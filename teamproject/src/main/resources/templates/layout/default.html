@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	  
+<head th:replace="fragments/head :: headFragment"></head>
+
+<body id="mimin" class="dashboard">
+	<!-- start: Header -->
+	<nav th:replace="fragments/header :: headerFragment"></nav>
+	<!-- end: Header -->
+	<div class="container-fluid mimin-wrapper">
+		<!-- start:Left Menu -->
+        <div id="left-menu" th:replace="fragments/leftmenu :: leftmenuFragment"></div>
+        <!-- end: Left Menu -->
+        <div id="content">
+        	<div th:replace="fragments/contentsHeader :: contentsHeaderFragment"></div>
+        	<th:block layout:fragment="customContents"></th:block>
+        </div>		
+		<div id="right-menu" th:replace="fragments/rightmenu :: rightmenuFragment"></div>
+	</div>
+	
+	<!-- start: Javascript -->
+	<script th:src="@{/asset/js/jquery.min.js}"></script>
+	<script th:src="@{/asset/js/jquery.ui.min.js}"></script>
+	<script th:src="@{/asset/js/bootstrap.min.js}"></script>
+	
+	
+	<!-- 사용자 정의 Script -->
+	<th:block layout:fragment="customScript"></th:block>
+	<!-- end: Javascript -->
+</body>
+
+</html>
