@@ -11,19 +11,19 @@
 		spring boot thymeleaf layout
 	
 	</th:block>
-	<th:block layout:fragment="customScript">	
+		<th:block layout:fragment="customBodyScript">	
 		<!-- plugins -->
-		<script src="asset/js/plugins/moment.min.js"></script>
-		<script src="asset/js/plugins/jquery.datatables.min.js"></script>
-		<script src="asset/js/plugins/datatables.bootstrap.min.js"></script>
-		<script src="asset/js/plugins/jquery.nicescroll.js"></script>
+		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.datatables.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/datatables.bootstrap.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
 		
 		
 		<!-- custom -->
-		<script src="asset/js/main.js"></script>
+		<script th:src="@{/asset/js/main.js}"></script>
 		<script type="text/javascript">
 		  $(document).ready(function(){
-		    $('#datatables-example').DataTable();
+		    //$('#datatables-example').DataTable();
 		  });
 		</script>
 <!-- end: Javascript -->
