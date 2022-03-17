@@ -12,9 +12,19 @@
 	
 	<main>
 		<section th:replace="userfragments/slider :: sliderFragment"></section>
-        <section>
-        	<th:block layout:fragment="customContents"></th:block>
-        </section>		
+        
+       		<!-- Courses area start -->
+	        <div class="courses-area section-padding40 fix">
+	            <div class="container">
+	                <div class="row justify-content-center">
+			        	<th:block layout:fragment="customContents">
+					                    
+			        	</th:block>
+	                </div>
+	            </div>
+	        </div>
+	        <!-- Courses area End -->        	
+        		
 	</main>
 	<footer th:replace="userfragments/footer :: footerFragment"></footer>
 	<div id="back-top">
