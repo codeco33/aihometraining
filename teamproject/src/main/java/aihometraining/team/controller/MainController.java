@@ -22,4 +22,28 @@ public class MainController {
 		return "main";
 		
 	}
+	@GetMapping("/mypage")
+	public String mypage(Model model) {
+		
+		model.addAttribute("title", "마이페이지");
+		
+		return "member/mypage";
+		
+	}
+	@GetMapping("/eclassadmin")
+	public String eclassadmin(Model model) {
+		
+		model.addAttribute("title", "운동 클래스 관리자 페이지");
+		
+		return "eClass/eclassadmin";
+		
+	}
+	@GetMapping("/challengeadmin")
+	public String challengeadmin(Model model) {
+		
+		model.addAttribute("title", "챌린지 관리자 페이지");
+		
+		return "challenge/challengeadmin";
+		
+	}
 }
