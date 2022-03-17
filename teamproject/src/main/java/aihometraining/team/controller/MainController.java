@@ -12,14 +12,38 @@ public class MainController {
 		
 		model.addAttribute("title", "메인화면");
 		
-		return "main";
+		return "usermain";
 	}
-	@GetMapping("/user")
+	@GetMapping("/admin")
 	public String usermain(Model model) {
 		
-		model.addAttribute("title", "메인화면");
+		model.addAttribute("title", "관리자 메인화면");
 		
-		return "usermain";
+		return "main";
+		
+	}
+	@GetMapping("/mypage")
+	public String mypage(Model model) {
+		
+		model.addAttribute("title", "마이페이지");
+		
+		return "member/mypage";
+		
+	}
+	@GetMapping("/eclassadmin")
+	public String eclassadmin(Model model) {
+		
+		model.addAttribute("title", "운동 클래스 관리자 페이지");
+		
+		return "eClass/eclassadmin";
+		
+	}
+	@GetMapping("/challengeadmin")
+	public String challengeadmin(Model model) {
+		
+		model.addAttribute("title", "챌린지 관리자 페이지");
+		
+		return "challenge/challengeadmin";
 		
 	}
 }
