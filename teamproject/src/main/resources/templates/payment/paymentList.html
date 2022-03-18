@@ -59,13 +59,25 @@
 						<tbody>
 							<tr>
 								<td><input type="checkbox" class="icheck" name="checkbox1" /></td>
-								<td>Tiger Nixon</td>
-								<td>System Architect</td>
-								<td>Edinburgh</td>
-								<td>61</td>
-								<td>2011/04/25</td>
-								<td>$320,800</td>
+								<td>Herrod Chandler</td>
+								<td>Sales Assistant</td>
+								<td>San Francisco</td>
+								<td>59</td>
+								<td>2012/08/06</td>
+								<td>$137,500</td>
 							</tr>
+							<!-- <tr th:if="${not #lists.isEmpty(paymentList)}" th:each="l : ${paymentList}">
+								<td th:text="${l.paymentCode}"></td>
+								<td th:text="${l.memberId}"></td>
+								<td th:text="${l.paymentMethodName}"></td>
+								<td th:text="${l.paymentTotalOrderPrice}"></td>
+								<td th:text="${l.paymentTotalPayPrice}"></td>
+								<td th:text="${l.paymentState}"></td>
+								<td th:text="${l.paymentRegDate}"></td>
+							</tr>
+							<tr th:unless="${not #lists.isEmpty(paymentList}">
+								<td colspan="7">등록된 결제 내역이 없습니다.</td>
+							</tr> -->
 						</tbody>
 					</table>
 				</div>
