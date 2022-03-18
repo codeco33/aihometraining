@@ -34,7 +34,6 @@ public class WorkoutLogConfigController {
 		model.addAttribute("title", "AI 운동 영상 목록");
 		model.addAttribute("leftMenuList", "일지");
 		
-		
 		return "workoutLog/workoutLogConfig/workoutAIVideoList";
 		
 	}
