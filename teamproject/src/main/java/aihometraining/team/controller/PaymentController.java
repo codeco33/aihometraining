@@ -22,5 +22,15 @@ public class PaymentController {
 		return "payment/paymentList";
 	}
 	
+	@GetMapping("/payment")
+	public String payment(Model model) {
+		
+		
+		
+		model.addAttribute("title", "결제");
+		
+		return "payment/payment";
+	}
+	
 
 }
