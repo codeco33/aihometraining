@@ -9,7 +9,7 @@
                         <!-- Logo -->
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo">
-                                <a href="index.html"><img th:src="@{/assets/img/logo/logo.png}" alt=""></a>
+                                <a th:href="@{/}"><img th:src="@{/assets/img/logo/logo.png}" alt=""></a>
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10">
@@ -18,10 +18,10 @@
                                 <div class="main-menu d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">                                                                                          
-                                            <li class="active" ><a href="index.html">홈</a></li>
+                                            <li class="active" ><a th:href="@{/}">홈</a></li>
                                             <li><a href="#">운동 클래스</a>
                                                 <ul class="submenu">
-                                                    <li><a th:href="@{/eClass/eClassApprovedList}">신규 클래스</a></li>
+                                                    <li><a th:href="@{/eClassApprovedList}">신규 클래스</a></li>
                                                     <li><a href="blog_details.html">특가 클래스</a></li>
                                                     <li><a href="elements.html">인기 클래스</a></li>
                                                 </ul>
@@ -46,7 +46,7 @@
                                                     <li><a href="blog_details.html">인기 일지</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="contact.html">위시리스트</a></li>
+                                            <li><a th:href="@{/wishList}">위시리스트</a></li>
                                             <!-- Button -->
                                             <li class="button-header margin-left "><a href="#" class="btn">Join</a></li>
                                             <li class="button-header"><a href="login.html" class="btn btn3">Log in</a></li>
