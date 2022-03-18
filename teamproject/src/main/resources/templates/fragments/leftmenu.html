@@ -25,7 +25,7 @@
                       </a>
                       <ul class="nav nav-list tree">
                         <li><a href="topnav.html">운동클래스 개설 신청 내역</a></li>
-                        <li><a href="topnav.html">운동 클래스 카테고리 관리</a></li>
+                        <li><a th:href="@{/eClass/eClassConfig/eClassCategoryList}">운동 클래스 카테고리 관리</a></li>
                         <li><a href="topnav.html">운동클래스 목록</a></li>
                         <li><a href="topnav.html">운동클래스</a></li>
                         <li><a href="boxed.html"></a></li>
@@ -127,8 +127,8 @@
                     	<span class="fa-angle-right fa right-arrow text-right"></span> 
                     </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="datatables.html">등록된 신고 관리</a></li>
-                        <li><a href="datatables.html">신고 기준 관리</a></li>
+                        <li><a th:href="@{/report/reportList}">등록된 신고 관리</a></li>
+                        <li><a th:href="@{/report/reportStandardList}">신고 기준 관리</a></li>
                       </ul>
                     </li>
                     <li class="ripple">

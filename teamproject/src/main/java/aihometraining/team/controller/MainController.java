@@ -46,4 +46,5 @@ public class MainController {
 		return "challenge/challengeadmin";
 		
 	}
+
 }
