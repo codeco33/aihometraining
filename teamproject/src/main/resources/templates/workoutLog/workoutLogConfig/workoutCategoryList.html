@@ -7,11 +7,20 @@
 	<title th:text="${title}"></title>
 </th:block>
 
+<!-- 사용자 정의 Css -->
+<th:block layout:fragment="customCss">
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/simple-line-icons.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/mediaelementplayer.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/icheck/skins/flat/red.css}"/>
+</th:block>
+
+
 <th:block layout:fragment="customContents">
+<form th:action="@{/workoutLog/workoutLogConfig/workoutCategoryInsert}" method="post">
 	<div class="col-md-12">
 		<div class="panel">
 	    	<div class="panel-heading-white panel-heading">
-	        	<h4>운동 카테고리 관리 설정</h4>
+	        	<h4>운동 계획 카테고리 관리 설정</h4>
 	        </div>
 			<div class="panel-body">
 			   	<div class="col-md-12">
@@ -19,7 +28,7 @@
 			   			<div class="col-md-12">
 			   				<div class="panel">
 			   					<div class="panel-heading bg-teal">
-			                    	<h6 class="text-white">운동 카테고리 목록</h6>
+			                    	<h6 class="text-white">운동 계획 카테고리 목록</h6>
 			                    </div>
 								<div class="panel-body">
 									<div class="col-md-12">
@@ -55,8 +64,7 @@
 							                    <thead>
 													<tr>
 								                        <th><input type="checkbox" class="icheck" name="checkbox1" /></th>
-								                        <th>운동 카테고리명</th>
-								                        <th>등록 이메일</th>
+								                        <th>운동 계획 카테고리명</th>
 								                        <th>수정</th>
 								                        <th>삭제</th>
 							                     	</tr>
@@ -65,50 +73,38 @@
 							                    	<tr>
 								                        <td><input type="checkbox" class="icheck" name="checkbox1" /></td>
 								                        <td>Tiger Nixon</td>
-								                        <td>System Architect</td>
-								                        <td>수정</td>
-								                        <td>삭제</td>
+								                        <td>
+								                        	<a th:href="@{/workoutLog/workoutLogConfig/workoutCategoryUpdate}">수정</a>
+								                        </td>
+								                        <td>
+								                        	<a th:href="@{/workoutLog/workoutLogConfig/workoutCategoryDelete}">삭제</a>
+								                        </td>
 							                      	</tr>
 							                      	<tr>
 								                        <td><input type="checkbox" class="icheck" name="checkbox1" /></td>
 								                        <td>Garrett Winters</td>
-								                        <td>Accountant</td>
-								                        <td>수정</td>
-								                        <td>삭제</td>
+								                        <td>
+								                        	<a th:href="@{/workoutLog/workoutLogConfig/workoutCategoryUpdate}">수정</a>
+								                        </td>
+								                        <td>
+								                        	<a th:href="@{/workoutLog/workoutLogConfig/workoutCategoryDelete}">삭제</a>
+								                        </td>
 								                     </tr>
 								                     <tr>
 								                        <td><input type="checkbox" class="icheck" name="checkbox1" /></td>
 								                        <td>Ashton Cox</td>
-								                        <td>Junior Technical Author</td>
-								                        <td>수정</td>
-								                        <td>삭제</td>
-							                      	</tr>
-							                      	<tr>
-								                        <td><input type="checkbox" class="icheck" name="checkbox1" /></td>
-								                        <td>Cedric Kelly</td>
-								                        <td>Senior Javascript Developer</td>
-								                        <td>수정</td>
-								                        <td>삭제</td>
-							                      	</tr>
-							                      	<tr>
-								                        <td><input type="checkbox" class="icheck" name="checkbox1" /></td>
-								                        <td>Airi Satou</td>
-								                        <td>Accountant</td>
-								                        <td>수정</td>
-								                        <td>삭제</td>
-							                      	</tr>
-							                      	<tr>
-								                        <td><input type="checkbox" class="icheck" name="checkbox1" /></td>
-								                        <td>Brielle Williamson</td>
-								                        <td>Integration Specialist</td>
-								                        <td>수정</td>
-								                        <td>삭제</td>
+								                        <td>
+								                        	<a th:href="@{/workoutLog/workoutLogConfig/workoutCategoryUpdate}">수정</a>
+								                        </td>
+								                        <td>
+								                        	<a th:href="@{/workoutLog/workoutLogConfig/workoutCategoryDelete}">삭제</a>
+								                        </td>
 							                      	</tr>
 							                    </tbody>
 						                  	</table>
 						                </div>
 					                 	<div class="col-md-6" style="padding-top:20px;">
-					                    	<span>2022. 03. 18</span>
+					                    	<input type="submit" class="btn btn-outline btn-primary" value="카테고리 등록 ">
 					                 	</div>
 					                 	<div class="col-md-6">
 										 	<ul class="pagination pull-right">
@@ -138,15 +134,15 @@
 			</div>
 		</div>
 	</div>
-	</th:block>
+</form>
+</th:block>
 	
 	<!-- start: Javascript -->
 	<th:block layout:fragment="customBodyScript">	
 		
 		<!-- plugins -->
 		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/jquery.datatables.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/datatables.bootstrap.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/icheck.min.js}"></script>
 		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
 		
 		<!-- custom -->

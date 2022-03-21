@@ -42,8 +42,9 @@
                                             </li>
                                             <li><a href="#">일지</a>
                                                 <ul class="submenu">
-                                                    <li><a href="blog.html">하루 일지</a></li>
-                                                    <li><a href="blog_details.html">인기 일지</a></li>
+                                                    <li><a th:href="@{/workoutLog/workoutLogUser/workoutGoalPlanList}">목표 및 계획</a></li>
+                                                    <li><a th:href="@{/workoutLog/workoutLogUser/workoutLogMain}">하루 일지</a></li>
+                                                    <li><a th:href="@{/workoutLog/workoutLogUser/workoutLogList}">인기 일지</a></li>
                                                 </ul>
                                             </li>
                                             <li><a th:href="@{/wishList}">위시리스트</a></li>
