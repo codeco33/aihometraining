@@ -7326,3 +7326,26 @@ b, sup, sub, u, del {
 .switch-wrap {
 	margin-bottom: 10px
 }
+
+/*------------------------------------------ css 추가---------------------------------------------------------------------------- */
+.courses-area .properties__background div {
+	padding: 29px 20px 20px 20px;
+	width: 100%;
+	border-radius: 10px 10px 0 0;
+	position: relative;
+	background-color: #4255A4;
+	/* 그라데이션 배경
+    background: #c054ff;
+    background: -moz-linear-gradient(top, #c054ff 0%, #5274ff 100%);
+    background: -webkit-linear-gradient(top, #c054ff 0%, #5274ff 100%);
+    background: linear-gradient(to bottom, #c054ff 0%, #5274ff 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c054ff', endColorstr='#5274ff', GradientType=0); 
+    */
+	font-size: 25px;
+	color: #ffffff;
+	text-align: center;
+}
+
+.courses-area .properties__background div a:hover{
+	color: #4255A4
+}
