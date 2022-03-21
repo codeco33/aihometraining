@@ -32,4 +32,20 @@ public class MemberController {
 		
 		return "member/loginList";
 	}
+	@GetMapping("/login")
+	public String login(Model model) {
+		
+		model.addAttribute("leftMenuList", "회원");
+		model.addAttribute("title", "로그인 페이지");
+		
+		return "member/login";
+	}
+	@GetMapping("/addMember")
+	public String addMember(Model model) {
+		
+		model.addAttribute("leftMenuList", "회원");
+		model.addAttribute("title", "회원 가입 페이지");
+		
+		return "member/addMember";
+	}
 }
