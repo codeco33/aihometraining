@@ -7,6 +7,14 @@
 	<title th:text="${title}"></title>
 </th:block>
 
+<!-- 사용자 정의 Css -->
+<th:block layout:fragment="customCss">
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/simple-line-icons.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/mediaelementplayer.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/icheck/skins/flat/red.css}"/>
+</th:block>
+
+
 <th:block layout:fragment="customContents">
 	<div class="col-md-12">
 		<div class="panel">
@@ -119,30 +127,6 @@
 								                        <td>59</td>
 								                        <td>2012/08/06</td>
 							                      	</tr>
-							                      	<tr>
-								                        <td><input type="checkbox" class="icheck" name="checkbox1" /></td>
-								                        <td>Rhona Davidson</td>
-								                        <td>Integration Specialist</td>
-								                        <td>Tokyo</td>
-								                        <td>55</td>
-								                        <td>2010/10/14</td>
-							                      	</tr>
-							                      	<tr>
-								                        <td><input type="checkbox" class="icheck" name="checkbox1" /></td>
-								                        <td>Colleen Hurst</td>
-								                        <td>Javascript Developer</td>
-								                        <td>San Francisco</td>
-								                        <td>39</td>
-								                        <td>2009/09/15</td>
-							                      	</tr>
-							                      	<tr>
-								                        <td><input type="checkbox" class="icheck" name="checkbox1" /></td>
-								                        <td>Sonya Frost</td>
-								                        <td>Software Engineer</td>
-								                        <td>Edinburgh</td>
-								                        <td>23</td>
-								                        <td>2008/12/13</td>
-							                      	</tr>
 							                    </tbody>
 						                  	</table>
 						                </div>
@@ -184,8 +168,7 @@
 		
 		<!-- plugins -->
 		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/jquery.datatables.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/datatables.bootstrap.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/icheck.min.js}"></script>
 		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
 		
 		<!-- custom -->
