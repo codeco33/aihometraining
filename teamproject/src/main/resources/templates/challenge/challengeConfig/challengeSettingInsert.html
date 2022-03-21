@@ -8,26 +8,119 @@
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
-		챌린지 관리자 설정 페이지 입니다.
-		챌린지 관리자 설정 페이지 입니다.
-		
-	
+		<div class="col-md-12">
+			<div class="panel">
+		    	<div class="panel-heading-white panel-heading">
+		        	<h4>챌린지 세팅 폼</h4>
+		        </div>
+		        <div class="panel-body">
+		        	<div class="col-md-12">
+		                <div class="panel box-shadow-none">
+		                    <div class="panel-body">
+		                        <form id="settingInsert" action="#">
+		                            <h3>Setting 정보 등록하기</h3>
+		                            <fieldset>
+		                                <legend>Setting</legend>
+		                         
+		                                <label for="settingName-2">세팅명 *</label>
+		                                <input id="settingName-2" name="settingName" type="text" class="required">		                                
+		                                <p>(*) 필수 입력 사항입니다.</p>
+		                            </fieldset>
+		                        </form>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+			</div>
+		</div>			
 	</th:block>
+	
+	<!-- 사용자 정의 Css -->
+		<th:block layout:fragment="customCss">
+			<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/jquery.steps.css}"/>
+		
+		</th:block>
+	
+	<!-- start: Javascript -->
 	<th:block layout:fragment="customBodyScript">	
+		
 		<!-- plugins -->
+		<script th:src="@{/asset/js/plugins/jquery.steps.min.js}"></script>
 		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/jquery.datatables.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/datatables.bootstrap.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.validate.min.js}"></script>
 		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
 		
 		
 		<!-- custom -->
 		<script th:src="@{/asset/js/main.js}"></script>
 		<script type="text/javascript">
-		  $(document).ready(function(){
-		    //$('#datatables-example').DataTable();
-		  });
+		$(function(){
+			
+			$(document).ready(function(){
+				
+			    var form = $("#settingInsert").show();
+			     
+			    form.steps({
+			        headerTag: "h3",
+			        bodyTag: "fieldset",
+			        transitionEffect: "slideLeft",
+			        onStepChanging: function (event, currentIndex, newIndex)
+			        {
+			            // Allways allow previous action even if the current form is not valid!
+			            if (currentIndex > newIndex)
+			            {
+			                return true;
+			            }
+			            // Forbid next action on "Warning" step if the user is to young
+			            if (newIndex === 3 && Number($("#age-2").val()) < 18)
+			            {
+			                return false;
+			            }
+			            // Needed in some cases if the user went back (clean up)
+			            if (currentIndex < newIndex)
+			            {
+			                // To remove error styles
+			                form.find(".body:eq(" + newIndex + ") label.error").remove();
+			                form.find(".body:eq(" + newIndex + ") .error").removeClass("error");
+			            }
+			            form.validate().settings.ignore = ":disabled,:hidden";
+			            return form.valid();
+			        },
+			        onStepChanged: function (event, currentIndex, priorIndex)
+			        {
+			            // Used to skip the "Warning" step if the user is old enough.
+			            if (currentIndex === 2 && Number($("#age-2").val()) >= 18)
+			            {
+			                form.steps("next");
+			            }
+			            // Used to skip the "Warning" step if the user is old enough and wants to the previous step.
+			            if (currentIndex === 2 && priorIndex === 3)
+			            {
+			                form.steps("previous");
+			            }
+			        },
+			        onFinishing: function (event, currentIndex)
+			        {
+			            form.validate().settings.ignore = ":disabled";
+			            return form.valid();
+			        },
+			        onFinished: function (event, currentIndex)
+			        {
+			            alert("등록되었습니다!");
+			        }
+			    }).validate({
+			        errorPlacement: function errorPlacement(error, element) { element.before(error); },
+			        rules: {
+			            confirm: {
+			                equalTo: "#password-2"
+			            }
+			        }
+			    });
+
+
+			});
+		});
 		</script>
-<!-- end: Javascript -->
 	</th:block>
+	<!-- end: Javascript -->
 </html>
