@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/userdefault}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+		<form>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="운동을 소개해주세요">
+			</div>
+			<div class="form-group">
+				<label>섹션</label>
+				<input type="password" class="form-control" id="exampleInputPassword1" placeholder="섹션">
+				<label>커리큘럼</label>
+				<input type="text" class="form-control" id="exampleInputPassword1" placeholder="커리큘럼">
+			</div>
+			<div class="form-group">
+				<label for="exampleInputFile">파일 업로드</label>
+				<input type="file" id="exampleInputFile">
+				<p class="help-block">여기에 블록레벨 도움말 예제</p>
+			</div>
+			<div class="checkbox">
+				<label>
+				<input type="checkbox"> 입력을 기억합니다
+				</label>
+			</div>
+			<button type="submit" class="btn btn-default">제출</button>
+		</form>
+	</th:block>
+	
+	
+</html>
