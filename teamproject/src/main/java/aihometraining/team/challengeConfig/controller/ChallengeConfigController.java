@@ -41,8 +41,8 @@ public class ChallengeConfigController {
 		
 		log.info("챌린지 카테고리 조회  challengeCategoryList : {}", challengeCategoryList);
 		
-		model.addAttribute("title", "challengeConfigList");
-		model.addAttribute("leftMenuList", "챌린지 관리 설정");
+		model.addAttribute("title", "챌린지 관리 설정");
+		model.addAttribute("leftMenuList", "챌린지");
 		model.addAttribute("challengeCategoryList", challengeCategoryList);
 		
 		return "challenge/challengeConfig/challengeConfigList";
@@ -51,8 +51,8 @@ public class ChallengeConfigController {
 	@GetMapping("/challengeCategoryInsert")
 	public String challengeCategoryInsert(Model model) {
 		
-		model.addAttribute("title", "challengeCategoryInsert");
-		model.addAttribute("leftMenuList", "챌린지 카테고리 등록");
+		model.addAttribute("title", "챌린지 카테고리 등록");
+		model.addAttribute("leftMenuList", "챌린지");
 		
 		return "challenge/challengeConfig/challengeCategoryInsert";
 		
@@ -60,8 +60,8 @@ public class ChallengeConfigController {
 	@GetMapping("/challengeSettingInsert")
 	public String challengeSettingInsert(Model model) {
 		
-		model.addAttribute("title", "challengeSettingInsert");
-		model.addAttribute("leftMenuList", "챌린지 세팅 등록");
+		model.addAttribute("title", "챌린지 세팅 등록");
+		model.addAttribute("leftMenuList", "챌린지");
 		
 		return "challenge/challengeConfig/challengeSettingInsert";
 		
@@ -69,8 +69,8 @@ public class ChallengeConfigController {
 	@GetMapping("/challengeList")
 	public String challengeList(Model model) {
 		
-		model.addAttribute("title", "challengeList");
-		model.addAttribute("leftMenuList", "모집 챌린지 목록");
+		model.addAttribute("title", "모집 챌린지 목록");
+		model.addAttribute("leftMenuList", "모집");
 		
 		return "challenge/challengeConfig/challengeList";
 		
@@ -78,8 +78,8 @@ public class ChallengeConfigController {
 	@GetMapping("/challengeListIng")
 	public String challengeListIng(Model model) {
 		
-		model.addAttribute("title", "challengeListIng");
-		model.addAttribute("leftMenuList", "진행 챌린지 목록");
+		model.addAttribute("title", "진행 챌린지 목록");
+		model.addAttribute("leftMenuList", "진행");
 		
 		return "challenge/challengeConfig/challengeListIng";
 		
@@ -87,8 +87,8 @@ public class ChallengeConfigController {
 	@GetMapping("/challengePoint")
 	public String challengePoint(Model model) {
 		
-		model.addAttribute("title", "challengePoint");
-		model.addAttribute("leftMenuList", "챌린지 포인트 관리");
+		model.addAttribute("title", "챌린지 포인트 관리");
+		model.addAttribute("leftMenuList", "챌린지");
 		
 		return "challenge/challengeConfig/challengePoint";
 		
@@ -96,8 +96,8 @@ public class ChallengeConfigController {
 	@GetMapping("/challengeReportList")
 	public String challengeReportList(Model model) {
 		
-		model.addAttribute("title", "challengeReportList");
-		model.addAttribute("leftMenuList", "챌린지 신고 관리");
+		model.addAttribute("title", "챌린지 신고 관리");
+		model.addAttribute("leftMenuList", "챌린지");
 		
 		return "challenge/challengeConfig/challengeReportList";
 		
