@@ -55,6 +55,8 @@
 		
 		<!-- custom -->
 		<script th:src="@{/asset/js/main.js}"></script>
+		<!-- 스윗얼랏 추가 -->
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		<script type="text/javascript">
 		$(function(){
 			
@@ -108,7 +110,8 @@
 			        },
 			        onFinished: function (event, currentIndex)
 			        {
-			            alert("등록되었습니다!");
+			        	//스윗얼랏 사용
+			        	swal("등록되었습니다.", "확인버튼을 눌러주세요.", "success");
 			        }
 			    }).validate({
 			        errorPlacement: function errorPlacement(error, element) { element.before(error); },
