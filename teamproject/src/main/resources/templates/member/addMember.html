@@ -6,36 +6,32 @@
 	<th:block layout:fragment="customTitle">
 		<title th:text="${title}"></title>
 	</th:block>
+	
 	<th:block layout:fragment="customContents">
-		<main class="login-body">
-		    <!-- 회원 가입 -->
-		    <form class="form-default" method="POST">
-		        <div class="login-form">
-		            <h2>회원 가입</h2>
-		            <div class="form-input">
-		                <label for="name">이름</label>
-		                <input  type="text" name="name" placeholder="이름을 입력해주세요.">
-		            </div>
-		            <div class="form-input">
-		                <label for="name">이메일</label>
-		                <input type="email" name="email" placeholder="이메일을 입력해주세요.">
-		            </div>
-		            <div class="form-input">
-		                <label for="name">비밀번호</label>
-		                <input type="password" name="password" placeholder="비밀번호를 입력해주세요.">
-		            </div>
-		            <div class="form-input">
-		                <label for="name">비밀번호 확인</label>
-		                <input type="password" name="password" placeholder="비밀번호를 확인해주세요.">
-		            </div>
-		            <div class="form-input pt-30">
-		                <input type="submit" name="submit" value="회원 가입">
-		            </div>
-		            <!-- Forget Password -->
-		            <a th:href="@{/member/login}" class="registration">로그인</a>
-		        </div>
-		    </form>
-		    <!-- /end login form -->
-		</main>
+	    <form class="form-default" method="POST">
+	        <div class="login-form">
+	            <h2>회원 가입</h2>
+	            <div class="form-input">
+	                <label for="name">이메일</label>
+	                <input  type="email" name="email" placeholder="﻿example@email.com">
+	            </div>
+	            <div class="form-input">
+	                <label for="name">이메일 확인</label>
+	                <input type="email" name="email" placeholder="﻿example@email.com">
+	            </div>
+	            <div class="form-input">
+	                <label for="name">비밀번호</label>
+	                <input type="password" name="password" placeholder="********">
+	            </div>
+	            <div class="form-input">
+	                <label for="name">비밀번호 확인</label>
+	                <input type="password" name="password" placeholder="********">
+	            </div>
+	            <div class="form-input pt-30">
+	                <input type="submit" name="submit" value="회원 가입">
+	            </div>
+	        </div>
+	    </form>
 	</th:block>
+   </body>
 </html>
