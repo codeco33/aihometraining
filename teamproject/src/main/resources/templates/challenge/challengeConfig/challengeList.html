@@ -2,118 +2,50 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{layout/default}">
-	<!-- 사용자 정의 title -->
-	<th:block layout:fragment="customTitle">
-		<title th:text="${title}"></title>
-	</th:block>
-	
-	<th:block layout:fragment="customContents">
-		<div class="col-md-12">
-			<div class="panel">
-		    	<div class="panel-heading-white panel-heading">
-		        	<h4>#모집 챌린지 목록(최보라)</h4>
-		        </div>
-		        <div class="panel-body">
-		        	<div class="col-md-12">
-						<div class="col-md-12 top-20 padding-0">
-			            	<div class="col-md-12">
-			                	<div class="panel">
-			                    	<div class="panel-heading bg-deep-purple">
-			                    		<h6 class="text-white">모집 챌린지 목록</h6>
-			                    	</div>
-			                   		<div class="panel-body">
-			                     		<div class="responsive-table">
-				                     	<table id="challengGatherList" class="table table-striped table-bordered" style="width: 100%;">
-										<thead>
-											<tr>
-												<th>챌린지 모집 등록자</th>
-												<th>챌린지 모집명</th>
-												<th>챌린지 소개</th>
-												<th>챌린지 최대 참여 인원수</th>
-												<th>챌린지 인증방법</th>
-												<th>챌린지 인증내용</th>
-												<th>챌린지 인증빈도</th>
-												<th>챌린지 모집 시작일</th>
-												<th>챌린지 모집 종료일</th>
-												<th>챌린지 시작일</th>
-												<th>챌린지 종료일</th>
-												<th>챌린지 등록날짜</th>
-												<th>수정</th>
-												<th>삭제</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>id002@email.com</td>
-												<td>하루 10분 요가해요</td>
-												<td>하루 10분 요가하는 챌린지 입니다.</td>
-												<td>5</td>
-												<td>사진</td>
-												<td>사진을 찍어서 2장이상 올려 주세요</td>
-												<td>30</td>
-												<td>2022-03-18</td>
-												<td>2022-03-29</td>
-												<td>2022-03-30</td>
-												<td>2022-04-30</td>
-												<td>2022-03-18</td>
-												<td>
-													<a href="#">수정</a>
-												</td>
-												<td>
-													<a href="#">삭제</a>
-												</td>
-											</tr>
-											<tr>
-												<td>id002@email.com</td>
-												<td>하루 10분 요가해요</td>
-												<td>하루 10분 요가하는 챌린지 입니다.</td>
-												<td>5</td>
-												<td>사진</td>
-												<td>사진을 찍어서 2장이상 올려 주세요</td>
-												<td>30</td>
-												<td>2022-03-18</td>
-												<td>2022-03-29</td>
-												<td>2022-03-30</td>
-												<td>2022-04-30</td>
-												<td>2022-03-18</td>
-												<td>
-													<a href="#">수정</a>
-												</td>
-												<td>
-													<a href="#">삭제</a>
-												</td>
-											</tr>
-											<tr>
-												<td>id002@email.com</td>
-												<td>하루 10분 요가해요</td>
-												<td>하루 10분 요가하는 챌린지 입니다.</td>
-												<td>5</td>
-												<td>사진</td>
-												<td>사진을 찍어서 2장이상 올려 주세요</td>
-												<td>30</td>
-												<td>2022-03-18</td>
-												<td>2022-03-29</td>
-												<td>2022-03-30</td>
-												<td>2022-04-30</td>
-												<td>2022-03-18</td>
-												<td>
-													<a href="#">수정</a>
-												</td>
-												<td>
-													<a href="#">삭제</a>
-												</td>
-											</tr>
-										</tbody>
-				                        </table>
-										</div>
+<!-- 사용자 정의 title -->
+<th:block layout:fragment="customTitle">
+	<title th:text="${title}"></title>
+</th:block>
+
+
+
+
+<th:block layout:fragment="customContents">
+	<div class="col-md-12">
+		<div class="panel">
+	    	<div class="panel-heading-white panel-heading">
+	        	<h4>#모집 챌린지 목록(최보라)</h4>
+	        </div>
+			<div class="panel-body">
+			   	<div class="col-md-12">
+			   		<div class="col-md-12 top-20 padding-0">
+			   			<div class="col-md-12">
+			   				<div class="panel">
+			   					<div class="panel-heading bg-deep-purple">
+			                    	<h6 class="text-white">모집 챌린지 목록</h6>
+			                    </div>
+								<div class="panel-body">
+									<div class="col-md-12">
+										
+										
+					                 	
+					                 	
 									</div>
 								</div>
-							</div>  
-						</div>
-					</div>
+							</div>
+						</div>	    
+					</div>  
 				</div>
 			</div>
 		</div>
+	</div>
+	</th:block>
+	
+	<!-- 사용자 정의 Css -->
+	<th:block layout:fragment="customCss">
+		<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/simple-line-icons.css}"/>
+		<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/mediaelementplayer.css}"/>
+		<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/icheck/skins/flat/red.css}"/>
 	</th:block>
 	
 	<!-- start: Javascript -->
@@ -121,19 +53,20 @@
 		
 		<!-- plugins -->
 		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/jquery.datatables.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/datatables.bootstrap.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/icheck.min.js}"></script>
 		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
-		
 		
 		<!-- custom -->
 		<script th:src="@{/asset/js/main.js}"></script>
 		<script type="text/javascript">
-		$(document).ready(function(){
-		    $('#challengGatherList').DataTable();		    
-		});
-		
+			$(document).ready(function(){
+			     $('input').iCheck({
+			        checkboxClass: 'icheckbox_flat-red',
+			        radioClass: 'iradio_flat-red'
+			      });
+			});
 		</script>
+		
 	</th:block>
 	<!-- end: Javascript -->
 </html>

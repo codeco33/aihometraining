@@ -93,8 +93,8 @@
 		
 		<!-- plugins -->
 		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/jquery.datatables.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/datatables.bootstrap.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.dataTables.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/dataTables.bootstrap.min.js}"></script>
 		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
 		
 		
@@ -105,18 +105,6 @@
 		    $('#challengReportList').DataTable();		    
 		});
 		
-		 $(function(){
-		 	
-			 var $challengReportListTd = $('#challengReportList tbody tr td');
-		 	
-		 	$challengReportListTd.click(function(){
-		 		$challengReportListTd.each(function(){
-		 			console.log($(this).val());
-		 		});
-		 	});
-			 
-		 });
-		 
 		</script>
 	</th:block>
 	<!-- end: Javascript -->
