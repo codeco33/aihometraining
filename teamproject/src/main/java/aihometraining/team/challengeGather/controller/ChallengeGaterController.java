@@ -12,6 +12,7 @@ public class ChallengeGaterController {
 	@GetMapping("/challengeGatherList")
 	public String challengeGather(Model model) {
 		model.addAttribute("title", "챌린지 모집 목록");
+		model.addAttribute("headerList", "챌린지");
 		return "challenge/challengeGather/challengeGatherList";
 	}
 }
