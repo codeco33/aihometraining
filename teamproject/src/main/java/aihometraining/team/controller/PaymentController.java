@@ -17,9 +17,20 @@ public class PaymentController {
 		
 		model.addAttribute("leftMenuList", "결제/환불");
 		model.addAttribute("title", "결제 내역");
-		//model.addAttribute("subTitle", "결제 상세 내역");
 		
 		return "payment/paymentList";
+	}
+	
+	@GetMapping("/paymentList/paymentDetail")
+	public String paymentDetail(Model model) {
+		
+		
+		
+		model.addAttribute("leftMenuList", "결제/환불");
+		model.addAttribute("title", "결제 내역");
+		model.addAttribute("subTitle", "결제 상세 내역");
+		
+		return "payment/paymentDetail";
 	}
 	
 	@GetMapping("/payment")
