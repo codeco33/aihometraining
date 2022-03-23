@@ -338,7 +338,10 @@
     
     
    
-  
+  /**********************************************
+   * 관리자 페이지 왼쪽 메뉴 활성화 페이지 수정
+   * 2022-03-23 진수경
+   ***********************************************/
     var getMenuLink = getCookie('menuLink');
     
     if(getMenuLink != undefined){
@@ -347,7 +350,10 @@
     	ripple.addClass('active');	
     	aMenu.parent('li').css('background', 'rgba(193, 184, 184, 0.2)');
     	aMenu.parents('ul').css('display','block');
-    	aMenu.css('font-weight', 'bold');
+    	aMenu.css('font-weight', 'bold').focus().blur();
+    	
+    	//contentsHeaderTitle 경로 설정
+    	$("#contentsHeaderTilte").attr('href', getMenuLink);
     }
 	
 	$('#left-menu .nav-list a').click(function(e){			
@@ -357,7 +363,10 @@
 			setCookie('menuLink', href, 1);	
 			location.href = href;			
 		}
-	});			
+	});
+	
+	
+	
 	
 	function setCookie(cname, cvalue, exdays) {
 	  const d = new Date();
@@ -380,5 +389,7 @@
 	  }
 	  return "";
 	}
+	
+	
 
 })(jQuery);
