@@ -1,4 +1,4 @@
-package aihometraining.team.challengeConfig.controller;
+package aihometraining.team.challenge.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import aihometraining.team.challengeConfig.service.ChallengeConfigService;
+import aihometraining.team.challenge.service.ChallengeConfigService;
 import aihometraining.team.dto.ChallengeCategory;
 
 @Controller

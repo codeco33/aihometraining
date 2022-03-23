@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="aihometraining.team.challengeConfig.mapper.ChallengeConfigMapper">
+<mapper namespace="aihometraining.team.challenge.mapper.ChallengeConfigMapper">
 
 	<resultMap type="ChallengeCategory" id="challengeCategoryResultMap">
 		<result column="challengeCategoryCode" property="challengeCategoryCode"/>
