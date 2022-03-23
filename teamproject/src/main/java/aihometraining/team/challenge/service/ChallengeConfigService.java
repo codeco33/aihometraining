@@ -1,4 +1,4 @@
-package aihometraining.team.challengeConfig.service;
+package aihometraining.team.challenge.service;
 
 import java.util.List;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import aihometraining.team.challengeConfig.mapper.ChallengeConfigMapper;
+import aihometraining.team.challenge.mapper.ChallengeConfigMapper;
 import aihometraining.team.dto.ChallengeCategory;
 
 @Service

@@ -1,4 +1,4 @@
-package aihometraining.team.challengeGather.controller;
+package aihometraining.team.challenge.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

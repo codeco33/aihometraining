@@ -1,4 +1,4 @@
-package aihometraining.team.challengeConfig.mapper;
+package aihometraining.team.challenge.mapper;
 
 import java.util.List;
 import java.util.Map;
