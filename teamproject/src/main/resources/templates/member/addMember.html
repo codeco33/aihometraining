@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{layout/userdefault}">
@@ -8,12 +8,12 @@
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
-	    <form class="form-default" method="POST">
+	    <form class="form-default" th:action="@{/member/addInfo}" method="POST">
 	        <div class="login-form">
 	            <h2>회원 가입</h2>
 	            <div class="form-input">
 	                <label for="name">이메일</label>
-	                <input  type="email" name="email" placeholder="﻿example@email.com">
+	                <input type="email" name="email" placeholder="﻿example@email.com">
 	            </div>
 	            <div class="form-input">
 	                <label for="name">이메일 확인</label>
