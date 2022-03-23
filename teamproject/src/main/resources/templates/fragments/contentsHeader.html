@@ -4,7 +4,11 @@
 		<div class="panel-body">
 			<div class="col-md-12">
 				<h3 class="animated fadeInLeft" th:text="${title}"></h3>
-				<p class="animated fadeInDown">[[${leftMenuList}]] <span class="fa-angle-right fa"></span> [[${title}]]</p>
+				<p class="animated fadeInDown">[[${leftMenuList}]] <span class="fa-angle-right fa"></span> [[${title}]]
+					<th:block th:if="${not #strings.isEmpty(subTitle)}">
+						 <span class="fa-angle-right fa"></span> [[${subTitle}]]
+					</th:block>
+				</p>
 			</div>
 		</div>
 	</div>
