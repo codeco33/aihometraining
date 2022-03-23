@@ -6498,12 +6498,27 @@ ul li a:focus {
 }
 
 
-/*!
- * 1팀 Custom Style Start
- */
- 
- 
+
+/**************************************
+* Custom Style 
+***************************************/
+
+
  /* 관리자페이지 로그아웃 버튼 */
 .user-dropdown .more ul li span {
 	font-size: 20px;
+}
+
+/*관리자 페이지 페이지 타이틀*/
+#contentsHeaderTilte {
+	color: #918C8C;
+	text-decoration: none;
+}
+#contentsHeaderTilte:hover {
+	text-decoration: underline;
+}
+
+/*거래내역 검색 td에 cursor 모양 넣기*/
+#paymentList .searchTd {
+	cursor: pointer;
 }
