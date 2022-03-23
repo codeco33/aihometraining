@@ -6498,7 +6498,12 @@ ul li a:focus {
 }
 
 
-
+/*!
+ * 1팀 Custom Style Start
+ */
+ 
+ 
+ /* 관리자페이지 로그아웃 버튼 */
 .user-dropdown .more ul li span {
 	font-size: 20px;
 }
