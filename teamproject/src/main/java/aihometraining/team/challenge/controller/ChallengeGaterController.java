@@ -28,7 +28,7 @@ public class ChallengeGaterController {
 		this.challengeGatherService = challengeGatherService;
 	}
 	
-	
+	//challengeGatherList
 	@GetMapping("/challengeGatherList")
 	public String challengeGather(Model model) {
 		
@@ -40,5 +40,16 @@ public class ChallengeGaterController {
 		model.addAttribute("headerList", "챌린지");
 		model.addAttribute("challengeGatherList", challengeGatherList);
 		return "challenge/challengeGather/challengeGatherList";
+	}
+	
+	//challengeGaterInsert
+	@GetMapping("/challengeGatherInsert")
+	public String challengeGatherInsert(Model model) {
+		
+		model.addAttribute("title", "챌린지 모집하기");
+		model.addAttribute("headerList", "챌린지");
+		
+		return "challenge/challengeGather/challengeGatherInsert";
+		
 	}
 }
