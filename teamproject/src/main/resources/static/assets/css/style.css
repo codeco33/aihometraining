@@ -366,11 +366,40 @@ hr {
 	cursor: pointer;
 	transition: color 0.4s linear;
 	position: relative;
-	z-index: 1;
+	z-index: 0;
 	border: 0;
 	overflow: hidden;
 	margin: 0;
 	display: inline-block !important
+}
+/*
+2022년 03월 24일 15:25분 [KJH]
+버튼 크기 조절때문에 새로 만듬 
+*/
+.btn.btn4 {
+	background: #FF9F67;
+	font-family: "Josefin Sans", sans-serif;
+	text-transform: capitalize;
+	padding: 15px 25px !important;
+	color: #fff;
+	cursor: pointer;
+	display: inline-blockc !important;
+	font-size: 16px;
+	font-weight: 600;
+	border-radius: 5px;
+	line-height: 1;
+	-moz-user-select: none;
+	letter-spacing: 1px;
+	line-height: 0;
+	margin-bottom: 0;
+	cursor: pointer;
+	transition: color 0.4s linear;
+	position: relative;
+	z-index: 1;
+	border: 0;
+	overflow: hidden;
+	margin: 0;
+	display: inline-block !important;
 }
 
 .btn::before {
@@ -7349,3 +7378,5 @@ b, sup, sub, u, del {
 .courses-area .properties__background div a:hover{
 	color: #4255A4
 }
+
+
