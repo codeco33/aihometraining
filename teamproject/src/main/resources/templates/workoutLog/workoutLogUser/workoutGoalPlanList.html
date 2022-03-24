@@ -8,46 +8,37 @@
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
-		
-  			<div id='wrap'>
-
-			    <div id='external-events'>
-			    	<h4>나의 운동 계획</h4>
-			
-			    	<div id='external-events-list'>
+		<div id='wrap'>
+		    <div id='external-events'>
+	    		<h4>나의 운동 계획</h4>
+		    		<div id='external-events-list'>
 				        <div class='fc-event'>[[${title}]]</div>
 				        <div class='fc-event'>하루 요가 섹션 2</div>
 				        <div class='fc-event'>하루 요가 섹션 3</div>
 				        <div class='fc-event'>하루 요가 섹션 4</div>
 				        <div class='fc-event'>하루 요가 섹션 5</div>
 			      	</div>
-			
 					<p>
 			       		<input type='checkbox' id='drop-remove' />
 			        	<label for='drop-remove'>remove after drop</label>
 			      	</p>
 			    </div>
-		
 		    	<div id='calendar'></div>
-		
 		    	<div style='clear:both'></div>
-		
-		  </div>
-		
-		
+		</div>
 	</th:block>
 	
 	<!-- 사용자 정의 Css -->
 	<th:block layout:fragment="customCss">
 		<style>
-		/* <-- daygrid-views start --> */
+		  /* <-- daygrid-views start --> */
 		  #calendar {
 		    max-width: 900px;
 		    margin: 0 auto;
 		  }
-		/* <-- daygrid-views End --> */  
+		  /* <-- daygrid-views End --> */  
 		
-		/* <-- external-dragging-builtin Start --> */
+		  /* <-- external-dragging-builtin Start --> */
 		  /* body {
 		    margin-top: 40px;
 		    font-size: 14px;
@@ -98,7 +89,6 @@
 		
 		  
 		</style>
-		
 	</th:block>
 	
 	<!-- 사용자 정의 Script -->

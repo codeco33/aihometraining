@@ -8,29 +8,54 @@
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
-		<form>
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="운동을 소개해주세요">
+		<script th:src="@{/assets/js/eClassNav.js}"></script>
+		<div class="container" style="width: 100%; height: 100%; overflow: auto; height: 800px; ">
+			<div 
+				class="card-header row"
+				style="	background: #c054ff;
+						background: -moz-linear-gradient(top, #c054ff 0%, #5274ff 100%);
+						background: -webkit-linear-gradient(top, #c054ff 0%, #5274ff 100%);
+						background: linear-gradient(to bottom, #c054ff 0%, #5274ff 100%);
+						filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c054ff', endColorstr='#5274ff', GradientType=0);">
+				<div class="col-md-12">
+					<ul class="nav nav-tabs" id="myTab" role="tablist">
+						<li class="nav-item" role="presentation">
+							<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">클래스 소개</a>
+						</li>
+						<li class="nav-item" role="presentation">
+							<a class="nav-link" id="profile-tab" data-toggle="tab" href="#SectionTitle" role="tab" aria-controls="profile" aria-selected="false">클래스 커리큘럼</a>
+						</li>
+						<li class="nav-item" role="presentation">
+							<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">미리보기</a>
+						</li>
+					</ul>
+				</div>
 			</div>
-			<div class="form-group">
-				<label>섹션</label>
-				<input type="password" class="form-control" id="exampleInputPassword1" placeholder="섹션">
-				<label>커리큘럼</label>
-				<input type="text" class="form-control" id="exampleInputPassword1" placeholder="커리큘럼">
+			<div class="row">
+				<div class="tab-content col-md-12" id="myTabContent">
+					<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+						<button type="button" class="btn">
+							사진 추가
+						</button>
+						<textarea style="width: 100%;" rows="20" placeholder="개설 하려는 운동에 대해 소개 해주세요"></textarea>
+					</div>
+					<div class="tab-pane fade row" id="SectionTitle" role="tabpanel" aria-labelledby="profile-tab">
+						<div class="col-md-10">
+							<input type="text" style="width: 100%; float: left;" placeholder="섹션 타이틀을 입력해주세요">
+						</div>
+						<div class="col-md-2">
+							<button type="button" id="eClassSectionTitle" style="float: right;" class="btn btn4">섹션 추가</button>
+						</div>
+						<div style="width: 100%; margin: 5px; padding: 5px;" class="col-md-12">
+							<input type="text" style="width: 100%;" placeholder="커리큘럼 제목을 입력해주세요">
+							<input type="file" placeholder="영상을 선택해주세요">
+							<button type="button" style="float: right;" class="btn btn4">커리큘럼 추가</button>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+				</div>
 			</div>
-			<div class="form-group">
-				<label for="exampleInputFile">파일 업로드</label>
-				<input type="file" id="exampleInputFile">
-				<p class="help-block">여기에 블록레벨 도움말 예제</p>
-			</div>
-			<div class="checkbox">
-				<label>
-				<input type="checkbox"> 입력을 기억합니다
-				</label>
-			</div>
-			<button type="submit" class="btn btn-default">제출</button>
-		</form>
+		</div>
+		<button type="submit" class="btn" style="float: right;">다음으로</button>
 	</th:block>
-	
-	
 </html>

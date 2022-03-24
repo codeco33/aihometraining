@@ -14,4 +14,11 @@ public class eClassController {
 		
 		return "eClass/eclassApprovedList";
 	}
+	@GetMapping("/OpenApplyForm")
+	public String OpenApplyForm(Model model) {
+		
+		model.addAttribute("title", "운통클래스 신청폼");
+		
+		return "eClass/eClassOpenApplyForm";
+	}
 }

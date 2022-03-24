@@ -114,14 +114,14 @@ public class MemberController {
 		
 		if(member != null && member.getMemberPw() != null && memberPw.equals(member.getMemberPw())) {
 			memberService.removeMember(member);
-			log.info("회원탈퇴성공");
+			log.info("회원 탈퇴 성공");
 			
 			return "redirect:/member/memberList";
 		}
 		
 		reAttr.addAttribute("memberEmail", memberEmail);
 		reAttr.addAttribute("result", "회원의 정보가 일치하지 않습니다.");
-		log.info("회원탈퇴실패");
+		log.info("회원 탈퇴 실패");
 		
 		return "redirect:/member/removeMember";
 	
@@ -148,7 +148,7 @@ public class MemberController {
 	 */
 	@PostMapping("/modifyMember")
 	public String modifyMember(Member member) {
-		log.info("회원 수정화면에서 입력받은 값: {}", member);
+		log.info("회원 수정 화면에서 입력받은 값: {}", member);
 		memberService.modifyMember(member);
 		return "redirect:/member/memberList";
 	}
@@ -160,8 +160,8 @@ public class MemberController {
 	public String modifyMember(Model model
 							  ,@RequestParam(name="memberEmail", required = false) String memberEmail
 							  ,@RequestParam(name="memberName", required = false) String memberName) {
-		log.info("회원 수정화면 폼 쿼리스트링 memberEmail : {}", memberEmail);
-		log.info("회원 수정화면 폼 쿼리스트링 memberName : {}", memberName);
+		log.info("회원 수정 화면 폼 쿼리 스트링 memberEmail : {}", memberEmail);
+		log.info("회원 수정 화면 폼 쿼리 스트링 memberName : {}", memberName);
 		
 		Member member = memberService.getMemberInfoByEmail(memberEmail);
 		List<MemberLevel> memberLevelList = memberService.getMemberLevelList();

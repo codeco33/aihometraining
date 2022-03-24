@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="aihometraining.team.challenge.mapper.ChallengeGatherMapper">
+
+	<resultMap type="ChallengeGather" id="challengeGatherResultMap">
+		<result column="challengeCategoryCode" 			property="challengeGatherCode"/>
+		<result column="challengeCategoryCode" 			property="challengeCategoryCode"/>
+		<result column="challengeGatherName" 			property="challengeGatherName"/>
+		<result column="challengeGatherIntro" 			property="challengeGatherIntro"/>
+		<result column="challengeGatherMaxPeople" 		property="challengeGatherMaxPeople"/>
+		<result column="challengeGatherProveMethod" 	property="challengeGatherProveMethod"/>
+		<result column="challengeGatherProveFrequency" 	property="challengeGatherProveFrequency"/>
+		<result column="challengeGatherAchieveRate" 	property="challengeGatherAchieveRate"/>
+		<result column="challengeStartDate" 			property="challengeStartDate"/>
+		<result column="challengeGatherRegDate" 		property="challengeGatherRegDate"/>
+		<result column="challengeGatherStartDate" 		property="challengeGatherStartDate"/>
+		<result column="challengeGatherEndDate" 		property="challengeGatherEndDate"/>
+		
+		<association property="member" javaType="Member">
+			<id column="memberEmail" property="memberEmail"/>
+		</association>
+	</resultMap>
+
+
+	<select id="getChallengeGatherList" resultMap="challengeGatherResultMap">
+		/*모집 카테고리 조회*/
+		SELECT
+			 ch.challengeGatherName
+			,ch.challengeGatherIntro
+			,ch.challengeGatherMaxPeople
+			,ch.challengeGatherProveMethod
+			,ch.challengeGatherProveContent
+			,ch.challengeGatherStartDate
+			,ch.challengeGatherEndDate
+			,ch.challengeStartDate
+			,ch.challengeEndDate
+		FROM
+			challengegather AS ch;	
+
+	</select>
+</mapper>
