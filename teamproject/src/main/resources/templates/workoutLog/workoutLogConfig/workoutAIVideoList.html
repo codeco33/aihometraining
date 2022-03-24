@@ -8,6 +8,7 @@
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
+	<form th:action="@{/workoutLog/workoutLogConfig/workoutAIVideoInsert}" method="post">
 		<div class="col-md-12">
 			<div class="panel">
 		    	<div class="panel-heading-white panel-heading">
@@ -132,6 +133,9 @@
 												</tbody>
 					                        </table>
 										</div>
+										<div>
+				                    	<input type="submit" class="btn btn-outline btn-primary" value="AI 운동 영상 등록 ">
+				                 		</div>
 									</div>
 								</div>
 							</div>  
@@ -139,7 +143,8 @@
 					</div>
 				</div>
 			</div>
-		</div>	
+		</div>
+	</form>		
 	</th:block>
 	
 	<!-- start: Javascript -->

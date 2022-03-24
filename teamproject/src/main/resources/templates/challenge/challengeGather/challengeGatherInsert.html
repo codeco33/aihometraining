@@ -1,33 +1,137 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layout/default}">
+	  layout:decorate="~{layout/userdefault}">
 	<!-- 사용자 정의 title -->
 	<th:block layout:fragment="customTitle">
 		<title th:text="${title}"></title>
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
-		챌린지 관리자 설정 페이지 입니다.
-		챌린지 관리자 설정 페이지 입니다.
-		
+		<!-- 챌린지 모집 area start -->
+		<div class="container">
+		    <div class="row justify-content-center">
+				<div class="col-xl-12">
+		        	<div class="section-tittle text-center mb-55">
+		                <h2>챌린지 모집하기</h2>
+		            </div>
+		        </div>
+	        </div>
+        </div>
+        <div class="container box_1170">
+			<div class="section-top-border">
+		        <div class="row">
+			        <div class="col-lg-12 col-md-12">
+						<h3 class="mb-30">챌린지 모집 기본 등록사항</h3>
+				        <form action="#">
+							<div class="mt-10">
+								<input type="text" name="challengeGatherName" placeholder="챌린지 모집명"
+								onfocus="this.placeholder = ''" onblur="this.placeholder = '챌린지 모집명'" required
+								class="single-input">
+							</div>
+							<div class="mt-10">
+								<input type="text" name="challengeGatherMaxPeople" placeholder="챌린지 최대 참여 인원수"
+								onfocus="this.placeholder = ''" onblur="this.placeholder = '챌린지 최대 참여 인원수'" required
+								class="single-input">
+							</div>
+							<div class="mt-10">
+								<textarea class="single-textarea" placeholder="챌린지 소개" onfocus="this.placeholder = ''"
+								onblur="this.placeholder = '챌린지 소개'" required></textarea>
+							</div>
+							<div class="mt-10">
+								<input type="text" name="challengeGatherProveMethod" placeholder="챌린지 인증방법"
+								onfocus="this.placeholder = ''" onblur="this.placeholder = '챌린지 인증방법'" required
+								class="single-input">
+							</div>
+							<div class="mt-10">
+								<input type="text" name="challengeGatherProveContent" placeholder="챌린지 인증내용"
+								onfocus="this.placeholder = ''" onblur="this.placeholder = '챌린지 인증내용'" required
+								class="single-input">
+							</div>
+							<div class="input-group-icon mt-10">
+								<div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
+								<div class="form-select" id="default-select">
+									<select>
+										<option value=" 1">City</option>
+										<option value="1">Dhaka</option>
+										<option value="1">Dilli</option>
+										<option value="1">Newyork</option>
+										<option value="1">Islamabad</option>
+									</select>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="section-top-border">
+		        <div class="row">
+			        <div class="col-lg-12 col-md-12">
+						<h3 class="mb-30">챌린지 모집 계획 등록 사항</h3>
+				        <form action="#">
+							<div class="mt-10">
+								<input type="text" name="first_name" placeholder="First Name"
+								onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'" required
+								class="single-input">
+							</div>
+							<div class="mt-10">
+								<input type="text" name="last_name" placeholder="Last Name"
+								onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required
+								class="single-input">
+							</div>
+							<div class="mt-10">
+								<input type="text" name="last_name" placeholder="Last Name"
+								onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required
+								class="single-input">
+							</div>
+							<div class="mt-10">
+								<input type="email" name="EMAIL" placeholder="Email address"
+								onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'" required
+								class="single-input">
+							</div>
+							<div class="input-group-icon mt-10">
+								<div class="icon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></div>
+								<input type="text" name="address" placeholder="Address" onfocus="this.placeholder = ''"
+								onblur="this.placeholder = 'Address'" required class="single-input">
+							</div>
+							
+							
+							<div class="mt-10">
+								<textarea class="single-textarea" placeholder="Message" onfocus="this.placeholder = ''"
+								onblur="this.placeholder = 'Message'" required></textarea>
+							</div>
+							<div class="mt-10">
+								<input type="text" name="first_name" placeholder="Primary color"
+								onfocus="this.placeholder = ''" onblur="this.placeholder = 'Primary color'" required
+								class="single-input-primary">
+							</div>
+							<div class="mt-10">
+								<input type="text" name="first_name" placeholder="Accent color"
+								onfocus="this.placeholder = ''" onblur="this.placeholder = 'Accent color'" required
+								class="single-input-accent">
+							</div>
+							<div class="mt-10">
+								<input type="text" name="first_name" placeholder="Secondary color"
+								onfocus="this.placeholder = ''" onblur="this.placeholder = 'Secondary color'"
+								required class="single-input-secondary">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+	
+	
+	<!-- 사용자 정의 Css -->
+	<th:block layout:fragment="customCss">
+		<style>
+			
+		</style>
+	</th:block>
+	<!-- 사용자 정의 Script -->
+	<th:block layout:fragment="customScript">
 	
 	</th:block>
-	<th:block layout:fragment="customBodyScript">	
-		<!-- plugins -->
-		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/jquery.datatables.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/datatables.bootstrap.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
-		
-		
-		<!-- custom -->
-		<script th:src="@{/asset/js/main.js}"></script>
-		<script type="text/javascript">
-		  $(document).ready(function(){
-		    //$('#datatables-example').DataTable();
-		  });
-		</script>
-<!-- end: Javascript -->
-	</th:block>
+	
 </html>
