@@ -8,9 +8,244 @@
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
-		사용자 하루 일지 화면입니다.
 	
+		<!--? Blog Area Start-->
+        <section class="blog_area section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mb-5 mb-lg-0">
+                        <div class="blog_left_sidebar">
+                            <article class="blog_item">
+                                <div class="blog_item_img">
+                                    <img class="card-img rounded-0" th:src="@{/assets/img/workoutLogimg1.jpg}" alt="토르">
+                                    <a href="#" class="blog_item_date">
+                                        <h3>23</h3>
+                                        <p>Mar</p>
+                                    </a>
+                                </div>
+                                <div class="blog_details">
+                                    <a class="d-inline-block" th:href="@{/workoutLog/workoutLogUser/workoutLogList}">
+                                        <h2 class="blog-head" style="color: #2d2d2d;">오늘은 사이드 런지</h2>
+                                    </a>
+                                    <p> 토르: 러브 앤 썬더 개봉일 2022년 7월 8일 입니다</p>
+                                    <ul class="blog-info-link">
+                                        <li><a href="#"><i class="fa fa-heart"></i>좋아요</a></li>
+                                        <li><a href="#"><i class="fa fa-comments"></i>피드백</a></li>
+                                    </ul>
+                                </div>
+                            </article>
+                            <article class="blog_item">
+                                <div class="blog_item_img embed-responsive embed-responsive-21by9">
+                                    <iframe class="embed-responsive-item" th:src="@{/assets/img/180419_Boxing_01_09.mp4}"></iframe>
+                                    <a href="#" class="blog_item_date">
+                                        <h3>22</h3>
+                                        <p>Mar</p>
+                                    </a>
+                                </div>
+                                <div class="blog_details">
+                                    <a class="d-inline-block" th:href="@{/workoutLog/workoutLogUser/workoutLogList}">
+                                        <h2 class="blog-head" style="color: #2d2d2d;">오늘은 권투 취취</h2>
+                                    </a>
+                                    <p>건들지마라</p>
+                                    <ul class="blog-info-link">
+                                        <li><a href="#"><i class="fa fa-heart"></i>좋아요</a></li>
+                                        <li><a href="#"><i class="fa fa-comments"></i>피드백</a></li>
+                                    </ul>
+                                </div>
+                            </article>
+                            <article class="blog_item">
+                                <div class="blog_item_img">
+                                    <img class="card-img rounded-0" th:src="@{/assets/img/workoutLogimg2.jpg}" alt="토르">
+                                    <a href="#" class="blog_item_date">
+                                        <h3>21</h3>
+                                        <p>Mar</p>
+                                    </a>
+                                </div>
+                                <div class="blog_details">
+                                    <a class="d-inline-block" th:href="@{/workoutLog/workoutLogUser/workoutLogList}">
+                                        <h2 class="blog-head" style="color: #2d2d2d;">오늘은 배틀 로프</h2>
+                                    </a>
+                                    <p>어렵지 않아요</p>
+                                    <ul class="blog-info-link">
+                                        <li><a href="#"><i class="fa fa-heart"></i>좋아요</a></li>
+                                        <li><a href="#"><i class="fa fa-comments"></i>피드백</a></li>
+                                    </ul>
+                                </div>
+                            </article>
+                            <nav class="blog-pagination justify-content-center d-flex">
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        <a href="#" class="page-link" aria-label="Previous">
+                                            <i class="ti-angle-left"></i>
+                                        </a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a href="#" class="page-link">1</a>
+                                    </li>
+                                    <li class="page-item active">
+                                        <a href="#" class="page-link">2</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a href="#" class="page-link" aria-label="Next">
+                                            <i class="ti-angle-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="blog_right_sidebar">
+                            <aside class="single_sidebar_widget search_widget">
+                                <form th:action="@{/workoutLog/workoutLogUser/workoutLogInsert}" method="post">
+                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit">
+                                                                                                   오늘의 일지 등록
+                                    </button>
+                                </form>
+                            </aside>
+                            <aside class="single_sidebar_widget post_category_widget">
+                                <h4 class="widget_title" style="color: #2d2d2d;">Todo</h4>
+											<form class="add-items d-flex">
+												<input type="text" class="form-control h-auto pr-3" placeholder="오늘 할 일  " required="" value="">
+												<button type="submit" class="btn btn-gradient-primary font-weight-bold px-lg-4 px-3">등록</button>
+											</form>
+												<ul class="list cat-list">
+													<li>
+														<div class="form-check">
+															<label for="" class="form-check-label">
+															<input class="checkbox" type="checkbox"> Print Statements 
+															<i class="input-helper"></i>
+															</label>
+														</div>
+														<i class="remove mdi mdi-close-circle-outline"></i>
+													</li>
+												</ul>
+                            </aside>
+                            <aside class="single_sidebar_widget popular_post_widget">
+                                <h3 class="widget_title" style="color: #2d2d2d;">Recent Post</h3>
+                                <div class="media post_item">
+                                    <img th:src="@{/assets/img/post/post_1.png}" alt="post">
+                                    <div class="media-body">
+                                        <a href="blog_details.html">
+                                            <h3 style="color: #2d2d2d;">From life was you fish...</h3>
+                                        </a>
+                                        <p>January 12, 2019</p>
+                                    </div>
+                                </div>
+                                <div class="media post_item">
+                                    <img th:src="@{/assets/img/post/post_1.png}" alt="post">
+                                    <div class="media-body">
+                                        <a href="blog_details.html">
+                                            <h3 style="color: #2d2d2d;">The Amazing Hubble</h3>
+                                        </a>
+                                        <p>02 Hours ago</p>
+                                    </div>
+                                </div>
+                                <div class="media post_item">
+                                    <img th:src="@{/assets/img/post/post_1.png}" alt="post">
+                                    <div class="media-body">
+                                        <a href="blog_details.html">
+                                            <h3 style="color: #2d2d2d;">Astronomy Or Astrology</h3>
+                                        </a>
+                                        <p>03 Hours ago</p>
+                                    </div>
+                                </div>
+                            </aside>
+                            <aside class="single_sidebar_widget tag_cloud_widget">
+                                <h4 class="widget_title" style="color: #2d2d2d;">Tag Clouds</h4>
+                                <ul class="list">
+                                    <li>
+                                        <a href="#">project</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">love</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">technology</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">travel</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">restaurant</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">life style</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">design</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">illustration</a>
+                                    </li>
+                                </ul>
+                            </aside>
+
+                            <aside class="single_sidebar_widget instagram_feeds">
+                                <h4 class="widget_title" style="color: #2d2d2d;">Instagram Feeds</h4>
+                                <ul class="instagram_row flex-wrap">
+                                    <li>
+                                        <a href="#">
+                                            <img class="img-fluid" th:src="@{/assets/img/post/post_1.png}" alt="">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img class="img-fluid" th:src="@{/assets/img/post/post_1.png}" alt="">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img class="img-fluid" th:src="@{/assets/img/post/post_1.png}" alt="">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img class="img-fluid" th:src="@{/assets/img/post/post_1.png}" alt="">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img class="img-fluid" th:src="@{/assets/img/post/post_1.png}" alt="">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img class="img-fluid" th:src="@{/assets/img/post/post_1.png}" alt="">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </aside>
+                            <aside class="single_sidebar_widget newsletter_widget">
+                                <h4 class="widget_title" style="color: #2d2d2d;">Newsletter</h4>
+                                <form action="#">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" onfocus="this.placeholder = ''"
+                                        onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
+                                    </div>
+                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                    type="submit">Subscribe</button>
+                                </form>
+                            </aside>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        
 	</th:block>
 	
+	<th:block layout:fragment="customCss">
+		<style>
+		</style>
+	</th:block>
 	
-</html>
+	<!-- 사용자 정의 Script -->
+	<th:block layout:fragment="customScript">
+		<script>
+		</script>
+		
+	</th:block>
+	
+</html>	
