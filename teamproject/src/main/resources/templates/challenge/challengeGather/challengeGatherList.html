@@ -9,47 +9,55 @@
 	
 	<th:block layout:fragment="customContents">
 	<!-- Courses area start -->
-		<div class="col-xl-7 col-lg-8">
-        	<div class="section-tittle text-center mb-55">
-                <h2>모집 중인 챌린지</h2>
-            </div>
-        </div>
-        <!-- userdefault 에서 customContects블럭 위치 조정 필요함  -->
-        <div class="row">
-        	<th:block th:if="${not #lists.isEmpty(challengeGatherList)}" th:each="l : ${challengeGatherList}">
-		        <div class="col-lg-4">
-		            <div class="properties properties2 mb-30">
-		                <div class="properties__card">
-		                	<div class="properties__background overlay1">
-	                            <div>
-	                            	<a href="#">[[${l.challengeGatherName}]]</a>
-	                            </div>
-	                        </div>
-		                    <div class="properties__caption">
-		                        <p>모집인원 : [[${l.challengeGatherMaxPeople}]]</p>
-		                        <h3><a href="#">[[${l.challengeGatherIntro}]]</a></h3>
-		                        <p>
-		                       	 [[${l.challengeGatherIntro}]]
-		                        </p>
-		                        <div class="properties__footer d-flex justify-content-between align-items-center">
-		                            <div class="restaurant-name" style="color: #4255A4;">
-		                                	[[${l.challengeGatherStartDate}]]
-		                            </div>
-		                            <div class="price">
-		                                <span>[[${l.challengeGatherEndDate}]]</span>
+	<div class="container">
+	    <div class="row justify-content-center">
+			<div class="col-xl-7 col-lg-8">
+	        	<div class="section-tittle text-center mb-55">
+	                <h2>모집 중인 챌린지</h2>
+	            </div>
+	        </div>
+       		<!-- userdefault 에서 customContects블럭 위치 조정 필요함  -->
+	        <div class="row">
+	        	<th:block th:if="${not #lists.isEmpty(challengeGatherList)}" th:each="l : ${challengeGatherList}">
+			        <div class="col-lg-4">
+			            <div class="properties properties2 mb-30">
+			                <div class="properties__card">
+			                	<div class="properties__background overlay1">
+		                            <div>
+		                            	<a href="#">[[${l.challengeGatherName}]]</a>
 		                            </div>
 		                        </div>
-		                    </div>
-		                </div>
-		            </div>
-		        </div>
-	        </th:block>
-	        <th:block th:unless="${not #lists.isEmpty(challengeGatherList)}" th:each="l : ${challengeGatherList}">
-	        	<div> 
-	        		등록된 챌린지가 없습니다.
-	        	</div>
-	        </th:block>        
+			                    <div class="properties__caption">
+			                        <p>모집인원 : [[${l.challengeGatherMaxPeople}]]</p>
+			                        <h3><a href="#">[[${l.challengeGatherIntro}]]</a></h3>
+			                        <p>
+			                       	 [[${l.challengeGatherIntro}]]
+			                        </p>
+			                        <div class="properties__footer d-flex justify-content-between align-items-center">
+			                            <div class="restaurant-name" style="color: #4255A4;">
+			                                	[[${l.challengeGatherStartDate}]]
+			                            </div>
+			                            <div class="price">
+			                                <span>[[${l.challengeGatherEndDate}]]</span>
+			                            </div>
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+		        </th:block>
+		        <th:block th:unless="${not #lists.isEmpty(challengeGatherList)}" th:each="l : ${challengeGatherList}">
+		        	<div> 
+		        		등록된 챌린지가 없습니다.
+		        	</div>
+		        </th:block>        
+	        </div>
         </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+			<button class="btn btn-primary me-md-2" type="button">Button</button>
+		    <button class="btn btn-primary" type="button">Button</button>
+		</div>
+	</div>
 	</th:block>
 	
 	
