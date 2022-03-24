@@ -67,7 +67,7 @@ public class MemberController {
 	public String login(Model model
 					   ,@RequestParam(value="result", required = false) String result) {
 		
-		model.addAttribute("title", "회원로그인");
+		model.addAttribute("title", "회원 로그인");
 		
 		if(result != null) model.addAttribute("result", result);
 		
@@ -89,7 +89,7 @@ public class MemberController {
 			session.setAttribute("SNAME", 	sessionName);
 			session.setAttribute("SLEVEL", 	sessionLevel);
 			
-			log.info("로그인성공");
+			log.info("로그인 성공");
 			
 			return "redirect:/";
 		}
@@ -198,11 +198,7 @@ public class MemberController {
 	@GetMapping("/addMember")
 	public String addMember(Model model) {
 		
-		//회원등급 목록 데이터
-		List<MemberLevel> memberLevelList = memberService.getMemberLevelList();
-		
 		model.addAttribute("title", "회원가입");
-		model.addAttribute("memberLevelList", memberLevelList);
 		
 		return "member/addMember";
 	}
@@ -219,7 +215,7 @@ public class MemberController {
 		
 		memberService.addMember(member);
 		
-		return "redirect:/member/memberList";
+		return "redirect:/member/addMember";
 	}
 
 	@GetMapping("/memberList")
