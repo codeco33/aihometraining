@@ -19,7 +19,7 @@ public class MainController {
 		
 		model.addAttribute("title", "관리자 메인화면");
 		
-		return "main";
+		return "adminmain";
 		
 	}
 	@GetMapping("/mypage")
