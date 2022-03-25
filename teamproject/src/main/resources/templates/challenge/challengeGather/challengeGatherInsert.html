@@ -20,102 +20,102 @@
         </div>
         <div class="container box_1170">
 			<div class="section-top-border">
-		        <div class="row">
-			        <div class="col-lg-12 col-md-12">
-						<h3 class="mb-30">챌린지 모집 기본 등록사항</h3>
-				        <form action="#">
-							<div class="mt-10">
-								<input type="text" name="challengeGatherName" placeholder="챌린지 모집명"
-								onfocus="this.placeholder = ''" onblur="this.placeholder = '챌린지 모집명'" required
+		        <div class="row justify-content-center">
+			        <div class="col-lg-8 col-md-8">
+				        <form class="mb-5" action="#">
+							<h3 class="mb-4">챌린지 모집 기본 등록사항</h3>
+								<div class="mt-2">
+									<input type="text" name="challengeGatherName" placeholder="챌린지 모집명"
+									onfocus="this.placeholder = ''" onblur="this.placeholder = '챌린지 모집명'" required
+									class="single-input">
+								</div>
+								<div class="input-group-icon mt-10">
+									<div class="icon"><i class="fas fa-bookmark" aria-hidden="true"></i></div>
+									<div class="form-select" id="challengeCategoryCode">
+										<select>
+											<option value=" 0">:: 운동클래스 카테고리 ::</option>
+											<option value="1">:: 요가 ::</option>
+											<option value="2">:: 댄스 ::</option>
+											<option value="3">:: 줌바댄스 ::</option>
+										</select>
+									</div>
+								</div>
+								<div class="mt-2">
+									<input type="text" name="challengeGatherMaxPeople" placeholder="챌린지 최대 참여 인원수"
+									onfocus="this.placeholder = ''" onblur="this.placeholder = '챌린지 최대 참여 인원수'" required
+									class="single-input">
+								</div>
+								<div class="mt-2">
+									<textarea class="single-textarea" placeholder="챌린지 소개" onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '챌린지 소개'" required></textarea>
+								</div>
+								<div class="mt-2">
+									<input type="text" name="challengeGatherProveMethod" placeholder="챌린지 인증방법"
+									onfocus="this.placeholder = ''" onblur="this.placeholder = '챌린지 인증방법'" required
+									class="single-input">
+								</div>
+								<div class="mt-2 mb-2">
+									<input type="text" name="challengeGatherProveContent" placeholder="챌린지 인증내용"
+									onfocus="this.placeholder = ''" onblur="this.placeholder = '챌린지 인증내용'" required
+									class="single-input">
+								</div>
+								<div class="card mt-2 mb-5 pt-5 pb-3 pl-2" style="background-color: #f9f9ff; border: none;">
+						            <div class="col-lg-6 col-11 px-1">
+						                <div class="input-group input-daterange"> 
+							                <input type="text" id="start" class="form-control text-left mr-2"> 
+							                	<label class="ml-3 form-control-placeholder" id="start-p" for="start">챌린지 모집 시작일</label> 
+							                <span class="fa fa-calendar" id="fa-1"></span> 
+							                <input type="text" id="end" class="form-control text-left ml-2"> 
+							                	<label class="ml-3 form-control-placeholder" id="end-p" for="end">챌린지 모집 종료일</label> 
+							                <span class="fa fa-calendar" id="fa-2"></span> 
+						                </div>
+						            </div>
+						        </div>
+								
+					        
+						<h3 class="mb-4">챌린지 모집 계획 등록 사항</h3>
+							<div class="input-group-icon mt-10">
+								<div class="icon"><i class="fas fa-bookmark" aria-hidden="true"></i></div>
+								<div class="form-select" id="challengeSettingCode">
+									<select>
+										<option value=" 0">:: 기간 지난 후 인증 가능 여부 ::</option>
+										<option value="1">:: YES ::</option>
+										<option value="2">:: NO ::</option>
+									</select>
+								</div>
+							</div>
+							<div class="mt-2">
+								<input type="text" name="challengeGatherPlanProveNumber" placeholder="챌린지 필수 인증 횟수"
+								onfocus="this.placeholder = ''" onblur="this.placeholder = '챌린지 필수 인증 횟수'" required
 								class="single-input">
 							</div>
-							<div class="mt-10">
-								<input type="text" name="challengeGatherMaxPeople" placeholder="챌린지 최대 참여 인원수"
-								onfocus="this.placeholder = ''" onblur="this.placeholder = '챌린지 최대 참여 인원수'" required
-								class="single-input">
-							</div>
-							<div class="mt-10">
-								<textarea class="single-textarea" placeholder="챌린지 소개" onfocus="this.placeholder = ''"
-								onblur="this.placeholder = '챌린지 소개'" required></textarea>
-							</div>
-							<div class="mt-10">
+							<div class="mt-2">
 								<input type="text" name="challengeGatherProveMethod" placeholder="챌린지 인증방법"
 								onfocus="this.placeholder = ''" onblur="this.placeholder = '챌린지 인증방법'" required
 								class="single-input">
 							</div>
-							<div class="mt-10">
+							<div class="mt-2 mb-2">
 								<input type="text" name="challengeGatherProveContent" placeholder="챌린지 인증내용"
 								onfocus="this.placeholder = ''" onblur="this.placeholder = '챌린지 인증내용'" required
 								class="single-input">
 							</div>
-							<div class="input-group-icon mt-10">
-								<div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
-								<div class="form-select" id="default-select">
-									<select>
-										<option value=" 1">City</option>
-										<option value="1">Dhaka</option>
-										<option value="1">Dilli</option>
-										<option value="1">Newyork</option>
-										<option value="1">Islamabad</option>
-									</select>
-								</div>
-							</div>
+							<div class="card mt-2 pt-5 pb-3 pl-2" style="background-color: #f9f9ff; border: none;">
+					            <div class="col-lg-6 col-11 px-1">
+					                <div class="input-group input-daterange"> 
+						                <input type="text" id="start" class="form-control text-left mr-2"> 
+						                	<label class="ml-3 form-control-placeholder" id="start-p" for="start">챌린지 시작일</label> 
+						                <span class="fa fa-calendar" id="fa-1"></span> 
+						                <input type="text" id="end" class="form-control text-left ml-2"> 
+						                	<label class="ml-3 form-control-placeholder" id="end-p" for="end">챌린지 종료일</label> 
+						                <span class="fa fa-calendar" id="fa-2"></span> 
+					                </div>
+					            </div>
+					        </div>
 						</form>
-					</div>
-				</div>
-			</div>
-			<div class="section-top-border">
-		        <div class="row">
-			        <div class="col-lg-12 col-md-12">
-						<h3 class="mb-30">챌린지 모집 계획 등록 사항</h3>
-				        <form action="#">
-							<div class="mt-10">
-								<input type="text" name="first_name" placeholder="First Name"
-								onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'" required
-								class="single-input">
-							</div>
-							<div class="mt-10">
-								<input type="text" name="last_name" placeholder="Last Name"
-								onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required
-								class="single-input">
-							</div>
-							<div class="mt-10">
-								<input type="text" name="last_name" placeholder="Last Name"
-								onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required
-								class="single-input">
-							</div>
-							<div class="mt-10">
-								<input type="email" name="EMAIL" placeholder="Email address"
-								onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'" required
-								class="single-input">
-							</div>
-							<div class="input-group-icon mt-10">
-								<div class="icon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></div>
-								<input type="text" name="address" placeholder="Address" onfocus="this.placeholder = ''"
-								onblur="this.placeholder = 'Address'" required class="single-input">
-							</div>
-							
-							
-							<div class="mt-10">
-								<textarea class="single-textarea" placeholder="Message" onfocus="this.placeholder = ''"
-								onblur="this.placeholder = 'Message'" required></textarea>
-							</div>
-							<div class="mt-10">
-								<input type="text" name="first_name" placeholder="Primary color"
-								onfocus="this.placeholder = ''" onblur="this.placeholder = 'Primary color'" required
-								class="single-input-primary">
-							</div>
-							<div class="mt-10">
-								<input type="text" name="first_name" placeholder="Accent color"
-								onfocus="this.placeholder = ''" onblur="this.placeholder = 'Accent color'" required
-								class="single-input-accent">
-							</div>
-							<div class="mt-10">
-								<input type="text" name="first_name" placeholder="Secondary color"
-								onfocus="this.placeholder = ''" onblur="this.placeholder = 'Secondary color'"
-								required class="single-input-secondary">
-							</div>
-						</form>
+						
+						<div class="row justify-content-center">
+			  				<button class="genric-btn primary radius" type="submit">모집 등록</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -124,13 +124,261 @@
 	
 	
 	<!-- 사용자 정의 Css -->
-	<th:block layout:fragment="customCss">
-		<style>
+			<th:block layout:fragment="customCss">
+			<style>
+			/* body {
+			    color: #000;
+			    overflow-x: hidden;
+			    height: 100%;
+			    background-color: #C5CAE9 !important;
+			    background-repeat: no-repeat;
+			    padding: 0 !important
+			} */
 			
+			/* .container {
+			    padding-top: 120px;
+			    padding-bottom: 120px
+			} */
+			
+			/* input {
+			    padding: 22px 15px !important;
+			    border: 1px solid #CFD8DC !important;
+			    border-radius: 4px !important;
+			    box-sizing: border-box;
+			    background-color: #fff !important;
+			    color: #000 !important;
+			    font-size: 16px !important;
+			    letter-spacing: 1px;
+			    position: relative
+			}
+			
+			input:focus {
+			    -moz-box-shadow: none !important;
+			    -webkit-box-shadow: none !important;
+			    box-shadow: none !important;
+			    border: 1px solid #1976D2 !important;
+			    outline-width: 0
+			} */
+			
+			.fa-calendar {
+			    position: absolute;
+			    top: 13px;
+			    font-size: 20px;
+			    color: #1976D2;
+			    z-index: 1000
+			}
+			
+			#fa-1 {
+			    left: calc(50% - 40px)
+			}
+			
+			#fa-2 {
+			    left: calc(100% - 40px)
+			}
+			
+			.form-control-placeholder {
+			    position: absolute;
+			    top: -10px !important;
+			    padding: 12px 2px 0 2px;
+			    opacity: 0.5
+			}
+			
+			#end-p {
+			    left: calc(50% + 4px)
+			}
+			
+			.form-control:focus+.form-control-placeholder,
+			.form-control:valid+.form-control-placeholder {
+			    font-size: 95%;
+			    top: 10px;
+			    transform: translate3d(0, -100%, 0);
+			    opacity: 1
+			}
+			
+			.form-select {
+				color: #BDBDBD;
+			    opacity: 1
+			}
+			
+			::placeholder {
+			    color: #BDBDBD;
+			    opacity: 1
+			}
+			
+			:-ms-input-placeholder {
+			    color: #BDBDBD
+			}
+			
+			::-ms-input-placeholder {
+			    color: #BDBDBD
+			}
+			
+			button:focus {
+			    -moz-box-shadow: none !important;
+			    -webkit-box-shadow: none !important;
+			    box-shadow: none !important;
+			    outline-width: 0
+			}
+			
+			.datepicker {
+			    background-color: #fff;
+			    border-radius: 0 !important;
+			    align-content: center !important;
+			    padding: 0 !important
+			}
+			
+			.datepicker-dropdown {
+			    top: 1130px !important;
+			    left: calc(10% - 0px) !important;
+			    border-right: #1976D2;
+			    border-left: #1976D2
+			}
+			
+			.datepicker-dropdown.datepicker-orient-left:before {
+			    left: calc(50% - 6px) !important
+			}
+			
+			.datepicker-dropdown.datepicker-orient-left:after {
+			    left: calc(50% - 5px) !important;
+			    border-bottom-color: #1976D2
+			}
+			
+			.datepicker-dropdown.datepicker-orient-right:after {
+			    border-bottom-color: #1976D2
+			}
+			
+			.datepicker table tr td.today,
+			span.focused {
+			    border-radius: 50% !important;
+			    background-image: linear-gradient(#FFF3E0, #FFE0B2)
+			}
+			
+			thead tr:nth-child(2) {
+			    background-color: #1976D2 !important
+			}
+			
+			thead tr:nth-child(3) th {
+			    font-weight: bold !important;
+			    padding: 20px 10px !important;
+			    color: #BDBDBD !important
+			}
+			
+			tbody tr td {
+			    padding: 10px !important
+			}
+			
+			tfoot tr:nth-child(2) th {
+			    padding: 10px !important;
+			    border-top: 1px solid #CFD8DC !important
+			}
+			
+			.cw {
+			    font-size: 14px !important;
+			    background-color: #E8EAF6 !important;
+			    border-radius: 0px !important;
+			    padding: 0px 20px !important;
+			    margin-right: 10px solid #fff !important
+			}
+			
+			.old,
+			.day,
+			.new {
+			    width: 40px !important;
+			    height: 40px !important;
+			    border-radius: 0px !important
+			}
+			
+			.day.old,
+			.day.new {
+			    color: #E0E0E0 !important
+			}
+			
+			.day.old:hover,
+			.day.new:hover {
+			    border-radius: 50% !important
+			}
+			
+			.old-day:hover,
+			.day:hover,
+			.new-day:hover,
+			.month:hover,
+			.year:hover,
+			.decade:hover,
+			.century:hover {
+			    border-radius: 50% !important;
+			    background-color: #eee
+			}
+			
+			.activedate {
+			    border-radius: 50% !important;
+			    background-image: linear-gradient(#1976D2, #1976D2) !important;
+			    color: #fff !important
+			}
+			
+			.range-start,
+			.range-end {
+			    border-radius: 50% !important;
+			    background-image: linear-gradient(#1976D2, #1976D2) !important
+			}
+			
+			.range {
+			    background-color: #E3F2FD !important
+			}
+			
+			.prev,
+			.next,
+			.datepicker-switch {
+			    border-radius: 0 !important;
+			    padding: 10px 10px 10px 10px !important;
+			    font-size: 18px;
+			    opacity: 0.7;
+			    color: #fff
+			}
+			
+			.prev:hover,
+			.next:hover,
+			.datepicker-switch:hover {
+			    background-color: inherit !important;
+			    opacity: 1
+			}
+			
+			label {
+				color: #BDBDCC;
+			}
+			
+			@media screen and (max-width: 726px) {
+			    .datepicker-dropdown.datepicker-orient-right:before {
+			        right: calc(50% - 6px)
+			    }
+			
+			    .datepicker-dropdown.datepicker-orient-right:after {
+			        right: calc(50% - 5px)
+			    }
+			}
 		</style>
 	</th:block>
-	<!-- 사용자 정의 Script -->
-	<th:block layout:fragment="customScript">
+	
+	<th:block layout:fragment="customBodyScript">
+		<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js}"></script>
+		<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js}"></script>
+		<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js}"></script>
+		<script>
+		$(document).ready(function(){
+		
+		   $('.input-daterange').datepicker({
+		   format: 'dd-mm-yyyy',
+		   autoclose: true,
+		   calendarWeeks : true,
+		   clearBtn: true,
+		   disableTouchKeyboard: true
+		   });
+		
+		   });
+		</script>
+	   	<!-- PRISM 이거 파일이 없는데 어떻게 하지?(민석님에게 물어보자)-->
+	   	<script th:src="@{/js/prism/prism.js}"></script>
+	   	<!-- custom 이거 파일이 없는데 어떻게 하지?(민석님에게 물어보자)-->
+	   	<script th:src="@{/js/custom.js}"></script>
 	
 	</th:block>
 	
