@@ -12,8 +12,29 @@ public class ChallengeEnterController {
 	public String challengeEnterList(Model model) {
 		
 		model.addAttribute("title", "참가 챌린지 목록");
+		model.addAttribute("headerList", "챌린지");
 		
 		return "challenge/challengeEnter/challengeEnterList";
+		
+	}
+	
+	@GetMapping("/challengeEnterDetail")
+	public String challengeEnterDetail(Model model) {
+		
+		model.addAttribute("title", "참가 챌린지 세부정보");
+		model.addAttribute("headerList", "챌린지");
+		
+		return "challenge/challengeEnter/challengeEnterDetail";
+		
+	}
+	
+	@GetMapping("/challengePlanDoInsert")
+	public String challengePlanDoInsert(Model model) {
+		
+		model.addAttribute("title", "참가 챌린지 인증하기");
+		model.addAttribute("headerList", "챌린지");
+		
+		return "challenge/challengeEnter/challengePlanDoInsert";
 		
 	}
 }
