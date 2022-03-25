@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layout/userdefault}">
+	  layout:decorate="~{layout/default}">
 	<!-- 사용자 정의 title -->
 	<th:block layout:fragment="customTitle">
 		<title th:text="${title}"></title>
 	</th:block>
-	<!-- 사용자 정의 Css -->
-	<th:block layout:fragment="customCss">
-		<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
-	</th:block>
 	
 	<th:block layout:fragment="customContents">
-		개설 승인된 운동클래스 리스트
+		개설 신청한 클래스 리스트
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-4">
@@ -193,5 +189,21 @@
 		</div>
 	</th:block>
 	
-	
+	<th:block layout:fragment="customBodyScript">	
+	<!-- plugins -->
+		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.datatables.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/datatables.bootstrap.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+		
+		
+		<!-- custom -->
+		<script th:src="@{/asset/js/main.js}"></script>
+		<script type="text/javascript">
+		  $(document).ready(function(){
+		    //$('#datatables-example').DataTable();
+		  });
+		</script>
+<!-- end: Javascript -->
+	</th:block>
 </html>
