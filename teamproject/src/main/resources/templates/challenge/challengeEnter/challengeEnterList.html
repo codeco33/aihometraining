@@ -1,33 +1,111 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layout/default}">
+	  layout:decorate="~{layout/userdefault}">
 	<!-- 사용자 정의 title -->
 	<th:block layout:fragment="customTitle">
 		<title th:text="${title}"></title>
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
-		챌린지 관리자 설정 페이지 입니다.
-		챌린지 관리자 설정 페이지 입니다.
-		
-	
+		<!-- 참가 챌린지  area start -->
+		<div class="container">
+		    <div class="row justify-content-center">
+				<div class="col-xl-7 col-lg-8">
+		        	<div class="section-tittle text-center mb-55">
+		                <h2>참가 중인 챌린지</h2>
+		            </div>
+		        </div>
+		        <!-- userdefault 에서 customContects블럭 위치 조정함  -->
+		        <div class="row section-top-border">
+			        <div class="properties__card">
+				        <div class="properties__background overlay1">
+		                    <div class="p-5"></div>
+		                </div>
+				        <section class="about-area2 fix pb-padding">
+				            <div class="support-wrapper align-items-center">
+				                <div class="right-content2">
+				                    <!-- img -->
+				                    <div class="right-img">
+				                        <img th:src="@{/assets/img/workoutLogimg2.jpg}" alt="">
+				                    </div>
+				                </div>
+				                <div class="left-content2">
+				                    <!-- section tittle -->
+				                    <div class="section-tittle section-tittle2 mb-20">
+				                        <div class="front-text">
+				                            <h2 class="">
+				                            	<a th:href="@{#}">참가 챌린지의 제목</a>
+				                            </h2>
+				                            <p>
+				                            	참가 중인 챌린지의 소개
+				                            </p>
+				                            <a th:href="@{#}" class="genric-btn primary radius">인증 하기</a>
+				                        </div>
+				                    </div>
+				                </div>
+				            </div>
+				        </section>
+			        </div>
+		        </div>
+		        <div class="row section-top-border"> <!-- 있는게 나을까 없는게 나을까? -->
+			        <div class="properties__card">
+				        <div class="properties__background overlay1">
+		                    <div class="p-5"></div>
+		                </div>
+				        <section class="about-area2 fix pb-padding">
+				            <div class="support-wrapper align-items-center">
+				                <div class="right-content2">
+				                    <!-- img -->
+				                    <div class="right-img">
+				                        <img th:src="@{/assets/img/workoutLogimg2.jpg}" alt="">
+				                    </div>
+				                </div>
+				                <div class="left-content2">
+				                    <!-- section tittle -->
+				                    <div class="section-tittle section-tittle2 mb-20">
+				                        <div class="front-text">
+				                            <h2 class="">
+				                            	<a th:href="@{#}">참가 챌린지의 제목</a>
+				                            </h2>
+				                            <p>
+				                            	참가 중인 챌린지의 소개
+				                            </p>
+				                            <a th:href="@{#}" class="genric-btn primary radius">인증 하기</a>
+				                        </div>
+				                    </div>
+				                </div>
+				            </div>
+				        </section>
+			        </div>
+		        </div>
+	        </div>
+        </div>
+		<!-- 챌린지 모집 area end -->
 	</th:block>
-	<th:block layout:fragment="customBodyScript">	
-		<!-- plugins -->
-		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/jquery.datatables.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/datatables.bootstrap.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
-		
-		
-		<!-- custom -->
-		<script th:src="@{/asset/js/main.js}"></script>
-		<script type="text/javascript">
-		  $(document).ready(function(){
-		    //$('#datatables-example').DataTable();
-		  });
-		</script>
-<!-- end: Javascript -->
+	
+	<th:block layout:fragment="customBodyScript">
+		<style>
+			.courses-area .properties__background div {
+			    padding: 29px 20px 20px 20px;
+			    width: 100%;
+			    border-radius: 10px 10px 0 0;
+			    position: relative;
+			    background-color: #ffffff;
+			    font-size: 25px;
+			    color: #fff;
+			    text-align: center;
+			}
+			.courses-area .front-text h2 a {
+			    font-size: 30px;
+			    font-weight: Semibold;
+			    color: #4255A4;
+			    outline: medium none;
+			}
+			.courses-area .front-text h2 a:hover {
+			    color: #bdbdbd;
+			    outline: medium none;
+			}
+		</style>
 	</th:block>
 </html>
