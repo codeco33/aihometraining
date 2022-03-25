@@ -8,165 +8,198 @@
 </th:block>
 <!-- 사용자 정의 Css -->
 <th:block layout:fragment="customCss">
-	<link rel="stylesheet" type="text/css"
-		th:href="@{/asset/css/plugins/simple-line-icons.css}" />
-	<link rel="stylesheet" type="text/css"
-		th:href="@{/asset/css/plugins/mediaelementplayer.css}" />
-	<link rel="stylesheet" type="text/css"
-		th:href="@{/asset/css/plugins/searchPanes.bootstrap.min.css}" />
-	<link rel="stylesheet" type="text/css"
-		th:href="@{/asset/css/plugins/select.bootstrap.min.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/simple-line-icons.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/mediaelementplayer.css}" />
+	<style type="text/css">		
+		.control-label {
+			padding-top: 10px;
+		}
+		
+		.formChecks {
+			line-height: 43px;
+		}
+		.formChecks label {
+			margin-right: 10px;
+		}
+		.dateInput {
+			width: 100px;
+			margin-bottom: 3px;
+		}		
+		
+		.searchForm {
+			margin-bottom: 20px;
+		}
+		.form-group {
+			padding-bottom: 50px;
+			border-bottom: 1px solid #efefef;
+		}
+		
+		
+		input[name="searchKey"] {
+			width: 70%;
+		}
+		
+		.searchBtn {
+			text-align: center;
+		}
+		
+		.select2-A {
+			height: 40.56px;
+		}
+		
+		@media (max-width: 767px){
+			.form-group {
+			padding-bottom: 10px;
+			border-bottom: 1px solid #efefef;
+			}
+		}
+		
+		@media (min-width: 768px) and (max-width: 1036px){
+			.form-group:nth-child(3) {
+			padding-bottom: 85px;
+			}
+			
+			
+		}
+		@media (min-width: 768px) and (max-width: 820px){
+			
+			.form-group:nth-child(1) {
+			padding-bottom: 78px;
+			}
+			
+			
+		}
+	</style>
 </th:block>
 
 <th:block layout:fragment="customContents">
 	<div class="col-md-12">
 		<div class="panel">
 			<div class="panel-body">
-
-				<div class="responsive-table">
-					<table cellpadding="3" cellspacing="0" border="0" style="width: 67%; margin: 0 auto 2em auto;">
-						<thead>
-							<tr>
-								<th>Target</th>
-								<th>Search text</th>
-								<th>Treat as regex</th>
-								<th>Use smart search</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr id="filter_global">
-								<td>Global search</td>
-								<td align="center"><input type="text" class="global_filter"
-									id="global_filter"></td>
-								<td align="center"><input type="checkbox"
-									class="global_filter" id="global_regex"></td>
-								<td align="center"><input type="checkbox"
-									class="global_filter" id="global_smart" checked="checked"></td>
-							</tr>
-							<tr id="filter_col1" data-column="0">
-								<td>Column - Name</td>
-								<td align="center"><input type="text" class="column_filter"
-									id="col0_filter"></td>
-								<td align="center"><input type="checkbox"
-									class="column_filter" id="col0_regex"></td>
-								<td align="center"><input type="checkbox"
-									class="column_filter" id="col0_smart" checked="checked"></td>
-							</tr>
-							<tr id="filter_col2" data-column="1">
-								<td>Column - Position</td>
-								<td align="center"><input type="text" class="column_filter"
-									id="col1_filter"></td>
-								<td align="center"><input type="checkbox"
-									class="column_filter" id="col1_regex"></td>
-								<td align="center"><input type="checkbox"
-									class="column_filter" id="col1_smart" checked="checked"></td>
-							</tr>
-							<tr id="filter_col3" data-column="2">
-								<td>Column - Office</td>
-								<td align="center"><input type="text" class="column_filter"
-									id="col2_filter"></td>
-								<td align="center"><input type="checkbox"
-									class="column_filter" id="col2_regex"></td>
-								<td align="center"><input type="checkbox"
-									class="column_filter" id="col2_smart" checked="checked"></td>
-							</tr>
-							<tr id="filter_col4" data-column="3">
-								<td>Column - Age</td>
-								<td align="center"><input type="text" class="column_filter"
-									id="col3_filter"></td>
-								<td align="center"><input type="checkbox"
-									class="column_filter" id="col3_regex"></td>
-								<td align="center"><input type="checkbox"
-									class="column_filter" id="col3_smart" checked="checked"></td>
-							</tr>
-							<tr id="filter_col5" data-column="4">
-								<td>Column - Start date</td>
-								<td align="center"><input type="text" class="column_filter"
-									id="col4_filter"></td>
-								<td align="center"><input type="checkbox"
-									class="column_filter" id="col4_regex"></td>
-								<td align="center"><input type="checkbox"
-									class="column_filter" id="col4_smart" checked="checked"></td>
-							</tr>
-							<tr id="filter_col6" data-column="5">
-								<td>Column - Salary</td>
-								<td align="center"><input type="text" class="column_filter"
-									id="col5_filter"></td>
-								<td align="center"><input type="checkbox"
-									class="column_filter" id="col5_regex"></td>
-								<td align="center"><input type="checkbox"
-									class="column_filter" id="col5_smart" checked="checked"></td>
-							</tr>
-						</tbody>
-					</table>
+				<form class="searchForm">
+					<div class="form-group">
+						<label class="col-sm-2 col-md-1 control-label text-right"><b>결제검색</b></label>
+						<div class="col-sm-10 col-md-11">
+	                        <select class="select2-A">
+	                            <option data-column="1">결제코드</option>
+	                            <option data-column="2">결제상품</option>
+	                            <option data-column="3">결제자</option>
+	                        </select>
+			                <input type="text" name="searchKey">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 col-md-1 control-label text-right"><b>결제상태</b></label>
+                        <div class="col-sm-10 col-md-11 formChecks">
+                            <label><input type="checkbox" name="option" value="결제대기"> 결제대기</label>
+                            <label><input type="checkbox" name="option" value="결제완료"> 결제완료</label>
+                            <label><input type="checkbox" name="option" value="결제취소"> 결제취소</label>
+                        </div>
+                    </div>
+                    
+					<div class="form-group">
+						<label class="col-sm-2 col-md-1 control-label text-right"><b>결제일자</b></label>
+						<div class="col-sm-10 col-md-11">
+	                        <input type="text" class="form-text mask-placeholder dateInput" placeholder="____/__/__"  required>
+	                        부터
+	                        <input type="text" class="form-text mask-placeholder dateInput" placeholder="____/__/__"  required>
+	                        까지
+	                        　
+	                        <input type="button" class="btn btn-round btn-default" value="오늘"/>
+	                        <input type="button" class="btn btn-round btn-default" value="1주일"/>
+	                        <input type="button" class="btn btn-round btn-default" value="1개월"/>
+	                        <input type="button" class="btn btn-round btn-default" value="3개월"/>
+	                        <input type="button" class="btn btn-round btn-default" value="1년"/>
+	                    </div>
+				   	</div>
+					<div class="form-group">
+						<label class="col-sm-2 col-md-1 control-label text-right"><b>결제방법</b></label>
+                        <div class="col-sm-10 col-md-11 formChecks">
+                            <label><input type="checkbox" name="option" value="카드"> 카드</label>
+                            <label><input type="checkbox" name="option" value="현금"> 현금</label>
+                        </div>
+                    </div>
+                    <div class="searchBtn">
+						<button type="button" class="btn-flip btn btn-gradient btn-primary ">
+								검색 <span class="fa fa-search"></span>
+						</button>
+						<button type="button" class="btn-flip btn btn-outline btn-default">
+								초기화
+						</button>
+					</div>
+				</form>			
+							
+							
+				<div class="responsive-table">				
+				
+					<!-- 데이터 테이블 --> 		
 					<table id="paymentList" class="table table-striped table-bordered">
 						<thead>
 							<tr>
-								<th>결제날짜</th>
+								<th>결제일자</th>
 								<th>결제코드</th>
-								<th>카테고리</th>
+								<th>결제상품</th>
 								<th>결제자</th>
-								<th>결제방식</th>
+								<th>결제방법</th>
 								<th>결제금액</th>
 								<th>상태</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td><a th:href="@{/paymentList/paymentDetail(paymentCode=)}">e20220323_00001</a></td>
+								<td>2022-03-23</td>
 								<!-- (paymentCode=${l.paymentCode}) -->
-								<td class="searchTd">id005@email.com</td>
+								<td><a th:href="@{/paymentList/paymentDetail(paymentCode=)}">e20220323_00001</a></td>
 								<td class="searchTd">운동클래스</td>
+								<td class="searchTd">id005@email.com</td>
 								<td class="searchTd">카드</td>
 								<td>137,500</td>
 								<td class="searchTd">결제완료</td>
-								<td>2022-03-23</td>
 							</tr>
 							<tr>
+								<td>2022-02-23</td>
 								<td><a th:href="@{/paymentList/paymentDetail(paymentCode=)}">c20220223_00001</a></td>
-								<td class="searchTd">id005@email.com</td>
 								<td class="searchTd">챌린지</td>
+								<td class="searchTd">id005@email.com</td>
 								<td class="searchTd">현금</td>
 								<td>7,500</td>
 								<td class="searchTd">결제전</td>
-								<td>2022-02-23</td>
 							</tr>
 							<tr>
-								<td><a
-									th:href="@{/paymentList/paymentDetail(paymentCode=)}">c20220223_00002</a></td>
-								<td class="searchTd">id006@email.com</td>
+								<td>2022-02-23</td>
+								<td><a th:href="@{/paymentList/paymentDetail(paymentCode=)}">c20220223_00002</a></td>
 								<td class="searchTd">챌린지</td>
+								<td class="searchTd">id006@email.com</td>
 								<td class="searchTd">현금</td>
 								<td>5,000</td>
 								<td class="searchTd">결제완료</td>
-								<td>2022-02-23</td>
 							</tr>
 							<tr>
+								<td>2022-02-24</td>
 								<td><a th:href="@{/paymentList/paymentDetail(paymentCode=)}">e20220224_00001</a></td>
-								<td class="searchTd">id006@email.com</td>
 								<td class="searchTd">운동클래스</td>
+								<td class="searchTd">id006@email.com</td>
 								<td class="searchTd">카드</td>
 								<td>12,000</td>
 								<td class="searchTd">결제완료</td>
-								<td>2022-02-24</td>
 							</tr>
 							<tr>
+								<td>2022-02-25</td>
 								<td><a th:href="@{/paymentList/paymentDetail(paymentCode=)}">c20220225_00001</a></td>
-								<td class="searchTd">id007@email.com</td>
 								<td class="searchTd">챌린지</td>
+								<td class="searchTd">id007@email.com</td>
 								<td class="searchTd">현금</td>
 								<td>2,000</td>
 								<td class="searchTd">결제전</td>
-								<td>2022-02-25</td>
 							</tr>
 							<tr>
+								<td>2022-02-22</td>
 								<td><a th:href="@{/paymentList/paymentDetail(paymentCode=)}">e20220222_00001</a></td>
-								<td class="searchTd">id007@email.com</td>
 								<td class="searchTd">운동클래스</td>
+								<td class="searchTd">id007@email.com</td>
 								<td class="searchTd">현금</td>
 								<td>10,000</td>
 								<td class="searchTd">결제완료</td>
-								<td>2022-02-22</td>
 							</tr>
 
 							<!-- <tr th:if="${not #lists.isEmpty(paymentList)}" th:each="l : ${paymentList}">
@@ -200,26 +233,37 @@
 	<script th:src="@{/asset/js/plugins/jquery.dataTables.min.js}"></script>
 	<script th:src="@{/asset/js/plugins/dataTables.bootstrap.min.js}"></script>
 	<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+	<script th:src="@{/asset/js/plugins/jquery.mask.min.js}"></script>
 
 	<!-- custom -->
 	<script th:src="@{/asset/js/main.js}"></script>
 	<script type="text/javascript">
-		function filterGlobal() {
-			$('#example').DataTable().search($('#global_filter').val(),
-					$('#global_regex').prop('checked'),
-					$('#global_smart').prop('checked')).draw();
-		}
-
-		function filterColumn(i) {
-			$('#example').DataTable().column(i).search(
-					$('#col' + i + '_filter').val(),
-					$('#col' + i + '_regex').prop('checked'),
-					$('#col' + i + '_smart').prop('checked')).draw();
-		}
+	
+		
+		
 
 		$(document).ready(function() {
-			// Create DataTable
-			$('#paymentList').DataTable();
+			/* 결제 일자 형식 지정*/
+			 $('.mask-placeholder').mask("0000/00/00", {placeholder: "____/__/__"});
+			
+			 
+			/* 데이터 테이블 생성*/
+			var table = $('#paymentList').DataTable({
+				order : [ 0, 'desc' ],
+				lengthChange : false,
+				pageLength : 15,
+				filter: false,
+				 dom: '<"top"i>rt<"bottom"flp><"clear">'
+			});
+			
+			/* 레코드 수 포맷 */
+			var info = table.page.info();			
+			$('#paymentList_info').html('전체 ' + info.recordsTotal + ' 건').css('font-weight','bold');
+			
+			$('#paymentList').click(function(){
+				$('#paymentList_info').html('전체 ' + info.recordsTotal + ' 건');
+			});
+		 
 
 		});
 	</script>
