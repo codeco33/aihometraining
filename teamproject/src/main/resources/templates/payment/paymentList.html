@@ -26,9 +26,6 @@
 			margin-bottom: 3px;
 		}		
 		
-		.searchForm {
-			margin-bottom: 20px;
-		}
 		.form-group {
 			padding-bottom: 50px;
 			border-bottom: 1px solid #efefef;
@@ -150,56 +147,56 @@
 								<td>2022-03-23</td>
 								<!-- (paymentCode=${l.paymentCode}) -->
 								<td><a th:href="@{/paymentList/paymentDetail(paymentCode=)}">e20220323_00001</a></td>
-								<td class="searchTd">운동클래스</td>
-								<td class="searchTd">id005@email.com</td>
-								<td class="searchTd">카드</td>
+								<td>운동클래스</td>
+								<td>id005@email.com</td>
+								<td>카드</td>
 								<td>137,500</td>
-								<td class="searchTd">결제완료</td>
+								<td>결제완료</td>
 							</tr>
 							<tr>
 								<td>2022-02-23</td>
 								<td><a th:href="@{/paymentList/paymentDetail(paymentCode=)}">c20220223_00001</a></td>
-								<td class="searchTd">챌린지</td>
-								<td class="searchTd">id005@email.com</td>
-								<td class="searchTd">현금</td>
+								<td>챌린지</td>
+								<td>id005@email.com</td>
+								<td>현금</td>
 								<td>7,500</td>
-								<td class="searchTd">결제전</td>
+								<td>결제전</td>
 							</tr>
 							<tr>
 								<td>2022-02-23</td>
 								<td><a th:href="@{/paymentList/paymentDetail(paymentCode=)}">c20220223_00002</a></td>
-								<td class="searchTd">챌린지</td>
-								<td class="searchTd">id006@email.com</td>
-								<td class="searchTd">현금</td>
+								<td>챌린지</td>
+								<td>id006@email.com</td>
+								<td>현금</td>
 								<td>5,000</td>
-								<td class="searchTd">결제완료</td>
+								<td>결제완료</td>
 							</tr>
 							<tr>
 								<td>2022-02-24</td>
 								<td><a th:href="@{/paymentList/paymentDetail(paymentCode=)}">e20220224_00001</a></td>
-								<td class="searchTd">운동클래스</td>
-								<td class="searchTd">id006@email.com</td>
-								<td class="searchTd">카드</td>
+								<td>운동클래스</td>
+								<td>id006@email.com</td>
+								<td>카드</td>
 								<td>12,000</td>
-								<td class="searchTd">결제완료</td>
+								<td>결제완료</td>
 							</tr>
 							<tr>
 								<td>2022-02-25</td>
 								<td><a th:href="@{/paymentList/paymentDetail(paymentCode=)}">c20220225_00001</a></td>
-								<td class="searchTd">챌린지</td>
-								<td class="searchTd">id007@email.com</td>
-								<td class="searchTd">현금</td>
+								<td>챌린지</td>
+								<td>id007@email.com</td>
+								<td>현금</td>
 								<td>2,000</td>
-								<td class="searchTd">결제전</td>
+								<td>결제전</td>
 							</tr>
 							<tr>
 								<td>2022-02-22</td>
 								<td><a th:href="@{/paymentList/paymentDetail(paymentCode=)}">e20220222_00001</a></td>
-								<td class="searchTd">운동클래스</td>
-								<td class="searchTd">id007@email.com</td>
-								<td class="searchTd">현금</td>
+								<td>운동클래스</td>
+								<td>id007@email.com</td>
+								<td>현금</td>
 								<td>10,000</td>
-								<td class="searchTd">결제완료</td>
+								<td>결제완료</td>
 							</tr>
 
 							<!-- <tr th:if="${not #lists.isEmpty(paymentList)}" th:each="l : ${paymentList}">
@@ -253,7 +250,8 @@
 				lengthChange : false,
 				pageLength : 15,
 				filter: false,
-				 dom: '<"top"i>rt<"bottom"flp><"clear">'
+				 dom: '<"top"i>rt<"bottom"p><"clear">',
+
 			});
 			
 			/* 레코드 수 포맷 */
