@@ -52,4 +52,5 @@ public class ChallengeGaterController {
 		return "challenge/challengeGather/challengeGatherInsert";
 		
 	}
+	
 }
