@@ -31,9 +31,18 @@ public class WorkoutLogUserController {
 	@GetMapping("/workoutLogList")
 	public String workoutLogList(Model model) {
 		
-		model.addAttribute("title", "인기 일지");
+		model.addAttribute("title", "일지 상세 화면");
 		
 		return "workoutLog/workoutLogUser/workoutLogList";
+		
+	}
+	
+	@PostMapping("/workoutLogBest")
+	public String workoutLogBest(Model model) {
+		
+		model.addAttribute("title", "인기 일지");
+		
+		return "workoutLog/workoutLogUser/workoutLogBest";
 		
 	}
 	
