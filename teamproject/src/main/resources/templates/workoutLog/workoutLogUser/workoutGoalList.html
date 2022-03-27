@@ -8,8 +8,137 @@
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
-		운동 목표 관리 화면입니다.
+		<div class="services-area section-padding">
+            <div class="container">
+                <div class="row justify-content-sm-center">
+                    <div class="col-lg-4 col-md-6 col-sm-8">
+                        <div class="single-services mb-30">
+                            <div class="features-caption">
+                                <h3>운동 목표 1</h3>
+                                <p>한달동안 2kg 감량하기</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-8">
+                        <div class="single-services mb-30">
+                            <div class="features-caption">
+                                <h3>운동 목표 2</h3>
+                                <p>복근 만들기</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-8">
+                        <div class="single-services mb-30">
+                            <div class="features-caption">
+                                <h3>운동 목표 3</h3>
+                                <p>다리 찢기</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+       <!-- Single Start-->
+		<section class="blog_area">
+	        <div class="container">
+	        	<div class="row justify-content-sm-center">
+	        		<div class="col-sm-4 mb-5 mb-lg-0">
+	            		<div class="properties__card">
+			                <div class="properties__caption">
+			                    <p>User Experience</p>
+			                    <h3>Fundamental of UX for Application design</a></h3>
+			                    <p>The automated process all your website tasks. Discover tools and techniques to engage effectively with vulnerable children and young people.
+			
+			                    </p>
+			                    <h6>목표 달성률</h6>
+			                    <div class="percentage">
+									<div class="progress">
+										<div class="progress-bar color-7" role="progressbar" style="width: 30%"
+										aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+								</div>
+			                    <form action="javascript:void(0)" method="post">
+				                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn mt-5" type="submit">
+				                    	운동 계획 GoGo
+				                    </button>
+				                </form>    
+			                </div>
+			
+			            </div>
+			        </div>
+			        <div class="col-sm-4 mb-5 mb-lg-0">
+			            <div class="properties__card">
+			                <div class="properties__caption">
+			                    <p>User Experience</p>
+			                    <h3>Fundamental of UX for Application design</a></h3>
+			                    <p>The automated process all your website tasks. Discover tools and techniques to engage effectively with vulnerable children and young people.
+			                    </p>
+			                     <h6>목표 달성률</h6>
+			                    <div class="percentage">
+									<div class="progress">
+										<div class="progress-bar color-7" role="progressbar" style="width: 30%"
+										aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+								</div>
+			                    <form action="javascript:void(0)" method="post">
+				                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn mt-5" type="submit">
+				                    	운동 계획 GoGo
+				                    </button>
+				                </form>    
+			                </div>
+			            </div>
+			        </div>
+			        <div class="col-sm-4 mb-5 mb-lg-0">
+			            <div class="properties__card">
+			                <div class="properties__caption">
+			                    <p>User Experience</p>
+			                    <h3>Fundamental of UX for Application design</a></h3>
+			                    <p>The automated process all your website tasks. Discover tools and techniques to engage effectively with vulnerable children and young people.
+			
+			                    </p>
+			                     <h6>목표 달성률</h6>
+			                    <div class="percentage">
+									<div class="progress">
+										<div class="progress-bar color-7" role="progressbar" style="width: 30%"
+										aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+								</div>
+			                    <form action="javascript:void(0)" method="post">
+				                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn mt-5" type="submit">
+				                    	운동 계획 GoGo
+				                    </button>
+				                </form>    
+			                </div>
+			
+			            </div>
+			        </div>
+			        <!-- Single End-->
+			        <div class="pt-5">
+	                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" th:onclick="|location.href='@{/workoutLog/workoutLogUser/workoutGoalInsert}'|">
+	                        	운동 목표 등록
+	                        </button>
+			        </div>
+			    </div>
+			</div>
+		</section>   
 	
 	</th:block>
+	
+	<!-- 사용자 정의 Css -->
+	<th:block layout:fragment="customCss">
+		<style>
+			.progress-bar.color-7 {
+			background-color: #a367e7
+			}
+			h6{
+			font-weight: bold
+			}
+		</style>
+	</th:block>
+	
+	
+	
+	
 	
 </html>
