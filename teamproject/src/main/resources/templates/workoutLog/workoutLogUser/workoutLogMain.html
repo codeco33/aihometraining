@@ -97,11 +97,9 @@
                     <div class="col-lg-4">
                         <div class="blog_right_sidebar">
                             <aside class="single_sidebar_widget search_widget">
-                                <form th:action="@{/workoutLog/workoutLogUser/workoutLogInsert}" method="post">
-                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit">
-                                    	오늘의 일지 등록
-                                    </button>
-                                </form>
+	                            <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" th:onclick="|location.href='@{/workoutLog/workoutLogUser/workoutLogInsert}'|">
+	                            	오늘의 일지 등록
+	                            </button>
                             </aside>
                             <aside class="single_sidebar_widget post_category_widget">
                                 <h4 class="widget_title" style="color: #2d2d2d;">오늘의 할 일</h4>
@@ -148,34 +146,46 @@
                                 </form>
                             </aside>
                             <aside class="single_sidebar_widget popular_post_widget">
-                                <h3 class="widget_title" style="color: #2d2d2d;">나의 목표 및 계획</h3>
-                                <div class="media post_item">
-                                    <img th:src="@{/assets/img/post/post_1.png}" alt="post">
-                                    <div class="media-body">
-                                        <a href="blog_details.html">
-                                            <h3 style="color: #2d2d2d;">From life was you fish...</h3>
-                                        </a>
-                                        <p>January 12, 2019</p>
-                                    </div>
-                                </div>
-                                <div class="media post_item">
-                                    <img th:src="@{/assets/img/post/post_1.png}" alt="post">
-                                    <div class="media-body">
-                                        <a href="blog_details.html">
-                                            <h3 style="color: #2d2d2d;">The Amazing Hubble</h3>
-                                        </a>
-                                        <p>02 Hours ago</p>
-                                    </div>
-                                </div>
-                                <div class="media post_item">
-                                    <img th:src="@{/assets/img/post/post_1.png}" alt="post">
-                                    <div class="media-body">
-                                        <a href="blog_details.html">
-                                            <h3 style="color: #2d2d2d;">Astronomy Or Astrology</h3>
-                                        </a>
-                                        <p>03 Hours ago</p>
-                                    </div>
-                                </div>
+                                <h3 class="widget_title" style="color: #2d2d2d;">나의 목표</h3>
+                                <div class="single-services mb-30">
+		                           <div class="features-caption">
+		                               <h3>운동 목표 1</h3>
+		                               <p>한달동안 2kg 감량하기</p>
+		                           </div>
+		                           <h6>목표 달성률</h6>
+				                   <div class="percentage">
+										<div class="progress">
+											<div class="progress-bar color-7" role="progressbar" style="width: 30%"
+											aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+									</div>
+		                      	</div>
+                                <div class="single-services mb-30">
+		                            <div class="features-caption">
+		                                <h3>운동 목표 2</h3>
+		                                <p>복근 만들기</p>
+		                            </div>
+		                            <h6>목표 달성률</h6>
+				                    <div class="percentage">
+										<div class="progress">
+											<div class="progress-bar color-7" role="progressbar" style="width: 30%"
+											aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+									</div>
+			                    </div>
+                                <div class="single-services mb-30">
+		                            <div class="features-caption">
+		                                <h3>운동 목표 3</h3>
+		                                <p>다리 찢기</p>
+		                            </div>
+		                            <h6>목표 달성률</h6>
+				                    <div class="percentage">
+										<div class="progress">
+											<div class="progress-bar color-7" role="progressbar" style="width: 30%"
+											aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+									</div>
+		                        </div>
                             </aside>
                             <aside class="single_sidebar_widget tag_cloud_widget">
                                 <h4 class="widget_title" style="color: #2d2d2d;">수강중인 클래스</h4>
@@ -194,38 +204,74 @@
 
                             <aside class="single_sidebar_widget instagram_feeds">
                                 <h4 class="widget_title" style="color: #2d2d2d;">피드백</h4>
-                                <ul class="instagram_row flex-wrap">
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" th:src="@{/assets/img/post/post_1.png}" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" th:src="@{/assets/img/post/post_1.png}" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" th:src="@{/assets/img/post/post_1.png}" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" th:src="@{/assets/img/post/post_1.png}" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" th:src="@{/assets/img/post/post_1.png}" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" th:src="@{/assets/img/post/post_1.png}" alt="">
-                                        </a>
-                                    </li>
-                                </ul>
+                            	<div class="comments-area">
+	                            	<div class="comment-list">
+							            <div class="single-comment justify-content-between d-flex">
+							               <div class="user justify-content-between d-flex">
+							                  <div class="thumb">
+							                     <img th:src="@{/assets/img/mds.PNG}" alt="">
+							                  </div>
+							                  <div class="desc">
+							                     <p class="comment">
+							                     	오늘 저녁 메뉴는 무엇입니까?
+							                     </p>
+							                     <p class="comment">
+							                     	<h5>
+							                        	<a href="#">마동석</a>
+							                        </h5>
+							                        <p class="date">March 25, 2022 at 6:10pm </p>
+							                        <div class="reply-btn">
+							                           <a href="#" class="btn-reply text-uppercase">reply</a>
+							                        </div>
+							                  </div>
+							               </div>
+							            </div>
+							         </div>
+							         <div class="comment-list">
+							            <div class="single-comment justify-content-between d-flex">
+							               <div class="user justify-content-between d-flex">
+							                  <div class="thumb">
+							                     <img th:src="@{/assets/img/mds.PNG}" alt="">
+							                  </div>
+							                  <div class="desc">
+							                     <p class="comment">
+							                     	설마 치킨은 아니겠지요	
+							                     <p class="comment">
+							                     	<h5>
+							                        	<a href="#">마동석</a>
+							                        </h5>
+							                        <p class="date">March 25, 2022 at 6:11pm  </p>
+							                        <div class="reply-btn">
+							                           <a href="#" class="btn-reply text-uppercase">reply</a>
+							                        </div>
+							                  </div>
+							               </div>
+							            </div>
+							         </div>
+							         <div class="comment-list">
+							            <div class="single-comment justify-content-between d-flex">
+							               <div class="user justify-content-between d-flex">
+							                  <div class="thumb">
+							                     <img th:src="@{/assets/img/mds.PNG}" alt="">
+							                  </div>
+							                  <div class="desc">
+							                     <p class="comment">
+							                     	설마 술은 아니겠지요
+							                     	드루와드루와	
+							                     </p>
+							                     <p class="comment">
+							                     	<h5>
+							                        	<a href="#">마동석</a>
+							                        </h5>
+							                        <p class="date">March 25, 2022 at 6:12pm  </p>
+							                        <div class="reply-btn">
+							                           <a href="#" class="btn-reply text-uppercase">reply</a>
+							                        </div>
+							                  </div>
+							               </div>
+							            </div>
+							         </div>
+							      </div>
                             </aside>
                         </div>
                     </div>
@@ -240,6 +286,18 @@
 		<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
 		<!-- Custom Stylesheet -->
     	<link th:href="@{/todolist/css/style.css}" rel="stylesheet">
+    	<style>
+			.progress-bar.color-7 {
+				background-color: #a367e7
+			}
+			h6{
+				font-weight: bold
+			}
+			.comments-area {
+				border-top: none;
+				padding: 0px;
+			}
+		</style>
 	</th:block>
 	
 	<!-- 사용자 정의 Script -->
