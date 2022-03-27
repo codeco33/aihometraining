@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/userdefault}">
+
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+		<div class="continer" style="margin: 15px 15px;">
+			<div style="background: #c054ff;
+						background: -moz-linear-gradient(top, #c054ff 0%, #5274ff 100%);
+						background: -webkit-linear-gradient(top, #c054ff 0%, #5274ff 100%);
+						background: linear-gradient(to bottom, #c054ff 0%, #5274ff 100%);
+						filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c054ff', endColorstr='#5274ff', GradientType=0);">
+				<div class="row">
+					<div class="col-md-2 offset-md-1" style="border-left:1px #fff solid; text-align: center;">
+						<a href="#">공지사항</a>
+					</div>
+					
+					<div class="col-md-2" style="border-left:1px #fff solid; text-align: center;" >
+						<a href="#">클래스소개</a>
+					</div>
+					
+					<div class="col-md-2" style="border-left:1px #fff solid; text-align: center;">
+						<a href="#">커리큘럼</a>
+					</div>
+					
+					<div class="col-md-2" style="border-left:1px #fff solid;text-align: center;">
+						<a href="#">Q n A</a>
+					</div>
+					
+					<div class="col-md-2" style="border-left:1px #fff solid; border-right:1px #fff solid; text-align: center;">
+						<a href="#">수강평</a>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12" style="padding: 25px;">
+					<div class="row" style="background-color:#e8c930; margin:">
+						<div class="col-md-3" style="border-right:1px #fff solid; text-align: center;">
+							<i class="bi bi-megaphone-fill"></i> 공지사항
+						</div>
+						<div class="col-md-9">
+							공지사항 내용
+						</div>
+					</div>
+				</div>
+				<div class="col-md-10 offset-md-1" style="padding: 15px;">
+					개설자가 넣은 클래스 소개란 이미지 또는 글
+					<div>
+						<img alt="" th:src="@{/asset/img/01_모코코콘1_07_멘탈X.png}">
+					</div>
+				</div>
+				<div class="col-md-10 offset-md-1" style="padding: 15px;">
+					섹션
+					<div>
+						커리큘럼
+					</div>
+				</div>
+				<div class="col-md-10 offset-md-1" style="padding: 15px;">
+					Q n A
+					<div class="col-md-12">
+						Q n A 질문란
+						<div class="col-md-10 offset-md-1">
+							Q n A 답변란
+						</div>
+					</div>
+				</div>
+				<div class="col-md-10 offset-md-1" style="padding: 15px;">
+					수강평
+					<form>
+						<div class="form-row">
+							<div class="form-group col-md-1">
+								<img alt="" th:src="@{asset/img/01_모코코콘1_07_멘탈X.png}" style="width: 50px; height: 50px;">
+							</div>
+							<div class="form-group col-md-4">
+								<span>사용자 닉네임</span>
+							</div>
+							<div class="col-md-5">
+								별점
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star-half"></i>
+							</div>
+							<div class="form-group col-md-7 offset-md-1">
+								<textarea rows="4" cols="50" placeholder="수강평을 작성해주세요~"></textarea>
+							</div>
+							<div class="col-md-1">
+								<button type="submit" class="btn btn4" style="height: 100px;">수강평 달기</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</th:block>
+	
+	<th:block layout:fragment="customCss">
+		<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
+	</th:block>
+</html>

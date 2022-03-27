@@ -9,6 +9,10 @@
                       <p class="animated fadeInRight">Sat,October 1st 2029</p>
                     </li>
                     <li class="ripple">
+                    	<a th:href="@{/admin}"><span class="fa-home fa"></span> 관리자 홈
+                      </a>
+                    </li>
+                    <li class="ripple">
                       <a class="tree-toggle nav-header"><span class="fa-user fa"></span> 회원
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
@@ -24,7 +28,7 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                        <li><a th:href="@{#}">#운동클래스 개설 신청 내역(재환)</a></li>
+                        <li><a th:href="@{/eClassOpenApplyadminList}">#운동클래스 개설 신청 내역(재환)</a></li>
                         <li><a th:href="@{/eClass/eClassConfig/eClassCategoryList}">#운동 클래스 카테고리 관리(민식)</a></li>
                         <li><a th:href="@{#}">#운동클래스 목록(재환)</a></li>
                         <li><a th:href="@{#}">#운동클래스(재환)</a></li>

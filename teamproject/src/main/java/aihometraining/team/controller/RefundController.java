@@ -22,7 +22,7 @@ public class RefundController {
 		model.addAttribute("leftMenuList", "결제/환불");
 		model.addAttribute("title", "환불 기준 관리");
 		
-		return "refund/refundList";
+		return "refund/refundStandard";
 	}
 	
 }

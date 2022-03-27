@@ -28,16 +28,34 @@ public class WorkoutLogUserController {
 		
 	}
 	
+	@GetMapping("/workoutGoalInsert")
+	public String workoutGoalInsert(Model model) {
+		
+		model.addAttribute("title", "운동 목표 등록");
+		
+		return "workoutLog/workoutLogUser/workoutGoalInsert";
+		
+	}
+	
 	@GetMapping("/workoutLogList")
 	public String workoutLogList(Model model) {
 		
-		model.addAttribute("title", "인기 일지");
+		model.addAttribute("title", "일지 상세 화면");
 		
 		return "workoutLog/workoutLogUser/workoutLogList";
 		
 	}
 	
-	@PostMapping("/workoutLogInsert")
+	@GetMapping("/workoutLogBest")
+	public String workoutLogBest(Model model) {
+		
+		model.addAttribute("title", "인기 일지");
+		
+		return "workoutLog/workoutLogUser/workoutLogBest";
+		
+	}
+	
+	@GetMapping("/workoutLogInsert")
 	public String workoutLogInsert(Model model) {
 		
 		model.addAttribute("title", "일지 등록");
@@ -54,7 +72,6 @@ public class WorkoutLogUserController {
 		return "workoutLog/workoutLogUser/workoutGoalPlanList";
 		
 	}
-	
 	
 	
 }

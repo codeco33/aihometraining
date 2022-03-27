@@ -19,8 +19,8 @@
                                 <div class="blog_item_img">
                                     <img class="card-img rounded-0" th:src="@{/assets/img/workoutLogimg1.jpg}" alt="토르">
                                     <a href="#" class="blog_item_date">
-                                        <h3>23</h3>
-                                        <p>Mar</p>
+                                        <h3>15</h3>
+                                        <p>Jan</p>
                                     </a>
                                 </div>
                                 <div class="blog_details">
@@ -38,12 +38,12 @@
                                 <div class="blog_item_img embed-responsive embed-responsive-21by9">
                                     <iframe class="embed-responsive-item" th:src="@{/assets/img/180419_Boxing_01_09.mp4}"></iframe>
                                     <a href="#" class="blog_item_date">
-                                        <h3>22</h3>
-                                        <p>Mar</p>
+                                        <h3>15</h3>
+                                        <p>Jan</p>
                                     </a>
                                 </div>
                                 <div class="blog_details">
-                                    <a class="d-inline-block" th:href="@{/workoutLog/workoutLogUser/workoutLogList}">
+                                    <a class="d-inline-block" href="blog_details.html">
                                         <h2 class="blog-head" style="color: #2d2d2d;">오늘은 권투 취취</h2>
                                     </a>
                                     <p>건들지마라</p>
@@ -57,12 +57,12 @@
                                 <div class="blog_item_img">
                                     <img class="card-img rounded-0" th:src="@{/assets/img/workoutLogimg2.jpg}" alt="토르">
                                     <a href="#" class="blog_item_date">
-                                        <h3>21</h3>
-                                        <p>Mar</p>
+                                        <h3>15</h3>
+                                        <p>Jan</p>
                                     </a>
                                 </div>
                                 <div class="blog_details">
-                                    <a class="d-inline-block" th:href="@{/workoutLog/workoutLogUser/workoutLogList}">
+                                    <a class="d-inline-block" href="blog_details.html">
                                         <h2 class="blog-head" style="color: #2d2d2d;">오늘은 배틀 로프</h2>
                                     </a>
                                     <p>어렵지 않아요</p>
@@ -97,135 +97,181 @@
                     <div class="col-lg-4">
                         <div class="blog_right_sidebar">
                             <aside class="single_sidebar_widget search_widget">
-                                <form th:action="@{/workoutLog/workoutLogUser/workoutLogInsert}" method="post">
-                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit">
-                                                                                                   오늘의 일지 등록
-                                    </button>
-                                </form>
+	                            <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" th:onclick="|location.href='@{/workoutLog/workoutLogUser/workoutLogInsert}'|">
+	                            	오늘의 일지 등록
+	                            </button>
                             </aside>
                             <aside class="single_sidebar_widget post_category_widget">
-                                <h4 class="widget_title" style="color: #2d2d2d;">Todo</h4>
-											<form class="add-items d-flex">
-												<input type="text" class="form-control h-auto pr-3" placeholder="오늘 할 일  " required="" value="">
-												<button type="submit" class="btn btn-gradient-primary font-weight-bold px-lg-4 px-3">등록</button>
-											</form>
-												<ul class="list cat-list">
-													<li>
-														<div class="form-check">
-															<label for="" class="form-check-label">
-															<input class="checkbox" type="checkbox"> Print Statements 
-															<i class="input-helper"></i>
-															</label>
-														</div>
-														<i class="remove mdi mdi-close-circle-outline"></i>
-													</li>
-												</ul>
+                                <h4 class="widget_title" style="color: #2d2d2d;">오늘의 할 일</h4>
+                                <form class="add-items">
+					                <div class="todo-list">
+					                    <div class="tdl-holder">
+					                        <div class="tdl-content">
+					                            <ul id="todo_list">
+					                                <li>
+					                                	<label>
+					                                		<input type="checkbox"><i></i>
+					                                		<span>물 2리터 이상 마시기</span>
+					                                		<a href='#' class="ti-trash"></a>
+					                                	</label>
+					                                </li>
+					                                <li>
+					                                	<label>
+					                                		<input type="checkbox" checked><i></i>
+					                                		<span>스쿼트 100개 하기</span>
+					                                		<a href='#' class="ti-trash"></a>
+					                                	</label>
+					                                </li>
+					                                <li>
+					                                <label>
+					                                	<input type="checkbox"><i></i>
+					                                	<span>책 읽기</span>
+					                                	<a href='#' class="ti-trash"></a>
+					                                </label>
+					                                </li>
+					                                <li>
+					                                	<label>
+					                                	<input type="checkbox" checked><i></i>
+					                                	<span>일기 쓰기</span>
+					                                	<a href='#' class="ti-trash"></a>
+					                                	</label>
+					                                </li>
+					                            </ul>
+					                        </div>
+					                        <div class="px-4">
+					                            <input type="text" class="tdl-new form-control" placeholder="새로운 할 일 작성 후 Enter 쳐유">
+					                        </div>
+					                    </div>
+					                </div>
+                                </form>
                             </aside>
                             <aside class="single_sidebar_widget popular_post_widget">
-                                <h3 class="widget_title" style="color: #2d2d2d;">Recent Post</h3>
-                                <div class="media post_item">
-                                    <img th:src="@{/assets/img/post/post_1.png}" alt="post">
-                                    <div class="media-body">
-                                        <a href="blog_details.html">
-                                            <h3 style="color: #2d2d2d;">From life was you fish...</h3>
-                                        </a>
-                                        <p>January 12, 2019</p>
-                                    </div>
-                                </div>
-                                <div class="media post_item">
-                                    <img th:src="@{/assets/img/post/post_1.png}" alt="post">
-                                    <div class="media-body">
-                                        <a href="blog_details.html">
-                                            <h3 style="color: #2d2d2d;">The Amazing Hubble</h3>
-                                        </a>
-                                        <p>02 Hours ago</p>
-                                    </div>
-                                </div>
-                                <div class="media post_item">
-                                    <img th:src="@{/assets/img/post/post_1.png}" alt="post">
-                                    <div class="media-body">
-                                        <a href="blog_details.html">
-                                            <h3 style="color: #2d2d2d;">Astronomy Or Astrology</h3>
-                                        </a>
-                                        <p>03 Hours ago</p>
-                                    </div>
-                                </div>
+                                <h3 class="widget_title" style="color: #2d2d2d;">나의 목표</h3>
+                                <div class="single-services mb-30">
+		                           <div class="features-caption">
+		                               <h3>운동 목표 1</h3>
+		                               <p>한달동안 2kg 감량하기</p>
+		                           </div>
+		                           <h6>목표 달성률</h6>
+				                   <div class="percentage">
+										<div class="progress">
+											<div class="progress-bar color-7" role="progressbar" style="width: 30%"
+											aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+									</div>
+		                      	</div>
+                                <div class="single-services mb-30">
+		                            <div class="features-caption">
+		                                <h3>운동 목표 2</h3>
+		                                <p>복근 만들기</p>
+		                            </div>
+		                            <h6>목표 달성률</h6>
+				                    <div class="percentage">
+										<div class="progress">
+											<div class="progress-bar color-7" role="progressbar" style="width: 30%"
+											aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+									</div>
+			                    </div>
+                                <div class="single-services mb-30">
+		                            <div class="features-caption">
+		                                <h3>운동 목표 3</h3>
+		                                <p>다리 찢기</p>
+		                            </div>
+		                            <h6>목표 달성률</h6>
+				                    <div class="percentage">
+										<div class="progress">
+											<div class="progress-bar color-7" role="progressbar" style="width: 30%"
+											aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+									</div>
+		                        </div>
                             </aside>
                             <aside class="single_sidebar_widget tag_cloud_widget">
-                                <h4 class="widget_title" style="color: #2d2d2d;">Tag Clouds</h4>
+                                <h4 class="widget_title" style="color: #2d2d2d;">수강중인 클래스</h4>
                                 <ul class="list">
                                     <li>
-                                        <a href="#">project</a>
+                                        <a href="#">문어요가</a>
                                     </li>
                                     <li>
-                                        <a href="#">love</a>
+                                        <a href="#">드루와복싱</a>
                                     </li>
                                     <li>
-                                        <a href="#">technology</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">travel</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">restaurant</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">life style</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">design</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">illustration</a>
+                                        <a href="#">하루 명상</a>
                                     </li>
                                 </ul>
                             </aside>
 
                             <aside class="single_sidebar_widget instagram_feeds">
-                                <h4 class="widget_title" style="color: #2d2d2d;">Instagram Feeds</h4>
-                                <ul class="instagram_row flex-wrap">
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" th:src="@{/assets/img/post/post_1.png}" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" th:src="@{/assets/img/post/post_1.png}" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" th:src="@{/assets/img/post/post_1.png}" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" th:src="@{/assets/img/post/post_1.png}" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" th:src="@{/assets/img/post/post_1.png}" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" th:src="@{/assets/img/post/post_1.png}" alt="">
-                                        </a>
-                                    </li>
-                                </ul>
-                            </aside>
-                            <aside class="single_sidebar_widget newsletter_widget">
-                                <h4 class="widget_title" style="color: #2d2d2d;">Newsletter</h4>
-                                <form action="#">
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
-                                    </div>
-                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                    type="submit">Subscribe</button>
-                                </form>
+                                <h4 class="widget_title" style="color: #2d2d2d;">피드백</h4>
+                            	<div class="comments-area">
+	                            	<div class="comment-list">
+							            <div class="single-comment justify-content-between d-flex">
+							               <div class="user justify-content-between d-flex">
+							                  <div class="thumb">
+							                     <img th:src="@{/assets/img/mds.PNG}" alt="">
+							                  </div>
+							                  <div class="desc">
+							                     <p class="comment">
+							                     	오늘 저녁 메뉴는 무엇입니까?
+							                     </p>
+							                     <p class="comment">
+							                     	<h5>
+							                        	<a href="#">마동석</a>
+							                        </h5>
+							                        <p class="date">March 25, 2022 at 6:10pm </p>
+							                        <div class="reply-btn">
+							                           <a href="#" class="btn-reply text-uppercase">reply</a>
+							                        </div>
+							                  </div>
+							               </div>
+							            </div>
+							         </div>
+							         <div class="comment-list">
+							            <div class="single-comment justify-content-between d-flex">
+							               <div class="user justify-content-between d-flex">
+							                  <div class="thumb">
+							                     <img th:src="@{/assets/img/mds.PNG}" alt="">
+							                  </div>
+							                  <div class="desc">
+							                     <p class="comment">
+							                     	설마 치킨은 아니겠지요	
+							                     <p class="comment">
+							                     	<h5>
+							                        	<a href="#">마동석</a>
+							                        </h5>
+							                        <p class="date">March 25, 2022 at 6:11pm  </p>
+							                        <div class="reply-btn">
+							                           <a href="#" class="btn-reply text-uppercase">reply</a>
+							                        </div>
+							                  </div>
+							               </div>
+							            </div>
+							         </div>
+							         <div class="comment-list">
+							            <div class="single-comment justify-content-between d-flex">
+							               <div class="user justify-content-between d-flex">
+							                  <div class="thumb">
+							                     <img th:src="@{/assets/img/mds.PNG}" alt="">
+							                  </div>
+							                  <div class="desc">
+							                     <p class="comment">
+							                     	설마 술은 아니겠지요
+							                     	드루와드루와	
+							                     </p>
+							                     <p class="comment">
+							                     	<h5>
+							                        	<a href="#">마동석</a>
+							                        </h5>
+							                        <p class="date">March 25, 2022 at 6:12pm  </p>
+							                        <div class="reply-btn">
+							                           <a href="#" class="btn-reply text-uppercase">reply</a>
+							                        </div>
+							                  </div>
+							               </div>
+							            </div>
+							         </div>
+							      </div>
                             </aside>
                         </div>
                     </div>
@@ -237,15 +283,204 @@
 	</th:block>
 	
 	<th:block layout:fragment="customCss">
-		<style>
+		<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
+		<!-- Custom Stylesheet -->
+    	<link th:href="@{/todolist/css/style.css}" rel="stylesheet">
+    	<style>
+			.progress-bar.color-7 {
+				background-color: #a367e7
+			}
+			h6{
+				font-weight: bold
+			}
+			.comments-area {
+				border-top: none;
+				padding: 0px;
+			}
 		</style>
 	</th:block>
 	
 	<!-- 사용자 정의 Script -->
 	<th:block layout:fragment="customScript">
 		<script>
+		$(document).ready(function($) {
+			    "use strict"
+			    //todo list
+			    $(".tdl-new").on('keypress', function(e) {
+			        var code = (e.keyCode ? e.keyCode : e.which);
+			        if (code == 13) {
+			            var v = $(this).val();
+			            var s = v.replace(/ +?/g, '');
+			            if (s == "") {
+			                return false;
+			            } else {
+			                $(".tdl-content ul").append("<li><label><input type='checkbox'><i></i><span>" + v + "</span><a href='#' class='ti-trash'></a></label></li>");
+			                $(this).val("");
+			            }
+			        }
+			    });
+			    $(".tdl-content a").on("click", function() {
+			        var _li = $(this).parent().parent("li");
+			        _li.addClass("remove").stop().delay(100).slideUp("fast", function() {
+			            _li.remove();
+			        });
+			        return false;
+			    });
+			    // for dynamically created a tags
+			    $(".tdl-content").on('click', "a", function() {
+			        var _li = $(this).parent().parent("li");
+			        _li.addClass("remove").stop().delay(100).slideUp("fast", function() {
+			            _li.remove();
+			        });
+			        return false;
+			    });
+			})(jQuery);
+			
+		$(document).ready(function($) {
+			    "use strict"
+			    $('#todo_list').slimscroll({
+			        position: "right",
+			        size: "5px",
+			        height: "250px",
+			        color: "transparent"
+			    });
+			    $('#activity').slimscroll({
+			        position: "right",
+			        size: "5px",
+			        height: "390px",
+			        color: "transparent"
+			    });
+			})(jQuery);
+			// Widget - Todo
+			$(document).ready(function( $ ) {
+				'use strict';
+				if ( $.isFunction($.fn[ 'themePluginWidgetTodoList' ]) ) {
+					$(function() {
+						$('[data-plugin-todo-list], ul.widget-todo-list').each(function() {
+							var $this = $( this ),
+								opts = {};
+							var pluginOptions = $this.data('plugin-options');
+							if (pluginOptions)
+								opts = pluginOptions;
+							$this.themePluginWidgetTodoList(opts);
+						});
+					});
+				}
+			}).apply(this, [ jQuery ]);
+			// Widget - Todo
+			$(document).ready(function(theme, $) {
+
+				theme = theme || {};
+
+				var instanceName = '__widgetTodoList';
+
+				var WidgetTodoList = function($el, opts) {
+					return this.initialize($el, opts);
+				};
+
+				WidgetTodoList.defaults = {
+				};
+
+				WidgetTodoList.prototype = {
+					initialize: function($el, opts) {
+						if ( $el.data( instanceName ) ) {
+							return this;
+						}
+
+						this.$el = $el;
+
+						this
+							.setData()
+							.setOptions(opts)
+							.build()
+							.events();
+
+						return this;
+					},
+
+					setData: function() {
+						this.$el.data(instanceName, this);
+
+						return this;
+					},
+
+					setOptions: function(opts) {
+						this.options = $.extend( true, {}, WidgetTodoList.defaults, opts );
+
+						return this;
+					},
+
+					check: function( input, label ) {
+						if ( input.is(':checked') ) {
+							label.addClass('line-through');
+						} else {
+							label.removeClass('line-through');
+						}
+					},
+
+					build: function() {
+						var _self = this,
+							$check = this.$el.find('.todo-check');
+
+						$check.each(function () {
+							var label = $(this).closest('li').find('.todo-label');
+							_self.check( $(this), label );
+						});
+
+						return this;
+					},
+
+					events: function() {
+						var _self = this,
+							$remove = this.$el.find( '.todo-remove' ),
+							$check = this.$el.find('.todo-check'),
+							$window = $( window );
+
+						$remove.on('click.widget-todo-list', function( ev ) {
+							ev.preventDefault();
+							$(this).closest("li").remove();
+						});
+
+						$check.on('change', function () {
+							var label = $(this).closest('li').find('.todo-label');
+							_self.check( $(this), label );
+						});
+
+						if ( $.isFunction( $.fn.sortable ) ) {
+							this.$el.sortable({
+								sort: function(event, ui) {
+									var top = event.pageY - _self.$el.offset().top - (ui.helper.outerHeight(true) / 2);
+									ui.helper.css({'top' : top + 'px'});
+							    }
+							});
+						}
+
+						return this;
+					}
+				};
+
+				// expose to scope
+				$.extend(theme, {
+					WidgetTodoList: WidgetTodoList
+				});
+
+				// jquery plugin
+				$.fn.themePluginWidgetTodoList = function(opts) {
+					return this.each(function() {
+						var $this = $(this);
+
+						if ($this.data(instanceName)) {
+							return $this.data(instanceName);
+						} else {
+							return new WidgetTodoList($this, opts);
+						}
+
+					});
+				}
+
+			}).apply(this, [ window.theme, jQuery ]);
+			
 		</script>
-		
 	</th:block>
 	
 </html>	

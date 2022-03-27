@@ -21,4 +21,18 @@ public class eClassController {
 		
 		return "eClass/eClassOpenApplyForm";
 	}
+	@GetMapping("/eClassApproved")
+	public String eClassApproved(Model model) {
+	
+		model.addAttribute("title", "개설 승인된 클래스");
+		
+		return "eClass/eClassApproved";
+	}
+	@GetMapping("/eClassOpenApplyadminList")
+	public String eClassOpenApplyadminList(Model model) {
+		
+		model.addAttribute("title", "개설 신청 리스트");
+		
+		return "eClass/eClassOpenApplyadminList";
+	}
 }
