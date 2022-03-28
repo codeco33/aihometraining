@@ -243,8 +243,12 @@ public class MemberController {
 	@GetMapping("/memberLevelList")
 	public String memberLevelList(Model model) {
 		
+		List<MemberLevel> memberLevelList = memberService.getMemberLevelList();
+		
 		model.addAttribute("leftMenuList", "회원 권한 목록 조회");
 		model.addAttribute("title", "회원 권한 목록 조회");
+		model.addAttribute("memberLevelList", memberLevelList);
+		
 		
 		return "member/memberLevelList";
 	}
