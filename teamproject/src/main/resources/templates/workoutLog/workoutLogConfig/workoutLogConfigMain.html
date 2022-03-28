@@ -15,12 +15,70 @@
 	        </div>
 			<div class="panel-body">
 			   	<div class="col-md-12">
-			   		<div class="col-md-12 top-20 padding-0">
+			   		<div class="panel-heading bg-deep-purple">
+                    	<h6 class="text-white">새롭게 등록된 일지 목록</h6>
+                </div>
+			   	<div class="col-md-12 top-20 padding-0">
+		   			   <div class="col-md-12">
+		                 <div class="panel">
+							<div class="panel-body">
+			                    <div class="col-sm-6 col-md-3 product-grid">
+			                      <div class="thumbnail">
+			                      	<a href="#">
+			                        	<img th:src="@{/assets/img/workoutLogImg1.jpg}" alt="...">
+			                        </a>
+			                        <div class="caption">
+			                        	<a href="#">
+			                          		<h4>오늘은 사이드 런지</h4>
+			                        	</a>	
+				                        <span class="fa fa-heart">좋아요  | 0</span>
+			                        </div>
+			                      </div>
+			                    </div>
+			                    <div class="col-sm-6 col-md-3 product-grid">
+			                      <div class="thumbnail">
+			                      	<a href="#">
+			                        	<iframe class="embed-responsive-item" th:src="@{/assets/img/180419_Boxing_01_09.mp4}"></iframe>
+			                        </a>
+			                        <div class="caption">
+			                        	<a href="#">
+			                          		<h4>오늘은 권투 취취</h4>
+			                        	</a>	
+			                            <span class="fa fa-heart">좋아요  | 10</span>
+			                        </div>
+			                      </div>
+			                    </div>
+			                    <div class="col-sm-6 col-md-3 product-grid">
+			                      <div class="thumbnail">
+			                        <a href="#">
+			                        	<img th:src="@{/assets/img/mds.PNG}" alt="...">
+			                        </a>
+			                        <div class="caption">
+			                        	<a href="#">
+			                          		<h4>오늘은 마동석</h4>
+			                        	</a>	
+			                            <span class="fa fa-heart">좋아요  | 503</span>
+			                        </div>
+			                      </div>
+			                    </div>
+			                    <div class="col-sm-6 col-md-3 product-grid">
+			                      <div class="thumbnail">
+			                        <a href="#">
+			                        	<img th:src="@{/assets/img/workoutLogimg2.jpg}" alt="...">
+			                        </a>
+			                        <div class="caption">
+			                        	<a href="#">
+			                          		<h4>오늘은 배틀 로프</h4>
+			                        	</a>	
+			                            <span class="fa fa-heart">좋아요  | 2810</span>
+			                        </div>
+			                      </div>
+			                    </div>
+			                  </div> 
+		                  </div>
+	             	 	</div>
 			   			<div class="col-md-12">
 			   				<div class="panel">
-			   					<div class="panel-heading bg-teal">
-			                    	<h6 class="text-white">새롭게 등록된 일지 목록</h6>
-			                    </div>
 								<div class="panel-body">
 									<div class="responsive-table">
 					                    <table id="workoutLogList" class="table table-striped table-bordered" style="width:100%" cellspacing="0">
@@ -35,29 +93,61 @@
 						                    </thead>
 						                    <tbody>
 						                    	<tr>
-							                        <td>Tiger Nixon</td>
-							                        <td>System Architect</td>
+							                        <td>
+								                        <a href="#">
+								                        Tiger Nixon
+								                        </a>
+							                        </td>
+							                        <td>
+							                        	<a href="#">
+							                        	System Architect
+							                        	</a>
+							                        </td>
 							                        <td>Edinburgh</td>
 							                        <td>61</td>
 							                        <td>2011/04/25</td>
 						                      	</tr>
 						                      	<tr>
-							                        <td>Garrett Winters</td>
-							                        <td>Accountant</td>
+							                        <td>
+							                        	<a href="#">
+							                        	Garrett Winters
+							                        	</a>
+							                        </td>
+							                        <td>
+							                        	<a href="#">
+							                        	Accountant
+							                        	</a>
+							                        </td>
 							                        <td>Tokyo</td>
 							                        <td>63</td>
 							                        <td>2011/07/25</td>
 							                     </tr>
 							                     <tr>
-							                        <td>Ashton Cox</td>
-							                        <td>Junior Technical Author</td>
+							                        <td>
+							                        	<a href="#">
+							                        	Ashton Cox
+							                        	</a>
+							                        </td>
+							                        <td>
+							                        	<a href="#">
+							                        	Junior Technical Author
+							                        	</a>
+							                        </td>
 							                        <td>San Francisco</td>
 							                        <td>66</td>
 							                        <td>2009/01/12</td>
 						                      	</tr>
 						                      	<tr>
-							                        <td>Cedric Kelly</td>
-							                        <td>Senior Javascript Developer</td>
+							                        <td>
+								                        <a href="#">
+								                        Cedric Kelly
+								                        </a>
+							                        </td>
+							                        <td>
+								                        <a href="#">
+								                        Senior Javascript Developer
+								                        </a>
+							                        </td>
 							                        <td>Edinburgh</td>
 							                        <td>22</td>
 							                        <td>2012/03/29</td>
@@ -75,8 +165,18 @@
 	</div>
 	</th:block>
 	
+	<!-- 사용자 정의 Css -->
+	<th:block layout:fragment="customCss">
+		<style>
+		</style>
+	</th:block>
+	
 	<!-- start: Javascript -->
-	<th:block layout:fragment="customBodyScript">	
+	<th:block layout:fragment="customBodyScript">
+		<!-- start: Javascript -->
+		<script th:src="@{/asset/js/jquery.min.js}"></script>
+		<script th:src="@{/asset/js/jquery.ui.min.js}"></script>
+		<script th:src="@{/asset/js/bootstrap.min.js}"></script>	
 		
 		<!-- plugins -->
 		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>

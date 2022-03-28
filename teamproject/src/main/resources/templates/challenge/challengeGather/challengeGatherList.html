@@ -24,7 +24,7 @@
 				                <div class="properties__card">
 				                	<div class="properties__background overlay1">
 			                            <div>
-			                            	<a href="#">[[${l.challengeGatherName}]]</a>
+			                            	<a href="#" data-toggle="modal" data-target="#GatherDetailModal">[[${l.challengeGatherName}]]</a>
 			                            </div>
 			                        </div>
 				                    <div class="properties__caption">
@@ -59,6 +59,47 @@
 			</div>
 		</div>
 		<!-- 챌린지 모집 area end -->
+		
+		<!-- Modal -->
+			<div class="modal fade" id="GatherDetailModal" tabindex="-1" aria-labelledby="GatherDetailModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="GatherDetailModalLabel">챌린지 제목</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			      	<div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">
+						챌린지 카테고리 :
+					</div>
+			      	<div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">
+						챌린지 소개 : 
+					</div>
+			      	<div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">
+						챌린지 현재 참가 희망 인원수 : 
+					</div>
+			      	<div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">
+						챌린지 인증 방법 : 
+					</div>
+			      	<div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">
+						챌린지 인증 빈도 : 
+					</div>
+			      	<div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">
+						챌린지 시작일 : 
+					</div>
+			      	<div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">
+						챌린지 종료일 : 
+					</div>
+			      </div>
+			      <div class="modal-footer">
+			        <a th:href="@{/challenge/challengeEnter/challengeEnterPaymemt}" class="btn btn-primary text-white">참가하기</a>
+			        <button  type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
 	</th:block>
 	
 	

@@ -162,6 +162,8 @@
 	   SELECT 
 			 l.memberLevelCode
 			,l.memberLevelName
+			,l.memberLevelRegEmail
+			,l.memberLevelRegDate
 		FROM 
 			memberlevel AS l;
 	</select>
