@@ -3,6 +3,7 @@ package aihometraining.team.dto;
 public class MemberLevel {
 	private String memberLevelCode;
 	private String memberLevelName;
+	private String memberLevelRegEmail;
 	private String memberLevelRegDate;
 	
 	public String getMemberLevelCode() {
@@ -17,6 +18,12 @@ public class MemberLevel {
 	public void setMemberLevelName(String memberLevelName) {
 		this.memberLevelName = memberLevelName;
 	}
+	public String getMemberLevelRegEmail() {
+		return memberLevelRegEmail;
+	}
+	public void setMemberLevelRegEmail(String memberLevelRegEmail) {
+		this.memberLevelRegEmail = memberLevelRegEmail;
+	}
 	public String getMemberLevelRegDate() {
 		return memberLevelRegDate;
 	}
@@ -27,8 +34,10 @@ public class MemberLevel {
 	@Override
 	public String toString() {
 		return "MemberLevel [memberLevelCode=" + memberLevelCode + ", memberLevelName=" + memberLevelName
-				+ ", memberLevelRegDate=" + memberLevelRegDate + "]";
+				+ ", memberLevelRegEmail=" + memberLevelRegEmail + ", memberLevelRegDate=" + memberLevelRegDate + "]";
 	}
+	
+	
 	
 	
 	
