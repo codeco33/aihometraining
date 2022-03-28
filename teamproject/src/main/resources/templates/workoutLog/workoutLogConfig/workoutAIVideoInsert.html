@@ -8,16 +8,63 @@
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
-		AI 운동 영상 관리 화면입니다.
-	
+		<div class="col-md-12">
+			<div class="panel">
+		    	<div class="panel-heading-white panel-heading">
+		        	<h4>운동 영상 등록 설정</h4>
+		        </div>
+				<div class="panel-body">
+				   	<div class="col-md-12">
+				   		<div class="col-md-12 top-20 padding-0">
+				   			<div class="col-md-12">
+				   				<div class="panel">
+				   					<div class="panel-heading bg-teal">
+				                    	<h6 class="text-white">운동 영상 등록</h6>
+				                    </div>
+						            <div class="panel-body" style="padding-bottom:30px;">
+						             <div class="col-md-12">
+						               <div class="form-group">
+						               	<label class="col-sm-2 control-label text-right">운동 영상 제목</label>
+						                <div class="col-sm-10">
+						                	<input type="text" class="form-control">
+						                </div>
+						               </div>
+						             </div>
+	                    			<h6 class="text-white">운동 영상 파일 업로드</h6>
+				                    <div class="row">
+				                      <div class="col-sm-12">
+				                        <div class="input-group fileupload-v1">
+				                          <input type="file" name="manualfile" class="fileupload-v1-file hidden"/>
+				                          <input type="text" class="form-control fileupload-v1-path" placeholder="File Path..." disabled>
+				                          <span class="input-group-btn">
+				                            <button class="btn fileupload-v1-btn" type="button"><i class="fa fa-folder"></i> Choose File</button>
+				                          </span>
+				                        </div><!-- /input-group -->
+				                      </div><!-- /.col-lg-6 -->
+				                    </div><!-- /.row -->
+			                		</div>
+					                <div class="panel-body">
+					                  <form action="/file-upload" class="dropzone" id="my-awesome-dropzone"></form>
+					                </div>
+			            		</div>
+			            	</div>
+						</div>
+					</div>
+				</div>    
+			</div>
+		</div>   
+		  
+
 	</th:block>
-		<th:block layout:fragment="customBodyScript">	
+		<th:block layout:fragment="customBodyScript">
+		<script th:src="@{/asset/js/jquery.min.js}"></script>
+		<script th:src="@{/asset/js/jquery.ui.min.js}"></script>
+		<script th:src="@{/asset/js/bootstrap.min.js}"></script>	
 		<!-- plugins -->
 		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/jquery.datatables.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/datatables.bootstrap.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/dropzone.js}"></script>
 		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
-		
+
 		
 		<!-- custom -->
 		<script th:src="@{/asset/js/main.js}"></script>

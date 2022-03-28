@@ -348,7 +348,7 @@
     	var aMenu = $('#left-menu a[href="'+getMenuLink+'"]');
     	var ripple = aMenu.parents('.ripple');
     	ripple.addClass('active');	
-    	aMenu.parent('li').css('background', 'rgba(193, 184, 184, 0.2)');
+    	aMenu.parent('li').css('background', 'rgba(184, 184, 184, 0.2)');
     	aMenu.parents('ul').css('display','block');
     	aMenu.css('font-weight', 'bold').focus().blur();
     	
@@ -360,13 +360,12 @@
 		e.preventDefault();
 		var href = $(this).attr('href');
 		if(href != undefined){
+			$('li.ripple:first').css('background', '');
 			setCookie('menuLink', href, 1);	
-			location.href = href;			
+			location.href = href;
 		}
+		
 	});
-	
-	
-	
 	
 	function setCookie(cname, cvalue, exdays) {
 	  const d = new Date();
@@ -389,6 +388,9 @@
 	  }
 	  return "";
 	}
+	
+	
+	
 	
 	
 

@@ -27,91 +27,187 @@
 .modal-footer{
 	border-top: none;
 }
+
+.nav-tabs.nav-tabs-v3 {
+	border-bottom: 2px solid #58666e;
+	margin: 0 10px;
+	padding-top: 0;
+}
+
+#refundListTab a {
+	font-size: 18px;
+	padding-bottom: 5px;
+}
+
 </style>
 </th:block>
 <th:block layout:fragment="customContents">
-	<div class="col-md-12">
-		<div class="panel">
-			<div class="panel-body">
+	
 
-				<div class="responsive-table">
-					<!-- 데이터 테이블 -->
-					<table id="refundList" class="table table-striped table-bordered">
-						<thead>
-							<tr>
-								<th>환불요청일자</th>
-								<th>환불요청자</th>
-								<th>환불상품</th>
-								<th>사유</th>
-								<th>상태</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="align-middle">2022-03-23</td>
-								<td>홍길동</td>
-								<td>챌린지</td>
-								<td>사유사유사유사유사유사유사유사유사유사유사유사유사유사유사유사유사유</td>
-								<td><input id="refundBtn" type="button"
-									class="btn btn-outline btn-warning refundBtn" value="환불대기"></td>
-							</tr>
-							<tr>
-								<td>2022-02-23</td>
-								<td>홍길동</td>
-								<td>챌린지</td>
-								<td>사유카테고리</td>
-								<td><input id="refundBtn" type="button"
-									class="btn btn-outline btn-warning refundBtn" value="환불대기"></td>
-							</tr>
-							<tr>
-								<td>2022-02-23</td>
-								<td>이순신</td>
-								<td>챌린지</td>
-								<td>사유카테고리</td>
-								<td><input id="refundBtn" type="button"
-									class="btn btn-outline btn-default refundBtn" value="환불미승인"></td>
-							</tr>
-							<tr>
-								<td>2022-02-24</td>
-								<td>이순신</td>
-								<td>운동클래스</td>
-								<td>사유카테고리</td>
-								<td><input id="refundBtn" type="button"
-									class="btn btn-outline btn-success refundBtn" value="환불승인"></td>
-							</tr>
-							<tr>
-								<td>2022-02-25</td>
-								<td>유관순</td>
-								<td>챌린지</td>
-								<td>사유카테고리</td>
-								<td><input id="refundBtn" type="button"
-									class="btn btn-outline btn-success refundBtn" value="환불승인"></td>
-							</tr>
-							<tr>
-								<td>2022-02-22</td>
-								<td>유관순</td>
-								<td>운동클래스</td>
-								<td>사유카테고리</td>
-								<td><input type="button"
-									class="btn btn-outline btn-success refundBtn" value="환불승인"></td>
-							</tr>
-							<!-- <tr th:if="${not #lists.isEmpty(paymentList)}" th:each="l : ${paymentList}">
-								<td th:text="${l.paymentCode}"></td>
-								<td th:text="${l.memberEmail}"></td>
-								<td th:text="${l.paymentMethodName}"></td>
-								<td th:text="${l.paymentTotalOrderPrice}"></td>
-								<td th:text="${l.paymentTotalPayPrice}"></td>
-								<td th:text="${l.paymentState}"></td>
-								<td th:text="${l.paymentRegDate}"></td>
-							</tr>
-							<tr th:unless="${not #lists.isEmpty(paymentList}">
-								<td colspan="7">등록된 결제 내역이 없습니다.</td>
-							</tr> -->
-						</tbody>
-					</table>
+				<div class="col-md-12">
+		<div class="tabs-area">
+		<!-- 탭 메뉴 -->
+			<ul	id="refundListTab" class="nav nav-tabs nav-tabs-v3 " role="tablist">
+				<li role="presentation" class="active">
+					<a href="#refundListTabArea1" id="refundListTab1" role="tab" data-toggle="tab" aria-expanded="true">신규 요청건</a>
+				</li>
+				<li role="presentation" class="">
+					<a href="#refundListTabArea2" id="refundListTab2" role="tab" data-toggle="tab" aria-expanded="false">전체 환불내역</a>
+				</li>
+			</ul>		
+			<!-- 신규요청탭 -->
+			<div id="refundListTabContent" class="tab-content tab-content-v3">
+				<div class="panel tab-pane fade active in" role ="tabpanel" id="refundListTabArea1" aria-labelledby="refundListTabArea1">
+					<div class="panel-body">
+						<div  class="responsive-table " >
+							<!-- 데이터 테이블 -->
+							<table class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>환불요청일자</th>
+										<th>환불요청자</th>
+										<th>환불상품</th>
+										<th>사유</th>
+										<th>상태</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="align-middle">2022-03-23</td>
+										<td>홍길동</td>
+										<td>챌린지</td>
+										<td>사유사유사유사유사유사유사유사유사유사유사유사유사유사유사유사유사유</td>
+										<td><input id="refundBtn" type="button"
+											class="btn btn-outline btn-warning refundBtn" value="환불대기"></td>
+									</tr>
+									<tr>
+										<td>2022-02-24</td>
+										<td>이순신</td>
+										<td>운동클래스</td>
+										<td>사유카테고리</td>
+										<td><input id="refundBtn" type="button"
+											class="btn btn-outline btn-success refundBtn" value="환불승인"></td>
+									</tr>
+									<tr>
+										<td>2022-02-25</td>
+										<td>유관순</td>
+										<td>챌린지</td>
+										<td>사유카테고리</td>
+										<td><input id="refundBtn" type="button"
+											class="btn btn-outline btn-success refundBtn" value="환불승인"></td>
+									</tr>
+									<tr>
+										<td>2022-02-22</td>
+										<td>유관순</td>
+										<td>운동클래스</td>
+										<td>사유카테고리</td>
+										<td><input type="button"
+											class="btn btn-outline btn-success refundBtn" value="환불승인"></td>
+									</tr>
+									<!-- <tr th:if="${not #lists.isEmpty(paymentList)}" th:each="l : ${paymentList}">
+										<td th:text="${l.paymentCode}"></td>
+										<td th:text="${l.memberEmail}"></td>
+										<td th:text="${l.paymentMethodName}"></td>
+										<td th:text="${l.paymentTotalOrderPrice}"></td>
+										<td th:text="${l.paymentTotalPayPrice}"></td>
+										<td th:text="${l.paymentState}"></td>
+										<td th:text="${l.paymentRegDate}"></td>
+									</tr>
+									<tr th:unless="${not #lists.isEmpty(paymentList}">
+										<td colspan="7">등록된 결제 내역이 없습니다.</td>
+									</tr> -->
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>
-
-				<div id="refundModal" class="modal fade">
+				
+				
+				<!-- 전체환불내역탭 -->
+				<div class="panel tab-pane fade" role ="tabpanel" id="refundListTabArea2" aria-labelledby="refundListTabArea2">
+					<div class="panel-body">
+						<div  class="responsive-table " >
+							<!-- 데이터 테이블 -->
+							<table id="refundList" class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>환불요청일자</th>
+										<th>환불요청자</th>
+										<th>환불상품</th>
+										<th>사유</th>
+										<th>상태</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="align-middle">2022-03-23</td>
+										<td>홍길동</td>
+										<td>챌린지</td>
+										<td>사유사유사유사유사유사유사유사유사유사유사유사유사유사유사유사유사유</td>
+										<td><input id="refundBtn" type="button"
+											class="btn btn-outline btn-warning refundBtn" value="환불대기"></td>
+									</tr>
+									<tr>
+										<td>2022-02-23</td>
+										<td>홍길동</td>
+										<td>챌린지</td>
+										<td>사유카테고리</td>
+										<td><input id="refundBtn" type="button"
+											class="btn btn-outline btn-warning refundBtn" value="환불대기"></td>
+									</tr>
+									<tr>
+										<td>2022-02-23</td>
+										<td>이순신</td>
+										<td>챌린지</td>
+										<td>사유카테고리</td>
+										<td><input id="refundBtn" type="button"
+											class="btn btn-outline btn-default refundBtn" value="환불미승인"></td>
+									</tr>
+									<tr>
+										<td>2022-02-24</td>
+										<td>이순신</td>
+										<td>운동클래스</td>
+										<td>사유카테고리</td>
+										<td><input id="refundBtn" type="button"
+											class="btn btn-outline btn-success refundBtn" value="환불승인"></td>
+									</tr>
+									<tr>
+										<td>2022-02-25</td>
+										<td>유관순</td>
+										<td>챌린지</td>
+										<td>사유카테고리</td>
+										<td><input id="refundBtn" type="button"
+											class="btn btn-outline btn-success refundBtn" value="환불승인"></td>
+									</tr>
+									<tr>
+										<td>2022-02-22</td>
+										<td>유관순</td>
+										<td>운동클래스</td>
+										<td>사유카테고리</td>
+										<td><input type="button"
+											class="btn btn-outline btn-success refundBtn" value="환불승인"></td>
+									</tr>
+									<!-- <tr th:if="${not #lists.isEmpty(paymentList)}" th:each="l : ${paymentList}">
+										<td th:text="${l.paymentCode}"></td>
+										<td th:text="${l.memberEmail}"></td>
+										<td th:text="${l.paymentMethodName}"></td>
+										<td th:text="${l.paymentTotalOrderPrice}"></td>
+										<td th:text="${l.paymentTotalPayPrice}"></td>
+										<td th:text="${l.paymentState}"></td>
+										<td th:text="${l.paymentRegDate}"></td>
+									</tr>
+									<tr th:unless="${not #lists.isEmpty(paymentList}">
+										<td colspan="7">등록된 결제 내역이 없습니다.</td>
+									</tr> -->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<div id="refundModal" class="modal fade">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -145,12 +241,6 @@
 					<!-- /.modal-dialog -->
 				</div>
 				<!-- /.modal -->
-			</div>
-
-		</div>
-	</div>
-	</div>
-
 </th:block>
 <th:block layout:fragment="customBodyScript">
 	<!-- plugins -->
@@ -174,8 +264,13 @@
 			$('#refundModal').modal('show');
 		});
 
-		$(document).ready(
-				function() {
+		$(document).ready(function() {
+			
+			 $(".nav-tabs a").click(function (e) {
+			      e.preventDefault();  
+			      $(this).tab('show');
+			    });
+			 
 					var searchBtn = function(e, dt, node, config) {
 						node.parent().children().attr('class',
 								'btn btn-default')
