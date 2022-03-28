@@ -1,5 +1,7 @@
 package aihometraining.team.dto;
 
+import java.util.List;
+
 public class EClassCategoryMedium {
 	/*
 	 * eClassCategoryMediumCode
@@ -19,6 +21,18 @@ public class EClassCategoryMedium {
 	private String eClassCategoryMediumRegDate;
 	private String memberUpdateEmail;
 	private String eClassCategoryMediumUpdateDate;
+	
+	private List<EClassCategorySmall> eClassCategorySmallList;
+	
+		
+	public List<EClassCategorySmall> geteClassCategorySmallList() {
+		return eClassCategorySmallList;
+	}
+	public void seteClassCategorySmallList(List<EClassCategorySmall> eClassCategorySmallList) {
+		this.eClassCategorySmallList = eClassCategorySmallList;
+	}
+	
+	
 	public String geteClassCategoryMediumCode() {
 		return eClassCategoryMediumCode;
 	}
@@ -74,7 +88,8 @@ public class EClassCategoryMedium {
 				+ ", eClassCategoryMediumName=" + eClassCategoryMediumName + ", eClassCategoryLargeCode="
 				+ eClassCategoryLargeCode + ", eClassCategoryLargeName=" + eClassCategoryLargeName + ", memberEmail="
 				+ memberEmail + ", eClassCategoryMediumRegDate=" + eClassCategoryMediumRegDate + ", memberUpdateEmail="
-				+ memberUpdateEmail + ", eClassCategoryMediumUpdateDate=" + eClassCategoryMediumUpdateDate + "]";
+				+ memberUpdateEmail + ", eClassCategoryMediumUpdateDate=" + eClassCategoryMediumUpdateDate
+				+ ", eClassCategorySmallList=" + eClassCategorySmallList + "]";
 	}
 	
 	

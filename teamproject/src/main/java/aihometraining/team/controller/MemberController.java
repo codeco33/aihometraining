@@ -201,8 +201,8 @@ public class MemberController {
 	}
 	
 	/**
-	 * /addMember method 방식이 다르기 때문에 주소를 중복해서 사용가능
-	 * @param member(회원가입 폼 전송시 요소의 name 속성의 값과  dto의 멤머변수의 이름과 같으면 자동으로 바인딩하는 객체)
+	 * /addMember method 방식이 다르기 때문에 주소를 중복해서 사용 가능
+	 * @param member(회원가입 폼 전송시 요소의 name 속성의 값과  dto의 멤버변수의 이름과 같으면 자동으로 바인딩하는 객체)
 	 *        커맨드객체
 	 * @return redirect: -> request.sendRedirect("")
 	 */
