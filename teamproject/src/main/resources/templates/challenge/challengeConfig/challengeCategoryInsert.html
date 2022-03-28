@@ -18,19 +18,16 @@
 						<div class="col-md-6 col-md-offset-3">
   							<form class="cmxform" id="challengeCategoryForm" method="get" action="">
     							<div class="col-md-12">
-	      							<div class="form-group form-animate-text" style="margin-top:40px !important;">
-										<input type="text" class="form-text" id="validate_memberEmail" name="validate_memberEmail" required>
-										<span class="bar"></span>
-										<label>등록자</label>
-									</div>
-									
 									<div class=" row form-group">
 										<label class="col-sm-3 control-label" style="color:#999; font-size: 18px;">운동 카테고리</label>
 										<div class="col-sm-9">
 											<select class="form-control" id="validate_eClassCategory" name="validate_eClassCategory" required>
-												<option>요가</option>
-											  	<option>댄스</option>
-											  	<option>줌바</option>
+												<th:block th:if="${not #lists.isEmpty(challengeCategoryList)}" th:each="l : ${challengeCategoryList}">
+													<option th:value="${l.get('eClassCategorySmallName')}" >[[${l.get('eClassCategorySmallName')}]]</option>
+												</th:block>
+												<th:block th:unless="${not #lists.isEmpty(challengeCategoryList)}" th:each="l : ${challengeCategoryList}">
+													<option >등록된 카테고리가 없습니다.</option>
+												</th:block>
 											</select>
 										</div>
 									</div>
@@ -88,12 +85,10 @@
 		        $(label.parent("div").removeClass("form-animate-error"));
 		      },
 		      rules: {
-		    	validate_memberEmail: "required",
 		        validate_categoryName: "required",
 		        validate_eClassCategory: "required"
 		      },
 		      messages: {
-		    	validate_memberEmail: "이메일을 입력해주세요.",
 		        validate_categoryName: "카테고리명을 입력해주세요.",
 		        validate_eClassCategory: "카테고리를 선택해주세요."
 		      }

@@ -35,11 +35,25 @@
 													</tr>
 												</thead>
 												<tbody>
+													<!-- 
 													<tr th:if="${not #lists.isEmpty(challengeCategoryList)}" th:each="l : ${challengeCategoryList}">
 														<td th:text="${l.challengeCategoryName}"></td>
-														<td th:text="${l.eClassCategorySmall}"></td>
+														<td th:text="${l.eClassCategorySmallCode}"></td>
 														<td th:text="${l.member.memberEmail}"></td>
 														<td th:text="${l.challengeCategoryRegDate}"></td>
+														<td>
+															<a href="#">수정</a>
+														</td>
+														<td>
+															<a href="#">삭제</a>
+														</td>
+													</tr>
+													 -->
+													<tr th:if="${not #lists.isEmpty(challengeCategoryList)}" th:each="l : ${challengeCategoryList}">
+														<td th:text="${l.get('challengeCategoryName')}"></td>
+														<td th:text="${l.get('eClassCategorySmallName')}"></td>
+														<td th:text="${l.get('memberEmail')}"></td>
+														<td th:text="${l.get('challengeCategoryRegDate')}"></td>
 														<td>
 															<a href="#">수정</a>
 														</td>

@@ -35,7 +35,8 @@ public class ChallengeConfigController {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("memberEmail", "id001@email.com");
 		
-		List<ChallengeCategory> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
+		//List<ChallengeCategory> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
+		List<Map<String, Object>> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
 		
 		paramMap = null;
 		
@@ -51,8 +52,19 @@ public class ChallengeConfigController {
 	@GetMapping("/challengeCategoryInsert")
 	public String challengeCategoryInsert(Model model) {
 		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("memberEmail", "id001@email.com");
+		
+		//List<ChallengeCategory> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
+		List<Map<String, Object>> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
+		
+		paramMap = null;
+		
+		log.info("챌린지 카테고리 조회  challengeCategoryList : {}", challengeCategoryList);
+		
 		model.addAttribute("title", "챌린지 카테고리 등록");
 		model.addAttribute("leftMenuList", "챌린지");
+		model.addAttribute("challengeCategoryList", challengeCategoryList);
 		
 		return "challenge/challengeConfig/challengeCategoryInsert";
 		
