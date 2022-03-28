@@ -44,62 +44,28 @@ memberBirthday, memberGender, memberRecommendEmail, memberFinalPoint -->
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>id001@email.com</td>
-												<td>levelCode001</td>
-												<td>Y</td>
-												<td>2022-03-17</td>
-												<td>관리짱1</td>
-												<td>010-0000-0001</td>
-												<td>관리짱이오</td>
-												<td>2022-03-17</td>
-												<td>남자</td>
-												<td></td>
-												<td>50</td>
+											<tr th:if="${not #lists.isEmpty(memberList)}" th:each="l : ${memberList}">
+												<td th:text="${l.memberEmail}"></td>
+												<td th:text="${l.memberLevelCode}"></td>
+												<td th:text="${l.memberNewsAgree}"></td>
+												<td th:text="${l.memberRegDate}"></td>
+												<td th:text="${l.memberName}"></td>
+												<td th:text="${l.memberPhone}"></td>
+												<td th:text="${l.memberNickname}"></td>
+												<td th:text="${l.memberBirthday}"></td>
+												<td th:text="${l.memberGender}"></td>
+												<td th:text="${l.memberRecommendEmail}"></td>
+												<td th:text="${l.memberFinalPoint}"></td>
 												<td>
-													<a href="#">수정</a>
+													<!-- /member/modifyMember?memberId=id001&memberName=홍01 -->
+													<a th:href="@{/member/modifyMember(memberEmail=${l.memberEmail})}">수정</a>
 												</td>
 												<td>
-													<a href="#">삭제</a>
-												</td>
-											</tr>
-											<tr>
-												<td>id002@email.com</td>
-												<td>levelCode002</td>
-												<td>N</td>
-												<td>2022-03-17</td>
-												<td>일반회원1</td>
-												<td>010-0000-0002</td>
-												<td>운동 클래스 1개 개설한 사람</td>
-												<td>2022-03-17</td>
-												<td>여자</td>
-												<td>id001@email.com</td>
-												<td>50</td>
-												<td>
-													<a href="#">수정</a>
-												</td>
-												<td>
-													<a href="#">삭제</a>
+													<a th:href="@{/member/removeMember(memberEmail=${l.memberEmail})}">삭제</a>
 												</td>
 											</tr>
-											<tr>
-												<td>id003@email.com</td>
-												<td>levelCode002</td>
-												<td>Y</td>
-												<td>2022-03-17</td>
-												<td>일반회원2</td>
-												<td>010-0000-0003</td>
-												<td>운동 클래스 2개 개설한 사람</td>
-												<td>2022-03-17</td>
-												<td>남자</td>
-												<td>id002@email.com</td>
-												<td>50</td>
-												<td>
-													<a href="#">수정</a>
-												</td>
-												<td>
-													<a href="#">삭제</a>
-												</td>
+											<tr th:unless="${not #lists.isEmpty(memberList)}">
+												<td colspan="7">등록된 회원의 정보가 없습니다.</td>
 											</tr>
 										</tbody>
 				                        </table>
@@ -128,7 +94,7 @@ memberBirthday, memberGender, memberRecommendEmail, memberFinalPoint -->
 		<script th:src="@{/asset/js/main.js}"></script>
 		<script type="text/javascript">
 		$(document).ready(function(){
-		    $('#challengIngList').DataTable();		    
+		    $('#memberList').DataTable();		    
 		});
 		
 		</script>
