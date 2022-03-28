@@ -8,6 +8,7 @@
 </th:block>
 
 <th:block layout:fragment="customCss">
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/simple-line-icons.css}" />
 	<style type="text/css">
 .btn-outline {
 	padding: 5px 20px;
@@ -30,13 +31,26 @@
 
 .nav-tabs.nav-tabs-v3 {
 	border-bottom: 2px solid #58666e;
-	margin: 0 10px;
-	padding-top: 0;
+	padding-bottom: 5px;
+	margin: 0 20px;
+	padding-top: 5px;
+	
 }
 
-#refundListTab a {
+
+.nav-tabs.nav-tabs-v3 > li > a {
 	font-size: 18px;
-	padding-bottom: 5px;
+	padding-bottom: 0;
+	color: #DDD;
+	padding-left: 0;
+}
+.nav-tabs.nav-tabs-v3 > li > a::after {
+	background: none;
+}
+
+.nav-tabs.nav-tabs-v3 > li.active > a, .nav-tabs.nav-tabs-v3 > li > a:hover {
+	color: #666 !important;
+	
 }
 
 </style>
@@ -49,10 +63,14 @@
 		<!-- 탭 메뉴 -->
 			<ul	id="refundListTab" class="nav nav-tabs nav-tabs-v3 " role="tablist">
 				<li role="presentation" class="active">
-					<a href="#refundListTabArea1" id="refundListTab1" role="tab" data-toggle="tab" aria-expanded="true">신규 요청건</a>
+					<a href="#refundListTabArea1" id="refundListTab1" role="tab" data-toggle="tab" aria-expanded="true">
+						<span class="icons icon-bulb"></span> 신규 요청건
+					</a>
 				</li>
 				<li role="presentation" class="">
-					<a href="#refundListTabArea2" id="refundListTab2" role="tab" data-toggle="tab" aria-expanded="false">전체 환불내역</a>
+					<a href="#refundListTabArea2" id="refundListTab2" role="tab" data-toggle="tab" aria-expanded="false">
+						<span class="icons icon-credit-card"></span> 전체 환불내역
+					</a>
 				</li>
 			</ul>		
 			<!-- 신규요청탭 -->
