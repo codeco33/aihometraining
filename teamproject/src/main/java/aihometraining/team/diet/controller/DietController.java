@@ -29,6 +29,17 @@ public class DietController {
 		return "diet/dietBankList";
 		
 	}
+	
+	@GetMapping("/dietBankListAdmin")
+	public String getDietBankListAdmin(Model model) {
+		
+		
+		model.addAttribute("title", "식단 은행 테스트");
+		model.addAttribute("role", "식단은행 테스트페이지");
+		
+		return "diet/dietBankListAdmin";
+		
+	}
 
 	
 }
