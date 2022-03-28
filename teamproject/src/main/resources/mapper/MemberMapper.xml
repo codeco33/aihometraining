@@ -2,32 +2,41 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ksmart42.mybatis.mapper.MemberMapper">
+<mapper namespace="aihometraining.team.mapper.MemberMapper">
 
 	<resultMap type="LoginHistory" id="loginResultMap">
-		<result column="login_num"		property="loginNum" />
-		<result column="login_id"		property="loginId" />
-		<result column="login_date"		property="loginDate" />
-		<result column="logout_date"	property="logoutDate" />
+		<result column="loginCode"				property="loginCode" />
+		<result column="loginMemberEmail"		property="loginMemberEmail" />
+		<result column="loginDate"				property="loginDate" />
+		<result column="loginFailNum"			property="loginFailNum" />
+		<result column="loginRecentTryDate"		property="loginRecentTryDate" />
+		<result column="login_id"				property="loginId" />
+		<result column="loginMACAddress"		property="loginMACAddress" />
+		<result column="loginOS"				property="loginOS" />
+		<result column="loginLogoutDate"		property="loginLogoutDate" />
+		<result column="loginOS"				property="loginOS" />
+		<result column="loginBrowser"			property="loginBrowser" />
+		<result column="loginIPAddress"			property="loginIPAddress" />
 		<association property="member" javaType="Member">
-			<id 	column="m_id" 		property="memberId"/>
-			<result column="m_pw" 		property="memberPw"/>
-			<result column="m_level" 	property="memberLevel"/>
-			<result column="m_name" 	property="memberName"/>
-			<result column="m_addr" 	property="memberAddr"/>
-			<result column="m_email"	property="memberEmail"/>
-			<result column="m_reg_date"	property="memberRegDate"/>
+			<id 	column="memberName" 		property="memberName"/>
+			<result column="memberLevelCode" 	property="memberLevelCode"/>
+			<result column="memberEmail" 		property="memberEmail"/>
 		</association>
 	</resultMap>
 
 	<resultMap type="Member" id="memberResultMap">
-		<id 	column="m_id" 		property="memberId"/>
-		<result column="m_pw" 		property="memberPw"/>
-		<result column="m_level" 	property="memberLevel"/>
-		<result column="m_name" 	property="memberName"/>
-		<result column="m_addr" 	property="memberAddr"/>
-		<result column="m_email" 	property="memberEmail"/>
-		<result column="m_reg_date" property="memberRegDate"/>
+		<id 	column="memberEmail" 			property="memberEmail"/>
+		<result column="memberPw" 				property="memberPw"/>
+		<result column="memberLevelCode" 		property="memberLevelCode"/>
+		<result column="memberNewsAgree" 		property="memberNewsAgree"/>
+		<result column="memberRegDate" 			property="memberRegDate"/>
+		<result column="memberName" 			property="memberName"/>
+		<result column="memberPhone"	 		property="memberPhone"/>
+		<result column="memberNickname" 		property="memberNickname"/>
+		<result column="memberBirthday" 		property="memberBirthday"/>
+		<result column="memberGender" 			property="memberGender"/>
+		<result column="memberRecommendEmail" 	property="memberRecommendEmail"/>
+		<result column="memberFinalPoint" 		property="memberFinalPoint"/>
 	</resultMap>
 	
 	<select id="getLoginHistory1" resultMap="loginResultMap" fetchSize="1000">
@@ -118,10 +127,11 @@
 	
 	</update>
 
-	<select id="getMemberInfoById" parameterType="String" resultMap="memberResultMap">
+	<select id="getMemberInfoByEmail" parameterType="String" resultMap="memberResultMap">
 		/* 회원별 회원정보 조회 */
 		SELECT
 		    m.memberEmail        
+		   ,m.memberPw        
 		   ,m.memberName        
 		   ,m.memberNickname      
 		   ,m.memberNewsAgree      
@@ -134,11 +144,11 @@
 		   member AS m
 		WHERE
 		   m.memberEmail = #{memberEmail};
-		
+		 
 	</select>
 
-	<select id="isIdCheck" parameterType="String" resultType="boolean">
-		/* 회원 아이디 중복 체크 */
+	<select id="isEmailCheck" parameterType="String" resultType="boolean">
+		/* 회원 이메일 중복 체크 */
 		SELECT
 			IF(COUNT(1) = 1, 0, 1)
 		FROM 
