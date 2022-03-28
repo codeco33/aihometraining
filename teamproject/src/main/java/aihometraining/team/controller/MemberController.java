@@ -239,4 +239,13 @@ public class MemberController {
 		
 		return "member/memberList";
 	}
+
+	@GetMapping("/memberLevelList")
+	public String memberLevelList(Model model) {
+		
+		model.addAttribute("leftMenuList", "회원 권한 목록 조회");
+		model.addAttribute("title", "회원 권한 목록 조회");
+		
+		return "member/memberLevelList";
+	}
 }
