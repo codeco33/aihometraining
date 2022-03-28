@@ -55,7 +55,7 @@ public class MemberService {
 		
 		return memberList;
 	}
-	
+	//회원가입
 	public int addMember(Member member) {
 		
 		int result = memberMapper.addMember(member);
