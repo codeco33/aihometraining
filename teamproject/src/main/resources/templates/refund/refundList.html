@@ -8,11 +8,18 @@
 </th:block>
 
 <th:block layout:fragment="customCss">
-	<style type="text/css">
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/simple-line-icons.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/icheck/skins/flat/red.css}"/>
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<style type="text/css">
 .btn-outline {
 	padding: 5px 20px;
+	
 }
-
+.approveBtn {
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
 #refundList tbody td:last-child .btn-default {
 	width: 98px;
 	padding: 5px;
@@ -21,24 +28,73 @@
 #refundList tbody td {
 	vertical-align: middle;
 }
-.modal-header {
-	border-bottom: none;
-}
+
 .modal-footer{
 	border-top: none;
 }
-
-.nav-tabs.nav-tabs-v3 {
+.modal-title {
+	font-weight: bold;
+}
+#refundListTab {
 	border-bottom: 2px solid #58666e;
-	margin: 0 10px;
-	padding-top: 0;
-}
-
-#refundListTab a {
-	font-size: 18px;
 	padding-bottom: 5px;
+	margin: 0 20px;
+	padding-top: 5px;
+	
 }
 
+#refundListTab> li > a {
+	font-size: 18px;
+	padding-bottom: 0;
+	color: #DDD;
+	padding-left: 0;
+}
+#refundListTab > li > a::after {
+	background: none;
+}
+
+#refundListTab > li.active > a, #refundListTab > li > a:hover {
+	color: #666 !important;
+}
+#selectApproveBtn {
+	height:  40px !important;
+}
+.sangseTextarea {
+	height: 150px;
+    width: 100%;
+}
+.searchDate input{
+	height: 33px;
+	width: 150px;
+}
+
+input[name="searchValue"] {
+	height: 33px;
+}
+
+#searchRefund .col-sm-6 {
+	margin-bottom: 5px;
+}
+#refundCate {
+	border-bottom: none;
+	padding-top: 40px;
+}
+
+#refundCate > li > a{
+	color: #bfbfbf;
+}
+
+#refundCate > li.active > a, #refundCate > li > a:hover {
+	color: #777 !important;
+}
+
+#refundCate > li > a::after{
+	background: #777;
+}
+
+#refundCate a {
+	padding: 5px 10px;
+}
 </style>
 </th:block>
 <th:block layout:fragment="customContents">
@@ -49,60 +105,58 @@
 		<!-- 탭 메뉴 -->
 			<ul	id="refundListTab" class="nav nav-tabs nav-tabs-v3 " role="tablist">
 				<li role="presentation" class="active">
-					<a href="#refundListTabArea1" id="refundListTab1" role="tab" data-toggle="tab" aria-expanded="true">신규 요청건</a>
+					<a href="#refundListTabArea1" id="refundListTab1" role="tab" data-toggle="tab" aria-expanded="true">
+						<span class="icons icon-bulb"></span> 신규 요청건
+					</a>
 				</li>
 				<li role="presentation" class="">
-					<a href="#refundListTabArea2" id="refundListTab2" role="tab" data-toggle="tab" aria-expanded="false">전체 환불내역</a>
+					<a href="#refundListTabArea2" id="refundListTab2" role="tab" data-toggle="tab" aria-expanded="false">
+						<span class="icons icon-credit-card"></span> 전체 환불내역
+					</a>
 				</li>
 			</ul>		
-			<!-- 신규요청탭 -->
 			<div id="refundListTabContent" class="tab-content tab-content-v3">
+				<!-- 신규요청탭 -->
 				<div class="panel tab-pane fade active in" role ="tabpanel" id="refundListTabArea1" aria-labelledby="refundListTabArea1">
 					<div class="panel-body">
 						<div  class="responsive-table " >
-							<!-- 데이터 테이블 -->
-							<table class="table table-striped table-bordered">
+							<table id="newRefundList" class="table table-striped table-bordered">
 								<thead>
 									<tr>
+										<th><input type="checkbox" class="icheck" name="checkbox1" /></th>
 										<th>환불요청일자</th>
 										<th>환불요청자</th>
 										<th>환불상품</th>
-										<th>사유</th>
-										<th>상태</th>
+										<th>환불사유</th>
+										<th>승인관리</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
+										<td><input type="checkbox" class="icheck" name="checkbox1" /></td>
 										<td class="align-middle">2022-03-23</td>
 										<td>홍길동</td>
 										<td>챌린지</td>
 										<td>사유사유사유사유사유사유사유사유사유사유사유사유사유사유사유사유사유</td>
-										<td><input id="refundBtn" type="button"
-											class="btn btn-outline btn-warning refundBtn" value="환불대기"></td>
+										<td>
+											<div class="btn-group" role="group">
+												<input type="button" class="btn btn-outline btn-success approveBtn" value="승인">
+												<input type="button" class="btn btn-outline btn-danger disapproveBtn" value="미승인">
+											</div>
+										</td>
 									</tr>
 									<tr>
+										<td><input type="checkbox" class="icheck" name="checkbox1" /></td>
 										<td>2022-02-24</td>
 										<td>이순신</td>
 										<td>운동클래스</td>
 										<td>사유카테고리</td>
-										<td><input id="refundBtn" type="button"
-											class="btn btn-outline btn-success refundBtn" value="환불승인"></td>
-									</tr>
-									<tr>
-										<td>2022-02-25</td>
-										<td>유관순</td>
-										<td>챌린지</td>
-										<td>사유카테고리</td>
-										<td><input id="refundBtn" type="button"
-											class="btn btn-outline btn-success refundBtn" value="환불승인"></td>
-									</tr>
-									<tr>
-										<td>2022-02-22</td>
-										<td>유관순</td>
-										<td>운동클래스</td>
-										<td>사유카테고리</td>
-										<td><input type="button"
-											class="btn btn-outline btn-success refundBtn" value="환불승인"></td>
+										<td>
+											<div class="btn-group" role="group">
+												<input type="button" class="btn btn-outline btn-success approveBtn" value="승인">
+												<input type="button" class="btn btn-outline btn-danger disapproveBtn" value="미승인">
+											</div>
+										</td>
 									</tr>
 									<!-- <tr th:if="${not #lists.isEmpty(paymentList)}" th:each="l : ${paymentList}">
 										<td th:text="${l.paymentCode}"></td>
@@ -118,74 +172,127 @@
 									</tr> -->
 								</tbody>
 							</table>
+							<div>
+								<input id="selectApproveBtn" type="button" class="btn  btn-gradient btn-success btn-flip" value="선택 승인">
+							</div>
 						</div>
 					</div>
 				</div>
 				
-				
 				<!-- 전체환불내역탭 -->
 				<div class="panel tab-pane fade" role ="tabpanel" id="refundListTabArea2" aria-labelledby="refundListTabArea2">
 					<div class="panel-body">
-						<div  class="responsive-table " >
-							<!-- 데이터 테이블 -->
+					
+						<!-- 전체환불내역탭 검색 -->
+						<div id="searchRefund">
+						
+							<!-- 데이터피커 -->
+							<div class="searchDate col-sm-5 col-sm-offset-1">
+								<span class="fa fa-calendar"></span>
+								<input type="text" class="startDate" name="datefilter" value="" />
+								-
+								<input type="text" class="endDate" name="datefilter" value="" />
+							</div>
+							
+							<!-- 검색 -->
+							<div class="col-sm-6">
+		                        <select class="select2-A">
+		                            <option data-column="1">환불코드</option>
+		                            <option data-column="2">환불상품</option>
+		                            <option data-column="3">환불요청자</option>
+		                        </select>
+				                <input type="text" name="searchValue">
+				                <button type="button" class="btn btn-gradient btn-primary ">
+									검색 <span class="fa fa-search"></span>
+								</button>
+							</div>
+							
+						</div>
+						
+						<!-- 전체환불내역탭 카테고리 -->
+						<div class="col-xs-12">
+							<ul id="refundCate" class="nav nav-tabs nav-tabs-v3" role="tablist">
+		                      <li role="presentation" class="active">
+		                        <a href="javascript:void(0)" id="tabs-demo4-1" role="tab" data-toggle="tab" aria-expanded="true">
+		                        전체 <span class="badge">4</span>
+		                        </a>
+		                      </li>
+		                      <li role="presentation" class="">
+		                        <a href="javascript:void(0)" role="tab" id="tabs-demo4-2" data-toggle="tab" aria-expanded="false">
+		                        환불요청 <span class="badge badge-primary">1</span>
+		                        </a>
+		                      </li>
+		                      <li role="presentation">
+		                        <a href="javascript:void(0)" id="tabs-demo4-3" role="tab" data-toggle="tab" aria-expanded="false">
+		                        환불처리중 <span class="badge badge-warning">1</span>
+		                        </a>
+		                      </li>
+		                      <li role="presentation" class="">
+		                        <a href="javascript:void(0)" role="tab" id="tabs-demo4-4" data-toggle="tab" aria-expanded="false">
+		                        환불완료 <span class="badge badge-success">1</span>
+		                        </a>
+		                      </li>
+		                       <li role="presentation" class="">
+		                        <a href="javascript:void(0)" role="tab" id="tabs-demo4-5" data-toggle="tab" aria-expanded="false">
+		                        환불미승인 <span class="badge badge-danger">1</span>
+		                        </a>
+		                      </li>
+		                    </ul>
+						</div>
+						
+						<!-- 데이터 테이블 -->
+						<div  class="responsive-table" >
 							<table id="refundList" class="table table-striped table-bordered">
 								<thead>
 									<tr>
 										<th>환불요청일자</th>
-										<th>환불요청자</th>
+										<th>환불승인일자</th>
+										<th>환불코드</th>
 										<th>환불상품</th>
-										<th>사유</th>
+										<th>환불요청자</th>
 										<th>상태</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<td class="align-middle">2022-03-23</td>
+										<td>2022-03-23</td>
+										<td>2022-03-23</td>
+										<td><a th:href="@{/paymentList/paymentDetail(paymentCode=)}">e20220224_00001</a></td>
+										<td>운동클래스</td>
 										<td>홍길동</td>
-										<td>챌린지</td>
-										<td>사유사유사유사유사유사유사유사유사유사유사유사유사유사유사유사유사유</td>
-										<td><input id="refundBtn" type="button"
-											class="btn btn-outline btn-warning refundBtn" value="환불대기"></td>
+										<td>
+											<span class="label label-primary">환불요청</span>
+										</td>
 									</tr>
 									<tr>
 										<td>2022-02-23</td>
-										<td>홍길동</td>
+										<td>2022-02-23</td>
+										<td><a th:href="@{/paymentList/paymentDetail(paymentCode=)}">c20220223_00002</a></td>
 										<td>챌린지</td>
-										<td>사유카테고리</td>
-										<td><input id="refundBtn" type="button"
-											class="btn btn-outline btn-warning refundBtn" value="환불대기"></td>
+										<td>홍길동</td>
+										<td>
+											<span class="label label-warning">환불처리중</span>
+										</td>
 									</tr>
 									<tr>
 										<td>2022-02-23</td>
+										<td>2022-02-23</td>
+										<td><a th:href="@{/paymentList/paymentDetail(paymentCode=)}">c20220223_00002</a></td>
+										<td>챌린지</td>
 										<td>이순신</td>
-										<td>챌린지</td>
-										<td>사유카테고리</td>
-										<td><input id="refundBtn" type="button"
-											class="btn btn-outline btn-default refundBtn" value="환불미승인"></td>
+										<td>
+											<span class="label label-success">환불완료</span>
+										</td>
 									</tr>
 									<tr>
 										<td>2022-02-24</td>
+										<td>2022-02-24</td>
+										<td><a th:href="@{/paymentList/paymentDetail(paymentCode=)}">e20220224_00001</a></td>
+										<td>운동클래스</td>
 										<td>이순신</td>
-										<td>운동클래스</td>
-										<td>사유카테고리</td>
-										<td><input id="refundBtn" type="button"
-											class="btn btn-outline btn-success refundBtn" value="환불승인"></td>
-									</tr>
-									<tr>
-										<td>2022-02-25</td>
-										<td>유관순</td>
-										<td>챌린지</td>
-										<td>사유카테고리</td>
-										<td><input id="refundBtn" type="button"
-											class="btn btn-outline btn-success refundBtn" value="환불승인"></td>
-									</tr>
-									<tr>
-										<td>2022-02-22</td>
-										<td>유관순</td>
-										<td>운동클래스</td>
-										<td>사유카테고리</td>
-										<td><input type="button"
-											class="btn btn-outline btn-success refundBtn" value="환불승인"></td>
+										<td>
+											<span class="label label-danger">환불미승인</span>
+										</td>
 									</tr>
 									<!-- <tr th:if="${not #lists.isEmpty(paymentList)}" th:each="l : ${paymentList}">
 										<td th:text="${l.paymentCode}"></td>
@@ -207,104 +314,155 @@
 			</div>
 		</div>
 	</div>
-<div id="refundModal" class="modal fade">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-								<h4 class="modal-title">환불 처리</h4>
-							</div>
-							<div class="modal-body">
-								<p>One fine body&hellip;</p>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-primary"
-									data-dismiss="modal">환불승인</button>
-								<button type="button" class="btn btn-default"
-									data-dismiss="modal">환불미승인</button>
-								<div class="btn-group" role="group">
-									<button type="button" class="btn  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-										기타 <span class="fa fa-angle-down"></span>
-									</button>
-									<ul class="dropdown-menu">
-										<li data-dismiss="modal"><a href="#">환불대기중으로 되돌리기</a></li>
-										<li data-dismiss="modal"><a href="#">자동환불 재시도</a></li>
-									</ul>
-								</div>
-							</div>
+	
+
+<!-- 환불 미승인 사유 입력 모달 -->
+<div id="disapproveModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+              <h4 class="modal-title">환불 미승인 사유 입력</h4>
+            </div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group col-sm-12">
+						<label class="col-sm-3 control-label text-right">환불 미승인 사유</label>
+                             <div class="col-sm-8">
+                               <div class="col-sm-12 padding-0">
+                                 <select class="form-control">
+                                   <option>option one</option>
+                                   <option>option two</option>
+                                   <option>option three</option>
+                                   <option>option four</option>
+                                 </select>
+                               </div>
+                             </div>
+                   	</div>
+                   	<div class="form-group col-sm-12">
+                   		<label class="col-sm-3 control-label text-right">상세 사유</label>
+                        <div class="col-sm-8">
+                        	<textarea class="sangseTextarea"></textarea>
 						</div>
-						<!-- /.modal-content -->
-					</div>
-					<!-- /.modal-dialog -->
-				</div>
-				<!-- /.modal -->
+                    </div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal">저장</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 </th:block>
+
+
+
 <th:block layout:fragment="customBodyScript">
 	<!-- plugins -->
 	<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
 	<script th:src="@{/asset/js/plugins/jquery.dataTables.min.js}"></script>
 	<script th:src="@{/asset/js/plugins/dataTables.bootstrap.min.js}"></script>
 	<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
-	<script
-		src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.bootstrap.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
-
-
+	<script th:src="@{/asset/js/plugins/icheck.min.js}"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 	<!-- custom -->
 	<script th:src="@{/asset/js/main.js}"></script>
 	<script type="text/javascript">
 		/*환불 처리 모달*/
-		$('.refundBtn').on('click', function() {
-			$('#refundModal').modal('show');
+		$('.disapproveBtn').on('click', function() {
+			$('#disapproveModal').modal('show');
+		});
+		
+		$(document).on('click','.searchDateBtn input[type="button"]', function(){
+			console.log($(this).val());
+			$('.ranges > td').attr('class', 'available');
+			if($(this).val() == '오늘'){
+				$('td.today').attr('class','today active start-date active end-date in-range available');
+			}
 		});
 
 		$(document).ready(function() {
+						
+			/*환불전체내역 데이터피커*/
+			$('.searchDate').click(function(){
+				//$('div.daterangepicker').addClass('show-calendar');
+			});
+		    $('.searchDate').daterangepicker({
+		        autoUpdateInput: false,
+		        locale: {
+		            cancelLabel: '초기화',
+		            applyLabel : '완료',
+			        daysOfWeek: ["일", "월", "화", "수", "목", "금", "토"],
+			        monthNames: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
+		        },
+		        maxDate: moment(),
+		        buttonClasses: 'btn',
+		        applyClass: 'btn-primary',
+		        cancelClass: 'btn-outline btn-default',
+		        ranges: {
+		            '오늘': [moment(), moment()],
+		            '어제': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+		            '1주일': [moment().subtract(6, 'days'), moment()],
+		            '1개월': [moment().subtract(29, 'days'), moment()],
+		            '3개월': [moment().subtract(3, 'month'), moment()],
+		            '1년': [moment().subtract(12, 'month'), moment()]
+		        },
+		         "alwaysShowCalendars": true,
+		         "showCustomRangeLabel": false,
+		    });
+		    
+			/*적용버튼*/
+		    $('.searchDate').on('apply.daterangepicker', function(ev, picker) {
+		        $('.startDate').val(picker.startDate.format('YYYY/MM/DD'));
+		        $('.endDate').val(picker.endDate.format('YYYY/MM/DD'));
+		    });
+			/*초기화버튼*/
+		    $('.searchDate').on('cancel.daterangepicker', function(ev, picker) {
+		        $(this).children().val('');
+		    });
 			
+		    /*날짜 기간 선택 버튼*/
+		    /* var searchDateBtn = '<div class="searchDateBtn" style="float:left;">';
+		    searchDateBtn += '<input type="button" class="btn btn-round btn-default" value="오늘" data-range-key="오늘">';
+		    searchDateBtn += '<input type="button" class="btn btn-round btn-default" value="어제" data-range-key="어제">';
+		    searchDateBtn += '<input type="button" class="btn btn-round btn-default" value="1주일" data-range-key="1주일">';
+		    searchDateBtn += '<input type="button" class="btn btn-round btn-default" value="1개월" data-range-key="1개월">';
+		    searchDateBtn += '<input type="button" class="btn btn-round btn-default" value="3개월" data-range-key="3개월">';
+		    searchDateBtn += '<input type="button" class="btn btn-round btn-default" value="1년" data-range-key="1년"/></div>'; */
+		    
+       	
+		    $('span.drp-selected').remove();
+			//$('.drp-buttons').prepend(searchDateBtn);
+			
+			
+			
+			
+			/* 탭 메뉴*/
 			 $(".nav-tabs a").click(function (e) {
 			      e.preventDefault();  
 			      $(this).tab('show');
 			    });
-			 
-					var searchBtn = function(e, dt, node, config) {
-						node.parent().children().attr('class',
-								'btn btn-default')
-						node.attr('class', 'btn btn-info');
-					}
+				
+				/*데이터 테이블*/
+				var table = $('#refundList').DataTable({
+					order : [ 0, 'desc' ],
+					lengthChange : false,
+					pageLength : 15,
+					filter: false
+				});
 
-					var table = $('#refundList').DataTable({
-						order : [ 0, 'desc' ],
-						lengthChange : false,
-						pageLength : 15,
-						buttons : [ {
-							text : '전체',
-							action : searchBtn
 
-						}, {
-							text : '환불대기',
-							action : searchBtn
-
-						}, {
-							text : '환불승인',
-							action : searchBtn
-
-						}, {
-							text : '환불미승인',
-							action : searchBtn
-
-						} ]
-					});
-
-					table.buttons().container().appendTo(
-							'#refundList_wrapper .col-sm-6:eq(0)');
-
-					$('.btn-group').children('.btn:eq(0)').attr('class',
-							'btn btn-info');
+				/*iCheck 제이쿼리*/
+				$('input').iCheck({
+			        checkboxClass: 'icheckbox_flat-red',
+			        radioClass: 'iradio_flat-red'
+			      });
+				
+				
 
 				});
 	</script>
