@@ -12,10 +12,10 @@
 		<div class="container box_1170">
 			<div class="row justify-content-center">
 				<div class="col-lg-8 col-md-8">
-					<h3 class="mb-30">오늘 일지 등록</h3>
+					<h3 class="mb-30">운동 목표 등록</h3>
 					<div class="mt-10">
-						<input type="text" name="workoutLogTitle" placeholder="일지 제목"
-						onfocus="this.placeholder = ''" onblur="this.placeholder = '일지 제목'" required
+						<input type="text" name="workoutLogTitle" placeholder="목표 제목"
+						onfocus="this.placeholder = ''" onblur="this.placeholder = '목표 제목'" required
 						class="single-input">
 					</div>
 					<div class="input-group-icon mt-10">
@@ -28,71 +28,24 @@
 								<option value="1">문어 요가</option>
 								<option value="2">드루와 복싱</option>
 								<option value="3">하루 명상</option>
+								<option value="4">없음</option>
 							</select>
 						</div>
 					</div>
-					<div class="mt-10">
-						<input type="text" name="dietbreakfast" placeholder="아침 식사"
-						onfocus="this.placeholder = ''" onblur="this.placeholder = '아침 식사'" required
-						class="single-input-primary">
-					</div>
-					<div class="mt-10">
-						<input type="text" name="dietlunch" placeholder="점심 식사"
-						onfocus="this.placeholder = ''" onblur="this.placeholder = 'Accent color'" required
-						class="single-input-accent">
-					</div>
-					<div class="mt-10">
-						<input type="text" name="dietdinner" placeholder="저녁 식사"
-						onfocus="this.placeholder = ''" onblur="this.placeholder = 'Secondary color'"
-						required class="single-input-secondary">
-					</div>
 					
-					<div class="row mt-3">
-						<div class="col-xs-12">
-							<section class="panel">
-								<header class="panel-heading">
-									<div class="panel-actions">
-										<a href="#" class="fa fa-caret-down"></a>
-										<a href="#" class="fa fa-times"></a>
-									</div>
-									<i class="fa fa-camera" aria-hidden="true">인증하기</i>
-								</header>
-								<div class="panel-body">
-									<form action="/upload" class="dropzone dz-square" id="dropzone-example">
-									</form>
-								</div>
-							</section>
-						</div>
-					</div>
-				
-					<div class="row">
-						<div class="col-xs-12">
-							<section class="panel">
-								<header class="panel-heading">
-									<div class="panel-actions">
-										<a href="#" class="fa fa-caret-down"></a>
-										<a href="#" class="fa fa-times"></a>
-									</div>
-									<i class="fa fa-list-alt" aria-hidden="true">인증내용</i>
-								</header>
-								<div class="panel-body">
-									<form class="form-horizontal form-bordered">
-										<div class="form-group">
-											<label class="col-md-3 control-label">Summernote</label>
-											<div class="col-md-9">
-												<div class="summernote" data-plugin-summernote data-plugin-options='{ "height": 180, "codemirror": { "theme": "ambiance" } }'>Start typing...</div>
-											</div>
-										</div>
-									</form>
-								</div>
-							</section>
-						</div>
-					</div>
+					<div class="row pt-3">
+		               <div class="col-12">
+		                  <div class="form-group">
+		                     <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
+		                     placeholder="내용을 입력하세요"></textarea>
+		                  </div>
+		               </div>
+		            </div>
 					
-					<div class="row justify-content-center">
+					<div class="row justify-content-center pt-5">
 						<form action="javascript:void(0)" method="post">
                            <button class="genric-btn primary-bg text-white btn_1 boxed-btn" type="submit">
-                           	<h5 style="font: #fff;">일지 등록</h5>
+                           	<h5 style="font: #fff;">목표 등록</h5>
                            </button>
 						</form>
                     </div>    
@@ -104,31 +57,390 @@
 	
 	<!-- 사용자 정의 Css -->
 	<th:block layout:fragment="customCss">
-		<meta name="keywords" content="HTML5 Admin Template" />
-		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
-		<meta name="author" content="okler.net">
 		<!-- Web Fonts  -->
 		<link th:href="@{http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light}" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
 		<link rel="stylesheet" th:href="@{/form/css/bootstrap.css}" />
-		<link rel="stylesheet" th:href="@{/form/css/font-awesome.css}" />
-		<link rel="stylesheet" th:href="@{/form/css/bootstrap-multiselect.css}" />
-		<link rel="stylesheet" th:href="@{/form/css/dropzone.css}" />
-		<link rel="stylesheet" th:href="@{/form/css/summernote.css}" />
-		<link rel="stylesheet" th:href="@{/form/css/summernote-bs3.css}" />
-		<link rel="stylesheet" th:href="@{/form/css/theme.css}" />
-		
 		
 	</th:block>
 	
 	<!-- 사용자 정의 Script -->
 	<th:block layout:fragment="customScript">
-		<script th:src="@{/form/js/bootstrap.js}"></script>
-		<script th:src="@{/form/js/bootstrap-multiselect.js}"></script>
-		<script th:src="@{/form/js/dropzone.js}"></script>
-		<script th:src="@{/form/js/summernote.js}"></script>
-		<script th:src="@{/form/js/theme.js}"></script>
-		<script th:src="@{/form/js/examples.advanced.form.js}" /></script>
+		<script>
+
+
+		</script>
+		
+	</th:block>
+	
+</html><!DOCTYPE html>
+<html class="fixed"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/userdefault}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+		<div class="container box_1170">
+			<div class="row justify-content-center">
+				<div class="col-lg-8 col-md-8">
+					<h3 class="mb-30">운동 목표 등록</h3>
+					<div class="mt-10">
+						<input type="text" name="workoutLogTitle" placeholder="목표 제목"
+						onfocus="this.placeholder = ''" onblur="this.placeholder = '목표 제목'" required
+						class="single-input">
+					</div>
+					<div class="input-group-icon mt-10">
+						<div class="icon">
+							<i class="fa fa-star" aria-hidden="true"></i>
+						</div>
+						<div class="form-select" id="eClassTakeCode">
+							<select>
+								<option value="o">수강중인 클래스</option>
+								<option value="1">문어 요가</option>
+								<option value="2">드루와 복싱</option>
+								<option value="3">하루 명상</option>
+								<option value="4">없음</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="row pt-3">
+		               <div class="col-12">
+		                  <div class="form-group">
+		                     <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
+		                     placeholder="내용을 입력하세요"></textarea>
+		                  </div>
+		               </div>
+		            </div>
+					
+					<div class="row justify-content-center pt-5">
+						<form action="javascript:void(0)" method="post">
+                           <button class="genric-btn primary-bg text-white btn_1 boxed-btn" type="submit">
+                           	<h5 style="font: #fff;">목표 등록</h5>
+                           </button>
+						</form>
+                    </div>    
+				</div>
+			</div>
+		</div>
+	
+	</th:block>
+	
+	<!-- 사용자 정의 Css -->
+	<th:block layout:fragment="customCss">
+		<!-- Web Fonts  -->
+		<link th:href="@{http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light}" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
+		<link rel="stylesheet" th:href="@{/form/css/bootstrap.css}" />
+		
+	</th:block>
+	
+	<!-- 사용자 정의 Script -->
+	<th:block layout:fragment="customScript">
+		<script>
+
+
+		</script>
+		
+	</th:block>
+	
+</html><!DOCTYPE html>
+<html class="fixed"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/userdefault}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+		<div class="container box_1170">
+			<div class="row justify-content-center">
+				<div class="col-lg-8 col-md-8">
+					<h3 class="mb-30">운동 목표 등록</h3>
+					<div class="mt-10">
+						<input type="text" name="workoutLogTitle" placeholder="목표 제목"
+						onfocus="this.placeholder = ''" onblur="this.placeholder = '목표 제목'" required
+						class="single-input">
+					</div>
+					<div class="input-group-icon mt-10">
+						<div class="icon">
+							<i class="fa fa-star" aria-hidden="true"></i>
+						</div>
+						<div class="form-select" id="eClassTakeCode">
+							<select>
+								<option value="o">수강중인 클래스</option>
+								<option value="1">문어 요가</option>
+								<option value="2">드루와 복싱</option>
+								<option value="3">하루 명상</option>
+								<option value="4">없음</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="row pt-3">
+		               <div class="col-12">
+		                  <div class="form-group">
+		                     <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
+		                     placeholder="내용을 입력하세요"></textarea>
+		                  </div>
+		               </div>
+		            </div>
+					
+					<div class="row justify-content-center pt-5">
+						<form action="javascript:void(0)" method="post">
+                           <button class="genric-btn primary-bg text-white btn_1 boxed-btn" type="submit">
+                           	<h5 style="font: #fff;">목표 등록</h5>
+                           </button>
+						</form>
+                    </div>    
+				</div>
+			</div>
+		</div>
+	
+	</th:block>
+	
+	<!-- 사용자 정의 Css -->
+	<th:block layout:fragment="customCss">
+		<!-- Web Fonts  -->
+		<link th:href="@{http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light}" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
+		<link rel="stylesheet" th:href="@{/form/css/bootstrap.css}" />
+		
+	</th:block>
+	
+	<!-- 사용자 정의 Script -->
+	<th:block layout:fragment="customScript">
+		<script>
+
+
+		</script>
+		
+	</th:block>
+	
+</html><!DOCTYPE html>
+<html class="fixed"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/userdefault}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+		<div class="container box_1170">
+			<div class="row justify-content-center">
+				<div class="col-lg-8 col-md-8">
+					<h3 class="mb-30">운동 목표 등록</h3>
+					<div class="mt-10">
+						<input type="text" name="workoutLogTitle" placeholder="목표 제목"
+						onfocus="this.placeholder = ''" onblur="this.placeholder = '목표 제목'" required
+						class="single-input">
+					</div>
+					<div class="input-group-icon mt-10">
+						<div class="icon">
+							<i class="fa fa-star" aria-hidden="true"></i>
+						</div>
+						<div class="form-select" id="eClassTakeCode">
+							<select>
+								<option value="o">수강중인 클래스</option>
+								<option value="1">문어 요가</option>
+								<option value="2">드루와 복싱</option>
+								<option value="3">하루 명상</option>
+								<option value="4">없음</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="row pt-3">
+		               <div class="col-12">
+		                  <div class="form-group">
+		                     <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
+		                     placeholder="내용을 입력하세요"></textarea>
+		                  </div>
+		               </div>
+		            </div>
+					
+					<div class="row justify-content-center pt-5">
+						<form action="javascript:void(0)" method="post">
+                           <button class="genric-btn primary-bg text-white btn_1 boxed-btn" type="submit">
+                           	<h5 style="font: #fff;">목표 등록</h5>
+                           </button>
+						</form>
+                    </div>    
+				</div>
+			</div>
+		</div>
+	
+	</th:block>
+	
+	<!-- 사용자 정의 Css -->
+	<th:block layout:fragment="customCss">
+		<!-- Web Fonts  -->
+		<link th:href="@{http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light}" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
+		<link rel="stylesheet" th:href="@{/form/css/bootstrap.css}" />
+		
+	</th:block>
+	
+	<!-- 사용자 정의 Script -->
+	<th:block layout:fragment="customScript">
+		<script>
+
+
+		</script>
+		
+	</th:block>
+	
+</html><!DOCTYPE html>
+<html class="fixed"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/userdefault}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+		<div class="container box_1170">
+			<div class="row justify-content-center">
+				<div class="col-lg-8 col-md-8">
+					<h3 class="mb-30">운동 목표 등록</h3>
+					<div class="mt-10">
+						<input type="text" name="workoutLogTitle" placeholder="목표 제목"
+						onfocus="this.placeholder = ''" onblur="this.placeholder = '목표 제목'" required
+						class="single-input">
+					</div>
+					<div class="input-group-icon mt-10">
+						<div class="icon">
+							<i class="fa fa-star" aria-hidden="true"></i>
+						</div>
+						<div class="form-select" id="eClassTakeCode">
+							<select>
+								<option value="o">수강중인 클래스</option>
+								<option value="1">문어 요가</option>
+								<option value="2">드루와 복싱</option>
+								<option value="3">하루 명상</option>
+								<option value="4">없음</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="row pt-3">
+		               <div class="col-12">
+		                  <div class="form-group">
+		                     <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
+		                     placeholder="내용을 입력하세요"></textarea>
+		                  </div>
+		               </div>
+		            </div>
+					
+					<div class="row justify-content-center pt-5">
+						<form action="javascript:void(0)" method="post">
+                           <button class="genric-btn primary-bg text-white btn_1 boxed-btn" type="submit">
+                           	<h5 style="font: #fff;">목표 등록</h5>
+                           </button>
+						</form>
+                    </div>    
+				</div>
+			</div>
+		</div>
+	
+	</th:block>
+	
+	<!-- 사용자 정의 Css -->
+	<th:block layout:fragment="customCss">
+		<!-- Web Fonts  -->
+		<link th:href="@{http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light}" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
+		<link rel="stylesheet" th:href="@{/form/css/bootstrap.css}" />
+		
+	</th:block>
+	
+	<!-- 사용자 정의 Script -->
+	<th:block layout:fragment="customScript">
+		<script>
+
+
+		</script>
+		
+	</th:block>
+	
+</html><!DOCTYPE html>
+<html class="fixed"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/userdefault}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+		<div class="container box_1170">
+			<div class="row justify-content-center">
+				<div class="col-lg-8 col-md-8">
+					<h3 class="mb-30">운동 목표 등록</h3>
+					<div class="mt-10">
+						<input type="text" name="workoutLogTitle" placeholder="목표 제목"
+						onfocus="this.placeholder = ''" onblur="this.placeholder = '목표 제목'" required
+						class="single-input">
+					</div>
+					<div class="input-group-icon mt-10">
+						<div class="icon">
+							<i class="fa fa-star" aria-hidden="true"></i>
+						</div>
+						<div class="form-select" id="eClassTakeCode">
+							<select>
+								<option value="o">수강중인 클래스</option>
+								<option value="1">문어 요가</option>
+								<option value="2">드루와 복싱</option>
+								<option value="3">하루 명상</option>
+								<option value="4">없음</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="row pt-3">
+		               <div class="col-12">
+		                  <div class="form-group">
+		                     <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
+		                     placeholder="내용을 입력하세요"></textarea>
+		                  </div>
+		               </div>
+		            </div>
+					
+					<div class="row justify-content-center pt-5">
+						<form action="javascript:void(0)" method="post">
+                           <button class="genric-btn primary-bg text-white btn_1 boxed-btn" type="submit">
+                           	<h5 style="font: #fff;">목표 등록</h5>
+                           </button>
+						</form>
+                    </div>    
+				</div>
+			</div>
+		</div>
+	
+	</th:block>
+	
+	<!-- 사용자 정의 Css -->
+	<th:block layout:fragment="customCss">
+		<!-- Web Fonts  -->
+		<link th:href="@{http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light}" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
+		<link rel="stylesheet" th:href="@{/form/css/bootstrap.css}" />
+		
+	</th:block>
+	
+	<!-- 사용자 정의 Script -->
+	<th:block layout:fragment="customScript">
 		<script>
 
 
