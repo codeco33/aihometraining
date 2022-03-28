@@ -37,4 +37,13 @@ public class ChallengeEnterController {
 		return "challenge/challengeEnter/challengePlanDoInsert";
 		
 	}
+	@GetMapping("/challengeEnterPaymemt")
+	public String challengeEnterPaymemt(Model model) {
+		
+		model.addAttribute("title", "챌린지 참가결제");
+		model.addAttribute("headerList", "챌린지");
+		
+		return "challenge/challengeEnter/challengeEnterPaymemt";
+		
+	}
 }
