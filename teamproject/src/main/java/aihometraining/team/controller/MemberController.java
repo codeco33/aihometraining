@@ -67,7 +67,7 @@ public class MemberController {
 	public String login(Model model
 					   ,@RequestParam(value="result", required = false) String result) {
 		
-		model.addAttribute("title", "회원로그인");
+		model.addAttribute("title", "회원 로그인");
 		
 		if(result != null) model.addAttribute("result", result);
 		
@@ -80,16 +80,15 @@ public class MemberController {
 		String memberPw = member.getMemberPw();
 		
 		Member checkMember = memberMapper.getMemberInfoByEmail(memberEmail);
+		log.info("{}", checkMember);
 		
 		if(checkMember != null && checkMember.getMemberPw() != null && memberPw.equals(checkMember.getMemberPw())) {
-			String sessionName = checkMember.getMemberName();
-			String sessionLevel = checkMember.getMemberLevelCode();
+			String sessionLevelCode = checkMember.getMemberLevelCode();
 			
 			session.setAttribute("SEMAIL", 	memberEmail);
-			session.setAttribute("SNAME", 	sessionName);
-			session.setAttribute("SLEVEL", 	sessionLevel);
+			session.setAttribute("SLEVEL", 	sessionLevelCode);
 			
-			log.info("로그인성공");
+			log.info("로그인 성공");
 			
 			return "redirect:/";
 		}
@@ -127,7 +126,7 @@ public class MemberController {
 	
 	}
 	
-	/**
+	/** 
 	 * 회원탈퇴화면
 	 */
 	@GetMapping("/removeMember")
@@ -158,10 +157,8 @@ public class MemberController {
 	 */
 	@GetMapping("/modifyMember")
 	public String modifyMember(Model model
-							  ,@RequestParam(name="memberEmail", required = false) String memberEmail
-							  ,@RequestParam(name="memberName", required = false) String memberName) {
+							  ,@RequestParam(name="memberEmail", required = false) String memberEmail) {
 		log.info("회원 수정 화면 폼 쿼리 스트링 memberEmail : {}", memberEmail);
-		log.info("회원 수정 화면 폼 쿼리 스트링 memberName : {}", memberName);
 		
 		Member member = memberService.getMemberInfoByEmail(memberEmail);
 		List<MemberLevel> memberLevelList = memberService.getMemberLevelList();
@@ -178,17 +175,17 @@ public class MemberController {
 	 *  idCheck ajax
 	 *  @RequestParam(value = "memberEmail") == request.getParameter("memberEmail");
 	 */
-	@PostMapping("/idCheck")
+	@PostMapping("/emailCheck")
 	@ResponseBody
-	public boolean isIdCheck(@RequestParam(value = "memberEmail") String memberEmail) {
-		boolean idCheck = false;
-		log.info("아이디중복체크 클릭시 요청받은 memberEmail의 값: {}", memberEmail);
+	public boolean isEmailCheck(@RequestParam(value = "memberEmail") String memberEmail) {
+		boolean emailCheck = false;
+		log.info("이메일 중복 체크 클릭 시 요청 받은 memberEmail의 값: {}", memberEmail);
 		
 		boolean result = memberMapper.isEmailCheck(memberEmail);
-		if(result) idCheck = true;
+		if(result) emailCheck = true;
 		
-		log.info("아이디중복체크 여부 : {}", result);
-		return idCheck;
+		log.info("이메일 중복 체크 여부 : {}", result);
+		return emailCheck;
 	}
 	
 	
@@ -198,11 +195,7 @@ public class MemberController {
 	@GetMapping("/addMember")
 	public String addMember(Model model) {
 		
-		//회원등급 목록 데이터
-		List<MemberLevel> memberLevelList = memberService.getMemberLevelList();
-		
 		model.addAttribute("title", "회원가입");
-		model.addAttribute("memberLevelList", memberLevelList);
 		
 		return "member/addMember";
 	}
@@ -219,7 +212,7 @@ public class MemberController {
 		
 		memberService.addMember(member);
 		
-		return "redirect:/member/memberList";
+		return "redirect:/member/addMember";
 	}
 
 	@GetMapping("/memberList")
@@ -234,8 +227,6 @@ public class MemberController {
 		if(searchKey != null) {
 			if("memberEmail".equals(searchKey)) {
 				searchKey = "memberEmail";
-			}else if("memberName".equals(searchKey)) {
-				searchKey = "memberName";
 			}else if("memberLevelCode".equals(searchKey)) {
 				searchKey = "memberLevelCode";
 			}
@@ -247,5 +238,18 @@ public class MemberController {
 		model.addAttribute("memberList", memberList);
 		
 		return "member/memberList";
+	}
+
+	@GetMapping("/memberLevelList")
+	public String memberLevelList(Model model) {
+		
+		List<MemberLevel> memberLevelList = memberService.getMemberLevelList();
+		
+		model.addAttribute("leftMenuList", "회원 권한 목록 조회");
+		model.addAttribute("title", "회원 권한 목록 조회");
+		model.addAttribute("memberLevelList", memberLevelList);
+		
+		
+		return "member/memberLevelList";
 	}
 }

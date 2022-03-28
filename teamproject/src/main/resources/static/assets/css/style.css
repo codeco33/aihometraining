@@ -7380,3 +7380,49 @@ b, sup, sub, u, del {
 }
 
 
+
+		/*alim, chat, note*/
+		.alimButton{
+			background: #C86FFF;
+			height: 50px;
+			width: 50px;
+			right: 31px;
+			bottom: 80px;
+			display: flex;
+			border-radius: 50%;
+			box-shadow: 0 0 10px 3px rgba(108, 98, 98, 0.2);
+			position: fixed;
+			align-items: center;
+			justify-content: center;
+			font-size: 30px;
+		}
+		.chatButton{
+			background: #C86FFF;
+			height: 50px;
+			width: 50px;
+			right: 31px;
+			bottom: 142px;
+			display: flex;
+			border-radius: 50%;
+			box-shadow: 0 0 10px 3px rgba(108, 98, 98, 0.2);
+			position: fixed;
+			align-items: center;
+			justify-content: center;
+			font-size: 30px;
+		}
+		.noteButton{
+			background: #C86FFF;
+			height: 50px;
+			width: 50px;
+			right: 31px;
+			bottom: 204px;
+			display: flex;
+			border-radius: 50%;
+			box-shadow: 0 0 10px 3px rgba(108, 98, 98, 0.2);
+			position: fixed;
+			align-items: center;
+			justify-content: center;
+			font-size: 30px;
+		}
+
+

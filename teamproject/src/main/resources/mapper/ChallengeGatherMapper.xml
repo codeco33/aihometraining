@@ -32,6 +32,7 @@
 			,ch.challengeGatherMaxPeople
 			,ch.challengeGatherProveMethod
 			,ch.challengeGatherProveContent
+			,ch.challengeGatherProveFrequency
 			,ch.challengeGatherStartDate
 			,ch.challengeGatherEndDate
 			,ch.challengeStartDate

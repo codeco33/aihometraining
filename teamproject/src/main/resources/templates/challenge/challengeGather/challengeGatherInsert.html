@@ -126,46 +126,14 @@
 	<!-- 사용자 정의 Css -->
 			<th:block layout:fragment="customCss">
 			<style>
-			/* body {
-			    color: #000;
-			    overflow-x: hidden;
-			    height: 100%;
-			    background-color: #C5CAE9 !important;
-			    background-repeat: no-repeat;
-			    padding: 0 !important
-			} */
-			
-			/* .container {
-			    padding-top: 120px;
-			    padding-bottom: 120px
-			} */
-			
-			/* input {
-			    padding: 22px 15px !important;
-			    border: 1px solid #CFD8DC !important;
-			    border-radius: 4px !important;
-			    box-sizing: border-box;
-			    background-color: #fff !important;
-			    color: #000 !important;
-			    font-size: 16px !important;
-			    letter-spacing: 1px;
-			    position: relative
-			}
-			
-			input:focus {
-			    -moz-box-shadow: none !important;
-			    -webkit-box-shadow: none !important;
-			    box-shadow: none !important;
-			    border: 1px solid #1976D2 !important;
-			    outline-width: 0
-			} */
 			
 			.fa-calendar {
 			    position: absolute;
 			    top: 13px;
 			    font-size: 20px;
 			    color: #1976D2;
-			    z-index: 1000
+			    /* z-index삭제 시켜버림 */
+			    
 			}
 			
 			#fa-1 {
@@ -224,14 +192,14 @@
 			    background-color: #fff;
 			    border-radius: 0 !important;
 			    align-content: center !important;
-			    padding: 0 !important
+			    padding: 0 !important;
+			    /* 달력이 위로 올라오는거 잡아줌  */
+			    z-index: 3 !important;
 			}
 			
 			.datepicker-dropdown {
-			    top: 1130px !important;
-			    left: calc(10% - 0px) !important;
 			    border-right: #1976D2;
-			    border-left: #1976D2
+			    border-left: #1976D2;
 			}
 			
 			.datepicker-dropdown.datepicker-orient-left:before {
@@ -363,22 +331,21 @@
 		<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js}"></script>
 		<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js}"></script>
 		<script>
-		$(document).ready(function(){
-		
-		   $('.input-daterange').datepicker({
-		   format: 'dd-mm-yyyy',
-		   autoclose: true,
-		   calendarWeeks : true,
-		   clearBtn: true,
-		   disableTouchKeyboard: true
-		   });
-		
-		   });
+			$(document).ready(function(){
+			
+			   $('.input-daterange').datepicker({
+			   format: 'dd-mm-yyyy',
+			   autoclose: true,
+			   calendarWeeks : true,
+			   clearBtn: true,
+			   disableTouchKeyboard: true
+			   
+			   });
+			   
+			   
+			});
 		</script>
-	   	<!-- PRISM 이거 파일이 없는데 어떻게 하지?(민석님에게 물어보자)-->
-	   	<script th:src="@{/js/prism/prism.js}"></script>
-	   	<!-- custom 이거 파일이 없는데 어떻게 하지?(민석님에게 물어보자)-->
-	   	<script th:src="@{/js/custom.js}"></script>
+	   	
 	
 	</th:block>
 	
