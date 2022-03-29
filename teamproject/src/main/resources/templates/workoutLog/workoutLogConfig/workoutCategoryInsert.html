@@ -16,10 +16,10 @@
 				<div class="panel-body">
 					<div class="col-md-12 panel-body" style="padding-bottom:30px;">
 						<div class="col-md-6 col-md-offset-3">
-  							<form class="cmxform" id="workoutCategoryForm" method="get" th:action="@{/workoutLog/workoutLogConfig/challengeConfigList}">
+  							<form class="cmxform" id="workoutCategoryForm" method="post" th:action="@{/workoutLog/workoutLogConfig/workoutCategoryInsert}">
     							<div class="col-md-12">
 	      							<div class="form-group form-animate-text" style="margin-top:40px !important;">
-										<input type="text" class="form-text" id="validate_workoutCategoryName" name="validate_workoutCategoryName" required>
+										<input type="text" class="form-text" id="validate_workoutGoalPlanCategoryContent" name="workoutGoalPlanCategoryContent" required>
 										<span class="bar"></span>
 										<label>운동 계획 카테고리명</label>
 									</div>
@@ -79,10 +79,10 @@
 		        $(label.parent("div").removeClass("form-animate-error"));
 		      },
 		      rules: {
-		    	validate_workoutCategoryName "required",
+		    	validate_workoutGoalPlanCategoryContent "required",
 		      },
 		      messages: {
-		    	validate_workoutCategoryName: "카테고리 이름을 입력해주세요.",
+		    	validate_workoutGoalPlanCategoryContent: "카테고리 이름을 입력해주세요.",
 		      }
 		    });
 		
