@@ -8,24 +8,102 @@
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
-		일지 사용자 트레이너 관리 화면입니다.
+		<div class="panel">
+			<div class="panel-heading bg-white border-none">
+	        	<h4><span class=" icon-calendar"></span> 운동 계획 관리</h4>
+	        </div>	
+            <div class="panel-body">
+              <div class="col-md-3">
+                <div id='external-events'>
+                <h4>운동 계획</h4>
+                  <div class='fc-event label'>My Event 1</div>
+                  <div class='fc-event label'>My Event 2</div>
+                  <div class='fc-event label'>My Event 3</div>
+                  <div class='fc-event label'>My Event 4</div>
+                  <div class='fc-event label'>My Event 5</div>
+                  <div class='fc-event label'>My Event 6</div>
+                  <p>
+                    <input type='checkbox' id='drop-remove' />
+                    <label for='drop-remove'>remove after drop</label>
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div id='calendar'></div>
+              </div>
+              
+            </div>
+		</div>
 	
 	</th:block>
-		<th:block layout:fragment="customBodyScript">	
+	
+	<!-- 사용자 정의 Css -->
+	<th:block layout:fragment="customCss">
+		<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/simple-line-icons.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/fullcalendar.min.css}"/>
+
+		<style type="text/css">
+			.panel-heading > h4 {
+				font-weight: bold;
+				margin-bottom: 0;
+				border-bottom: 2px solid #58666e;
+				padding-bottom: 5px;
+			}
+			 .panel-body:nth-child(2) {
+				padding-top: 0;
+			}
+		</style>
+	</th:block>	
+	
+	<th:block layout:fragment="customBodyScript">	
 		<!-- plugins -->
+		<script th:src="@{/asset/js/jquery.min.js}"></script>
+		<script th:src="@{/asset/js/jquery.ui.min.js}"></script>
+		<script th:src="@{/asset/js/bootstrap.min.js}"></script>
 		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/jquery.datatables.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/datatables.bootstrap.min.js}"></script>
 		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
-		
+		<script th:src="@{/asset/js/plugins/fullcalendar.min.js}"></script>
 		
 		<!-- custom -->
 		<script th:src="@{/asset/js/main.js}"></script>
 		<script type="text/javascript">
-		  $(document).ready(function(){
-		    //$('#datatables-example').DataTable();
-		  });
+			  $(document).ready(function(){
+			        $('#external-events .fc-event').each(function() {
+			        // store data so the calendar knows to render an event upon drop
+			        $(this).data('event', {
+			          title: $.trim($(this).text()), // use the element's text as the event title
+			          stick: true // maintain when user navigates (see docs on the renderEvent method)
+			        });
+	
+			        // make the event draggable using jQuery UI
+			        $(this).draggable({
+			          zIndex: 999,
+			          revert: true,      // will cause the event to go back to its
+			          revertDuration: 0  //  original position after the drag
+			        });
+	
+			      });
+	
+	
+			      $('#calendar').fullCalendar({
+			      header: {
+			        left: 'prev,next today',
+			        center: 'title',
+			        right: 'month,agendaWeek,agendaDay'
+			      },
+			      editable: true,
+			      droppable: true, // this allows things to be dropped onto the calendar
+			      drop: function(date, jsEvent, ui ) {
+	
+			        // is the "remove after drop" checkbox checked?
+			        if ($('#drop-remove').is(':checked')) {
+			          // if so, remove the element from the "Draggable Events" list
+			          $(this).remove();
+			        }
+			      }
+			    });
+			  });
 		</script>
-<!-- end: Javascript -->
+		<!-- end: Javascript -->
 	</th:block>
 </html>
