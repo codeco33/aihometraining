@@ -9,44 +9,17 @@
 	
 	<th:block layout:fragment="customContents">
 		<div class="services-area section-padding">
-            <div class="container">
-                <div class="row justify-content-sm-center">
-            		<th:block th:if="${not #lists.isEmpty(workoutGoalList)}" th:each="l : ${workoutGoalList}">
-	                    <div class="col-lg-4 col-md-6 col-sm-8">
-	                        <div class="single-services mb-30">
-	                            <div class="features-caption">
-	                                <h3>운동 목표 </h3>
-	                                <p>[[${l.workoutGoalContent}]]</p>
-	                            </div>
-	                        </div>
-	                    </div>
-            		</th:block>
-	            	<th:block th:unless="${not #lists.isEmpty(workoutGoalList)}" th:each="l : ${workoutGoalList}">
-	            		<div class="col-lg-4 col-md-6 col-sm-8">
-	                        <div class="single-services mb-30">
-	                            <div class="features-caption">
-	                                <h3>운동 목표</h3>
-	                                <p>등록된 운동 목표가 없습니다.</p>
-	                            </div>
-	                        </div>
-	                    </div>
-	            	</th:block>
-	            </div>
-            </div>
-        </div>
-        
-       <!-- Single Start-->
-		<section class="blog_area">
 	        <div class="container">
 	        	<div class="row justify-content-sm-center">
+	        	<th:block th:if="${not #lists.isEmpty(workoutGoalList)}" th:each="l : ${workoutGoalList}">
 	        		<div class="col-sm-4 mb-5 mb-lg-0">
 	            		<div class="properties__card">
 			                <div class="properties__caption">
-			                    <p>User Experience</p>
-			                    <h3>Fundamental of UX for Application design</a></h3>
-			                    <p>The automated process all your website tasks. Discover tools and techniques to engage effectively with vulnerable children and young people.
-			
-			                    </p>
+                                <h2>운동 목표 </h2>
+                                <p>[[${l.workoutGoalContent}]]</p>
+			                    <p>아이디 : [[${l.memberEmail}]]</p>
+			                    <h3>시작일 : [[${l.workoutGoalStartDate}]] </h3>
+			                    <h3>종료일 : [[${l.workoutGoalEndDate}]]</h3>
 			                    <h6>목표 달성률</h6>
 			                    <div class="percentage">
 									<div class="progress">
@@ -63,52 +36,19 @@
 			
 			            </div>
 			        </div>
-			        <div class="col-sm-4 mb-5 mb-lg-0">
-			            <div class="properties__card">
-			                <div class="properties__caption">
-			                    <p>User Experience</p>
-			                    <h3>Fundamental of UX for Application design</a></h3>
-			                    <p>The automated process all your website tasks. Discover tools and techniques to engage effectively with vulnerable children and young people.
-			                    </p>
-			                     <h6>목표 달성률</h6>
-			                    <div class="percentage">
-									<div class="progress">
-										<div class="progress-bar color-7" role="progressbar" style="width: 30%"
-										aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-								</div>
-			                    <form action="javascript:void(0)" method="post">
-				                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn mt-5" type="submit">
-				                    	운동 계획 GoGo
-				                    </button>
-				                </form>    
-			                </div>
-			            </div>
-			        </div>
-			        <div class="col-sm-4 mb-5 mb-lg-0">
-			            <div class="properties__card">
-			                <div class="properties__caption">
-			                    <p>User Experience</p>
-			                    <h3>Fundamental of UX for Application design</a></h3>
-			                    <p>The automated process all your website tasks. Discover tools and techniques to engage effectively with vulnerable children and young people.
-			
-			                    </p>
-			                     <h6>목표 달성률</h6>
-			                    <div class="percentage">
-									<div class="progress">
-										<div class="progress-bar color-7" role="progressbar" style="width: 30%"
-										aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-								</div>
-			                    <form action="javascript:void(0)" method="post">
-				                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn mt-5" type="submit">
-				                    	운동 계획 GoGo
-				                    </button>
-				                </form>    
-			                </div>
-			
-			            </div>
-			        </div>
+            		  </th:block>
+	            	<th:block th:unless="${not #lists.isEmpty(workoutGoalList)}" th:each="l : ${workoutGoalList}">
+	            		<div class="col-lg-4 col-md-6 col-sm-8">
+	                        <div class="single-services mb-30">
+	                            <div class="features-caption">
+	                                <h3>운동 목표</h3>
+	                                <p>등록된 운동 목표가 없습니다.</p>
+	                            </div>
+	                        </div>
+	                    </div>
+	            	</th:block>
+			        
+			        
 			        <!-- Single End-->
 			        <div class="pt-5">
 	                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" th:onclick="|location.href='@{/workoutLog/workoutLogUser/workoutGoalInsert}'|">
@@ -117,7 +57,7 @@
 			        </div>
 			    </div>
 			</div>
-		</section>   
+		</div>	
 	
 	</th:block>
 	
@@ -127,7 +67,7 @@
 			.progress-bar.color-7 {
 			background-color: #a367e7
 			}
-			h6{
+			h2,h6{
 			font-weight: bold
 			}
 		</style>

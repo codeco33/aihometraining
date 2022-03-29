@@ -377,14 +377,7 @@ input[name="searchValue"] {
 			$('#disapproveModal').modal('show');
 		});
 		
-		$(document).on('click','.searchDateBtn input[type="button"]', function(){
-			console.log($(this).val());
-			$('.ranges > td').attr('class', 'available');
-			if($(this).val() == '오늘'){
-				$('td.today').attr('class','today active start-date active end-date in-range available');
-			}
-		});
-
+		
 		$(document).ready(function() {
 						
 			/*환불전체내역 데이터피커*/
