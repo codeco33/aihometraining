@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import aihometraining.team.dto.EClassCategoryLarge;
+import aihometraining.team.dto.EClassCategoryMedium;
+import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.mapper.EClassCategoryMapper;
 import aihometraining.team.service.EClassCategoryService;
 
@@ -48,12 +50,30 @@ public class EClassCategoryController {
 				searchKey = "eClassCategoryLargeName";
 			}
 		}
+		if(searchKey != null) {
+			if("eClassCategoryMediumCode".equals(searchKey)) {
+				searchKey = "eClassCategoryMediumCode";
+			}else if("eClassCategoryMediumName".equals(searchKey)) {
+				searchKey = "eClassCategoryMediumName";
+			}
+		}
+		if(searchKey != null) {
+			if("eClassCategoryLargeCode".equals(searchKey)) {
+				searchKey = "eClassCategorySmallCode";
+			}else if("eClassCategorySmallName".equals(searchKey)) {
+				searchKey = "eClassCategorySmallName";
+			}
+		}
 		
-		List<EClassCategoryLarge> eClassCategoryList = eClassCategoryService.getEClassCategoryList(searchKey, searchValue);
+		List<EClassCategoryLarge> eClassCategoryLargeList = eClassCategoryService.getEClassCategoryLargeList(searchKey, searchValue);
+		List<EClassCategoryMedium> eClassCategoryMediumList = eClassCategoryService.getEClassCategoryMediumList(searchKey, searchValue);
+		List<EClassCategorySmall> eClassCategorySmallList = eClassCategoryService.getEClassCategorySmallList(searchKey, searchValue);
 
 		model.addAttribute("leftMenuList", "운동 클래스");
 		model.addAttribute("title", "운동 클래스 카테고리 관리");
-		model.addAttribute("eClassCategoryList", eClassCategoryList);
+		model.addAttribute("eClassCategoryLargeList", eClassCategoryLargeList);
+		model.addAttribute("eClassCategoryMediumList", eClassCategoryMediumList);
+		model.addAttribute("eClassCategorySmallList", eClassCategorySmallList);
 		
 		return "eClass/eClassConfig/eClassCategoryList";
 	}
