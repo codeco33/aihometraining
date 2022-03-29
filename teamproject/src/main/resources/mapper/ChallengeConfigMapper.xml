@@ -82,7 +82,17 @@
 		
 	</select>
 	
-	<select id="getChallengeCategoryList" parameterType="map" resultType="map">
+	<select id="getClassCategoryList" resultType="EClassCategorySmall">
+		/* 운동클래스카테고리small 조회 */
+		SELECT
+			 ec.eClassCategorySmallCode
+			,ec.eClassCategorySmallName
+		FROM
+			eclasscategorysmall AS ec;
+	
+	</select>
+	
+	<select id="getChallengeCategoryList" parameterType="map" resultType="map" resultMap="challengeCategoryResultMap">
 		/*챌린지 카테고리 조회*/
 		SELECT
 			 cc.challengeCategoryCode

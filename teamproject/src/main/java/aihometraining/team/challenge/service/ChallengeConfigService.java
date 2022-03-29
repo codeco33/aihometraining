@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import aihometraining.team.challenge.mapper.ChallengeConfigMapper;
 import aihometraining.team.dto.ChallengeCategory;
+import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.mapper.CommonMapper;
 
 @Service
@@ -32,6 +33,15 @@ public class ChallengeConfigService {
 		
 	}
 	
+	//운동 클래스 카테고리 small 조회
+	public List<EClassCategorySmall> getClassCategoryList() {
+		
+		List<EClassCategorySmall> classCategoryList = challengeConfigMapper.getClassCategoryList();
+		
+		return classCategoryList;
+		
+	}
+	
 	//카테고리 코드별 챌린지 카테고리 정보 조회
 	public ChallengeCategory getChallengeCategoryByCode(String challengeCategoryCode) {
 		
@@ -43,11 +53,12 @@ public class ChallengeConfigService {
 	
 	//카테고리 등록 처리
 	public int challengeCategoryInsert(ChallengeCategory challengeCategory) {
-		                                         //pk로 쓸 컬럼명,              테이블명
+		//pk컬럼에 들어갈 코드를 자동으로 만들어주는 Mapper      //pk로 쓸 db의 컬럼명                     //코드가 들어갈 db의 테이블명
 		String newCode = commonMapper.getNewCode("challengeCategoryCode", "challengecategory");
 		
+		//dto에 위에서 만들어진 코드를 세팅해주기
 		challengeCategory.setChallengeCategoryCode(newCode);
-		challengeCategory.setMemberEmail("id001@email.com");
+		challengeCategory.setMemberEmail("id001@email.com"); //로그인 처리가 아직 안이루어져서 임의로 해놓음!
 		
 		int result = challengeConfigMapper.challengeCategoryInsert(challengeCategory);
 		
