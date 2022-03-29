@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import aihometraining.team.dto.WorkoutLogCategory;
-import aihometraining.team.workoutLog.mapper.WorkoutLogConfigMapper;
 import aihometraining.team.workoutLog.service.WorkoutLogConfigService;
 
 @Controller
