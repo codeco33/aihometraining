@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -34,6 +35,30 @@ public class EClassCategoryController {
 		this.eClassCategoryMapper = eClassCategoryMapper;
 	}
 	
+	/*
+ 	 * 운동 클래스 카테고리 추가 등록
+	 * */
+	@GetMapping("/eClassCategoryInsert")
+	public String eClassCategoryInsert(Model model) {
+		
+		model.addAttribute("title", "운동 클래스 카테고리 추가 등록");
+		
+		return "eClass/eClassConfig/eClassCategoryInsert";
+	}
+	
+	@PostMapping("/eClassCategoryInsert")
+	public String eClassCategoryInsert(EClassCategoryLarge eClassCategoryLarge, EClassCategoryMedium eClassCategoryMedium, EClassCategorySmall eClassCategorySmall) {
+		log.info("운동 클래스 카테고리 추가 등록 폼에서 입력 받은 데이터 : {}", eClassCategoryLarge, eClassCategoryMedium, eClassCategorySmall);
+		
+		eClassCategoryService.addEClassCategory(eClassCategoryLarge, eClassCategoryMedium, eClassCategorySmall);
+		
+		return "redirect:/eClass/eClassConfig/eClassCategoryInsert";
+	}
+	
+	/*
+	 * 운동 클래스 카테고리 목록 조회
+	 * */
+	
 	@GetMapping("/eClassCategoryList")
 	public String eClassCategoryList(Model model
 							   ,@RequestParam(value="searchKey", required = false) String searchKey
@@ -58,7 +83,7 @@ public class EClassCategoryController {
 			}
 		}
 		if(searchKey != null) {
-			if("eClassCategoryLargeCode".equals(searchKey)) {
+			if("eClassCategorySmallCode".equals(searchKey)) {
 				searchKey = "eClassCategorySmallCode";
 			}else if("eClassCategorySmallName".equals(searchKey)) {
 				searchKey = "eClassCategorySmallName";

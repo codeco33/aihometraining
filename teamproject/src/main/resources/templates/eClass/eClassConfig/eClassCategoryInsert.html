@@ -14,25 +14,50 @@
 		        	<h4>운동 클래스 카테고리 등록 폼</h4>
 		        </div>
 		        <div class="panel-body">
-		        	<div class="col-md-12">
-		                <div class="panel box-shadow-none">
-		                    <div class="panel-body">
-		                        <form id="eClassCategoryInsert" action="#">
-		                            <h3>운동 클래스 카테고리 등록하기</h3>
-		                            <fieldset>
-		                                <legend>카테고리</legend>
-		                         
-		                                <label for="categoryName-2">카테고리명 *</label>
-		                                <input id="categoryName-2" name="categoryName" type="text" class="required">
-		                                <label for="eClassCategory-2">운동클래스 카테고리명 *</label>
-		                                <input id="eClassCategory-2" name="eClassCategory" type="text" class="required">
-		                                <p>(*) 필수 입력 사항입니다.</p>
-		                            </fieldset>
-		                        </form>
-		                    </div>
-		                </div>
-		            </div>
-		        </div>
+			        <div class="col-md-6 col-md-offset-3">
+						<div class="col-md-12 top-20 padding-0">
+			            	<div class="col-md-12">
+			                	<div class="panel">
+			                    	<div class="panel-heading bg-deep-purple">
+			                    		<h6 class="text-white">운동 클래스 카테고리 등록</h6>
+			                    	</div>
+							        <div class="panel-body">
+										<div class="col-md-12 panel-body" style="padding-bottom:30px;">
+											<div class="col-md-12">
+					  							<form class="cmxform" id="eClassCategoryInsertForm" method="get" action="">
+					    							<div class="col-md-12">
+														<div class=" row form-group">
+															<label class="col-sm-5 control-label" style="color:#999; font-size: 18px;">운동 클래스 카테고리</label>
+															<div class="col-sm-7">
+																<select class="form-control" id="validate_eClassCategory" name="validate_eClassCategory" required>
+																	<th:block th:if="${not #lists.isEmpty(eClasCategoryList)}" th:each="l : ${eClasCategoryList}">
+																		<option th:value="${l.get('eClassCategorySmallName')}" >[[${l.get('eClassCategorySmallName')}]]</option>
+																	</th:block>
+																	<th:block th:unless="${not #lists.isEmpty(eClasCategoryList)}" th:each="l : ${eClasCategoryList}">
+																		<option >등록된 운동 클래스 카테고리가 없습니다.</option>
+																	</th:block>
+																</select>
+															</div>
+														</div>
+						       							
+														<div class="form-group form-animate-text" style="margin-top:40px !important;">
+										                    <input type="text" class="form-text" id="validate_categoryName" name="validate_categoryName" required>
+										                    <span class="bar"></span>
+										                    <label>운동 클래스 카테고리명</label>
+									                    </div>
+					        						</div>
+													<div style="text-align: center;">
+														<input class="submit btn btn-outline btn-info btn-sm" type="submit" value="등록">
+													</div>
+												</form>
+											</div>
+										</div>
+							        </div>
+		        				</div>
+	                    	</div>
+	                   	</div>
+	                </div>
+                </div>
 			</div>
 		</div>			
 	</th:block>
@@ -47,84 +72,44 @@
 	<th:block layout:fragment="customBodyScript">	
 		
 		<!-- plugins -->
-		<script th:src="@{/asset/js/plugins/jquery.steps.min.js}"></script>
 		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/jquery.validate.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.knob.js}"></script>
+		<script th:src="@{/asset/js/plugins/ion.rangeSlider.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/bootstrap-material-datetimepicker.js}"></script>
 		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.mask.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/select2.full.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/nouislider.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.validate.min.js}"></script>
 		
 		
 		<!-- custom -->
 		<script th:src="@{/asset/js/main.js}"></script>
-		<!-- 스윗얼랏 추가 -->
-		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		<script type="text/javascript">
-		$(function(){
-			
-			$(document).ready(function(){
-				
-			    var form = $("#eClassCategoryInsert").show();
-			     
-			    form.steps({
-			        headerTag: "h3",
-			        bodyTag: "fieldset",
-			        transitionEffect: "slideLeft",
-			        onStepChanging: function (event, currentIndex, newIndex)
-			        {
-			            // Allways allow previous action even if the current form is not valid!
-			            if (currentIndex > newIndex)
-			            {
-			                return true;
-			            }
-			            // Forbid next action on "Warning" step if the user is to young
-			            if (newIndex === 3 && Number($("#age-2").val()) < 18)
-			            {
-			                return false;
-			            }
-			            // Needed in some cases if the user went back (clean up)
-			            if (currentIndex < newIndex)
-			            {
-			                // To remove error styles
-			                form.find(".body:eq(" + newIndex + ") label.error").remove();
-			                form.find(".body:eq(" + newIndex + ") .error").removeClass("error");
-			            }
-			            form.validate().settings.ignore = ":disabled,:hidden";
-			            return form.valid();
-			        },
-			        onStepChanged: function (event, currentIndex, priorIndex)
-			        {
-			            // Used to skip the "Warning" step if the user is old enough.
-			            if (currentIndex === 2 && Number($("#age-2").val()) >= 18)
-			            {
-			                form.steps("next");
-			            }
-			            // Used to skip the "Warning" step if the user is old enough and wants to the previous step.
-			            if (currentIndex === 2 && priorIndex === 3)
-			            {
-			                form.steps("previous");
-			            }
-			        },
-			        onFinishing: function (event, currentIndex)
-			        {
-			            form.validate().settings.ignore = ":disabled";
-			            return form.valid();
-			        },
-			        onFinished: function (event, currentIndex)
-			        {
-			        	//스윗얼랏 사용
-			        	swal("등록되었습니다.", "확인버튼을 눌러주세요.", "success");
-			        }
-			    }).validate({
-			        errorPlacement: function errorPlacement(error, element) { element.before(error); },
-			        rules: {
-			            confirm: {
-			                equalTo: "#password-2"
-			            }
-			        }
-			    });
-
-
-			});
-		});
+		  $(document).ready(function(){
+			  
+		    $("#eClassCategoryInsertForm").validate({
+		      errorElement: "em",
+		      errorPlacement: function(error, element) {
+		        $(element.parent("div").addClass("form-animate-error"));
+		        error.appendTo(element.parent("div"));
+		      },
+		      success: function(label) {
+		        $(label.parent("div").removeClass("form-animate-error"));
+		      },
+		      rules: {
+		        validate_categoryName: "required",
+		        validate_eClassCategory: "required"
+		      },
+		      messages: {
+		        validate_categoryName: "카테고리명을 입력해주세요.",
+		        validate_eClassCategory: "카테고리를 선택해주세요."
+		      }
+		    });
+		
+		  });
+        	//스윗얼랏 사용
+        	//swal("등록되었습니다.", "확인버튼을 눌러주세요.", "success");
 		</script>
 	</th:block>
 	<!-- end: Javascript -->
