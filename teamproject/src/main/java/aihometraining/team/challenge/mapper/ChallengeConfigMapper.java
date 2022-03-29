@@ -12,5 +12,8 @@ import aihometraining.team.dto.ChallengeCategory;
 @Mapper
 public interface ChallengeConfigMapper {
 	//카테고리 목록 조회
-	public List<ChallengeCategory> getChallengeCategoryList(Map<String, Object> paramMap);
+	//public List<ChallengeCategory> getChallengeCategoryList(Map<String, Object> paramMap);
+	
+	//임시용
+	public List<Map<String,Object>> getChallengeCategoryList(Map<String, Object> paramMap);
 }

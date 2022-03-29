@@ -29,13 +29,15 @@ public class ChallengeConfigController {
 		this.challengeConfigService = challengeConfigService;
 	}
 	
+	//챌린지 관리설정
 	@GetMapping("/configList")
 	public String challengeConfigList(Model model) {
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("memberEmail", "id001@email.com");
 		
-		List<ChallengeCategory> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
+		//List<ChallengeCategory> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
+		List<Map<String, Object>> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
 		
 		paramMap = null;
 		
@@ -48,15 +50,54 @@ public class ChallengeConfigController {
 		return "challenge/challengeConfig/challengeConfigList";
 		
 	}
+	
+	//챌린지 카테고리 등록
 	@GetMapping("/challengeCategoryInsert")
 	public String challengeCategoryInsert(Model model) {
 		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("memberEmail", "id001@email.com");
+		
+		//List<ChallengeCategory> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
+		List<Map<String, Object>> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
+		
+		paramMap = null;
+		
+		log.info("챌린지 카테고리 조회  challengeCategoryList : {}", challengeCategoryList);
+		
 		model.addAttribute("title", "챌린지 카테고리 등록");
 		model.addAttribute("leftMenuList", "챌린지");
+		model.addAttribute("challengeCategoryList", challengeCategoryList);
 		
 		return "challenge/challengeConfig/challengeCategoryInsert";
 		
 	}
+	
+	/**
+	 * 
+	 * 챌린지 카테고리 수정화면
+	 */
+	@GetMapping("/challengeCategoryUpdate")
+	public String challengeCategoryUpdate(Model model) {
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("memberEmail", "id001@email.com");
+		
+		//List<ChallengeCategory> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
+		List<Map<String, Object>> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
+		
+		paramMap = null;
+		
+		log.info("챌린지 카테고리 조회  challengeCategoryList : {}", challengeCategoryList);
+		
+		model.addAttribute("title", "챌린지 카테고리 수정");
+		model.addAttribute("leftMenuList", "챌린지");
+		model.addAttribute("challengeCategoryList", challengeCategoryList);
+		
+		return "challenge/challengeConfig/challengeCategoryUpdate";
+	}
+	
+	//챌린지 세팅 등록
 	@GetMapping("/challengeSettingInsert")
 	public String challengeSettingInsert(Model model) {
 		
@@ -66,6 +107,8 @@ public class ChallengeConfigController {
 		return "challenge/challengeConfig/challengeSettingInsert";
 		
 	}
+	
+	//챌린지 모집 중인 목록
 	@GetMapping("/challengeList")
 	public String challengeList(Model model) {
 		
@@ -75,6 +118,8 @@ public class ChallengeConfigController {
 		return "challenge/challengeConfig/challengeList";
 		
 	}
+	
+	//진행중인 챌린지 목록
 	@GetMapping("/challengeListIng")
 	public String challengeListIng(Model model) {
 		
@@ -84,6 +129,8 @@ public class ChallengeConfigController {
 		return "challenge/challengeConfig/challengeListIng";
 		
 	}
+	
+	//챌린지 포인트 관리
 	@GetMapping("/challengePoint")
 	public String challengePoint(Model model) {
 		
@@ -93,6 +140,8 @@ public class ChallengeConfigController {
 		return "challenge/challengeConfig/challengePoint";
 		
 	}
+	
+	//챌린지 신고 관리
 	@GetMapping("/challengeReportList")
 	public String challengeReportList(Model model) {
 		

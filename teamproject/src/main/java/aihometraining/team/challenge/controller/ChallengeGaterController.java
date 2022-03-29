@@ -28,6 +28,18 @@ public class ChallengeGaterController {
 		this.challengeGatherService = challengeGatherService;
 	}
 	
+	//challengeGatherAdmin
+	@GetMapping("/gatherAdmin")
+	public String challengeGatherAdmin(Model model) {
+		
+		model.addAttribute("title", "모집 챌린지 관리자");
+		model.addAttribute("leftMenuList", "챌린지");
+		
+		return "challenge/challengeadmin";
+		
+	}
+	
+	
 	//challengeGatherList
 	@GetMapping("/challengeGatherList")
 	public String challengeGather(Model model) {

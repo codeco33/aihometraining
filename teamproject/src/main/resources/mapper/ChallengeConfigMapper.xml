@@ -6,39 +6,61 @@
 <mapper namespace="aihometraining.team.challenge.mapper.ChallengeConfigMapper">
 
 	<resultMap type="ChallengeCategory" id="challengeCategoryResultMap">
-		<result column="challengeCategoryCode" property="challengeCategoryCode"/>
-		<result column="challengeCategoryName" property="challengeCategoryName"/>
-		<result column="challengeCategoryRegDate" property="challengeCategoryRegDate"/>
-		<result column="eClassCategorySmall" property="eClassCategorySmall"/>
-		<result column="memberUpdateEmail" property="memberUpdateEmail"/>
-		<result column="memberUpdateDate" property="memberUpdateDate"/>
+		<result column="challengeCategoryCode" 		property="challengeCategoryCode"/>
+		<result column="memberEmail" 				property="memberEmail"/>
+		<result column="challengeCategoryName" 		property="challengeCategoryName"/>
+		<result column="challengeCategoryRegDate" 	property="challengeCategoryRegDate"/>
+		<result column="eClassCategorySmallCode" 	property="eClassCategorySmallCode"/>
+		<result column="memberUpdateEmail"		 	property="memberUpdateEmail"/>
+		<result column="memberUpdateDate" 			property="memberUpdateDate"/>
 		
 		<association property="member" javaType="Member">
-			<id column="memberEmail" property="memberEmail"/>
+			<id 	column="memberEmail" 			property="memberEmail"/>
+			<result column="memberPw" 				property="memberPw"/>
+			<result column="memberLevelCode" 		property="memberLevelCode"/>
+			<result column="memberNewsAgree" 		property="memberNewsAgree"/>
+			<result column="memberRegDate" 			property="memberRegDate"/>
+			<result column="memberName" 			property="memberName"/>
+			<result column="memberPhone"	 		property="memberPhone"/>
+			<result column="memberNickname" 		property="memberNickname"/>
+			<result column="memberBirthday" 		property="memberBirthday"/>
+			<result column="memberGender" 			property="memberGender"/>
+			<result column="memberRecommendEmail" 	property="memberRecommendEmail"/>
+			<result column="memberFinalPoint" 		property="memberFinalPoint"/>
 		</association>
 	
+		<association property="eClassCategorySmall" javaType="EClassCategorySmall">
+			<id 	column="eClassCategorySmallCode" 				property="eClassCategorySmallCode"/>
+			<result column="eClassCategorySmallName" 				property="eClassCategorySmallName"/>
+			<result column="eClassCategoryMediumCode" 				property="eClassCategoryMediumCode"/>
+			<result column="eClassCategoryMediumName" 				property="eClassCategoryMediumName"/>
+			<result column="eClassCategoryLargeCode" 				property="eClassCategoryLargeCode"/>
+			<result column="eClassCategoryLargeName" 				property="eClassCategoryLargeName"/>
+			<result column="memberEmail" 							property="memberEmail"/>
+			<result column="eClassCategorySmallRegDate" 			property="eClassCategorySmallRegDate"/>
+			<result column="updateMemberEmail" 						property="updateMemberEmail"/>
+			<result column="eClassCategorySmallFinalUpdateDate" 	property="eClassCategorySmallFinalUpdateDate"/>
+		</association>
 	</resultMap>
-	<select id="getChallengeCategoryList" parameterType="map" resultMap="challengeCategoryResultMap">
+	
+	
+	<select id="getChallengeCategoryList" parameterType="map" resultType="map">
 		/*챌린지 카테고리 조회*/
-		SELECT 
-			 m.memberEmail
-			,ch.challengeCategoryName
-			,ch.challengeCategoryRegDate
-			,ch.eClassCategorySmall
-			,ch.memberUpdateEmail
-			,ch.memberUpdateDate
-		FROM 
-			challengecategory AS ch
+		SELECT
+			ec.eClassCategorySmallName
+			,m.memberEmail
+			,cc.challengeCategoryName
+			,cc.challengeCategoryRegDate	
+		FROM
+			eclasscategorysmall AS ec
+			INNER join
+			challengecategory AS cc
+			on
+			ec.eClassCategorySmallCode = cc.eClassCategorySmallCode
 			INNER join
 			member AS m
 			on
-			ch.memberEmail = m.memberEmail
-		<trim prefix="WHERE" prefixOverrides="AND |OR ">
-			<if test="memberEmail != null and memberEmail != ''">
-				ch.memberEmail = #{memberEmail}
-			</if>
-		</trim>
-		;	
+			cc.memberEmail = m.memberEmail;
 	</select>
 </mapper>	
 	
