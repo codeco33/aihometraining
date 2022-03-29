@@ -17,4 +17,16 @@
 		FROM
 			workoutgoalplancategory;
 	</select>
+	
+	<insert id="workoutGoalCategoryInsert" parameterType="WorkoutLogCategory">
+		/* 운동 카테고리 등록 */
+		INSERT INTO workoutgoalplancategory
+		(
+		   workoutGoalPlanCategoryCode
+		 , workoutGoalPlanCategoryContent
+		)VALUES (
+		   #{workoutGoalPlanCategoryCode}
+		 , #{workoutGoalPlanCategoryContent}
+		);
+	</insert>
 </mapper>        
