@@ -3,24 +3,34 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
         
-<mapper namespace="aihometraining.team.workoutLog.mapper.WorkoutLogUserMapper">
-
+	<mapper namespace="aihometraining.team.workoutLog.mapper.WorkoutLogUserMapper">
 	<resultMap type="WorkoutGoal" id="WorkoutGoalResultMap">
-		<result column="workoutGoalCode" 		property="workoutGoalCode"/>
-		<result column="memberEmail" 			property="memberEmail"/>
-		<result column="workoutGoalContent" 	property="workoutGoalContent"/>
-		<result column="workoutGoalStartDate" 	property="workoutGoalStartDate"/>
-		<result column="workoutGoalEndDate" 	property="workoutGoalEndDate"/>
-		<result column="workoutGoalUpdateDate" 	property="workoutGoalUpdateDate"/>
-		<result column="memberUpdateEmail" 		property="memberUpdateEmail"/>
-	</resultMap>	
+			<result column="workoutGoalCode" 		property="workoutGoalCode"/>
+			<result column="memberEmail" 			property="memberEmail"/>
+			<result column="workoutGoalContent" 	property="workoutGoalContent"/>
+			<result column="workoutGoalStartDate" 	property="workoutGoalStartDate"/>
+			<result column="workoutGoalEndDate" 	property="workoutGoalEndDate"/>
+			<result column="workoutGoalUpdateDate" 	property="workoutGoalUpdateDate"/>
+			<result column="memberUpdateEmail" 		property="memberUpdateEmail"/>
+		<association property="member" javaType="Member">
+				<id column="memberEmail" property="memberEmail"/>
+		</association>	
+	</resultMap>
+		
+		<select id="getworkoutGoalList" resultType="WorkoutGoal">
+			SELECT
+				 m.memberEmail
+				,w.workoutGoalContent
+				,w.workoutGoalStartDate
+				,w.workoutGoalEndDate
+			FROM
+				workoutgoal AS w
+				JOIN 
+				member AS m
+				ON 
+				w.memberEmail = m.memberEmail
+			WHERE
+				w.memberEmail = 'id004@email.com';
+		</select>
 	
-	<select id="getworkoutGoalList" resultType="WorkoutGoal">
-		SELECT
-			workoutGoalContent
-		FROM
-			workoutgoal AS w
-		WHERE 
-			w.memberEmail='id004@email.com';
-	</select>
-</mapper>        
+	</mapper>
