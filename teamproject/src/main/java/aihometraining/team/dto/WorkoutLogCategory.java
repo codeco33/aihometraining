@@ -2,15 +2,15 @@ package aihometraining.team.dto;
 
 public class WorkoutLogCategory {
 
-	private String workoutGoalPlanCategory;
+	private String workoutGoalPlanCategoryCode;
 	private String workoutGoalPlanCategoryContent;
 	
 	
-	public String getWorkoutGoalPlanCategory() {
-		return workoutGoalPlanCategory;
+	public String getWorkoutGoalPlanCategoryCode() {
+		return workoutGoalPlanCategoryCode;
 	}
-	public void setWorkoutGoalPlanCategory(String workoutGoalPlanCategory) {
-		this.workoutGoalPlanCategory = workoutGoalPlanCategory;
+	public void setWorkoutGoalPlanCategoryCode(String workoutGoalPlanCategoryCode) {
+		this.workoutGoalPlanCategoryCode = workoutGoalPlanCategoryCode;
 	}
 	public String getWorkoutGoalPlanCategoryContent() {
 		return workoutGoalPlanCategoryContent;
@@ -19,11 +19,13 @@ public class WorkoutLogCategory {
 		this.workoutGoalPlanCategoryContent = workoutGoalPlanCategoryContent;
 	}
 	
+	
 	@Override
 	public String toString() {
-		return "WorkoutLogCategory [workoutGoalPlanCategory=" + workoutGoalPlanCategory
+		return "WorkoutLogCategory [workoutGoalPlanCategoryCode=" + workoutGoalPlanCategoryCode
 				+ ", workoutGoalPlanCategoryContent=" + workoutGoalPlanCategoryContent + "]";
 	}
+	
 	
 	
 	
