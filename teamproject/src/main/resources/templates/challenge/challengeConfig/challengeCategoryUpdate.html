@@ -30,10 +30,10 @@
 															<label class="col-sm-5 control-label" style="color:#999; font-size: 18px;">운동 카테고리</label>
 															<div class="col-sm-7">
 																<select class="form-control" id="validate_eClassCategory" name="validate_eClassCategory" required>
-																	<th:block th:if="${not #lists.isEmpty(challengeCategoryList)}" th:each="l : ${challengeCategoryList}">
-																		<option th:value="${l.get('eClassCategorySmallCode')}" th:selected="${l.get('eClassCategorySmallCode') == challengeCategory.eClassCategorySmallCode}" >[[${l.get('eClassCategorySmallName')}]]</option>
+																	<th:block th:if="${not #lists.isEmpty(classCategoryList)}" th:each="l : ${classCategoryList}">
+																		<option th:value="${l.eClassCategorySmallCode}" th:selected="${l.eClassCategorySmallCode == challengeCategory.eClassCategorySmallCode}" >[[${l.eClassCategorySmallName}]]</option>
 																	</th:block>
-																	<th:block th:unless="${not #lists.isEmpty(challengeCategoryList)}" th:each="l : ${challengeCategoryList}">
+																	<th:block th:unless="${not #lists.isEmpty(classCategoryList)}" th:each="l : ${classCategoryList}">
 																		<option >등록된 카테고리가 없습니다.</option>
 																	</th:block>
 																</select>
