@@ -9,11 +9,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import aihometraining.team.challenge.service.ChallengeConfigService;
 import aihometraining.team.dto.ChallengeCategory;
+import aihometraining.team.mapper.CommonMapper;
 
 @Controller
 @RequestMapping("/challenge/challengeConfig")
@@ -28,6 +30,29 @@ public class ChallengeConfigController {
 	
 	public ChallengeConfigController(ChallengeConfigService challengeConfigService) {
 		this.challengeConfigService = challengeConfigService;
+		
+	}
+	
+	//관리설정test
+	@GetMapping("/test")
+	public String test(Model model) {
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("memberEmail", "id001@email.com");
+		
+		//List<ChallengeCategory> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
+		List<Map<String, Object>> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
+		
+		paramMap = null;
+		
+		log.info("챌린지 카테고리 조회  challengeCategoryList : {}", challengeCategoryList);
+		
+		model.addAttribute("title", "챌린지 관리 설정");
+		model.addAttribute("leftMenuList", "챌린지");
+		model.addAttribute("challengeCategoryList", challengeCategoryList);
+		
+		return null;
+		
 	}
 	
 	//챌린지 관리설정
@@ -52,7 +77,7 @@ public class ChallengeConfigController {
 		
 	}
 	
-	//챌린지 카테고리 등록
+	//챌린지 카테고리 등록폼
 	@GetMapping("/challengeCategoryInsert")
 	public String challengeCategoryInsert(Model model) {
 		
@@ -71,6 +96,19 @@ public class ChallengeConfigController {
 		model.addAttribute("challengeCategoryList", challengeCategoryList);
 		
 		return "challenge/challengeConfig/challengeCategoryInsert";
+		
+	}
+	
+	//챌린지 카테고리 등록 처리
+	@PostMapping("/challengeCategoryInsert")
+	public String challengeCategoryInsert(ChallengeCategory challengeCategory) {
+		
+		log.info("챌린지 카테고리 등록 폼에서 입력받은 데이터: {}", challengeCategory); //받은 내용이 여기{}에 담긴다.
+		
+		//memberService.addMember(member);
+		challengeConfigService.challengeCategoryInsert(challengeCategory);
+		
+		return "redirect:/challenge/challengeConfig/configList";
 		
 	}
 	
