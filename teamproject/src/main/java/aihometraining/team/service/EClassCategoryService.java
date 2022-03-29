@@ -30,13 +30,30 @@ public class EClassCategoryService {
 		
 		return result; 
 	}
-
-	public List<EClassCategoryLarge> getEClassCategoryList(String searchKey,
+	
+	//운동 클래스 카테고리 대 목록 조회
+	public List<EClassCategoryLarge> getEClassCategoryLargeList(String searchKey,
 			String searchValue) {
 		
-		List<EClassCategoryLarge> eClassCategoryList = eClassCategoryMapper.getEClassCategoryList(searchKey, searchValue);
+		List<EClassCategoryLarge> eClassCategoryLargeList = eClassCategoryMapper.getEClassCategoryLargeList(searchKey, searchValue);
 		
-		return eClassCategoryList;
+		return eClassCategoryLargeList;
+	}
+	//운동 클래스 카테고리 중 목록 조회
+	public List<EClassCategoryMedium> getEClassCategoryMediumList(String searchKey,
+			String searchValue) {
+		
+		List<EClassCategoryMedium> eClassCategoryMediumList = eClassCategoryMapper.getEClassCategoryMediumList(searchKey, searchValue);
+		
+		return eClassCategoryMediumList;
+	}
+	//운동 클래스 카테고리 소 목록 조회
+	public List<EClassCategorySmall> getEClassCategorySmallList(String searchKey,
+			String searchValue) {
+		
+		List<EClassCategorySmall> eClassCategorySmallList = eClassCategoryMapper.getEClassCategorySmallList(searchKey, searchValue);
+		
+		return eClassCategorySmallList;
 	}
 	
 }
