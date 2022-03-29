@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import aihometraining.team.challenge.service.ChallengeConfigService;
 import aihometraining.team.dto.ChallengeCategory;
@@ -73,16 +74,17 @@ public class ChallengeConfigController {
 		
 	}
 	
-	/**
-	 * 
-	 * 챌린지 카테고리 수정화면
-	 */
+	//챌린지 카테고리 수정화면
 	@GetMapping("/challengeCategoryUpdate")
-	public String challengeCategoryUpdate(Model model) {
+	public String challengeCategoryUpdate(Model model
+										, @RequestParam(name="challengeCategoryCode", required = false) String challengeCategoryCode) {
+		
+		log.info("챌린지 카테고리 수정화면 폼 쿼리 스트링 challengeCategoryCode : {}", challengeCategoryCode);
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("memberEmail", "id001@email.com");
 		
+		ChallengeCategory challengeCategory = challengeConfigService.getChallengeCategoryByCode(challengeCategoryCode);
 		//List<ChallengeCategory> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
 		List<Map<String, Object>> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
 		
@@ -92,10 +94,12 @@ public class ChallengeConfigController {
 		
 		model.addAttribute("title", "챌린지 카테고리 수정");
 		model.addAttribute("leftMenuList", "챌린지");
+		model.addAttribute("challengeCategory", challengeCategory);
 		model.addAttribute("challengeCategoryList", challengeCategoryList);
 		
 		return "challenge/challengeConfig/challengeCategoryUpdate";
 	}
+	
 	
 	//챌린지 세팅 등록
 	@GetMapping("/challengeSettingInsert")
@@ -141,7 +145,10 @@ public class ChallengeConfigController {
 		
 	}
 	
-	//챌린지 신고 관리
+	/**
+	 * 챌린지 신고 관리
+	 * 
+	 */
 	@GetMapping("/challengeReportList")
 	public String challengeReportList(Model model) {
 		

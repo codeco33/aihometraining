@@ -27,4 +27,13 @@ public class ChallengeConfigService {
 		return challengeCategoryList;
 		
 	}
+	
+	//카테고리 코드별 챌린지 카테고리 정보 조회
+	public ChallengeCategory getChallengeCategoryByCode(String challengeCategoryCode) {
+		
+		ChallengeCategory challengeCategory = challengeConfigMapper.getChallengeCategoryByCode(challengeCategoryCode);
+		
+		return challengeCategory;
+		
+	}
 }
