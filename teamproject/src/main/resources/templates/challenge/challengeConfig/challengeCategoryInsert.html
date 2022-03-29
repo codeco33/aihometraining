@@ -31,7 +31,7 @@
 															<div class="col-sm-7">
 																<select class="form-control" id="validate_eClassCategory" name="validate_eClassCategory" required>
 																	<th:block th:if="${not #lists.isEmpty(challengeCategoryList)}" th:each="l : ${challengeCategoryList}">
-																		<option th:value="${l.get('eClassCategorySmallName')}" >[[${l.get('eClassCategorySmallName')}]]</option>
+																		<option th:value="${l.get('eClassCategorySmallCode')}" >[[${l.get('eClassCategorySmallName')}]]</option>
 																	</th:block>
 																	<th:block th:unless="${not #lists.isEmpty(challengeCategoryList)}" th:each="l : ${challengeCategoryList}">
 																		<option >등록된 카테고리가 없습니다.</option>
