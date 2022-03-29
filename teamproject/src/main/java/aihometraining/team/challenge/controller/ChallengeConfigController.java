@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import aihometraining.team.challenge.service.ChallengeConfigService;
 import aihometraining.team.dto.ChallengeCategory;
+import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.mapper.CommonMapper;
 
 @Controller
@@ -84,16 +85,16 @@ public class ChallengeConfigController {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("memberEmail", "id001@email.com");
 		
-		//List<ChallengeCategory> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
-		List<Map<String, Object>> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
+		//운동클래스카테고리small 조회
+		List<EClassCategorySmall> classCategoryList = challengeConfigService.getClassCategoryList();
 		
 		paramMap = null;
 		
-		log.info("챌린지 카테고리 조회  challengeCategoryList : {}", challengeCategoryList);
+		log.info("운동클래스카테고리small 조회  classCategoryList : {}", classCategoryList);
 		
 		model.addAttribute("title", "챌린지 카테고리 등록");
 		model.addAttribute("leftMenuList", "챌린지");
-		model.addAttribute("challengeCategoryList", challengeCategoryList);
+		model.addAttribute("classCategoryList", classCategoryList);
 		
 		return "challenge/challengeConfig/challengeCategoryInsert";
 		
@@ -105,7 +106,6 @@ public class ChallengeConfigController {
 		
 		log.info("챌린지 카테고리 등록 폼에서 입력받은 데이터: {}", challengeCategory); //받은 내용이 여기{}에 담긴다.
 		
-		//memberService.addMember(member);
 		challengeConfigService.challengeCategoryInsert(challengeCategory);
 		
 		return "redirect:/challenge/challengeConfig/configList";
@@ -120,20 +120,23 @@ public class ChallengeConfigController {
 		log.info("챌린지 카테고리 수정화면 폼 쿼리 스트링 challengeCategoryCode : {}", challengeCategoryCode);
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("memberEmail", "id001@email.com");
+		paramMap.put("memberEmail", "id001@email.com"); //로그인 처리가 아직 안되서 임시로 넣은값
 		
+		//카테고리 코드별 챌린지 카테고리 정보 조회
 		ChallengeCategory challengeCategory = challengeConfigService.getChallengeCategoryByCode(challengeCategoryCode);
-		//List<ChallengeCategory> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
-		List<Map<String, Object>> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
+		
+		//운동클래스카테고리small 조회
+		List<EClassCategorySmall> classCategoryList = challengeConfigService.getClassCategoryList();
 		
 		paramMap = null;
 		
-		log.info("챌린지 카테고리 조회  challengeCategoryList : {}", challengeCategoryList);
+		log.info("카테고리 코드별 챌린지 카테고리 정보 조회  challengeCategory : {}", challengeCategory);
+		log.info("운동클래스카테고리small 조회  classCategoryList : {}", classCategoryList);
 		
 		model.addAttribute("title", "챌린지 카테고리 수정");
 		model.addAttribute("leftMenuList", "챌린지");
 		model.addAttribute("challengeCategory", challengeCategory);
-		model.addAttribute("challengeCategoryList", challengeCategoryList);
+		model.addAttribute("classCategoryList", classCategoryList);
 		
 		return "challenge/challengeConfig/challengeCategoryUpdate";
 	}
