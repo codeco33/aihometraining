@@ -1,45 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-		<!-- start:Left Menu -->
+		<!-- start:ChallengeLeft Menu -->
             <div id="left-menu" th:fragment="challengeleftmenuFragment">
               <div class="sub-left-menu scroll">
                 <ul class="nav nav-list">
-                    <li><div class="left-bg"></div></li>
                     <li class="time">
                       <h1 class="animated fadeInLeft">21:00</h1>
                       <p class="animated fadeInRight">Sat,October 1st 2029</p>
                     </li>
-                    <li class="active ripple">
-                      <a class="tree-toggle nav-header"><span class="fa-home fa"></span> 모집 챌린지 관리
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                    <li class="ripple">
+                    	<a th:href="@{/challenge/challengeGather/gatherAdmin}"><span class="fa-home fa"></span> 관리자 홈
                       </a>
-                      <ul class="nav nav-list tree">
-                          <li><a href="dashboard-v1.html">회원 목록</a></li>                          
-                          <li><a href="dashboard-v1.html">회원 권한 관리</a></li>                          
-                      </ul>
                     </li>
                     <li class="ripple">
-                      <a class="tree-toggle nav-header">
-                        <span class="fa-diamond fa"></span> 운동클래스
+                      <a class="tree-toggle nav-header"><span class="fa fa-trophy"></span> 모집 챌린지 관리
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="topnav.html">운동클래스 개설 신청 내역</a></li>
-                        <li><a href="topnav.html">운동 클래스 카테고리 관리</a></li>
-                        <li><a href="topnav.html">운동클래스 목록</a></li>
-                        <li><a href="topnav.html">운동클래스 목록</a></li>
-                        <li><a href="boxed.html"></a></li>
-                      </ul>
-                    </li>
-                    <li class="ripple">
-                      <a class="tree-toggle nav-header">
-                        <span class="fa-area-chart fa"></span> 일지
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="chartjs.html">일지관리</a></li>
-                        <li><a href="morris.html">운동계획 카테고리 관리</a></li>
-                        <li><a href="flot.html">AI운동영상 관리</a></li>
+                          <li><a th:href="@{#}">모집 챌린지 목록</a></li>                          
+                          <li><a th:href="@{#}">모집 챌린지 인증 목록</a></li>                          
                       </ul>
                     </li>
                     <li class="ripple">
@@ -55,80 +34,6 @@
                         <li><a href="buttons.html">진행 챌린지 목록</a></li>
                         <li><a href="media.html">챌린지 포인트 관리</a></li>
                         <li><a href="panels.html">챌린지 신고 관리</a></li>
-                      </ul>
-                    </li>
-                    <li class="ripple">
-                    <a class="tree-toggle nav-header">
-                    	<span class="fa fa-check-square-o"></span> 식단  
-                    	<span class="fa-angle-right fa right-arrow text-right"></span> 
-                    </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="formelement.html">식단 은행</a></li>
-                        <li><a href="#">개별 식단 관리</a></li>
-                        <li><a href="#">영양성분  API 관리</a></li>
-                        <li><a href="#">수강생 식단 관리</a></li>
-                      </ul>
-                    </li>
-                    <li class="ripple">
-                    <a class="tree-toggle nav-header">
-                    	<span class="fa fa-table"></span> 결제/환불  
-                    	<span class="fa-angle-right fa right-arrow text-right"></span> 
-                    </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="datatables.html">결제 내역</a></li>
-                        <li><a href="handsontable.html">환불 내역</a></li>
-                        <li><a href="tablestatic.html">환불 기준</a></li>
-                      </ul>
-                    </li>
-                    <li class="ripple">
-                    <a class="tree-toggle nav-header">
-                    	<span class="fa fa-table"></span> 포인트
-                    	<span class="fa-angle-right fa right-arrow text-right"></span> 
-                    </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="datatables.html">포인트 지급</a></li>
-                        <li><a href="handsontable.html">포인트 내역</a></li>
-                        <li><a href="tablestatic.html">포인트 지급 기준</a></li>
-                      </ul>
-                    </li>
-                    <li class="ripple">
-                    <a class="tree-toggle nav-header">
-                    	<span class="fa fa-table"></span> 채팅
-                    	<span class="fa-angle-right fa right-arrow text-right"></span> 
-                    </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="datatables.html">채팅 내역 관리(관리자)</a></li>
-                      </ul>
-                    </li>
-                    <li class="ripple">
-                    <a class="tree-toggle nav-header">
-                    	<span class="fa fa-table"></span> 알림
-                    	<span class="fa-angle-right fa right-arrow text-right"></span> 
-                    </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="datatables.html">알림 문구 관리</a></li>
-                        <li><a href="datatables.html">알림 내역 관리</a></li>
-                        <li><a href="datatables.html">새 알림 등록</a></li>
-                      </ul>
-                    </li>
-                    <li class="ripple">
-                    <a class="tree-toggle nav-header">
-                    	<span class="fa fa-table"></span> 쪽지
-                    	<span class="fa-angle-right fa right-arrow text-right"></span> 
-                    </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="datatables.html">쪽지 관리</a></li>
-                        <li><a href="datatables.html">쪽지함</a></li>
-                      </ul>
-                    </li>
-                    <li class="ripple">
-                    <a class="tree-toggle nav-header">
-                    	<span class="fa fa-table"></span> 신고
-                    	<span class="fa-angle-right fa right-arrow text-right"></span> 
-                    </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="datatables.html">등록된 신고 관리</a></li>
-                        <li><a href="datatables.html">신고 기준 관리</a></li>
                       </ul>
                     </li>
                     <li class="ripple">

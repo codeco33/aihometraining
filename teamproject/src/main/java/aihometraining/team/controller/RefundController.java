@@ -25,4 +25,16 @@ public class RefundController {
 		return "refund/refundStandard";
 	}
 	
+	@GetMapping("/refundList/refundDetail")
+	public String paymentDetail(Model model) {
+		
+		
+		
+		model.addAttribute("leftMenuList", "결제/환불");
+		model.addAttribute("title", "환불 상세 내역");
+		model.addAttribute("subTitle", "환불 상세 내역");
+		
+		return "refund/refundDetail";
+	}
+	
 }

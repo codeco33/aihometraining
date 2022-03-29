@@ -11,31 +11,27 @@
 		<div class="services-area section-padding">
             <div class="container">
                 <div class="row justify-content-sm-center">
-                    <div class="col-lg-4 col-md-6 col-sm-8">
-                        <div class="single-services mb-30">
-                            <div class="features-caption">
-                                <h3>운동 목표 1</h3>
-                                <p>한달동안 2kg 감량하기</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-8">
-                        <div class="single-services mb-30">
-                            <div class="features-caption">
-                                <h3>운동 목표 2</h3>
-                                <p>복근 만들기</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-8">
-                        <div class="single-services mb-30">
-                            <div class="features-caption">
-                                <h3>운동 목표 3</h3>
-                                <p>다리 찢기</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            		<th:block th:if="${not #lists.isEmpty(workoutGoalList)}" th:each="l : ${workoutGoalList}">
+	                    <div class="col-lg-4 col-md-6 col-sm-8">
+	                        <div class="single-services mb-30">
+	                            <div class="features-caption">
+	                                <h3>운동 목표 </h3>
+	                                <p>[[${l.workoutGoalContent}]]</p>
+	                            </div>
+	                        </div>
+	                    </div>
+            		</th:block>
+	            	<th:block th:unless="${not #lists.isEmpty(workoutGoalList)}" th:each="l : ${workoutGoalList}">
+	            		<div class="col-lg-4 col-md-6 col-sm-8">
+	                        <div class="single-services mb-30">
+	                            <div class="features-caption">
+	                                <h3>운동 목표</h3>
+	                                <p>등록된 운동 목표가 없습니다.</p>
+	                            </div>
+	                        </div>
+	                    </div>
+	            	</th:block>
+	            </div>
             </div>
         </div>
         

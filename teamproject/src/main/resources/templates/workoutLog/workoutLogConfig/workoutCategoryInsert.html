@@ -8,24 +8,69 @@
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
-		운동 카테고리 등록 화면입니다.
+		<div class="col-md-12">
+			<div class="panel">
+		    	<div class="panel-heading-white panel-heading">
+		        	<h4>운동 카테고리 등록 설정</h4>
+		        </div>
+				<div class="panel-body">
+				   	<div class="col-md-12">
+				   		<div class="col-md-12 top-20 padding-0">
+				   			<div class="col-md-12">
+				   				<div class="panel">
+				   					<div class="panel-heading bg-deep-purple">
+				                    	<h6 class="text-white">운동 카테고리 등록</h6>
+				                    </div>
+	                    			<!-- start: Content -->
+						           	<div class="panel box-shadow-none content-header">
+						                  <div class="panel-body">
+						                    <div class="col-md-12">
+						                        <h5>운동 카테고리명</h5>
+							                	<div class="panel-body">
+							                  		<div id="summernote">내용을 입력하세요</div>
+							               		</div>
+						                    </div>
+						                  </div>
+						            </div>
+							      <!-- end: content -->
+							    </div>
+			            	</div>
+						</div>
+					</div>
+				</div>    
+			</div>
+		</div>   
 	
 	</th:block>
-		<th:block layout:fragment="customBodyScript">	
+	
+	<!-- 사용자 정의 Css -->
+	<th:block layout:fragment="customCss">
+		<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/dropzone.css}"/>
+		<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/summernote.css}"/>
+	</th:block>
+	
+	<!-- 사용자 정의 Script -->
+	<th:block layout:fragment="customBodyScript">
+		<script th:src="@{/asset/js/jquery.min.js}"></script>
+		<script th:src="@{/asset/js/jquery.ui.min.js}"></script>
+		<script th:src="@{/asset/js/bootstrap.min.js}"></script>	
 		<!-- plugins -->
 		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/jquery.datatables.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/datatables.bootstrap.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/summernote.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/dropzone.js}"></script>
 		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
-		
+
 		
 		<!-- custom -->
 		<script th:src="@{/asset/js/main.js}"></script>
 		<script type="text/javascript">
 		  $(document).ready(function(){
-		    //$('#datatables-example').DataTable();
+		       $('#summernote').summernote({
+		        height:400
+		       });
 		  });
 		</script>
-<!-- end: Javascript -->
+	<!-- end: Javascript -->
 	</th:block>
+	
 </html>

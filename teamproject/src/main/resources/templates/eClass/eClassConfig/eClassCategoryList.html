@@ -8,24 +8,217 @@
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
-		운동 클래스 카테고리 관리 화면입니다.
-	
+		<div class="col-md-12">
+			<div class="panel">
+		    	<div class="panel-heading-white panel-heading">
+		        	<h4>#운동 클래스 카테고리 목록(이민식)</h4>
+		        </div>
+		        <div class="panel-body">
+		        	<div class="col-md-12">
+						<div class="col-md-12 top-20 padding-0">
+			            	<div class="col-md-12">
+			            		<div class="col-md-12 tabs-area">
+				                    <ul id="tabs-demo2" class="nav nav-tabs nav-tabs-v1" role="tablist">
+				                      <li role="presentation" class="active">
+				                        <a href="#tabs-demo2-area1" id="tabs-demo2-1" role="tab" data-toggle="tab" aria-expanded="true">운동 클래스 카테고리 대</a>
+				                      </li>
+				                      <li role="presentation" class="">
+				                        <a href="#tabs-demo2-area2" role="tab" id="tabs-demo2-2" data-toggle="tab" aria-expanded="false">운동 클래스 카테고리 중</a>
+				                      </li>
+				                      <li role="presentation">
+				                        <a href="#tabs-demo2-area3" id="tabs-demo2-3" role="tab" data-toggle="tab" aria-expanded="false">운동 클래스 카테고리 소</a>
+				                      </li>
+				                    </ul>
+				                    <div id="tabsDemo2Content" class="tab-content tab-content-v1 col-md-12">
+				                      <div role="tabpanel" class="tab-pane fade active in" id="tabs-demo2-area1" aria-labelledby="tabs-demo2-area1">
+				                        <div class="panel">
+					                    	<div class="panel-heading bg-deep-purple">
+					                    		<h6 class="text-white">운동 클래스 카테고리 대 목록</h6>
+					                    	</div>
+					                   		<div class="panel-body">
+					                     		<div class="responsive-table">
+						                     	<table id="eClassCategoryLargeList" class="table table-striped table-bordered" style="width: 100%;">
+												<thead>
+													<tr>
+														<th>운동 클래스 카테고리 대 코드</th>
+														<th>운동 클래스 카테고리 대 이름</th>
+														<th>등록자 회원 이메일</th>
+														<th>등록 날짜</th>
+														<th>수정 회원 이메일</th>
+														<th>최종 수정 날짜</th>
+														<th>수정</th>
+														<th>삭제</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr th:if="${not #lists.isEmpty(eClassCategoryLargeList)}" th:each="l : ${eClassCategoryLargeList}">
+														<td th:text="${l.eClassCategoryLargeCode}"></td>
+														<td th:text="${l.eClassCategoryLargeName}"></td>
+														<td th:text="${l.eClassCategoryLargeRegEmail}"></td>
+														<td th:text="${l.eClassCategoryLargeRegDate}"></td>
+														<td th:text="${l.eClassCategoryLargeUpdateDate}"></td>
+														<td th:text="${l.eClassCategoryLargeUpdateEmail}"></td>
+														<td>
+															<a th:href="@{/eClass/eClassConfig/eClassCategoryUpdate(eClassCategoryLargeCode=${l.eClassCategoryLargeCode})}">수정</a>
+														</td>
+														<td>
+															<a th:href="@{/eClass/eClassConfig/eClassCategoryDelete(eClassCategoryLargeCode=${l.eClassCategoryLargeCode})}">삭제</a>
+														</td>
+													</tr>
+													<tr th:unless="${not #lists.isEmpty(eClassCategoryLargeList)}">
+														<td colspan="7">등록된 운동 클래스 카테고리가 없습니다.</td>
+													</tr>
+												</tbody>
+						                        </table>
+												</div>
+											</div>
+											
+										</div>
+				                      </div>
+				                      <div role="tabpanel" class="tab-pane fade" id="tabs-demo2-area2" aria-labelledby="tabs-demo2-area2">
+				                      	<div class="panel">
+					                    	<div class="panel-heading bg-deep-purple">
+					                    		<h6 class="text-white">운동 클래스 카테고리 중 목록</h6>
+					                    	</div>
+					                   		<div class="panel-body">
+					                     		<div class="responsive-table">
+						                     	<table id="eClassCategoryLargeList" class="table table-striped table-bordered" style="width: 100%;">
+												<thead>
+													<tr>
+														<th>운동 클래스 카테고리 중 코드</th>
+														<th>운동 클래스 카테고리 중 이름</th>
+														<th>운동 클래스 카테고리 대 코드</th>
+														<th>운동 클래스 카테고리 대 이름</th>
+														<th>등록자 회원 이메일</th>
+														<th>등록 날짜</th>
+														<th>수정 회원 이메일</th>
+														<th>최종 수정 날짜</th>
+														<th>수정</th>
+														<th>삭제</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr th:if="${not #lists.isEmpty(eClassCategoryMediumList)}" th:each="l : ${eClassCategoryMediumList}">
+														<td th:text="${l.eClassCategoryMediumCode}"></td>
+														<td th:text="${l.eClassCategoryMediumName}"></td>
+														<td th:text="${l.eClassCategoryLargeCode}"></td>
+														<td th:text="${l.eClassCategoryLargeName}"></td>
+														<td th:text="${l.memberEmail}"></td>
+														<td th:text="${l.eClassCategoryMediumRegDate}"></td>
+														<td th:text="${l.memberUpdateEmail}"></td>
+														<td th:text="${l.eClassCategoryMediumUpdateDate}"></td>
+														<td>
+															<a th:href="@{/eClass/eClassConfig/eClassCategoryUpdate(eClassCategoryMediumCode=${l.eClassCategoryMediumCode})}">수정</a>
+														</td>
+														<td>
+															<a th:href="@{/eClass/eClassConfig/eClassCategoryDelete(eClassCategoryMediumCode=${l.eClassCategoryMediumCode})}">삭제</a>
+														</td>
+													</tr>
+													<tr th:unless="${not #lists.isEmpty(eClassCategoryMediumList)}">
+														<td colspan="7">등록된 운동 클래스 카테고리가 없습니다.</td>
+													</tr>
+												</tbody>
+						                        </table>
+												</div>
+											</div>
+											
+										</div>
+				                      </div>
+				                      <div role="tabpanel" class="tab-pane fade" id="tabs-demo2-area3" aria-labelledby="tabs-demo2-area3">
+											<div class="panel">
+					                    	<div class="panel-heading bg-deep-purple">
+					                    		<h6 class="text-white">운동 클래스 카테고리 소 목록</h6>
+					                    	</div>
+					                   		<div class="panel-body">
+					                     		<div class="responsive-table">
+						                     	<table id="eClassCategorySmallList" class="table table-striped table-bordered" style="width: 100%;">
+												<thead>
+													<tr>
+														<th>운동 클래스 카테고리 소 코드</th>
+														<th>운동 클래스 카테고리 소 이름</th>
+														<th>운동 클래스 카테고리 중 코드</th>
+														<th>운동 클래스 카테고리 중 이름</th>
+														<th>운동 클래스 카테고리 대 코드</th>
+														<th>운동 클래스 카테고리 대 이름</th>
+														<th>등록자 회원 이메일</th>
+														<th>등록 날짜</th>
+														<th>수정 회원 이메일</th>
+														<th>최종 수정 날짜</th>
+														<th>수정</th>
+														<th>삭제</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr th:if="${not #lists.isEmpty(eClassCategorySmallList)}" th:each="l : ${eClassCategorySmallList}">
+														<td th:text="${l.eClassCategorySmallCode}"></td>
+														<td th:text="${l.eClassCategorySmallName}"></td>
+														<td th:text="${l.eClassCategoryMediumCode}"></td>
+														<td th:text="${l.eClassCategoryMediumName}"></td>
+														<td th:text="${l.eClassCategoryLargeCode}"></td>
+														<td th:text="${l.eClassCategoryLargeName}"></td>
+														<td th:text="${l.memberEmail}"></td>
+														<td th:text="${l.eClassCategorySmallRegDate}"></td>
+														<td th:text="${l.updateMemberEmail}"></td>
+														<td th:text="${l.eClassCategorySmallFinalUpdateDate}"></td>
+														<td>
+															<a th:href="@{/eClass/eClassConfig/eClassCategoryUpdate(eClassCategorySmallCode=${l.eClassCategorySmallCode})}">수정</a>
+														</td>
+														<td>
+															<a th:href="@{/eClass/eClassConfig/eClassCategoryDelete(eClassCategorySmallCode=${l.eClassCategorySmallCode)}">삭제</a>
+														</td>
+													</tr>
+													<tr th:unless="${not #lists.isEmpty(eClassCategorySmallList)}">
+														<td colspan="7">등록된 운동 클래스 카테고리가 없습니다.</td>
+													</tr>
+												</tbody>
+						                        </table>
+												</div>
+											</div>
+											
+										</div>
+				                      </div>
+				                    </div>
+				
+				                  </div>
+			                	
+							</div>  
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</th:block>
-		<th:block layout:fragment="customBodyScript">	
+	
+	<!-- start: Javascript -->
+	<th:block layout:fragment="customBodyScript">	
+		
 		<!-- plugins -->
 		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/jquery.datatables.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/datatables.bootstrap.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.dataTables.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/dataTables.bootstrap.min.js}"></script>
 		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
 		
 		
 		<!-- custom -->
 		<script th:src="@{/asset/js/main.js}"></script>
 		<script type="text/javascript">
-		  $(document).ready(function(){
-		    //$('#datatables-example').DataTable();
-		  });
+		$(document).ready(function(){
+		    $('#eClassCategoryLargeList').DataTable();		    
+		});
+		
 		</script>
-<!-- end: Javascript -->
+		<script type="text/javascript">
+		$(document).ready(function(){
+		    $('#eClassCategoryMediumList').DataTable();		    
+		});
+		
+		</script>
+		<script type="text/javascript">
+		$(document).ready(function(){
+		    $('#eClassCategorySmallList').DataTable();		    
+		});
+		
+		</script>
 	</th:block>
+	<!-- end: Javascript -->
 </html>

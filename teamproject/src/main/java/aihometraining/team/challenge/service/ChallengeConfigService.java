@@ -19,8 +19,11 @@ public class ChallengeConfigService {
 		this.challengeConfigMapper = challengeConfigMapper;
 	}
 	
-	public List<ChallengeCategory> getChallengeCategoryList(Map<String, Object> paramMap){
-		List<ChallengeCategory> challengeCategoryList =  challengeConfigMapper.getChallengeCategoryList(paramMap);
+	//챌린지 카테고리 조회
+	public List<Map<String, Object>> getChallengeCategoryList(Map<String, Object> paramMap){
+		//List<ChallengeCategory> challengeCategoryList =  challengeConfigMapper.getChallengeCategoryList(paramMap);
+		List<Map<String, Object>> challengeCategoryList =  challengeConfigMapper.getChallengeCategoryList(paramMap);
+		
 		return challengeCategoryList;
 		
 	}
