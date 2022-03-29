@@ -8,19 +8,140 @@
 </th:block>
 <!-- 사용자 정의 Css -->
 <th:block layout:fragment="customCss">
-	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/simple-line-icons.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/mediaelementplayer.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/icheck/skins/flat/red.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/icheck/skins/flat/red.css}"/>
+	<link rel="stylesheet" type="text/css"
+		th:href="@{/asset/css/plugins/simple-line-icons.css}" />
+	<style type="text/css">
+		.title>h4 {
+			font-weight: bold;
+			margin-bottom: 10px;
+			border-bottom: 2px solid #58666e;
+			padding-bottom: 5px;
+		}
+		
+		#paymentDetailBtnDiv {
+			text-align: right;
+		}
+		
+		#paymentCancelBtn{
+			padding: 5px 10px;
+		}
+</style>
 </th:block>
 
 <th:block layout:fragment="customContents">
 	<div class="col-md-12">
 		<div class="panel">
+			<!-- 패널 헤더 타이틀 -->
+
 			<div class="panel-body">
+				<div class="detailTable">
+					<div class="title">
+						<h4>
+							<span class="fa fa-angle-right"></span> 주문정보
+						</h4>
+					</div>
+					<table class="table">
+						<colgroup>
+							<col style="width: 150px">
+							<col style="width: auto">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th scope="row">결제코드</th>
+								<td>x00000000_00000</td>
+							</tr>
+							<tr>
+								<th scope="row">결제일자</th>
+								<td>2022-03-29 14:09:57</td>
+							</tr>
+							<tr>
+								<th scope="row">결제자</th>
+								<td><span>진수경</span></td>
+							</tr>
+							<tr>
+								<th scope="row">결제상태</th>
+								<td>결제완료 <input type="button" id="paymentCancelBtn" class="btn btn-outline btn-default" value="결제취소"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="detailTable">
+					<div class="title">
+						<h4>
+							<span class="fa fa-angle-right"></span> 결제정보
+						</h4>
+					</div>
+					<table class="table">
+						<colgroup>
+							<col style="width: 150px">
+							<col style="width: auto">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th scope="row">총 주문금액</th>
+								<td>50,000</td>
+							</tr>
+							<tr>
+								<th scope="row">포인트 사용 금액</th>
+								<td>6,000</td>
+							</tr>
+							<tr>
+								<th scope="row">총 결제금액</th>
+								<td>44,000</td>
+							</tr>
+							<tr>
+								<th scope="row">결제수단</th>
+								<td>카카오페이</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="detailTable">
+					<div class="title">
+						<h4>
+							<span class="fa fa-angle-right"></span> 주문 상품 정보
+						</h4>
+					</div>
+					<table class="table">
+						<colgroup>
+							<col style="width: 150px">
+							<col style="width: 250px">
+							<col style="width: auto">
+							<col style="width: auto">
+							<col style="width: auto">
+						</colgroup>
+						<thead>
+							<tr>
+								<th colspan="2">상품정보</th>
+								<th>판매가</th>
+								<th>결제상태</th>
+								<th>환불</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>이미지</td>
+								<td>클래스/챌린지 제목<br>
+								클래스/챌린지 개설한 사람 이름</td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+						<tfoot>
+						<tr>
+							<td colspan="5">
+							상품구매금액 <strong>35,900</strong><span class="displaynone"> + 부가세 0</span> + 배송비 0 + 지역별배송비 0<span class=""> - 상품할인금액 3,000</span> = 합계 :  <strong class="txtEm gIndent10"><span class="txt18">32,900</span></strong> <span class="displaynone"></span>
+							</td>
+						</tr>
+						</tfoot>
+					</table>
+				</div>
 				
 				
-			
+				<div id="paymentDetailBtnDiv">
+					<a th:href="@{/paymentList}"><input type="button" class="btn btn-outline btn-default" value="거래내역 목록"></a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -30,7 +151,7 @@
 </th:block>
 
 <th:block layout:fragment="customBodyScript">
-	
+
 	<!-- plugins -->
 	<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
 	<script th:src="@{/asset/js/plugins/jquery.dataTables.min.js}"></script>
@@ -40,10 +161,8 @@
 	<!-- custom -->
 	<script th:src="@{/asset/js/main.js}"></script>
 	<script type="text/javascript">
-	 
-		$(document).ready(function(){
-			
-					    
+		$(document).ready(function() {
+
 		});
 	</script>
 </th:block>
