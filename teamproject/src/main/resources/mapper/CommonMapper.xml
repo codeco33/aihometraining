@@ -5,6 +5,7 @@
 	
 	<mapper namespace="aihometraining.team.mapper.CommonMapper">
 		<select id="getNewCode" parameterType="string" resultType="string">
+			/* db의 pk컬럼명과 db의 테이블명으로 자동으로 증가하는 코드 생성  */
 			SELECT
 			      CASE
 			      WHEN COUNT(1)=0 THEN CONCAT(#{codePattern},'_1')

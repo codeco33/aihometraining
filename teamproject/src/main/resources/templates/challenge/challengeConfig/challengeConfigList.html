@@ -174,20 +174,20 @@
 							</tr>
 							 -->
 							<tr th:if="${not #lists.isEmpty(challengeCategoryList)}" th:each="l : ${challengeCategoryList}">
-								<td th:text="${l.get('challengeCategoryName')}"></td>
-								<td th:text="${l.get('eClassCategorySmallName')}"></td>
-								<td th:text="${l.get('memberEmail')}"></td>
-								<td th:text="${l.get('challengeCategoryRegDate')}"></td>
+								<td th:text="${l.challengeCategoryName}"></td>
+								<td th:text="${l.eClassCategorySmall.eClassCategorySmallName}"></td>
+								<td th:text="${l.member.memberEmail}"></td>
+								<td th:text="${l.challengeCategoryRegDate}"></td>
 								<td>
-									<a th:href="@{/challenge/challengeConfig/challengeCategoryUpdate(challengeCategoryCode=${l.get('challengeCategoryCode')})}"><span class="label label-primary">수정</span></a>
+									<a th:href="@{/challenge/challengeConfig/challengeCategoryUpdate(challengeCategoryCode=${l.challengeCategoryCode})}">수정</a>
 								</td>
 								<td>
-									<a href="#"><span class="label label-danger">삭제</span></a>
+									<a href="#">삭제</a>
 								</td>
 							</tr>
 							<tr th:unless="${not #lists.isEmpty(challengeCategoryList)}">
 								<td colspan="6">등록된 정보가 없습니다.</td>
-							</tr>											
+							</tr>															
 						</tbody>
 					</table>
 					<div style="text-align: center;">
