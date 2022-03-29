@@ -43,11 +43,51 @@
 		</association>
 	</resultMap>
 	
+	<insert id="challengeCategoryInsert" parameterType="challengeCategory">
+		/* 챌린지 카테고리 등록 처리 */
+		INSERT INTO challengecategory
+		( 	 challengeCategoryCode
+			, memberEmail
+			, challengeCategoryName
+			, challengeCategoryRegDate
+			, eClassCategorySmallCode
+			, memberUpdateEmail
+			, memberUpdateDate
+		)VALUES (
+		 	  #{challengeCategoryCode}
+			, #{memberEmail}
+			, #{challengeCategoryName}
+			, CURDATE()
+			, #{eClassCategorySmallCode}
+			, #{memberUpdateEmail}
+			, CURDATE()
+		);
+		
+	</insert>
+	
+	<select id="getChallengeCategoryByCode" parameterType="String" resultMap="challengeCategoryResultMap">
+		/* 카테고리 코드별 챌린지 카테고리 정보 조회 */
+		SELECT
+			 cc.challengeCategoryName
+			,eg.eClassCategorySmallCode
+			,eg.eClassCategorySmallName
+		FROM
+			challengecategory AS cc
+			INNER join
+			eclasscategorysmall AS eg
+			on
+			cc.eClassCategorySmallCode = eg.eClassCategorySmallCode
+		WHERE
+			cc.challengeCategoryCode = #{challengeCategoryCode};
+		
+	</select>
 	
 	<select id="getChallengeCategoryList" parameterType="map" resultType="map">
 		/*챌린지 카테고리 조회*/
 		SELECT
-			ec.eClassCategorySmallName
+			 cc.challengeCategoryCode
+			,cc.eClassCategorySmallCode
+			,ec.eClassCategorySmallName
 			,m.memberEmail
 			,cc.challengeCategoryName
 			,cc.challengeCategoryRegDate	
