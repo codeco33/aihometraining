@@ -10,67 +10,86 @@
 	<th:block layout:fragment="customContents">
 		<div class="col-md-12">
 			<div class="panel">
-		    	<div class="panel-heading-white panel-heading">
-		        	<h4>운동 카테고리 등록 설정</h4>
-		        </div>
+		    	<div class="panel-heading bg-white border-none">
+			        	<h4><span class="icon-direction"></span> 운동 계획 카테고리 등록</h4>
+			    </div>
 				<div class="panel-body">
-				   	<div class="col-md-12">
-				   		<div class="col-md-12 top-20 padding-0">
-				   			<div class="col-md-12">
-				   				<div class="panel">
-				   					<div class="panel-heading bg-deep-purple">
-				                    	<h6 class="text-white">운동 카테고리 등록</h6>
-				                    </div>
-	                    			<!-- start: Content -->
-						           	<div class="panel box-shadow-none content-header">
-						                  <div class="panel-body">
-						                    <div class="col-md-12">
-						                        <h5>운동 카테고리명</h5>
-							                	<div class="panel-body">
-							                  		<div id="summernote">내용을 입력하세요</div>
-							               		</div>
-						                    </div>
-						                  </div>
-						            </div>
-							      <!-- end: content -->
-							    </div>
-			            	</div>
+					<div class="col-md-12 panel-body" style="padding-bottom:30px;">
+						<div class="col-md-6 col-md-offset-3">
+  							<form class="cmxform" id="workoutCategoryForm" method="get" th:action="@{/workoutLog/workoutLogConfig/challengeConfigList}">
+    							<div class="col-md-12">
+	      							<div class="form-group form-animate-text" style="margin-top:40px !important;">
+										<input type="text" class="form-text" id="validate_workoutCategoryName" name="validate_workoutCategoryName" required>
+										<span class="bar"></span>
+										<label>운동 계획 카테고리명</label>
+									</div>
+        						</div>
+								<div style="text-align: center;">
+									<input class="submit btn btn-danger" type="submit" value="등록">
+								</div>
+							</form>
 						</div>
 					</div>
-				</div>    
+		        </div>
 			</div>
 		</div>   
 	
 	</th:block>
 	
 	<!-- 사용자 정의 Css -->
-	<th:block layout:fragment="customCss">
-		<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/dropzone.css}"/>
-		<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/summernote.css}"/>
-	</th:block>
+		<th:block layout:fragment="customCss">
+			<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/jquery.steps.css}"/>
+			<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/simple-line-icons.css}" />
 	
-	<!-- 사용자 정의 Script -->
-	<th:block layout:fragment="customBodyScript">
-		<script th:src="@{/asset/js/jquery.min.js}"></script>
-		<script th:src="@{/asset/js/jquery.ui.min.js}"></script>
-		<script th:src="@{/asset/js/bootstrap.min.js}"></script>	
+			<style type="text/css">
+				.panel-heading > h4 {
+					font-weight: bold;
+					margin-bottom: 0;
+					border-bottom: 2px solid #58666e;
+					padding-bottom: 5px;
+				}
+				 .panel-body:nth-child(2) {
+					padding-top: 0;
+				}
+			</style>
+		</th:block>
+	
+	<!-- start: Javascript -->
+	<th:block layout:fragment="customBodyScript">	
+		
 		<!-- plugins -->
 		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/summernote.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/dropzone.js}"></script>
 		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
-
+		<script th:src="@{/asset/js/plugins/nouislider.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.validate.min.js}"></script>
+		
 		
 		<!-- custom -->
 		<script th:src="@{/asset/js/main.js}"></script>
 		<script type="text/javascript">
 		  $(document).ready(function(){
-		       $('#summernote').summernote({
-		        height:400
-		       });
+			  
+		    $("#workoutCategoryForm").validate({
+		      errorElement: "em",
+		      errorPlacement: function(error, element) {
+		        $(element.parent("div").addClass("form-animate-error"));
+		        error.appendTo(element.parent("div"));
+		      },
+		      success: function(label) {
+		        $(label.parent("div").removeClass("form-animate-error"));
+		      },
+		      rules: {
+		    	validate_workoutCategoryName "required",
+		      },
+		      messages: {
+		    	validate_workoutCategoryName: "카테고리 이름을 입력해주세요.",
+		      }
+		    });
+		
 		  });
+        	//스윗얼랏 사용
+        	//swal("등록되었습니다.", "확인버튼을 눌러주세요.", "success");
 		</script>
-	<!-- end: Javascript -->
 	</th:block>
-	
+	<!-- end: Javascript -->
 </html>

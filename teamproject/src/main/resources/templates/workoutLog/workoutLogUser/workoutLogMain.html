@@ -316,6 +316,7 @@
 			            } else {
 			                $(".tdl-content ul").append("<li><label><input type='checkbox'><i></i><span>" + v + "</span><a href='#' class='ti-trash'></a></label></li>");
 			                $(this).val("");
+			                return false;	//리턴값 추가하여 엔터 먹힘
 			            }
 			        }
 			    });
