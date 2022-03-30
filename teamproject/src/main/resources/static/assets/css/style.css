@@ -380,11 +380,11 @@ hr {
 	background: #FF9F67;
 	font-family: "Josefin Sans", sans-serif;
 	text-transform: capitalize;
-	padding: 15px 25px !important;
+	padding: 15px 10px !important;
 	color: #fff;
 	cursor: pointer;
 	display: inline-blockc !important;
-	font-size: 16px;
+	font-size: 15px;
 	font-weight: 600;
 	border-radius: 5px;
 	line-height: 1;
@@ -395,7 +395,7 @@ hr {
 	cursor: pointer;
 	transition: color 0.4s linear;
 	position: relative;
-	z-index: 1;
+	z-index: 0;
 	border: 0;
 	overflow: hidden;
 	margin: 0;
