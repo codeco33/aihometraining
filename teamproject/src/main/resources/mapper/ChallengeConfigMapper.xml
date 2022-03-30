@@ -43,7 +43,23 @@
 		</association>
 	</resultMap>
 	
-	<insert id="challengeCategoryInsert" parameterType="challengeCategory">
+	<update id="challengeCategoryUpdate" parameterType="ChallengeCategory">
+		/* 챌린지 카테고리 수정처리 (pk값으로 잡힌건 어떻게 해야할지 물어봐야할듯!)*/
+		UPDATE challengecategory
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="challengeCategoryName !=null and challengeCategoryName !=''">
+				challengeCategoryName = #{challengeCategoryName},
+			</if>
+			<if test="memberUpdateEmail !=null and memberUpdateEmail !=''">
+				memberUpdateEmail = #{memberUpdateEmail},
+			</if>
+		</trim>
+			,memberUpdateDate=CURDATE()
+		WHERE
+			challengeCategoryCode = #{challengeCategoryCode};
+	</update>
+	
+	<insert id="challengeCategoryInsert" parameterType="ChallengeCategory">
 		/* 챌린지 카테고리 등록 처리 */
 		INSERT INTO challengecategory
 		( 	 challengeCategoryCode
@@ -68,7 +84,8 @@
 	<select id="getChallengeCategoryByCode" parameterType="String" resultMap="challengeCategoryResultMap">
 		/* 카테고리 코드별 챌린지 카테고리 정보 조회 */
 		SELECT
-			 cc.challengeCategoryName
+			 cc.challengeCategoryCode
+			,cc.challengeCategoryName
 			,eg.eClassCategorySmallCode
 			,eg.eClassCategorySmallName
 		FROM

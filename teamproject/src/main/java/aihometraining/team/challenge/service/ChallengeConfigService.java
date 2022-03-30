@@ -65,4 +65,14 @@ public class ChallengeConfigService {
 		return result;
 		
 	}
+	
+	//카테고리 수정처리
+	public int challengeCategoryUpdate(ChallengeCategory challengeCategory) {
+		
+		challengeCategory.setMemberUpdateEmail("id001@email.com");//임시로 처리해둠
+		
+		int result = challengeConfigMapper.challengeCategoryUpdate(challengeCategory);
+		
+		return result;
+	}
 }
