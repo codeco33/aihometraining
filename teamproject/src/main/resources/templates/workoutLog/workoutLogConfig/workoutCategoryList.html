@@ -27,10 +27,12 @@
 		                    	<tr th:if="${not #lists.isEmpty(workoutLogCategoryList)}" th:each="l : ${workoutLogCategoryList}">
 			                        <td th:text="${l.workoutGoalPlanCategoryContent}"></td>
 			                        <td>
-			                        	<a th:href="@{/workoutLog/workoutLogConfig/workoutCategoryUpdate}">수정</a>
+			                        	<button type="button" id="btn1" class="btn btn-outline btn-success btn-sm" data-toggle="modal" data-target="#categoryUpdate">
+											  	수정
+										</button>
 			                        </td>
 			                        <td>
-			                        	<a th:href="@{/workoutLog/workoutLogConfig/workoutCategoryDelete}">삭제</a>
+			                        	<a th:href="@{/workoutLog/workoutLogConfig/workoutCategoryDelete}"> 삭제 </a>
 			                        </td>
 		                      	</tr>
 		                      	<tr th:unless="${not #lists.isEmpty(workoutLogCategoryList)}">
@@ -45,7 +47,37 @@
 	            </div>
 			</div>
 		</div>
+		
+		<!-- 모달-수정 -->
+		<div class="modal fade" id="categoryUpdate">
+	        <div class="modal-dialog">
+	          <div class="modal-content">
+	            <div class="modal-header">
+	              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	              <h4 class="modal-title"><span class="icon-direction"></span>운동 계획 카테고리명 수정</h4>
+	            </div>
+	            <div class="modal-body">
+	              <form class="cmxform" id="workoutCategoryForm">
+						<div class="col-md-12">
+							<div class="form-group form-animate-text" style="margin-top:40px !important;">
+								<input type="text" class="form-text" id="validate_workoutGoalPlanCategoryContent" name="workoutGoalPlanCategoryContent" required>
+								<span class="bar"></span>
+								<label>운동 계획 카테고리명</label>
+							</div>
+		 				</div>
+				  </form>
+				 </div> 
+	            <div class="modal-footer">
+	              <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+	              <button type="button" class="btn btn-primary" data-dismiss="modal">저장</button>
+	            </div>
+	          </div>
+	        </div>
+	    </div>
+	
 	</th:block>
+	
+	
 			
 	<!-- 사용자 정의 Css -->
 	<th:block layout:fragment="customCss">
@@ -61,25 +93,73 @@
 			 .panel-body:nth-child(2) {
 				padding-top: 0;
 			}
+			.modal-body {
+			    padding: 0px !important; 
+			}
+			#btn1 {width: 20%;}
 		</style>
 	</th:block>
 	
 	<!-- start: Javascript -->
 	<th:block layout:fragment="customBodyScript">	
+		<!-- start: Javascript -->
+		<script src="asset/js/jquery.min.js"></script>
+		<script src="asset/js/jquery.ui.min.js"></script>
+		<script src="asset/js/bootstrap.min.js"></script>
 	
 		<!-- plugins -->
 		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
 		<script th:src="@{/asset/js/plugins/jquery.dataTables.min.js}"></script>
 		<script th:src="@{/asset/js/plugins/dataTables.bootstrap.min.js}"></script>
 		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+		<script th:src="@{/asset/js/plugins/nouislider.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.validate.min.js}"></script>
 		
 		
 		<!-- custom -->
 		<script th:src="@{/asset/js/main.js}"></script>
 		<script type="text/javascript">
+		
+			/* 데이터테이블 */
 		  $(document).ready(function(){
 		    $('#workoutCategory').DataTable();
 		  });
+		  
+			/* 모달 */
+		  $(document).ready(function() {
+			    // Set iframe attributes when the show instance method is called
+			    $("#categoryUpdate").on("show.bs.modal", function(event) {
+			        let button = $(event.relatedTarget); // Button that triggered the modal
+			    });
+
+			    // Remove iframe attributes when the modal has finished being hidden from the user
+			    $("#categoryUpdate").on("hidden.bs.modal", function() {
+			        $("#categoryUpdate").removeAttr('.close');
+			    });
+			});
+		  
+			/* 카테고리폼 */
+		  $(document).ready(function(){
+			  
+			    $("#workoutCategoryForm").validate({
+			      errorElement: "em",
+			      errorPlacement: function(error, element) {
+			        $(element.parent("div").addClass("form-animate-error"));
+			        error.appendTo(element.parent("div"));
+			      },
+			      success: function(label) {
+			        $(label.parent("div").removeClass("form-animate-error"));
+			      },
+			      rules: {
+			    	validate_workoutGoalPlanCategoryContent: "required",
+			      },
+			      messages: {
+			    	validate_workoutGoalPlanCategoryContent: "카테고리 이름을 입력해주세요.",
+			      }
+			    });
+			
+			  });
+			
 		</script>
 		
 	</th:block>

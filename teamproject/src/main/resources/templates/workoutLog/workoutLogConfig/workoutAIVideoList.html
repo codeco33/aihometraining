@@ -102,7 +102,7 @@
 											  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 											    <div class="modal-content">
 													<div class="modal-header bg-dark border-dark">
-																				<h4 class="modal-title">요가 영상</h4>
+														<h4 class="modal-title">요가 영상</h4>
 										                <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
 										            </div>
 										            <div class="modal-body bg-dark p-0">
@@ -165,9 +165,13 @@
 		<!-- custom -->
 		<script th:src="@{/asset/js/main.js}"></script>
 		<script type="text/javascript">
+		
+			/* 데이터테이블 */
 		  $(document).ready(function(){
 		    $('#workoutCategory').DataTable();
 		  });
+			
+			/* 모달 */
 		  $(document).ready(function() {
 			    // Set iframe attributes when the show instance method is called
 			    $("#videoModal1").on("show.bs.modal", function(event) {
