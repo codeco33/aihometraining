@@ -83,7 +83,10 @@ public class WorkoutLogUserController {
 	@GetMapping("/workoutGoalPlanList")
 	public String workoutGoalPlanList(Model model) {
 		
+		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
+		
 		model.addAttribute("title", "운동 계획");
+		model.addAttribute("workoutGoalList", workoutGoalList);
 		
 		return "workoutLog/workoutLogUser/workoutGoalPlanList";
 		

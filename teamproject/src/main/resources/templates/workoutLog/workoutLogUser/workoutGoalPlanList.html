@@ -8,54 +8,153 @@
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
-		<div id='wrap'>
-		    <div id='external-events'>
-	    		<h4>나의 운동 계획</h4>
-		    		<div id='external-events-list'>
-				        <div class='fc-event'>[[${title}]]</div>
-				        <div class='fc-event'>하루 요가 섹션 2</div>
-				        <div class='fc-event'>하루 요가 섹션 3</div>
-				        <div class='fc-event'>하루 요가 섹션 4</div>
-				        <div class='fc-event'>하루 요가 섹션 5</div>
-			      	</div>
-					<p>
-			       		<input type='checkbox' id='drop-remove' />
-			        	<label for='drop-remove'>remove after drop</label>
-			      	</p>
-			    </div>
-		    	<div id='calendar'></div>
-		    	<div style='clear:both'></div>
-		</div>
+		
+		<section class="blog_area">
+		    <div class="container">
+		        <div class="row justify-content-sm-center">
+		                <div class="single-services">
+		                        <h3 align="center">운동 목표 : &nbsp </h3>
+					        	<th:block th:if="${not #lists.isEmpty(workoutGoalList)}" th:each="l : ${workoutGoalList}">
+					            	<p>[[${l.workoutGoalContent}]] &nbsp &nbsp</p>
+					            </th:block>
+		                </div>
+	            	<th:block th:unless="${not #lists.isEmpty(workoutGoalList)}" th:each="l : ${workoutGoalList}">
+	            		<div class="col-lg-4 col-md-6 col-sm-8">
+	                        <div class="single-services mb-30">
+	                            <div class="features-caption">
+	                                <h3>운동 목표</h3>
+	                                <p>등록된 운동 목표가 없습니다.</p>
+	                            </div>
+	                        </div>
+	                    </div>
+	            	</th:block>
+	            </div>	
+                <div class="row pt-5">
+                    <div class="col-lg-8 mb-5 mb-lg-0">
+                        <div class="blog_left_sidebar">
+							<div id='calendar'></div>
+					    	<div style='clear:both'></div>
+						</div>
+		       		</div>
+		       		
+		       		<div class="col-lg-4">
+                        <div class="blog_right_sidebar">
+                            <aside class="single_sidebar_widget search_widget">
+                            	 <div id='external-events'>
+							    		<h4>나의 운동 계획</h4>
+							    		<div id='external-events-list'>
+									        <div class='fc-event'>[[${title}]]</div>
+									        <div class='fc-event'>하루 요가 섹션 2</div>
+									        <div class='fc-event'>하루 요가 섹션 3</div>
+									        <div class='fc-event'>하루 요가 섹션 4</div>
+									        <div class='fc-event'>하루 요가 섹션 5</div>
+								      	</div>
+										<p>
+								       		<input type='checkbox' id='drop-remove' />
+								        	<label for='drop-remove'>remove after drop</label>
+								      	</p>
+									</div>
+                            	 <div id='external-events'>
+							    		<h4>나의 일정</h4>
+							    		<div id='external-events-list'>
+									        <div class='fc-event'>[[${title}]]</div>
+									        <div class='fc-event'>하루 요가 섹션 2</div>
+									        <div class='fc-event'>하루 요가 섹션 3</div>
+									        <div class='fc-event'>하루 요가 섹션 4</div>
+									        <div class='fc-event'>하루 요가 섹션 5</div>
+								      	</div>
+										<p>
+								       		<input type='checkbox' id='drop-remove' />
+								        	<label for='drop-remove'>remove after drop</label>
+								      	</p>
+									</div>
+                            	 <div id='external-events'>
+							    		<h4>나의 식단</h4>
+							    		<div id='external-events-list'>
+									        <div class='fc-event'>[[${title}]]</div>
+									        <div class='fc-event'>하루 요가 섹션 2</div>
+									        <div class='fc-event'>하루 요가 섹션 3</div>
+									        <div class='fc-event'>하루 요가 섹션 4</div>
+									        <div class='fc-event'>하루 요가 섹션 5</div>
+								      	</div>
+										<p>
+								       		<input type='checkbox' id='drop-remove' />
+								        	<label for='drop-remove'>remove after drop</label>
+								      	</p>
+									</div>
+                            	 <div id='external-events'>
+							    		<h4>나의 과제</h4>
+							    		<div id='external-events-list'>
+									        <div class='fc-event'>[[${title}]]</div>
+									        <div class='fc-event'>하루 요가 섹션 2</div>
+									        <div class='fc-event'>하루 요가 섹션 3</div>
+									        <div class='fc-event'>하루 요가 섹션 4</div>
+									        <div class='fc-event'>하루 요가 섹션 5</div>
+								      	</div>
+										<p>
+								       		<input type='checkbox' id='drop-remove' />
+								        	<label for='drop-remove'>remove after drop</label>
+								      	</p>
+									</div>
+                            </aside>
+                        </div>
+                    </div>   
+				</div>
+			</div>
+		</section>	
+			
 	</th:block>
 	
 	<!-- 사용자 정의 Css -->
 	<th:block layout:fragment="customCss">
 		<style>
-		  /* <-- daygrid-views start --> */
+			
+			/* 오른쪽 메뉴 */
+			.single-services {
+			    display: flex !important;
+			    box-shadow: 0px 25px 60px rgb(66 85 164 / 10%) !important;
+			    padding: 29px 24px !important;
+			    border-radius: 20px !important;
+			    background: #fbf9ff !important;
+			    width: 55%;
+			}
+
+		  .col-lg-4 {
+		     -ms-flex: 0 0 33.333333% !important;
+		     flex: 0 0 33.333333% !important;
+		     max-width: 33.333333% !important;
+		     height: max-content !important;
+		     background: #fbf9ff !important;
+		     padding-bottom: 30px !important;
+		  }
+		  
+		  /* 달력 */	
 		  #calendar {
+		    float: right;
+		    width: 900px;
 		    max-width: 900px;
 		    margin: 0 auto;
 		  }
-		  /* <-- daygrid-views End --> */  
 		
-		  /* <-- external-dragging-builtin Start --> */
 		  /* body {
 		    margin-top: 40px;
 		    font-size: 14px;
 		    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
 		  } */
 		
+		  /* 메인 */	
 		  #wrap {
 		    width: 1100px;
 		    margin: 0 auto;
 		  }
 		
+		  /* 오른쪽 드래그 */
 		  #external-events {
 		    float: left;
 		    width: 150px;
 		    padding: 0 10px;
-		    border: 1px solid #ccc;
-		    background: #eee;
+		    border: 1px solid #C86FFF;
+		    background:  #fbf9ff;
 		    text-align: left;
 		  }
 		
@@ -73,20 +172,34 @@
 		  #external-events p {
 		    margin: 1.5em 0;
 		    font-size: 11px;
-		    color: #666;
+		    color: #C86FFF;
 		  }
 		
 		  #external-events p input {
 		    margin: 0;
 		    vertical-align: middle;
 		  }
-		
-		  #calendar {
-		    float: right;
-		    width: 900px;
+		  
+		  .fc-event, .fc-event-dot {
+			    background-color: #C86FFF !important;
 		  }
-		/* <-- external-dragging-builtin End --> */
-		
+		  
+		  .fc-event {
+			  position: relative;
+			  display: block;
+			  font-size: 0.85em;
+			  line-height: 1.4;
+			  border-radius: 3px;
+			  border: 1px solid #C86FFF !important;
+		  }
+		  
+		/* 프로그레스 */
+		.progress-bar.color-7 {
+		background-color: #a367e7
+		}
+		h2,h6{
+		font-weight: bold
+		}
 		  
 		</style>
 	</th:block>
