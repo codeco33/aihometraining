@@ -3,6 +3,7 @@ package aihometraining.team.eclassController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class eClassController {
@@ -41,5 +42,12 @@ public class eClassController {
 		model.addAttribute("title", "관리자 운동클래스목록");
 		
 		return "eClass/eClassApplyadminList";
+	}
+	@PostMapping("/eClassOpenApplyForm")
+	public String eClassOpenApplyForm(Model model) {
+		
+		model.addAttribute("title", "운동클래스 신청완료");
+		
+		return "";
 	}
 }
