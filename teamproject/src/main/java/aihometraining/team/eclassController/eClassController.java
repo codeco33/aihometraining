@@ -35,4 +35,11 @@ public class eClassController {
 		
 		return "eClass/eClassOpenApplyadminList";
 	}
+	@GetMapping("/eClassApplyadminList")
+	public String eClassApplyadminList(Model model) {
+		
+		model.addAttribute("title", "관리자 운동클래스목록");
+		
+		return "eClass/eClassApplyadminList";
+	}
 }
