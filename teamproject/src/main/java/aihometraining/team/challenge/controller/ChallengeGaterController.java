@@ -57,16 +57,32 @@ public class ChallengeGaterController {
 	}
 	
 	//ajax
-	@PostMapping("/gatherDetail")
+	/*
+	 * @PostMapping("/gatherDetail")
+	 * 
+	 * @ResponseBody public List<ChallengeGatherPlan>
+	 * getGatherDatail(@RequestParam(value = "challengeGatherCode") String
+	 * challengeGatherCode) {
+	 * 
+	 * log.info("요청받은 challengeGatherCode값  challengeGatherCode : {}",
+	 * challengeGatherCode);
+	 * 
+	 * List<ChallengeGatherPlan> gatherDetail =
+	 * challengeGatherMapper.getGatherDatail(challengeGatherCode);
+	 * 
+	 * log.info("챌린지모집 세부내용 조회  gatherDetail : {}", gatherDetail);
+	 * 
+	 * return gatherDetail;
+	 * 
+	 * }
+	 */
+	
+	@GetMapping("/gatherDetail")
 	@ResponseBody
-	public List<ChallengeGatherPlan> getGatherDatail(@RequestParam(value = "challengeGatherCode") String challengeGatherCode) {
-		
-		log.info("요청받은 challengeGatherCode값  challengeGatherCode : {}", challengeGatherCode);
-		
+	public List<ChallengeGatherPlan> getGatherDatail(String challengeGatherCode){
+		log.info("챌린지모집 세부내용 조회  challengeGatherCode : {}", challengeGatherCode);
 		List<ChallengeGatherPlan> gatherDetail = challengeGatherMapper.getGatherDatail(challengeGatherCode);
-		
 		log.info("챌린지모집 세부내용 조회  gatherDetail : {}", gatherDetail);
-		
 		return gatherDetail;
 		
 	}

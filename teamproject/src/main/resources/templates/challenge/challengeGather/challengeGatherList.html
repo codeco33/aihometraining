@@ -23,10 +23,9 @@
 				            <div class="properties properties2 mb-30">
 				                <div class="properties__card">
 				                	<div class="properties__background overlay1">
-			                            <div>                                                                                 <!-- data-code라고만 써서 ${l.challengeGatherCode}text자체로 불러와졌다. -->
+			                            <div class="myModal">                                                                                 <!-- data-code라고만 써서 ${l.challengeGatherCode}text자체로 불러와졌다. -->
 			                            	<!-- <a href="#" data-toggle="modal" id="gatherModel" data-target="#GatherDetailModal" th:data-code="${l.challengeGatherCode}" >[[${l.challengeGatherCode}]]</a> -->
-			                            	<a href="#" data-toggle="modal" id="gatherModel" data-target="#GatherDetailModal" th:data-code="${l.challengeGatherCode}" >[[${l.challengeGatherName}]]</a>
-			                            	<input type="hidden" id ="gatherCode" name="challengeGatherCode" th:value="${l.challengeGatherCode}">
+			                            	<a th:href="@{/challenge/challengeGather/gatherDetail(challengeGatherCode=${l.challengeGatherCode})}" >[[${l.challengeGatherName}]]</a>
 			                            </div>
 			                        </div>
 				                    <div class="properties__caption">
@@ -84,48 +83,38 @@
 	</th:block>
 	<th:block layout:fragment="customBodyScript">
 		<script>
-		
 				
-			   $('#gatherModel').on('click', function(event){
+			   $('.myModal a').on('click', function(event){
 				   /* var challengeGatherCode = $(this).data('code'); */
-				   var gatherCode = $('input[name="challengeGatherCode"]').val();
-				   for(var i=0; i>gatherCode.length; i++){
-					   cosole.log(gatherCode[i]);
-				   }
 				   //console.log(gatherCode);
-				   
+				   event.preventDefault();
+				   console.log($(this).attr("href"));
+				   var href = $(this).attr("href");
 				   
 				   $.ajax({
-						 url: '/challenge/challengeGather/gatherDetail'
-						,type: 'post'
-						,data: {'challengeGatherCode': gatherCode}
-						,dateType: 'json'
+						 url: href
 						,success: function(data){
 							console.log(data);
 							console.log(data.length);
 							for(var i=0; i<data.length; i++){
 							var modalbody = '';
-								modalbody += '<div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">챌린지 카테고리 :  '
-								+ data[i].challengeCategoryCode + '</div>'
-								modalbody += '<div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">챌린지 소개 : '
-								+ data[i].challengeGather.challengeGatherIntro + '</div>'
-								modalbody += '<div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">챌린지 현재 참가 희망 인원수 :  '
-								+ data[i].challengeGather.challengeGatherMaxPeople + '</div>'
-								modalbody += '<div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">챌린지 인증 방법 :  '
-								+ data[i].challengeGather.challengeGatherProveMethod + '</div>'
-								modalbody += '<div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">챌린지 인증 빈도 :  '
-								+ data[i].challengeGather.challengeGatherProveFrequency + '</div>'
-								modalbody += '<div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">챌린지 시작일 :  '
-								+ data[i].challengeGather.challengeStartDate + '</div>'
-								modalbody += '<div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">챌린지 종료일  :  '
-								+ data[i].challengeGather.challengeEndDate + '</div>'
-								$('.modal-body').append(modalbody);
 							
+								modalbody += '<input class="mt-2 p-2 form-control" name="challengeCategoryCode" value="'+ data[i].challengeCategoryCode +'"style="background-color: #f9f9ff; border: none;">'
+								modalbody += '<input class="mt-2 p-2 form-control" name="challengeGatherIntro" value="'+ data[i].challengeGather.challengeGatherIntro +'"style="background-color: #f9f9ff; border: none;">'
+								modalbody += '<input class="mt-2 p-2 form-control" name="challengeGatherMaxPeople" value="'+ data[i].challengeGather.challengeGatherMaxPeople +'"style="background-color: #f9f9ff; border: none;">'
+								modalbody += '<input class="mt-2 p-2 form-control" name="challengeGatherProveMethod" value="'+ data[i].challengeGather.challengeGatherProveMethod +'"style="background-color: #f9f9ff; border: none;">'
+								modalbody += '<input class="mt-2 p-2 form-control" name="challengeGatherProveFrequency" value="'+ data[i].challengeGather.challengeGatherProveFrequency +'"style="background-color: #f9f9ff; border: none;">'
+								modalbody += '<input class="mt-2 p-2 form-control" name="challengeStartDate" value="'+ data[i].challengeGather.challengeStartDate +'"style="background-color: #f9f9ff; border: none;">'
+								modalbody += '<input class="mt-2 p-2 form-control" name="challengeEndDate" value="'+ data[i].challengeGather.challengeEndDate +'"style="background-color: #f9f9ff; border: none;">'
+							
+							$('.modal-body').empty();
+							$('.modal-body').append(modalbody);
+							
+							$('#GatherDetailModal').modal();
 							}
 						}
 					});
 			   });
-			   
 			   
 			   
 			
