@@ -26,4 +26,7 @@ public interface ChallengeConfigMapper {
 	
 	//카테고리 등록 처리
 	public int challengeCategoryInsert(ChallengeCategory challengeCategory);
+	
+	//카테고리 수정처리
+	public int challengeCategoryUpdate(ChallengeCategory challengeCategory);
 }

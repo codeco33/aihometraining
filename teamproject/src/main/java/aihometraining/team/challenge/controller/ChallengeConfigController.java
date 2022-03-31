@@ -141,6 +141,16 @@ public class ChallengeConfigController {
 		return "challenge/challengeConfig/challengeCategoryUpdate";
 	}
 	
+	//챌린지 카테고리 수정처리
+	@PostMapping("/challengeCategoryUpdate")
+	public String challengeCategoryUpdate(ChallengeCategory challengeCategory) {
+		
+		log.info("챌린지 카테고리 수정 폼에서 입력받은 데이터: {}", challengeCategory); //받은 내용이 여기{}에 담긴다.
+		
+		challengeConfigService.challengeCategoryUpdate(challengeCategory);
+		
+		return "redirect:/challenge/challengeConfig/configList";
+	}
 	
 	//챌린지 세팅 등록
 	@GetMapping("/challengeSettingInsert")

@@ -2,6 +2,7 @@ package aihometraining.team.dto;
 
 public class ChallengeGather {
 	private String challengeGatherCode;
+	private String memberEmail;
 	private String challengeCategoryCode;
 	private String challengeGatherName;
 	private String challengeGatherIntro;
@@ -11,17 +12,26 @@ public class ChallengeGather {
 	private String challengeGatherProveFrequency;
 	private String challengeGatherAchieveRate;
 	private String challengeStartDate;
+	private String challengeEndDate;
 	private String challengeGatherRegDate;
+	private String memberEnterEmail;
 	private String challengeGatherStartDate;
 	private String challengeGatherEndDate;
 	
 	private Member member;
+	private ChallengeCategory ChallengeCategory;
 	
 	public String getChallengeGatherCode() {
 		return challengeGatherCode;
 	}
 	public void setChallengeGatherCode(String challengeGatherCode) {
 		this.challengeGatherCode = challengeGatherCode;
+	}
+	public String getMemberEmail() {
+		return memberEmail;
+	}
+	public void setMemberEmail(String memberEmail) {
+		this.memberEmail = memberEmail;
 	}
 	public String getChallengeCategoryCode() {
 		return challengeCategoryCode;
@@ -77,11 +87,23 @@ public class ChallengeGather {
 	public void setChallengeStartDate(String challengeStartDate) {
 		this.challengeStartDate = challengeStartDate;
 	}
+	public String getChallengeEndDate() {
+		return challengeEndDate;
+	}
+	public void setChallengeEndDate(String challengeEndDate) {
+		this.challengeEndDate = challengeEndDate;
+	}
 	public String getChallengeGatherRegDate() {
 		return challengeGatherRegDate;
 	}
 	public void setChallengeGatherRegDate(String challengeGatherRegDate) {
 		this.challengeGatherRegDate = challengeGatherRegDate;
+	}
+	public String getMemberEnterEmail() {
+		return memberEnterEmail;
+	}
+	public void setMemberEnterEmail(String memberEnterEmail) {
+		this.memberEnterEmail = memberEnterEmail;
 	}
 	public String getChallengeGatherStartDate() {
 		return challengeGatherStartDate;
@@ -101,18 +123,28 @@ public class ChallengeGather {
 	public void setMember(Member member) {
 		this.member = member;
 	}
+	public ChallengeCategory getChallengeCategory() {
+		return ChallengeCategory;
+	}
+	public void setChallengeCategory(ChallengeCategory challengeCategory) {
+		ChallengeCategory = challengeCategory;
+	}
+	
 	@Override
 	public String toString() {
-		return "ChallengeGather [challengeGatherCode=" + challengeGatherCode + ", challengeCategoryCode="
-				+ challengeCategoryCode + ", challengeGatherName=" + challengeGatherName + ", challengeGatherIntro="
-				+ challengeGatherIntro + ", challengeGatherMaxPeople=" + challengeGatherMaxPeople
-				+ ", challengeGatherProveMethod=" + challengeGatherProveMethod + ", challengeGatherProveContent="
-				+ challengeGatherProveContent + ", challengeGatherProveFrequency=" + challengeGatherProveFrequency
-				+ ", challengeGatherAchieveRate=" + challengeGatherAchieveRate + ", challengeStartDate="
-				+ challengeStartDate + ", challengeGatherRegDate=" + challengeGatherRegDate
+		return "ChallengeGather [challengeGatherCode=" + challengeGatherCode + ", memberEmail=" + memberEmail
+				+ ", challengeCategoryCode=" + challengeCategoryCode + ", challengeGatherName=" + challengeGatherName
+				+ ", challengeGatherIntro=" + challengeGatherIntro + ", challengeGatherMaxPeople="
+				+ challengeGatherMaxPeople + ", challengeGatherProveMethod=" + challengeGatherProveMethod
+				+ ", challengeGatherProveContent=" + challengeGatherProveContent + ", challengeGatherProveFrequency="
+				+ challengeGatherProveFrequency + ", challengeGatherAchieveRate=" + challengeGatherAchieveRate
+				+ ", challengeStartDate=" + challengeStartDate + ", challengeEndDate=" + challengeEndDate
+				+ ", challengeGatherRegDate=" + challengeGatherRegDate + ", memberEnterEmail=" + memberEnterEmail
 				+ ", challengeGatherStartDate=" + challengeGatherStartDate + ", challengeGatherEndDate="
-				+ challengeGatherEndDate + ", member=" + member + "]";
+				+ challengeGatherEndDate + ", member=" + member + ", ChallengeCategory=" + ChallengeCategory + "]";
 	}
+	
+	
 	
 	
 }
