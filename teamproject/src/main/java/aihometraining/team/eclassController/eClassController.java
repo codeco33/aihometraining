@@ -42,4 +42,19 @@ public class eClassController {
 		
 		return "eClass/eClassApplyadminList";
 	}
+	@GetMapping("/myApplyList")
+	public String MyApplyList(Model model) {
+			
+		model.addAttribute("title", "나의 개설신청 현황");
+		
+		return "/eClass/myEClassApplyList";
+	}
+	@GetMapping("/myeClassList")
+	public String myeClassList(Model model) {
+		
+		model.addAttribute("title", "내 운동클래스");
+		
+		return "/eClass/myeClassList";
+	}
+	
 }
