@@ -107,8 +107,7 @@
 					                     </div>
 					                  </div>
 					               </div>
-					               <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-					               type="submit">검색</button>
+					               <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit">검색</button>
 					            </form>
 					        </aside>
                             <aside class="single_sidebar_widget search_widget">
@@ -162,45 +161,31 @@
                             </aside>
                             <aside class="single_sidebar_widget popular_post_widget">
                                 <h3 class="widget_title" style="color: #2d2d2d;">나의 목표</h3>
-                                <div class="single-services mb-30">
-		                           <div class="features-caption">
-		                               <h3>운동 목표 1</h3>
-		                               <p>한달동안 2kg 감량하기</p>
-		                           </div>
-		                           <h6>목표 달성률</h6>
-				                   <div class="percentage">
-										<div class="progress">
-											<div class="progress-bar color-7" role="progressbar" style="width: 30%"
-											aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                <th:block th:if="${not #lists.isEmpty(workoutGoalList)}" th:each="l : ${workoutGoalList}">
+	                                <div class="single-services mb-30">
+			                           <div class="features-caption">
+			                               <h3>운동 목표 </h3>
+			                               <p>[[${l.workoutGoalContent}]]</p>
+			                           </div>
+			                           <h6>목표 달성률</h6>
+					                   <div class="percentage">
+											<div class="progress">
+												<div class="progress-bar color-7" role="progressbar" style="width: 30%"
+												aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+											</div>
 										</div>
-									</div>
-		                      	</div>
-                                <div class="single-services mb-30">
-		                            <div class="features-caption">
-		                                <h3>운동 목표 2</h3>
-		                                <p>복근 만들기</p>
-		                            </div>
-		                            <h6>목표 달성률</h6>
-				                    <div class="percentage">
-										<div class="progress">
-											<div class="progress-bar color-7" role="progressbar" style="width: 30%"
-											aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-										</div>
-									</div>
-			                    </div>
-                                <div class="single-services mb-30">
-		                            <div class="features-caption">
-		                                <h3>운동 목표 3</h3>
-		                                <p>다리 찢기</p>
-		                            </div>
-		                            <h6>목표 달성률</h6>
-				                    <div class="percentage">
-										<div class="progress">
-											<div class="progress-bar color-7" role="progressbar" style="width: 30%"
-											aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-										</div>
-									</div>
-		                        </div>
+			                      	</div>
+			                    </th:block>
+			                    <th:block th:unless="${not #lists.isEmpty(workoutGoalList)}" th:each="l : ${workoutGoalList}">
+				            		<div class="col-lg-4 col-md-6 col-sm-8">
+				                        <div class="single-services mb-30">
+				                            <div class="features-caption">
+				                                <h3>운동 목표</h3>
+				                                <p>등록된 운동 목표가 없습니다.</p>
+				                            </div>
+				                        </div>
+				                    </div>
+				            	</th:block>      	  	
                             </aside>
                             <aside class="single_sidebar_widget tag_cloud_widget">
                                 <h4 class="widget_title" style="color: #2d2d2d;">수강중인 클래스</h4>
