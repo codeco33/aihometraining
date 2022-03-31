@@ -51,7 +51,7 @@ public class ChallengeEnterController {
 	public String challengeEnterPaymemt(Model model) {
 		
 		model.addAttribute("title", "챌린지 참가결제");
-		model.addAttribute("headerList", "챌린지");
+		model.addAttribute("leftMenuList", "챌린지");
 		
 		return "challenge/challengeEnter/challengeEnterPaymemt";
 		
