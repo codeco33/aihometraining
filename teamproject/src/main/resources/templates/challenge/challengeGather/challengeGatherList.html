@@ -71,12 +71,14 @@
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
+			      <form class="cmxform" method="post" th:action="@{/challenge/challengeEnter/challengeEnterPaymemt}">
 			      <div class="modal-body">
 			      </div>
 			      <div class="modal-footer">
-			        <a th:href="@{/challenge/challengeEnter/challengeEnterPaymemt}" class="btn btn-primary text-white">참가하기</a>
+			        <button type="submit" id="modaljoin" class="btn btn-primary text-white">참가하기</button>
 			        <button  type="button" id="modalclose" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 			      </div>
+			      </form>
 			    </div>
 			  </div>
 			</div>
@@ -98,7 +100,7 @@
 							console.log(data.length);
 							for(var i=0; i<data.length; i++){
 							var modalbody = '';
-							
+								
 								modalbody += '<input class="mt-2 p-2 form-control" name="challengeCategoryCode" value="'+ data[i].challengeCategoryCode +'"style="background-color: #f9f9ff; border: none;">'
 								modalbody += '<input class="mt-2 p-2 form-control" name="challengeGatherIntro" value="'+ data[i].challengeGather.challengeGatherIntro +'"style="background-color: #f9f9ff; border: none;">'
 								modalbody += '<input class="mt-2 p-2 form-control" name="challengeGatherMaxPeople" value="'+ data[i].challengeGather.challengeGatherMaxPeople +'"style="background-color: #f9f9ff; border: none;">'
@@ -106,11 +108,12 @@
 								modalbody += '<input class="mt-2 p-2 form-control" name="challengeGatherProveFrequency" value="'+ data[i].challengeGather.challengeGatherProveFrequency +'"style="background-color: #f9f9ff; border: none;">'
 								modalbody += '<input class="mt-2 p-2 form-control" name="challengeStartDate" value="'+ data[i].challengeGather.challengeStartDate +'"style="background-color: #f9f9ff; border: none;">'
 								modalbody += '<input class="mt-2 p-2 form-control" name="challengeEndDate" value="'+ data[i].challengeGather.challengeEndDate +'"style="background-color: #f9f9ff; border: none;">'
-							
-							$('.modal-body').empty();
-							$('.modal-body').append(modalbody);
-							
-							$('#GatherDetailModal').modal();
+								
+								
+								$('.modal-body').empty();
+								$('.modal-body').append(modalbody);
+								
+								$('#GatherDetailModal').modal();
 							}
 						}
 					});
