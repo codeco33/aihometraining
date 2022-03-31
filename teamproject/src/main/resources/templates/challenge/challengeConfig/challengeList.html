@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+<!-- 사용자 정의 title -->
+<th:block layout:fragment="customTitle">
+	<title th:text="${title}"></title>
+</th:block>
+
+
+
+
+<th:block layout:fragment="customContents">
+	<div class="col-md-12">
+		<div class="panel">
+	    	<div class="panel-heading-white panel-heading">
+	        	<h4>#모집 챌린지 목록(최보라)</h4>
+	        </div>
+			<div class="panel-body">
+			   	<div class="col-md-12">
+			   		<div class="col-md-12 top-20 padding-0">
+			   			<div class="col-md-12">
+			   				<div class="panel">
+			   					<div class="panel-heading bg-deep-purple">
+			                    	<h6 class="text-white">모집 챌린지 목록</h6>
+			                    </div>
+								<div class="panel-body">
+									<div class="col-md-12">
+										<table id="challengeGatherList" class="display" style="width:100%">
+									        <thead>
+									            <tr>
+									                <th></th>
+									                <th>Name</th>
+									                <th>Position</th>
+									                <th>Office</th>
+									                <th>Salary</th>
+									            </tr>
+									        </thead>
+									        <tbody>
+									        	<tr>
+									        		<td></td>
+									        		<td>id002</td>
+									        		<td>챌린지</td>
+									        		<td>1213</td>
+									        		<td>123</td>
+									        	</tr>
+									        </tbody>
+									    </table>
+										
+					                 	
+					                 	
+									</div>
+								</div>
+							</div>
+						</div>	    
+					</div>  
+				</div>
+			</div>
+		</div>
+	</div>
+	</th:block>
+	
+	<!-- start: Javascript -->
+	<th:block layout:fragment="customBodyScript">	
+		
+		<!-- plugins -->
+		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.dataTables.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/dataTables.bootstrap.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+		
+		
+		<!-- custom -->
+		<script th:src="@{/asset/js/main.js}"></script>
+		<script type="text/javascript">
+			function format ( d ) {
+		    // `d` is the original data object for the row
+		    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+		        '<tr>'+
+		            '<td>Full name:</td>'+
+		            '<td>'+d.name+'</td>'+
+		        '</tr>'+
+		        '<tr>'+
+		            '<td>Extension number:</td>'+
+		            '<td>'+d.extn+'</td>'+
+		        '</tr>'+
+		        '<tr>'+
+		            '<td>Extra info:</td>'+
+		            '<td>And any further details here (images etc)...</td>'+
+		        '</tr>'+
+		    '</table>';
+			}
+		
+		  $(document).ready(function(){
+		    var table = $('#challengeGatherList').DataTable();		    
+		  });
+		
+		  // Add event listener for opening and closing details
+		  $('#example tbody').on('click', 'td.dt-control', function () {
+		        var tr = $(this).closest('tr');
+		        var row = table.row( tr );
+		 
+		        if ( row.child.isShown() ) {
+		            // This row is already open - close it
+		            row.child.hide();
+		            tr.removeClass('shown');
+		        }
+		        else {
+		            // Open this row
+		            row.child( format(row.data()) ).show();
+		            tr.addClass('shown');
+		        }
+		    } );
+		  
+		  
+		</script>
+	</th:block>
+	<!-- end: Javascript -->
+</html>

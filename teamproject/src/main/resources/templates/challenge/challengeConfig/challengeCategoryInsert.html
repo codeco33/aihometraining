@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+		<div class="col-md-12">
+			<div class="panel">
+		    	<div class="panel-heading-white panel-heading">
+		        	<h4>챌린지 카테고리 등록 폼</h4>
+		        </div>
+		        <div class="panel-body">
+			        <div class="col-md-6 col-md-offset-3">
+						<div class="col-md-12 top-20 padding-0">
+			            	<div class="col-md-12">
+			                	<div class="panel">
+			                    	<div class="panel-heading bg-deep-purple">
+			                    		<h6 class="text-white">챌린지 카테고리 등록</h6>
+			                    	</div>
+							        <div class="panel-body">
+										<div class="col-md-12 panel-body" style="padding-bottom:30px;">
+											<div class="col-md-12">
+					  							<form class="cmxform" id="challengeCategoryForm" method="post" th:action="@{/challenge/challengeConfig/challengeCategoryInsert}">
+					    							<div class="col-md-12">
+														<div class=" row form-group">
+															<label class="col-sm-5 control-label" style="color:#999; font-size: 18px;">운동 카테고리</label>
+															<div class="col-sm-7">
+																<select class="form-control" id="validate_eClassCategory" name="eClassCategorySmallCode" required>
+																	<th:block th:if="${not #lists.isEmpty(classCategoryList)}" th:each="l : ${classCategoryList}">
+																		<option th:value="${l.eClassCategorySmallCode}" >[[${l.eClassCategorySmallName}]]</option>
+																	</th:block>
+																	<th:block th:unless="${not #lists.isEmpty(classCategoryList)}" th:each="l : ${classCategoryList}">
+																		<option >등록된 카테고리가 없습니다.</option>
+																	</th:block>
+																</select>
+															</div>
+														</div>
+						       							
+														<div class="form-group form-animate-text" style="margin-top:40px !important;">
+										                    <input type="text" class="form-text" id="validate_categoryName" name="challengeCategoryName" required>
+										                    <span class="bar"></span>
+										                    <label>챌린지 카테고리명</label>
+									                    </div>
+					        						</div>
+													<div style="text-align: center;">
+														<input class="submit btn btn-outline btn-info btn-sm" type="submit" value="등록">
+													</div>
+												</form>
+											</div>
+										</div>
+							        </div>
+		        				</div>
+	                    	</div>
+	                   	</div>
+	                </div>
+                </div>
+			</div>
+		</div>			
+	</th:block>
+	
+	<!-- 사용자 정의 Css -->
+		<th:block layout:fragment="customCss">
+			<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/jquery.steps.css}"/>
+		
+		</th:block>
+	
+	<!-- start: Javascript -->
+	<th:block layout:fragment="customBodyScript">	
+		
+		<!-- plugins -->
+		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.knob.js}"></script>
+		<script th:src="@{/asset/js/plugins/ion.rangeSlider.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/bootstrap-material-datetimepicker.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.mask.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/select2.full.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/nouislider.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.validate.min.js}"></script>
+		
+		
+		<!-- custom -->
+		<script th:src="@{/asset/js/main.js}"></script>
+		<script type="text/javascript">
+		  $(document).ready(function(){
+			  
+		    $("#challengeCategoryForm").validate({
+		      errorElement: "em",
+		      errorPlacement: function(error, element) {
+		        $(element.parent("div").addClass("form-animate-error"));
+		        error.appendTo(element.parent("div"));
+		      },
+		      success: function(label) {
+		        $(label.parent("div").removeClass("form-animate-error"));
+		      },
+		      rules: {
+		        validate_categoryName: "required",
+		        validate_eClassCategory: "required"
+		      },
+		      messages: {
+		        validate_categoryName: "카테고리명을 입력해주세요.",
+		        validate_eClassCategory: "카테고리를 선택해주세요."
+		      }
+		    });
+		
+		  });
+        	//스윗얼랏 사용
+        	//swal("등록되었습니다.", "확인버튼을 눌러주세요.", "success");
+		</script>
+	</th:block>
+	<!-- end: Javascript -->
+</html>

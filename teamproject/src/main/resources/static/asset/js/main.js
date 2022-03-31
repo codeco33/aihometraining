@@ -335,4 +335,63 @@
     rightMenu();
     treeMenu();
     hide();
+    
+    
+   
+  /**********************************************
+   * 관리자 페이지 왼쪽 메뉴 활성화 페이지 수정
+   * 2022-03-23 진수경
+   ***********************************************/
+    var getMenuLink = getCookie('menuLink');
+    
+    if(getMenuLink != undefined){
+    	var aMenu = $('#left-menu a[href="'+getMenuLink+'"]');
+    	var ripple = aMenu.parents('.ripple');
+    	ripple.addClass('active');	
+    	aMenu.parent('li').css('background', 'rgba(184, 184, 184, 0.2)');
+    	aMenu.parents('ul').css('display','block');
+    	aMenu.css('font-weight', 'bold').focus().blur();
+    	
+    	//contentsHeaderTitle 경로 설정
+    	$("#contentsHeaderTilte").attr('href', getMenuLink);
+    }
+	
+	$('#left-menu .nav-list a').click(function(e){			
+		e.preventDefault();
+		var href = $(this).attr('href');
+		if(href != undefined){
+			$('li.ripple:first').css('background', '');
+			setCookie('menuLink', href, 1);	
+			location.href = href;
+		}
+		
+	});
+	
+	function setCookie(cname, cvalue, exdays) {
+	  const d = new Date();
+	  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+	  let expires = "expires="+d.toUTCString();
+	  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+	}
+
+	function getCookie(cname) {
+	  let name = cname + "=";
+	  let ca = document.cookie.split(';');
+	  for(let i = 0; i < ca.length; i++) {
+	    let c = ca[i];
+	    while (c.charAt(0) == ' ') {
+	      c = c.substring(1);
+	    }
+	    if (c.indexOf(name) == 0) {
+	      return c.substring(name.length, c.length);
+	    }
+	  }
+	  return "";
+	}
+	
+	
+	
+	
+	
+
 })(jQuery);

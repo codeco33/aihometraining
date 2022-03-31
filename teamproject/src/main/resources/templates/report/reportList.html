@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+		<div class="col-md-12">
+			<div class="panel">
+		    	<div class="panel-heading-white panel-heading">
+		        	<h4>#신고 목록(이민식)</h4>
+		        </div>
+		        <div class="panel-body">
+		        	<div class="col-md-12">
+						<div class="col-md-12 top-20 padding-0">
+			            	<div class="col-md-12">
+			                	<div class="panel">
+			                    	<div class="panel-heading bg-deep-purple">
+			                    		<h6 class="text-white">신고 목록</h6>
+			                    	</div>
+			                   		<div class="panel-body">
+			                     		<div class="responsive-table">
+				                     	<table id="reportList" class="table table-striped table-bordered" style="width: 100%;">
+										<thead>
+											<tr>
+												<th>신고 코드</th>
+												<th>신고 내용</th>
+												<th>신고자 이메일</th>
+												<th>신고 날짜</th>
+												<th>신고 처리</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>신고 코드</td>
+												<td>부적할한 인증 방법을 요구합니다.</td>
+												<td>id003@email.com</td>
+												<td>2022-03-30</td>
+												<td style="text-align: center;">
+													<a href="#">
+														<input type="button" class="btn btn-outline btn-warning btn-sm"  value="신고처리"/>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td>신고 코드</td>
+												<td>부적할한 인증 방법을 요구합니다.</td>
+												<td>id003@email.com</td>
+												<td>2022-03-30</td>
+												<td style="text-align: center;">
+													<a href="#">
+														<input type="button" class="btn btn-outline btn-warning btn-sm"  value="신고처리"/>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td>신고 코드</td>
+												<td>부적할한 인증 방법을 요구합니다.</td>
+												<td>id003@email.com</td>
+												<td>2022-03-30</td>
+												<td style="text-align: center;">
+													<a href="#">
+														<input type="button" class="btn btn-xs btn-outline btn-warning"  value="신고처리"/>
+													</a>
+												</td>
+											</tr>
+										</tbody>
+				                        </table>
+										</div>
+									</div>
+								</div>
+							</div>  
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+	
+	<!-- start: Javascript -->
+	<th:block layout:fragment="customBodyScript">	
+		
+		<!-- plugins -->
+		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.dataTables.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/dataTables.bootstrap.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+		
+		
+		<!-- custom -->
+		<script th:src="@{/asset/js/main.js}"></script>
+		<script type="text/javascript">
+		$(document).ready(function(){
+		    $('#reportList').DataTable();		    
+		});
+		
+		</script>
+	</th:block>
+	<!-- end: Javascript -->
+</html>

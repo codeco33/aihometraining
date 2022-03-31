@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/userdefault}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+		<!-- 참가 챌린지 세부사항  area start -->
+		<div class="container">
+		    <div class="row justify-content-center">
+				<div class="col-xl-7 col-lg-8">
+		        	<div class="section-tittle text-center mb-55">
+		                <h2>참가 중인 챌린지의 세부사항</h2>
+		            </div>
+		        </div>
+		        <!-- userdefault 에서 customContects블럭 위치 조정함  -->
+		        <div class="row section-top-border">
+			        <div class="properties__card">
+				        <div class="properties__background overlay1">
+		                    <div class="p-5"></div>
+		                </div>
+				        <section class="about-area2 fix pb-padding">
+				            	<div class="front-text ml-5 mb-3">
+				            		<h2>
+				            			<a th:href="@{/challenge/challengeEnter/challengeEnterList}">참가 챌린지 제목</a>
+				            		</h2>
+				            	</div>
+				            <div class="support-wrapper align-items-center">
+				                <div class="right-content2">
+				                    <!-- section tittle -->
+				                    <div class="section-tittle section-tittle2 mb-20">
+				                        <div class="front-text">
+				                            <div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">
+												챌린지 카테고리 : 운동
+											</div>
+				                            <div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">
+												챌린지 인증 방법 : 사진
+											</div>
+				                            <div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">
+												챌린지 인증 횟수 : 30
+											</div>
+				                            <div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">
+												챌린지 시작일 : 2022-3-30
+											</div>
+				                            <div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">
+												챌린지 종료일 : 2022-4-30
+											</div>
+				                        </div>
+				                    </div>
+				                </div>
+				                <div class="left-table">
+				                    <!-- right contents start -->
+				                    <div class="progress-table-wrap">
+										<div class="progress-table">
+											<table class="table table-hover">
+												<thead>
+												  <tr>
+												    <th scope="col">#</th>
+												    <th scope="col">참가 회원 이메일</th>
+												    <th scope="col">참가 회원 인증 상태</th>
+												    <th scope="col">참가 회원 진행률</th>
+												  </tr>
+												</thead>
+												<tbody>
+												  <tr>
+												    <th scope="row">1</th>
+												    <td>id001@email.com</td>
+												    <td>인증</td>
+												    <td>
+												    	<div class="progress">
+															<div class="progress-bar color-7" role="progressbar" style="width: 30%"
+															aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+														</div>
+												    </td>
+												  </tr>
+												  <tr>
+												    <th scope="row">2</th>
+												    <td>id001@email.com</td>
+												    <td>미인증</td>
+												    <td>
+													    <div class="progress">
+															<div class="progress-bar color-7" role="progressbar" style="width: 30%"
+															aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+														</div>
+												    </td>
+												  </tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+							    	<!-- right contents end -->
+				                </div>
+				            </div>
+				            <div class="row justify-content-center">
+								<a th:href="@{/challenge/challengeEnter/challengePlanDoInsert}" class="genric-btn primary radius mt-2">인증 하기</a>
+				            </div>
+				        </section>
+			        </div>
+		        </div>
+	        </div>
+        </div>
+		<!-- 참가 챌린지 세부사항 area end -->
+	</th:block>
+	
+	<th:block layout:fragment="customBodyScript">
+		<style>
+			.container .properties__card {
+			    box-shadow: rgba(2, 25, 65, 0.08) 0px 6px 6px 4px;
+			    border-radius: 10px;
+			    transition: all 0.4s ease 0s;
+			}
+			.container .properties__background div {
+			    padding: 29px 20px 20px 20px;
+			    width: 100%;
+			    border-radius: 10px 10px 0 0;
+			    position: relative;
+			    background-color: #ffffff;
+			    font-size: 25px;
+			    color: #fff;
+			    text-align: center;
+			}
+			
+			.container .front-text h2 a {
+			    font-size: 30px;
+			    font-weight: bold;
+			    color: #4255A4;
+			    outline: medium none;
+			}
+			.courses-area .front-text h2 a:hover {
+			    color: #bdbdbd;
+			    outline: medium none;
+			}
+			
+			.container .support-wrapper .left-table {
+				width: 46%;
+				/* padding-left: 40px; */
+				
+			}
+			
+			@media only screen and (min-width: 1200px) and (max-width: 1440px) {
+				.container .support-wrapper .left-table {
+					width: 46%;
+					padding-left: 20px
+				}
+			}
+			
+			@media ( min-width : 1401px) and (max-width: 1600px) {
+				.container .support-wrapper .left-table {
+					width: 45%;
+					padding-left: 20px
+				}
+			}
+			
+			@media only screen and (min-width: 1601px) and (max-width: 1800px) {
+				.container .support-wrapper .left-table {
+					width: 40%;
+					padding-left: 20px
+				}
+			}
+			
+			@media only screen and (min-width: 992px) and (max-width: 1199px) {
+				.container .support-wrapper .left-table {
+					width: 60%;
+					padding-left: 20px;
+					padding-right: 60px;
+					padding-top: 50px
+				}
+			}
+			
+			@media only screen and (min-width: 768px) and (max-width: 991px) {
+				.container .support-wrapper .left-table {
+					width: 82%;
+					padding-left: 10px;
+					padding-right: 60px;
+					padding-top: 50px
+				}
+			}
+			
+			@media only screen and (min-width: 576px) and (max-width: 767px) {
+				.container .support-wrapper .left-table {
+					width: 100%;
+					padding-left: 5px;
+					padding-right: 60px;
+					padding-top: 50px
+				}
+			}
+			
+			@media ( max-width : 575px) {
+				.container .support-wrapper .left-table {
+					width: 100%;
+					padding-left: 5px;
+					padding-right: 60px;
+					padding-top: 50px
+				}
+			}
+		</style>
+	</th:block>
+</html>

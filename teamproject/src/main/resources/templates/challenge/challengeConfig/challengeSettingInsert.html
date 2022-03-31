@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+		<div class="col-md-12">
+			<div class="panel">
+		    	<div class="panel-heading-white panel-heading">
+		        	<h4>챌린지 세팅 등록 폼</h4>
+		        </div>
+		        <div class="panel-body">
+					<div class="col-md-12 panel-body" style="padding-bottom:30px;">
+						<div class="col-md-6 col-md-offset-3">
+  							<form class="cmxform" id="challengeCategoryForm" method="get" action="">
+    							<div class="col-md-12">
+	      							<div class="form-group form-animate-text" style="margin-top:40px !important;">
+										<input type="text" class="form-text" id="validate_memberEmail" name="validate_memberEmail" required>
+										<span class="bar"></span>
+										<label>등록자</label>
+									</div>
+									
+									<div class="form-group form-animate-text" style="margin-top:40px !important;">
+					                    <input type="text" class="form-text" id="validate_settingName" name="validate_settingName" required>
+					                    <span class="bar"></span>
+					                    <label>챌린지 세팅명</label>
+				                    </div>
+        						</div>
+								<div style="text-align: center;">
+									<input class="submit btn btn-danger" type="submit" value="등록">
+								</div>
+							</form>
+						</div>
+					</div>
+		        </div>
+			</div>
+		</div>			
+	</th:block>
+	
+	<!-- 사용자 정의 Css -->
+		<th:block layout:fragment="customCss">
+			<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/jquery.steps.css}"/>
+		
+		</th:block>
+	
+	<!-- start: Javascript -->
+	<th:block layout:fragment="customBodyScript">	
+		
+		<!-- plugins -->
+		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.knob.js}"></script>
+		<script th:src="@{/asset/js/plugins/ion.rangeSlider.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/bootstrap-material-datetimepicker.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.mask.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/select2.full.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/nouislider.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.validate.min.js}"></script>
+		
+		
+		<!-- custom -->
+		<script th:src="@{/asset/js/main.js}"></script>
+		<script type="text/javascript">
+		  $(document).ready(function(){
+			  
+		    $("#challengeCategoryForm").validate({
+		      errorElement: "em",
+		      errorPlacement: function(error, element) {
+		        $(element.parent("div").addClass("form-animate-error"));
+		        error.appendTo(element.parent("div"));
+		      },
+		      success: function(label) {
+		        $(label.parent("div").removeClass("form-animate-error"));
+		      },
+		      rules: {
+		    	validate_memberEmail: "required",
+		    	validate_settingName: "required",
+		      },
+		      messages: {
+		    	validate_memberEmail: "이메일을 입력해주세요.",
+		    	validate_settingName: "카테고리명을 입력해주세요.",
+		      }
+		    });
+		
+		  });
+        	//스윗얼랏 사용
+        	//swal("등록되었습니다.", "확인버튼을 눌러주세요.", "success");
+		</script>
+	</th:block>
+	<!-- end: Javascript -->
+</html>
