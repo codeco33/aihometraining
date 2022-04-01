@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import aihometraining.team.dto.WorkoutGoal;
@@ -15,6 +14,7 @@ import aihometraining.team.workoutLog.service.WorkoutLogUserService;
 @RequestMapping("/workoutLog/workoutLogUser")
 public class WorkoutLogUserController {
 	
+
 	//DI 의존성 주입 생성자 메소드 주입방식
 	private WorkoutLogUserService workoutLogUserService;
 	
@@ -23,10 +23,14 @@ public class WorkoutLogUserController {
 		this.workoutLogUserService = workoutLogUserService;
 	}
 	
+	
 	@GetMapping("/workoutLogMain")
 	public String workoutLogMain(Model model) {
-			
+		
+		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
+		
 		model.addAttribute("title", "하루 일지");
+		model.addAttribute("workoutGoalList", workoutGoalList);
 		
 		return "workoutLog/workoutLogUser/workoutLogMain";
 			
@@ -53,10 +57,23 @@ public class WorkoutLogUserController {
 		
 	}
 	
+	@GetMapping("/workoutLogUpdate")
+	
+	public String workoutLogUpdate(Model model) {
+		
+		model.addAttribute("title", "일지 수정 화면");
+		
+		return "workoutLog/workoutLogUser/workoutLogUpdate";
+		
+	}
+	
 	@GetMapping("/workoutLogList")
 	public String workoutLogList(Model model) {
 		
+		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
+		
 		model.addAttribute("title", "일지 상세 화면");
+		model.addAttribute("workoutGoalList", workoutGoalList);
 		
 		return "workoutLog/workoutLogUser/workoutLogList";
 		
@@ -83,7 +100,10 @@ public class WorkoutLogUserController {
 	@GetMapping("/workoutGoalPlanList")
 	public String workoutGoalPlanList(Model model) {
 		
+		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
+		
 		model.addAttribute("title", "운동 계획");
+		model.addAttribute("workoutGoalList", workoutGoalList);
 		
 		return "workoutLog/workoutLogUser/workoutGoalPlanList";
 		

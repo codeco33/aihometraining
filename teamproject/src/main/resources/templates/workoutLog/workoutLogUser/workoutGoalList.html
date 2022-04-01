@@ -36,7 +36,7 @@
 			
 			            </div>
 			        </div>
-            		  </th:block>
+            		</th:block>
 	            	<th:block th:unless="${not #lists.isEmpty(workoutGoalList)}" th:each="l : ${workoutGoalList}">
 	            		<div class="col-lg-4 col-md-6 col-sm-8">
 	                        <div class="single-services mb-30">
@@ -73,6 +73,10 @@
 		</style>
 	</th:block>
 	
+	<!-- 사용자 정의 Script -->
+	<th:block layout:fragment="customScript">
+	
+	</th:block>
 	
 	
 	
