@@ -23,7 +23,17 @@
 		<script th:src="@{/asset/js/main.js}"></script>
 		<script type="text/javascript">
 		  $(document).ready(function(){
-		    //$('#datatables-example').DataTable();
+			  $('.ripple').removeClass('active');
+				$('.tree').css('display', 'none');
+				$('.tree li').css('background','none');
+				$('.tree li a').css('font-weight',400);
+				
+				$('.ripple:first').css('background', 'rgba(184, 184, 184, 0.2)').addClass('active');
+				
+				  function deleteCookie(name) {
+					  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+					}
+				deleteCookie('menuLink');
 		  });
 		</script>
 <!-- end: Javascript -->

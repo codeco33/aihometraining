@@ -1,20 +1,195 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layout/userdefault}">
-	<!-- 사용자 정의 title -->
-	<th:block layout:fragment="customTitle">
-		<title th:text="${title}"></title>
-	</th:block>
-	
-	<th:block layout:fragment="customContents">
-		<div class="container">
-		    <div class="row" style="background-color: #efefef;">
-		    	위시리스트
-		    </div>
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/userdefault}">
+<!-- 사용자 정의 title -->
+<th:block layout:fragment="customTitle">
+	<title th:text="${title}"></title>
+</th:block>
+<!-- 사용자 정의 Css -->
+<th:block layout:fragment="customCss">
+	<style type="text/css">
+		.orderSelect {
+			margin-bottom: 20px;
+		}
+		.allCheck {
+			margin-left: 5px;
+			margin-bottom: 0;
+		}
+		.checks {
+			position: absolute;
+			top: 10px;
+			left: 20px;
+		}
+		.wishListDiv {
+			position: relative;
+		}
+		.deleteBtn {
+			margin-left: 10px;
+			margin-top: 0;
+			padding: 0 5px;
+		}
+</style>
+</th:block>
+
+
+<th:block layout:fragment="customContents">
+	<div class="container">
+		<!-- 전체선택박스 & 정렬기준 -->
+		<div class="orderSelect d-flex align-items-end justify-content-between">
+			<!-- 전체선택 박스 -->
+			<div class="d-flex align-items-center">
+				<div class="primary-checkbox">
+					<input type="checkbox" id="default-checkbox"> <label for="default-checkbox"></label>
+				</div>
+				<label for="default-checkbox" class="allCheck">전체선택</label>
+				<a href="#" class="genric-btn primary-border small deleteBtn">선택삭제</a>
+			</div>
+
+			<!-- 정렬기준 -->
+			<div class="default-select" id="default-select">
+				<select style="display: none;">
+					<option value=" 1">최신순</option>
+					<option value="1">제목순</option>
+					<option value="1">학생수순</option>
+					<option value="1">평점순</option>
+				</select>
+				<div class="nice-select" tabindex="0">
+					<span class="current">최신순</span>
+					<ul class="list">
+						<li data-value=" 1" class="option">최신순</li>
+						<li data-value="1" class="option">제목순</li>
+						<li data-value="1" class="option">학생수순</li>
+						<li data-value="1" class="option">평점순</li>
+					</ul>
+				</div>
+			</div>
 		</div>
+
+
+		<!-- 위시리스트 시작 -->
+		<div class="row">
+			<div class="col-lg-4 col-sm-6">
+				<div class="properties properties2 mb-30">
+				<label for="checks_3">
+					<div class="properties__card">
+						<div class="properties__img overlay1 wishListDiv">
+							<img th:src="@{assets/img/gallery/featured1.png}" alt="">
+							<div class="primary-checkbox checks">
+								<input type="checkbox" id="checks_3">
+								<label for="checks_3"></label>
+							</div>
+						</div>
+						<div class="properties__caption">
+							<p>운동클래스 카테고리</p>
+							<h3>
+								<a href="#">운동클래스 이름</a>
+							</h3>
+							<p>운동클래스 설명</p>
+							<div class="properties__footer">
+								<div class="restaurant-name">
+									<div class="rating">
+										<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+											class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+											class="fas fa-star-half"></i>
+										<p>
+											<span>(90)</span>
+										</p>
+									</div>
+
+								</div>
+								<div class="price">
+									<span>29,900원</span>
+								</div>
+							</div>
+							<a href="#" class="border-btn border-btn2">수강신청 하기</a>
+						</div>
+					</div>
+					</label>
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-6">
+				<div class="properties properties2 mb-30">
+					<label for="checks_2">
+					<div class="properties__card">
+						<div class="properties__img overlay1">
+							<img th:src="@{assets/img/gallery/featured1.png}" alt="">
+							<div class="primary-checkbox checks">
+								<input type="checkbox" id="checks_2">
+								<label for="checks_2"></label>
+							</div>
+						</div>
+						<div class="properties__caption">
+							<p>운동클래스 카테고리</p>
+							<h3>
+								<a href="#">운동클래스 이름</a>
+							</h3>
+							<p>운동클래스 설명</p>
+							<div class="properties__footer">
+								<div class="restaurant-name">
+									<div class="rating">
+										<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+											class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+											class="fas fa-star-half"></i>
+										<p>
+											<span>(45)</span>
+										</p>
+									</div>
+
+								</div>
+								<div class="price">
+									<span>50,000원</span>
+								</div>
+							</div>
+							<a href="#" class="border-btn border-btn2">수강신청 하기</a>
+						</div>
+					</div>
+					</label>
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-6">
+				<div class="properties properties2 mb-30">
+					<label for="checks_1">
+						<div class="properties__card">
+							<div class="properties__img overlay1">
+								<img th:src="@{assets/img/gallery/featured1.png}" alt="">
+								<div class="primary-checkbox checks">
+									<input type="checkbox" id="checks_1">
+									<label for="checks_1"></label>
+								</div>
+							</div>
+							<div class="properties__caption">
+								<p>운동클래스 카테고리</p>
+								<h3>
+									<a href="#">운동클래스 이름</a>
+								</h3>
+								<p>운동클래스 설명</p>
+								<div class="properties__footer">
+									<div class="restaurant-name">
+										<div class="rating">
+											<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+												class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+												class="fas fa-star-half"></i>
+											<p>
+												<span>(120)</span>
+											</p>
+										</div>
 	
-	</th:block>
-	
-	
+									</div>
+									<div class="price">
+										<span>35,000원</span>
+									</div>
+								</div>
+								<a href="#" class="border-btn border-btn2">수강신청 하기</a>
+							</div>
+						</div>
+					</label>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</th:block>
+
+
 </html>
