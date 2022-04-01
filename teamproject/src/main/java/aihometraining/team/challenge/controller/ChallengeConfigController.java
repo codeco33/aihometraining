@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import aihometraining.team.challenge.service.ChallengeConfigService;
 import aihometraining.team.dto.ChallengeCategory;
 import aihometraining.team.dto.EClassCategorySmall;
-import aihometraining.team.mapper.CommonMapper;
 
 @Controller
 @RequestMapping("/challenge/challengeConfig")
