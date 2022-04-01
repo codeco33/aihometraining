@@ -17,7 +17,7 @@ import aihometraining.team.mapper.MemberMapper;
 @Transactional
 public class MemberService {
 	
-	//DI 의존성 주입 생성자메소드 주입방식
+	//DI 의존성 주입 생성자 메서드 주입 방식
 	private MemberMapper memberMapper; 
 	
 	@Autowired
