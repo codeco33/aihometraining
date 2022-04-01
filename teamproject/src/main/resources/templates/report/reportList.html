@@ -27,45 +27,48 @@
 										<thead>
 											<tr>
 												<th>신고 코드</th>
-												<th>신고 내용</th>
 												<th>신고자 이메일</th>
-												<th>신고 날짜</th>
-												<th>신고 처리</th>
+												<th>신고자 이름</th>
+												<th>신고 대상 종류</th>
+												<th>신고 대상</th>
+												<th>신고 기준 코드</th>
+												<th>신고 사유</th>
+												<th>신고자 IP</th>
+												<th>신고 등록 날짜</th>
+												<th>신고 처리 상태</th>
+												<th>신고 처리 등록자 이메일</th>
+												<th>신고 처리 등록 날짜</th>
+												<th>신고 처리 수정자 이메일</th>
+												<th>신고 처리 수정 날짜</th>
+												<th>수정</th>
+												<th>삭제</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>신고 코드</td>
-												<td>부적할한 인증 방법을 요구합니다.</td>
-												<td>id003@email.com</td>
-												<td>2022-03-30</td>
-												<td style="text-align: center;">
-													<a href="#">
-														<input type="button" class="btn btn-outline btn-warning btn-sm"  value="신고처리"/>
-													</a>
+											<tr th:if="${not #lists.isEmpty(reportList)}" th:each="l : ${reportList}">
+												<td th:text="${l.reportCode}"></td>
+												<td th:text="${l.reportMemberEmail}"></td>
+												<td th:text="${l.reportMemberName}"></td>
+												<td th:text="${l.reportTargetType}"></td>
+												<td th:text="${l.reportTarget}"></td>
+												<td th:text="${l.reportStandardCode}"></td>
+												<td th:text="${l.reportReason}"></td>
+												<td th:text="${l.reportIP}"></td>
+												<td th:text="${l.reportRegDate}"></td>
+												<td th:text="${l.reportProcessState}"></td>
+												<td th:text="${l.reportProcessRegMemberEmail}"></td>
+												<td th:text="${l.reportProcessDate}"></td>
+												<td th:text="${l.reportProcessUpdateMemberEmail}"></td>
+												<td th:text="${l.reportProcessUpdateDate}"></td>
+												<td>
+													<a th:href="@{#}">수정</a>
+												</td>
+												<td>
+													<a th:href="@{#}">삭제</a>
 												</td>
 											</tr>
-											<tr>
-												<td>신고 코드</td>
-												<td>부적할한 인증 방법을 요구합니다.</td>
-												<td>id003@email.com</td>
-												<td>2022-03-30</td>
-												<td style="text-align: center;">
-													<a href="#">
-														<input type="button" class="btn btn-outline btn-warning btn-sm"  value="신고처리"/>
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td>신고 코드</td>
-												<td>부적할한 인증 방법을 요구합니다.</td>
-												<td>id003@email.com</td>
-												<td>2022-03-30</td>
-												<td style="text-align: center;">
-													<a href="#">
-														<input type="button" class="btn btn-xs btn-outline btn-warning"  value="신고처리"/>
-													</a>
-												</td>
+											<tr th:unless="${not #lists.isEmpty(reportList)}">
+												<td colspan="7">등록된 신고가 없습니다.</td>
 											</tr>
 										</tbody>
 				                        </table>

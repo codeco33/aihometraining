@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import aihometraining.team.dto.Report;
 import aihometraining.team.dto.ReportStandard;
 import aihometraining.team.mapper.ReportMapper;
 
@@ -23,6 +24,15 @@ public class ReportService {
 		this.reportMapper = reportMapper;
 	}
 	
+	/**
+	 * 신고 목록 조회
+	 */
+	public List<Report> getReportList(){
+		
+		List<Report> reportList = reportMapper.getReportList();
+		
+		return reportList;
+	}
 	/**
 	 * 신고 기준 목록 조회
 	 */
