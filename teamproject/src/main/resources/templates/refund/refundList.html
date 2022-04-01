@@ -10,7 +10,7 @@
 <th:block layout:fragment="customCss">
 	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/simple-line-icons.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/icheck/skins/flat/red.css}"/>
-	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/daterangepicker.css}" />
 <style type="text/css">
 .btn-outline {
 	padding: 5px 20px;
@@ -368,7 +368,7 @@ input[name="searchValue"] {
 	<script th:src="@{/asset/js/plugins/dataTables.bootstrap.min.js}"></script>
 	<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
 	<script th:src="@{/asset/js/plugins/icheck.min.js}"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+	<script type="text/javascript" th:src="@{/asset/js/plugins/daterangepicker.min.js}"></script>
 	<!-- custom -->
 	<script th:src="@{/asset/js/main.js}"></script>
 	<script type="text/javascript">
