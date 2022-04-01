@@ -43,6 +43,23 @@
 					                    self-imposed MCSE training. who has the willpower to actually
 					                </p>
 		               			</div>
+		               			
+					            <div class = "row justify-content-center mt-4">
+			               			<div class="col-lg-4 mb-2 mb-lg-0" style="display: inline-block">
+				               			<a th:href="@{/workoutLog/workoutLogUser/workoutLogUpdate}">
+					                        <button class="button button-contactForm" id="button">
+					                        	일지 수정
+					                        </button>
+					                	</a>
+				                	</div>
+				                	<div class="col-lg-4 mb-2 mb-lg-0" style="display: inline-block">
+				               			<a th:href="@{/workoutLog/workoutLogUser/workoutLogUpdate}">
+					                        <button class="button button-contactForm" id="button" >
+					                        	일지 삭제
+					                        </button>
+					                	</a>
+				                	</div>
+					            </div>
                             </article>     
 		                </div>
 			            <div class="navigation-top">
@@ -199,12 +216,35 @@
 			   </div>
 			   <div class="col-lg-4">
 					<div class="blog_right_sidebar">
-		                <aside class="single_sidebar_widget search_widget">
-	                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" th:onclick="|location.href='@{/workoutLog/workoutLogUser/workoutLogBest}'|">
-	                        	인기 일지
-	                        </button>
-		                </aside>
 	                    <aside class="single_sidebar_widget popular_post_widget">
+                                <h3 class="widget_title" style="color: #2d2d2d;">나의 목표</h3>
+                                <th:block th:if="${not #lists.isEmpty(workoutGoalList)}" th:each="l : ${workoutGoalList}">
+	                                <div class="single-services mb-30">
+			                           <div class="features-caption">
+			                               <h3>운동 목표 </h3>
+			                               <p>[[${l.workoutGoalContent}]]</p>
+			                           </div>
+			                           <h6>목표 달성률</h6>
+					                   <div class="percentage">
+											<div class="progress">
+												<div class="progress-bar color-7" role="progressbar" style="width: 30%"
+												aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+											</div>
+										</div>
+			                      	</div>
+			            	    </th:block>
+			            	    <th:block th:unless="${not #lists.isEmpty(workoutGoalList)}" th:each="l : ${workoutGoalList}">
+				            		<div class="col-lg-4 col-md-6 col-sm-8">
+				                        <div class="single-services mb-30">
+				                            <div class="features-caption">
+				                                <h3>운동 목표</h3>
+				                                <p>등록된 운동 목표가 없습니다.</p>
+				                            </div>
+				                        </div>
+				                    </div>
+				            	</th:block>      	
+                        </aside>
+                         <aside class="single_sidebar_widget popular_post_widget">
 	                        <h3 class="widget_title" style="color: #2d2d2d;">오늘의 식단</h3>
 	                        <div class="media post_item">
 	                            <img th:src="@{/assets/img/post/post_1.png}" alt="post">
@@ -234,48 +274,6 @@
 	                            </div>
 	                        </div>
 	                    </aside>
-	                    <aside class="single_sidebar_widget popular_post_widget">
-                                <h3 class="widget_title" style="color: #2d2d2d;">나의 목표</h3>
-                                <div class="single-services mb-30">
-		                           <div class="features-caption">
-		                               <h3>운동 목표 1</h3>
-		                               <p>한달동안 2kg 감량하기</p>
-		                           </div>
-		                           <h6>목표 달성률</h6>
-				                   <div class="percentage">
-										<div class="progress">
-											<div class="progress-bar color-7" role="progressbar" style="width: 30%"
-											aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-										</div>
-									</div>
-		                      	</div>
-                                <div class="single-services mb-30">
-		                            <div class="features-caption">
-		                                <h3>운동 목표 2</h3>
-		                                <p>복근 만들기</p>
-		                            </div>
-		                            <h6>목표 달성률</h6>
-				                    <div class="percentage">
-										<div class="progress">
-											<div class="progress-bar color-7" role="progressbar" style="width: 30%"
-											aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-										</div>
-									</div>
-			                    </div>
-                                <div class="single-services mb-30">
-		                            <div class="features-caption">
-		                                <h3>운동 목표 3</h3>
-		                                <p>다리 찢기</p>
-		                            </div>
-		                            <h6>목표 달성률</h6>
-				                    <div class="percentage">
-										<div class="progress">
-											<div class="progress-bar color-7" role="progressbar" style="width: 30%"
-											aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-										</div>
-									</div>
-		                        </div>
-                        </aside>
 	                    <aside class="single_sidebar_widget tag_cloud_widget">
 	                        <h4 class="widget_title" style="color: #2d2d2d;">과제</h4>
 	                        <ul class="list">
@@ -323,13 +321,22 @@
 	<th:block layout:fragment="customCss">
 		<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
 		<!-- Custom Stylesheet -->
-    	<link th:href="@{/todolist/css/style.css}" rel="stylesheet">
     	<style>
 			.progress-bar.color-7 {
 				background-color: #a367e7
 			}
 			h6{
 				font-weight: bold
+			}
+			#button{
+				background: #fff;
+			    color: #C86FFF !important;
+			    font-family: "Josefin Sans", sans-serif !important;
+			    border: 1px solid #C86FFF;
+			    letter-spacing: 3px;
+			    text-align: center;
+			    color: #C86FFF;
+			
 			}
 		</style>
 	</th:block>

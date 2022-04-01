@@ -20,10 +20,19 @@
 		
 		#paymentDetailBtnDiv {
 			text-align: right;
+			margin-top: 50px;
 		}
 		
 		#paymentCancelBtn{
 			padding: 5px 10px;
+		}
+		
+		.orderGoodsTable th, .orderGoodsTable td {
+			text-align: center;
+			vertical-align: middle !important;
+		}
+		td[colspan="5"] {
+			text-align: right;
 		}
 </style>
 </th:block>
@@ -96,13 +105,13 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="detailTable">
+				<div class="detailTable responsive-table">
 					<div class="title">
 						<h4>
 							<span class="fa fa-angle-right"></span> 주문 상품 정보
 						</h4>
 					</div>
-					<table class="table">
+					<table class="table orderGoodsTable">
 						<colgroup>
 							<col style="width: 150px">
 							<col style="width: 250px">
@@ -115,7 +124,7 @@
 								<th colspan="2">상품정보</th>
 								<th>판매가</th>
 								<th>결제상태</th>
-								<th>환불</th>
+								<th>다음 결제 일자</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -123,15 +132,15 @@
 								<td>이미지</td>
 								<td>클래스/챌린지 제목<br>
 								클래스/챌린지 개설한 사람 이름</td>
-								<td></td>
-								<td></td>
-								<td></td>
+								<td>50,000</td>
+								<td>결제완료</td>
+								<td>-</td>
 							</tr>
 						</tbody>
 						<tfoot>
 						<tr>
-							<td colspan="5">
-							상품구매금액 <strong>35,900</strong><span class="displaynone"> + 부가세 0</span> + 배송비 0 + 지역별배송비 0<span class=""> - 상품할인금액 3,000</span> = 합계 :  <strong class="txtEm gIndent10"><span class="txt18">32,900</span></strong> <span class="displaynone"></span>
+							<td colspan="5" >
+							상품구매금액 <strong>50,000</strong> - 포인트 사용금액 <strong>6,000</strong> = 합계 :  <strong>44,000</strong> 
 							</td>
 						</tr>
 						</tfoot>
@@ -140,7 +149,7 @@
 				
 				
 				<div id="paymentDetailBtnDiv">
-					<a th:href="@{/paymentList}"><input type="button" class="btn btn-outline btn-default" value="거래내역 목록"></a>
+					<a th:href="@{/paymentList}"><input type="button" class="btn btn-outline btn-default" value="결제내역 목록"></a>
 				</div>
 			</div>
 		</div>
