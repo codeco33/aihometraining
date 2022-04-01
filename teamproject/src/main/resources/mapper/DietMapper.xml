@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="aihometraining.team.diet.mapper.DietMapper">
+	
+	<resultMap type="DietBank" id="DietBankResultMap">
+		<id 	column="dietBankCode" 			property="dietBankCode"/>
+		<result column="eClassApprovedCode" 	property="eClassApprovedCode"/>
+		<result column="memberEmail" 			property="memberEmail"/>
+		<result column="dietBankInsertDate" 	property="dietBankInsertDate"/>
+		<result column="memberUpdateEmail" 		property="memberUpdateEmail"/>
+		<result column="dietBankUpdateDate" 	property="dietBankUpdateDate"/>
+	</resultMap>
+	
+	
+	<resultMap type="DietMealLevelList" 	id="DietMealLevelListResultMap">
+		<result column="nutrientsAPIFoodSort" 	property="nutrientsAPIFoodSort"/>
+		<result column="nutrientsAPISortdetail" 	property="nutrientsAPISortdetail"/>
+	</resultMap>
+	
+	
+	<resultMap type="DietNutrientList" 	id="DietNutrientListMap">
+		<id 	column="nutrientsAPICode" 			property="nutrientsAPICode"/>
+		<result column="nutrientsAPIFoodSort" 		property="nutrientsAPIFoodSort"/>
+		<result column="nutrientsAPISortdetail" 	property="nutrientsAPISortdetail"/>
+		<result column="nutrientsAPIName" 			property="nutrientsAPIName"/>
+		<result column="nutrientsAPIServe" 			property="nutrientsAPIServe"/>
+		<result column="nutrientsAPIKcal" 			property="nutrientsAPIKcal"/>
+		<result column="nutrientsAPICarbo" 			property="nutrientsAPICarbo"/>
+		<result column="nutrientsAPIPro" 			property="nutrientsAPIPro"/>
+		<result column="nutrientsAPIFat" 			property="nutrientsAPIFat"/>
+		<result column="nutrientsAPINatr" 			property="nutrientsAPINatr"/>
+	
+	</resultMap>
+	
+	
+
+
+	<select id="selectDietMealListDetail" parameterType="String" resultMap="DietMealLevelListResultMap">
+		SELECT 
+			nutrientsAPISortdetail
+		FROM 
+			nutrientsapi
+		WHERE 
+			nutrientsAPIFoodSort = #{mainMealSort}
+		GROUP BY 
+			nutrientsAPISortdetail;
+	</select>
+	
+	
+	<select id="selectDietMealLevelList" resultMap="DietMealLevelListResultMap">
+		SELECT 
+			nutrientsAPIFoodSort
+		FROM 
+			nutrientsapi
+		GROUP BY 
+			nutrientsAPIFoodSort;
+	</select>
+
+	
+	<select id="getDietBankListAdminByC" parameterType="String" resultMap="DietBankResultMap" fetchSize="1000">
+		SELECT 
+			 dietBankCode
+			,eClassApprovedCode
+			,memberEmail
+			,dietBankInsertDate
+			,memberUpdateEmail
+			,dietBankUpdateDate	
+		FROM 
+			dietbank
+		WHERE
+			dietBankCode = #{newCode};
+	</select>
+	
+	
+	<select id="getDietBankListAdmin" resultMap="DietBankResultMap" fetchSize="1000">
+		SELECT 
+			 dietBankCode
+			,eClassApprovedCode
+			,memberEmail
+			,dietBankInsertDate
+			,memberUpdateEmail
+			,dietBankUpdateDate	
+		FROM 
+			dietbank;
+	</select>
+	
+	
+	<insert id="insertDietBankList2" parameterType="String">
+		INSERT INTO dietbank( 	
+				 dietBankCode
+			 	,memberEmail
+			 	,dietBankInsertDate
+			)VALUES (
+				 #{newCode}
+				,#{insertEmail}
+				, CURDATE()
+			);
+	</insert>
+
+
+	
+	<select id="selectDietBankListNewCode" resultType="String">
+	/* DietBank최신 pk불러오기 */
+			SELECT
+			CONCAT('DBC',
+					CAST(
+						max(cast(substring(dietBankCode,4) as UNSIGNED))+1
+					AS char)
+				) AS newDietBankCodeNum
+			FROM
+				dietbank ;
+		
+	</select>
+	
+	
+	<delete id="deleteDietBankList" parameterType="String">
+		DELETE FROM 
+			dietbank 
+		WHERE 
+			dietBankCode = #{dietBankCode};
+	</delete>
+	
+	
+	<select id="selectDietNutrientList" parameterType="String" resultMap="DietNutrientListMap">
+		SELECT 
+			nutrientsAPICode
+			, nutrientsAPIFoodSort
+			, nutrientsAPISortdetail
+			, nutrientsAPIName
+			, nutrientsAPIServe
+			, nutrientsAPIKcal
+			, nutrientsAPICarbo
+			, nutrientsAPIPro
+			, nutrientsAPIFat
+			, nutrientsAPINatr
+		FROM 
+			nutrientsapi	
+		WHERE
+			nutrientsAPIFoodSort = #{mainMealSort};
+	
+	</select>
+	
+	
+
+
+	
+	
+</mapper>
