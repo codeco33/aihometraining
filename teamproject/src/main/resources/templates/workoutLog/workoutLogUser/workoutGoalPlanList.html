@@ -29,15 +29,15 @@
 	                    </div>
 	            	</th:block>
 	            </div>	
-                <div class="row pt-5">
-                    <div class="col-lg-8 mb-5 mb-lg-0">
+                <div class="row justify-content-sm-center pt-5">
+                    <div class="col-lg-9 mb-5 mb-lg-0">
                         <div class="blog_left_sidebar">
 							<div id='calendar'></div>
 					    	<div style='clear:both'></div>
 						</div>
 		       		</div>
 		       		
-		       		<div class="col-lg-4">
+		       		<div class="col-lg-3" id="eventform">
                         <div class="blog_right_sidebar">
                             <aside class="single_sidebar_widget search_widget">
                             	 <div id='external-events'>
@@ -48,47 +48,23 @@
 									        <div class='fc-event'>하루 요가 섹션 3</div>
 									        <div class='fc-event'>하루 요가 섹션 4</div>
 									        <div class='fc-event'>하루 요가 섹션 5</div>
-								      	</div>
-										<p>
-								       		<input type='checkbox' id='drop-remove' />
-								        	<label for='drop-remove'>remove after drop</label>
-								      	</p>
-									</div>
-                            	 <div id='external-events'>
-							    		<h4>나의 일정</h4>
-							    		<div id='external-events-list'>
-									        <div class='fc-event'>[[${title}]]</div>
-									        <div class='fc-event'>하루 요가 섹션 2</div>
-									        <div class='fc-event'>하루 요가 섹션 3</div>
-									        <div class='fc-event'>하루 요가 섹션 4</div>
 									        <div class='fc-event'>하루 요가 섹션 5</div>
-								      	</div>
-										<p>
-								       		<input type='checkbox' id='drop-remove' />
-								        	<label for='drop-remove'>remove after drop</label>
-								      	</p>
-									</div>
-                            	 <div id='external-events'>
-							    		<h4>나의 식단</h4>
-							    		<div id='external-events-list'>
-									        <div class='fc-event'>[[${title}]]</div>
-									        <div class='fc-event'>하루 요가 섹션 2</div>
-									        <div class='fc-event'>하루 요가 섹션 3</div>
-									        <div class='fc-event'>하루 요가 섹션 4</div>
 									        <div class='fc-event'>하루 요가 섹션 5</div>
-								      	</div>
-										<p>
-								       		<input type='checkbox' id='drop-remove' />
-								        	<label for='drop-remove'>remove after drop</label>
-								      	</p>
-									</div>
-                            	 <div id='external-events'>
-							    		<h4>나의 과제</h4>
-							    		<div id='external-events-list'>
-									        <div class='fc-event'>[[${title}]]</div>
-									        <div class='fc-event'>하루 요가 섹션 2</div>
-									        <div class='fc-event'>하루 요가 섹션 3</div>
-									        <div class='fc-event'>하루 요가 섹션 4</div>
+									        <div class='fc-event'>하루 요가 섹션 5</div>
+									        <div class='fc-event'>하루 요가 섹션 5</div>
+									        <div class='fc-event'>하루 요가 섹션 5</div>
+									        <h4>나의 운동 계획</h4>
+									        <div class='fc-event'>하루 요가 섹션 5</div>
+									        <div class='fc-event'>하루 요가 섹션 5</div>
+									        <div class='fc-event'>하루 요가 섹션 5</div>
+									        <div class='fc-event'>하루 요가 섹션 5</div>
+									        <div class='fc-event'>하루 요가 섹션 5</div>
+									        <div class='fc-event'>하루 요가 섹션 5</div>
+									        <div class='fc-event'>하루 요가 섹션 5</div>
+									        <div class='fc-event'>하루 요가 섹션 5</div>
+									        <div class='fc-event'>하루 요가 섹션 5</div>
+									        <div class='fc-event'>하루 요가 섹션 5</div>
+									        <div class='fc-event'>하루 요가 섹션 5</div>
 									        <div class='fc-event'>하루 요가 섹션 5</div>
 								      	</div>
 										<p>
@@ -119,13 +95,13 @@
 			    width: 55%;
 			}
 
-		  .col-lg-4 {
-		     -ms-flex: 0 0 33.333333% !important;
+		  #eventform {
 		     flex: 0 0 33.333333% !important;
-		     max-width: 33.333333% !important;
 		     height: max-content !important;
 		     background: #fbf9ff !important;
 		     padding-bottom: 30px !important;
+		     display: block; 
+			 padding-left: 45px !important;
 		  }
 		  
 		  /* 달력 */	
@@ -181,7 +157,8 @@
 		  }
 		  
 		  .fc-event, .fc-event-dot {
-			    background-color: #C86FFF !important;
+			    background-color: #CCCCFF !important;
+			    
 		  }
 		  
 		  .fc-event {
@@ -191,6 +168,7 @@
 			  line-height: 1.4;
 			  border-radius: 3px;
 			  border: 1px solid #C86FFF !important;
+			  color: #212529 !important;
 		  }
 		  
 		/* 프로그레스 */
@@ -200,7 +178,12 @@
 		h2,h6{
 		font-weight: bold
 		}
-		  
+		
+		#addBtn {
+			height: 2px !important;
+			line-height: 0px;
+		}
+		
 		</style>
 	</th:block>
 	
@@ -217,7 +200,7 @@
 		<script th:src="@{/fullcalendar/packages/timegrid/main.js}"></script>
 		<script th:src="@{/fullcalendar/packages/list/main.js}"></script>
 		
-		<script>
+		<script type="text/javascript">
 		  document.addEventListener('DOMContentLoaded', function() {
 			  var Calendar = FullCalendar.Calendar;
 			    var Draggable = FullCalendarInteraction.Draggable
@@ -235,21 +218,21 @@
 			      }
 			    });
 
-			    //// the individual way to do it
-	            // var containerEl = document.getElementById('external-events-list');
-	            // var eventEls = Array.prototype.slice.call(
-	            //   containerEl.querySelectorAll('.fc-event')
-	            // );
-	            // eventEls.forEach(function(eventEl) {
-	            //   new Draggable(eventEl, {
-	            //     eventData: {
-	            //       title: eventEl.innerText.trim(),
-	            //     }
-	            //   });
-	            // });
+			     /* // the individual way to do it
+	             var containerEl = document.getElementById('external-events-list');
+	             var eventEls = Array.prototype.slice.call(
+	               containerEl.querySelectorAll('.fc-event')
+	             );
+	             eventEls.forEach(function(eventEl) {
+	               new Draggable(eventEl, {
+	                 eventData: {
+	                   title: eventEl.innerText.trim(),
+	                 }
+	               });
+	             }); */
+	             
 
 	            /* initialize the calendar
-
 			    -----------------------------------------------------------------*/
 		    var calendarEl = document.getElementById('calendar');
 		
@@ -332,10 +315,16 @@
 		          start: '2022-03-12T20:00:00'
 		        }
 		      ]
-		    });
+		    })
 		  
 		    calendar.render();
 		  });
+		  
+		  var fc = $('.fc-day-grid-event');
+		  console.log(fc);
+		  
+	  
+
 		</script>
 		
 	</th:block>

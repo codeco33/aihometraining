@@ -107,13 +107,13 @@
 					                     </div>
 					                  </div>
 					               </div>
-					               <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit">검색</button>
 					            </form>
-					        </aside>
-                            <aside class="single_sidebar_widget search_widget">
 	                            <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" th:onclick="|location.href='@{/workoutLog/workoutLogUser/workoutLogInsert}'|">
 	                            	오늘의 일지 등록
 	                            </button>
+	                            <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn mt-3" th:onclick="|location.href='@{/workoutLog/workoutLogUser/workoutLogBest}'|">
+		                        	인기 일지
+		                        </button>
                             </aside>
                             <aside class="single_sidebar_widget post_category_widget">
                                 <h4 class="widget_title" style="color: #2d2d2d;">오늘의 할 일</h4>
@@ -186,92 +186,6 @@
 				                        </div>
 				                    </div>
 				            	</th:block>      	  	
-                            </aside>
-                            <aside class="single_sidebar_widget tag_cloud_widget">
-                                <h4 class="widget_title" style="color: #2d2d2d;">수강중인 클래스</h4>
-                                <ul class="list">
-                                    <li>
-                                        <a href="#">문어요가</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">드루와복싱</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">하루 명상</a>
-                                    </li>
-                                </ul>
-                            </aside>
-
-                            <aside class="single_sidebar_widget instagram_feeds">
-                                <h4 class="widget_title" style="color: #2d2d2d;">피드백</h4>
-                            	<div class="comments-area">
-	                            	<div class="comment-list">
-							            <div class="single-comment justify-content-between d-flex">
-							               <div class="user justify-content-between d-flex">
-							                  <div class="thumb">
-							                     <img th:src="@{/assets/img/mds.PNG}" alt="">
-							                  </div>
-							                  <div class="desc">
-							                     <p class="comment">
-							                     	오늘 저녁 메뉴는 무엇입니까?
-							                     </p>
-							                     <p class="comment">
-							                     	<h5>
-							                        	<a href="#">마동석</a>
-							                        </h5>
-							                        <p class="date">March 25, 2022 at 6:10pm </p>
-							                        <div class="reply-btn">
-							                           <a href="#" class="btn-reply text-uppercase">reply</a>
-							                        </div>
-							                  </div>
-							               </div>
-							            </div>
-							         </div>
-							         <div class="comment-list">
-							            <div class="single-comment justify-content-between d-flex">
-							               <div class="user justify-content-between d-flex">
-							                  <div class="thumb">
-							                     <img th:src="@{/assets/img/mds.PNG}" alt="">
-							                  </div>
-							                  <div class="desc">
-							                     <p class="comment">
-							                     	설마 치킨은 아니겠지요	
-							                     <p class="comment">
-							                     	<h5>
-							                        	<a href="#">마동석</a>
-							                        </h5>
-							                        <p class="date">March 25, 2022 at 6:11pm  </p>
-							                        <div class="reply-btn">
-							                           <a href="#" class="btn-reply text-uppercase">reply</a>
-							                        </div>
-							                  </div>
-							               </div>
-							            </div>
-							         </div>
-							         <div class="comment-list">
-							            <div class="single-comment justify-content-between d-flex">
-							               <div class="user justify-content-between d-flex">
-							                  <div class="thumb">
-							                     <img th:src="@{/assets/img/mds.PNG}" alt="">
-							                  </div>
-							                  <div class="desc">
-							                     <p class="comment">
-							                     	설마 술은 아니겠지요
-							                     	드루와드루와	
-							                     </p>
-							                     <p class="comment">
-							                     	<h5>
-							                        	<a href="#">마동석</a>
-							                        </h5>
-							                        <p class="date">March 25, 2022 at 6:12pm  </p>
-							                        <div class="reply-btn">
-							                           <a href="#" class="btn-reply text-uppercase">reply</a>
-							                        </div>
-							                  </div>
-							               </div>
-							            </div>
-							         </div>
-							      </div>
                             </aside>
                         </div>
                     </div>
