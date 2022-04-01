@@ -30,7 +30,7 @@ public class MemberController {
 	private static final Logger log = LoggerFactory.getLogger(MemberController.class);
 
 	
-	//DI 의존성 주입 생성자 메소드 주입방식
+	//DI 의존성 주입 생성자 메소드 주입 방식
 	private MemberService memberService;
 	private MemberMapper memberMapper;
 	
