@@ -4,6 +4,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="aihometraining.team.mapper.ReportMapper">
 
+	<resultMap type="Report" id="reportResultMap">
+		<id 	column="reportCode" 					property="reportCode"/>
+		<result column="reportMemberEmail" 				property="reportMemberEmail"/>
+		<result column="reportMemberName" 				property="reportMemberName"/>
+		<result column="reportTargetType" 				property="reportTargetType"/>
+		<result column="reportTarget" 					property="reportTarget"/>
+		<result column="reportStandardCode" 			property="reportStandardCode"/>
+		<result column="reportReason" 					property="reportReason"/>
+		<result column="reportIP" 						property="reportIP"/>
+		<result column="reportRegDate" 					property="reportRegDate"/>
+		<result column="reportProcessState" 			property="reportProcessState"/>
+		<result column="reportProcessRegMemberEmail" 	property="reportProcessRegMemberEmail"/>
+		<result column="reportProcessDate" 				property="reportProcessDate"/>
+		<result column="reportProcessUpdateMemberEmail" property="reportProcessUpdateMemberEmail"/>
+		<result column="reportProcessUpdateDate" 		property="reportProcessUpdateDate"/>
+	</resultMap>
+
 	<resultMap type="ReportStandard" id="reportStandardResultMap">
 		<id 	column="reportStandardCode" 		property="reportStandardCode"/>
 		<result column="reportStandardName" 		property="reportStandardName"/>
@@ -13,6 +30,32 @@
 		<result column="reportStandardUpdateDate" 	property="reportStandardUpdateDate"/>
 	</resultMap>
 
+	<select id="getReportList" parameterType="String" resultMap="reportResultMap" fetchSize="1000">
+		/* 신고 목록 조회  */
+		SELECT 
+			 r.reportCode
+			,r.reportMemberEmail
+			,r.reportMemberName
+			,r.reportTargetType
+			,r.reportTarget
+			,r.reportStandardCode
+			,r.reportReason
+			,r.reportIP
+			,r.reportRegDate
+			,r.reportProcessState
+			,r.reportProcessRegMemberEmail
+			,r.reportProcessDate
+			,r.reportProcessUpdateMemberEmail
+			,r.reportProcessUpdateDate
+		FROM 
+			report AS r;
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="searchKey != null and searchKey != '' and searchValue != ''">
+				${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
+			</if>
+		</trim>;
+	</select>
+	
 	<select id="getReportStandardList" parameterType="String" resultMap="reportStandardResultMap" fetchSize="1000">
 		/* 신고 기준 목록 조회 */
 		SELECT 
