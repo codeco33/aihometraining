@@ -8,52 +8,49 @@
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
-		<script th:src="@{/assets/js/eClassNav.js}"></script>
 		<div class="container-fluid">
 			<ul class="nav nav-tabs" 
+				id="myTab"
 				role="tablist"
 				style="	background: #c054ff;
 						background: -moz-linear-gradient(top, #c054ff 0%, #5274ff 100%);
 						background: -webkit-linear-gradient(top, #c054ff 0%, #5274ff 100%);
 						background: linear-gradient(to bottom, #c054ff 0%, #5274ff 100%);
-						filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c054ff', endColorstr='#5274ff', GradientType=0);
-						">
-				<li class="nav-item" role="presentation">
-					<a class="nav-link active" id="home-tab" data-toggle="tab" href=".introduce" role="tab" aria-controls="introduce" aria-selected="true">강의소개</a>
+						filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c054ff', endColorstr='#5274ff', GradientType=0); ">
+				<li class="nav-item">
+					<a class="nav-link active" id="home-tab" data-toggle="tab" href=".introduce" role="tab" aria-controls="home" aria-selected="true">운동소개</a>
 				</li>
-				<li class="nav-item" role="presentation">
-					<a class="nav-link" id="section-tab" data-toggle="tab" href=".section" role="tab" aria-controls="section" aria-selected="false">커리큘럼</a>
+				<li class="nav-item">
+					<a class="nav-link" id="profile-tab" data-toggle="tab" href=".section" role="tab" aria-controls="profile" aria-selected="false">커리큘럼짜기</a>
 				</li>
-				<li class="nav-item" role="presentation">
-					<a class="nav-link" id="contact-tab" data-toggle="tab" href=".contact" role="tab" aria-controls="contact" aria-selected="false">Q n A</a>
+				<li class="nav-item">
+					<a class="nav-link" id="contact-tab" data-toggle="tab" href=".QnA" role="tab" aria-controls="contact" aria-selected="false">Q n A</a>
 				</li>
 			</ul>
-			<div class="tab-content">
-				<form action="">
-					<div class="tab-pane fade show active introduce" role="tabpanel" aria-labelledby="home-tab">
-						<input type="file" multiple="multiple">
-						<textarea rows="20"style="width: 100%" placeholder="강의할 운동을 소개해주세요"></textarea>
-					</div>
-					<div class="tab-pane fade section" role="tabpanel" aria-labelledby="section-tab">
-						<div class="row" style="padding: 20px;">
-							<div class="col-10 sectionTitle">
-								<input type="text" style="width: 70%;" placeholder="섹션명을 정해주세요">
-								<div class="curriculum" style="padding: 10px;">
-									<div class="col-8">
-										<input type="text" style="width: 60%;" placeholder="커리큘럼명 또는 영상명">
-										<button type="button" class="btn btn4">커리큘럼 추가</button>
-										<button type="button" class="btn btn4">커리큘럼 삭제</button>
-										<input type="file">
-									</div>
-								</div>
-							</div>
-							<div class="col-1">
-								<button class="btn btn4" id="sectionTitleBtn">섹션추가</button>
-							</div>
+			<div class="tab-content" id="myTabContent" style="width: 100%; padding: 10px;">
+				<div class="tab-pane fade show active introduce" role="tabpanel" aria-labelledby="home-tab">
+					<input type="file" multiple="multiple">
+					<textarea rows="20" cols="" style="width: 100%;"></textarea>
+				</div>
+				<div class="tab-pane fade section row" role="tabpanel" aria-labelledby="profile-tab">
+					<div class="col-md-8" style="padding: 15px;">
+						<input type="text" class="sectionTitle">
+						<div class="sectionCurriculum">
+							<input type="text" class="curriculum">
+							<input type="file">
+						</div>
+						<div>
+							<button type="button" class="curriculumAdd btn btn4">커리큘럼 추가</button>
+							<button type="button" class="curriculumDle btn btn4">커리큘럼 삭제</button>
 						</div>
 					</div>
-					<div class="tab-pane fade contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-				</form>
+					<div class="col-md-2">
+						<button type="button" class="titleAdd btn btn4">섹션 추가</button>
+					</div>
+				</div>
+				<div class="tab-pane fade QnA" role="tabpanel" aria-labelledby="contact-tab">
+					
+				</div>
 			</div>
 		</div>
 	</th:block>
