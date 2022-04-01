@@ -1,17 +1,107 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layout/userdefault}">
-	<!-- 사용자 정의 title -->
-	<th:block layout:fragment="customTitle">
-		<title th:text="${title}"></title>
-	</th:block>
-	
-	<th:block layout:fragment="customContents">
-		결제 페이지
-		<br><Br><br><Br><br><Br><br><Br><br><Br><br><Br><br><Br><br><Br><br><Br><br><Br><br><Br><br><Br>
-	
-	</th:block>
-	
-	
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head th:replace="userfragments/head :: headFragment"></head>
+
+<!-- 사용자 정의 title -->
+<th:block layout:fragment="customTitle">
+	<title th:text="${title}"></title>
+</th:block>
+
+<!-- 사용자 정의 Css -->
+<th:block layout:fragment="customCss">
+	<style type="text/css">
+#paymentHeader {
+	height: 50px;
+	background: #efefef;
+	padding: 0 20px;
+}
+
+#paymentHeader span {
+	font-size: 25px;
+}
+
+#paymentSection {
+	padding: 50px 0;
+}
+</style>
+</th:block>
+<body>
+	<div id="paymentHeader"
+		class="d-flex justify-content-between align-items-center">
+		<div>
+			<span class="ti-angle-left"></span> <span class="ti-home"></span>
+
+		</div>
+		<div>
+			<span class="ti-bell"></span> <span class="ti-user"></span>
+		</div>
+	</div>
+
+	<div id="paymentSection" class="services-area services-area2">
+		<div class="container">
+			<div class="row justify-content-sm-center">
+			
+				<div class="col-sm-8">
+					<div class="single-services mb-30">
+						<div class="features-caption">
+							<h3>수강기간 선택</h3>
+							<div class="d-flex justify-content-start">
+								<div class="primary-radio">
+									<input type="checkbox" id="radio1" name="radios"> <label
+										for="radio1"></label>
+								</div>
+								<label for="radio1"> 1개월</label>
+							</div>
+							<div class="d-flex justify-content-start">
+								<div class="primary-radio">
+									<input type="checkbox" id="radio2" name="radios"> <label
+										for="radio2"></label>
+								</div>
+								<label for="radio2"> 커리큘럼 기간동안</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			<div class="col-sm-8">
+				<div class="single-services mb-30">
+					<div class="features-caption">
+						<h3>결제 금액</h3>
+						<p>The automated process all your website tasks.</p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-8">
+				<div class="single-services mb-30">
+					<div class="features-caption">
+						<h3>휴대폰 번호 입력</h3>
+						<p>The automated process all your website tasks.</p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-8">
+				<div class="single-services mb-30">
+					<div class="features-caption">
+						<h3>결제 수단</h3>
+						<p>The automated process all your website tasks.</p>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	</div>
+	<div id="back-top">
+		<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+	</div>
+
+	<th:block th:replace="userfragments/userJavaScripts :: userJSFragment"></th:block>
+	<th:block layout:fragment="customBodyScript"></th:block>
+</body>
+
+
 </html>
