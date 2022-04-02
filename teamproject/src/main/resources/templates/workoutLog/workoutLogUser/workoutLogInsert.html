@@ -12,45 +12,50 @@
 			<div class="section-top-border">
 				<div class="row justify-content-center">
 					<div class="col-lg-8 col-md-8">
-						<form class="mb-5" action="#">
-							<h3 class="mb-30">오늘 일지 등록</h3>
+						<h3 class="mb-30">오늘 일지 등록</h3>
+						<form class="mb-5" th:action="@{/workoutLog/workoutLogUser/workoutLogInsert}" method="post">
+							<!-- 일지 제목 -->
 							<div class="mt-10">
-								<input type="text" name="workoutLogTitle" placeholder="일지 제목"
-								onfocus="this.placeholder = ''" onblur="this.placeholder = '일지 제목'" required
-								class="single-input">
+									<input type="text" name="workoutLogTitle" placeholder="일지 제목" onfocus="this.placeholder = ''" onblur="this.placeholder = '일지 제목'" required class="single-input">
 							</div>
 							<div class="input-group-icon mt-10">
-								<div class="icon">
-									<i class="fa fa-star" aria-hidden="true"></i>
-								</div>
-								<div class="form-select" id="eClassTakeCode">
-									<select>
-										<option value="0">수강중인 클래스</option>
-										<option value="1">문어 요가</option>
-										<option value="2">드루와 복싱</option>
-										<option value="3">하루 명상</option>
-									</select>
-								</div>
+									<div class="icon"><i class="fas fa-bookmark" aria-hidden="true"></i></div>
+									<div class="form-select">
+										<!-- 일지 공개범위 선택 -->
+										<select name="workoutLogPrivacyBoundsCode">
+											<th:block th:if="${not #lists.isEmpty(workoutLogPrivacyboundsList)}" th:each="wpl : ${workoutLogPrivacyboundsList}">
+												<option th:value="${wpl.workoutLogPrivacyBoundsCode}" >[[${wpl.workoutLogPrivacyBoundsContent}]]</option>
+											</th:block>
+											<th:block th:unless="${not #lists.isEmpty(workoutLogPrivacyboundsList)}" th:each="wpl : ${workoutLogPrivacyboundsList}">
+												<option >등록된 카테고리가 없습니다.</option>
+											</th:block>
+										</select>
+									</div>
 							</div>
-							<div class="mt-10">
-								<input type="text" name="dietbreakfast" placeholder="아침 식사"
-								onfocus="this.placeholder = ''" onblur="this.placeholder = '아침 뭐묵?'" required
-								class="single-input-primary">
-							</div>
-							<div class="mt-10">
-								<input type="text" name="dietlunch" placeholder="점심 식사"
-								onfocus="this.placeholder = ''" onblur="this.placeholder = '점심은 기깔나게'" required
-								class="single-input-accent">
-							</div>
-							<div class="mt-10">
-								<input type="text" name="dietdinner" placeholder="저녁 식사"
-								onfocus="this.placeholder = ''" onblur="this.placeholder = '저녁먹었어?흠'"
-								required class="single-input-secondary">
+							<div class="input-group-icon mt-10">
+									<div class="icon"><i class="fas fa-bookmark" aria-hidden="true"></i></div>
+									<div class="form-select">
+										<!-- 운동 클래스 카테고리 small 선택 -->
+										<select  name="eClassCategorySmallCode">
+											<th:block th:if="${not #lists.isEmpty(eClassCategorySmallList)}" th:each="el : ${eClassCategorySmallList}">
+												<option th:value="${el.eClassCategorySmallCode}" >[[${el.eClassCategorySmallName}]]</option>
+											</th:block>
+											<th:block th:unless="${not #lists.isEmpty(eClassCategorySmallList)}" th:each="el : ${eClassCategorySmallList}">
+												<option >등록된 카테고리가 없습니다.</option>
+											</th:block>
+										</select>
+									</div>
 							</div>
 							<div class="mt-10">
 						        <div class="card p-3" style="background-color: #f9f9ff; border: none;">
 									<h6>일지 내용</h6>
-									<div id="summernote">인증내용을 작성해주세요</div>
+									<div class="row pt-3">
+						               <div class="col-12">
+						                  <div class="form-group">
+						                     <textarea class="form-control w-100" name="workoutLogContent" id="comment" cols="30" rows="9" placeholder="내용을 입력하세요"></textarea>
+						                  </div>
+						               </div>
+						            </div>
 								</div>
 							</div>
 							<div class="row justify-content-center mt-5">
@@ -125,15 +130,6 @@
 		<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js}"></script>
    		<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 		<script>
-			$(document).ready(function(){
-				
-			   $('#summernote').summernote({
-			        placeholder: '인증내용을 작성해주세요',
-			        tabsize: 2,
-			        height: 350
-			   });
-			
-			});
 		</script>
 		
 	</th:block>
