@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/default}">
+
 <!-- 사용자 정의 title -->
 <th:block layout:fragment="customTitle">
 	<title th:text="${title}"></title>
@@ -47,6 +48,7 @@
 					<div class="title">
 						<h4>
 							<span class="fa fa-angle-right"></span> 주문정보
+							<input type="text" th:attr="value=${layoutDeco}"></span>
 						</h4>
 					</div>
 					<table class="table">

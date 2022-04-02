@@ -37,4 +37,28 @@ public class MypageController {
 		
 		return "point/mypointList";
 	}
+	
+	@GetMapping("/paymentDetail")
+	public String paymentDetail(Model model) {
+		
+		
+		
+		model.addAttribute("leftMenuList", "결제/환불");
+		model.addAttribute("title", "결제 내역");
+		model.addAttribute("subTitle", "결제 상세 내역");
+		model.addAttribute("layoutDeco", "~{layout/mypagedefault}");
+		
+		return "payment/paymentDetail";
+	}
+	
+	@GetMapping("/refundDetail")
+	public String refundDetail(Model model) {
+		
+		
+		model.addAttribute("leftMenuList", "결제/환불");
+		model.addAttribute("title", "환불 내역");
+		model.addAttribute("subTitle", "환불 상세 내역");
+		
+		return "refund/refundDetail";
+	}
 }

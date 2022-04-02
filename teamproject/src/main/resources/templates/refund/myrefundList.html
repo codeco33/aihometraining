@@ -8,207 +8,135 @@
 </th:block>
 
 <th:block layout:fragment="customCss">
-	<link rel="stylesheet" type="text/css"
-		th:href="@{/asset/css/plugins/simple-line-icons.css}" />
-	<link rel="stylesheet" type="text/css"
-		th:href="@{/asset/css/plugins/icheck/skins/flat/red.css}" />
-	<link rel="stylesheet" type="text/css"
-		th:href="@{/asset/css/plugins/daterangepicker.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/simple-line-icons.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/icheck/skins/flat/red.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/daterangepicker.css}" />
 	<style type="text/css">
-.btn-outline {
-	padding: 5px 20px;
-}
-
-.approveBtn {
-	margin-right: 5px;
-	margin-bottom: 5px;
-}
-
-#refundList tbody td:last-child .btn-default {
-	width: 98px;
-	padding: 5px;
-}
-
-#refundList tbody td {
-	vertical-align: middle;
-}
-
-.modal-footer {
-	border-top: none;
-}
-
-.modal-title {
-	font-weight: bold;
-}
-
-#refundListTab {
-	border-bottom: 2px solid #58666e;
-	padding-bottom: 5px;
-	margin: 0 20px;
-	padding-top: 5px;
-}
-
-#refundListTab>li>a {
-	font-size: 18px;
-	padding-bottom: 0;
-	color: #DDD;
-	padding-left: 0;
-}
-
-#refundListTab>li>a::after {
-	background: none;
-}
-
-#refundListTab>li.active>a, #refundListTab>li>a:hover {
-	color: #666 !important;
-}
-
-#selectApproveBtn {
-	height: 40px !important;
-}
-
-.sangseTextarea {
-	height: 150px;
-	width: 100%;
-}
-
-.searchDate input {
-	height: 33px;
-	width: 150px;
-}
-
-input[name="searchValue"] {
-	height: 33px;
-}
-
-#searchRefund .col-sm-6 {
-	margin-bottom: 5px;
-}
-
-#refundCate {
-	border-bottom: none;
-	padding-top: 40px;
-}
-
-#refundCate>li>a {
-	color: #bfbfbf;
-}
-
-#refundCate>li.active>a, #refundCate>li>a:hover {
-	color: #777 !important;
-}
-
-#refundCate>li>a::after {
-	background: #777;
-}
-
-#refundCate a {
-	padding: 5px 10px;
-}
+	
+		.ranges {
+			margin-top: 0 !important;
+		}
+		.ranges ul {
+			width: 100% !important;
+		}
+		.ranges ul li {
+			float:left;
+		}
+		.ranges .btn {
+			padding: 6px;
+		}
+		#refundList tbody td:last-child .btn-default {
+			width: 98px;
+			padding: 5px;
+		}
+		#refundList tbody td {
+			vertical-align: middle;
+		}
+		.modal-footer {
+			border-top: none;
+		}
+		.modal-title {
+			font-weight: bold;
+		}
+		.sangseTextarea {
+			height: 150px;
+			width: 100%;
+		}
+		.searchDate input[type="text"]{
+			height: 33px;
+			width: 150px;
+		}
+		.searchDate .fa-calendar {
+			margin-left: 20px;
+		}
+		.searchDate button {
+			margin-left: 20px;
+		}
+		.panel-heading {
+			padding: 15px;
+			padding-bottom: 0;
+		}
+		
+		.panel-heading>h4 {
+			font-weight: bold;
+			margin-top: 40px;
+			margin-bottom: 0;
+			border-bottom: 2px solid #58666e;
+			padding-bottom: 5px;
+		}
+		.searchDate {
+			background-color: #fff;
+			border: 5px solid #e8e8e8;
+			padding: 20px 0;
+			margin: 0 20px;
+			padding-left: 20px;
+		}
+		#paymentInfo {
+			 padding-inline-start: 25px;
+			 margin-top: 20px;
+		}
+		#paymentInfo li {
+			 list-style: disc;
+		}
+		#paymentList tbody td {
+			vertical-align: middle;
+		}
 </style>
 </th:block>
 <th:block layout:fragment="customContents">
 	<div class="col-md-12">
-		<div class="panel">
-			<div class="panel-body">
-
-				<!-- 전체환불내역탭 검색 -->
-				<div id="searchRefund">
-
-					<!-- 데이터피커 -->
-					<div class="searchDate col-sm-5 col-sm-offset-1">
-						<span class="fa fa-calendar"></span> <input type="text"
-							class="startDate" name="datefilter" value="" /> - <input
-							type="text" class="endDate" name="datefilter" value="" />
-					</div>
-
-					<!-- 검색 -->
-					<div class="col-sm-6">
-						<select class="select2-A">
-							<option data-column="1">환불코드</option>
-							<option data-column="2">환불상품</option>
-							<option data-column="3">환불요청자</option>
-						</select> <input type="text" name="searchValue">
-						<button type="button" class="btn btn-gradient btn-primary ">
+	<div class="panel">
+		<div class="panel-heading bg-white border-none">
+				<div class="well" >
+					<form class="searchDate row form-inline">
+						<div class="form-group">
+							<span class="fa fa-calendar"></span>
+							<input type="text" class="startDate" name="datefilter" value="" />
+							 - 
+							<input type="text" class="endDate" name="datefilter" value="" />
+						</div>
+						<button type="button" class="btn btn-gradient btn-primary form-group">
 							검색 <span class="fa fa-search"></span>
 						</button>
-					</div>
-
-				</div>
-
-				<!-- 전체환불내역탭 카테고리 -->
-				<div class="col-xs-12">
-					<ul id="refundCate" class="nav nav-tabs nav-tabs-v3" role="tablist">
-						<li role="presentation" class="active"><a
-							href="javascript:void(0)" id="tabs-demo4-1" role="tab"
-							data-toggle="tab" aria-expanded="true"> 전체 <span
-								class="badge">4</span>
-						</a></li>
-						<li role="presentation" class=""><a href="javascript:void(0)"
-							role="tab" id="tabs-demo4-2" data-toggle="tab"
-							aria-expanded="false"> 환불요청 <span class="badge badge-primary">1</span>
-						</a></li>
-						<li role="presentation"><a href="javascript:void(0)"
-							id="tabs-demo4-3" role="tab" data-toggle="tab"
-							aria-expanded="false"> 환불처리중 <span
-								class="badge badge-warning">1</span>
-						</a></li>
-						<li role="presentation" class=""><a href="javascript:void(0)"
-							role="tab" id="tabs-demo4-4" data-toggle="tab"
-							aria-expanded="false"> 환불완료 <span class="badge badge-success">1</span>
-						</a></li>
-						<li role="presentation" class=""><a href="javascript:void(0)"
-							role="tab" id="tabs-demo4-5" data-toggle="tab"
-							aria-expanded="false"> 환불미승인 <span class="badge badge-danger">1</span>
-						</a></li>
+					</form>
+					<ul id="paymentInfo" class="list">
+						<li>기본적으로 최근 3개월간의 내역이 조회되며, 기간 검색시 환불처리 후 36개월 이내의 주문내역을 조회하실 수 있습니다.</li>
+						<li>환불처리 후 36개월 이상 경과한 거래 내역은 고객센터에서 문의를 통해 확인하실 수 있습니다.</li>
+						<li>환불코드를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
 					</ul>
 				</div>
+			</div>
+			<div class="panel-body">
+				
 
 				<!-- 데이터 테이블 -->
 				<div class="responsive-table">
 					<table id="refundList" class="table table-striped table-bordered">
 						<thead>
 							<tr>
-								<th>환불요청일자</th>
-								<th>환불승인일자</th>
-								<th>환불코드</th>
-								<th>환불상품</th>
-								<th>환불요청자</th>
+								<th>환불처리일자<br>/환불코드</th>
+								<th colspan="2">환불상품</th>
 								<th>상태</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>2022-03-23</td>
-								<td>2022-03-23</td>
-								<td><a th:href="@{/refundList/refundDetail(refundCode=)}">e20220224_00001</a></td>
-								<td>운동클래스</td>
-								<td>홍길동</td>
+								<td>
+									<p>2022-03-23</p>
+									<p><a th:href="@{/mypage/refundDetail(refundCode=)}">e20220224_00001</a></p>
+								</td>
+								<td>이미지</td>
+								<td>운동클래스운동클래스운동클래스운동클래스</td>
 								<td><span class="label label-primary">환불요청</span></td>
 							</tr>
 							<tr>
-								<td>2022-02-23</td>
-								<td>2022-02-23</td>
-								<td><a th:href="@{/refundList/refundDetail(refundCode=)}">c20220223_00002</a></td>
+								<td>
+									<p>2022-04-02</p>
+									<p><a th:href="@{/mypage/refundDetail(refundCode=)}">c20220223_00002</a></p>
+								</td>
+								<td>이미지</td>
 								<td>챌린지</td>
-								<td>홍길동</td>
 								<td><span class="label label-warning">환불처리중</span></td>
-							</tr>
-							<tr>
-								<td>2022-02-23</td>
-								<td>2022-02-23</td>
-								<td><a th:href="@{/refundList/refundDetail(refundCode=)}">c20220223_00002</a></td>
-								<td>챌린지</td>
-								<td>이순신</td>
-								<td><span class="label label-success">환불완료</span></td>
-							</tr>
-							<tr>
-								<td>2022-02-24</td>
-								<td>2022-02-24</td>
-								<td><a th:href="@{/refundList/refundDetail(refundCode=)}">e20220224_00001</a></td>
-								<td>운동클래스</td>
-								<td>이순신</td>
-								<td><span class="label label-danger">환불미승인</span></td>
 							</tr>
 						</tbody>
 					</table>
@@ -283,95 +211,77 @@ input[name="searchValue"] {
 		$('.disapproveBtn').on('click', function() {
 			$('#disapproveModal').modal('show');
 		});
+		
+		
 
-		$(document).ready(
-				function() {
+		$(document).ready(function() {
+				var startDate = moment().subtract(3, 'month');
+				var endDate = moment();
+				
+				 $('.startDate').val(startDate.format('YYYY/MM/DD'));
+			     $('.endDate').val(endDate.format('YYYY/MM/DD'));
+			     
+				$('.searchDate div').daterangepicker(
+						{
+							autoUpdateInput : false,
+							locale: {
+					            cancelLabel: '취소',
+					            applyLabel : '완료',
+						        daysOfWeek: ["일", "월", "화", "수", "목", "금", "토"],
+						        monthNames: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+					        },
+					        maxDate: endDate,
+					        minDate: moment().subtract(36, 'month'),
+					        startDate: startDate,
+					        endDate: endDate,
+					        format: 'YYYY/MM/DD',
+					        ranges: {
+					            '오늘': [moment(), moment()],
+					            '1주일': [moment().subtract(6, 'days'), moment()],
+					            '1개월': [moment().subtract(1, 'month'), moment()],
+					            '3개월': [moment().subtract(3, 'month'), moment()],
+					            '6개월': [moment().subtract(6, 'month'), moment()]
+					        },
+					         "alwaysShowCalendars": true,
+					         "showCustomRangeLabel": false,
+					         
+					    });
+				
+				 $('.ranges').prependTo('.searchDate');
+				 $('.ranges li').addClass("btn btn-default");
+				 $('.ranges li:eq(3)').addClass("active");
 
-					/*환불전체내역 데이터피커*/
-					$('.searchDate').click(function() {
-						//$('div.daterangepicker').addClass('show-calendar');
-					});
-					$('.searchDate').daterangepicker(
-							{
-								autoUpdateInput : false,
-								locale : {
-									cancelLabel : '초기화',
-									applyLabel : '완료',
-									daysOfWeek : [ "일", "월", "화", "수", "목",
-											"금", "토" ],
-									monthNames : [ "1월", "2월", "3월", "4월",
-											"5월", "6월", "7월", "8월", "9월",
-											"10월", "11월", "12월" ]
-								},
-								maxDate : moment(),
-								buttonClasses : 'btn',
-								applyClass : 'btn-primary',
-								cancelClass : 'btn-outline btn-default',
-								ranges : {
-									'오늘' : [ moment(), moment() ],
-									'어제' : [ moment().subtract(1, 'days'),
-											moment().subtract(1, 'days') ],
-									'1주일' : [ moment().subtract(6, 'days'),
-											moment() ],
-									'1개월' : [ moment().subtract(29, 'days'),
-											moment() ],
-									'3개월' : [ moment().subtract(3, 'month'),
-											moment() ],
-									'1년' : [ moment().subtract(12, 'month'),
-											moment() ]
-								},
-								"alwaysShowCalendars" : true,
-								"showCustomRangeLabel" : false,
-							});
-
-					/*적용버튼*/
-					$('.searchDate').on(
-							'apply.daterangepicker',
-							function(ev, picker) {
-								$('.startDate').val(
-										picker.startDate.format('YYYY/MM/DD'));
-								$('.endDate').val(
-										picker.endDate.format('YYYY/MM/DD'));
-							});
-					/*초기화버튼*/
-					$('.searchDate').on('cancel.daterangepicker',
-							function(ev, picker) {
-								$(this).children().val('');
-							});
-
-					/*날짜 기간 선택 버튼*/
-					/* var searchDateBtn = '<div class="searchDateBtn" style="float:left;">';
-					searchDateBtn += '<input type="button" class="btn btn-round btn-default" value="오늘" data-range-key="오늘">';
-					searchDateBtn += '<input type="button" class="btn btn-round btn-default" value="어제" data-range-key="어제">';
-					searchDateBtn += '<input type="button" class="btn btn-round btn-default" value="1주일" data-range-key="1주일">';
-					searchDateBtn += '<input type="button" class="btn btn-round btn-default" value="1개월" data-range-key="1개월">';
-					searchDateBtn += '<input type="button" class="btn btn-round btn-default" value="3개월" data-range-key="3개월">';
-					searchDateBtn += '<input type="button" class="btn btn-round btn-default" value="1년" data-range-key="1년"/></div>'; */
-
-					$('span.drp-selected').remove();
-					//$('.drp-buttons').prepend(searchDateBtn);
-
-					/* 탭 메뉴*/
-					$(".nav-tabs a").click(function(e) {
-						e.preventDefault();
-						$(this).tab('show');
-					});
-
-					/*데이터 테이블*/
-					var table = $('#refundList').DataTable({
-						order : [ 0, 'desc' ],
-						lengthChange : false,
-						pageLength : 15,
-						filter : false
-					});
-
-					/*iCheck 제이쿼리*/
-					$('input').iCheck({
-						checkboxClass : 'icheckbox_flat-red',
-						radioClass : 'iradio_flat-red'
-					});
-
+				/*적용버튼*/
+				$('.searchDate').on('apply.daterangepicker',function(ev, picker) {
+					$('.startDate').val(
+							picker.startDate.format('YYYY/MM/DD'));
+					$('.endDate').val(
+							picker.endDate.format('YYYY/MM/DD'));
 				});
+			
+				$('span.drp-selected').remove();
+				
+				/*ranges 버튼에 active 처리*/
+				$('.ranges li').click(function(){
+					$('.ranges li').removeClass('active');
+					$(this).addClass('active');
+				});
+				
+				/*데이터 테이블*/
+				var table = $('#refundList').DataTable({
+					order : [ 0, 'desc' ],
+					lengthChange : false,
+					pageLength : 15,
+					filter : false
+				});
+
+				/*iCheck 제이쿼리*/
+				$('input').iCheck({
+					checkboxClass : 'icheckbox_flat-red',
+					radioClass : 'iradio_flat-red'
+				});
+
+			});
 	</script>
 	<!-- end: Javascript -->
 </th:block>
