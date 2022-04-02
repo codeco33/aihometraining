@@ -30,6 +30,7 @@ public class PaymentController {
 		model.addAttribute("leftMenuList", "결제/환불");
 		model.addAttribute("title", "결제 내역");
 		model.addAttribute("subTitle", "결제 상세 내역");
+		model.addAttribute("layoutDeco", "~{layout/default}");
 		
 		return "payment/paymentDetail";
 	}

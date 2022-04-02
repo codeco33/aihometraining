@@ -26,7 +26,7 @@ public class RefundController {
 	}
 	
 	@GetMapping("/refundList/refundDetail")
-	public String paymentDetail(Model model) {
+	public String refundDetail(Model model) {
 		
 		
 		
