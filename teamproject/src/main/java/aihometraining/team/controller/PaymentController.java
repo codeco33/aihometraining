@@ -35,6 +35,17 @@ public class PaymentController {
 		return "payment/paymentDetail";
 	}
 	
+	@GetMapping("/signUpForClass")
+	public String eClassTake(Model model) {
+		
+		
+		
+		model.addAttribute("title", "수강신청");
+		
+		return "eClass/eClassTake";
+	}
+
+	
 	@GetMapping("/payment")
 	public String payment(Model model) {
 		
