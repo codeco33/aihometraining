@@ -87,6 +87,17 @@ public class ChallengeConfigService {
 		return result;
 	}
 	
+	//세팅 등록 처리
+	public void challengeSettingInsert(ChallengeSetting challengeSetting) {
+		
+		String newCode = commonMapper.getNewCode("challengeSettingCode", "challengesetting");
+		
+		challengeSetting.setChallengeSettingCode(newCode);
+		
+		challengeConfigMapper.challengeSettingInsert(challengeSetting);
+		
+	}
+	
 	//모집 챌린지 목록 조회
 	public List<ChallengeGather> getGetherList(){
 		

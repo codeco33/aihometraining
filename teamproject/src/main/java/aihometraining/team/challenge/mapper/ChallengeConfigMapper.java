@@ -35,6 +35,9 @@ public interface ChallengeConfigMapper {
 	//카테고리 수정처리
 	public int challengeCategoryUpdate(ChallengeCategory challengeCategory);
 	
+	//세팅 등록 처리
+	public void challengeSettingInsert(ChallengeSetting challengeSetting);
+	
 	//모집 챌린지 목록 조회
 	public List<ChallengeGather> getGetherList();
 	

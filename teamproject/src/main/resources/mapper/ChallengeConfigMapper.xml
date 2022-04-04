@@ -159,6 +159,18 @@
 	
 	</select>
 	
+	<insert id="challengeSettingInsert" parameterType="ChallengeSetting">
+		/* 챌린지 세팅 등록 처리 */
+		INSERT INTO challengesetting
+		(
+			 challengeSettingCode
+			,challengeSettingUpdateDo
+		)VALUES (
+			 #{challengeSettingCode}
+			,#{challengeSettingUpdateDo}
+		);
+	</insert>
+	
 	<select id="getClassCategoryList" resultType="EClassCategorySmall">
 		/* 운동클래스카테고리small 조회 */
 		SELECT

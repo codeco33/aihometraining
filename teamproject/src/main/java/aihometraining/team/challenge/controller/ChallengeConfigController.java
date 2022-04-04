@@ -166,6 +166,19 @@ public class ChallengeConfigController {
 		
 	}
 	
+	//세팅 등록 처리
+	@PostMapping("/challengeSettingInsert")
+	public String challengeSettingInsert(ChallengeSetting challengeSetting) {
+		
+		log.info("챌린지 세팅  폼에서 입력받은 데이터: {}", challengeSetting);
+		
+		challengeConfigService.challengeSettingInsert(challengeSetting);
+		
+		return "redirect:/challenge/challengeConfig/configList";
+		
+	}
+	
+	
 	//챌린지 모집 중인 목록
 	@GetMapping("/challengeList")
 	public String challengeList(Model model) {
