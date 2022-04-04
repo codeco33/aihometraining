@@ -19,15 +19,85 @@
 	    background: -webkit-linear-gradient(top, #c054ff 0%, #5274ff 100%);
 	    background: linear-gradient(to bottom, #c054ff 0%, #5274ff 100%);
 	}
-	@media (min-width: 576px){
-	.justify-content-sm-center {
-	    -ms-flex-pack: center!important;
-	    justify-content: center!important;
-	}
-	}
+	
 	#eClassTakeSection .row {
 		margin-left: 0 !important;
 		margin-right: 0 !important;
+	}
+	.captionTitle {
+		/* border-bottom: 1px solid #f0e9ff; */
+		padding-bottom: 10px;
+		font-weight: 700;
+	}
+	.captionTitle small {
+		display: inline-block;
+	}
+	.services-area .single-services {
+		box-shadow: 3px 5px 20px rgb(66 85 164 / 6%);
+		display: block;
+	}
+	#eClassTakeForm .inputTitle {
+		color: #96979f;
+		font-size: 13px;
+	}
+
+	#eClassTakeForm .form-control-plaintext {
+		font-size: 15px;
+		font-family: "Mulish", sans-serif;
+		line-height: 1.5;
+		padding: 0;
+		font-weight: 550;
+		color: #565860;
+	}
+	.form-border {
+		background: #f0e9ff;
+		height: 1px;
+		margin-bottom: 25px;
+	}
+	.features-caption {
+		padding: 0 15px;
+	}
+	label.error {
+		color: red;
+		font-size: 14px;
+	    margin-top: 8px;
+	}
+	
+	input.error:focus {
+		    border-color: #dc3545;
+    	box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
+	}
+	.usePoint {
+		line-height: 40px;
+	    border: none;
+	    outline: none;
+	    background: #f9f9ff;
+	    padding: 0 20px;
+	}
+	.usePointBtn {
+		height: 40px;
+		padding: 0 10px !important;
+		font-size: 14px;
+	}
+	.totalPayPrice {
+		
+	}
+	@media (min-width: 769px) {
+	.single-services:first-child {
+		margin-right: 20px;
+	}
+	}
+	
+	.single-services:last-child {
+		height: fit-content;
+	}
+	#eClassTakeBtn {
+		margin: 20px 0;
+	}
+	input[name="paymentTotalPayPrice"] {
+		font-size: 24px !important;
+	    font-weight: bold !important;
+	    color: #696dff !important;
 	}
 </style>
 <body>
@@ -38,59 +108,68 @@
 	 
    	<!-- Courses area start -->
 	<div id="eClassTakeSection" class="fix services-area services-area2">
-		<div class="row justify-content-center">
-			<div class="col-md-7">
-					<div class="single-services mb-30">
-						<div class="features-caption">
-							<h3>클래스 정보</h3>
-							<p>The automated process all your website tasks.</p>
+		<div class="container">
+			<form id="eClassTakeForm" class="row justify-content-center" th:action="@{/payment}" method="get">
+				
+				<div class="single-services mb-30 col-lg-6">
+					<div class="features-caption">
+						<h3 class="captionTitle">수강 정보</h3>
+						
+						<!-- 클래스정보 -->
+						<div class="form-group">
+							<label class="inputTitle">클래 이름</label>
+							<input type="text" name="eClassName" class="form-control-plaintext" readonly value="운동클래스 이름">
+						</div>
+						<div class="form-group">
+							<label class="inputTitle">강사이름</label>
+							<input type="text" name="eClassPrice" class="form-control-plaintext" readonly value="이순신">
+						</div>
+						<div class="form-group">
+							<label class="inputTitle">커리큘럼 기간</label>
+							<input type="text" name="eClassApprovedSetDate" class="form-control-plaintext" readonly value="3개월">
+						</div>
+					
+						<div class="form-group form-border"></div>
+						
+						<!-- 수강신청자 정보 -->
+						<div class="form-group">
+							<label class="inputTitle">이름</label>
+							<input type="text" name="memberName" class="form-control-plaintext" readonly value="홍길동">
+						</div>
+						<div class="form-group">
+							<label class="inputTitle">이메일</label>
+							<input type="text" name="memberEmail" class="form-control-plaintext" readonly value="id004@email.com">
+						</div>
+						<div class="form-group">
+							<label class="inputTitle">휴대폰 번호</label>
+							<input type="text" name="memberPhone" class="single-input form-control" >
 						</div>
 					</div>
 				</div>
-			<div class="col-md-7">
-				<div class="single-services mb-30">
+				
+			
+				<div class="single-services col-lg-5">
 					<div class="features-caption">
-						<h3>수강기간 선택</h3>
-						<div class="d-flex justify-content-start">
-							<div class="primary-radio">
-								<input type="checkbox" id="radio1" name="radios"> <label
-									for="radio1"></label>
-							</div>
-							<label for="radio1"> 1개월</label>
+						<h3 class="captionTitle">
+							가격 정보
+							<small>* 기간내 미 결제시, 자동으로 수강 신청이 취소됩니다.</small>
+						</h3>
+					
+						<div class="form-group">
+							<label class="inputTitle">클래스 금액</label>
+							<input type="text" name="eClassPrice" class="form-control-plaintext" readonly value="87,000  (월 29,000원 × 3)">
 						</div>
-						<div class="d-flex justify-content-start">
-							<div class="primary-radio">
-								<input type="checkbox" id="radio2" name="radios"> <label
-									for="radio2"></label>
-							</div>
-							<label for="radio2"> 커리큘럼 기간동안</label>
+						<div class="form-group">
+							<label class="inputTitle">월 정기 결제 금액</label>
+							<input type="text" name="paymentTotalPayPrice" class="form-control-plaintext totalPayPrice" readonly value="29,000"> 
 						</div>
+						<button id="eClassTakeBtn" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit">수강신청서 제출</button>
 					</div>
 				</div>
-			</div>
-			
-			<div class="col-md-7">
-				<div class="single-services mb-30">
-					<div class="features-caption">
-						<h3>결제 금액</h3>
-						<p>The automated process all your website tasks.</p>
-					</div>
-				</div>
-			</div>
-			
-			<div class="col-md-7">
-				<div class="single-services mb-30">
-					<div class="features-caption">
-						<h3>휴대폰 번호</h3>
-						<p>The automated process all your website tasks.</p>
-					</div>
-				</div>
-			</div>
-			
-			
-			<div class="col-md-7">
-				<button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit">수강신청서 제출</button>
-			</div>
+				
+				
+				
+			</form>
 	
 		</div>
 	</div>
@@ -103,6 +182,23 @@
 	</div>
 
 	<th:block th:replace="userfragments/userJavaScripts :: userJSFragment"></th:block>
-	<th:block layout:fragment="customBodyScript"></th:block>
+	<th:block layout:fragment="customBodyScript">
+		<script type="text/javascript">
+			$(function(){
+				 $('#eClassTakeForm').validate({
+			            rules: {
+			            	memberPhone: {
+			                    required: true,
+			                }
+			            },
+			            messages: {
+			            	memberPhone: {
+			                    required: "*휴대폰 번호를 입력해주세요",
+			                }
+			            }
+				 });
+			});
+		</script>
+	</th:block>
 </body>
 </html>
