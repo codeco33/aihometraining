@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import aihometraining.team.dto.WorkoutLog;
 import aihometraining.team.dto.WorkoutLogCategory;
 import aihometraining.team.mapper.CommonMapper;
 import aihometraining.team.workoutLog.mapper.WorkoutLogConfigMapper;
@@ -42,6 +43,15 @@ public class WorkoutLogConfigService {
 		int result = workoutLogConfigMapper.workoutGoalCategoryInsert(workoutLogCategory);
 		
 		return result;
+		
+	}
+	
+	// 운동 일지 목록 조회
+	public List<WorkoutLog> getWorkoutLogList(){
+		
+		List<WorkoutLog> workoutLogList = workoutLogConfigMapper.getWorkoutLogList();
+		
+		return workoutLogList;
 		
 	}
 }

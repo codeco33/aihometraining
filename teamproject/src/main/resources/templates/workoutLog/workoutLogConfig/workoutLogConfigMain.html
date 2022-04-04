@@ -8,6 +8,7 @@
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
+	
 		<div class="col-md-12">
 			<div class="panel">
 		    	<div class="panel-heading bg-white border-none">
@@ -67,7 +68,7 @@
 		              	</div>
 		            </div>
 		        </div>
-			</div>			        
+			</div>		
 	        <div class="panel">
 		        <div class="panel-heading bg-white border-none">
 		        	<h4><span class="icon-book-open"></span> 전체 일지 목록</h4>
@@ -85,72 +86,29 @@
 		                     	</tr>
 		                    </thead>
 		                    <tbody>
-		                    	<tr>
-			                        <td>
+		                    	<tr th:if="${not #lists.isEmpty(workoutLogList)}" th:each="wl : ${workoutLogList}">
+			                        <td th:text="${wl.memberEmail}">
 				                        <a href="#">
-				                        Tiger Nixon
 				                        </a>
 			                        </td>
-			                        <td>
+			                        <td th:text="${wl.workoutLogTitle}">
 			                        	<a href="#">
-			                        	System Architect
 			                        	</a>
 			                        </td>
 			                        <td>Edinburgh</td>
 			                        <td>61</td>
-			                        <td>2011/04/25</td>
+			                        <td th:text="${wl.workoutLogUpdateFinalDate}"></td>
 		                      	</tr>
-		                      	<tr>
-			                        <td>
-			                        	<a href="#">
-			                        	Garrett Winters
-			                        	</a>
-			                        </td>
-			                        <td>
-			                        	<a href="#">
-			                        	Accountant
-			                        	</a>
-			                        </td>
-			                        <td>Tokyo</td>
-			                        <td>63</td>
-			                        <td>2011/07/25</td>
-			                     </tr>
-			                     <tr>
-			                        <td>
-			                        	<a href="#">
-			                        	Ashton Cox
-			                        	</a>
-			                        </td>
-			                        <td>
-			                        	<a href="#">
-			                        	Junior Technical Author
-			                        	</a>
-			                        </td>
-			                        <td>San Francisco</td>
-			                        <td>66</td>
-			                        <td>2009/01/12</td>
-		                      	</tr>
-		                      	<tr>
-			                        <td>
-				                        <a href="#">
-				                        Cedric Kelly
-				                        </a>
-			                        </td>
-			                        <td>
-				                        <a href="#">
-				                        Senior Javascript Developer
-				                        </a>
-			                        </td>
-			                        <td>Edinburgh</td>
-			                        <td>22</td>
-			                        <td>2012/03/29</td>
-		                      	</tr>
+		                      	<tr th:unless="${not #lists.isEmpty(workoutLogList)}">
+									<td colspan="5">등록된 회원의 정보가 없습니다.</td>
+								</tr>
 		            		</tbody>
 	            		</table>
 					</div>
 				</div>
 			</div>	
 		</div>	
+		
 	</th:block>
 	
 	<!-- 사용자 정의 Css -->
@@ -187,7 +145,24 @@
 		<script th:src="@{/asset/js/main.js}"></script>
 		<script type="text/javascript">
 		  $(document).ready(function(){
-		    $('#workoutLogList').DataTable();
+		 	/* 데이터 테이블 생성*/
+		    var table = $('#workoutLogList').DataTable({
+		    	order : [ 0, 'desc' ],
+				lengthChange : false,
+				pageLength : 15,
+				filter: false,
+				 dom: '<"top"i>rt<"bottom"p><"clear">',
+		    });
+		 	
+		    /* 레코드 수 포맷 */
+			var info = table.page.info();			
+			$('#workoutLogList_info').html('전체 ' + info.recordsTotal + ' 건').css('font-weight','bold');
+			
+			$('#workoutLogList').click(function(){
+				$('#workoutLogList_info').html('전체 ' + info.recordsTotal + ' 건');
+			});
+		 
+		    
 		  });
 		</script>
 		

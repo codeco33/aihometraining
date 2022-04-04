@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import aihometraining.team.dto.WorkoutLog;
 import aihometraining.team.dto.WorkoutLogCategory;
 import aihometraining.team.workoutLog.service.WorkoutLogConfigService;
 
@@ -33,8 +34,11 @@ public class WorkoutLogConfigController {
 	@GetMapping("/workoutLogConfigMain")
 	public String workoutLogConfigMain(Model model) {
 		
+		List<WorkoutLog> workoutLogList = workoutLogConfigService.getWorkoutLogList();
+		
 		model.addAttribute("title", "일지 관리자 화면");
 		model.addAttribute("leftMenuList", "일지");
+		model.addAttribute("workoutLogList", workoutLogList);
 		
 		return "workoutLog/workoutLogConfig/workoutLogConfigMain";
 		
@@ -44,12 +48,12 @@ public class WorkoutLogConfigController {
 	@GetMapping("/workoutCategoryList")
 	public String workoutCategoryList(Model model) {
 		
+		
 		List<WorkoutLogCategory> workoutLogCategoryList = workoutLogConfigService.getWorkoutLogCategoryList();
 		
 		model.addAttribute("title", "운동 계획 카테고리 목록");
 		model.addAttribute("leftMenuList", "일지");
 		model.addAttribute("workoutLogCategoryList", workoutLogCategoryList);
-		
 		
 		return "workoutLog/workoutLogConfig/workoutCategoryList";
 	}
