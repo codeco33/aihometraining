@@ -179,10 +179,10 @@
 								<td th:text="${l.member.memberEmail}"></td>
 								<td th:text="${l.challengeCategoryRegDate}"></td>
 								<td>
-									<a th:href="@{/challenge/challengeConfig/challengeCategoryUpdate(challengeCategoryCode=${l.challengeCategoryCode})}">수정</a>
+									<a th:href="@{/challenge/challengeConfig/challengeCategoryUpdate(challengeCategoryCode=${l.challengeCategoryCode})}"><span class="label label-primary">수정</span></a>
 								</td>
 								<td>
-									<a href="#">삭제</a>
+									<a href="#"><span class="label label-danger">삭제</span></a>
 								</td>
 							</tr>
 							<tr th:unless="${not #lists.isEmpty(challengeCategoryList)}">
@@ -231,6 +231,15 @@
 				filter: false,
 				 dom: '<"top"i>rt<"bottom"p><"clear">',
 
+				 "language": {
+			     "info": "전체 _TOTAL_건",
+		    	 "paginate": {
+		                "first":      "처음",
+		                "last":       "마지막",
+		                "next":       "다음",
+		                "previous":   "이전"
+		            }
+				 }
 			});
 			
 			/* 레코드 수 포맷 */
