@@ -8,26 +8,93 @@
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
-		챌린지 관리자 설정 페이지 입니다.
-		챌린지 관리자 설정 페이지 입니다.
-		
-	
+		<div class="col-md-6 col-md-offset-3">
+			<div class="panel">
+		    	<div class="panel-heading bg-white border-none">
+		        	<h4><span class="icon-direction icons"></span> 챌린지 세팅 수정</h4>
+		        </div>
+		        <div class="panel-body">
+					<div class="col-md-12 panel-body" style="padding-bottom:30px;">
+						<div class="col-md-12">
+  							<form class="cmxform" id="challengeSettingForm" method="post" th:action="@{/challenge/challengeConfig/challengeSettingUpdate}">
+    							<div class="col-md-12">
+									<th:block>
+									<div class="form-group form-animate-text" style="margin-top:40px !important;">
+										<input type="hidden" class="form-text" name="challengeSettingCode" th:value="${challengeSetting.challengeSettingCode}"/>
+					                    <input type="text" class="form-text" id="validate_settingName" name="challengeSettingUpdateDo" th:value="${challengeSetting.challengeSettingUpdateDo}" required>
+					                    <span class="bar"></span>
+					                    <label>챌린지 세팅명</label>
+				                    </div>
+        						</div>
+								<div style="text-align: center;">
+									<input class="submit btn btn-outline btn-info btn-sm" type="submit" value="수정">
+								</div>
+							</form>
+						</div>
+					</div>
+		        </div>
+			</div>
+		</div>			
 	</th:block>
+	
+	<!-- 사용자 정의 Css -->
+		<th:block layout:fragment="customCss">
+			<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/simple-line-icons.css}" />
+			<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/mediaelementplayer.css}" />
+			<style type="text/css">
+			
+				.panel-heading > h4 {
+					font-weight: bold;
+					margin-bottom: 0;
+					border-bottom: 2px solid #58666e;
+					padding-bottom: 5px;
+				}
+			</style>
+			<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/jquery.steps.css}"/>
+		
+		</th:block>
+	
+	<!-- start: Javascript -->
 	<th:block layout:fragment="customBodyScript">	
+		
 		<!-- plugins -->
 		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/jquery.datatables.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/datatables.bootstrap.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.knob.js}"></script>
+		<script th:src="@{/asset/js/plugins/ion.rangeSlider.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/bootstrap-material-datetimepicker.js}"></script>
 		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.mask.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/select2.full.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/nouislider.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.validate.min.js}"></script>
 		
 		
 		<!-- custom -->
 		<script th:src="@{/asset/js/main.js}"></script>
 		<script type="text/javascript">
 		  $(document).ready(function(){
-		    //$('#datatables-example').DataTable();
+			  
+		    $("#challengeSettingForm").validate({
+		      errorElement: "em",
+		      errorPlacement: function(error, element) {
+		        $(element.parent("div").addClass("form-animate-error"));
+		        error.appendTo(element.parent("div"));
+		      },
+		      success: function(label) {
+		        $(label.parent("div").removeClass("form-animate-error"));
+		      },
+		      rules: {
+		    	validate_settingName: "required",
+		      },
+		      messages: {
+		    	validate_settingName: "카테고리명을 입력해주세요.",
+		      }
+		    });
+		
 		  });
+        	//스윗얼랏 사용
+        	//swal("등록되었습니다.", "확인버튼을 눌러주세요.", "success");
 		</script>
-<!-- end: Javascript -->
 	</th:block>
+	<!-- end: Javascript -->
 </html>
