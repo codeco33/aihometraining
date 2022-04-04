@@ -37,14 +37,34 @@
 							<div class="input-group-icon mt-10">
 									<div class="icon"><i class="fas fa-bookmark" aria-hidden="true"></i></div>
 									<div class="form-select">
+										<!-- 운동 클래스 카테고리 large 선택 -->
+										<select  name="eClassCategoryLarge" id="eClassCategoryLarge">
+												<option value="0">운동 카테고리 대</option>
+												<th:block th:if="${not #lists.isEmpty(eClassCategoryLargeList)}" th:each="el : ${eClassCategoryLargeList}">
+												<option th:value="${el.eClassCategoryLargeCode}">[[${el.eClassCategoryLargeName}]]</option>
+												</th:block>
+												<th:block th:unless="${not #lists.isEmpty(eClassCategoryLargeList)}" th:each="el : ${eClassCategoryLargeList}">
+													<option >등록된 카테고리가 없습니다.</option>
+												</th:block>
+										</select>
+									</div>
+							</div>
+							<div class="input-group-icon mt-10">
+									<div class="icon"><i class="fas fa-bookmark" aria-hidden="true"></i></div>
+									<div class="form-select">
+										<!-- 운동 클래스 카테고리 medium 선택 -->
+										<select  name="eClassCategoryMediumCode" id="eClassCategoryMedium">
+												<option value="0">운동 카테고리 중</option>
+										</select>
+									</div>
+							</div>
+							<div class="input-group-icon mt-10">
+									<div class="icon"><i class="fas fa-bookmark" aria-hidden="true"></i></div>
+									<div class="form-select">
 										<!-- 운동 클래스 카테고리 small 선택 -->
 										<select  name="eClassCategorySmallCode">
-											<th:block th:if="${not #lists.isEmpty(eClassCategorySmallList)}" th:each="el : ${eClassCategorySmallList}">
-												<option th:value="${el.eClassCategorySmallCode}" th:data-cate="${el.eClassCategorySmallName}" >[[${el.eClassCategorySmallName}]]</option>
-											</th:block>
-											<th:block th:unless="${not #lists.isEmpty(eClassCategorySmallList)}" th:each="el : ${eClassCategorySmallList}">
-												<option >등록된 카테고리가 없습니다.</option>
-											</th:block>
+											<option value="0">운동 카테고리 소</option>
+											<!--  <option value="${el.eClassCategorySmallCode}" data-cate="${el.eClassCategorySmallName}" ></option>-->
 										</select>
 									</div>
 							</div>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import aihometraining.team.dto.EClassCategoryLarge;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.WorkoutGoal;
 import aihometraining.team.dto.WorkoutLog;
@@ -18,8 +19,8 @@ public interface WorkoutLogUserMapper {
 	//일지 공개범위 목록 조회
 		public List<WorkoutLogPrivacybounds> getworkoutLogPrivacyboundsList();
 		
-	//운동 클래스 카테고리 small 목록 조회	
-		public List<EClassCategorySmall> geteClassCategorySmallList();
+	//운동 클래스 카테고리 large 목록 조회	
+		public List<EClassCategoryLarge> geteClassCategoryLargeList();
 		
 	//일지 등록 처리
 		public int workoutLogInsert(WorkoutLog workoutLog);

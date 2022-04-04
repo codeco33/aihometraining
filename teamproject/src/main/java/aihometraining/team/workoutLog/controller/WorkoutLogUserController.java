@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import aihometraining.team.dto.EClassCategoryLarge;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.WorkoutGoal;
 import aihometraining.team.dto.WorkoutLog;
@@ -83,12 +84,12 @@ public class WorkoutLogUserController {
 		log.info("일지 공개범위 목록 조회  workoutlogPrivacyboundsList : {}", workoutLogPrivacyboundsList);
 		
 		//운동 클래스 카테고리 small 목록 조회
-		List<EClassCategorySmall> eClassCategorySmallList = workoutLogUserService.geteClassCategorySmallList();
-		log.info("운동 클래스 카테고리 small 목록 조회  eClassCategorySmallList : {}", eClassCategorySmallList);
+		List<EClassCategoryLarge> eClassCategoryLargeList = workoutLogUserService.geteClassCategoryLargeList();
+		log.info("운동 클래스 카테고리 small 목록 조회  eClassCategorySmallList : {}", eClassCategoryLargeList);
 		
 		model.addAttribute("title", "일지 등록");
 		model.addAttribute("workoutLogPrivacyboundsList", workoutLogPrivacyboundsList);
-		model.addAttribute("eClassCategorySmallList", eClassCategorySmallList);
+		model.addAttribute("eClassCategoryLargeList", eClassCategoryLargeList);
 		
 		return "workoutLog/workoutLogUser/workoutLogInsert";
 		
