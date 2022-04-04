@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import aihometraining.team.dto.EClassCategoryLarge;
 import aihometraining.team.dto.EClassCategoryMedium;
-import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.WorkoutGoal;
 import aihometraining.team.dto.WorkoutLog;
 import aihometraining.team.dto.WorkoutLogPrivacybounds;

@@ -70,7 +70,7 @@ public class WorkoutLogUserController {
 		
 	}
 	
-	// 인지 일지 화면
+	// 인기 일지 화면
 	@GetMapping("/workoutLogBest")
 	public String workoutLogBest(Model model) {
 		
