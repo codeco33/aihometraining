@@ -6,6 +6,8 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import aihometraining.team.dto.ChallengeCategory;
+import aihometraining.team.dto.ChallengeGather;
+import aihometraining.team.dto.ChallengeSetting;
 import aihometraining.team.dto.EClassCategorySmall;
 
 
@@ -18,6 +20,9 @@ public interface ChallengeConfigMapper {
 	//카테고리 목록 조회 임시용
 	public List<Map<String,Object>> getChallengeCategoryList(Map<String, Object> paramMap);
 	
+	//세팅 목록 조회
+	public List<ChallengeSetting> getChallengeSettingList();
+	
 	//운동클래스카테고리small 조회
 	public List<EClassCategorySmall> getClassCategoryList();
 	
@@ -29,4 +34,10 @@ public interface ChallengeConfigMapper {
 	
 	//카테고리 수정처리
 	public int challengeCategoryUpdate(ChallengeCategory challengeCategory);
+	
+	//모집 챌린지 목록 조회
+	public List<ChallengeGather> getGetherList();
+	
+	//모집 챌린지 코드별 모집 챌린지 세부 정보 조회
+	public List<ChallengeGather> getListDetailByCode(String challengeGatherCode);
 }

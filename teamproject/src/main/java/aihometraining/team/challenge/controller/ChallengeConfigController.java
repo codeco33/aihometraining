@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import aihometraining.team.challenge.service.ChallengeConfigService;
 import aihometraining.team.dto.ChallengeCategory;
+import aihometraining.team.dto.ChallengeGather;
+import aihometraining.team.dto.ChallengeSetting;
 import aihometraining.team.dto.EClassCategorySmall;
-import aihometraining.team.mapper.CommonMapper;
 
 @Controller
 @RequestMapping("/challenge/challengeConfig")
@@ -65,6 +67,7 @@ public class ChallengeConfigController {
 		
 		//List<ChallengeCategory> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
 		List<Map<String, Object>> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
+		List<ChallengeSetting> challengeSettingList = challengeConfigService.getChallengeSettingList();
 		
 		paramMap = null;
 		
@@ -73,7 +76,7 @@ public class ChallengeConfigController {
 		model.addAttribute("title", "챌린지 관리 설정");
 		model.addAttribute("leftMenuList", "챌린지");
 		model.addAttribute("challengeCategoryList", challengeCategoryList);
-		
+		model.addAttribute("challengeSettingList", challengeSettingList);
 		return "challenge/challengeConfig/challengeConfigList";
 		
 	}
@@ -167,10 +170,29 @@ public class ChallengeConfigController {
 	@GetMapping("/challengeList")
 	public String challengeList(Model model) {
 		
+		List<ChallengeGather> gatherList = challengeConfigService.getGetherList();
+		
+		log.info("모집챌린지 gatherList : {}", gatherList);
+		
 		model.addAttribute("title", "모집 챌린지 목록");
 		model.addAttribute("leftMenuList", "모집");
+		model.addAttribute("gatherList", gatherList);
 		
 		return "challenge/challengeConfig/challengeList";
+		
+	}
+	
+	//ajax 챌린지 모집 목록 자세한 내용 조회
+	@PostMapping("/listDetail")
+	@ResponseBody
+	public List<ChallengeGather> getListDetailByCode(String challengeGatherCode){
+		
+		log.info("모집챌린지 String challengeGatherCode : {}", challengeGatherCode);
+		
+		List<ChallengeGather> listDetail = challengeConfigService.getListDetailByCode(challengeGatherCode);
+		log.info("모집 챌린지 세부 내용 조회 ListDetail : {}", listDetail);
+		
+		return listDetail;
 		
 	}
 	
