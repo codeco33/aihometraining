@@ -107,6 +107,12 @@ public class ChallengeConfigService {
 		
 	}
 	
+	//챌린지 세팅 수정 처리
+	public void challengeSettingUpdate(ChallengeSetting challengeSetting) {
+		
+		challengeConfigMapper.challengeSettingUpdate(challengeSetting);
+	}
+	
 	//모집 챌린지 목록 조회
 	public List<ChallengeGather> getGetherList(){
 		

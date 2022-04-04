@@ -16,10 +16,11 @@
 		        <div class="panel-body">
 					<div class="col-md-12 panel-body" style="padding-bottom:30px;">
 						<div class="col-md-12">
-  							<form class="cmxform" id="challengeSettingForm" method="post" th:action="@{/challenge/challengeConfig/challengeSettingInsert}">
+  							<form class="cmxform" id="challengeSettingForm" method="post" th:action="@{/challenge/challengeConfig/challengeSettingUpdate}">
     							<div class="col-md-12">
 									<th:block>
 									<div class="form-group form-animate-text" style="margin-top:40px !important;">
+										<input type="hidden" class="form-text" name="challengeSettingCode" th:value="${challengeSetting.challengeSettingCode}"/>
 					                    <input type="text" class="form-text" id="validate_settingName" name="challengeSettingUpdateDo" th:value="${challengeSetting.challengeSettingUpdateDo}" required>
 					                    <span class="bar"></span>
 					                    <label>챌린지 세팅명</label>
