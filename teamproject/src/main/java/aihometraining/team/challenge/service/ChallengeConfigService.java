@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import aihometraining.team.challenge.mapper.ChallengeConfigMapper;
 import aihometraining.team.dto.ChallengeCategory;
+import aihometraining.team.dto.ChallengeGather;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.mapper.CommonMapper;
 
@@ -74,5 +75,23 @@ public class ChallengeConfigService {
 		int result = challengeConfigMapper.challengeCategoryUpdate(challengeCategory);
 		
 		return result;
+	}
+	
+	//모집 챌린지 목록 조회
+	public List<ChallengeGather> getGetherList(){
+		
+		List<ChallengeGather> gatherList = challengeConfigMapper.getGetherList();
+		
+		return gatherList;
+		
+	}
+	
+	//모집 챌린지 코드별 모집 챌린지 세부 정보 조회
+	public List<ChallengeGather> getListDetailByCode(String challengeGatherCode){
+		
+		List<ChallengeGather> listDetail = challengeConfigMapper.getListDetailByCode(challengeGatherCode);
+		
+		return listDetail;
+		
 	}
 }
