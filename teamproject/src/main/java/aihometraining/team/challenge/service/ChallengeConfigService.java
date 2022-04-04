@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import aihometraining.team.challenge.mapper.ChallengeConfigMapper;
 import aihometraining.team.dto.ChallengeCategory;
+import aihometraining.team.dto.ChallengeGather;
+import aihometraining.team.dto.ChallengeSetting;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.mapper.CommonMapper;
 
@@ -32,6 +34,15 @@ public class ChallengeConfigService {
 		return challengeCategoryList;
 		
 	}
+	
+	//챌린지 세팅 목록 조회
+		public List<ChallengeSetting> getChallengeSettingList(){
+			
+			List<ChallengeSetting> challengeSettingList = challengeConfigMapper.getChallengeSettingList();
+			
+			return challengeSettingList;
+			
+		}
 	
 	//운동 클래스 카테고리 small 조회
 	public List<EClassCategorySmall> getClassCategoryList() {
@@ -74,5 +85,49 @@ public class ChallengeConfigService {
 		int result = challengeConfigMapper.challengeCategoryUpdate(challengeCategory);
 		
 		return result;
+	}
+	
+	//세팅 등록 처리
+	public void challengeSettingInsert(ChallengeSetting challengeSetting) {
+		
+		String newCode = commonMapper.getNewCode("challengeSettingCode", "challengesetting");
+		
+		challengeSetting.setChallengeSettingCode(newCode);
+		
+		challengeConfigMapper.challengeSettingInsert(challengeSetting);
+		
+	}
+	
+	//챌린지 세팅 코드 별 세팅정보 조회
+	public ChallengeSetting getChallengeSettingByCode(String challengeSettingCode) {
+		
+		ChallengeSetting challengeSetting = challengeConfigMapper.getChallengeSettingByCode(challengeSettingCode);
+		
+		return challengeSetting;
+		
+	}
+	
+	//챌린지 세팅 수정 처리
+	public void challengeSettingUpdate(ChallengeSetting challengeSetting) {
+		
+		challengeConfigMapper.challengeSettingUpdate(challengeSetting);
+	}
+	
+	//모집 챌린지 목록 조회
+	public List<ChallengeGather> getGetherList(){
+		
+		List<ChallengeGather> gatherList = challengeConfigMapper.getGetherList();
+		
+		return gatherList;
+		
+	}
+	
+	//모집 챌린지 코드별 모집 챌린지 세부 정보 조회
+	public List<ChallengeGather> getListDetailByCode(String challengeGatherCode){
+		
+		List<ChallengeGather> listDetail = challengeConfigMapper.getListDetailByCode(challengeGatherCode);
+		
+		return listDetail;
+		
 	}
 }

@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import aihometraining.team.challenge.service.ChallengeConfigService;
 import aihometraining.team.dto.ChallengeCategory;
+import aihometraining.team.dto.ChallengeGather;
+import aihometraining.team.dto.ChallengeSetting;
 import aihometraining.team.dto.EClassCategorySmall;
-import aihometraining.team.mapper.CommonMapper;
 
 @Controller
 @RequestMapping("/challenge/challengeConfig")
@@ -65,6 +67,7 @@ public class ChallengeConfigController {
 		
 		//List<ChallengeCategory> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
 		List<Map<String, Object>> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
+		List<ChallengeSetting> challengeSettingList = challengeConfigService.getChallengeSettingList();
 		
 		paramMap = null;
 		
@@ -73,7 +76,7 @@ public class ChallengeConfigController {
 		model.addAttribute("title", "챌린지 관리 설정");
 		model.addAttribute("leftMenuList", "챌린지");
 		model.addAttribute("challengeCategoryList", challengeCategoryList);
-		
+		model.addAttribute("challengeSettingList", challengeSettingList);
 		return "challenge/challengeConfig/challengeConfigList";
 		
 	}
@@ -163,14 +166,74 @@ public class ChallengeConfigController {
 		
 	}
 	
+	//챌린지 세팅 등록 처리
+	@PostMapping("/challengeSettingInsert")
+	public String challengeSettingInsert(ChallengeSetting challengeSetting) {
+		
+		log.info("챌린지 세팅  폼에서 입력받은 데이터: {}", challengeSetting);
+		
+		challengeConfigService.challengeSettingInsert(challengeSetting);
+		
+		return "redirect:/challenge/challengeConfig/configList";
+		
+	}
+	
+	//챌린지 세팅 수정 화면
+	@GetMapping("/challengeSettingUpdate")
+	public String chllengeSettingUpdate(Model model, @RequestParam(name="challengeSettingCode", required = false) String challengeSettingCode) {
+		
+		log.info("챌린지 세팅 수정화면 폼 쿼리 스트링 challengeSettingCode : {}", challengeSettingCode);
+		
+		//챌린지 세팅 코드 별 세팅정보 조회
+		ChallengeSetting challengeSetting = challengeConfigService.getChallengeSettingByCode(challengeSettingCode);
+		
+		model.addAttribute("title", "챌린지 수정 화면");
+		model.addAttribute("leftMenuList", "챌린지");
+		model.addAttribute("challengeSetting", challengeSetting);
+		
+		return "challenge/challengeConfig/challengeSettingUpdate";
+		
+	}
+	
+	//챌린지 세팅 수정 처리
+	@PostMapping("/challengeSettingUpdate")
+	public String chllengeSettingUpdate(ChallengeSetting challengeSetting) {
+		
+		log.info("챌린지 세팅 수정 폼에서 입력받은 데이터 challengeSetting : {}", challengeSetting);
+		
+		challengeConfigService.challengeSettingUpdate(challengeSetting);
+		
+		return "redirect:/challenge/challengeConfig/configList";
+		
+	}
+	
 	//챌린지 모집 중인 목록
 	@GetMapping("/challengeList")
 	public String challengeList(Model model) {
 		
+		List<ChallengeGather> gatherList = challengeConfigService.getGetherList();
+		
+		log.info("모집챌린지 gatherList : {}", gatherList);
+		
 		model.addAttribute("title", "모집 챌린지 목록");
 		model.addAttribute("leftMenuList", "모집");
+		model.addAttribute("gatherList", gatherList);
 		
 		return "challenge/challengeConfig/challengeList";
+		
+	}
+	
+	//ajax 챌린지 모집 목록 자세한 내용 조회
+	@PostMapping("/listDetail")
+	@ResponseBody
+	public List<ChallengeGather> getListDetailByCode(String challengeGatherCode){
+		
+		log.info("모집챌린지 String challengeGatherCode : {}", challengeGatherCode);
+		
+		List<ChallengeGather> listDetail = challengeConfigService.getListDetailByCode(challengeGatherCode);
+		log.info("모집 챌린지 세부 내용 조회 ListDetail : {}", listDetail);
+		
+		return listDetail;
 		
 	}
 	
