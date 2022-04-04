@@ -166,6 +166,47 @@ public class ChallengeConfigController {
 		
 	}
 	
+	//챌린지 세팅 등록 처리
+	@PostMapping("/challengeSettingInsert")
+	public String challengeSettingInsert(ChallengeSetting challengeSetting) {
+		
+		log.info("챌린지 세팅  폼에서 입력받은 데이터: {}", challengeSetting);
+		
+		challengeConfigService.challengeSettingInsert(challengeSetting);
+		
+		return "redirect:/challenge/challengeConfig/configList";
+		
+	}
+	
+	//챌린지 세팅 수정 화면
+	@GetMapping("/challengeSettingUpdate")
+	public String chllengeSettingUpdate(Model model, @RequestParam(name="challengeSettingCode", required = false) String challengeSettingCode) {
+		
+		log.info("챌린지 세팅 수정화면 폼 쿼리 스트링 challengeSettingCode : {}", challengeSettingCode);
+		
+		//챌린지 세팅 코드 별 세팅정보 조회
+		ChallengeSetting challengeSetting = challengeConfigService.getChallengeSettingByCode(challengeSettingCode);
+		
+		model.addAttribute("title", "챌린지 수정 화면");
+		model.addAttribute("leftMenuList", "챌린지");
+		model.addAttribute("challengeSetting", challengeSetting);
+		
+		return "challenge/challengeConfig/challengeSettingUpdate";
+		
+	}
+	
+	//챌린지 세팅 수정 처리
+	@PostMapping("/challengeSettingUpdate")
+	public String chllengeSettingUpdate(ChallengeSetting challengeSetting) {
+		
+		log.info("챌린지 세팅 수정 폼에서 입력받은 데이터 challengeSetting : {}", challengeSetting);
+		
+		challengeConfigService.challengeSettingUpdate(challengeSetting);
+		
+		return "redirect:/challenge/challengeConfig/configList";
+		
+	}
+	
 	//챌린지 모집 중인 목록
 	@GetMapping("/challengeList")
 	public String challengeList(Model model) {

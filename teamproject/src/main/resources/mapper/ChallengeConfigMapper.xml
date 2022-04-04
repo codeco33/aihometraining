@@ -94,7 +94,7 @@
 	</resultMap>
 	
 	<update id="challengeCategoryUpdate" parameterType="ChallengeCategory">
-		/* 챌린지 카테고리 수정처리 (pk값으로 잡힌건 어떻게 해야할지 물어봐야할듯!)*/
+		/* 챌린지 카테고리 수정처리 (fk값으로 잡힌건 어떻게 해야할지 물어봐야할듯! casecade를 이용하자)*/
 		UPDATE challengecategory
 		<trim prefix="SET" suffixOverrides=",">
 			<if test="challengeCategoryName !=null and challengeCategoryName !=''">
@@ -159,6 +159,40 @@
 	
 	</select>
 	
+	<insert id="challengeSettingInsert" parameterType="ChallengeSetting">
+		/* 챌린지 세팅 등록 처리 */
+		INSERT INTO challengesetting
+		(
+			 challengeSettingCode
+			,challengeSettingUpdateDo
+		)VALUES (
+			 #{challengeSettingCode}
+			,#{challengeSettingUpdateDo}
+		);
+	</insert>
+	
+	<select id="getChallengeSettingByCode" parameterType="String" resultMap="chllengeSettingResultMap">
+		/* 챌린지 세팅 코드별 세팅 정보 조회 */
+		SELECT
+			 cs.challengeSettingCode
+			,cs.challengeSettingUpdateDo
+		FROM
+			challengesetting AS cs
+		WHERE
+			cs.challengeSettingCode = #{challengeSettingCode};
+	</select>
+	
+	<update id="challengeSettingUpdate">
+		/*챌린지 세팅 수정 처리*/
+		UPDATE challengesetting
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="challengeSettingUpdateDo !=null and challengeSettingUpdateDo !=''">
+				challengeSettingUpdateDo = #{challengeSettingUpdateDo},
+			</if>
+		</trim>
+		WHERE challengeSettingCode= #{challengeSettingCode};
+	</update>
+	
 	<select id="getClassCategoryList" resultType="EClassCategorySmall">
 		/* 운동클래스카테고리small 조회 */
 		SELECT
@@ -187,7 +221,8 @@
 			INNER join
 			member AS m
 			on
-			cc.memberEmail = m.memberEmail;
+			cc.memberEmail = m.memberEmail
+			ORDER BY cast(SUBSTRING_INDEX(cc.challengeCategoryCode,'_',-1) AS UNSIGNED) ASC;
 	</select>
 	
 	<select id="getGetherList" parameterType="ChallengeGather" resultMap="challengeGatherResultMap">

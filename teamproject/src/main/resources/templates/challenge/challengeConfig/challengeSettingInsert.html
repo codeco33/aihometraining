@@ -16,24 +16,10 @@
 		        <div class="panel-body">
 					<div class="col-md-12 panel-body" style="padding-bottom:30px;">
 						<div class="col-md-12">
-  							<form class="cmxform" id="challengeSettingForm" method="post" th:action="@{#}">
+  							<form class="cmxform" id="challengeSettingForm" method="post" th:action="@{/challenge/challengeConfig/challengeSettingInsert}">
     							<div class="col-md-12">
-	      							<div class=" row form-group">
-										<label class="col-sm-5 control-label" style="color:#999; font-size: 18px;">운동 카테고리</label>
-										<div class="col-sm-7">
-											<select class="form-control" id="validate_eClassCategory" name="eClassCategorySmallCode" required>
-												<th:block th:if="${not #lists.isEmpty(classCategoryList)}" th:each="l : ${classCategoryList}">
-													<option th:value="${l.eClassCategorySmallCode}">[[${l.eClassCategorySmallName}]]</option>
-												</th:block>
-												<th:block th:unless="${not #lists.isEmpty(classCategoryList)}" th:each="l : ${classCategoryList}">
-													<option >등록된 카테고리가 없습니다.</option>
-												</th:block>
-											</select>
-										</div>
-									</div>
-									
 									<div class="form-group form-animate-text" style="margin-top:40px !important;">
-					                    <input type="text" class="form-text" id="validate_settingName" name="validate_settingName" required>
+					                    <input type="text" class="form-text" id="validate_settingName" name="challengeSettingUpdateDo" required>
 					                    <span class="bar"></span>
 					                    <label>챌린지 세팅명</label>
 				                    </div>
@@ -96,11 +82,9 @@
 		        $(label.parent("div").removeClass("form-animate-error"));
 		      },
 		      rules: {
-		    	validate_eClassCategory: "required",
 		    	validate_settingName: "required",
 		      },
 		      messages: {
-		    	validate_eClassCategory: "카테고리를 선택해주세요.",
 		    	validate_settingName: "카테고리명을 입력해주세요.",
 		      }
 		    });
