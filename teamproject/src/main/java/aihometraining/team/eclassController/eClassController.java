@@ -1,11 +1,25 @@
 package aihometraining.team.eclassController;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import aihometraining.team.challenge.controller.ChallengeConfigController;
+import aihometraining.team.eclassService.eClassService;
 
 @Controller
 public class eClassController {
+	
+	private static final Logger log = LoggerFactory.getLogger(ChallengeConfigController.class);
+	
+	private eClassService eClassService;
+	
+	public eClassController(eClassService eClassService) {
+		this.eClassService = eClassService;
+	}
 	
 	@GetMapping("/eClassApprovedList")
 	public String eClassApprovedList(Model model) {
@@ -14,6 +28,7 @@ public class eClassController {
 		
 		return "eClass/eclassApprovedList";
 	}
+	
 	@GetMapping("/OpenApplyForm")
 	public String OpenApplyForm(Model model) {
 		
@@ -21,6 +36,14 @@ public class eClassController {
 		
 		return "eClass/eClassOpenApplyForm";
 	}
+	@PostMapping("/EClassOpenApplyForm")
+	public String EClassOpenApplyFormInsert(Model model) {
+		
+		model.addAttribute("title", "개설신청 완료");
+		
+		return "";
+	}
+	
 	@GetMapping("/eClassApproved")
 	public String eClassApproved(Model model) {
 	
@@ -28,6 +51,7 @@ public class eClassController {
 		
 		return "eClass/eClassApproved";
 	}
+	
 	@GetMapping("/eClassOpenApplyadminList")
 	public String eClassOpenApplyadminList(Model model) {
 		
@@ -35,6 +59,7 @@ public class eClassController {
 		
 		return "eClass/eClassOpenApplyadminList";
 	}
+	
 	@GetMapping("/eClassApplyadminList")
 	public String eClassApplyadminList(Model model) {
 		
@@ -42,6 +67,7 @@ public class eClassController {
 		
 		return "eClass/eClassApplyadminList";
 	}
+	
 	@GetMapping("/myApplyList")
 	public String MyApplyList(Model model) {
 			
@@ -49,6 +75,7 @@ public class eClassController {
 		
 		return "/eClass/myEClassApplyList";
 	}
+	
 	@GetMapping("/myeClassList")
 	public String myeClassList(Model model) {
 		
