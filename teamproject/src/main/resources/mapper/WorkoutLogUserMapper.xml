@@ -23,14 +23,25 @@
 			<result column="workoutLogPrivacyBoundsContent" 	property="workoutLogPrivacyBoundsContent"/>
 	</resultMap>
 	
-	<resultMap type="geteClassCategoryLargeList" id="EClassCategoryLargeResultMap">
+	<resultMap type="EClassCategoryLarge" id="EClassCategoryLargeResultMap">
 			<id 	column="eClassCategoryLargeCode" 			property="eClassCategoryLargeCode"/>
 			<result column="eClassCategoryLargeName" 			property="eClassCategoryLargeName"/>
 			<result column="eClassCategoryLargeRegEmail" 		property="eClassCategoryLargeRegEmail"/>
 			<result column="eClassCategoryLargeRegDate" 		property="eClassCategoryLargeRegDate"/>
 			<result column="eClassCategoryLargeUpdateDate" 		property="eClassCategoryLargeUpdateDate"/>
 			<result column="eClassCategoryLargeUpdateEmail" 	property="eClassCategoryLargeUpdateEmail"/>
-	</resultMap>	
+	</resultMap>
+	
+	<resultMap type="EClassCategoryMedium" id="EClassCategoryMediumResultMap">
+			<id 	column="eClassCategoryMediumCode" 			property="eClassCategoryMediumCode"/>
+			<result column="eClassCategoryMediumName" 			property="eClassCategoryMediumName"/>
+			<result column="eClassCategoryLargeCode" 			property="eClassCategoryLargeCode"/>
+			<result column="eClassCategoryLargeName" 			property="eClassCategoryLargeName"/>
+			<result column="memberEmail" 						property="memberEmail"/>
+			<result column="eClassCategoryMediumRegDate" 		property="eClassCategoryMediumRegDate"/>
+			<result column="memberUpdateEmail" 					property="memberUpdateEmail"/>
+			<result column="eClassCategoryMediumUpdateDate" 	property="eClassCategoryMediumUpdateDate"/>
+	</resultMap>
 	
 	<resultMap type="EClassCategorySmall" id="EClassCategorySmallResultMap">	
 			<id 	column="eClassCategorySmallCode" 				property="eClassCategorySmallCode"/>
@@ -62,7 +73,7 @@
 	</resultMap>
 	
 		
-		<select id="getworkoutGoalList" resultType="WorkoutGoal">
+		<select id="getworkoutGoalList" resultMap="WorkoutGoalResultMap">
 			/* 운동 계획 목록 조회*/
 			SELECT
 				 m.memberEmail
@@ -79,7 +90,7 @@
 				w.memberEmail = 'id004@email.com';
 		</select>
 		
-		<select id="getworkoutLogPrivacyboundsList" resultType="WorkoutLogPrivacybounds">
+		<select id="getworkoutLogPrivacyboundsList" resultMap="WorkoutLogPrivacyboundsResultMap">
 			/* 일지 공개범위 목록 조회*/
 			SELECT 
 				 wp.workoutLogPrivacyBoundsCode
@@ -95,6 +106,17 @@
 				,ec.eClassCategoryLargeName
 			FROM
 				eclasscategorylarge AS ec;
+		</select>
+		
+		<select id="geteClassCategoryMedium" resultMap="EClassCategoryMediumResultMap" parameterType="String">
+			/* 운동클래스 카테고리 Medium 조회 */
+			SELECT
+				 em.eClassCategoryMediumCode
+				,em.eClassCategoryMediumName
+			FROM
+				eclasscategorymedium AS em
+			Where
+				em.eClassCategoryLargeCode = #{eClassCategoryLargeCode};	
 		</select>
 		
 		<insert id="workoutLogInsert" parameterType="workoutLog">
