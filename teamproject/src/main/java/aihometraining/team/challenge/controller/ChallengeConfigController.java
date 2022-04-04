@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import aihometraining.team.challenge.service.ChallengeConfigService;
 import aihometraining.team.dto.ChallengeCategory;
 import aihometraining.team.dto.ChallengeGather;
+import aihometraining.team.dto.ChallengeSetting;
 import aihometraining.team.dto.EClassCategorySmall;
 
 @Controller
@@ -66,6 +67,7 @@ public class ChallengeConfigController {
 		
 		//List<ChallengeCategory> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
 		List<Map<String, Object>> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
+		List<ChallengeSetting> challengeSettingList = challengeConfigService.getChallengeSettingList();
 		
 		paramMap = null;
 		
@@ -74,7 +76,7 @@ public class ChallengeConfigController {
 		model.addAttribute("title", "챌린지 관리 설정");
 		model.addAttribute("leftMenuList", "챌린지");
 		model.addAttribute("challengeCategoryList", challengeCategoryList);
-		
+		model.addAttribute("challengeSettingList", challengeSettingList);
 		return "challenge/challengeConfig/challengeConfigList";
 		
 	}
