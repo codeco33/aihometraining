@@ -9,7 +9,7 @@
                         <!-- Logo -->
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo">
-                                <a href="index.html"><img th:src="@{/assets/img/logo/logo2.png}" alt=""></a>
+                                <a th:href="@{/}"><img th:src="@{/assets/img/logo/logo.png}" alt=""></a>
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10">
@@ -18,38 +18,41 @@
                                 <div class="main-menu d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">                                                                                          
-                                            <li class="active" ><a href="index.html">홈</a></li>
-                                            <li><a href="#">운동 클래스</a>
+                                            <li class="active" ><a th:href="@{/}">20220322</a></li>
+                                            <li class="active" ><a th:href="@{/}">홈</a></li>
+                                            <li><a href="#">#운동 클래스</a>
                                                 <ul class="submenu">
-                                                    <li><a href="blog.html">신규 클래스</a></li>
-                                                    <li><a href="blog_details.html">특가 클래스</a></li>
-                                                    <li><a href="elements.html">인기 클래스</a></li>
+                                                    <li><a th:href="@{/eClassApprovedList}">#신규 클래스(재환)</a></li>
+                                                    <li><a th:href="@{/OpenApplyForm}">#특가 클래스(재환)</a></li>
+                                                    <li><a href="#">#인기 클래스(재환)</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="#">챌린지</a>
+                                            <li><a href="#">#챌린지</a>
                                                 <ul class="submenu">
-                                                    <li><a href="blog.html">모집 중 챌린지</a></li>
-                                                    <li><a href="blog_details.html">참가 챌린지</a></li>
-                                                    <li><a href="elements.html">챌린지</a></li>
+                                                    <li><a th:href="@{/challenge/challengeGather/challengeGatherList}">#모집 중 챌린지</a></li>
+                                                    <li><a th:href="@{/challenge/challengeEnter/challengeEnterList}">#참가 챌린지(보라)</a></li>
+                                                    <li><a href="#">#챌린지(보라)</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="#">식단</a>
+                                            <li><a href="#">#식단</a>
                                                 <ul class="submenu">
-                                                    <li><a href="blog.html">식단 은행</a></li>
-                                                    <li><a href="blog_details.html">추천 식단</a></li>
-                                                    <li><a href="elements.html">인기 식단</a></li>
+                                                    <li><a th:href="@{/diet/dietBankList}">#식단 은행(영호)</a></li>
+                                                    <li><a href="#">#개인 식단(영호)</a></li>
+                                                    <li><a href="#">#인기 식단(영호)</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="#">일지</a>
+                                            <li><a href="#">#일지</a>
                                                 <ul class="submenu">
-                                                    <li><a href="blog.html">하루 일지</a></li>
-                                                    <li><a href="blog_details.html">인기 일지</a></li>
+                                                    <li><a th:href="@{/workoutLog/workoutLogUser/workoutGoalList}">#운동 목표(민희)</a></li>
+                                                    <li><a th:href="@{/workoutLog/workoutLogUser/workoutGoalPlanList}">#운동 계획(민희)</a></li>
+                                                    <li><a th:href="@{/workoutLog/workoutLogUser/workoutLogMain}">#하루 일지(민희)</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="contact.html">위시리스트</a></li>
+                                            <li><a th:href="@{/wishList}">#위시리스트</a></li>
                                             <!-- Button -->
-                                            <li class="button-header margin-left "><a href="#" class="btn">Join</a></li>
-                                            <li class="button-header"><a href="login.html" class="btn btn3">Log in</a></li>
+                                            <li class="button-header margin-left "><a th:if="${session.SEMAIL == null}" th:href="@{/member/login}" class="btn">#로그인(민식)</a></li>
+                                            <li class="button-header"><a th:if="${session.SEMAIL == null}" th:href="@{/member/addMember}" class="btn btn3">#회원가입(민식)</a></li>
+                                            <li class="button-header"><a th:if="${session.SEMAIL != null}" th:href="@{/member/mypage}" class="btn btn3">#마이페이지</a></li>
                                         </ul>
                                     </nav>
                                 </div>

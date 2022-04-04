@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/userdefault}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+		<!--? Blog Area Start -->
+		<section class="blog_area section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mb-5 mb-lg-0">
+                        <div class="blog_left_sidebar">
+                            <article class="blog_item">
+                                <div class="blog_item_img">
+                                    <img class="card-img rounded-0" th:src="@{/assets/img/workoutLogimg1.jpg}" alt="토르">
+                                    <a href="#" class="blog_item_date">
+                                        <h3>23</h3>
+                                        <p>Mar</p>
+                                    </a>
+                                </div>
+                                <div class="blog_details">
+                                    <a class="d-inline-block" th:href="@{/workoutLog/workoutLogUser/workoutLogList}">
+                                        <h2 class="blog-head" style="color: #2d2d2d;">오늘은 사이드 런지</h2>
+                                    </a>
+                                    <p> 토르: 러브 앤 썬더 개봉일 2022년 7월 8일 입니다</p>
+                                    <ul class="blog-info-link">
+                                        <li><a href="#"><i class="fa fa-heart"></i>좋아요</a></li>
+                                        <li><a href="#"><i class="fa fa-comments"></i>피드백</a></li>
+                                    </ul>
+					                <p class="excert">
+					                    MCSE boot camps have its supporters and its detractors. Some people do not understand why you
+					                    should have to spend money on boot camp when you can get the MCSE study materials yourself at a
+					                    fraction of the camp price. However, who has the willpower
+					                </p>
+					                <p>
+					                    MCSE boot camps have its supporters and its detractors. Some people do not understand why you
+					                    should have to spend money on boot camp when you can get the MCSE study materials yourself at a
+					                    fraction of the camp price. However, who has the willpower to actually sit through a
+					                    self-imposed MCSE training. who has the willpower to actually
+					                </p>
+		               			</div>
+		               			
+					            <div class = "row justify-content-center mt-4">
+			               			<div class="col-lg-4 mb-2 mb-lg-0" style="display: inline-block">
+				               			<a th:href="@{/workoutLog/workoutLogUser/workoutLogUpdate}">
+					                        <button class="button button-contactForm" id="button">
+					                        	일지 수정
+					                        </button>
+					                	</a>
+				                	</div>
+				                	<div class="col-lg-4 mb-2 mb-lg-0" style="display: inline-block">
+				               			<a th:href="@{/workoutLog/workoutLogUser/workoutLogUpdate}">
+					                        <button class="button button-contactForm" id="button" >
+					                        	일지 삭제
+					                        </button>
+					                	</a>
+				                	</div>
+					            </div>
+                            </article>     
+		                </div>
+			            <div class="navigation-top">
+			               <div class="d-sm-flex justify-content-between text-center">
+			                  <p class="like-info"><span class="align-middle"><i class="fa fa-heart"></i></span> Lily and 4
+			                  people like this</p>
+			                  <div class="col-sm-4 text-center my-2 my-sm-0">
+			                     <!-- <p class="comment-count"><span class="align-middle"><i class="fa fa-comment"></i></span> 06 Comments</p> -->
+			                  </div>
+			                  <ul class="social-icons">
+			                     <li><a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a></li>
+			                     <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+			                     <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
+			                     <li><a href="#"><i class="fab fa-behance"></i></a></li>
+			                  </ul>
+			               </div>
+			               <div class="navigation-area">
+			                  <div class="row">
+			                     <div
+			                     class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+			                     <div class="thumb">
+			                        <a href="#">
+			                           <img class="img-fluid" src="assets/img/post/preview.png" alt="">
+			                        </a>
+			                     </div>
+			                     <div class="arrow">
+			                        <a href="#">
+			                           <span class="lnr text-white ti-arrow-left"></span>
+			                        </a>
+			                     </div>
+			                     <div class="detials">
+			                        <p>이전 일지</p>
+			                        <a href="#">
+			                           <h4 style="color: #2d2d2d;">오늘은 명상</h4>
+			                        </a>
+			                     </div>
+			                  </div>
+			                  <div
+			                  class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+			                  <div class="detials">
+			                     <p>다음 일지</p>
+			                     <a href="#">
+			                        <h4 style="color: #2d2d2d;">오늘은 달리기</h4>
+			                     </a>
+			                  </div>
+			                  <div class="arrow">
+			                     <a href="#">
+			                        <span class="lnr text-white ti-arrow-right"></span>
+			                     </a>
+			                  </div>
+			                  <div class="thumb">
+			                     <a href="#">
+			                        <img class="img-fluid" src="" alt="">
+			                     </a>
+			                  </div>
+			               </div>
+			            </div>
+			         </div>
+			      </div>
+			      <div class="comments-area">
+			         <h4>피드백</h4>
+			         <div class="comment-list">
+			            <div class="single-comment justify-content-between d-flex">
+			               <div class="user justify-content-between d-flex">
+			                  <div class="thumb">
+			                     <img th:src="@{/assets/img/mds.PNG}" alt="">
+			                  </div>
+			                  <div class="desc">
+			                     <p class="comment">
+			                     	오늘 저녁 메뉴는 무엇입니까?
+			                     </p>
+			                     <div class="d-flex justify-content-between">
+			                        <div class="d-flex align-items-center">
+			                           <h5>
+			                              <a href="#">마동석</a>
+			                           </h5>
+			                           <p class="date">March 25, 2022 at 6:10 pm </p>
+			                        </div>
+			                        <div class="reply-btn">
+			                           <a href="#" class="btn-reply text-uppercase">reply</a>
+			                        </div>
+			                     </div>
+			                  </div>
+			               </div>
+			            </div>
+			         </div>
+			         <div class="comment-list">
+			            <div class="single-comment justify-content-between d-flex">
+			               <div class="user justify-content-between d-flex">
+			                  <div class="thumb">
+			                     <img th:src="@{/assets/img/mds.PNG}" alt="">
+			                  </div>
+			                  <div class="desc">
+			                     <p class="comment">
+			                     	설마 치킨은 아니겠지요	
+			                     <div class="d-flex justify-content-between">
+			                        <div class="d-flex align-items-center">
+			                           <h5>
+			                              <a href="#">마동석</a>
+			                           </h5>
+			                           <p class="date">March 25, 2022 at 6:11 pm </p>
+			                        </div>
+			                        <div class="reply-btn">
+			                           <a href="#" class="btn-reply text-uppercase">reply</a>
+			                        </div>
+			                     </div>
+			                  </div>
+			               </div>
+			            </div>
+			         </div>
+			         <div class="comment-list">
+			            <div class="single-comment justify-content-between d-flex">
+			               <div class="user justify-content-between d-flex">
+			                  <div class="thumb">
+			                     <img th:src="@{/assets/img/mds.PNG}" alt="">
+			                  </div>
+			                  <div class="desc">
+			                     <p class="comment">
+			                     	설마 술은 아니겠지요
+			                     	드루와드루와	
+			                     </p>
+			                     <div class="d-flex justify-content-between">
+			                        <div class="d-flex align-items-center">
+			                           <h5>
+			                              <a href="#">마동석</a>
+			                           </h5>
+			                           <p class="date">March 25, 2022 at 6:12 pm </p>
+			                        </div>
+			                        <div class="reply-btn">
+			                           <a href="#" class="btn-reply text-uppercase">reply</a>
+			                        </div>
+			                     </div>
+			                  </div>
+			               </div>
+			            </div>
+			         </div>
+			      </div>
+			      <div class="comment-form">
+			         <h4>피드백 댓글</h4>
+			         <form class="form-contact comment_form" action="#" id="commentForm">
+			            <div class="row">
+			               <div class="col-12">
+			                  <div class="form-group">
+			                     <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
+			                     placeholder="내용을 입력하세요"></textarea>
+			                  </div>
+			               </div>
+			            </div>
+			            <div class="row justify-content-center ">
+			               <button type="submit" class="button button-contactForm btn_1 boxed-btn">피드백 댓글 등록</button>
+			            </div>
+			         </form>
+			      </div>
+			   </div>
+			   <div class="col-lg-4">
+					<div class="blog_right_sidebar">
+	                    <aside class="single_sidebar_widget popular_post_widget">
+                                <h3 class="widget_title" style="color: #2d2d2d;">나의 목표</h3>
+                                <th:block th:if="${not #lists.isEmpty(workoutGoalList)}" th:each="l : ${workoutGoalList}">
+	                                <div class="single-services mb-30">
+			                           <div class="features-caption">
+			                               <h3>운동 목표 </h3>
+			                               <p>[[${l.workoutGoalContent}]]</p>
+			                           </div>
+			                           <h6>목표 달성률</h6>
+					                   <div class="percentage">
+											<div class="progress">
+												<div class="progress-bar color-7" role="progressbar" style="width: 30%"
+												aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+											</div>
+										</div>
+			                      	</div>
+			            	    </th:block>
+			            	    <th:block th:unless="${not #lists.isEmpty(workoutGoalList)}" th:each="l : ${workoutGoalList}">
+				            		<div class="col-lg-4 col-md-6 col-sm-8">
+				                        <div class="single-services mb-30">
+				                            <div class="features-caption">
+				                                <h3>운동 목표</h3>
+				                                <p>등록된 운동 목표가 없습니다.</p>
+				                            </div>
+				                        </div>
+				                    </div>
+				            	</th:block>      	
+                        </aside>
+                         <aside class="single_sidebar_widget popular_post_widget">
+	                        <h3 class="widget_title" style="color: #2d2d2d;">오늘의 식단</h3>
+	                        <div class="media post_item">
+	                            <img th:src="@{/assets/img/post/post_1.png}" alt="post">
+	                            <div class="media-body">
+	                                <a href="blog_details.html">
+	                                    <h3 style="color: #2d2d2d;">아침</h3>
+	                                </a>
+	                                <p>구운 계란</p>
+	                            </div>
+	                        </div>
+	                        <div class="media post_item">
+	                            <img th:src="@{/assets/img/post/post_1.png}" alt="post">
+	                            <div class="media-body">
+	                                <a href="blog_details.html">
+	                                    <h3 style="color: #2d2d2d;">점심</h3>
+	                                </a>
+	                                <p>현미밥, 된장찌개</p>
+	                            </div>
+	                        </div>
+	                        <div class="media post_item">
+	                            <img th:src="@{/assets/img/post/post_1.png}" alt="post">
+	                            <div class="media-body">
+	                                <a href="blog_details.html">
+	                                    <h3 style="color: #2d2d2d;">저녁</h3>
+	                                </a>
+	                                <p>샐러드</p>
+	                            </div>
+	                        </div>
+	                    </aside>
+	                    <aside class="single_sidebar_widget tag_cloud_widget">
+	                        <h4 class="widget_title" style="color: #2d2d2d;">과제</h4>
+	                        <ul class="list">
+	                            <li>
+	                                <a href="#">스쿼트 3세트 추가</a>
+	                            </li>
+	                            <li>
+	                                <a href="#">버핏테스트 2세트 추가</a>
+	                            </li>
+	                            <li>
+	                                <a href="#">6시 이후 금식</a>
+	                            </li>
+	                        </ul>
+	                    </aside>
+	                    <aside class="single_sidebar_widget tag_cloud_widget">
+	                        <h4 class="widget_title" style="color: #2d2d2d;">수강중인 클래스</h4>
+	                        <ul class="list">
+	                            <li>
+	                                <a href="#">문어요가</a>
+	                            </li>
+	                            <li>
+	                                <a href="#">드루와복싱</a>
+	                            </li>
+	                            <li>
+	                                <a href="#">하루 명상</a>
+	                            </li>
+	                        </ul>
+	                    </aside>
+	                    <aside class="single_sidebar_widget tag_cloud_widget">
+	                        <h4 class="widget_title" style="color: #2d2d2d;">참여중인 챌린지</h4>
+	                        <ul class="list">
+	                            <li>
+	                                <a href="#">한달 넥스트레벨 완성하기</a>
+	                            </li>
+	                        </ul>
+	                    </aside>
+					  </div>
+				   </div>
+				</div>
+			</div>
+		</section>
+        
+	</th:block>
+	
+	<th:block layout:fragment="customCss">
+		<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
+		<!-- Custom Stylesheet -->
+    	<style>
+			.progress-bar.color-7 {
+				background-color: #a367e7
+			}
+			h6{
+				font-weight: bold
+			}
+			#button{
+				background: #fff;
+			    color: #C86FFF !important;
+			    font-family: "Josefin Sans", sans-serif !important;
+			    border: 1px solid #C86FFF;
+			    letter-spacing: 3px;
+			    text-align: center;
+			    color: #C86FFF;
+			
+			}
+		</style>
+	</th:block>
+	
+	<!-- 사용자 정의 Script -->
+	<th:block layout:fragment="customScript">
+		<script>
+		</script>
+	</th:block>
+	
+</html>	

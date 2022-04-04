@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+		<div class="col-md-12">
+			<div class="panel">
+		    	<div class="panel-heading bg-white border-none">
+			        	<h4><span class="icon-direction"></span> 운동 계획 카테고리 등록</h4>
+			    </div>
+				<div class="panel-body">
+					<div class="col-md-12 panel-body" style="padding-bottom:30px;">
+						<div class="col-md-6 col-md-offset-3">
+  							<form class="cmxform" id="workoutCategoryForm" method="post" th:action="@{/workoutLog/workoutLogConfig/workoutCategoryInsert}">
+    							<div class="col-md-12">
+	      							<div class="form-group form-animate-text" style="margin-top:40px !important;">
+										<input type="text" class="form-text" id="validate_workoutGoalPlanCategoryContent" name="workoutGoalPlanCategoryContent" required>
+										<span class="bar"></span>
+										<label>운동 계획 카테고리명</label>
+									</div>
+        						</div>
+								<div style="text-align: center;">
+									<input class="submit btn btn-danger" type="submit" value="등록">
+								</div>
+							</form>
+						</div>
+					</div>
+		        </div>
+			</div>
+		</div>   
+	
+	</th:block>
+	
+	<!-- 사용자 정의 Css -->
+		<th:block layout:fragment="customCss">
+			<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/jquery.steps.css}"/>
+			<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/simple-line-icons.css}" />
+	
+			<style type="text/css">
+				.panel-heading > h4 {
+					font-weight: bold;
+					margin-bottom: 0;
+					border-bottom: 2px solid #58666e;
+					padding-bottom: 5px;
+				}
+				 .panel-body:nth-child(2) {
+					padding-top: 0;
+				}
+			</style>
+		</th:block>
+	
+	<!-- start: Javascript -->
+	<th:block layout:fragment="customBodyScript">	
+		
+		<!-- plugins -->
+		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+		<script th:src="@{/asset/js/plugins/nouislider.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.validate.min.js}"></script>
+		
+		
+		<!-- custom -->
+		<script th:src="@{/asset/js/main.js}"></script>
+		<script type="text/javascript">
+		  $(document).ready(function(){
+			  
+		    $("#workoutCategoryForm").validate({
+		      errorElement: "em",
+		      errorPlacement: function(error, element) {
+		        $(element.parent("div").addClass("form-animate-error"));
+		        error.appendTo(element.parent("div"));
+		      },
+		      success: function(label) {
+		        $(label.parent("div").removeClass("form-animate-error"));
+		      },
+		      rules: {
+		    	validate_workoutGoalPlanCategoryContent "required",
+		      },
+		      messages: {
+		    	validate_workoutGoalPlanCategoryContent: "카테고리 이름을 입력해주세요.",
+		      }
+		    });
+		
+		  });
+        	//스윗얼랏 사용
+        	//swal("등록되었습니다.", "확인버튼을 눌러주세요.", "success");
+		</script>
+	</th:block>
+	<!-- end: Javascript -->
+</html>

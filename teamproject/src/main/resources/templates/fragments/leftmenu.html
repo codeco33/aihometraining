@@ -4,139 +4,138 @@
             <div id="left-menu" th:fragment="leftmenuFragment">
               <div class="sub-left-menu scroll">
                 <ul class="nav nav-list">
-                    <li><div class="left-bg"></div></li>
                     <li class="time">
                       <h1 class="animated fadeInLeft">21:00</h1>
                       <p class="animated fadeInRight">Sat,October 1st 2029</p>
                     </li>
-                    <li class="active ripple">
-                      <a class="tree-toggle nav-header"><span class="fa-home fa"></span> 회원
+                    <li class="ripple">
+                    	<a th:href="@{/admin}"><span class="fa-home fa"></span> 관리자 홈
+                      </a>
+                    </li>
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header"><span class="fa-user fa"></span> 회원
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                          <li><a href="dashboard-v1.html">회원 목록</a></li>                          
-                          <li><a href="dashboard-v1.html">회원 권한 관리</a></li>                          
+                          <li><a th:href="@{/member/memberList}">#전체 회원 목록(민식)</a></li>                          
+                          <li><a th:href="@{/member/memberLevelList}">#회원 권한 관리(민식)</a></li>                          
+                          <li><a th:href="@{/member/loginHistory}">#로그인 회원 목록(민식)</a></li>                          
                       </ul>
                     </li>
                     <li class="ripple">
                       <a class="tree-toggle nav-header">
-                        <span class="fa-diamond fa"></span> 운동클래스
+                        <span class="fa fa-users"></span> 운동클래스
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="topnav.html">운동클래스 개설 신청 내역</a></li>
-                        <li><a href="topnav.html">운동 클래스 카테고리 관리</a></li>
-                        <li><a href="topnav.html">운동클래스 목록</a></li>
-                        <li><a href="topnav.html">운동클래스</a></li>
-                        <li><a href="boxed.html"></a></li>
+                        <li><a th:href="@{/eClassOpenApplyadminList}">#운동클래스 개설 신청 내역(재환)</a></li>
+                        <li><a th:href="@{/eClass/eClassConfig/eClassCategoryList}">#운동 클래스 카테고리 관리(민식)</a></li>
+                        <li><a th:href="@{/eClassApplyadminList}">#운동클래스 목록(재환)</a></li>
+                        <li><a th:href="@{#}">#운동클래스(재환)</a></li>
+                        <li><a th:href="@{#}"></a></li>
                       </ul>
                     </li>
                     <li class="ripple">
                       <a class="tree-toggle nav-header">
-                        <span class="fa-area-chart fa"></span> 일지
+                        <span class="fa fa-pencil-square"></span> 일지
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="chartjs.html">일지관리</a></li>
-                        <li><a href="morris.html">운동계획 카테고리 관리</a></li>
-                        <li><a href="flot.html">AI운동영상 관리</a></li>
+                        <li><a th:href="@{/workoutLog/workoutLogConfig/workoutLogConfigMain}">#일지 관리(민희)</a></li>
+                        <li><a th:href="@{/workoutLog/workoutLogConfig/workoutCategoryList}">#운동계획 카테고리 관리(민희)</a></li>
+                        <li><a th:href="@{/workoutLog/workoutLogUserTrainer/workoutGoalPlanTrainerList}">#운동계획 관리-트레이너(민희)</a></li>
+                        <li><a th:href="@{/workoutLog/workoutLogConfig/workoutAIVideoList}">#AI운동영상 관리(민희)</a></li>
                       </ul>
                     </li>
                     <li class="ripple">
                     <a class="tree-toggle nav-header">
-                    	<span class="fa fa-pencil-square"></span> 챌린지  
+                    	<span class="fa fa-trophy"></span> 챌린지  
                     	<span class="fa-angle-right fa right-arrow text-right"></span> 
                     </a>
                       <ul class="nav nav-list tree">
-                        <li><a th:href="@{/challenge/challengeConfig/configList}">챌린지 관리설정</a></li>
-                        <li><a href="weather.html">챌린지 카테고리 등록</a></li>
-                        <li><a href="typography.html">챌린지 세팅 등록</a></li>
-                        <li><a href="icons.html">모집 챌린지 목록</a></li>
-                        <li><a href="buttons.html">진행 챌린지 목록</a></li>
-                        <li><a href="media.html">챌린지 포인트 관리</a></li>
-                        <li><a href="panels.html">챌린지 신고 관리</a></li>
+                        <li><a th:href="@{/challenge/challengeConfig/configList}">#챌린지 관리설정(보라)</a></li>
+                        <li><a th:href="@{/challenge/challengeConfig/challengeCategoryInsert}">#챌린지 카테고리 등록(보라)</a></li>
+                        <li><a th:href="@{/challenge/challengeConfig/challengeSettingInsert}">#챌린지 세팅 등록(보라)</a></li>
+                        <li><a th:href="@{/challenge/challengeConfig/challengeList}">#모집 챌린지 목록(보라)</a></li>
+                        <li><a th:href="@{/challenge/challengeConfig/challengeListIng}">#진행 챌린지 목록(보라)</a></li>
+                        <li><a th:href="@{/challenge/challengeConfig/challengePoint}">#챌린지 포인트 관리(보라)</a></li>
+                        <li><a th:href="@{/challenge/challengeConfig/challengeReportList}">#챌린지 신고 관리(보라)</a></li>
                       </ul>
                     </li>
                     <li class="ripple">
                     <a class="tree-toggle nav-header">
-                    	<span class="fa fa-check-square-o"></span> 식단  
+                    	<span class="fa fa-ship"></span> 식단  
                     	<span class="fa-angle-right fa right-arrow text-right"></span> 
                     </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="formelement.html">식단 은행</a></li>
-                        <li><a href="#">개별 식단 관리</a></li>
-                        <li><a href="#">영양성분  API 관리</a></li>
-                        <li><a href="#">수강생 식단 관리</a></li>
+                        <li><a th:href="@{/diet/dietBankListAdmin}">#식단 은행(영호)</a></li>
+                        <li><a th:href="@{#}">#개별 식단 관리(영호)</a></li>
+                        <li><a th:href="@{#}">#영양성분  API 관리(영호)</a></li>
+                        <li><a th:href="@{#}">#수강생 식단 관리(영호)</a></li>
                       </ul>
                     </li>
                     <li class="ripple">
                     <a class="tree-toggle nav-header">
-                    	<span class="fa fa-table"></span> 결제/환불  
+                    	<span class="fa fa-credit-card"></span> 결제/환불  
                     	<span class="fa-angle-right fa right-arrow text-right"></span> 
                     </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="datatables.html">결제 내역</a></li>
-                        <li><a href="handsontable.html">환불 내역</a></li>
-                        <li><a href="tablestatic.html">환불 기준</a></li>
+                        <li><a th:href="@{/paymentList}">#결제 내역(수경)</a></li>
+                        <li><a th:href="@{/refundList}">#환불 내역(수경)</a></li>
+                        <li><a th:href="@{/refundStandard}">#환불 기준 관리(수경)</a></li>
                       </ul>
                     </li>
                     <li class="ripple">
                     <a class="tree-toggle nav-header">
-                    	<span class="fa fa-table"></span> 포인트
+                    	<span class="fa fa-money"></span> 포인트
                     	<span class="fa-angle-right fa right-arrow text-right"></span> 
                     </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="datatables.html">포인트 지급</a></li>
-                        <li><a href="handsontable.html">포인트 내역</a></li>
-                        <li><a href="tablestatic.html">포인트 지급 기준</a></li>
+                        <li><a th:href="@{/givePoint}">#포인트 지급(수경)</a></li>
+                        <li><a th:href="@{/pointList}">#포인트 내역(수경)</a></li>
+                        <li><a th:href="@{/pointStandard}">#포인트 지급 기준(수경)</a></li>
                       </ul>
                     </li>
                     <li class="ripple">
                     <a class="tree-toggle nav-header">
-                    	<span class="fa fa-table"></span> 채팅
+                    	<span class="fa fa-wechat"></span> 채팅
                     	<span class="fa-angle-right fa right-arrow text-right"></span> 
                     </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="datatables.html">채팅 내역 관리(관리자)</a></li>
+                        <li><a th:href="@{#}">#채팅 내역 관리(관리자)(영호)</a></li>
                       </ul>
                     </li>
                     <li class="ripple">
                     <a class="tree-toggle nav-header">
-                    	<span class="fa fa-table"></span> 알림
+                    	<span class="fa fa-bell"></span> 알림
                     	<span class="fa-angle-right fa right-arrow text-right"></span> 
                     </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="datatables.html">알림 문구 관리</a></li>
-                        <li><a href="datatables.html">알림 내역 관리</a></li>
-                        <li><a href="datatables.html">새 알림 등록</a></li>
+                        <li><a th:href="@{#}">#알림 문구 관리(영호)</a></li>
+                        <li><a th:href="@{#}">#알림 내역 관리(영호)</a></li>
+                        <li><a th:href="@{#}">#새 알림 등록(영호)</a></li>
                       </ul>
                     </li>
                     <li class="ripple">
                     <a class="tree-toggle nav-header">
-                    	<span class="fa fa-table"></span> 쪽지
+                    	<span class="fa fa-sticky-note"></span> 쪽지
                     	<span class="fa-angle-right fa right-arrow text-right"></span> 
                     </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="datatables.html">쪽지 관리</a></li>
-                        <li><a href="datatables.html">쪽지함</a></li>
+                        <li><a th:href="@{#}">#쪽지 관리(영호)</a></li>
+                        <li><a th:href="@{#}">#쪽지함(영호)</a></li>
                       </ul>
                     </li>
                     <li class="ripple">
                     <a class="tree-toggle nav-header">
-                    	<span class="fa fa-table"></span> 신고
+                    	<span class="fa fa-user-secret"></span> 신고
                     	<span class="fa-angle-right fa right-arrow text-right"></span> 
                     </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="datatables.html">등록된 신고 관리</a></li>
-                        <li><a href="datatables.html">신고 기준 관리</a></li>
+                        <li><a th:href="@{/report/reportList}">#등록된 신고 관리(민식)</a></li>
+                        <li><a th:href="@{/report/reportStandardList}">#신고 기준 관리(민식)</a></li>
                       </ul>
                     </li>
-                    <li class="ripple">
-                    <a href="calendar.html">
-                   		<span class="fa fa-calendar-o"></span>Calendar
-                    </a>
-                    </li>                   
-                    <li><a href="credits.html">LogOut</a></li>
                   </ul>
                 </div>
             </div>

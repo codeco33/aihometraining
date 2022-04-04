@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="aihometraining.team.challenge.mapper.ChallengeConfigMapper">
+
+	<resultMap type="ChallengeCategory" id="challengeCategoryResultMap">
+		<result column="challengeCategoryCode" 		property="challengeCategoryCode"/>
+		<result column="memberEmail" 				property="memberEmail"/>
+		<result column="challengeCategoryName" 		property="challengeCategoryName"/>
+		<result column="challengeCategoryRegDate" 	property="challengeCategoryRegDate"/>
+		<result column="eClassCategorySmallCode" 	property="eClassCategorySmallCode"/>
+		<result column="memberUpdateEmail"		 	property="memberUpdateEmail"/>
+		<result column="memberUpdateDate" 			property="memberUpdateDate"/>
+		
+		<association property="member" javaType="Member">
+			<id 	column="memberEmail" 			property="memberEmail"/>
+			<result column="memberPw" 				property="memberPw"/>
+			<result column="memberLevelCode" 		property="memberLevelCode"/>
+			<result column="memberNewsAgree" 		property="memberNewsAgree"/>
+			<result column="memberRegDate" 			property="memberRegDate"/>
+			<result column="memberName" 			property="memberName"/>
+			<result column="memberPhone"	 		property="memberPhone"/>
+			<result column="memberNickname" 		property="memberNickname"/>
+			<result column="memberBirthday" 		property="memberBirthday"/>
+			<result column="memberGender" 			property="memberGender"/>
+			<result column="memberRecommendEmail" 	property="memberRecommendEmail"/>
+			<result column="memberFinalPoint" 		property="memberFinalPoint"/>
+		</association>
+	
+		<association property="eClassCategorySmall" javaType="EClassCategorySmall">
+			<id 	column="eClassCategorySmallCode" 				property="eClassCategorySmallCode"/>
+			<result column="eClassCategorySmallName" 				property="eClassCategorySmallName"/>
+			<result column="eClassCategoryMediumCode" 				property="eClassCategoryMediumCode"/>
+			<result column="eClassCategoryMediumName" 				property="eClassCategoryMediumName"/>
+			<result column="eClassCategoryLargeCode" 				property="eClassCategoryLargeCode"/>
+			<result column="eClassCategoryLargeName" 				property="eClassCategoryLargeName"/>
+			<result column="memberEmail" 							property="memberEmail"/>
+			<result column="eClassCategorySmallRegDate" 			property="eClassCategorySmallRegDate"/>
+			<result column="updateMemberEmail" 						property="updateMemberEmail"/>
+			<result column="eClassCategorySmallFinalUpdateDate" 	property="eClassCategorySmallFinalUpdateDate"/>
+		</association>
+	</resultMap>
+	
+	<update id="challengeCategoryUpdate" parameterType="ChallengeCategory">
+		/* 챌린지 카테고리 수정처리 (pk값으로 잡힌건 어떻게 해야할지 물어봐야할듯!)*/
+		UPDATE challengecategory
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="challengeCategoryName !=null and challengeCategoryName !=''">
+				challengeCategoryName = #{challengeCategoryName},
+			</if>
+			<if test="memberUpdateEmail !=null and memberUpdateEmail !=''">
+				memberUpdateEmail = #{memberUpdateEmail},
+			</if>
+		</trim>
+			,memberUpdateDate=CURDATE()
+		WHERE
+			challengeCategoryCode = #{challengeCategoryCode};
+	</update>
+	
+	<insert id="challengeCategoryInsert" parameterType="ChallengeCategory">
+		/* 챌린지 카테고리 등록 처리 */
+		INSERT INTO challengecategory
+		( 	 challengeCategoryCode
+			, memberEmail
+			, challengeCategoryName
+			, challengeCategoryRegDate
+			, eClassCategorySmallCode
+			, memberUpdateEmail
+			, memberUpdateDate
+		)VALUES (
+		 	  #{challengeCategoryCode}
+			, #{memberEmail}
+			, #{challengeCategoryName}
+			, CURDATE()
+			, #{eClassCategorySmallCode}
+			, #{memberUpdateEmail}
+			, CURDATE()
+		);
+		
+	</insert>
+	
+	<select id="getChallengeCategoryByCode" parameterType="String" resultMap="challengeCategoryResultMap">
+		/* 카테고리 코드별 챌린지 카테고리 정보 조회 */
+		SELECT
+			 cc.challengeCategoryCode
+			,cc.challengeCategoryName
+			,eg.eClassCategorySmallCode
+			,eg.eClassCategorySmallName
+		FROM
+			challengecategory AS cc
+			INNER join
+			eclasscategorysmall AS eg
+			on
+			cc.eClassCategorySmallCode = eg.eClassCategorySmallCode
+		WHERE
+			cc.challengeCategoryCode = #{challengeCategoryCode};
+		
+	</select>
+	
+	<select id="getClassCategoryList" resultType="EClassCategorySmall">
+		/* 운동클래스카테고리small 조회 */
+		SELECT
+			 ec.eClassCategorySmallCode
+			,ec.eClassCategorySmallName
+		FROM
+			eclasscategorysmall AS ec;
+	
+	</select>
+	
+	<select id="getChallengeCategoryList" parameterType="map" resultType="map" resultMap="challengeCategoryResultMap">
+		/*챌린지 카테고리 조회*/
+		SELECT
+			 cc.challengeCategoryCode
+			,cc.eClassCategorySmallCode
+			,ec.eClassCategorySmallName
+			,m.memberEmail
+			,cc.challengeCategoryName
+			,cc.challengeCategoryRegDate	
+		FROM
+			eclasscategorysmall AS ec
+			INNER join
+			challengecategory AS cc
+			on
+			ec.eClassCategorySmallCode = cc.eClassCategorySmallCode
+			INNER join
+			member AS m
+			on
+			cc.memberEmail = m.memberEmail;
+	</select>
+</mapper>	
+	
+  

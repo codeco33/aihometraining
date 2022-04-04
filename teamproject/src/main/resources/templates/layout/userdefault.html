@@ -15,15 +15,13 @@
         
        		<!-- Courses area start -->
 	        <div class="courses-area section-padding40 fix">
-	            <div class="container">
-	                <div class="row justify-content-center">
-			        	<th:block layout:fragment="customContents">
+			    <th:block layout:fragment="customContents">
+	            
 					                    
-			        	</th:block>
-	                </div>
-	            </div>
+	               
+			    </th:block>
 	        </div>
-	        <!-- Courses area End -->        	
+	        <!-- Courses area End -->     	
         		
 	</main>
 	<footer th:replace="userfragments/footer :: footerFragment"></footer>
@@ -31,7 +29,10 @@
         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
     </div>
     
+    
 	<th:block th:replace="userfragments/userJavaScripts :: userJSFragment"></th:block>
+    <th:block layout:fragment="customBodyScript"></th:block>
+   
 	
 
 </body>

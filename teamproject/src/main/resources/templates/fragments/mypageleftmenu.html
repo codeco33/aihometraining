@@ -4,32 +4,44 @@
             <div id="left-menu" th:fragment="mypageleftmenuFragment">
               <div class="sub-left-menu scroll">
                 <ul class="nav nav-list">
-                    <li><div class="left-bg"></div></li>
                     <li class="time">
                       <h1 class="animated fadeInLeft">21:00</h1>
                       <p class="animated fadeInRight">Sat,October 1st 2029</p>
                     </li>
-                    <li class="active ripple">
-                      <a class="tree-toggle nav-header"><span class="fa-home fa"></span> 마이페이지
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header" th:href="@{/mypage}">
+                      	<span class="fa-home fa"></span> 마이페이지
+                      </a>
+                    </li>
+                      <li class="ripple">
+                      <a class="tree-toggle nav-header">
+                        <span class="fa fa-users"></span> 운동클래스
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                          <li><a href="dashboard-v1.html">회원 목록</a></li>                          
-                          <li><a href="dashboard-v1.html">회원 권한 관리</a></li>                          
+                        <li><a th:href="@{/mypage}">내 강의 보기</a></li>
+                        <li><a th:href="@{/mypage}">수강 신청 내역</a></li>
                       </ul>
                     </li>
                     <li class="ripple">
                       <a class="tree-toggle nav-header">
-                        <span class="fa-diamond fa"></span> 운동클래스
+                        <span class="fa fa-credit-card"></span> 거래 내역
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="topnav.html">운동클래스 개설 신청 내역</a></li>
-                        <li><a href="topnav.html">운동 클래스 카테고리 관리</a></li>
-                        <li><a href="topnav.html">운동클래스 목록</a></li>
-                        <li><a href="topnav.html">운동클래스 목록</a></li>
-                        <li><a href="boxed.html"></a></li>
+                        <li><a th:href="@{/mypage/mypaymentList}">결제내역</a></li>
+                        <li><a th:href="@{/mypage/myrefundList}">환불내역</a></li>
                       </ul>
+                    </li>
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header" th:href="@{/mypage/mypointList}">
+                      	<span class="fa fa-money"></span> 포인트
+                      </a>
+                    </li>
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header" th:href="@{/wishList}">
+                      	<span class="fa fa-shopping-cart"></span> 위시리스트 <span class="fa fa-link right-arrow text-right"></span>
+                      </a>
                     </li>
                     <li class="ripple">
                       <a class="tree-toggle nav-header">
@@ -67,28 +79,6 @@
                         <li><a href="#">개별 식단 관리</a></li>
                         <li><a href="#">영양성분  API 관리</a></li>
                         <li><a href="#">수강생 식단 관리</a></li>
-                      </ul>
-                    </li>
-                    <li class="ripple">
-                    <a class="tree-toggle nav-header">
-                    	<span class="fa fa-table"></span> 결제/환불  
-                    	<span class="fa-angle-right fa right-arrow text-right"></span> 
-                    </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="datatables.html">결제 내역</a></li>
-                        <li><a href="handsontable.html">환불 내역</a></li>
-                        <li><a href="tablestatic.html">환불 기준</a></li>
-                      </ul>
-                    </li>
-                    <li class="ripple">
-                    <a class="tree-toggle nav-header">
-                    	<span class="fa fa-table"></span> 포인트
-                    	<span class="fa-angle-right fa right-arrow text-right"></span> 
-                    </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="datatables.html">포인트 지급</a></li>
-                        <li><a href="handsontable.html">포인트 내역</a></li>
-                        <li><a href="tablestatic.html">포인트 지급 기준</a></li>
                       </ul>
                     </li>
                     <li class="ripple">
@@ -131,12 +121,6 @@
                         <li><a href="datatables.html">신고 기준 관리</a></li>
                       </ul>
                     </li>
-                    <li class="ripple">
-                    <a href="calendar.html">
-                   		<span class="fa fa-calendar-o"></span>Calendar
-                    </a>
-                    </li>                   
-                    <li><a href="credits.html">LogOut</a></li>
                   </ul>
                 </div>
             </div>

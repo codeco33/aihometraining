@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head th:replace="userfragments/head :: headFragment"></head>
+
+
+<title th:text="${title}"></title>
+
+<!-- 사용자 정의 Css -->
+<style type="text/css">
+	#eClassTakeSection{
+		padding-top: 150px;
+	}
+	.header-bottom {
+		background: #c054ff;
+	    background: -moz-linear-gradient(top, #c054ff 0%, #5274ff 100%);
+	    background: -webkit-linear-gradient(top, #c054ff 0%, #5274ff 100%);
+	    background: linear-gradient(to bottom, #c054ff 0%, #5274ff 100%);
+	}
+	@media (min-width: 576px){
+	.justify-content-sm-center {
+	    -ms-flex-pack: center!important;
+	    justify-content: center!important;
+	}
+	}
+	#eClassTakeSection .row {
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+	}
+</style>
+<body>
+	<div id="preloader-active" th:replace="userfragments/preloader :: preloaderFragment"></div>
+	<!-- start: Header -->
+	<div th:replace="userfragments/header :: headerFragment"></div>
+	<!-- end: Header -->
+	 
+   	<!-- Courses area start -->
+	<div id="eClassTakeSection" class="fix services-area services-area2">
+		<div class="row justify-content-center">
+			<div class="col-md-7">
+				<div class="single-services mb-30">
+					<div class="features-caption">
+						<h3>수강기간 선택</h3>
+						<div class="d-flex justify-content-start">
+							<div class="primary-radio">
+								<input type="checkbox" id="radio1" name="radios"> <label
+									for="radio1"></label>
+							</div>
+							<label for="radio1"> 1개월</label>
+						</div>
+						<div class="d-flex justify-content-start">
+							<div class="primary-radio">
+								<input type="checkbox" id="radio2" name="radios"> <label
+									for="radio2"></label>
+							</div>
+							<label for="radio2"> 커리큘럼 기간동안</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+			<div class="col-md-7">
+				<div class="single-services mb-30">
+					<div class="features-caption">
+						<h3>결제 금액</h3>
+						<p>The automated process all your website tasks.</p>
+					</div>
+				</div>
+			</div>
+	
+			<div class="col-md-7">
+				<div class="single-services mb-30">
+					<div class="features-caption">
+						<h3>휴대폰 번호 입력</h3>
+						<p>The automated process all your website tasks.</p>
+					</div>
+				</div>
+			</div>
+	
+			<div class="col-md-7">
+				<div class="single-services mb-30">
+					<div class="features-caption">
+						<h3>결제 수단</h3>
+						<p>The automated process all your website tasks.</p>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+        <!-- Courses area End -->     	
+        		
+	
+	<footer th:replace="userfragments/footer :: footerFragment"></footer>
+	<div id="back-top">
+		<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+	</div>
+
+	<th:block th:replace="userfragments/userJavaScripts :: userJSFragment"></th:block>
+	<th:block layout:fragment="customBodyScript"></th:block>
+</body>
+</html>

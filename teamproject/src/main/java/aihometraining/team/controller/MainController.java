@@ -19,7 +19,7 @@ public class MainController {
 		
 		model.addAttribute("title", "관리자 메인화면");
 		
-		return "main";
+		return "adminmain";
 		
 	}
 	@GetMapping("/mypage")
@@ -46,4 +46,13 @@ public class MainController {
 		return "challenge/challengeadmin";
 		
 	}
+	@GetMapping("/wishList")
+	public String wishList(Model model) {
+		
+		model.addAttribute("title", "위시리스트");
+		
+		return "member/wishList";
+		
+	}
+
 }

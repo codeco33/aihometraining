@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+<!-- 사용자 정의 title -->
+<th:block layout:fragment="customTitle">
+	<title th:text="${title}"></title>
+</th:block>
+<!-- 사용자 정의 Css -->
+<th:block layout:fragment="customCss">
+	<link rel="stylesheet" type="text/css"
+		th:href="@{/asset/css/plugins/simple-line-icons.css}" />
+	<style type="text/css">
+		.title>h4 {
+			font-weight: bold;
+			margin-bottom: 10px;
+			border-bottom: 2px solid #58666e;
+			padding-bottom: 5px;
+		}
+		
+		#paymentDetailBtnDiv {
+			text-align: right;
+			margin-top: 50px;
+		}
+		#refundResonBtn{
+			padding: 5px 10px;
+		}
+		#accountUpdateBtn{
+			padding: 5px 10px;
+		}
+</style>
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<div class="col-md-12">
+		<div class="panel">
+			<!-- 패널 헤더 타이틀 -->
+
+			<div class="panel-body">
+				<div class="detailTable">
+					<div class="title">
+						<h4>
+							<span class="fa fa-angle-right"></span> 환불 정보
+						</h4>
+					</div>
+					<table class="table">
+						<colgroup>
+							<col style="width: 150px">
+							<col style="width: auto">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th scope="row">환불코드</th>
+								<td>x00000000_00000</td>
+							</tr>
+							<tr>
+								<th scope="row">환불요청일자</th>
+								<td>2022-03-29 14:09:57</td>
+							</tr>
+							<tr>
+								<th scope="row">환불완료일자</th>
+								<td> - </td>
+							</tr>
+							<tr>
+								<th scope="row">환불 요청자</th>
+								<td><span>진수경</span></td>
+							</tr>
+							<tr>
+								<th scope="row">환불상태</th>
+								<td>환불 미승인 <input type="button" id="refundResonBtn" class="btn btn-outline btn-default" value="사유 보기"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="detailTable">
+					<div class="title">
+						<h4>
+							<span class="fa fa-angle-right"></span> 결제정보
+						</h4>
+					</div>
+					<table class="table">
+						<colgroup>
+							<col style="width: 150px">
+							<col style="width: auto">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th scope="row">결제코드</th>
+								<td>x00000000_00000</td>
+							</tr>
+							<tr>
+								<th scope="row">결제 금액</th>
+								<td>44,000</td>
+							</tr>
+							<tr>
+								<th scope="row">만족 환불 기준</th>
+								<td> - </td>
+							</tr>
+							<tr>
+								<th scope="row">환불 금액</th>
+								<td> - </td>
+							</tr>
+							<tr>
+								<th scope="row">환불 계좌</th>
+								<td>카카오뱅크 3333-00000-00000 <input type="button" id="accountUpdateBtn" class="btn btn-outline btn-default" value="계좌 수정"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+				
+				
+				<div id="paymentDetailBtnDiv">
+					<a th:href="@{/paymentList}"><input type="button" class="btn btn-outline btn-default" value="환불내역 목록"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</th:block>
+
+<th:block layout:fragment="customBodyScript">
+
+	<!-- plugins -->
+	<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
+	<script th:src="@{/asset/js/plugins/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/asset/js/plugins/dataTables.bootstrap.min.js}"></script>
+	<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+
+	<!-- custom -->
+	<script th:src="@{/asset/js/main.js}"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+		});
+	</script>
+</th:block>
+</html>

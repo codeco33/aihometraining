@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="aihometraining.team.workoutLog.mapper.WorkoutLogConfigMapper">
+
+	<resultMap type="WorkoutLogCategory" id="WorkoutLogCategoryResultMap">
+		<result column="workoutGoalPlanCategoryCode" 		property="workoutGoalPlanCategoryCode"/>
+		<result column="workoutGoalPlanCategoryContent" 	property="workoutGoalPlanCategoryContent"/>
+	</resultMap>
+	
+	<resultMap type="WorkoutLog" id="WorkoutLogResultMap">
+			<id 	column="workoutLogcode" 				property="workoutLogcode"/>
+			<result column="memberEmail" 					property="memberEmail"/>
+			<result column="eClassCategorySmallCode" 		property="eClassCategorySmallCode"/>
+			<result column="eClassCategorySmallName" 		property="eClassCategorySmallName"/>
+			<result column="workoutLogTitle" 				property="workoutLogTitle"/>
+			<result column="workoutLogContent" 				property="workoutLogContent"/>
+			<result column="workoutGoalPlanCode" 			property="workoutGoalPlanCode"/>
+			<result column="eClassTaskDoCode" 				property="eClassTaskDoCode"/>
+			<result column="challengeEnterCode" 			property="challengeEnterCode"/>
+			<result column="workoutLogAddFileCode" 			property="workoutLogAddFileCode"/>
+			<result column="workoutLogPrivacyBoundsCode" 	property="workoutLogPrivacyBoundsCode"/>
+			<result column="workoutLogUpdateEmail" 			property="workoutLogUpdateEmail"/>
+			<result column="workoutLogDeleteEmail" 			property="workoutLogDeleteEmail"/>
+			
+		<association property="member" javaType="Member">
+			<id 	column="memberEmail" property="memberEmail"/>
+		</association>	
+	</resultMap>	
+	
+	<select id="getWorkoutLogCategoryList" resultType="WorkoutLogCategory">
+		/* 운동 카테고리 조회 */
+		SELECT
+			workoutGoalPlanCategoryContent
+		FROM
+			workoutgoalplancategory;
+	</select>
+	
+	<insert id="workoutGoalCategoryInsert" parameterType="WorkoutLogCategory">
+		/* 운동 카테고리 등록 */
+		INSERT INTO workoutgoalplancategory
+		(
+		   workoutGoalPlanCategoryCode
+		 , workoutGoalPlanCategoryContent
+		)VALUES (
+		   #{workoutGoalPlanCategoryCode}
+		 , #{workoutGoalPlanCategoryContent}
+		);
+	</insert>
+	
+	<select id="getWorkoutLogList" resultType="WorkoutLog">
+		SELECT
+			 w.memberEmail
+			,w.workoutLogTitle
+			,w.workoutLogUpdateFinalDate
+		FROM
+			workoutlog AS w
+			INNER JOIN
+			member AS m
+			ON 
+			w.memberEmail = m.memberEmail
+		WHERE
+			w.memberEmail = 'id004@email.com';	
+	</select>
+</mapper>        

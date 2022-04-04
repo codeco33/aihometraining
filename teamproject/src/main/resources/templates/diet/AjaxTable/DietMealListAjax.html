@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+					<div class="responsive-table" id="DietNutrientListTable">
+				                    <table class="table table-condensed table-hover" width="100%" cellspacing="0">
+				                    <thead>
+				                      <tr>
+				                        <th class=" text-center">식품명</th>
+				                        <th class=" text-center">1회제공량</th>
+				                        <th class=" text-center">에너지(㎉)</th>
+				                        <th class=" text-center">탄수화물(g)</th>
+				                        <th class=" text-center">단백질(g)</th>
+				                        <th class=" text-center">지방(g)</th>
+				                        <th class=" text-center">나트륨(㎎)</th>
+				                        <th class=" text-center"></th>
+				                      </tr>
+				                    </thead>
+				                    <tbody>
+				                      <tr class="NutrientListLine" th:each="d : ${DietNutrientList}" th:value="${d.nutrientsAPISortdetail}">
+				                        <td th:text="${d.nutrientsAPIName}"></td>
+				                        <td th:text="${d.nutrientsAPIServe}"></td>
+				                        <td th:text="${d.nutrientsAPIKcal}"></td>
+				                        <td th:text="${d.nutrientsAPICarbo}"></td>
+				                        <td th:text="${d.nutrientsAPIPro}"></td>
+				                        <td th:text="${d.nutrientsAPIFat}"></td>
+				                        <td th:text="${d.nutrientsAPINatr}"></td>
+				                        <th class="text-center">
+				                        	<button class="btn btn-round btn-default">추가</button>
+				                        </th>
+				                      </tr>
+				                    </tbody>
+				                  </table>
+				                </div>
+	  
+</html>
