@@ -38,6 +38,9 @@ public interface ChallengeConfigMapper {
 	//세팅 등록 처리
 	public void challengeSettingInsert(ChallengeSetting challengeSetting);
 	
+	//챌린지 세팅 코드 별 세팅정보 조회
+	public ChallengeSetting getChallengeSettingByCode(String challengeSettingCode);
+	
 	//모집 챌린지 목록 조회
 	public List<ChallengeGather> getGetherList();
 	

@@ -166,7 +166,7 @@ public class ChallengeConfigController {
 		
 	}
 	
-	//세팅 등록 처리
+	//챌린지 세팅 등록 처리
 	@PostMapping("/challengeSettingInsert")
 	public String challengeSettingInsert(ChallengeSetting challengeSetting) {
 		
@@ -175,6 +175,23 @@ public class ChallengeConfigController {
 		challengeConfigService.challengeSettingInsert(challengeSetting);
 		
 		return "redirect:/challenge/challengeConfig/configList";
+		
+	}
+	
+	//챌린지 수정 화면
+	@GetMapping("/challengeSettingUpdate")
+	public String chllengeSettingUpdate(Model model, @RequestParam(name="challengeSettingCode", required = false) String challengeSettingCode) {
+		
+		log.info("챌린지 세팅 수정화면 폼 쿼리 스트링 challengeSettingCode : {}", challengeSettingCode);
+		
+		//챌린지 세팅 코드 별 세팅정보 조회
+		ChallengeSetting challengeSetting = challengeConfigService.getChallengeSettingByCode(challengeSettingCode);
+		
+		model.addAttribute("title", "챌린지 수정 화면");
+		model.addAttribute("leftMenuList", "챌린지");
+		model.addAttribute("challengeSetting", challengeSetting);
+		
+		return "challenge/challengeConfig/challengeSettingUpdate";
 		
 	}
 	

@@ -171,6 +171,17 @@
 		);
 	</insert>
 	
+	<select id="getChallengeSettingByCode" parameterType="String" resultMap="chllengeSettingResultMap">
+		/* 챌린지 세팅 코드별 세팅 정보 조회 */
+		SELECT
+			 cs.challengeSettingCode
+			,cs.challengeSettingUpdateDo
+		FROM
+			challengesetting AS cs
+		WHERE
+			cs.challengeSettingCode = #{challengeSettingCode};
+	</select>
+	
 	<select id="getClassCategoryList" resultType="EClassCategorySmall">
 		/* 운동클래스카테고리small 조회 */
 		SELECT
