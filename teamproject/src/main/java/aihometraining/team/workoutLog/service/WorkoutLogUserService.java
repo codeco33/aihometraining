@@ -34,6 +34,7 @@ public class WorkoutLogUserService {
 		
 		String code = commonMapper.getNewCode("workoutLogcode", "workoutlog");
 		workoutLog.setWorkoutLogcode(code);
+		workoutLog.setMemberEmail("id004@email.com");	//로그인 처리가 아직 안이루어져서 임의로 해놓음!
 		
 		int result = workoutLogUserMapper.workoutLogInsert(workoutLog);
 		

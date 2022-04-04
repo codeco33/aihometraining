@@ -13,10 +13,12 @@
 				<div class="row justify-content-center">
 					<div class="col-lg-8 col-md-8">
 						<h3 class="mb-30">오늘 일지 등록</h3>
-						<form class="mb-5" th:action="@{/workoutLog/workoutLogUser/workoutLogInsert}" method="post">
+						<form class="mb-5" id="workoutLogInsert" th:action="@{/workoutLog/workoutLogUser/workoutLogInsert}" method="post">
 							<!-- 일지 제목 -->
 							<div class="mt-10">
-									<input type="text" name="workoutLogTitle" placeholder="일지 제목" onfocus="this.placeholder = ''" onblur="this.placeholder = '일지 제목'" required class="single-input">
+								<input type="text" name="workoutLogTitle" placeholder="일지 제목" onfocus="this.placeholder = ''" onblur="this.placeholder = '일지 제목'" required class="single-input">
+							</div>
+							<div class="mt-10">
 							</div>
 							<div class="input-group-icon mt-10">
 									<div class="icon"><i class="fas fa-bookmark" aria-hidden="true"></i></div>
@@ -24,7 +26,7 @@
 										<!-- 일지 공개범위 선택 -->
 										<select name="workoutLogPrivacyBoundsCode">
 											<th:block th:if="${not #lists.isEmpty(workoutLogPrivacyboundsList)}" th:each="wpl : ${workoutLogPrivacyboundsList}">
-												<option th:value="${wpl.workoutLogPrivacyBoundsCode}" >[[${wpl.workoutLogPrivacyBoundsContent}]]</option>
+												<option th:value="${wpl.workoutLogPrivacyBoundsCode}">[[${wpl.workoutLogPrivacyBoundsContent}]]</option>
 											</th:block>
 											<th:block th:unless="${not #lists.isEmpty(workoutLogPrivacyboundsList)}" th:each="wpl : ${workoutLogPrivacyboundsList}">
 												<option >등록된 카테고리가 없습니다.</option>
@@ -38,7 +40,7 @@
 										<!-- 운동 클래스 카테고리 small 선택 -->
 										<select  name="eClassCategorySmallCode">
 											<th:block th:if="${not #lists.isEmpty(eClassCategorySmallList)}" th:each="el : ${eClassCategorySmallList}">
-												<option th:value="${el.eClassCategorySmallCode}" >[[${el.eClassCategorySmallName}]]</option>
+												<option th:value="${el.eClassCategorySmallCode}" th:data-cate="${el.eClassCategorySmallName}" >[[${el.eClassCategorySmallName}]]</option>
 											</th:block>
 											<th:block th:unless="${not #lists.isEmpty(eClassCategorySmallList)}" th:each="el : ${eClassCategorySmallList}">
 												<option >등록된 카테고리가 없습니다.</option>
@@ -59,7 +61,7 @@
 								</div>
 							</div>
 							<div class="row justify-content-center mt-5">
-	                            <button class="primary-bg btn_1 boxed-btn" type="submit">
+	                            <button class="primary-bg btn_1 boxed-btn" id="workoutLogInsertbtn" type="button">
 	                            	일지 등록
 	                            </button>
 	                        </div>
@@ -130,7 +132,19 @@
 		<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js}"></script>
    		<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 		<script>
+		
+		//등록 처리시 form을 submit 하기 전에 특정값을 추가
+		$(function(){
+			$('#workoutLogInsertbtn').click(function(){
+				var datacate = $('select[name="eClassCategorySmallCode"] option:selected').attr('data-cate');
+				//alert(datacate);
+				var eClassCategorySmall = $("<input type='hidden' value='" + datacate + "' name='eClassCategorySmallName'/>");
+				$("#workoutLogInsert").append(eClassCategorySmall);
+				$("#workoutLogInsert").submit();
+			});
+		});
 		</script>
+		
 		
 	</th:block>
 	
