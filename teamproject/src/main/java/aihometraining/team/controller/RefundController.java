@@ -33,6 +33,7 @@ public class RefundController {
 		model.addAttribute("leftMenuList", "결제/환불");
 		model.addAttribute("title", "환불 내역");
 		model.addAttribute("subTitle", "환불 상세 내역");
+		model.addAttribute("layoutDeco", "layout/default");
 		
 		return "refund/refundDetail";
 	}

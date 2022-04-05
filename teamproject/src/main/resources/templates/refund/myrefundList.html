@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/mypagedefault}">
+	
 <!-- 사용자 정의 title -->
 <th:block layout:fragment="customTitle">
 	<title th:text="${title}"></title>
@@ -126,7 +127,7 @@
 							<tr>
 								<td>
 									<p>2022-03-23</p>
-									<p><a th:href="@{/mypage/refundDetail(refundCode=)}">e20220224_00001</a></p>
+									<p><a th:href="@{/mypage/myrefundList/refundDetail(refundCode=)}">e20220224_00001</a></p>
 								</td>
 								<td>이미지</td>
 								<td>운동클래스운동클래스운동클래스운동클래스</td>
@@ -135,7 +136,7 @@
 							<tr>
 								<td>
 									<p>2022-04-02</p>
-									<p><a th:href="@{/mypage/refundDetail(refundCode=)}">c20220223_00002</a></p>
+									<p><a th:href="@{/mypage/myrefundList/refundDetail(refundCode=)}">c20220223_00002</a></p>
 								</td>
 								<td>이미지</td>
 								<td>챌린지</td>

@@ -38,7 +38,7 @@ public class MypageController {
 		return "point/mypointList";
 	}
 	
-	@GetMapping("/paymentDetail")
+	@GetMapping("/mypaymentList/paymentDetail")
 	public String paymentDetail(Model model) {
 		
 		
@@ -51,13 +51,14 @@ public class MypageController {
 		return "payment/paymentDetail";
 	}
 	
-	@GetMapping("/refundDetail")
+	@GetMapping("/myrefundList/refundDetail")
 	public String refundDetail(Model model) {
 		
 		
 		model.addAttribute("leftMenuList", "결제/환불");
 		model.addAttribute("title", "환불 내역");
 		model.addAttribute("subTitle", "환불 상세 내역");
+		model.addAttribute("layoutDeco", "layout/mypagedefault");
 		
 		return "refund/refundDetail";
 	}
