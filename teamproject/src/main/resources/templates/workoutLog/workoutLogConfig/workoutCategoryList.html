@@ -23,13 +23,14 @@
 			                        <th>삭제</th>
 		                     	</tr>
 		                    </thead>
-		                    <tbody>
+		                    <tbody class="myModal">
 		                    	<tr th:if="${not #lists.isEmpty(workoutLogCategoryList)}" th:each="l : ${workoutLogCategoryList}">
-			                        <td th:text="${l.workoutGoalPlanCategoryContent}"></td>
+			                        <td id="workoutLogCategoryCode" th:text="${l.workoutGoalPlanCategoryContent}"></td>
 			                        <td>
-			                        	<button type="button" id="btn1" class="btn btn-outline btn-success btn-sm" data-toggle="modal" data-target="#categoryUpdate">
+			                        	<button type="button" th:data-cateCd="${l.workoutGoalPlanCategoryCode}" class="btn btn-outline btn-success btn-sm workoutCategoryUpdateBtn" data-toggle="modal" data-target="#categoryUpdate">
 											  	수정
 										</button>
+										<!-- <a th:href="@{/workoutLog/workoutLogConfig/workoutLogCategoryModal(workoutGoalPlanCategoryCode=${l.workoutGoalPlanCategoryCode})}">수정</a> -->
 			                        </td>
 			                        <td>
 			                        	<a th:href="@{/workoutLog/workoutLogConfig/workoutCategoryDelete}"> 삭제 </a>
@@ -54,13 +55,13 @@
 	          <div class="modal-content">
 	            <div class="modal-header">
 	              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	              <h4 class="modal-title"><span class="icon-direction"></span>운동 계획 카테고리명 수정</h4>
+	              <h4 class="modal-title" id="workoutLogCategoryModal"><span class="icon-direction"></span>운동 계획 카테고리명 수정</h4>
 	            </div>
 	            <div class="modal-body">
 	              <form class="cmxform" id="workoutCategoryForm">
 						<div class="col-md-12">
 							<div class="form-group form-animate-text" style="margin-top:40px !important;">
-								<input type="text" class="form-text" id="validate_workoutGoalPlanCategoryContent" name="workoutGoalPlanCategoryContent" required>
+								<input type="text" class="form-text" id="workoutGoalPlanCategoryContent" name="workoutGoalPlanCategoryContent" required>
 								<span class="bar"></span>
 								<label>운동 계획 카테고리명</label>
 							</div>
@@ -74,7 +75,7 @@
 	          </div>
 	        </div>
 	    </div>
-	
+	    
 	</th:block>
 	
 	
@@ -103,9 +104,9 @@
 	<!-- start: Javascript -->
 	<th:block layout:fragment="customBodyScript">	
 		<!-- start: Javascript -->
-		<script src="asset/js/jquery.min.js"></script>
-		<script src="asset/js/jquery.ui.min.js"></script>
-		<script src="asset/js/bootstrap.min.js"></script>
+		<script th:src="@{/asset/js/jquery.min.js}"></script>
+		<script th:src="@{/asset/js/jquery.ui.min.js}"></script>
+		<script th:src="@{/asset/js/bootstrap.min.js}"></script>
 	
 		<!-- plugins -->
 		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
@@ -120,13 +121,26 @@
 		<script th:src="@{/asset/js/main.js}"></script>
 		<script type="text/javascript">
 		
-			/* 데이터테이블 */
-		  $(document).ready(function(){
-		    $('#workoutCategory').DataTable();
-		  });
-		  
-			/* 모달 */
-		  $(document).ready(function() {
+			 $(document).ready(function(){
+				 	/* 데이터 테이블 생성*/
+				    var table = $('#workoutCategory').DataTable({
+				    	order : [ 0, 'desc' ],
+						lengthChange : false,
+						pageLength : 15,
+						filter: false,
+						 dom: '<"top"i>rt<"bottom"p><"clear">',
+				    });
+				 	
+				    /* 레코드 수 포맷 */
+					var info = table.page.info();			
+					$('#workoutCategory_info').html('전체 ' + info.recordsTotal + ' 건').css('font-weight','bold');
+					
+					$('#workoutCategory').click(function(){
+						$('#workoutCategory_info').html('전체 ' + info.recordsTotal + ' 건');
+					});
+			    
+					
+				/* 모달 */
 			    // Set iframe attributes when the show instance method is called
 			    $("#categoryUpdate").on("show.bs.modal", function(event) {
 			        let button = $(event.relatedTarget); // Button that triggered the modal
@@ -136,11 +150,9 @@
 			    $("#categoryUpdate").on("hidden.bs.modal", function() {
 			        $("#categoryUpdate").removeAttr('.close');
 			    });
-			});
 		  
-			/* 카테고리폼 */
-		  $(document).ready(function(){
-			  
+			    
+				/* 카테고리폼 */
 			    $("#workoutCategoryForm").validate({
 			      errorElement: "em",
 			      errorPlacement: function(error, element) {
@@ -151,14 +163,41 @@
 			        $(label.parent("div").removeClass("form-animate-error"));
 			      },
 			      rules: {
-			    	validate_workoutGoalPlanCategoryContent: "required",
+			    	workoutGoalPlanCategoryContent: "required",
 			      },
 			      messages: {
-			    	validate_workoutGoalPlanCategoryContent: "카테고리 이름을 입력해주세요.",
+			    	workoutGoalPlanCategoryContent: "카테고리 이름을 입력해주세요.",
 			      }
 			    });
 			
-			  });
+			    
+				 //모달에 데이터 가져오기
+				 $(document).on('click','.workoutCategoryUpdateBtn',function(){
+					   console.log("나와라 오바");
+					   var workoutLogCategoryCode = $(this).attr('data-cateCd');
+					   console.log(workoutLogCategoryCode);
+					   
+					   $.ajax({
+							 url: '/workoutLog/workoutLogConfig/workoutLogCategoryModal'
+							,type : 'post'
+							,data : {
+									'workoutLogCategoryCode' : workoutLogCategoryCode
+							}
+					   		,dataType : 'json'
+							,success: function(data){
+								console.log(data);
+								
+								var modalbody = '';
+									
+									modalbody += '<div class="col-md-12"> <div class="form-group form-animate-text" style="margin-top:40px !important;"> <input  type="text" class="form-text" id="validate_workoutGoalPlanCategoryContent" name="workoutGoalPlanCategoryContent" required> <span class="bar"></span> <label>'+ data.workoutGoalPlanCategoryContent +'</label> </div> </div>'
+									
+									$('.modal-body').empty();
+									$('.modal-body').append(modalbody);
+									$('#categoryUpdate').modal('show');
+							}
+						});
+				   });
+			});
 			
 		</script>
 		
