@@ -21,7 +21,7 @@ import aihometraining.team.dto.ChallengeSetting;
 import aihometraining.team.dto.EClassCategorySmall;
 
 @Controller
-@RequestMapping("/challenge/challengeConfig")
+@RequestMapping("/admin")
 public class ChallengeConfigController {
 	
 	

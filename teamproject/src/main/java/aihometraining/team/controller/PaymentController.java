@@ -64,7 +64,7 @@ public class PaymentController {
 		
 		model.addAttribute("title", "결제");
 		
-		return "payment/payment";
+		return "redirect:/mypage/mypaymentList/paymentDetail";
 	}
 
 }
