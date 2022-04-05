@@ -19,9 +19,14 @@ public class MainController {
 		return "usermain";
 	}
 	@GetMapping("/admin")
-	public String usermain(Model model) {
+	public String usermain(Model model, HttpSession session) {
 		
 		model.addAttribute("title", "관리자 메인화면");
+		String sessionLevel = (String) session.getAttribute("SLEVEL");
+		
+		if(sessionLevel == null || (sessionLevel != null && !sessionLevel.equals("levelCode001"))) {
+			return "redirect:/";
+		}
 		
 		return "adminmain";
 		

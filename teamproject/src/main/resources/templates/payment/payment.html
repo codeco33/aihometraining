@@ -30,7 +30,7 @@
 		font-weight: 700;
 	}
 	.services-area .single-services {
-		box-shadow: 3px 5px 20px rgb(66 85 164 / 6%);
+		box-shadow: 3px 5px 20px rgb(66 85 164 / 20%);
 		display: block;
 	}
 	#paymentForm .inputTitle {
@@ -58,8 +58,19 @@
 		color: red;
 		font-size: 14px;
 	    margin-top: 8px;
+	    position: absolute;
+	    left: 320px;
 	}
-	
+	@media (max-width: 1000px) {
+	label.error {
+		color: red;
+		font-size: 14px;
+	    margin-top: 8px;
+	    position: absolute;
+	    left: 50px;
+	    top: 570px;
+	}
+	}
 	input.error:focus {
 		border-color: #dc3545;
     	box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
@@ -96,6 +107,40 @@
 		padding: 0;
 		width: fit-content;
 	}
+	.allPointUse {
+		margin-left: 15px;
+	}
+	.paymentMethodBtn {
+		width: 100%;
+	}
+	.paymentMethodBtn:hover {
+		color: #fff !important;
+		background: #1f2b7b;
+	}
+	.paymentMethodBtn.active {
+		color: #fff !important;
+		background: #1f2b7b;
+	}
+	#totalPriceDiv{
+		box-shadow: none !important;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0;
+		margin-top: 50px;
+	}
+	#totalPriceStrDiv span:first-child {
+		color: black;
+	}
+	#totalPriceStrDiv span:last-child {
+		font-size: 36px !important;
+	    font-weight: bold !important;
+	    color: #696dff !important;
+	    margin-left: 20px;
+	}
+	#paymentBtn {
+		width: 50% !important;
+	}
 </style>
 <body>
 	<div id="preloader-active" th:replace="userfragments/preloader :: preloaderFragment"></div>
@@ -106,7 +151,7 @@
    	<!-- Courses area start -->
 	<div id="paymentSection" class="fix services-area services-area2">
 		<div class="row justify-content-center">
-			<form id="paymentForm" class="col-md-7" th:action="@{/payment}">
+			<form id="paymentForm" class="col-md-7" th:action="@{/payment}" method="post">
 				
 				<div class="single-services mb-30">
 					<div class="features-caption">
@@ -137,13 +182,13 @@
 							<label class="inputTitle">이메일</label>
 							<input type="text" name="memberEmail" class="form-control-plaintext" readonly value="id004@email.com">
 						</div>
-						<div class="form-group">
+						<div class="form-group phoneCertifyDiv">
 							<label class="inputTitle">휴대폰 번호</label><br>
 							<div class="phoneNum-formgroup">
 								<input type="text" name="memberPhone" class="phoneNum" readonly value="010-0000-0004">
 								<input type="button" id="certifyNumSendBtn" class="btn memberPhoneBtn active" value="인증번호 전송">
 							</div>
-							<div class="phoneNum-formgroup">
+							<div class="phoneNum-formgroup" id="phoneCertifyDiv">
 								<input type="text" name="memberPhoneCertify" class="phoneNum">
 								<input type="button" id="AuthenticateBtn" class="btn memberPhoneBtn" value="인증하기">
 							</div>
@@ -156,17 +201,44 @@
 					<div class="features-caption">
 						<h3 class="captionTitle">할인 적용</h3>
 						<div class="form-group">
-							<label class="paymentTotalOrderPrice">포인트 사용</label>
+							<label class="inputTitle">포인트 사용</label>
 							<div class="phoneNum-formgroup">
-								<input type="text" name="memberPhone" class="phoneNum" readonly value="010-0000-0004">
-								<input type="button" id="certifyNumSendBtn" class="btn memberPhoneBtn active" value="인증번호 전송">
+								<p>보유 포인트 : <span class="finalPoint">2,000</span>p</p><label><input type="checkbox" class="allPointUse"> 포인트 전체사용</label>
+							</div>
+							<div class="phoneNum-formgrou">
+								<input type="text" name="pointUseInput" class="phoneNum">
+								<input type="button" id="pointUseBtn" class="btn memberPhoneBtn active" value="적용">
 							</div>
 						</div>
 					
 					</div>
 				</div>
 				
-				<button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit">수강신청서 제출</button>
+				<div class="single-services mb-30">
+					<div class="features-caption">
+						<h3 class="captionTitle">결제 수단</h3>
+						<div class="form-group row">
+							<label class="col-xl-4 col-md-6 paymentMethodLabel">
+								<a class="genric-btn primary-border circle arrow paymentMethodBtn active"><input type="radio" name="paymentMethod" value="카드" checked><span>신용/체크카드</span></a>
+							</label>
+							<label class="col-xl-4 col-md-6 paymentMethodLabel">
+								<a class="genric-btn primary-border circle arrow paymentMethodBtn"><input type="radio" name="paymentMethod" value="카드"><span>가상계좌</span></a>
+							</label>
+							<label class="col-xl-4 col-md-6 paymentMethodLabel">
+								<a class="genric-btn primary-border circle arrow paymentMethodBtn"><input type="radio" name="paymentMethod" value="카드"><span>카카오페이</span></a>
+							</label>
+						</div>
+					
+					</div>
+				</div>
+				<div id="totalPriceDiv" class="single-services mb-30">
+					<div id="totalPriceStrDiv">
+						<span>총 결제금액</span>
+						<span>27,000</span>
+					</div>
+					<button id="paymentBtn" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit">결제하기</button>
+				</div>
+				
 				
 			</form>
 		</div>
@@ -182,21 +254,51 @@
 	<th:block th:replace="userfragments/userJavaScripts :: userJSFragment"></th:block>
 	<th:block layout:fragment="customBodyScript">
 		<script type="text/javascript">
+		 
 			$(function(){
 				 $('#paymentForm').validate({
 			            rules: {
 			            	memberPhoneCertify: {
 			                    required: true,
-			                }
+			                    digits : true
+			                },
+			               
 			            },
 			            messages: {
 			            	memberPhoneCertify: {
 			                    required: "*인증번호를 입력해주세요",
-			                }
+			                    digits : "*전송된 인증번호를 입력해주세요"
+			                },
+			               
+			               
 			            }
-				 });
+				});
 				 
-				 $('')
+				$('.paymentMethodBtn').click(function(){
+					 if($(this).children('input[type="radio"]').prop('checked') == true){
+						//$(this).prarents('div .row').find('.paymentMethodBtn').removeClass('.paymentMethodBtn:hover');
+					 	//$(this).css('background','#1f2b7b').css('color','#fff');
+					 	$(this).parents('div .row').find('.paymentMethodBtn').removeClass('active');
+					 	$(this).addClass("active"); 
+					 }
+					 
+				 });
+				
+				$('.allPointUse').click(function(){
+					var point = $('.finalPoint').text();
+					if($(this).prop('checked') == true){
+						$('input[name="pointUseInput"]').val(point);
+					}else {
+						$('input[name="pointUseInput"]').val('');
+					}
+				});
+				
+				//포인트 잔액 바뀌면 체크버튼 풀리게하기
+
+				
+				 
+				
+				 
 			});
 		</script>
 	</th:block>

@@ -182,10 +182,10 @@
 								<td th:text="${l.member.memberEmail}"></td>
 								<td th:text="${l.challengeCategoryRegDate}"></td>
 								<td>
-									<a th:href="@{/challenge/challengeConfig/challengeCategoryUpdate(challengeCategoryCode=${l.challengeCategoryCode})}"><span class="label label-primary">수정</span></a>
+									<a th:href="@{/admin/challengeCategoryUpdate(challengeCategoryCode=${l.challengeCategoryCode})}"><span class="label label-primary">수정</span></a>
 								</td>
 								<td>
-									<a href="#"><span class="label label-danger">삭제</span></a>
+									<a class="cateDelete" th:href="@{#}"><span class="label label-danger">삭제</span></a>
 								</td>
 							</tr>
 							<tr th:unless="${not #lists.isEmpty(challengeCategoryList)}">
@@ -194,7 +194,7 @@
 						</tbody>
 					</table>
 					<div style="text-align: center;">
-                   		<a th:href="@{/challenge/challengeConfig/challengeCategoryInsert}" class="btn btn-outline btn-info btn-sm">카테고리 등록</a>
+                   		<a th:href="@{/admin/challengeCategoryInsert}" class="btn btn-outline btn-info btn-sm">카테고리 등록</a>
 					</div>
 				</div>
 				<!--챌린지 카테고리 데이터 테이블 End -->
@@ -269,7 +269,7 @@
 								<td th:text="${l.challengeSettingCode}"></td>
 								<td th:text="${l.challengeSettingUpdateDo}"></td>
 								<td>
-									<a th:href="@{/challenge/challengeConfig/challengeSettingUpdate(challengeSettingCode=${l.challengeSettingCode})}"><span class="label label-primary">수정</span></a>
+									<a th:href="@{/admin/challengeSettingUpdate(challengeSettingCode=${l.challengeSettingCode})}"><span class="label label-primary">수정</span></a>
 								</td>
 								<td>
 									<a href="#"><span class="label label-danger">삭제</span></a>
@@ -281,7 +281,7 @@
 						</tbody>
 					</table>
 					<div style="text-align: center;">
-                   		<a th:href="@{/challenge/challengeConfig/challengeSettingInsert}" class="btn btn-outline btn-info btn-sm">세팅 등록</a>
+                   		<a th:href="@{/admin/challengeSettingInsert}" class="btn btn-outline btn-info btn-sm">세팅 등록</a>
 					</div>
 				</div>
 				<!--챌린지 카테고리 데이터 테이블 End --> 		
@@ -304,15 +304,38 @@
 
 	<!-- custom -->
 	<script th:src="@{/asset/js/main.js}"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script type="text/javascript">
 	
 		
 		
 
 		$(document).ready(function() {
-			/* 결제 일자 형식 지정*/
-			 $('.mask-placeholder').mask("0000/00/00", {placeholder: "____/__/__"});
+			/* 검색 일자 형식 지정*/
+			$('.mask-placeholder').mask("0000/00/00", {placeholder: "____/__/__"});
 			
+			/*sweetalret으로 삭제 처리는 어떻게 해야하나*/
+			$('.cateDelete').click(function(){
+				console.log($('challengeCategory tr td').text());
+                Swal.fire({
+                    title: '정말 삭제 하시겠습니까?',
+                    text: "삭제한 내용은 되돌릴 수 없습니다.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '삭제',
+                    cancelButtonText: '취소'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire(
+                            '삭제되었습니다.',
+                            '',
+                            'success',
+                        )
+                    }
+                })
+			});
 			 
 			/* 데이터 테이블 생성*/
 			var table1 = $('#challengeCategory').DataTable({
