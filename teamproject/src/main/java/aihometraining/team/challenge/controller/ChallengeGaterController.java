@@ -102,11 +102,11 @@ public class ChallengeGaterController {
 	
 	//모집챌린지 등록처리
 	@PostMapping("/challengeGatherInsert")
-	public String challengeGatherInsert(ChallengeGather challengeGather) {
+	public String challengeGatherInsert(ChallengeGather challengeGather, ChallengeGatherPlan challengeGatherPlan) {
 		
 		log.info("모집챌린지 등록폼에서 입력받은 데이터: {}", challengeGather);
 		
-		challengeGatherService.challengeGatherInsert(challengeGather);
+		challengeGatherService.challengeGatherInsert(challengeGather, challengeGatherPlan);
 		
 		return "redirect:/challenge/challengeGather/challengeGatherList";
 		
