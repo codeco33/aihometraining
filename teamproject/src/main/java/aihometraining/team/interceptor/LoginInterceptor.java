@@ -18,7 +18,6 @@ public class LoginInterceptor implements HandlerInterceptor{
 		
 		String sessionEmail 	= (String) session.getAttribute("SEMAIL");
 		
-		
 		if(sessionEmail == null) {
 			response.sendRedirect("/member/login");
 			return false;
