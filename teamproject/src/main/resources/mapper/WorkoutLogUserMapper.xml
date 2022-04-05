@@ -23,6 +23,26 @@
 			<result column="workoutLogPrivacyBoundsContent" 	property="workoutLogPrivacyBoundsContent"/>
 	</resultMap>
 	
+	<resultMap type="EClassCategoryLarge" id="EClassCategoryLargeResultMap">
+			<id 	column="eClassCategoryLargeCode" 			property="eClassCategoryLargeCode"/>
+			<result column="eClassCategoryLargeName" 			property="eClassCategoryLargeName"/>
+			<result column="eClassCategoryLargeRegEmail" 		property="eClassCategoryLargeRegEmail"/>
+			<result column="eClassCategoryLargeRegDate" 		property="eClassCategoryLargeRegDate"/>
+			<result column="eClassCategoryLargeUpdateDate" 		property="eClassCategoryLargeUpdateDate"/>
+			<result column="eClassCategoryLargeUpdateEmail" 	property="eClassCategoryLargeUpdateEmail"/>
+	</resultMap>
+	
+	<resultMap type="EClassCategoryMedium" id="EClassCategoryMediumResultMap">
+			<id 	column="eClassCategoryMediumCode" 			property="eClassCategoryMediumCode"/>
+			<result column="eClassCategoryMediumName" 			property="eClassCategoryMediumName"/>
+			<result column="eClassCategoryLargeCode" 			property="eClassCategoryLargeCode"/>
+			<result column="eClassCategoryLargeName" 			property="eClassCategoryLargeName"/>
+			<result column="memberEmail" 						property="memberEmail"/>
+			<result column="eClassCategoryMediumRegDate" 		property="eClassCategoryMediumRegDate"/>
+			<result column="memberUpdateEmail" 					property="memberUpdateEmail"/>
+			<result column="eClassCategoryMediumUpdateDate" 	property="eClassCategoryMediumUpdateDate"/>
+	</resultMap>
+	
 	<resultMap type="EClassCategorySmall" id="EClassCategorySmallResultMap">	
 			<id 	column="eClassCategorySmallCode" 				property="eClassCategorySmallCode"/>
 			<result column="eClassCategorySmallName" 				property="eClassCategorySmallName"/>
@@ -50,7 +70,8 @@
 			<result column="workoutLogPrivacyBoundsCode" 	property="workoutLogPrivacyBoundsCode"/>
 			<result column="workoutLogUpdateEmail" 			property="workoutLogUpdateEmail"/>
 			<result column="workoutLogDeleteEmail" 			property="workoutLogDeleteEmail"/>
-	</resultMap>	
+	</resultMap>
+	
 		
 		<select id="getworkoutGoalList" resultType="WorkoutGoal">
 			/* 운동 계획 목록 조회*/
@@ -78,13 +99,35 @@
 				workoutlogprivacybounds AS wp;
 		</select>
 		
-		<select id="geteClassCategorySmallList" resultType="EClassCategorySmall">
-			/* 운동클래스카테고리small 조회 */
+		<select id="geteClassCategoryLargeList" resultMap="EClassCategoryLargeResultMap">
+			/* 운동클래스카테고리large 조회 */
 			SELECT
-				 ec.eClassCategorySmallCode
-				,ec.eClassCategorySmallName
+				 ec.eClassCategoryLargeCode
+				,ec.eClassCategoryLargeName
 			FROM
-				eclasscategorysmall AS ec;
+				eclasscategorylarge AS ec;
+		</select>
+		
+		<select id="geteClassCategoryMedium" resultMap="EClassCategoryMediumResultMap" parameterType="String">
+			/* 운동클래스 카테고리 Medium 조회 */
+			SELECT
+				 em.eClassCategoryMediumCode
+				,em.eClassCategoryMediumName
+			FROM
+				eclasscategorymedium AS em
+			Where
+				em.eClassCategoryLargeCode = #{eClassCategoryLargeCode};	
+		</select>
+		
+		<select id="geteClassCategorySmall" resultMap="EClassCategorySmallResultMap" parameterType="String">
+			/* 운동클래스 카테고리 small 조회 */
+			SELECT
+				 es.eClassCategorySmallCode
+				,es.eClassCategorySmallName
+			FROM
+				 eclasscategorysmall AS es
+			WHERE 	
+				 es.eClassCategoryMediumCode = #{eClassCategoryMediumCode};
 		</select>
 		
 		<insert id="workoutLogInsert" parameterType="workoutLog">
