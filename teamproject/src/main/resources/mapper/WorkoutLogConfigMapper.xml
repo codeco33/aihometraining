@@ -28,7 +28,16 @@
 		<association property="member" javaType="Member">
 			<id 	column="memberEmail" property="memberEmail"/>
 		</association>	
-	</resultMap>	
+	</resultMap>
+	
+	<!-- <update id="workoutLogCategoryUpdateModal" parameterType="String">
+		UPDATE 
+			workoutgoalplancategory AS wp
+		SET
+			wp.workoutGoalPlanCategoryContent=#{workoutGoalPlanCategoryContent}
+		WHERE 
+			workoutGoalPlanCategoryCode=#{workoutGoalPlanCategoryCode};
+	</update>	 -->
 	
 	<delete id="workoutLogCategoryDelete" parameterType="String">
 		DELETE 

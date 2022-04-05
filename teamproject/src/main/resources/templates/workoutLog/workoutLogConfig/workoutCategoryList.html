@@ -33,7 +33,7 @@
 										<!-- <a th:href="@{/workoutLog/workoutLogConfig/workoutLogCategoryModal(workoutGoalPlanCategoryCode=${l.workoutGoalPlanCategoryCode})}">수정</a> -->
 			                        </td>
 			                        <td>
-			                        	<a th:href="@{/workoutLog/workoutLogConfig/workoutCategoryDelete}"> 삭제 </a>
+			                        	<a th:href="@{/admin/workoutCategoryDelete}"> 삭제 </a>
 			                        </td>
 		                      	</tr>
 		                      	<tr th:unless="${not #lists.isEmpty(workoutLogCategoryList)}">
@@ -43,7 +43,7 @@
 	                  	</table>
 	                </div>
 		            <div style="text-align: center;">
-		            	<a th:href="@{/workoutLog/workoutLogConfig/workoutCategoryInsert}" class="btn btn-outline btn-info btn-sm">카테고리 등록</a>
+		            	<a th:href="@{/admin/workoutCategoryInsert}" class="btn btn-outline btn-info btn-sm">카테고리 등록</a>
 		            </div>
 	            </div>
 			</div>
@@ -178,7 +178,7 @@
 					   console.log(workoutLogCategoryCode);
 					   
 					   $.ajax({
-							 url: '/workoutLog/workoutLogConfig/workoutLogCategoryModal'
+							 url: '/admin/workoutLogCategoryModal'
 							,type : 'post'
 							,data : {
 									'workoutLogCategoryCode' : workoutLogCategoryCode

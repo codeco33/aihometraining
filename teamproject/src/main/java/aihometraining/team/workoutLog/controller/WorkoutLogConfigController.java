@@ -18,7 +18,7 @@ import aihometraining.team.workoutLog.mapper.WorkoutLogConfigMapper;
 import aihometraining.team.workoutLog.service.WorkoutLogConfigService;
 
 @Controller
-@RequestMapping("/workoutLog/workoutLogConfig")
+@RequestMapping("/admin")
 public class WorkoutLogConfigController {
 	
 	
@@ -97,6 +97,25 @@ public class WorkoutLogConfigController {
 		
 		return workoutLogCategoryModal;
 	}
+	
+	/*
+	 * //A-jax : 운동 계획 카테고리명 수정처리
+	 * 
+	 * @PostMapping("/workoutLogCategoryUpdateModal")
+	 * 
+	 * @ResponseBody public WorkoutLogCategory
+	 * workoutLogCategoryUpdateModal(@RequestParam(name="workoutLogCategoryCode",
+	 * required = false) String workoutGoalPlanCategoryCode){
+	 * 
+	 * WorkoutLogCategory workoutLogCategoryUpdateModal =
+	 * workoutLogConfigMapper.workoutLogCategoryUpdateModal(
+	 * workoutGoalPlanCategoryCode);
+	 * 
+	 * log.info("운동 계획 카테고리명 수정  workoutGoalPlanCategoryCode : {}",
+	 * workoutGoalPlanCategoryCode);
+	 * 
+	 * return workoutLogCategoryUpdateModal; }
+	 */
 	
 	//운동 계획 카테고리 수정
 	@GetMapping("/workoutCategoryUpdate")
