@@ -101,6 +101,7 @@ public class WorkoutLogUserController {
 		
 	}
 	
+	// Ajax : 운동 계획 카테고리 대-중 분류
 	@PostMapping("/geteClassCategoryMedium")
 	@ResponseBody
 	public List<EClassCategoryMedium> geteClassCategoryMedium(@RequestParam(value = "eClassCategoryLargeCode") String eClassCategoryLargeCode){
@@ -108,6 +109,17 @@ public class WorkoutLogUserController {
 		log.info("운동클래스 카테고리 medium 목록 조회 : {}", eClassCategoryLargeCode);
 		
 		return workoutLogUserMapper.geteClassCategoryMedium(eClassCategoryLargeCode);
+		
+	}
+	
+	// Ajax : 운동 계획 카테고리 중-소 분류
+	@PostMapping("/geteClassCategorySmall")
+	@ResponseBody
+	public List<EClassCategorySmall> geteClassCategorySmall(@RequestParam(value = "eClassCategoryMediumCode") String eClassCategoryMediumCode){
+		
+		log.info("운동클래스 카테고리 small 목록 조회 : {}", eClassCategoryMediumCode);
+		
+		return workoutLogUserMapper.geteClassCategorySmall(eClassCategoryMediumCode);
 		
 	}
 	

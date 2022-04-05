@@ -119,6 +119,17 @@
 				em.eClassCategoryLargeCode = #{eClassCategoryLargeCode};	
 		</select>
 		
+		<select id="geteClassCategorySmall" resultMap="EClassCategorySmallResultMap" parameterType="String">
+			/* 운동클래스 카테고리 small 조회 */
+			SELECT
+				 es.eClassCategorySmallCode
+				,es.eClassCategorySmallName
+			FROM
+				 eclasscategorysmall AS es
+			WHERE 	
+				 es.eClassCategoryMediumCode = #{eClassCategoryMediumCode};
+		</select>
+		
 		<insert id="workoutLogInsert" parameterType="workoutLog">
 			/* 일지 등록 처리 */
 			INSERT INTO workoutlog
