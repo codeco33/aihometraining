@@ -51,6 +51,7 @@
 				<result column="eClassIntroduceContent" 	property="introduceContent"/>
 				<result column="memberUpdateEmail" 			property="updateEmail"/>
 				<result column="eClassIntroducetDate" 		property="introducetDate"/>
+				<result column="eClassIntroduceImg" 		property="introduceImg"/>
 			</association>
 			
 	</resultMap>

@@ -36,25 +36,25 @@
 				<div class="tab-content" id="myTabContent" style="width: 100%; padding: 10px;">
 					<div class="tab-pane fade show active introduce" role="tabpanel" aria-labelledby="home-tab">
 					
-							<input type="file" multiple="multiple" class="introducefile" name="introduceImg">
-							<textarea rows="20" cols="" style="width: 100%;" name="introduceContent" placeholder="개설 하려는 클래스를 소개 시켜주세요"></textarea>
+							<input type="file" multiple="multiple" class="introducefile">
+							<textarea rows="20" cols="" style="width: 100%;" placeholder="개설 하려는 클래스를 소개 시켜주세요"></textarea>
 
 					</div>
 					<div class="tab-pane fade section" role="tabpanel" aria-labelledby="profile-tab">
 						<div class="row" style="padding: 15px;">
 							<div class="col-7" id="sectionTitle">
 								<div style=" padding: 10px;">
-									<input type="text" style="width: 100%;" name="sectionTitleName" placeholder="섹션 제목을 정해주세요">
+									<input type="text" style="width: 100%;" placeholder="섹션 제목을 정해주세요">
 								</div>
 								<div class="sectionCurriculum">
 									<div class="row" style="padding: 10px;">
 										<div class="col-8">
 											<div class="row">
 												<div class="col-6">
-													<input type="text" class="curriculumName" name="curriculumTitle" style="width: 100%;" placeholder="커리큘럼 이름을 정해주세요">
+													<input type="text" class="curriculumName" style="width: 100%;" placeholder="커리큘럼 이름을 정해주세요">
 												</div>
 												<div class="col-6">
-													<input type="file" name="curriculumAddFile">
+													<input type="file">
 												</div>
 											</div>
 										</div>
@@ -77,13 +77,13 @@
 							<div class="col-8">
 								<div class="Question&Answer">
 									<div class="row">
-										<div class="col-10">
+										<div class="col-12">
 											<div style="padding: 10px;">
-												<input type="text" style="width: 100%; border: solid 1px;" name="question" placeholder="자주 묻는 질문을 등록해주세요">
+												<input type="text" style="width: 100%; border: solid 1px;" placeholder="해당클래스에 자주 뭍는 질문을 등록해주세요">
 											</div>
 											<div class="row" style="padding: 10px;">
 												<div class="col-10 offset-1">
-													<input type="text" style="width: 100%; border: solid 1px;" name="answer" placeholder="어떻게 답하실건가요?">
+													<input type="text" style="width: 100%; border: solid 1px;" placeholder="어떻게 답하실건가요?">
 												</div>
 											</div>
 										</div>
@@ -97,12 +97,11 @@
 						</div>
 					</div>
 					<div class="tab-pane fade Preview" role="tabpanel" aria-labelledby="Preview-tab"style="background-color: #fff;">
-						<div class="col-md-10 offset-md-1" style="padding: 15px;" th:if>
+						<div class="col-md-10 offset-md-1" style="padding: 15px;">
 							개설자가 넣은 클래스 소개란 이미지 또는 글
 							<div>
 								<img alt="" th:src="@{/asset/img/01_모코코콘1_07_멘탈X.png}">
 							</div>
-							<textarea rows="20" cols="" style="width: 100%; border: none;" readonly th:value="@{}"></textarea>
 						</div>
 						<div class="col-md-10 offset-md-1" style="padding: 15px;">
 							섹션
@@ -120,10 +119,8 @@
 							</div>
 						</div>
 					</div>
-					<button type="button" class="btn" id="next">다음</button>
-					<div style="display: none;">
+					<button type="button" class="btn">다음</button>
 					<button type="submit" class="btn">개설하기</button>
-					</div>
 				</div>
 			</form>
 		</div>
