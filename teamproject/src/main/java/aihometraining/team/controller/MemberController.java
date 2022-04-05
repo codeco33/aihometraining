@@ -39,6 +39,17 @@ public class MemberController {
 		this.memberMapper = memberMapper;
 	}
 	
+	/* 마이페이지 화면 */
+	@GetMapping("/mypage")
+	public String mypage(Model model) {
+		
+		model.addAttribute("title", "마이페이지");
+		
+		return "member/mypage";
+	}
+	
+	
+	/* 로그인 이력 조회 */
 	@SuppressWarnings("unchecked")
 	@GetMapping("/loginHistory")
 	public String getLoginHistory(Model model) {
@@ -55,6 +66,7 @@ public class MemberController {
 		return "member/loginHistory";
 	}
 	
+	/* 로그아웃 */
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 	
@@ -63,6 +75,7 @@ public class MemberController {
 		return "redirect:/member/login";
 	}
 	
+	/* 로그인 */
 	@GetMapping("/login")
 	public String login(Model model
 					   ,@RequestParam(value="result", required = false) String result) {
@@ -74,6 +87,7 @@ public class MemberController {
 		return "member/login";
 	}
 	
+	/* 로그인 처리 */
 	@PostMapping("/login")
 	public String login(Member member, HttpSession session, RedirectAttributes reAttr) {
 		String memberEmail = member.getMemberEmail();
@@ -84,9 +98,11 @@ public class MemberController {
 		
 		if(checkMember != null && checkMember.getMemberPw() != null && memberPw.equals(checkMember.getMemberPw())) {
 			String sessionLevelCode = checkMember.getMemberLevelCode();
+			String sessionName = checkMember.getMemberName();
 			
 			session.setAttribute("SEMAIL", 	memberEmail);
 			session.setAttribute("SLEVEL", 	sessionLevelCode);
+			session.setAttribute("SNAME", 	sessionName);
 			
 			log.info("로그인 성공");
 			
@@ -99,9 +115,7 @@ public class MemberController {
 	}
 	
 	
-	/**
-	 *  회원 탈퇴 처리
-	 */
+	/* 회원 탈퇴 처리 */
 	@PostMapping("/removeMember")
 	public String removeMember(@RequestParam(name="memberEmail", required = false) String memberEmail
 							  ,@RequestParam(name="memberPw", required = false, defaultValue = "") String memberPw
@@ -126,9 +140,7 @@ public class MemberController {
 	
 	}
 	
-	/** 
-	 * 회원탈퇴화면
-	 */
+	/* 회원 탈퇴 화면	 */
 	@GetMapping("/removeMember")
 	public String removeMember(@RequestParam(name="memberEmail", required = false) String memberEmail
 							  ,@RequestParam(name="result", required = false) String result
@@ -142,9 +154,7 @@ public class MemberController {
 	}
 	
 	
-	/**
-	 * 회원수정처리
-	 */
+	/* 회원 수정 처리 */
 	@PostMapping("/modifyMember")
 	public String modifyMember(Member member) {
 		log.info("회원 수정 화면에서 입력받은 값: {}", member);
@@ -152,9 +162,7 @@ public class MemberController {
 		return "redirect:/member/memberList";
 	}
 	
-	/**
-	 * 회원 수정화면
-	 */
+	/* 회원 수정 화면 */
 	@GetMapping("/modifyMember")
 	public String modifyMember(Model model
 							  ,@RequestParam(name="memberEmail", required = false) String memberEmail) {
@@ -172,7 +180,7 @@ public class MemberController {
 	
 	
 	/**
-	 *  idCheck ajax
+	 *  emailCheck ajax
 	 *  @RequestParam(value = "memberEmail") == request.getParameter("memberEmail");
 	 */
 	@PostMapping("/emailCheck")
@@ -189,9 +197,7 @@ public class MemberController {
 	}
 	
 	
-	/**
-	 * 회원가입 폼
-	 */
+	 /* 회원가입 폼 */
 	@GetMapping("/addMember")
 	public String addMember(Model model) {
 		
@@ -214,6 +220,8 @@ public class MemberController {
 		
 		return "redirect:/member/addMember";
 	}
+	
+	/* 회원 목록 조회 */
 
 	@GetMapping("/memberList")
 	public String getMemberList(Model model
@@ -239,7 +247,8 @@ public class MemberController {
 		
 		return "member/memberList";
 	}
-
+	
+	/* 회원 권한 목록 조회 */
 	@GetMapping("/memberLevelList")
 	public String memberLevelList(Model model) {
 		

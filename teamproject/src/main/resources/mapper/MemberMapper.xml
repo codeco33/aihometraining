@@ -132,6 +132,7 @@
 		SELECT
 		    m.memberEmail        
 		   ,m.memberPw        
+		   ,m.memberLevelCode        
 		   ,m.memberName        
 		   ,m.memberNickname      
 		   ,m.memberNewsAgree      
