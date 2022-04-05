@@ -52,11 +52,15 @@ public class ChallengeGatherService {
 	}
 	
 	//챌린지 모집 등록 처리
-	public int challengeGatherInsert(ChallengeGather challengeGather) {
+	public int challengeGatherInsert(ChallengeGather challengeGather) {//,dto하나더 추가하고(controller)
 		//pk컬럼에 들어갈 코드를 자동으로 만들어주는 Mapper      //pk로 쓸 db의 컬럼명                     //코드가 들어갈 db의 테이블명
 		String newCode = commonMapper.getNewCode("challengeGatherCode", "challengegather");
 		challengeGather.setChallengeGatherCode(newCode);
 		challengeGather.setMemberEmail("id002@email.com");//임시처리
+		
+		//dto(커맨드객체2).set(challengeGather.getChallengeCategoryCode());
+		//insert문 하나더
+		
 		
 		int result = challengeGatherMapper.challengeGatherInsert(challengeGather);
 		
