@@ -30,10 +30,13 @@
 			                        	<button type="button" th:data-cateName="${l.workoutGoalPlanCategoryContent}"  th:data-cateCode="${l.workoutGoalPlanCategoryCode}" class="btn btn-outline btn-success btn-sm workoutCategoryUpdateBtn" data-toggle="modal" data-target="#categoryUpdate">
 											  	수정
 										</button>
-										<!-- <a th:href="@{/workoutLog/workoutLogConfig/workoutLogCategoryModal(workoutGoalPlanCategoryCode=${l.workoutGoalPlanCategoryCode})}">수정</a> -->
 			                        </td>
 			                        <td>
-			                        	<a th:href="@{/admin/workoutCategoryDelete}"> 삭제 </a>
+			                        	<a th:href="@{/admin/workoutCategoryDelete(workoutGoalPlanCategoryCode=${l.workoutGoalPlanCategoryCode})}">
+				                        	<button type="button" class="btn btn-outline btn-danger btn-sm">
+												삭제
+											</button>
+			                        	</a>
 			                        </td>
 		                      	</tr>
 		                      	<tr th:unless="${not #lists.isEmpty(workoutLogCategoryList)}">

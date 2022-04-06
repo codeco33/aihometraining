@@ -29,13 +29,9 @@ public interface WorkoutLogConfigMapper {
 	//모달에서 운동 계획 카테고리명 수정 처리 
 	public int workoutLogCategoryUpdateModal(Map<String, Object> paramMap);
 	
-	//public int workoutLogCategoryUpdateModal(String workoutGoalPlanCategoryCode, String workoutGoalPlanCategoryContent);
+	//운동 계획 카테고리 삭제 
+	public int workoutLogCategoryDelete(String workoutGoalPlanCategoryCode);
 	 
-	
-	/*
-	 * //운동 계획 카테고리 삭제 
-	 * public int workoutLogCategoryDelete(String workoutGoalPlanCategoryCode);
-	 * 
-	 */
+	 
 	
 }

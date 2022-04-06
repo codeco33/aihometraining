@@ -30,6 +30,16 @@
 		</association>	
 	</resultMap>
 	
+	<delete id="workoutLogCategoryDelete" parameterType="String">
+		/* 운동 계획 카테고리 삭제 */
+		DELETE 
+			wc
+		FROM
+			workoutgoalplancategory AS wc
+		WHERE 
+			wc.workoutGoalPlanCategoryCode=#{workoutGoalPlanCategoryCode};	
+	</delete>
+	
 	<update id="workoutLogCategoryUpdateModal" parameterType="String">
 		/* 모달에서 카테고리명 수정처리 */
 		UPDATE 
@@ -42,16 +52,6 @@
 		WHERE 
 			workoutGoalPlanCategoryCode=#{workoutGoalPlanCategoryCode};
 	</update>
-	
-	<!-- <delete id="workoutLogCategoryDelete" parameterType="String">
-		DELETE 
-			 wc.workoutGoalPlanCategoryCode
-			,wc.workoutGoalPlanCategoryContent
-		FROM
-			workoutgoalplancategory AS wc
-		WHERE 
-			wc.workoutGoalPlanCategoryCode=#{workoutGoalPlanCategoryCode};	
-	</delete> -->
 	
 	<select id="getWorkoutLogCategoryModal" parameterType="String" resultType="WorkoutLogCategory">
 		/* 모달에서 운동 계획 카테고리명 가져오기 */

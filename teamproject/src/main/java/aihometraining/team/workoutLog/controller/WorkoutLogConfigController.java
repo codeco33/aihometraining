@@ -105,16 +105,15 @@ public class WorkoutLogConfigController {
 	 */
 	
 	
-	  //A-jax : 운동 계획 카테고리명 수정처리
-	  
-	  @PostMapping("/workoutLogCategoryUpdateModal")
-	  @ResponseBody 
-	  public int workoutLogCategoryUpdateModal(@RequestParam Map<String, Object> paramMap){	
+	//A-jax : 운동 계획 카테고리명 수정처리
+	@PostMapping("/workoutLogCategoryUpdateModal")
+	@ResponseBody 
+	public int workoutLogCategoryUpdateModal(@RequestParam Map<String, Object> paramMap){	
 		  
-		  log.info("workoutLogCategoryUpdateModal : {}", paramMap.toString());
+		log.info("workoutLogCategoryUpdateModal : {}", paramMap.toString());
 		  
-		  return  workoutLogConfigMapper.workoutLogCategoryUpdateModal(paramMap); 	  
-	  }
+		return  workoutLogConfigMapper.workoutLogCategoryUpdateModal(paramMap); 	  
+	}
 	 
 	 
 	//운동 계획 카테고리 수정
@@ -130,12 +129,13 @@ public class WorkoutLogConfigController {
 	
 	//운동 계획 카테고리 삭제
 	@GetMapping("/workoutCategoryDelete")
-	public String workoutCategoryDelete(Model model) {
+	public String workoutCategoryDelete(@RequestParam(name="workoutGoalPlanCategoryCode", required = false) String workoutGoalPlanCategoryCode, WorkoutLogCategory workoutLogCategory) {
 		
-		model.addAttribute("title", "운동 계획 카테고리 삭제");
-		model.addAttribute("leftMenuList", "일지");
+		log.info("운동 카테고리 등록 폼에서 삭제 할 데이터: {}", workoutGoalPlanCategoryCode);
 		
-		return "workoutLog/workoutLogConfig/workoutCategoryDelete";
+		workoutLogConfigService.workoutGoalCategoryDelete(workoutGoalPlanCategoryCode);
+		
+		return "redirect:/admin/workoutCategoryList";
 		
 	}
 	
