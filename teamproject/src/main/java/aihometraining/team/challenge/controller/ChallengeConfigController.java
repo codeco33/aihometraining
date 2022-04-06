@@ -155,6 +155,20 @@ public class ChallengeConfigController {
 		return "redirect:/challenge/challengeConfig/configList";
 	}
 	
+	//챌린지 카테고리 삭제처리
+	@GetMapping("/challengeCategoryDelete")
+	public String challengeCategoryDelete(Model model
+										, @RequestParam(name="challengeCategoryCode", required = false) String challengeCategoryCode) {
+		
+		log.info("챌린지 카테고리 삭제버튼 눌렀을때 스트링 값 challengeCategoryCode : {}", challengeCategoryCode);
+		
+		//챌린지 카테고리 코드에 따른 신고내역 삭제(챌린지 카테고리 삭제처리 )
+		challengeConfigService.categoryDeleteBycateCode(challengeCategoryCode);
+		
+		return "redirect:/admin/configList";
+		
+	}
+	
 	//챌린지 세팅 등록
 	@GetMapping("/challengeSettingInsert")
 	public String challengeSettingInsert(Model model) {

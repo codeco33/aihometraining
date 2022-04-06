@@ -176,7 +176,7 @@
 							</tr>
 							 -->
 							<tr th:if="${not #lists.isEmpty(challengeCategoryList)}" th:each="l : ${challengeCategoryList}">
-								<td th:text="${l.challengeCategoryCode}"></td>
+								<td class="cateCode" th:text="${l.challengeCategoryCode}"></td>
 								<td th:text="${l.challengeCategoryName}"></td>
 								<td th:text="${l.eClassCategorySmall.eClassCategorySmallName}"></td>
 								<td th:text="${l.member.memberEmail}"></td>
@@ -316,8 +316,10 @@
 			
 			/*sweetalret으로 삭제 처리는 어떻게 해야하나*/
 			$('.cateDelete').click(function(){
-				console.log($('challengeCategory tr td').text());
-                Swal.fire({
+				console.log($(this).parents('tr').find('.cateCode').text());
+				var cateCode = $(this).parents('tr').find('.cateCode').text();
+                
+				Swal.fire({
                     title: '정말 삭제 하시겠습니까?',
                     text: "삭제한 내용은 되돌릴 수 없습니다.",
                     icon: 'warning',
@@ -328,11 +330,8 @@
                     cancelButtonText: '취소'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        Swal.fire(
-                            '삭제되었습니다.',
-                            '',
-                            'success',
-                        )
+                    	location.href = "/admin/challengeCategoryDelete?challengeCategoryCode="+cateCode;
+                    	
                     }
                 })
 			});

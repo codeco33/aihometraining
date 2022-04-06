@@ -87,6 +87,29 @@ public class ChallengeConfigService {
 		return result;
 	}
 	
+	//카테고리 삭제처리 프로세스
+		public void categoryDeleteBycateCode(String challengeCategoryCode) {
+			//챌린지 카테고리 코드에 따른 신고내역 삭제(챌린지 카테고리 삭제처리 )
+			challengeConfigMapper.reportDeleteBycateCode(challengeCategoryCode);
+			
+			//챌린지 카테고리 코드에 따른 포인트내역 삭제(챌린지 카테고리 삭제처리 )
+			challengeConfigMapper.pointDeleteBycateCode(challengeCategoryCode);
+			
+			//챌린지 카테고리 코드에 따른 실행내역 삭제(챌린지 카테고리 삭제처리 )
+			challengeConfigMapper.planDoDeleteBycateCode(challengeCategoryCode);
+			
+			//챌린지 카테고리 코드에 따른 참가내역 삭제(챌린지 카테고리 삭제처리 )
+			challengeConfigMapper.enterDeleteBycateCode(challengeCategoryCode);
+			
+			//챌린지 카테고리 코드에 따른 모집계획 내역 삭제(챌린지 카테고리 삭제처리 )
+			challengeConfigMapper.planDeleteBycateCode(challengeCategoryCode);
+			
+			//챌린지 카테고리 코드에 따른 모집내역 삭제(챌린지 카테고리 삭제처리 )
+			challengeConfigMapper.gatherDeleteBycateCode(challengeCategoryCode);
+			//챌린지 카테고리 코드에 따른 카테고리 삭제(챌린지 카테고리 삭제처리 )
+			challengeConfigMapper.challengeCategoryDelete(challengeCategoryCode);
+		}
+	
 	//세팅 등록 처리
 	public void challengeSettingInsert(ChallengeSetting challengeSetting) {
 		
