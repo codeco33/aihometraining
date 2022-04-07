@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import aihometraining.team.challenge.controller.ChallengeConfigController;
 import aihometraining.team.eclassService.eClassService;
@@ -76,12 +77,12 @@ public class eClassController {
 		return "/eClass/myEClassApplyList";
 	}
 	
-	@GetMapping("/myeClassList")
-	public String myeClassList(Model model) {
+	@GetMapping("/eclassadmin/studentList")
+	public String studentList(Model model) {
 		
-		model.addAttribute("title", "내 운동클래스");
+		model.addAttribute("title", "수강생 목록");
 		
-		return "/eClass/myeClassList";
+		return "/eClass/studentList";
 	}
 	
 }
