@@ -73,7 +73,7 @@ public class WorkoutLogConfigController {
 		
 		workoutLogConfigService.workoutGoalCategoryInsert(workoutLogCategory);
 		
-		return "redirect:/workoutLog/workoutLogConfig/workoutCategoryList";
+		return "redirect:/admin/workoutCategoryList";
 		
 	}
 	
