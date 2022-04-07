@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
+@RequestMapping("/admin")
 public class PaymentController {
 	
 	
@@ -36,35 +37,6 @@ public class PaymentController {
 		return "payment/paymentDetail";
 	}
 	
-	@GetMapping("/signUpForClass")
-	public String eClassTake(Model model) {
-		
-		
-		
-		model.addAttribute("title", "수강신청");
-		
-		return "eClass/eClassTake";
-	}
-
 	
-	@GetMapping("/payment")
-	public String payment(Model model) {
-		
-		
-		
-		model.addAttribute("title", "결제");
-		
-		return "payment/payment";
-	}
-	
-	@PostMapping("/payment")
-	public String payment(Model model, String a) {
-		
-		
-		
-		model.addAttribute("title", "결제");
-		
-		return "redirect:/mypage/mypaymentList/paymentDetail";
-	}
 
 }
