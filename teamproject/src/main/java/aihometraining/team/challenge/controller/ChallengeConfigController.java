@@ -259,8 +259,13 @@ public class ChallengeConfigController {
 	@GetMapping("/challengeListIng")
 	public String challengeListIng(Model model) {
 		
+		List<ChallengeGather> challengeIngList = challengeConfigService.getChallengeIngList();
+		
+		log.info("진행 챌린지 목록 조회 challengeIngList: {}", challengeIngList);
+		
 		model.addAttribute("title", "진행 챌린지 목록");
-		model.addAttribute("leftMenuList", "진행");
+		model.addAttribute("leftMenuList", "챌린지");
+		model.addAttribute("challengeIngList", challengeIngList);
 		
 		return "challenge/challengeConfig/challengeListIng";
 		

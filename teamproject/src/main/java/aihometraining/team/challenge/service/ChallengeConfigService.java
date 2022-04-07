@@ -157,4 +157,13 @@ public class ChallengeConfigService {
 		return listDetail;
 		
 	}
+	
+	//진행 챌린지 목록 조회
+	public List<ChallengeGather> getChallengeIngList() {
+		
+		List<ChallengeGather> challengeIngList = challengeConfigMapper.getChallengeIngList();
+		
+		return challengeIngList;
+		
+	}
 }
