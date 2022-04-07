@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -63,7 +65,7 @@ public class ChallengeConfigController {
 	public String challengeConfigList(Model model) {
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("memberEmail", "id001@email.com");
+		/* paramMap.put("memberEmail", "id001@email.com"); */
 		
 		//List<ChallengeCategory> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
 		List<Map<String, Object>> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
@@ -86,7 +88,7 @@ public class ChallengeConfigController {
 	public String challengeCategoryInsert(Model model) {
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("memberEmail", "id001@email.com");
+		/* paramMap.put("memberEmail", "id001@email.com"); */
 		
 		//운동클래스카테고리small 조회
 		List<EClassCategorySmall> classCategoryList = challengeConfigService.getClassCategoryList();
@@ -105,13 +107,15 @@ public class ChallengeConfigController {
 	
 	//챌린지 카테고리 등록 처리
 	@PostMapping("/challengeCategoryInsert")
-	public String challengeCategoryInsert(ChallengeCategory challengeCategory) {
+	public String challengeCategoryInsert(ChallengeCategory challengeCategory, HttpSession session) {
 		
 		log.info("챌린지 카테고리 등록 폼에서 입력받은 데이터: {}", challengeCategory); //받은 내용이 여기{}에 담긴다.
 		
-		challengeConfigService.challengeCategoryInsert(challengeCategory);
+		String sEmail = (String) session.getAttribute("SEMAIL");
 		
-		return "redirect:/challenge/challengeConfig/configList";
+		challengeConfigService.challengeCategoryInsert(challengeCategory, sEmail);
+		
+		return "redirect:/admin/configList";
 		
 	}
 	
@@ -122,8 +126,7 @@ public class ChallengeConfigController {
 		
 		log.info("챌린지 카테고리 수정화면 폼 쿼리 스트링 challengeCategoryCode : {}", challengeCategoryCode);
 		
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("memberEmail", "id001@email.com"); //로그인 처리가 아직 안되서 임시로 넣은값
+		
 		
 		//카테고리 코드별 챌린지 카테고리 정보 조회
 		ChallengeCategory challengeCategory = challengeConfigService.getChallengeCategoryByCode(challengeCategoryCode);
@@ -131,7 +134,6 @@ public class ChallengeConfigController {
 		//운동클래스카테고리small 조회
 		List<EClassCategorySmall> classCategoryList = challengeConfigService.getClassCategoryList();
 		
-		paramMap = null;
 		
 		log.info("카테고리 코드별 챌린지 카테고리 정보 조회  challengeCategory : {}", challengeCategory);
 		log.info("운동클래스카테고리small 조회  classCategoryList : {}", classCategoryList);
@@ -146,13 +148,15 @@ public class ChallengeConfigController {
 	
 	//챌린지 카테고리 수정처리
 	@PostMapping("/challengeCategoryUpdate")
-	public String challengeCategoryUpdate(ChallengeCategory challengeCategory) {
+	public String challengeCategoryUpdate(ChallengeCategory challengeCategory, HttpSession session) {
 		
 		log.info("챌린지 카테고리 수정 폼에서 입력받은 데이터: {}", challengeCategory); //받은 내용이 여기{}에 담긴다.
 		
-		challengeConfigService.challengeCategoryUpdate(challengeCategory);
+		String sEmail = (String) session.getAttribute("SEMAIL");
 		
-		return "redirect:/challenge/challengeConfig/configList";
+		challengeConfigService.challengeCategoryUpdate(challengeCategory, sEmail);
+		
+		return "redirect:/admin/configList";
 	}
 	
 	//챌린지 카테고리 삭제처리
@@ -188,7 +192,7 @@ public class ChallengeConfigController {
 		
 		challengeConfigService.challengeSettingInsert(challengeSetting);
 		
-		return "redirect:/challenge/challengeConfig/configList";
+		return "redirect:/admin/configList";
 		
 	}
 	
@@ -217,7 +221,7 @@ public class ChallengeConfigController {
 		
 		challengeConfigService.challengeSettingUpdate(challengeSetting);
 		
-		return "redirect:/challenge/challengeConfig/configList";
+		return "redirect:/admin/configList";
 		
 	}
 	
