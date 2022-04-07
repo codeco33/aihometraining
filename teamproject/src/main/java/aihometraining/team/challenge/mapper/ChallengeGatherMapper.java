@@ -24,6 +24,9 @@ public interface ChallengeGatherMapper {
 	//챌린지 세팅 조회
 	public List<ChallengeSetting> getChallengeSetting();
 	
-	//챌린지 등록처리
+	//챌린지 모집 등록처리
 	public int challengeGatherInsert(ChallengeGather challengeGather);
+		
+	//챌린지 모집 계획 등록처리
+	public void challengeGatherPlanInsert(ChallengeGatherPlan challengeGatherPlan);
 }

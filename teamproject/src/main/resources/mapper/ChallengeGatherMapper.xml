@@ -182,36 +182,61 @@
 	<insert id="challengeGatherInsert" parameterType="ChallengeGather">
 		/* 챌린지 등록 처리*/
 		INSERT INTO challengegather
-	(
-		 challengeGatherCode
-		,memberEmail
-		,challengeCategoryCode
-		,challengeGatherName
-		,challengeGatherIntro
-		,challengeGatherMaxPeople
-		,challengeGatherProveMethod
-		,challengeGatherProveContent
-		,challengeGatherProveFrequency
-		,challengeStartDate
-		,challengeEndDate
-		,challengeGatherRegDate
-		,challengeGatherStartDate
-		,challengeGatherEndDate
-	)VALUES (
-		 #{challengeGatherCode}
-		,#{memberEmail}
-		,#{challengeCategoryCode}
-		,#{challengeGatherName}
-		,#{challengeGatherIntro}
-		,#{challengeGatherMaxPeople}
-		,#{challengeGatherProveMethod}
-		,#{challengeGatherProveContent}
-		,#{challengeGatherProveFrequency}
-		,#{challengeStartDate}
-		,#{challengeEndDate}
-		,CURDATE()
-		,#{challengeGatherStartDate}
-		,#{challengeGatherEndDate}
-	);
+		(
+			 challengeGatherCode
+			,memberEmail
+			,challengeCategoryCode
+			,challengeGatherName
+			,challengeGatherIntro
+			,challengeGatherMaxPeople
+			,challengeGatherProveMethod
+			,challengeGatherProveContent
+			,challengeGatherProveFrequency
+			,challengeStartDate
+			,challengeEndDate
+			,challengeGatherRegDate
+			,challengeGatherStartDate
+			,challengeGatherEndDate
+		)VALUES (
+			 #{challengeGatherCode}
+			,#{memberEmail}
+			,#{challengeCategoryCode}
+			,#{challengeGatherName}
+			,#{challengeGatherIntro}
+			,#{challengeGatherMaxPeople}
+			,#{challengeGatherProveMethod}
+			,#{challengeGatherProveContent}
+			,#{challengeGatherProveFrequency}
+			,#{challengeStartDate}
+			,#{challengeEndDate}
+			,CURDATE()
+			,#{challengeGatherStartDate}
+			,#{challengeGatherEndDate}
+		);
+	</insert>
+	
+	<insert id="challengeGatherPlanInsert" parameterType="ChallengeGatherPlan">
+		/* 챌린지 모집 계획 등록처리 */
+		INSERT INTO challengegatherplan
+		(
+			 challengeGatherPlanCode
+			,memberEmail
+			,challengeGatherCode
+			,challengeCategoryCode
+			,challengeSettingCode
+			,challengeGatherPlanProveNumber
+			,challengeGatherChallengeStartDate
+			,challengeGatherChallengeLastDate
+		)VALUES (
+			 #{challengeGatherPlanCode}
+			,#{memberEmail}
+			,#{challengeGatherCode}
+			,#{challengeCategoryCode}
+			,#{challengeSettingCode}
+			,#{challengeGatherPlanProveNumber}
+			,#{challengeGatherChallengeStartDate}
+			,#{challengeGatherChallengeLastDate}
+		);
+	
 	</insert>
 </mapper>
