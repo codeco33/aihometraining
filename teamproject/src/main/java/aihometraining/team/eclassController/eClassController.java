@@ -1,5 +1,7 @@
 package aihometraining.team.eclassController;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -10,8 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import aihometraining.team.challenge.controller.ChallengeConfigController;
 import aihometraining.team.dto.EClassAnswer;
 import aihometraining.team.dto.EClassApproved;
-import aihometraining.team.dto.EClassCategoryLarge;
-import aihometraining.team.dto.EClassCategoryMedium;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.EClassIntroduce;
 import aihometraining.team.dto.EClassOpenApplyForm;
@@ -26,18 +26,10 @@ public class eClassController {
 	private static final Logger log = LoggerFactory.getLogger(ChallengeConfigController.class);
 	
 	private eClassService eClassService;
-	private EClassCategoryLarge eClassCategoryLarge;
-	private EClassCategoryMedium eClassCategoryMedium;
-	private EClassCategorySmall eClassCategorySmall;
 	
-	public eClassController( eClassService eClassService
-							,EClassCategoryLarge eClassCategoryLarge
-							,EClassCategoryMedium eClassCategoryMedium
-							,EClassCategorySmall eClassCategorySmall) {
+	public eClassController( eClassService eClassService) {
+		
 		this.eClassService = eClassService;
-		this.eClassCategoryLarge = eClassCategoryLarge;
-		this.eClassCategoryMedium = eClassCategoryMedium;
-		this.eClassCategorySmall = eClassCategorySmall;
 	}
 	
 	@GetMapping("/eClassApprovedList")
@@ -51,12 +43,16 @@ public class eClassController {
 	@GetMapping("/OpenApplyForm")
 	public String OpenApplyForm(Model model) {
 		
-		/*
-		 * model.addAttribute("title", "운통클래스 신청폼");
-		 * model.addAttribute("eclasscategorylargeList", eClassCategoryLarge);
-		 * model.addAttribute("eClassCategoryMediumList", eClassCategoryMedium);
-		 * model.addAttribute("eClassCategorySmallList", eClassCategorySmall);
-		 */
+		//운동 클래스 카테고리 조회
+		List<EClassCategorySmall> eClassCategoryList = eClassService.eClassCategoryList();
+		
+		
+		
+		log.info("eClassController.javaOpenApplyForm 데이터: {}", eClassCategoryList); //받은 내용이 여기{}에 담긴다.
+
+		
+		model.addAttribute("title", "운통클래스 신청폼");
+		model.addAttribute("eClassCategoryList", eClassCategoryList);
 		
 		return "eClass/eClassOpenApplyForm";
 	}

@@ -1,10 +1,13 @@
 package aihometraining.team.eclassService;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import aihometraining.team.dto.EClassAnswer;
 import aihometraining.team.dto.EClassApproved;
+import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.EClassIntroduce;
 import aihometraining.team.dto.EClassOpenApplyForm;
 import aihometraining.team.dto.EClassQuestion;
@@ -23,6 +26,13 @@ public class eClassService {
 	public eClassService(EClassMapper eClassMapper, CommonMapper commonMapper) {
 		this.eClassMapper = eClassMapper;
 		this.commonMapper = commonMapper;
+	}
+	
+	public List<EClassCategorySmall> eClassCategoryList() {
+		
+		List<EClassCategorySmall> eClassCategoryList = eClassMapper.eClassCategoryList();
+		
+		return eClassCategoryList;
 	}
 	
 	//클래스 신청 폼 등록처리

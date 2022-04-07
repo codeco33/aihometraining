@@ -40,14 +40,13 @@
 							<input type="file" multiple="multiple" class="introducefile" name="introduceImg">
 						</div>
 						<div class="col-6 col-md-6">
-							<div class="col-4">
-								[[${eclasscategoryLargeList}]]
+<!-- 							<div class="col-4">
 								<select name="eClassCategoryLargeCode" id="eClassCategoryLargeCode">
 									<option> :::: </option>
-									<th:block th:if="${not #lists.isEmpty(eclasscategoryLargeList)}" th:each="eccl : ${eclasscategoryLargeList}">
-										<option th:value = "${eccl.eclasscategoryLargeCode}">[[${ECCL.eClassCategoryLargeName}]]</option>
+									<th:block th:if="${not #lists.isEmpty(eClassCategoryList)}" th:each="eccl : ${eClassCategoryList}">
+										<option th:value = "${eccl.eClassCategoryList}">[[${eccl.eClassCategoryLargeName}]]</option>
 									</th:block>
-									<th:block th:nuless="${not #lists.isEmpty(eclasscategoryLargeList)}" th:each="eccl : ${eclasscategoryLargeList}">
+									<th:block th:nuless="${not #lists.isEmpty(eClassCategoryList)}" th:each="eccl : ${eClassCategoryList}">
 										<option>등록된 카테고리가 없습니다.</option>
 									</th:block>
 								</select>
@@ -55,21 +54,21 @@
 							<div class="col-4">
 								<select name="eClassCategoryMediumCode" id="eClassCategoryMediumCode">
 									<option> :::: </option>
-									<th:block th:if="${not #lists.isEmpty(eClassCategoryMediumList)}" th:each="eccm : ${eclasscategoryMediumList}">
-										<option th:value = "${eccm.eClassCategoryMediumCode}">[[${ECCL.eClassCategoryMediumName}]]</option>
+									<th:block th:if="${not #lists.isEmpty(eClassCategoryList)}" th:each="eccm : ${eClassCategoryList}">
+										<option th:value = "${eccm.eClassCategoryList}">[[${eccm.eClassCategoryMediumName}]]</option>
 									</th:block>
-									<th:block th:nuless="${not #lists.isEmpty(eclasscategoryMediumList)}" th:each="eccm : ${eclasscategoryMediumList}">
+									<th:block th:nuless="${not #lists.isEmpty(eClassCategoryList)}" th:each="eccm : ${eClassCategoryList}">
 										<option>등록된 카테고리가 없습니다.</option>
 									</th:block>
 								</select>
-							</div>
+							</div> -->
 							<div class="col-4">
-								<select name="eClassCategorySmallCode" id="eClassCategorySmallCode">
+								<select>
 									<option> :::: </option>
-									<th:block th:if="${not #lists.isEmpty(eClassCategorySmallList)}" th:each="ECCL : ${eClassCategorySmallList}">
-										<option th:value = "${ECCL.eClassCategorySmallCode}">[[${ECCL.eClassCategorySmallName}]]</option>
+									<th:block th:if="${not #lists.isEmpty(eClassCategoryList)}" th:each="eccs : ${eClassCategoryList}">
+										<option th:value = "${eccs.eClassCategoryList}">[[${eccs.eClassCategorySmallName}]]</option>
 									</th:block>
-									<th:block th:nuless="${not #lists.isEmpty(eClassCategorySmallList)}" th:each="ECCL : ${eClassCategorySmallList}">
+									<th:block th:nuless="${not #lists.isEmpty(eClassCategoryList)}" th:each="eccs : ${eClassCategoryList}">
 										<option>등록된 카테고리가 없습니다.</option>
 									</th:block>
 								</select>

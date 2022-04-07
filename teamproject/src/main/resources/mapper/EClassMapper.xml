@@ -78,4 +78,15 @@
 			, null
 		);
 	</insert>
+	
+	<select id="eClassCategoryList" resultType="EClassCategorySmall">
+		/* 카테고리 조회 */
+		SELECT
+			 cs.eClassCategorySmallCode
+			,cs.eClassCategorySmallName
+			,cs.eClassCategoryMediumName
+			,cs.eClassCategoryLargeName
+		FROM
+			eclasscategorysmall AS cs;
+	</select>
 </mapper>
