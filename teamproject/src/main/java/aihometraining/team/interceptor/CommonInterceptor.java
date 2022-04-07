@@ -60,25 +60,5 @@ public class CommonInterceptor implements HandlerInterceptor{
 	      return true;
 	   }
 	
-	/**
-	 * handler adapter 실행 후 view 랜더링 전 ( 매개변수 ModelAndView) 실행되는 메소드
-	 */
 	
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
-		log.info("CommonInterceptor =====================================postHandle");
-		HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
-	}
-	
-	/**
-	 * view 랜더링 후 실행되는 메소드
-	 * 
-	 */
-	@Override
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-			throws Exception {
-		log.info("CommonInterceptor =====================================afterCompletion");
-		HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
-	}
 }
