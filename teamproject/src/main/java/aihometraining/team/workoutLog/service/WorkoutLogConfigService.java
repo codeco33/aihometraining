@@ -49,6 +49,7 @@ public class WorkoutLogConfigService {
 	// 운동 계획 카테고리 삭제 처리
 	public void workoutGoalCategoryDelete(String workoutGoalPlanCategoryCode) {
 		
+		workoutLogConfigMapper.workoutLogGoalPlanDelete(workoutGoalPlanCategoryCode);
 		workoutLogConfigMapper.workoutLogCategoryDelete(workoutGoalPlanCategoryCode);
 		
 	}
