@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import aihometraining.team.dto.ChallengeCategory;
 import aihometraining.team.dto.ChallengeGather;
+import aihometraining.team.dto.ChallengePointGive;
 import aihometraining.team.dto.ChallengeSetting;
 import aihometraining.team.dto.EClassCategorySmall;
 
@@ -75,4 +76,7 @@ public interface ChallengeConfigMapper {
 	
 	//진행 챌린지 목록 조회
 	public List<ChallengeGather> getChallengeIngList();
+	
+	//챌린지 포인트 관리 목록 조회
+	public List<ChallengePointGive> getChallengePointList();
 }

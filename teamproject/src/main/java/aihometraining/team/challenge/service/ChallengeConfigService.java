@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import aihometraining.team.challenge.mapper.ChallengeConfigMapper;
 import aihometraining.team.dto.ChallengeCategory;
 import aihometraining.team.dto.ChallengeGather;
+import aihometraining.team.dto.ChallengePointGive;
 import aihometraining.team.dto.ChallengeSetting;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.mapper.CommonMapper;
@@ -164,6 +165,15 @@ public class ChallengeConfigService {
 		List<ChallengeGather> challengeIngList = challengeConfigMapper.getChallengeIngList();
 		
 		return challengeIngList;
+		
+	}
+	
+	//챌린지 포인트 관리 목록 조회
+	public List<ChallengePointGive> getChallengePointList() {
+		
+		List<ChallengePointGive> pointList = challengeConfigMapper.getChallengePointList();
+		
+		return pointList;
 		
 	}
 }

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import aihometraining.team.challenge.service.ChallengeConfigService;
 import aihometraining.team.dto.ChallengeCategory;
 import aihometraining.team.dto.ChallengeGather;
+import aihometraining.team.dto.ChallengePointGive;
 import aihometraining.team.dto.ChallengeSetting;
 import aihometraining.team.dto.EClassCategorySmall;
 
@@ -275,8 +276,14 @@ public class ChallengeConfigController {
 	@GetMapping("/challengePoint")
 	public String challengePoint(Model model) {
 		
+		//챌린지 포인트 관리 목록 조회
+		List<ChallengePointGive> pointList = challengeConfigService.getChallengePointList();
+		
+		log.info("챌린지 포인트 목록 조회 pointList: {}", pointList);
+		
 		model.addAttribute("title", "챌린지 포인트 관리");
 		model.addAttribute("leftMenuList", "챌린지");
+		model.addAttribute("pointList", pointList);
 		
 		return "challenge/challengeConfig/challengePoint";
 		
