@@ -174,9 +174,13 @@
 		INSERT INTO member
 		( 	 memberEmail
 			,memberPw
+			,memberLevelCode
+			,memberRegDate
 		)VALUES (
 			 #{memberEmail}
 			,#{memberPw}
+			,#{memberLevelCode}
+			,CURDATE()
 		);
 	</insert>
 	

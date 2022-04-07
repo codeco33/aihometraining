@@ -415,6 +415,30 @@
 			cg.challengeGatherCode = #{challengeGatherCode};
 	</select>
 	
+	<select id="getChallengeIngList" parameterType="ChallengeGather" resultMap="challengeGatherResultMap">
+		/* 진행 챌린지 목록 조회 */
+		<![CDATA[  
+			SELECT
+				 cg.challengeGatherCode
+				,cg.memberEmail
+				,cg.challengeCategoryCode
+				,cg.challengeGatherName
+				,cc.challengeCategoryName
+				,cg.challengeGatherRegDate
+				,cg.challengeStartDate
+				,cg.challengeEndDate
+			FROM
+				challengegather AS cg
+				INNER join
+				challengecategory AS cc
+				on
+				cg.challengeCategoryCode = cc.challengeCategoryCode
+			WHERE
+				cg.challengeStartDate <= CURDATE()
+			AND
+				cg.challengeEndDate > CURDATE();
+		  ]]>
+	</select>
 	
 </mapper>	
 	

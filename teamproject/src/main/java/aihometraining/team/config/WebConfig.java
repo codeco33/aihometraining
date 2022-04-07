@@ -39,8 +39,8 @@ public class WebConfig implements WebMvcConfigurer{
 				.excludePathPatterns("/fullcalendar/**")
 				.excludePathPatterns("/todolist/**")
 				.excludePathPatterns("/")
-				.excludePathPatterns("/member/addMember")
-				.excludePathPatterns("/member/login");
+				.excludePathPatterns("/admin/addMember")
+				.excludePathPatterns("/admin/login");
 		
 		
 		WebMvcConfigurer.super.addInterceptors(registry);
