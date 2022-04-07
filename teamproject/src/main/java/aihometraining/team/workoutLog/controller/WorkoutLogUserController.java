@@ -1,6 +1,9 @@
 package aihometraining.team.workoutLog.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -186,6 +189,34 @@ public class WorkoutLogUserController {
 		
 	}
 	
+	
+	
+	
+	//달력 이벤트 가져오기
+	@GetMapping("/calendarEvents")
+	@ResponseBody
+	public List<Map<String,Object>> calendarEvents(@RequestParam Map<String, Object> paramMap) {
+		
+		System.out.println(paramMap.toString());
+		
+		List<Map<String,Object>> calList = new ArrayList<Map<String,Object>>();
+		Map<String, Object> map = null;
+		
+		map = new HashMap<String, Object>();
+		map.put("title", "삼일절");
+		map.put("start", "2022-03-01");
+		map.put("end", "2022-03-01");		
+		calList.add(map);
+		
+		map = new HashMap<String, Object>();
+		map.put("title", "삼일절1");
+		map.put("start", "2022-03-02");
+		map.put("end", "2022-03-02");		
+		calList.add(map);
+		
+		return calList;
+		
+	}
 	
 }
 
