@@ -56,7 +56,7 @@ public class ChallengeGaterController {
 		
 	}
 	
-	//ajax
+	//ajax 모집 챌린지 상세정보 Modal로
 	@GetMapping("/gatherDetail")
 	@ResponseBody
 	public List<ChallengeGatherPlan> getGatherDatail(String challengeGatherCode){
