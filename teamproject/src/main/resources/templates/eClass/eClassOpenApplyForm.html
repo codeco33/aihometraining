@@ -15,7 +15,7 @@
 				background: -webkit-linear-gradient(top, #c054ff 0%, #5274ff 100%);
 				background: linear-gradient(to bottom, #c054ff 0%, #5274ff 100%);
 				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c054ff', endColorstr='#5274ff', GradientType=0);">
-				
+ 				
 			<ul class="nav nav-tabs" id="myTab" role="tablist" style=" background-color:inherit;">
 				
 				<li class="nav-item">
@@ -28,30 +28,68 @@
 					<a class="nav-link" id="contact-tab" data-toggle="tab" href=".QnA" role="tab" aria-controls="contact" aria-selected="false">Q n A</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" id="contact-tab" data-toggle="tab" href=".Preview" role="tab" aria-controls="preview" aria-selected="false">미리보기</a>
+					<a class="nav-link" id="contact-tab" data-toggle="tab" href=".price" role="tab" aria-controls="price" aria-selected="false">금액 설정</a>
 				</li>
 				
 			</ul>
-			<form th:action="@{/EClassOpenApplyForm}">
+			
+ 			<form th:action="@{/EClassOpenApplyForm}">
 				<div class="tab-content" id="myTabContent" style="width: 100%; padding: 10px;">
-					<div class="tab-pane fade show active introduce" role="tabpanel" aria-labelledby="home-tab">
-					
+					<div class="tab-pane fade show active introduce row" role="tabpanel" aria-labelledby="home-tab">
+						<div class="col-6 col-md-6">
 							<input type="file" multiple="multiple" class="introducefile" name="introduceImg">
+						</div>
+						<div class="col-6 col-md-6">
+<!-- 							<div class="col-4">
+								<select name="eClassCategoryLargeCode" id="eClassCategoryLargeCode">
+									<option> :::: </option>
+									<th:block th:if="${not #lists.isEmpty(eClassCategoryList)}" th:each="eccl : ${eClassCategoryList}">
+										<option th:value = "${eccl.eClassCategoryList}">[[${eccl.eClassCategoryLargeName}]]</option>
+									</th:block>
+									<th:block th:nuless="${not #lists.isEmpty(eClassCategoryList)}" th:each="eccl : ${eClassCategoryList}">
+										<option>등록된 카테고리가 없습니다.</option>
+									</th:block>
+								</select>
+							</div>
+							<div class="col-4">
+								<select name="eClassCategoryMediumCode" id="eClassCategoryMediumCode">
+									<option> :::: </option>
+									<th:block th:if="${not #lists.isEmpty(eClassCategoryList)}" th:each="eccm : ${eClassCategoryList}">
+										<option th:value = "${eccm.eClassCategoryList}">[[${eccm.eClassCategoryMediumName}]]</option>
+									</th:block>
+									<th:block th:nuless="${not #lists.isEmpty(eClassCategoryList)}" th:each="eccm : ${eClassCategoryList}">
+										<option>등록된 카테고리가 없습니다.</option>
+									</th:block>
+								</select>
+							</div> -->
+							<div class="col-4">
+								<select>
+									<option> :::: </option>
+									<th:block th:if="${not #lists.isEmpty(eClassCategoryList)}" th:each="eccs : ${eClassCategoryList}">
+										<option th:value = "${eccs.eClassCategoryList}">[[${eccs.eClassCategorySmallName}]]</option>
+									</th:block>
+									<th:block th:nuless="${not #lists.isEmpty(eClassCategoryList)}" th:each="eccs : ${eClassCategoryList}">
+										<option>등록된 카테고리가 없습니다.</option>
+									</th:block>
+								</select>
+							</div>
+						</div>
+						<div>
 							<textarea rows="20" cols="" style="width: 100%;" name="introduceContent" placeholder="개설 하려는 클래스를 소개 시켜주세요"></textarea>
-
+						</div>
 					</div>
 					<div class="tab-pane fade section" role="tabpanel" aria-labelledby="profile-tab">
 						<div class="row" style="padding: 15px;">
 							<div class="col-7" id="sectionTitle">
 								<div style=" padding: 10px;">
-									<input type="text" style="width: 100%;" name="sectionTitleName" placeholder="섹션 제목을 정해주세요">
+									<input type="text" style="width: 100%;" name="sectionTitle" placeholder="섹션 제목을 정해주세요">
 								</div>
 								<div class="sectionCurriculum">
 									<div class="row" style="padding: 10px;">
 										<div class="col-8">
 											<div class="row">
 												<div class="col-6">
-													<input type="text" class="curriculumName" name="curriculumTitle" style="width: 100%;" placeholder="커리큘럼 이름을 정해주세요">
+													<input type="text" class="curriculumName" name="curriculum" style="width: 100%;" placeholder="커리큘럼 이름을 정해주세요">
 												</div>
 												<div class="col-6">
 													<input type="file" name="curriculumAddFile">
@@ -96,29 +134,8 @@
 							</div>
 						</div>
 					</div>
-					<div class="tab-pane fade Preview" role="tabpanel" aria-labelledby="Preview-tab"style="background-color: #fff;">
-						<div class="col-md-10 offset-md-1" style="padding: 15px;" th:if>
-							개설자가 넣은 클래스 소개란 이미지 또는 글
-							<div>
-								<img alt="" th:src="@{/asset/img/01_모코코콘1_07_멘탈X.png}">
-							</div>
-							<textarea rows="20" cols="" style="width: 100%; border: none;" readonly th:value="@{}"></textarea>
-						</div>
-						<div class="col-md-10 offset-md-1" style="padding: 15px;">
-							섹션
-							<div>
-								커리큘럼
-							</div>
-						</div>
-						<div class="col-md-10 offset-md-1" style="padding: 15px;">
-							Q n A
-							<div class="col-md-12">
-								Q n A 질문란
-								<div class="col-md-10 offset-md-1">
-									Q n A 답변란
-								</div>
-							</div>
-						</div>
+					<div class="tab-pane fade price" role="tabpanel" aria-labelledby="price-tab"style="background-color: #fff;">
+						<div><input type="number"style=" width: 50%;"></div>
 					</div>
 					<button type="button" class="btn" id="next">다음</button>
 					<div style="display: none;">
@@ -126,6 +143,8 @@
 					</div>
 				</div>
 			</form>
+
+
 		</div>
 	</th:block>
 	<th:block layout:fragment="customBodyScript">

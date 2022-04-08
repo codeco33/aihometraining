@@ -228,6 +228,31 @@
 				$("#workoutLogInsert").append(eClassCategorySmall);
 				$("#workoutLogInsert").submit();
 			});
+			
+			
+			
+			//회원만 일지 등록하는 처리
+			
+			var sessionLevel = '[[${session.SLEVEL}]]';
+			 
+			$('#workoutLogInsertbtn').click(function(){
+				
+				if(sessionLevel == 'levelCode001'){
+					alert('회원만 일지 등록할 수 있습니다.')
+					return false;
+				}
+				
+				
+			});
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		});
 		</script>
 		

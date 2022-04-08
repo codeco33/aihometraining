@@ -10,6 +10,8 @@ public class WorkoutGoal {
 	private String workoutGoalUpdateDate;
 	private String memberUpdateEmail;
 	
+	private Member member;
+	
 	public String getWorkoutGoalCode() {
 		return workoutGoalCode;
 	}

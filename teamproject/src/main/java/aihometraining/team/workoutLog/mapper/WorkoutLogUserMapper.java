@@ -31,5 +31,6 @@ public interface WorkoutLogUserMapper {
 	
 	//일지 등록 처리
 		public int workoutLogInsert(WorkoutLog workoutLog);
+
 		
 }
