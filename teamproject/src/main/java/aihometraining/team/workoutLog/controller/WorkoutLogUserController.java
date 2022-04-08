@@ -130,18 +130,18 @@ public class WorkoutLogUserController {
 	
 	
 	//일지 등록 처리
-	@PostMapping("/workoutLogInsert")
-	public String workoutLogInsert(WorkoutLog workoutLog, HttpSession session) {
-		
-		String sessionEmail = (String) session.getAttribute("SEMAIL");	//형변환을 해줘라
-		
-		log.info("일지 등록 폼에서 입력받은 데이터: {}", workoutLog);
-		
-		workoutLogUserService.workoutLogInsert(workoutLog, sessionEmail);
-		
-		return "redirect:/workoutLog/workoutLogUser/workoutLogMain";
-		
-	}
+		@PostMapping("/workoutLogInsert")
+		public String workoutLogInsert(WorkoutLog workoutLog, HttpSession session) {
+			
+			String sessionEmail = (String) session.getAttribute("SEMAIL");	//형변환을 해줘라
+			
+			log.info("일지 등록 폼에서 입력받은 데이터: {}", workoutLog);
+			
+			workoutLogUserService.workoutLogInsert(workoutLog, sessionEmail);
+			
+			return "redirect:/workoutLog/workoutLogUser/workoutLogMain";
+			
+		}
 	
 	
 	
