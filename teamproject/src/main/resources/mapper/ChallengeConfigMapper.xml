@@ -192,6 +192,154 @@
 			challengeCategoryCode = #{challengeCategoryCode};
 	</update>
 	
+	<delete id="reportDeleteBycateCode" parameterType="String">
+		/* 챌린지 카테고리 코드에 따른 신고내역 삭제(챌린지 카테고리 삭제처리 )*/
+		DELETE
+			cr
+		FROM
+			challengecategory AS cc
+			INNER JOIN
+			challengegather AS cg
+			on
+			cc.challengeCategoryCode = cg.challengeCategoryCode
+			INNER JOIN
+			challengegatherplan AS cp
+			on
+			cc.challengeCategoryCode = cp.challengeCategoryCode
+			INNER JOIN
+			challengeenter AS ce
+			on
+			cc.challengeCategoryCode = ce.challengeCategoryCode
+			INNER join
+			challengegatherplando AS cpd
+			on
+			cc.challengeCategoryCode = cpd.challengeCategoryCode
+			INNER JOIN
+			challengepointgive AS cpg
+			on
+			cc.challengeCategoryCode = cpg.challengeCategoryCode
+			INNER JOIN
+			challengereport AS cr
+			on
+			cc.challengeCategoryCode = cr.challengeCategoryCode
+		where
+			cc.challengeCategoryCode = #{challengeCategoryCode};
+	</delete>
+	
+	<delete id="pointDeleteBycateCode" parameterType="String">
+		DELETE
+			cpg
+		FROM
+			challengecategory AS cc
+			INNER JOIN
+			challengegather AS cg
+			on
+			cc.challengeCategoryCode = cg.challengeCategoryCode
+			INNER JOIN
+			challengegatherplan AS cp
+			on
+			cc.challengeCategoryCode = cp.challengeCategoryCode
+			INNER JOIN
+			challengeenter AS ce
+			on
+			cc.challengeCategoryCode = ce.challengeCategoryCode
+			INNER join
+			challengegatherplando AS cpd
+			on
+			cc.challengeCategoryCode = cpd.challengeCategoryCode
+			INNER JOIN
+			challengepointgive AS cpg
+			on
+			cc.challengeCategoryCode = cpg.challengeCategoryCode
+		where
+			cc.challengeCategoryCode = #{challengeCategoryCode};
+	</delete>
+	
+	<delete id="planDoDeleteBycateCode" parameterType="String">
+		DELETE
+			cpd
+		FROM
+			challengecategory AS cc
+			INNER JOIN
+			challengegather AS cg
+			on
+			cc.challengeCategoryCode = cg.challengeCategoryCode
+			INNER JOIN
+			challengegatherplan AS cp
+			on
+			cc.challengeCategoryCode = cp.challengeCategoryCode
+			INNER JOIN
+			challengeenter AS ce
+			on
+			cc.challengeCategoryCode = ce.challengeCategoryCode
+			INNER join
+			challengegatherplando AS cpd
+			on
+			cc.challengeCategoryCode = cpd.challengeCategoryCode
+		where
+			cc.challengeCategoryCode = #{challengeCategoryCode};
+	</delete>
+	
+	<delete id="enterDeleteBycateCode">
+		DELETE
+			ce
+		FROM
+			challengecategory AS cc
+			INNER JOIN
+			challengegather AS cg
+			on
+			cc.challengeCategoryCode = cg.challengeCategoryCode
+			INNER JOIN
+			challengegatherplan AS cp
+			on
+			cc.challengeCategoryCode = cp.challengeCategoryCode
+			INNER JOIN
+			challengeenter AS ce
+			on
+			cc.challengeCategoryCode = ce.challengeCategoryCode
+		where
+			cc.challengeCategoryCode = #{challengeCategoryCode};
+	</delete>
+	
+	<delete id="planDeleteBycateCode">
+		DELETE
+			cp
+		FROM
+			challengecategory AS cc
+			INNER JOIN
+			challengegather AS cg
+			on
+			cc.challengeCategoryCode = cg.challengeCategoryCode
+			INNER JOIN
+			challengegatherplan AS cp
+			on
+			cc.challengeCategoryCode = cp.challengeCategoryCode
+		where
+			cc.challengeCategoryCode = #{challengeCategoryCode};
+	</delete>
+		
+	<delete id="gatherDeleteBycateCode">
+		DELETE
+			cg
+		FROM
+			challengecategory AS cc
+			INNER JOIN
+			challengegather AS cg
+			on
+			cc.challengeCategoryCode = cg.challengeCategoryCode
+		where
+			cc.challengeCategoryCode = #{challengeCategoryCode};
+	</delete>
+	
+	<delete id="challengeCategoryDelete">
+		DELETE
+			cc
+		FROM
+			challengecategory AS cc
+		where
+			cc.challengeCategoryCode = #{challengeCategoryCode};
+	</delete>
+	
 	<insert id="challengeSettingInsert" parameterType="ChallengeSetting">
 		/* 챌린지 세팅 등록 처리 */
 		INSERT INTO challengesetting
@@ -267,6 +415,30 @@
 			cg.challengeGatherCode = #{challengeGatherCode};
 	</select>
 	
+	<select id="getChallengeIngList" parameterType="ChallengeGather" resultMap="challengeGatherResultMap">
+		/* 진행 챌린지 목록 조회 */
+		<![CDATA[  
+			SELECT
+				 cg.challengeGatherCode
+				,cg.memberEmail
+				,cg.challengeCategoryCode
+				,cg.challengeGatherName
+				,cc.challengeCategoryName
+				,cg.challengeGatherRegDate
+				,cg.challengeStartDate
+				,cg.challengeEndDate
+			FROM
+				challengegather AS cg
+				INNER join
+				challengecategory AS cc
+				on
+				cg.challengeCategoryCode = cc.challengeCategoryCode
+			WHERE
+				cg.challengeStartDate <= CURDATE()
+			AND
+				cg.challengeEndDate > CURDATE();
+		  ]]>
+	</select>
 	
 </mapper>	
 	

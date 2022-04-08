@@ -23,7 +23,7 @@ import aihometraining.team.mapper.MemberMapper;
 import aihometraining.team.service.MemberService;
 
 @Controller
-@RequestMapping("/member")
+@RequestMapping("/admin")
 public class MemberController {
 
 	
@@ -72,7 +72,7 @@ public class MemberController {
 	
 		session.invalidate();
 		
-		return "redirect:/member/login";
+		return "redirect:/admin/login";
 	}
 	
 	/* 로그인 */
@@ -111,7 +111,7 @@ public class MemberController {
 		
 		reAttr.addAttribute("result", "등록된 회원이 없습니다.");
 		
-		return "redirect:/member/login";
+		return "redirect:/admin/login";
 	}
 	
 	
@@ -136,7 +136,7 @@ public class MemberController {
 		reAttr.addAttribute("result", "회원의 정보가 일치하지 않습니다.");
 		log.info("회원 탈퇴 실패");
 		
-		return "redirect:/member/removeMember";
+		return "redirect:/admin/removeMember";
 	
 	}
 	
@@ -159,7 +159,7 @@ public class MemberController {
 	public String modifyMember(Member member) {
 		log.info("회원 수정 화면에서 입력받은 값: {}", member);
 		memberService.modifyMember(member);
-		return "redirect:/member/memberList";
+		return "redirect:/admin/memberList";
 	}
 	
 	/* 회원 수정 화면 */
@@ -196,6 +196,15 @@ public class MemberController {
 		return emailCheck;
 	}
 	
+	/* 회원 추가 정보 입력 폼 */
+	@GetMapping("/addInfo")
+	public String addInfo(Model model) {
+		
+		model.addAttribute("title", "추가 정보 입력");
+		
+		return "member/addInfo";
+		
+	}
 	
 	 /* 회원가입 폼 */
 	@GetMapping("/addMember")
@@ -218,7 +227,7 @@ public class MemberController {
 		
 		memberService.addMember(member);
 		
-		return "redirect:/member/addMember";
+		return "member/addInfo";
 	}
 	
 	/* 회원 목록 조회 */

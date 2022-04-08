@@ -8,25 +8,25 @@
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
-	    <form class="form-default" th:action="@{/member/addMember}" method="POST">
+	    <form class="form-default" th:action="@{/admin/addMember}" method="POST">
 	        <div class="login-form">
 	            <h2>회원 가입</h2>
 	            <div class="form-input">
 	                <label for="name">이메일</label>
-	                <input type="email" name="email" placeholder="﻿example@email.com">
+	                <input type="email" name="memberEmail" placeholder="﻿example@email.com">
 	            </div>
-	            <div class="form-input">
+	           <!--  <div class="form-input">
 	                <label for="name">이메일 확인</label>
-	                <input type="email" name="email" placeholder="﻿example@email.com">
-	            </div>
+	                <input type="email" placeholder="﻿example@email.com">
+	            </div> -->
 	            <div class="form-input">
 	                <label for="name">비밀번호</label>
-	                <input type="password" name="password" placeholder="********">
+	                <input type="password" name="memberPw" placeholder="********">
 	            </div>
-	            <div class="form-input">
+	            <!-- <div class="form-input">
 	                <label for="name">비밀번호 확인</label>
-	                <input type="password" name="password" placeholder="********">
-	            </div>
+	                <input type="password" placeholder="********">
+	            </div> -->
 	            <div class="form-input pt-30">
 	                <input type="submit" name="submit" value="회원 가입">
 	            </div>

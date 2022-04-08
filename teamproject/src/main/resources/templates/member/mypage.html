@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layout/userdefault}">
+	  layout:decorate="~{layout/mypagedefault}">
 	<!-- 사용자 정의 title -->
 	<th:block layout:fragment="customTitle">
 		<title th:text="${title}"></title>
@@ -13,6 +13,34 @@
 		<br><Br><br><Br><br><Br><br><Br><br><Br><br><Br><br><Br><br><Br><br><Br><br><Br><br><Br><br><Br>
 	
 	</th:block>
+	
+	<th:block layout:fragment="customBodyScript">	
+	
+	<!-- plugins -->
+	<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
+	<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+	
+	<!-- custom -->
+	<script th:src="@{/asset/js/main.js}"></script>
+	<script type="text/javascript">
+		 
+	  $(document).ready(function(){
+		  
+		$('.ripple').removeClass('active');
+		$('.tree').css('display', 'none');
+		$('.tree li').css('background','none');
+		$('.tree li a').css('font-weight',400);
+		
+		$('.ripple:first').css('background', 'rgba(184, 184, 184, 0.2)').addClass('active');
+		
+		  function deleteCookie(name) {
+			  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+			}
+		deleteCookie('menuLink');
+	  });
+	</script>
+	
+</th:block>
 	
 	
 </html>

@@ -111,7 +111,8 @@
 				
 				
 				<div id="paymentDetailBtnDiv">
-					<a th:href="@{/paymentList}"><input type="button" class="btn btn-outline btn-default" value="환불내역 목록"></a>
+					<a th:if="${layoutDeco == 'layout/default'}" th:href="@{/admin/refundList}"><input type="button" class="btn btn-outline btn-default" value="환불내역 목록"></a>
+					<a th:unless="${layoutDeco == 'layout/default'}" th:href="@{/mypage/myrefundList}"><input type="button" class="btn btn-outline btn-default" value="환불내역 목록"></a>
 				</div>
 			</div>
 		</div>

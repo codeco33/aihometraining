@@ -63,13 +63,15 @@ public class ChallengeConfigService {
 	}
 	
 	//카테고리 등록 처리
-	public int challengeCategoryInsert(ChallengeCategory challengeCategory) {
+	public int challengeCategoryInsert(ChallengeCategory challengeCategory, String sEmail) {
 		//pk컬럼에 들어갈 코드를 자동으로 만들어주는 Mapper      //pk로 쓸 db의 컬럼명                     //코드가 들어갈 db의 테이블명
 		String newCode = commonMapper.getNewCode("challengeCategoryCode", "challengecategory");
 		
+		
+		
 		//dto에 위에서 만들어진 코드를 세팅해주기
 		challengeCategory.setChallengeCategoryCode(newCode);
-		challengeCategory.setMemberEmail("id001@email.com"); //로그인 처리가 아직 안이루어져서 임의로 해놓음!
+		challengeCategory.setMemberEmail(sEmail); //로그인 처리가 아직 안이루어져서 임의로 해놓음!
 		
 		int result = challengeConfigMapper.challengeCategoryInsert(challengeCategory);
 		
@@ -78,14 +80,39 @@ public class ChallengeConfigService {
 	}
 	
 	//카테고리 수정처리
-	public int challengeCategoryUpdate(ChallengeCategory challengeCategory) {
+	public int challengeCategoryUpdate(ChallengeCategory challengeCategory, String sEmail) {
 		
-		challengeCategory.setMemberUpdateEmail("id001@email.com");//임시로 처리해둠
+		//session에서 받아온 이메일값
+		challengeCategory.setMemberUpdateEmail(sEmail);
 		
 		int result = challengeConfigMapper.challengeCategoryUpdate(challengeCategory);
 		
 		return result;
 	}
+	
+	//카테고리 삭제처리 프로세스
+		public void categoryDeleteBycateCode(String challengeCategoryCode) {
+			//챌린지 카테고리 코드에 따른 신고내역 삭제(챌린지 카테고리 삭제처리 )
+			challengeConfigMapper.reportDeleteBycateCode(challengeCategoryCode);
+			
+			//챌린지 카테고리 코드에 따른 포인트내역 삭제(챌린지 카테고리 삭제처리 )
+			challengeConfigMapper.pointDeleteBycateCode(challengeCategoryCode);
+			
+			//챌린지 카테고리 코드에 따른 실행내역 삭제(챌린지 카테고리 삭제처리 )
+			challengeConfigMapper.planDoDeleteBycateCode(challengeCategoryCode);
+			
+			//챌린지 카테고리 코드에 따른 참가내역 삭제(챌린지 카테고리 삭제처리 )
+			challengeConfigMapper.enterDeleteBycateCode(challengeCategoryCode);
+			
+			//챌린지 카테고리 코드에 따른 모집계획 내역 삭제(챌린지 카테고리 삭제처리 )
+			challengeConfigMapper.planDeleteBycateCode(challengeCategoryCode);
+			
+			//챌린지 카테고리 코드에 따른 모집내역 삭제(챌린지 카테고리 삭제처리 )
+			challengeConfigMapper.gatherDeleteBycateCode(challengeCategoryCode);
+			
+			//챌린지 카테고리 코드에 따른 카테고리 삭제(챌린지 카테고리 삭제처리 )
+			challengeConfigMapper.challengeCategoryDelete(challengeCategoryCode);
+		}
 	
 	//세팅 등록 처리
 	public void challengeSettingInsert(ChallengeSetting challengeSetting) {
@@ -128,6 +155,15 @@ public class ChallengeConfigService {
 		List<ChallengeGather> listDetail = challengeConfigMapper.getListDetailByCode(challengeGatherCode);
 		
 		return listDetail;
+		
+	}
+	
+	//진행 챌린지 목록 조회
+	public List<ChallengeGather> getChallengeIngList() {
+		
+		List<ChallengeGather> challengeIngList = challengeConfigMapper.getChallengeIngList();
+		
+		return challengeIngList;
 		
 	}
 }

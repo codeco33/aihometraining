@@ -153,7 +153,8 @@
 				
 				
 				<div id="paymentDetailBtnDiv">
-					<a th:href="@{/paymentList}"><input type="button" class="btn btn-outline btn-default" value="결제내역 목록"></a>
+					<a th:if="${layoutDeco == 'layout/default'}" th:href="@{/admin/paymentList}"><input type="button" class="btn btn-outline btn-default" value="결제내역 목록"></a>
+					<a th:unless="${layoutDeco == 'layout/default'}" th:href="@{/mypage/mypaymentList}"><input type="button" class="btn btn-outline btn-default" value="결제내역 목록"></a>
 				</div>
 			</div>
 		</div>
