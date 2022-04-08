@@ -9,8 +9,9 @@
 
 <!-- 사용자 정의 Css -->
 <style type="text/css">
-	#eClassTakeSection{
+	#paymentSection{
 		padding-top: 150px;
+		padding-bottom: 50px;
 	}
 	.header-bottom {
 		background: #c054ff;
@@ -18,15 +19,127 @@
 	    background: -webkit-linear-gradient(top, #c054ff 0%, #5274ff 100%);
 	    background: linear-gradient(to bottom, #c054ff 0%, #5274ff 100%);
 	}
-	@media (min-width: 576px){
-	.justify-content-sm-center {
-	    -ms-flex-pack: center!important;
-	    justify-content: center!important;
+	
+	#paymentSection .row {
+		margin-left: 10px !important;
+		margin-right: 10px !important;
+	}
+	.captionTitle {
+		/* border-bottom: 1px solid #f0e9ff; */
+		padding-bottom: 10px;
+		font-weight: 700;
+	}
+	.services-area .single-services {
+		box-shadow: 3px 5px 20px rgb(66 85 164 / 20%);
+		display: block;
+	}
+	#paymentForm .inputTitle {
+		color: #96979f;
+		font-size: 13px;
+	}
+
+	#paymentForm .form-control-plaintext {
+		font-size: 15px;
+		font-family: "Mulish", sans-serif;
+		line-height: 1.5;
+		padding: 0;
+		font-weight: 550;
+		color: #565860;
+	}
+	.form-border {
+		background: #f0e9ff;
+		height: 1px;
+		margin-bottom: 25px;
+	}
+	.features-caption {
+		padding: 0 15px;
+	}
+	label.error {
+		color: red;
+		font-size: 14px;
+	    margin-top: 8px;
+	    position: absolute;
+	    left: 320px;
+	}
+	@media (max-width: 1000px) {
+	label.error {
+		color: red;
+		font-size: 14px;
+	    margin-top: 8px;
+	    position: absolute;
+	    left: 50px;
+	    top: 570px;
 	}
 	}
-	#eClassTakeSection .row {
-		margin-left: 0 !important;
-		margin-right: 0 !important;
+	input.error:focus {
+		border-color: #dc3545;
+    	box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
+	}
+	.phoneNum {
+		line-height: 40px;
+	    border: none;
+	    outline: none;
+	    background: #f9f9ff;
+	    padding: 0 20px;
+	    width: 150px !important;
+	}
+	.memberPhoneBtn {
+		height: 40px;
+		padding: 0 !important;
+		font-size: 13px;
+		margin-left: 5px;
+		width: 100px;
+		background-color: #c3b8b2;
+	}
+	.memberPhoneBtn.active {
+		background-color: #FF9F67;
+	}
+	.memberPhoneBtn.active:hover {
+		 transition: .3s;
+		 background-color: #C86FFF !important;
+	}
+	.phoneNum-formgroup {
+		display: flex;
+		margin-bottom: 10px;
+	}
+	input[name="memberPhone"]{
+		background: none;
+		padding: 0;
+		width: fit-content;
+	}
+	.allPointUse {
+		margin-left: 15px;
+	}
+	.paymentMethodBtn {
+		width: 100%;
+	}
+	.paymentMethodBtn:hover {
+		color: #fff !important;
+		background: #1f2b7b;
+	}
+	.paymentMethodBtn.active {
+		color: #fff !important;
+		background: #1f2b7b;
+	}
+	#totalPriceDiv{
+		box-shadow: none !important;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0;
+		margin-top: 50px;
+	}
+	#totalPriceStrDiv span:first-child {
+		color: black;
+	}
+	#totalPriceStrDiv span:last-child {
+		font-size: 36px !important;
+	    font-weight: bold !important;
+	    color: #696dff !important;
+	    margin-left: 20px;
+	}
+	#paymentBtn {
+		width: 50% !important;
 	}
 </style>
 <body>
@@ -36,57 +149,98 @@
 	<!-- end: Header -->
 	 
    	<!-- Courses area start -->
-	<div id="eClassTakeSection" class="fix services-area services-area2">
+	<div id="paymentSection" class="fix services-area services-area2">
 		<div class="row justify-content-center">
-			<div class="col-md-7">
+			<form id="paymentForm" class="col-md-7" th:action="@{/payment}" method="post">
+				
 				<div class="single-services mb-30">
 					<div class="features-caption">
-						<h3>수강기간 선택</h3>
-						<div class="d-flex justify-content-start">
-							<div class="primary-radio">
-								<input type="checkbox" id="radio1" name="radios"> <label
-									for="radio1"></label>
-							</div>
-							<label for="radio1"> 1개월</label>
+						<h3 class="captionTitle">결제 정보</h3>
+						
+						<!-- 클래스정보 -->
+						<div class="form-group">
+							<label class="inputTitle">결제상품이름</label>
+							<input type="text" name="paymentOrderName" class="form-control-plaintext" readonly value="운동클래스/챌린지 이름">
 						</div>
-						<div class="d-flex justify-content-start">
-							<div class="primary-radio">
-								<input type="checkbox" id="radio2" name="radios"> <label
-									for="radio2"></label>
+						<div class="form-group">
+							<label class="inputTitle">금액</label>
+							<input type="text" name="eClassPrice" class="form-control-plaintext" readonly value="27,000">
+						</div>
+						<div class="form-group">
+							<label class="inputTitle">(운동클래스라면)정기결제 기간</label>
+							<input type="text" name="eClassApprovedSetDate" class="form-control-plaintext" readonly value="3개월">
+						</div>
+					
+						<div class="form-group form-border"></div>
+						
+						<!-- 수강신청자 정보 -->
+						<div class="form-group">
+							<label class="inputTitle">이름</label>
+							<input type="text" name="memberName" class="form-control-plaintext" readonly value="홍길동">
+						</div>
+						<div class="form-group">
+							<label class="inputTitle">이메일</label>
+							<input type="text" name="memberEmail" class="form-control-plaintext" readonly value="id004@email.com">
+						</div>
+						<div class="form-group phoneCertifyDiv">
+							<label class="inputTitle">휴대폰 번호</label><br>
+							<div class="phoneNum-formgroup">
+								<input type="text" name="memberPhone" class="phoneNum" readonly value="010-0000-0004">
+								<input type="button" id="certifyNumSendBtn" class="btn memberPhoneBtn active" value="인증번호 전송">
 							</div>
-							<label for="radio2"> 커리큘럼 기간동안</label>
+							<div class="phoneNum-formgroup" id="phoneCertifyDiv">
+								<input type="text" name="memberPhoneCertify" class="phoneNum">
+								<input type="button" id="AuthenticateBtn" class="btn memberPhoneBtn" value="인증하기">
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		
-			<div class="col-md-7">
-				<div class="single-services mb-30">
-					<div class="features-caption">
-						<h3>결제 금액</h3>
-						<p>The automated process all your website tasks.</p>
-					</div>
-				</div>
-			</div>
-	
-			<div class="col-md-7">
-				<div class="single-services mb-30">
-					<div class="features-caption">
-						<h3>휴대폰 번호 입력</h3>
-						<p>The automated process all your website tasks.</p>
-					</div>
-				</div>
-			</div>
-	
-			<div class="col-md-7">
-				<div class="single-services mb-30">
-					<div class="features-caption">
-						<h3>결제 수단</h3>
-						<p>The automated process all your website tasks.</p>
-					</div>
-				</div>
-			</div>
 			
+			
+				<div class="single-services mb-30">
+					<div class="features-caption">
+						<h3 class="captionTitle">할인 적용</h3>
+						<div class="form-group">
+							<label class="inputTitle">포인트 사용</label>
+							<div class="phoneNum-formgroup">
+								<p>보유 포인트 : <span class="finalPoint">2,000</span>p</p><label><input type="checkbox" class="allPointUse"> 포인트 전체사용</label>
+							</div>
+							<div class="phoneNum-formgrou">
+								<input type="text" name="pointUseInput" class="phoneNum">
+								<input type="button" id="pointUseBtn" class="btn memberPhoneBtn active" value="적용">
+							</div>
+						</div>
+					
+					</div>
+				</div>
+				
+				<div class="single-services mb-30">
+					<div class="features-caption">
+						<h3 class="captionTitle">결제 수단</h3>
+						<div class="form-group row">
+							<label class="col-xl-4 col-md-6 paymentMethodLabel">
+								<a class="genric-btn primary-border circle arrow paymentMethodBtn active"><input type="radio" name="paymentMethod" value="카드" checked><span>신용/체크카드</span></a>
+							</label>
+							<label class="col-xl-4 col-md-6 paymentMethodLabel">
+								<a class="genric-btn primary-border circle arrow paymentMethodBtn"><input type="radio" name="paymentMethod" value="카드"><span>가상계좌</span></a>
+							</label>
+							<label class="col-xl-4 col-md-6 paymentMethodLabel">
+								<a class="genric-btn primary-border circle arrow paymentMethodBtn"><input type="radio" name="paymentMethod" value="카드"><span>카카오페이</span></a>
+							</label>
+						</div>
+					
+					</div>
+				</div>
+				<div id="totalPriceDiv" class="single-services mb-30">
+					<div id="totalPriceStrDiv">
+						<span>총 결제금액</span>
+						<span>27,000</span>
+					</div>
+					<button id="paymentBtn" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit">결제하기</button>
+				</div>
+				
+				
+			</form>
 		</div>
 	</div>
         <!-- Courses area End -->     	
@@ -98,6 +252,55 @@
 	</div>
 
 	<th:block th:replace="userfragments/userJavaScripts :: userJSFragment"></th:block>
-	<th:block layout:fragment="customBodyScript"></th:block>
+	<th:block layout:fragment="customBodyScript">
+		<script type="text/javascript">
+		 
+			$(function(){
+				 $('#paymentForm').validate({
+			            rules: {
+			            	memberPhoneCertify: {
+			                    required: true,
+			                    digits : true
+			                },
+			               
+			            },
+			            messages: {
+			            	memberPhoneCertify: {
+			                    required: "*인증번호를 입력해주세요",
+			                    digits : "*전송된 인증번호를 입력해주세요"
+			                },
+			               
+			               
+			            }
+				});
+				 
+				$('.paymentMethodBtn').click(function(){
+					 if($(this).children('input[type="radio"]').prop('checked') == true){
+						//$(this).prarents('div .row').find('.paymentMethodBtn').removeClass('.paymentMethodBtn:hover');
+					 	//$(this).css('background','#1f2b7b').css('color','#fff');
+					 	$(this).parents('div .row').find('.paymentMethodBtn').removeClass('active');
+					 	$(this).addClass("active"); 
+					 }
+					 
+				 });
+				
+				$('.allPointUse').click(function(){
+					var point = $('.finalPoint').text();
+					if($(this).prop('checked') == true){
+						$('input[name="pointUseInput"]').val(point);
+					}else {
+						$('input[name="pointUseInput"]').val('');
+					}
+				});
+				
+				//포인트 잔액 바뀌면 체크버튼 풀리게하기
+
+				
+				 
+				
+				 
+			});
+		</script>
+	</th:block>
 </body>
 </html>

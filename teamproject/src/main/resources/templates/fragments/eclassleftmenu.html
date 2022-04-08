@@ -4,29 +4,19 @@
             <div id="left-menu" th:fragment="eclassleftmenuFragment">
               <div class="sub-left-menu scroll">
                 <ul class="nav nav-list">
-                    <li><div class="left-bg"></div></li>
                     <li class="time">
                       <h1 class="animated fadeInLeft">21:00</h1>
                       <p class="animated fadeInRight">Sat,October 1st 2029</p>
                     </li>
-                    <li class="active ripple">
-                      <a class="tree-toggle nav-header"><span class="fa-home fa"></span> 운동 클래스 관리
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                          <li><a href="dashboard-v1.html">회원 목록</a></li>                       
-                      </ul>
+                    <li class="ripple">
+	                    <a th:href="@{/eclassadmin}">
+	                   		<span class="fa fa-home"></span> 홈
+	                    </a>
                     </li>
                     <li class="ripple">
-                      <a class="tree-toggle nav-header">
-                        <span class="fa-diamond fa"></span> 운동클래스
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                        <li><a th:href="@{/myApplyList}">내가 신청한 운동클래스</a></li>
-                        <li><a th:href="@{/myeClassList}">나의 운동 클래스</a></li>
-                        <li><a href="boxed.html"></a></li>
-                      </ul>
+                    <a th:href="@{/eclassadmin/studentList}">
+                   		<span class="fa fa fa-users"></span> 수강생 목록
+                    </a>
                     </li>
                     <li class="ripple">
                       <a class="tree-toggle nav-header">
@@ -93,7 +83,6 @@
                    		<span class="fa fa-calendar-o"></span>Calendar
                     </a>
                     </li>                   
-                    <li><a href="credits.html">LogOut</a></li>
                   </ul>
                 </div>
             </div>
