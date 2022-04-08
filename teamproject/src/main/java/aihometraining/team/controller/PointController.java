@@ -3,8 +3,10 @@ package aihometraining.team.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/admin")
 public class PointController {
 	@GetMapping("/givePoint")
 	public String givePoint(Model model) {
