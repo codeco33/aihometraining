@@ -6,17 +6,18 @@
 	<th:block layout:fragment="customTitle">
 		<title th:text="${title}"></title>
 	</th:block>
-	
+
 	<th:block layout:fragment="customContents">
-		<div class="container-fluid">
-			<ul class="nav nav-tabs" 
-				id="myTab"
-				role="tablist"
-				style="	background: #c054ff;
-						background: -moz-linear-gradient(top, #c054ff 0%, #5274ff 100%);
-						background: -webkit-linear-gradient(top, #c054ff 0%, #5274ff 100%);
-						background: linear-gradient(to bottom, #c054ff 0%, #5274ff 100%);
-						filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c054ff', endColorstr='#5274ff', GradientType=0); ">
+		<div 	class="container-fluid" 
+				style="border: solid 1px; 
+				background: #c054ff;
+				background: -moz-linear-gradient(top, #c054ff 0%, #5274ff 100%);
+				background: -webkit-linear-gradient(top, #c054ff 0%, #5274ff 100%);
+				background: linear-gradient(to bottom, #c054ff 0%, #5274ff 100%);
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c054ff', endColorstr='#5274ff', GradientType=0);">
+ 				
+			<ul class="nav nav-tabs" id="myTab" role="tablist" style=" background-color:inherit;">
+				
 				<li class="nav-item">
 					<a class="nav-link active" id="home-tab" data-toggle="tab" href=".introduce" role="tab" aria-controls="home" aria-selected="true">운동소개</a>
 				</li>
@@ -26,33 +27,127 @@
 				<li class="nav-item">
 					<a class="nav-link" id="contact-tab" data-toggle="tab" href=".QnA" role="tab" aria-controls="contact" aria-selected="false">Q n A</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="contact-tab" data-toggle="tab" href=".price" role="tab" aria-controls="price" aria-selected="false">금액 설정</a>
+				</li>
+				
 			</ul>
-			<div class="tab-content" id="myTabContent" style="width: 100%; padding: 10px;">
-				<div class="tab-pane fade show active introduce" role="tabpanel" aria-labelledby="home-tab">
-					<input type="file" multiple="multiple">
-					<textarea rows="20" cols="" style="width: 100%;"></textarea>
-				</div>
-				<div class="tab-pane fade section row" role="tabpanel" aria-labelledby="profile-tab">
-					<div class="col-md-8" style="padding: 15px;">
-						<input type="text" class="sectionTitle">
-						<div class="sectionCurriculum">
-							<input type="text" class="curriculum">
-							<input type="file">
+			
+ 			<form th:action="@{/EClassOpenApplyForm}">
+				<div class="tab-content" id="myTabContent" style="width: 100%; padding: 10px;">
+					<div class="tab-pane fade show active introduce row" role="tabpanel" aria-labelledby="home-tab">
+						<div class="col-6 col-md-6">
+							<input type="file" multiple="multiple" class="introducefile" name="introduceImg">
+						</div>
+						<div class="col-6 col-md-6">
+<!-- 							<div class="col-4">
+								<select name="eClassCategoryLargeCode" id="eClassCategoryLargeCode">
+									<option> :::: </option>
+									<th:block th:if="${not #lists.isEmpty(eClassCategoryList)}" th:each="eccl : ${eClassCategoryList}">
+										<option th:value = "${eccl.eClassCategoryList}">[[${eccl.eClassCategoryLargeName}]]</option>
+									</th:block>
+									<th:block th:nuless="${not #lists.isEmpty(eClassCategoryList)}" th:each="eccl : ${eClassCategoryList}">
+										<option>등록된 카테고리가 없습니다.</option>
+									</th:block>
+								</select>
+							</div>
+							<div class="col-4">
+								<select name="eClassCategoryMediumCode" id="eClassCategoryMediumCode">
+									<option> :::: </option>
+									<th:block th:if="${not #lists.isEmpty(eClassCategoryList)}" th:each="eccm : ${eClassCategoryList}">
+										<option th:value = "${eccm.eClassCategoryList}">[[${eccm.eClassCategoryMediumName}]]</option>
+									</th:block>
+									<th:block th:nuless="${not #lists.isEmpty(eClassCategoryList)}" th:each="eccm : ${eClassCategoryList}">
+										<option>등록된 카테고리가 없습니다.</option>
+									</th:block>
+								</select>
+							</div> -->
+							<div class="col-4">
+								<select>
+									<option> :::: </option>
+									<th:block th:if="${not #lists.isEmpty(eClassCategoryList)}" th:each="eccs : ${eClassCategoryList}">
+										<option th:value = "${eccs.eClassCategoryList}">[[${eccs.eClassCategorySmallName}]]</option>
+									</th:block>
+									<th:block th:nuless="${not #lists.isEmpty(eClassCategoryList)}" th:each="eccs : ${eClassCategoryList}">
+										<option>등록된 카테고리가 없습니다.</option>
+									</th:block>
+								</select>
+							</div>
 						</div>
 						<div>
-							<button type="button" class="curriculumAdd btn btn4">커리큘럼 추가</button>
-							<button type="button" class="curriculumDle btn btn4">커리큘럼 삭제</button>
+							<textarea rows="20" cols="" style="width: 100%;" name="introduceContent" placeholder="개설 하려는 클래스를 소개 시켜주세요"></textarea>
 						</div>
 					</div>
-					<div class="col-md-2">
-						<button type="button" class="titleAdd btn btn4">섹션 추가</button>
+					<div class="tab-pane fade section" role="tabpanel" aria-labelledby="profile-tab">
+						<div class="row" style="padding: 15px;">
+							<div class="col-7" id="sectionTitle">
+								<div style=" padding: 10px;">
+									<input type="text" style="width: 100%;" name="sectionTitle" placeholder="섹션 제목을 정해주세요">
+								</div>
+								<div class="sectionCurriculum">
+									<div class="row" style="padding: 10px;">
+										<div class="col-8">
+											<div class="row">
+												<div class="col-6">
+													<input type="text" class="curriculumName" name="curriculum" style="width: 100%;" placeholder="커리큘럼 이름을 정해주세요">
+												</div>
+												<div class="col-6">
+													<input type="file" name="curriculumAddFile">
+												</div>
+											</div>
+										</div>
+										<div class="col-4">
+											<div>
+												<button type="button" class="curriculumAdd btn btn4">커리큘럼 추가</button>
+												<button type="button" class="curriculumDle btn btn4">커리큘럼 삭제</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-2" style="padding: 10px;">
+								<button type="button" class="titleAdd btn btn4" id="sectionTitleBtn">섹션 추가</button>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade QnA" role="tabpanel" aria-labelledby="contact-tab">
+						<div class="row">
+							<div class="col-8">
+								<div class="Question&Answer">
+									<div class="row">
+										<div class="col-10">
+											<div style="padding: 10px;">
+												<input type="text" style="width: 100%; border: solid 1px;" name="question" placeholder="자주 묻는 질문을 등록해주세요">
+											</div>
+											<div class="row" style="padding: 10px;">
+												<div class="col-10 offset-1">
+													<input type="text" style="width: 100%; border: solid 1px;" name="answer" placeholder="어떻게 답하실건가요?">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-4">
+								<button type="button" class="questionAdd btn btn4">질답 추가</button>
+								<button type="button" class="questionDle btn btn4">질답 삭제</button>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade price" role="tabpanel" aria-labelledby="price-tab"style="background-color: #fff;">
+						<div><input type="number"style=" width: 50%;"></div>
+					</div>
+					<button type="button" class="btn" id="next">다음</button>
+					<div style="display: none;">
+					<button type="submit" class="btn">개설하기</button>
 					</div>
 				</div>
-				<div class="tab-pane fade QnA" role="tabpanel" aria-labelledby="contact-tab">
-					
-				</div>
-			</div>
+			</form>
+
+
 		</div>
 	</th:block>
-	
+	<th:block layout:fragment="customBodyScript">
+		<script th:src="@{/assets/js/eClassNav.js}"></script>
+	</th:block>
 </html>

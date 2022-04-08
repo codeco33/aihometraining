@@ -9,13 +9,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import aihometraining.team.dto.WorkoutLog;
 import aihometraining.team.dto.WorkoutLogCategory;
+import aihometraining.team.workoutLog.mapper.WorkoutLogConfigMapper;
 import aihometraining.team.workoutLog.service.WorkoutLogConfigService;
 
 @Controller
-@RequestMapping("/workoutLog/workoutLogConfig")
+@RequestMapping("/admin")
 public class WorkoutLogConfigController {
 	
 	
@@ -24,9 +27,11 @@ public class WorkoutLogConfigController {
 	
 	//DI 의존성 주입 생성자 메소드 주입방식
 	private WorkoutLogConfigService workoutLogConfigService;
-	
-	public WorkoutLogConfigController(WorkoutLogConfigService workoutLogConfigService) {
+	private WorkoutLogConfigMapper workoutLogConfigMapper;
+	 
+	public WorkoutLogConfigController(WorkoutLogConfigService workoutLogConfigService, WorkoutLogConfigMapper workoutLogConfigMapper) {
 		this.workoutLogConfigService = workoutLogConfigService;
+		this.workoutLogConfigMapper = workoutLogConfigMapper;
 		
 	}
 	
@@ -80,6 +85,37 @@ public class WorkoutLogConfigController {
 		
 		return "workoutLog/workoutLogConfig/workoutCategoryInsert";
 	}
+	
+	// A-jax : 운동 계획 카테고리 수정 모달에 데이터값 가져오기
+	@PostMapping("/workoutLogCategoryModal")
+	@ResponseBody
+	public WorkoutLogCategory getWorkoutLogCategoryModal(@RequestParam(name="workoutLogCategoryCode", required = false) String workoutGoalPlanCategoryCode){
+		
+		WorkoutLogCategory workoutLogCategoryModal = workoutLogConfigMapper.getWorkoutLogCategoryModal(workoutGoalPlanCategoryCode);
+		
+		log.info("운동 계획 카테고리명 조회  workoutGoalPlanCategoryCode : {}", workoutGoalPlanCategoryCode);
+		
+		return workoutLogCategoryModal;
+	}
+	
+	/*
+	 * //A-jax : 운동 계획 카테고리명 수정처리
+	 * 
+	 * @PostMapping("/workoutLogCategoryUpdateModal")
+	 * 
+	 * @ResponseBody public WorkoutLogCategory
+	 * workoutLogCategoryUpdateModal(@RequestParam(name="workoutLogCategoryCode",
+	 * required = false) String workoutGoalPlanCategoryCode){
+	 * 
+	 * WorkoutLogCategory workoutLogCategoryUpdateModal =
+	 * workoutLogConfigMapper.workoutLogCategoryUpdateModal(
+	 * workoutGoalPlanCategoryCode);
+	 * 
+	 * log.info("운동 계획 카테고리명 수정  workoutGoalPlanCategoryCode : {}",
+	 * workoutGoalPlanCategoryCode);
+	 * 
+	 * return workoutLogCategoryUpdateModal; }
+	 */
 	
 	//운동 계획 카테고리 수정
 	@GetMapping("/workoutCategoryUpdate")

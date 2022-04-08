@@ -8,7 +8,7 @@
 	</th:block>
 	<th:block layout:fragment="customContents">
         <!-- Login -->
-        <form id="loginForm" th:action="@{/member/login}" method="post">
+        <form id="loginForm" th:action="@{/admin/login}" method="post">
             <div class="login-form">
                 <h2>로그인</h2>
                 <div class="form-input">
@@ -25,7 +25,7 @@
                 <!-- Forget Password -->
                 <a th:href="@{#}" class="forget">비밀번호 찾기</a>
                 <!-- Forget Password -->
-                <a th:href="@{/member/addMember}" class="registration">회원 가입</a>
+                <a th:href="@{/admin/addMember}" class="registration">회원 가입</a>
             </div>
         </form>
         <!-- /end login form -->

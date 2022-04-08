@@ -28,11 +28,9 @@ public class EClassCategoryController {
 	
 	//DI 의존성 주입 생성자 메소드 주입방식
 	private EClassCategoryService eClassCategoryService;
-	private EClassCategoryMapper eClassCategoryMapper;
 	
 	public EClassCategoryController(EClassCategoryService eClassCategoryService, EClassCategoryMapper eClassCategoryMapper) {
 		this.eClassCategoryService = eClassCategoryService;
-		this.eClassCategoryMapper = eClassCategoryMapper;
 	}
 	
 	/*

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/default}">
+	layout:decorate="~{${layoutDeco}}">
 
 <!-- 사용자 정의 title -->
 <th:block layout:fragment="customTitle">
@@ -37,7 +37,10 @@
 		}
 </style>
 </th:block>
-
+<th:block th:with="level=${role}">
+	<div th:if="${role eq 'user' }"  layout:decorate="~{layout/mypagedefault}" th:replace="fragments/mypageleftmenu :: mypageleftmenuFragment"></div>
+	<div th:if="${role eq 'admin' }" layout:decorate="~{layout/default}" th:replace="fragments/leftmenu :: leftmenuFragment"></div>
+</th:block>
 <th:block layout:fragment="customContents">
 	<div class="col-md-12">
 		<div class="panel">
@@ -48,7 +51,6 @@
 					<div class="title">
 						<h4>
 							<span class="fa fa-angle-right"></span> 주문정보
-							<input type="text" th:attr="value=${layoutDeco}"></span>
 						</h4>
 					</div>
 					<table class="table">
@@ -151,7 +153,8 @@
 				
 				
 				<div id="paymentDetailBtnDiv">
-					<a th:href="@{/paymentList}"><input type="button" class="btn btn-outline btn-default" value="결제내역 목록"></a>
+					<a th:if="${layoutDeco == 'layout/default'}" th:href="@{/admin/paymentList}"><input type="button" class="btn btn-outline btn-default" value="결제내역 목록"></a>
+					<a th:unless="${layoutDeco == 'layout/default'}" th:href="@{/mypage/mypaymentList}"><input type="button" class="btn btn-outline btn-default" value="결제내역 목록"></a>
 				</div>
 			</div>
 		</div>
