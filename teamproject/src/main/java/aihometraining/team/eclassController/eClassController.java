@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import aihometraining.team.challenge.controller.ChallengeConfigController;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.EClassIntroduce;
 import aihometraining.team.eclassService.eClassService;
@@ -80,7 +79,7 @@ public class eClassController {
 		
 		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassIntroduce);
 		//1 eClassIntroduceCode 자동생성
-		eClassIntroduce.seteClassApprovedCode("eClassIntroduceCode");	//2 개설된 클래스 코드
+		//2 개설된 클래스 코드
 		eClassIntroduce.setMemberEmail("id004@email.com");
 		eClassService.EClassIntroduceInsert(eClassIntroduce);
 		

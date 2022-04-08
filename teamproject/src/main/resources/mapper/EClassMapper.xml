@@ -73,17 +73,32 @@
 	
 	<resultMap type="EClassIntroduce" id="eClassIntroduceResultMap">
 	
-		<result column="eClassIntroduceCode" 		property="eClassCategorySmallCode"/>
-		<result column="eClassApprovedCode"			property="eClassCategorySmallName"/>
-		<result column="memberEmail" 				property="eClassCategoryMediumCode"/>
-		<result column="eClassIntroduceContent" 	property="eClassCategoryMediumName"/>
-		<result column="memberUpdateEmail" 			property="eClassCategoryLargeCode"/>
-		<result column="eClassIntroducetDate"		property="eClassCategoryLargeName"/>
+		<result column="eClassIntroduceCode" 		property="eClassIntroduceCode"/>
+		<result column="memberEmail" 				property="memberEmail"/>
+		<result column="eClassIntroduceContent" 	property="eClassIntroduceContent"/>
+		<result column="memberUpdateEmail" 			property="memberUpdateEmail"/>
+		<result column="eClassIntroducetDate"		property="eClassIntroducetDate"/>
+		<result column="eClassIntroduceImg"			property="eClassIntroduceImg"/>
 		
 	</resultMap>
 	
 	<insert id="EClassIntroduceInsert" parameterType="EClassIntroduce">
-		
+	/* introduce 등록 처리 */
+		INSERT INTO eclassintroduce (
+			 eClassIntroduceCode
+			, memberEmail
+			, eClassIntroduceContent
+			, memberUpdateEmail
+			, eClassIntroducetDate
+			, eClassIntroduceImg
+		)VALUES (
+			  #{eClassIntroduceCode}
+			, #{memberEmail}
+			, #{eClassIntroduceContent}
+			, null
+			, NOW()
+			, NULL
+		);
 	</insert>
 	
 	<select id="eClassCategoryList" resultType="EClassCategorySmall">

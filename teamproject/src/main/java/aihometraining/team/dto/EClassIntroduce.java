@@ -4,22 +4,17 @@ import java.sql.Date;
 
 public class EClassIntroduce {
 	private String eClassIntroduceCode;
-	private String eClassApprovedCode;
 	private String memberEmail;
 	private String eClassIntroduceContent;
 	private String memberUpdateEmail;
 	private Date eClassIntroducetDate;
+	private String eClassIntroduceImg;
+	
 	public String geteClassIntroduceCode() {
 		return eClassIntroduceCode;
 	}
 	public void seteClassIntroduceCode(String eClassIntroduceCode) {
 		this.eClassIntroduceCode = eClassIntroduceCode;
-	}
-	public String geteClassApprovedCode() {
-		return eClassApprovedCode;
-	}
-	public void seteClassApprovedCode(String eClassApprovedCode) {
-		this.eClassApprovedCode = eClassApprovedCode;
 	}
 	public String getMemberEmail() {
 		return memberEmail;
@@ -45,11 +40,17 @@ public class EClassIntroduce {
 	public void seteClassIntroducetDate(Date eClassIntroducetDate) {
 		this.eClassIntroducetDate = eClassIntroducetDate;
 	}
+	public String geteClassIntroduceImg() {
+		return eClassIntroduceImg;
+	}
+	public void seteClassIntroduceImg(String eClassIntroduceImg) {
+		this.eClassIntroduceImg = eClassIntroduceImg;
+	}
 	@Override
 	public String toString() {
-		return "EClassIntroduce [eClassIntroduceCode=" + eClassIntroduceCode + ", eClassApprovedCode="
-				+ eClassApprovedCode + ", memberEmail=" + memberEmail + ", eClassIntroduceContent="
-				+ eClassIntroduceContent + ", memberUpdateEmail=" + memberUpdateEmail + ", eClassIntroducetDate="
-				+ eClassIntroducetDate + "]";
+		return "EClassIntroduce [eClassIntroduceCode=" + eClassIntroduceCode + ", memberEmail=" + memberEmail
+				+ ", eClassIntroduceContent=" + eClassIntroduceContent + ", memberUpdateEmail=" + memberUpdateEmail
+				+ ", eClassIntroducetDate=" + eClassIntroducetDate + ", eClassIntroduceImg=" + eClassIntroduceImg + "]";
 	}
+	
 }

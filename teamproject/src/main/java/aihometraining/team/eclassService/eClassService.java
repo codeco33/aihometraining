@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import aihometraining.team.challenge.controller.ChallengeConfigController;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.EClassIntroduce;
 import aihometraining.team.mapper.CommonMapper;
@@ -37,8 +36,9 @@ public class eClassService {
 	//클래스 신청 폼 introduce등록처리
 	public int EClassIntroduceInsert(EClassIntroduce eClassIntroduce) {
 		
-		String introduceCode = (commonMapper.getNewCode("eClassIntroduceCode", "introduceCode"));
-		log.info("EClassIntroduceInsert introduceCode 데이터: {}", introduceCode);
+		log.info("EClassIntroduceInsert eClassIntroduce 데이터: {}", eClassIntroduce);
+		String introduceCode = commonMapper.getNewCode("eClassIntroduceCode", "eclassintroduce");
+		log.info("eClassService EClassIntroduceInsert introduceCode",introduceCode);
 		eClassIntroduce.seteClassIntroduceCode(introduceCode);
 		
 		int result = eClassMapper.EClassIntroduceInsert(eClassIntroduce);
