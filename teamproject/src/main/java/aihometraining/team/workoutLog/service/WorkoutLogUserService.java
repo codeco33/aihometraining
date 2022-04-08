@@ -31,11 +31,11 @@ public class WorkoutLogUserService {
 	}
 	
 	// 일지 등록 처리
-	public int workoutLogInsert(WorkoutLog workoutLog) {
+	public int workoutLogInsert(WorkoutLog workoutLog, String sessionEmail) {
 		
 		String code = commonMapper.getNewCode("workoutLogcode", "workoutlog");
 		workoutLog.setWorkoutLogcode(code);
-		workoutLog.setMemberEmail("id004@email.com");	//로그인 처리가 아직 안이루어져서 임의로 해놓음!
+		workoutLog.setMemberEmail(sessionEmail);	
 		
 		int result = workoutLogUserMapper.workoutLogInsert(workoutLog);
 		

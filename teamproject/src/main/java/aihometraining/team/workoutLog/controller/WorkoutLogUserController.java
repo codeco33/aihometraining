@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -129,11 +131,13 @@ public class WorkoutLogUserController {
 	
 	//일지 등록 처리
 	@PostMapping("/workoutLogInsert")
-	public String workoutLogInsert(WorkoutLog workoutLog) {
+	public String workoutLogInsert(WorkoutLog workoutLog, HttpSession session) {
+		
+		String sessionEmail = (String) session.getAttribute("SEMAIL");	//형변환을 해줘라
 		
 		log.info("일지 등록 폼에서 입력받은 데이터: {}", workoutLog);
 		
-		workoutLogUserService.workoutLogInsert(workoutLog);
+		workoutLogUserService.workoutLogInsert(workoutLog, sessionEmail);
 		
 		return "redirect:/workoutLog/workoutLogUser/workoutLogMain";
 		
