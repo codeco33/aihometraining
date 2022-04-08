@@ -72,9 +72,31 @@
 			<result column="workoutLogDeleteEmail" 			property="workoutLogDeleteEmail"/>
 	</resultMap>
 	
+	<resultMap type="WorkoutGoalPlan" id="WorkoutGoalPlanResultmap">
+		<id 	column="workoutLogcode" 					property="workoutLogcode"/>
+		<result column="memberEmail" 						property="memberEmail"/>
+		<result column="workoutGoalCode" 					property="workoutGoalCode"/>
+		<result column="workoutGoalPlanStartDate" 			property="workoutGoalPlanStartDate"/>
+		<result column="workoutGoalPlanFinalDate" 			property="workoutGoalPlanFinalDate"/>
+		<result column="workoutGoalPlanContent" 			property="workoutGoalPlanContent"/>
+		<result column="workoutGoalPlanUpdateEmail" 		property=workoutGoalPlanUpdateEmail/>
+		<result column="workoutGoalPlanFinalUpdateTime" 	property="workoutGoalPlanFinalUpdateTime"/>
+		<result column="AIworkoutVideoCode" 				property="AIworkoutVideoCode"/>
+		<result column="AIWorkoutPerformanceCount" 			property="AIWorkoutPerformanceCount"/>
+		<result column="AIWorkoutPerformanceGoal" 			property="AIWorkoutPerformanceGoal"/>
+		<result column="workoutGoalPlanAchieveState" 		property="workoutGoalPlanAchieveState"/>
+		<result column="workoutGoalPlanCategoryCode" 		property="workoutGoalPlanCategoryCode"/>	
+	</resultMap>
+	
+		<select id="">
+			
 		
-		<select id="getworkoutGoalList" resultType="WorkoutGoal">
-			/* 운동 계획 목록 조회*/
+		
+		</select>
+	
+		
+		<select id="getworkoutGoalList" resultMap="WorkoutGoalPlanResultmap">
+			/* 운동 계획 목록 */
 			SELECT
 				 m.memberEmail
 				,w.workoutGoalContent
