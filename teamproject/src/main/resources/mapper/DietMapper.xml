@@ -101,16 +101,16 @@
 
 
 	
-	<select id="selectDietBankListNewCode" resultType="String">
-	/* DietBank최신 pk불러오기 */
-			SELECT
-			CONCAT('DBC',
-					CAST(
-						max(cast(substring(dietBankCode,4) as UNSIGNED))+1
-					AS char)
-				) AS newDietBankCodeNum
-			FROM
-				dietbank ;
+	<select id="selectDietBankListNewCode" parameterType ="String" resultType="String">
+	/* DB 테이블의 최신 pk불러오기 */
+		SELECT
+			CONCAT(#{columName},
+				CAST(
+					max(cast(substring(${columName},LENGTH(#{columName})+1) as UNSIGNED))+1
+				AS char)
+			) AS ${columName}
+		FROM
+			${tableName} ;
 		
 	</select>
 	
@@ -142,6 +142,57 @@
 	
 	</select>
 	
+	<insert id="insertDietOneMealConnection" parameterType="DietOnemealConnection">
+	
+	INSERT INTO dietonemealconnection
+		( dietOneMealConnectionCode
+		 ,dietNutrientsAPICode
+		 ,dietOneMealConnectionGroupNum
+		 ,memberEmail
+		 ,dietOneMealConnectionDate
+		 ,dietBankCode
+		 ,dietBankOneMealConnectionDay
+		 ,dietBankOneMealConnectionTime
+		)VALUES (
+		  #{dietOneMealConnectionCode}
+		 ,#{dietNutrientsAPICode}
+		 ,#{dietOneMealConnectionGroupNum}
+		 ,#{memberEmail}
+		 ,CURDATE()
+		 ,#{dietBankCode}
+		 ,#{dietBankOneMealConnectionDay}
+		 ,#{dietBankOneMealConnectionTime}
+		)
+	
+	</insert>
+	
+	<select id="selectDietOneMealConnectionByBankCode" parameterType="DietOnemealConnection" resultType="hashmap">
+		SELECT 
+			  dietOneMealConnectionCode					AS dietOneMealConnectionCode
+			, dietNutrientsAPICode                      AS dietNutrientsAPICode
+			, dietOneMealConnectionGroupNum             AS dietOneMealConnectionGroupNum
+			, memberEmail                               AS memberEmail
+			, dietOneMealConnectionDate                 AS dietOneMealConnectionDate
+			, dietBankCode                              AS dietBankCode
+			, dietBankOneMealConnectionDay              AS dietBankOneMealConnectionDay
+			, dietBankOneMealConnectionTime             AS dietBankOneMealConnectionTime
+				, n.nutrientsAPICode                    AS nutrientsAPICode
+				, n.nutrientsAPIFoodSort                AS nutrientsAPIFoodSort
+				, n.nutrientsAPISortdetail              AS nutrientsAPISortdetail
+				, n.nutrientsAPIName                    AS nutrientsAPIName
+				, n.nutrientsAPIServe                   AS nutrientsAPIServe
+				, n.nutrientsAPIKcal                    AS nutrientsAPIKcal
+				, n.nutrientsAPICarbo                   AS nutrientsAPICarbo
+				, n.nutrientsAPIPro                     AS nutrientsAPIPro
+				, n.nutrientsAPIFat                     AS nutrientsAPIFat
+				, n.nutrientsAPINatr                    AS nutrientsAPINatr
+		FROM 
+			dietonemealconnection AS d
+		LEFT JOIN
+			nutrientsapi AS n
+		ON d.dietNutrientsAPICode = n.nutrientsAPICode
+		WHERE dietBankCode = #{dietBankCode};
+	</select>
 	
 
 

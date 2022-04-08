@@ -1,5 +1,6 @@
 package aihometraining.team.diet.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -7,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import aihometraining.team.dto.DietBank;
 import aihometraining.team.dto.DietMealLevelList;
 import aihometraining.team.dto.DietNutrientList;
+import aihometraining.team.dto.DietOnemealConnection;
 
 
 
@@ -16,7 +18,7 @@ public interface DietMapper {
 	public int insertDietBankList2(String connectEClass, String insertEmail,String newCode);
 
 	//식단 은행 새 코드 불러오기
-	public String selectDietBankListNewCode();
+	public String selectDietBankListNewCode(String tableName, String columName);
 	
 	//식단 은행 리스트 불러오기
 	public List<DietBank> getDietBankListAdmin();
@@ -35,5 +37,11 @@ public interface DietMapper {
 	
 	//음식 리스트 검색
 	public List<DietNutrientList> selectDietNutrientList(String mainMealSort);
+	
+	//요일별 식단 삽입
+	public int insertDietOneMealConnection(DietOnemealConnection dietOnemealConnection);
+	
+	//요일별 식단 조회
+	public List<HashMap<String, Object>> selectDietOneMealConnectionByBankCode(DietOnemealConnection dietOnemealConnection);
 	
 }
