@@ -168,7 +168,6 @@
 		</association>		
 	</resultMap>
 	
-	
 	<select id="getChallengeCategoryList" parameterType="map" resultType="map" resultMap="challengeCategoryResultMap">
 		/*챌린지 카테고리 조회*/
 		SELECT
@@ -546,6 +545,31 @@
 			ps.pointGiveStandardCode = cpg.pointGiveStandardCode;
 	</select>
 	
+	<select id="getPointDetailByCode" parameterType="String" resultMap="challengePointGiveResultMap">
+		/* 챌린지 포인트 코드별 포인트 관리 세부 조회 */
+		SELECT
+			 ce.memberEmail
+			,cg.challengeGatherAchieveRate
+			,pg.pointGiveStandardNote
+			,pg.pointGiveStandardPrice
+			,cg.challengeGatherName
+		FROM
+			challengepointgive AS cpg
+			INNER join
+			challengeenter AS ce
+			on
+			cpg.challengeEnterCode = ce.challengeEnterCode
+			INNER JOIN
+			challengegather AS cg
+			on
+			cpg.challengeGatherCode = cg.challengeGatherCode
+			INNER join
+			pointgivestandard AS pg
+			on
+			cpg.pointGiveStandardCode = pg.pointGiveStandardCode
+		WHERE
+			cpg.challengePointGiveCode = #{challengePointGiveCode};
+	</select>
 </mapper>	
 	
   

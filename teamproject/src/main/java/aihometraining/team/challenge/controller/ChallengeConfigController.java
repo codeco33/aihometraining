@@ -289,6 +289,20 @@ public class ChallengeConfigController {
 		
 	}
 	
+	//ajax
+	//챌린지 포인트 코드별 포인트 관리 세부 조회
+	@PostMapping("/pointDetail")
+	@ResponseBody
+	public List<ChallengePointGive> getPointDetailByCode(String challengePointGiveCode){
+		
+		log.info("챌린지 포인트 관리 String challengePointGiveCode : {}", challengePointGiveCode);
+		
+		List<ChallengePointGive> pointDetailList = challengeConfigService.getPointDetailByCode(challengePointGiveCode);
+		
+		return pointDetailList;
+		
+	}
+	
 	/**
 	 * 챌린지 신고 관리
 	 * 

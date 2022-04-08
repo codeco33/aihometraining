@@ -176,4 +176,13 @@ public class ChallengeConfigService {
 		return pointList;
 		
 	}
+	
+	//챌린지 포인트 코드별 포인트 관리 세부 조회
+	public List<ChallengePointGive> getPointDetailByCode(String challengePointGiveCode) {
+		
+		List<ChallengePointGive> pointDetailList = challengeConfigMapper.getPointDetailByCode(challengePointGiveCode);
+		
+		return pointDetailList;
+		
+	}
 }

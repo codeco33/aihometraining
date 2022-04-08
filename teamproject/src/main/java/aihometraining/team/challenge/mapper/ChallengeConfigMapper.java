@@ -79,4 +79,7 @@ public interface ChallengeConfigMapper {
 	
 	//챌린지 포인트 관리 목록 조회
 	public List<ChallengePointGive> getChallengePointList();
+	
+	//챌린지 포인트 코드별 포인트 관리 세부 조회
+	public List<ChallengePointGive> getPointDetailByCode(String challengePointGiveCode);
 }
