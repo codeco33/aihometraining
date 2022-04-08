@@ -30,6 +30,18 @@
 		</association>	
 	</resultMap>
 	
+	
+	
+	<delete id="GoalPlanInCategoryCodeDelete" parameterType="String">
+		/* 운동 계획 카테고리에 따른 운동 계획 삭제 */
+		DELETE 
+			wg
+		FROM
+			workoutgoalplan AS wg
+		WHERE 
+			wg.workoutGoalPlanCategoryCode=#{workoutGoalPlanCategoryCode};	
+	</delete>
+	
 	<delete id="workoutLogCategoryDelete" parameterType="String">
 		/* 운동 계획 카테고리 삭제 */
 		DELETE 
