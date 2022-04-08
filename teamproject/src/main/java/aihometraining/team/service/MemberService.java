@@ -58,8 +58,6 @@ public class MemberService {
 	//회원가입
 	public int addMember(Member member) {
 		
-		member.setMemberLevelCode("levelCode003");
-		
 		int result = memberMapper.addMember(member);
 		
 		return result; 

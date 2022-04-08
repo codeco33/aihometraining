@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+<!-- 사용자 정의 title -->
+<th:block layout:fragment="customTitle">
+	<title th:text="${title}"></title>
+</th:block>
+
+
+
+
+<th:block layout:fragment="customContents">
+	<div class="col-md-12">
+		<div class="panel">
+	    	<div class="panel-heading-white panel-heading">
+	        	<h4>#모집 챌린지 목록(최보라)</h4>
+	        </div>
+			<div class="panel-body">
+			   	<div class="col-md-12">
+			   		<div class="col-md-12 top-20 padding-0">
+			   			<div class="col-md-12">
+			   				<div class="panel">
+			   					<div class="panel-heading bg-deep-purple">
+			                    	<h6 class="text-white">모집 챌린지 목록</h6>
+			                    </div>
+								<div class="panel-body">
+									<div class="col-md-12">
+										<div class="col-md-12 padding-0" style="padding-bottom:20px;">
+											<div class="col-md-6" style="padding-left:10px;">
+												<input type="checkbox" name="checkbox1"/>
+						                        <select>
+						                            <option>Delete</option>
+						                            <option>Ignore</option>
+						                            <option>Cancel</option>
+						                        </select>
+					                 		</div>
+						                    <div class="col-md-6">
+												<div class="col-lg-12">
+						                        	<div class="input-group">
+						                            	<input type="text" class="form-control" aria-label="...">
+						                             	<div class="input-group-btn">
+						                               		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search<span class="caret"></span></button>
+						                               		<ul class="dropdown-menu dropdown-menu-right">
+						                                 		<li><a href="#">Action</a></li>
+						                                 		<li><a href="#">Another action</a></li>
+						                                 		<li><a href="#">Something else here</a></li>
+						                                 		<li role="separator" class="divider"></li>
+						                                 		<li><a href="#">Separated link</a></li>
+						                               		</ul>
+						                             	</div><!-- /btn-group -->
+						                           	</div><!-- /input-group -->
+						                        </div><!-- /.col-lg-6 -->
+							                </div>
+						                </div>
+										<div class="responsive-table">
+						                    <table class="table table-striped table-bordered" style="width: 100%">
+							                    <thead>
+													<tr>
+								                        <th><input type="checkbox" class="icheck" name="checkbox1" /></th>
+								                        <th>챌린지 모집 등록자</th>
+														<th>챌린지 모집명</th>
+														<th>챌린지 소개</th>
+														<th>챌린지 최대 참여 인원수</th>
+														<th>챌린지 인증방법</th>
+														<th>챌린지 인증내용</th>
+														<th>챌린지 인증빈도</th>
+														<th>챌린지 모집 시작일</th>
+														<th>챌린지 모집 종료일</th>
+														<th>챌린지 시작일</th>
+														<th>챌린지 종료일</th>
+														<th>챌린지 등록날짜</th>
+														<th>수정</th>
+														<th>삭제</th>
+							                     	</tr>
+							                    </thead>
+							                    <tbody>
+							                    	<tr>
+								                        <td><input type="checkbox" class="icheck" name="checkbox1" /></td>
+								                        <td>id002@email.com</td>
+														<td>하루 10분 요가해요</td>
+														<td>하루 10분 요가하는 챌린지 입니다.</td>
+														<td>5</td>
+														<td>사진</td>
+														<td>사진을 찍어서 2장이상 올려 주세요</td>
+														<td>30</td>
+														<td>2022-03-18</td>
+														<td>2022-03-29</td>
+														<td>2022-03-30</td>
+														<td>2022-04-30</td>
+														<td>2022-03-18</td>
+														<td>
+															<a href="#">수정</a>
+														</td>
+														<td>
+															<a href="#">삭제</a>
+														</td>
+						                      		</tr>
+							                    	<tr>
+								                        <td><input type="checkbox" class="icheck" name="checkbox1" /></td>
+								                        <td>id002@email.com</td>
+														<td>하루 10분 요가해요</td>
+														<td>하루 10분 요가하는 챌린지 입니다.</td>
+														<td>5</td>
+														<td>사진</td>
+														<td>사진을 찍어서 2장이상 올려 주세요</td>
+														<td>30</td>
+														<td>2022-03-18</td>
+														<td>2022-03-29</td>
+														<td>2022-03-30</td>
+														<td>2022-04-30</td>
+														<td>2022-03-18</td>
+														<td>
+															<a href="#">수정</a>
+														</td>
+														<td>
+															<a href="#">삭제</a>
+														</td>
+						                      		</tr>
+							                    	<tr>
+								                        <td><input type="checkbox" class="icheck" name="checkbox1" /></td>
+								                        <td>id002@email.com</td>
+														<td>하루 10분 요가해요</td>
+														<td>하루 10분 요가하는 챌린지 입니다.</td>
+														<td>5</td>
+														<td>사진</td>
+														<td>사진을 찍어서 2장이상 올려 주세요</td>
+														<td>30</td>
+														<td>2022-03-18</td>
+														<td>2022-03-29</td>
+														<td>2022-03-30</td>
+														<td>2022-04-30</td>
+														<td>2022-03-18</td>
+														<td>
+															<a href="#">수정</a>
+														</td>
+														<td>
+															<a href="#">삭제</a>
+														</td>
+						                      		</tr>
+							                    </tbody>
+						                  	</table>
+						                </div>
+					                 	<div class="col-md-6" style="padding-top:20px;">
+					                    	<span>2022. 03. 18</span>
+					                 	</div>
+					                 	<div class="col-md-6">
+										 	<ul class="pagination pull-right">
+												<li>
+						                        	<a href="#" aria-label="Previous">
+						                              <span aria-hidden="true">&laquo;</span>
+						                            </a>
+						                        </li>
+						                        <li class="active"><a href="#">1</a></li>
+						                        <li><a href="#">2</a></li>
+						                        <li><a href="#">3</a></li>
+						                        <li><a href="#">4</a></li>
+						                        <li><a href="#">5</a></li>
+						                        <li>
+						                        	<a href="#" aria-label="Next">
+						                              <span aria-hidden="true">&raquo;</span>
+						                            </a>
+						                        </li>
+						                    </ul>
+					                 	</div>
+									</div>
+								</div>
+							</div>
+						</div>	    
+					</div>  
+				</div>
+			</div>
+		</div>
+	</div>
+	</th:block>
+	
+	<!-- 사용자 정의 Css -->
+	<th:block layout:fragment="customCss">
+		<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/simple-line-icons.css}"/>
+		<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/mediaelementplayer.css}"/>
+		<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/icheck/skins/flat/red.css}"/>
+	</th:block>
+	
+	<!-- start: Javascript -->
+	<th:block layout:fragment="customBodyScript">	
+		
+		<!-- plugins -->
+		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/icheck.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+		
+		<!-- custom -->
+		<script th:src="@{/asset/js/main.js}"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+			     $('input').iCheck({
+			        checkboxClass: 'icheckbox_flat-red',
+			        radioClass: 'iradio_flat-red'
+			      });
+			});
+		</script>
+		
+	</th:block>
+	<!-- end: Javascript -->
+</html>

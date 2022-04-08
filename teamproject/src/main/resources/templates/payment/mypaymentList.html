@@ -62,51 +62,7 @@
 		#paymentList tbody td {
 			vertical-align: middle;
 		}
-		.sangseTextarea {
-			height: 100px;
-		    width: 100%;
-		}
-		.modal-title {
-			font-weight: bold;
-		}
-		.modal-body .formTitle {
-			border-bottom: 1px solid #918c8c;
-		    margin: 0 20px;
-		    margin-bottom: 10px;
-		}
-		.modal-body .formTitle p {
-			font-size: 16px;
-			font-weight: 550;
-			margin-bottom: 5px;
-		}
-		.rnaowjdqhInput {
-			border: none !important;
-			height: 20px;
-			width: 100%;
-			font-weight: bold;
-		}
-		#refundApplyForm .form-group {
-			margin-bottom: 10px;
-		}
-		#refundApplyForm .form-group:nth-child(3) {
-			margin-bottom: 20px;
-		}
-		#refundApplyForm .form-group:nth-child(6) {
-			margin-bottom: 20px;
-		}
 		
-		#refundApplyForm input[type="text"]{
-			width: 100%;
-			height: 34px;
-		}
-		#refundApplyForm label {
-			margin-bottom: 0;
-			margin-top: 7px;
-		}
-		#refundApplyBtn {
-			margin-top: 20px;
-			width: 100% !important;
-		}
 	</style>
 </th:block>
 
@@ -168,14 +124,14 @@
 							<tr>
 								<td>
 									<p>2022-03-23</p>
-									<p><a th:href="@{/mypage/mypaymentList/paymentDetail(paymentCode=)}">e20220323_00001</a></p>
+									<p><a th:href="@{/mypage/paymentDetail(paymentCode=)}">e20220323_00001</a></p>
 								</td>
 								<!-- (paymentCode=${l.paymentCode}) -->
 								<td>이미지</td>
 								<td>운동클래스운동클래스운동클래스운동클래스운동클래스</td>
 								<td>137,500</td>
 								<td><span class="label label-success">결제완료</span></td>
-								<td><input type="button" class="btn btn-outline btn-default refundBtn" value="신청"></td>
+								<td><input type="button" class="btn btn-outline btn-default" value="신청"></td>
 							</tr>
 							<tr>
 								<td>
@@ -186,7 +142,7 @@
 								<td>챌린지</td>
 								<td>7,500</td>
 								<td><span class="label label-success">결제완료</span></td>
-								<td><input type="button" class="btn btn-outline btn-default refundBtn" value="신청"></td>
+								<td><input type="button" class="btn btn-outline btn-default" value="신청"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -195,111 +151,7 @@
 			</div>
 		</div>
 	</div>
-<!-- 환불 신청 모달 -->
-<div id="refundModal" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-              <h4 class="modal-title">환불 신청하기</h4>
-            </div>
-			<div class="modal-body">
-				<form id="refundApplyForm" class="row">
-					<div class="form-group formTitle">
-						<p>결제정보</p>
-					</div>
-					<div class="form-group col-sm-12">
-						<label class="col-sm-3 control-label text-right">결제코드</label>
-                             <div class="col-sm-8">
-	                               <div class="col-sm-12 padding-0">
-	                                 <input type="text" class="rnaowjdqhInput" readonly value="e20220407_00001">
-	                               </div>
-                             </div>
-                   	</div>
-                   	<div class="form-group col-sm-12">
-						<label class="col-sm-3 control-label text-right">주문상품</label>
-                             <div class="col-sm-8">
-	                               <div class="col-sm-12 padding-0">
-	                                 <input type="text" class="rnaowjdqhInput" readonly value="운동클래스 이름">
-	                               </div>
-                             </div>
-                   	</div>
-                   	
-                   	
-					<div class="form-group formTitle">
-						<p>취소사유</p>
-					</div>
-					<div class="form-group col-sm-12">
-						<label class="col-sm-3 control-label text-right">사유 선택</label>
-                             <div class="col-sm-8">
-                               <div class="col-sm-12 padding-0">
-                                 <select class="form-control">
-                                   <option>option one</option>
-                                   <option>option two</option>
-                                   <option>option three</option>
-                                   <option>option four</option>
-                                 </select>
-                               </div>
-                             </div>
-                   	</div>
-                   	<div class="form-group col-sm-12">
-                   		<label class="col-sm-3 control-label text-right">상세 내용</label>
-                        <div class="col-sm-8">
-                        	<textarea class="sangseTextarea"></textarea>
-						</div>
-                    </div>
-                    
-                    
-                    <div class="form-group formTitle">
-						<p>환불계좌 입력</p>
-					</div>
-					<div class="form-group col-sm-12">
-						<label class="col-sm-3 control-label text-right">은행명</label>
-                             <div class="col-sm-8">
-	                               <div class="col-sm-12 padding-0">
-	                                 <input type="text">
-	                               </div>
-                             </div>
-                   	</div>
-                   	<div class="form-group col-sm-12">
-						<label class="col-sm-3 control-label text-right">계좌번호</label>
-                             <div class="col-sm-8">
-	                               <div class="col-sm-12 padding-0">
-	                                 <input type="text">
-	                               </div>
-                             </div>
-                   	</div>
-                   	<div class="form-group col-sm-12">
-						<label class="col-sm-3 control-label text-right">예금주</label>
-                             <div class="col-sm-8">
-	                               <div class="col-sm-12 padding-0">
-	                                 <input type="text">
-	                               </div>
-                             </div>
-                   	</div>
-                   	
-                   	<div class="form-group col-sm-12">
-                        <button id="refundApplyBtn" class="btn-flip btn btn-gradient btn-primary btn-block" data-dismiss="modal">
-                          <div class="flip">
-	                            <div class="side">
-	                              신청하기</span>
-	                            </div>
-	                            <div class="side back">
-	                              <span class="fa fa-check" style="font-size:2em;"></span>
-	                            </div>
-                          </div>
-                          <span class="icon"></span>
-                        </button>
-                   	</div>
-				</form>
-			</div>
-			<!-- <div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-				<button type="button" class="btn btn-primary" data-dismiss="modal">신청</button>
-			</div> -->
-		</div>
-	</div>
-</div>
+
 
 </th:block>
 
@@ -315,10 +167,6 @@
 	<!-- custom -->
 	<script th:src="@{/asset/js/main.js}"></script>
 	<script type="text/javascript">
-		/*환불 신청 모달*/
-		$('.refundBtn').on('click', function() {
-			$('#refundModal').modal('show');
-		});
 			
 		$(document).ready(function() {
 			/*데이터피커*/

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import aihometraining.team.dto.EClassCategoryLarge;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.WorkoutGoal;
 import aihometraining.team.dto.WorkoutLog;
@@ -35,7 +34,6 @@ public class WorkoutLogUserService {
 		
 		String code = commonMapper.getNewCode("workoutLogcode", "workoutlog");
 		workoutLog.setWorkoutLogcode(code);
-		workoutLog.setMemberEmail("id004@email.com");	//로그인 처리가 아직 안이루어져서 임의로 해놓음!
 		
 		int result = workoutLogUserMapper.workoutLogInsert(workoutLog);
 		
@@ -60,12 +58,12 @@ public class WorkoutLogUserService {
 		return workoutLogprivacyboundsList;
 	}
 	
-	// 운동 클래스 카테고리 large 목록 조회
-	public List<EClassCategoryLarge> geteClassCategoryLargeList(){
+	// 운동 클래스 카테고리 small 목록 조회
+	public List<EClassCategorySmall> geteClassCategorySmallList(){
 		
-		List<EClassCategoryLarge> eClassCategoryLargeList = workoutLogUserMapper.geteClassCategoryLargeList();
+		List<EClassCategorySmall> eClassCategorySmallList = workoutLogUserMapper.geteClassCategorySmallList();
 		
-		return eClassCategoryLargeList;
+		return eClassCategorySmallList;
 		
 	}
 	
