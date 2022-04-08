@@ -286,7 +286,6 @@ public class ChallengeConfigController {
 		model.addAttribute("pointList", pointList);
 		
 		return "challenge/challengeConfig/challengePoint";
-		
 	}
 	
 	//ajax
@@ -300,7 +299,6 @@ public class ChallengeConfigController {
 		List<ChallengePointGive> pointDetailList = challengeConfigService.getPointDetailByCode(challengePointGiveCode);
 		
 		return pointDetailList;
-		
 	}
 	
 	/**

@@ -183,6 +183,5 @@ public class ChallengeConfigService {
 		List<ChallengePointGive> pointDetailList = challengeConfigMapper.getPointDetailByCode(challengePointGiveCode);
 		
 		return pointDetailList;
-		
 	}
 }
