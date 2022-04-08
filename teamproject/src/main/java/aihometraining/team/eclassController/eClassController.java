@@ -8,29 +8,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import aihometraining.team.challenge.controller.ChallengeConfigController;
-import aihometraining.team.dto.EClassAnswer;
-import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.EClassIntroduce;
-import aihometraining.team.dto.EClassOpenApplyForm;
-import aihometraining.team.dto.EClassQuestion;
-import aihometraining.team.dto.EClassSectionCurriculum;
-import aihometraining.team.dto.EClassSectionTitle;
 import aihometraining.team.eclassService.eClassService;
+import aihometraining.team.mapper.EClassMapper;
 
 @Controller
 public class eClassController {
 	
-	private static final Logger log = LoggerFactory.getLogger(ChallengeConfigController.class);
+	private static final Logger log = LoggerFactory.getLogger(eClassController.class);
 	
 	private eClassService eClassService;
+	private EClassMapper eClassMapper;
 	
-	public eClassController( eClassService eClassService) {
+	public eClassController( eClassService eClassService, EClassMapper eClassMapper) {
 		
 		this.eClassService = eClassService;
+		this.eClassMapper = eClassMapper;
 	}
 	
 	@GetMapping("/eClassApprovedList")
@@ -57,23 +54,39 @@ public class eClassController {
 		
 		return "eClass/eClassOpenApplyForm";
 	}
-	@PostMapping("/EClassOpenApplyForm")
-	public String EClassOpenApplyFormInsert( Model model
-											,EClassOpenApplyForm eClassOpenApplyForm
-											,EClassApproved eClassApproved
-											,EClassIntroduce eClassIntroduce
-											,EClassSectionTitle eClassSectionTitle
-											,EClassSectionCurriculum eClassSectionCurriculum
-											,EClassQuestion eClassQuestion
-											,EClassAnswer eClassAnswer) {
+	
+	@PostMapping("/CategoryLarge")
+	@ResponseBody
+	public List<EClassCategorySmall> EClassMedium(String eClassCategoryLargeCode){
 		
-		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassApproved,eClassIntroduce,eClassSectionTitle,eClassSectionCurriculum,eClassQuestion,eClassAnswer);
+		log.info("eClassController EClassMedium 데이터: {}", eClassCategoryLargeCode);
 		
-		eClassService.EClassOpenApplyFormInsert(eClassOpenApplyForm, eClassApproved,eClassIntroduce,eClassSectionTitle,eClassSectionCurriculum,eClassQuestion,eClassAnswer);
+		List<EClassCategorySmall> categoryLarge = eClassMapper.eClassCategoryLarge(eClassCategoryLargeCode);
+		
+		return categoryLarge;
+	}
+	@PostMapping("/CategoryMedium")
+	@ResponseBody
+	public List<EClassCategorySmall> EClassSmall (String eClassCategoryMediumCode){
+	
+		List<EClassCategorySmall> categorySmall = eClassMapper.eClassCategoryMedium(eClassCategoryMediumCode);
+		
+		return categorySmall;
+	}
+	
+	@GetMapping("/eClassIntroduce")
+	public String EClassIntroduceInsert( Model model
+											,EClassIntroduce eClassIntroduce) {
+		
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassIntroduce);
+		//1 eClassIntroduceCode 자동생성
+		eClassIntroduce.seteClassApprovedCode("eClassIntroduceCode");	//2 개설된 클래스 코드
+		eClassIntroduce.setMemberEmail("id004@email.com");
+		eClassService.EClassIntroduceInsert(eClassIntroduce);
 		
 		model.addAttribute("title", "개설신청 완료");
 		
-		return "";
+		return "/eClassOpenApplyForm";
 	}
 	
 	@GetMapping("/eClassApproved")

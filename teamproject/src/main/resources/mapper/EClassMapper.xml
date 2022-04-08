@@ -5,16 +5,16 @@
 
 <mapper namespace="aihometraining.team.mapper.EClassMapper">
 	
-	 	<resultMap type="eClassOpenApplyForm" id="EClassOpenApplyFormResultMap">
+	 <resultMap type="EClassOpenApplyForm" id="EClassOpenApplyFormResultMap">
 	
-		<result column="eClassOpenAppleyCode" 			property="openAppleyCode"/>
-		<result column="eClassOpenApplyMemberEmail"		property="memberEmail"/>
-		<result column="eClassOpenApplyName" 			property="openApplyName"/>
-		<result column="eClassOpenApplyCategorySamll" 	property="eClassCategorySmallCode"/>
-		<result column="eClassOpenApplyPrice" 			property="openApplyPrice"/>
-		<result column="eClassIntroduceCode"			property="introduceCode"/>
-		<result column="eClassOpenApplyDate"			property="openApplyDate"/>
-		<result column="eClassOpenApplyApproveState"	property="openApplyApproveState"/>
+		<result column="eClassOpenAppleyCode" 			property="eClassOpenAppleyCode"/>
+		<result column="eClassOpenApplyMemberEmail"		property="eClassOpenApplyMemberEmail"/>
+		<result column="eClassOpenApplyName" 			property="eClassOpenApplyName"/>
+		<result column="eClassOpenApplyCategorySamll" 	property="eClassOpenApplyCategorySamll"/>
+		<result column="eClassOpenApplyPrice" 			property="eClassOpenApplyPrice"/>
+		<result column="eClassIntroduceCode"			property="eClassIntroduceCode"/>
+		<result column="eClassOpenApplyDate"			property="eClassOpenApplyDate"/>
+		<result column="eClassOpenApplyApproveState"	property="eClassOpenApplyApproveState"/>
 		
 			<association property="member" javaType="Member">
 				<id 	column="memberEmail" 			property="memberEmail"/>
@@ -45,38 +45,45 @@
 			</association>
 			
 			<association property="eClassIntroduce" javaType="EClassIntroduce">
-				<id 	column="eClassIntroduceCode" 		property="introduceCode"/>
-				<result column="eClassApprovedCode" 		property="approvedCode"/>
+				<id 	column="eClassIntroduceCode" 		property="eClassIntroduceCode"/>
+				<result column="eClassApprovedCode" 		property="eClassApprovedCode"/>
 				<result column="memberEmail" 				property="memberEmail"/>
-				<result column="eClassIntroduceContent" 	property="introduceContent"/>
-				<result column="memberUpdateEmail" 			property="updateEmail"/>
-				<result column="eClassIntroducetDate" 		property="introducetDate"/>
-				<result column="eClassIntroduceImg" 		property="introduceImg"/>
+				<result column="eClassIntroduceContent" 	property="eClassIntroduceContent"/>
+				<result column="memberUpdateEmail" 			property="memberUpdateEmail"/>
+				<result column="eClassIntroducetDate" 		property="eClassIntroducetDate"/>
+				<result column="eClassIntroduceImg" 		property="eClassIntroduceImg"/>
 			</association>
 			
 	</resultMap>
 	
-	<insert id="eClassOpenApplyFormInsert" parameterType="eClassOpenApplyForm">
-		/* 운동클래스 폼 등록 처리 */
-		INSERT 
-		INTO 
-		eclassopenapply2(
-		 	 eClassOpenApplyMemberEmail
-			,eClassOpenApplyName
-			,eClassOpenApplyCategorySamll
-			,eClassOpenApplyPrice
-			,eClassIntroduceCode
-			,eClassOpenApplyDate
-			,eClassOpenApplyApproveState
-		)VALUE(
-			  #{openAppleyCode}
-			, #{memberEmail}
-			, #{eClassCategorySmallCode}
-			, #{openApplyPrice}
-			, #{introduceCode}
-			, CURDATE()
-			, null
-		);
+	<resultMap type="EClassCategorySmall" id="eClassCategorySmallResultMap">
+	
+		<result column="eClassCategorySmallCode" 			property="eClassCategorySmallCode"/>
+		<result column="eClassCategorySmallName"			property="eClassCategorySmallName"/>
+		<result column="eClassCategoryMediumCode" 			property="eClassCategoryMediumCode"/>
+		<result column="eClassCategoryMediumName" 			property="eClassCategoryMediumName"/>
+		<result column="eClassCategoryLargeCode" 			property="eClassCategoryLargeCode"/>
+		<result column="eClassCategoryLargeName"			property="eClassCategoryLargeName"/>
+		<result column="memberEmail"						property="memberEmail"/>
+		<result column="eClassCategorySmallRegDate"			property="eClassCategorySmallRegDate"/>
+		<result column="updateMemberEmail"					property="updateMemberEmail"/>
+		<result column="eClassCategorySmallFinalUpdateDate"	property="eClassCategorySmallFinalUpdateDate"/>
+		
+	</resultMap>
+	
+	<resultMap type="EClassIntroduce" id="eClassIntroduceResultMap">
+	
+		<result column="eClassIntroduceCode" 		property="eClassCategorySmallCode"/>
+		<result column="eClassApprovedCode"			property="eClassCategorySmallName"/>
+		<result column="memberEmail" 				property="eClassCategoryMediumCode"/>
+		<result column="eClassIntroduceContent" 	property="eClassCategoryMediumName"/>
+		<result column="memberUpdateEmail" 			property="eClassCategoryLargeCode"/>
+		<result column="eClassIntroducetDate"		property="eClassCategoryLargeName"/>
+		
+	</resultMap>
+	
+	<insert id="EClassIntroduceInsert" parameterType="EClassIntroduce">
+		
 	</insert>
 	
 	<select id="eClassCategoryList" resultType="EClassCategorySmall">
@@ -84,9 +91,33 @@
 		SELECT
 			 cs.eClassCategorySmallCode
 			,cs.eClassCategorySmallName
+			,cs.eClassCategoryMediumCode
 			,cs.eClassCategoryMediumName
+			,cs.eClassCategoryLargeCode
 			,cs.eClassCategoryLargeName
 		FROM
 			eclasscategorysmall AS cs;
+	</select>
+	
+	<select id="eClassCategoryLarge" parameterType="String" resultMap="eClassCategorySmallResultMap">
+		/* 운동클래스 카테고리 Medium 조회 */
+		SELECT
+			 cs.eClassCategoryMediumCode
+			,cs.eClassCategoryMediumName
+		FROM
+			eclasscategorysmall AS cs 
+		WHERE
+			cs.eClassCategoryLargeCode = #{eClassCategoryLargeCode};
+	</select>
+	
+	<select id="eClassCategoryMedium" parameterType="String" resultMap="eClassCategorySmallResultMap">
+		/* 운동클래스 카테고리 small 조회 */
+		SELECT
+			 es.eClassCategorySmallCode
+			,es.eClassCategorySmallName
+		FROM
+			 eclasscategorysmall AS es
+		WHERE 	
+			 es.eClassCategoryMediumCode = #{eClassCategoryMediumCode};
 	</select>
 </mapper>
