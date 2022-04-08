@@ -25,15 +25,18 @@
 		                    </thead>
 		                    <tbody class="myModal">
 		                    	<tr th:if="${not #lists.isEmpty(workoutLogCategoryList)}" th:each="l : ${workoutLogCategoryList}">
-			                        <td id="workoutLogCategoryCode" th:text="${l.workoutGoalPlanCategoryContent}"></td>
+			                        <td th:text="${l.workoutGoalPlanCategoryContent}"></td>
 			                        <td>
-			                        	<button type="button" th:data-cateCd="${l.workoutGoalPlanCategoryCode}" class="btn btn-outline btn-success btn-sm workoutCategoryUpdateBtn" data-toggle="modal" data-target="#categoryUpdate">
+			                        	<button type="button" th:data-cateName="${l.workoutGoalPlanCategoryContent}"  th:data-cateCode="${l.workoutGoalPlanCategoryCode}" class="btn btn-outline btn-success btn-sm workoutCategoryUpdateBtn" data-toggle="modal" data-target="#categoryUpdate">
 											  	수정
 										</button>
-										<!-- <a th:href="@{/workoutLog/workoutLogConfig/workoutLogCategoryModal(workoutGoalPlanCategoryCode=${l.workoutGoalPlanCategoryCode})}">수정</a> -->
 			                        </td>
 			                        <td>
-			                        	<a th:href="@{/admin/workoutCategoryDelete}"> 삭제 </a>
+			                        	<a th:href="@{/admin/workoutCategoryDelete(workoutGoalPlanCategoryCode=${l.workoutGoalPlanCategoryCode})}">
+				                        	<button type="button" class="btn btn-outline btn-danger btn-sm">
+												삭제
+											</button>
+			                        	</a>
 			                        </td>
 		                      	</tr>
 		                      	<tr th:unless="${not #lists.isEmpty(workoutLogCategoryList)}">
@@ -57,21 +60,24 @@
 	              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	              <h4 class="modal-title" id="workoutLogCategoryModal"><span class="icon-direction"></span>운동 계획 카테고리명 수정</h4>
 	            </div>
-	            <div class="modal-body">
-	              <form class="cmxform" id="workoutCategoryForm">
-						<div class="col-md-12">
-							<div class="form-group form-animate-text" style="margin-top:40px !important;">
-								<input type="text" class="form-text" id="workoutGoalPlanCategoryContent" name="workoutGoalPlanCategoryContent" required>
-								<span class="bar"></span>
-								<label>운동 계획 카테고리명</label>
-							</div>
-		 				</div>
+	              <form class="cmxform" id="workoutCategoryForm" th:href="@{/admin/workoutCategoryList}">
+		            <div class="modal-body">
+							<div class="col-md-12">
+								<div class="form-group form-animate-text" style="margin-top:40px !important;">
+							
+									<input type="text" class="form-text" id="workoutGoalPlanCategoryContent" name="workoutGoalPlanCategoryContent" required>
+									<input type="hidden" class="form-text" id="workoutGoalPlanCategoryCode" name="workoutGoalPlanCategoryCode" required>
+									
+									<span class="bar"></span>
+									<label>운동 계획 카테고리명</label>
+								</div>
+			 				</div>
+					 </div> 
+		            <div class="modal-footer">
+		              <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+		              <button type="button" class="btn btn-primary workoutCategoryUpdate" data-dismiss="modal">저장</button>
+		            </div>
 				  </form>
-				 </div> 
-	            <div class="modal-footer">
-	              <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-	              <button type="button" class="btn btn-primary" data-dismiss="modal">저장</button>
-	            </div>
 	          </div>
 	        </div>
 	    </div>
@@ -174,27 +180,44 @@
 				 //모달에 데이터 가져오기
 				 $(document).on('click','.workoutCategoryUpdateBtn',function(){
 					   console.log("나와라 오바");
-					   var workoutLogCategoryCode = $(this).attr('data-cateCd');
-					   console.log(workoutLogCategoryCode);
+					   var workoutLogCategoryCode = $(this).attr('data-cateCode');
+					   var workoutGoalPlanCategoryContent = $(this).attr('data-cateName');
+					   console.log(workoutLogCategoryCode, workoutGoalPlanCategoryContent);
 					   
-					   $.ajax({
-							 url: '/admin/workoutLogCategoryModal'
+					   $('#workoutGoalPlanCategoryContent').val(workoutGoalPlanCategoryContent);
+					   $('#workoutGoalPlanCategoryCode').val(workoutLogCategoryCode);
+					   					  
+				   });
+				 
+				 
+				 //모달에서 카테고리명 수정 처리
+				 $(document).on('click','.workoutCategoryUpdate',function(){
+					   console.log("나와라 수정");
+					   var workoutGoalPlanCategoryCode =  $('#workoutGoalPlanCategoryCode').val();
+					   var workoutGoalPlanCategoryContent =  $('#workoutGoalPlanCategoryContent').val();
+					   console.log(workoutGoalPlanCategoryCode, workoutGoalPlanCategoryContent);
+					   
+					  $.ajax({
+							 url: '/admin/workoutLogCategoryUpdateModal' //수정 컨트롤러
 							,type : 'post'
 							,data : {
-									'workoutLogCategoryCode' : workoutLogCategoryCode
+									'workoutGoalPlanCategoryCode' : workoutGoalPlanCategoryCode,
+									'workoutGoalPlanCategoryContent' : workoutGoalPlanCategoryContent
 							}
-					   		,dataType : 'json'
+					   		,dataType : 'text'
 							,success: function(data){
 								console.log(data);
-								
-								var modalbody = '';
-									
-									modalbody += '<div class="col-md-12"> <div class="form-group form-animate-text" style="margin-top:40px !important;"> <input  type="text" class="form-text" id="validate_workoutGoalPlanCategoryContent" name="workoutGoalPlanCategoryContent" required> <span class="bar"></span> <label>'+ data.workoutGoalPlanCategoryContent +'</label> </div> </div>'
-									
-									$('.modal-body').empty();
-									$('.modal-body').append(modalbody);
-									$('#categoryUpdate').modal('show');
+								if(Number(data) > 0){									
+									alert('수정 성공');
+									location.reload();
+								}else{
+									alert('수정 실패');
+								}
 							}
+					   		, error : function(){
+					   			alert('수정 실패');
+					   		}
+							
 						});
 				   });
 			});
