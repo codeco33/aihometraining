@@ -1658,7 +1658,7 @@ ul li a:focus {
   .avatar {
     height: 40px;
     width: 40px;
-    border: 4px solid #108DB6 !important;
+    border: 4px solid rgba(255,255,255,0.8) !important;
     margin-top: 5px;
   }
 
@@ -1781,9 +1781,10 @@ ul li a:focus {
 
   .navbar {
     height: 55px;
-    background-color: #2196F3;
     color: #fff;
     border: none;
+    background: -webkit-linear-gradient(top, #c054ff 0%, #5274ff 100%);
+    background: linear-gradient(to bottom, #c054ff 0%, #5274ff 100%);
   }
 
   .navbar .navbar-brand {
@@ -1800,7 +1801,7 @@ ul li a:focus {
 
   .opener-right-menu span{
     font-size: 25px;
-    color: #0c66ae;
+    color: #fff;
   }
 
   .opener-right-menu {
@@ -1906,22 +1907,24 @@ ul li a:focus {
 
 .user-dropdown .more {
   background-color: #F9F9F9;
-  padding: 0px;
+  padding: 0;
+  margin-top: 8px;
   width: 100%;
   height: 40px;
   border-top: 1px solid #ddd;
 }
 
 .user-dropdown .more ul {
-  padding: 0px;
-  padding-left: 10px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+  justify-content: space-evenly;
 }
 
 .user-dropdown .more li {
   float: left;
-  list-style: none;
-  padding: 15px;
-  padding-top: 5px;
+ 
 }
 
 .user-dropdown .more a {
@@ -1944,8 +1947,9 @@ ul li a:focus {
 #left-menu{}
 #left-menu .left-bg {
   background: url('../img/left-bg.png');
-  background-repeat: repeat-x;
-  height: 100px;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 90px;
   left: 0;
   position: relative;
   margin-left: -2px;
@@ -2039,15 +2043,14 @@ ul li a:focus {
   float: left;
   padding: 20px;
   padding-top: 35px;
-  background-color: #2196F3;
   padding-bottom: 11px;
   color: #C62828;
   cursor: pointer;
-  -webkit-box-shadow: 0px 9px 0px 0px #2196F3, 0 -9px 0px 0px #2196F3, 4px 0 15px -4px rgba(0, 0, 0, 0.16), -4px 0 15px -4px rgba(0, 0, 0, 0.12);
-  -moz-box-shadow: 0px 9px 0px 0px #2196F3, 0 -9px 0px 0px #2196F3, 4px 0 15px -4px rgba(0, 0, 0, 0.16), -4px 0 15px -4px rgba(0, 0, 0, 0.12);
-  -ms-box-shadow: 0px 9px 0px 0px #2196F3, 0 -9px 0px 0px #2196F3, 4px 0 15px -4px rgba(0, 0, 0, 0.16), -4px 0 15px -4px rgba(0, 0, 0, 0.12);
-  -o-box-shadow: 0px 9px 0px 0px #2196F3, 0 -9px 0px 0px #2196F3, 4px 0 15px -4px rgba(0, 0, 0, 0.16), -4px 0 15px -4px rgba(0, 0, 0, 0.12);
-  box-shadow: 0px 9px 0px 0px #2196F3, 0 -9px 0px 0px #2196F3, 4px 0 15px -4px rgba(0, 0, 0, 0.16), -4px 0 15px -4px rgba(0, 0, 0, 0.12);
+  -webkit-box-shadow: 0px 9px 0px 0px #5d71ff, 0 -9px 0px 0px #2196F3, 4px 0 15px -4px rgba(0, 0, 0, 0.16), -4px 0 15px -4px rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0px 9px 0px 0px #5d71ff, 0 -9px 0px 0px #2196F3, 4px 0 15px -4px rgba(0, 0, 0, 0.16), -4px 0 15px -4px rgba(0, 0, 0, 0.12);
+  -ms-box-shadow: 0px 9px 0px 0px #5d71ff, 0 -9px 0px 0px #2196F3, 4px 0 15px -4px rgba(0, 0, 0, 0.16), -4px 0 15px -4px rgba(0, 0, 0, 0.12);
+  -o-box-shadow: 0px 9px 0px 0px #5d71ff, 0 -9px 0px 0px #2196F3, 4px 0 15px -4px rgba(0, 0, 0, 0.16), -4px 0 15px -4px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 9px 0px 0px #5d71ff, 0 -9px 0px 0px #2196F3, 4px 0 15px -4px rgba(0, 0, 0, 0.16), -4px 0 15px -4px rgba(0, 0, 0, 0.12);
 }
 
 
@@ -6322,6 +6325,13 @@ ul li a:focus {
   .article-v1-footer{
     padding: 0px !important;
   }
+  .navbar .navbar-brand {
+    text-shadow: 0px 1px 5px #918C8C;
+    padding: 15px;
+    margin-left: 20px;
+    font-size: 1.8em;
+    color: #FFFFFF !important;
+  }
 }
 
 
@@ -6485,4 +6495,30 @@ ul li a:focus {
     display: none;
   }
 
+}
+
+
+
+/**************************************
+* Custom Style 
+***************************************/
+
+
+ /* 관리자페이지 로그아웃 버튼 */
+.user-dropdown .more ul li span {
+	font-size: 20px;
+}
+
+/*관리자 페이지 페이지 타이틀*/
+#contentsHeaderTilte {
+	color: #918C8C;
+	text-decoration: none;
+}
+#contentsHeaderTilte:hover {
+	text-decoration: underline;
+}
+
+/*거래내역 검색 td에 cursor 모양 넣기*/
+#paymentList .searchTd {
+	cursor: pointer;
 }

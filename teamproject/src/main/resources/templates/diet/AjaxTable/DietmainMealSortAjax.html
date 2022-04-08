@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+	<select class="form-control" id="mainMealSort" onchange="MainSortchageSelect()">
+		<option  disabled selected style="display:none" >대분류</option>
+		<option th:each="s : ${mainMealSort}" th:value="${s.nutrientsAPIFoodSort}" th:text="${s.nutrientsAPIFoodSort}"></option>
+	</select>
+	  
+</html>

@@ -9,7 +9,7 @@
                         <!-- Logo -->
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo">
-                                <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
+                                <a th:href="@{/}"><img th:src="@{/assets/img/logo/logo.png}" alt=""></a>
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10">
@@ -18,20 +18,59 @@
                                 <div class="main-menu d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">                                                                                          
-                                            <li class="active" ><a href="index.html">Home</a></li>
-                                            <li><a href="courses.html">Courses</a></li>
-                                            <li><a href="about.html">About</a></li>
-                                            <li><a href="#">Blog</a>
+                                            <li class="active" ><a th:href="@{/}">20220322</a></li>
+                                            <li class="active" ><a th:href="@{/}">홈</a></li>
+                                            <li><a href="#">#운동 클래스</a>
                                                 <ul class="submenu">
-                                                    <li><a href="blog.html">Blog</a></li>
-                                                    <li><a href="blog_details.html">Blog Details</a></li>
-                                                    <li><a href="elements.html">Element</a></li>
+                                                    <li><a th:href="@{/eClassApprovedList}">#신규 클래스(재환)</a></li>
+                                                    <li><a th:href="@{/OpenApplyForm}">#특가 클래스(재환)</a></li>
+                                                    <li><a href="#">#인기 클래스(재환)</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="contact.html">Contact</a></li>
+                                            <li><a href="#">#챌린지</a>
+                                                <ul class="submenu">
+                                                    <li><a th:href="@{/challenge/challengeGather/challengeGatherList}">#모집 중 챌린지</a></li>
+                                                    <li><a th:href="@{/challenge/challengeEnter/challengeEnterList}">#참가 챌린지(보라)</a></li>
+                                                    <li><a href="#">#챌린지(보라)</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">#식단</a>
+                                                <ul class="submenu">
+                                                    <li><a th:href="@{/diet/dietBankList}">#식단 은행(영호)</a></li>
+                                                    <li><a href="#">#개인 식단(영호)</a></li>
+                                                    <li><a href="#">#인기 식단(영호)</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">#일지</a>
+                                                <ul class="submenu">
+                                                    <li><a th:href="@{/workoutLog/workoutLogUser/workoutGoalList}">#운동 목표(민희)</a></li>
+                                                    <li><a th:href="@{/workoutLog/workoutLogUser/workoutGoalPlanList}">#운동 계획(민희)</a></li>
+                                                    <li><a th:href="@{/workoutLog/workoutLogUser/workoutLogMain}">#하루 일지(민희)</a></li>
+                                                </ul>
+                                            </li>
                                             <!-- Button -->
-                                            <li class="button-header margin-left "><a href="#" class="btn">Join</a></li>
-                                            <li class="button-header"><a href="login.html" class="btn btn3">Log in</a></li>
+                                            <li class="button-header margin-left "><a th:if="${session.SEMAIL == null}" th:href="@{/admin/login}" class="btn">#로그인(민식2)</a></li>
+                                            <li class="button-header"><a th:if="${session.SEMAIL == null}" th:href="@{/admin/addMember}" class="btn btn3">#회원가입(민식)</a></li>
+											<li th:if="${session.SEMAIL != null}" class="user-name"><span>[[${session.SNAME}]]님이 로그인하셨습니다.</span></li>
+											<li><a th:if="${session.SEMAIL != null && session.SLEVEL == 'levelCode001'}">#관리자메뉴</a>
+											<!-- <img th:src="@{/asset/img/avatar.jpg}" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/> -->
+												<ul class="submenu">
+													<li><a th:if="${session.SEMAIL != null}" th:href="@{/mypage}"><span class="fa fa-user"></span>마이페이지</a></li>
+													<li role="separator" class="divider"></li>
+													<li><a th:href="@{/wishList}"><span class="fa fa-calendar"></span>#위시리스트</a></li>
+													<li><a th:if="${session.SEMAIL != null && session.SLEVEL == 'levelCode001'}" th:href="@{/admin}"><span class="fa fa-cogs"></span>관리자 페이지</a></li>
+													<li><a th:if="${session.SEMAIL != null}" th:href="@{/admin/logout}" ><span class="fa fa-power-off"></span>로그아웃</a></li>
+												</ul>
+											</li>
+											<li><a th:if="${session.SEMAIL != null && session.SLEVEL != 'levelCode001'}">#회원 메뉴</a>
+											<!-- <img th:src="@{/asset/img/avatar.jpg}" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/> -->
+												<ul class="submenu">
+													<li><a th:if="${session.SEMAIL != null}" th:href="@{/member/mypage}"><span class="fa fa-user"></span>마이페이지</a></li>
+													<li role="separator" class="divider"></li>
+													<li><a th:if="${session.SEMAIL != null}" th:href="@{/wishList}"><span class="fa fa-calendar"></span>#위시리스트</a></li>
+													<li><a th:if="${session.SEMAIL != null}" th:href="@{/admin/logout}" ><span class="fa fa-power-off"></span>로그아웃</a></li>
+												</ul>
+											</li>
                                         </ul>
                                     </nav>
                                 </div>

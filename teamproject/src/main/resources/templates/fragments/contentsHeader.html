@@ -3,8 +3,12 @@
 	<div class="panel box-shadow-none content-header" th:fragment="contentsHeaderFragment">
 		<div class="panel-body">
 			<div class="col-md-12">
-				<h3 class="animated fadeInLeft">Data Tables</h3>
-				<p class="animated fadeInDown">Table <span class="fa-angle-right fa"></span> Data Tables</p>
+				<h3 class="animated fadeInLeft"><a id="contentsHeaderTilte" href="javascript:void(0)">[[${title}]]</a></h3>
+				<p class="animated fadeInDown">[[${leftMenuList}]] <span class="fa-angle-right fa"></span> [[${title}]]
+					<th:block th:if="${not #strings.isEmpty(subTitle)}">
+						 <span class="fa-angle-right fa"></span> [[${subTitle}]]
+					</th:block>
+				</p>
 			</div>
 		</div>
 	</div>
