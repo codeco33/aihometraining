@@ -17,9 +17,9 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                          <li><a th:href="@{/member/memberList}">#전체 회원 목록(민식)</a></li>                          
-                          <li><a th:href="@{/member/memberLevelList}">#회원 권한 관리(민식)</a></li>                          
-                          <li><a th:href="@{/member/loginHistory}">#로그인 회원 목록(민식)</a></li>                          
+						  <li><a th:href="@{/admin/memberList}">#전체 회원 목록(민식)</a></li>                          
+                          <li><a th:href="@{/admin/memberLevelList}">#회원 권한 관리(민식)</a></li>                          
+                          <li><a th:href="@{/admin/loginHistory}">#로그인 회원 목록(민식)</a></li>  
                       </ul>
                     </li>
                     <li class="ripple">
@@ -28,6 +28,8 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
+                      	<li><a th:href="@{/admin/eClassOpenApplyadminList}">#운동클래스 개설 신청 내역(재환)</a></li>
+						<li><a th:href="@{/admin/eClassApplyadminList}">#운동클래스 목록(재환)</a></li>
                         <li><a th:href="@{/eClassOpenApplyadminList}">#운동클래스 개설 신청 내역(재환)</a></li>
                         <li><a th:href="@{/eClass/eClassConfig/eClassCategoryList}">#운동 클래스 카테고리 관리(민식)</a></li>
                         <li><a th:href="@{/eClassApplyadminList}">#운동클래스 목록(재환)</a></li>
@@ -41,10 +43,10 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                        <li><a th:href="@{/workoutLog/workoutLogConfig/workoutLogConfigMain}">#일지 관리(민희)</a></li>
-                        <li><a th:href="@{/workoutLog/workoutLogConfig/workoutCategoryList}">#운동계획 카테고리 관리(민희)</a></li>
-                        <li><a th:href="@{/workoutLog/workoutLogUserTrainer/workoutGoalPlanTrainerList}">#운동계획 관리-트레이너(민희)</a></li>
-                        <li><a th:href="@{/workoutLog/workoutLogConfig/workoutAIVideoList}">#AI운동영상 관리(민희)</a></li>
+                        <li><a th:href="@{/admin/workoutLogConfigMain}">#일지 관리(민희)</a></li>
+						<li><a th:href="@{/admin/workoutCategoryList}">#운동계획 카테고리 관리(민희)</a></li>
+						<li><a th:href="@{/admin/workoutGoalPlanTrainerList}">#운동계획 관리-트레이너(민희)</a></li>
+						<li><a th:href="@{/admin/workoutAIVideoList}">#AI운동영상 관리(민희)</a></li>
                       </ul>
                     </li>
                     <li class="ripple">
@@ -53,13 +55,11 @@
                     	<span class="fa-angle-right fa right-arrow text-right"></span> 
                     </a>
                       <ul class="nav nav-list tree">
-                        <li><a th:href="@{/challenge/challengeConfig/configList}">#챌린지 관리설정(보라)</a></li>
-                        <li><a th:href="@{/challenge/challengeConfig/challengeCategoryInsert}">#챌린지 카테고리 등록(보라)</a></li>
-                        <li><a th:href="@{/challenge/challengeConfig/challengeSettingInsert}">#챌린지 세팅 등록(보라)</a></li>
-                        <li><a th:href="@{/challenge/challengeConfig/challengeList}">#모집 챌린지 목록(보라)</a></li>
-                        <li><a th:href="@{/challenge/challengeConfig/challengeListIng}">#진행 챌린지 목록(보라)</a></li>
-                        <li><a th:href="@{/challenge/challengeConfig/challengePoint}">#챌린지 포인트 관리(보라)</a></li>
-                        <li><a th:href="@{/challenge/challengeConfig/challengeReportList}">#챌린지 신고 관리(보라)</a></li>
+                        <li><a th:href="@{/admin/configList}">#챌린지 관리설정(보라)</a></li>
+						<li><a th:href="@{/admin/challengeList}">#모집 챌린지 목록(보라)</a></li>
+						<li><a th:href="@{/admin/challengeListIng}">#진행 챌린지 목록(보라)</a></li>
+						<li><a th:href="@{/admin/challengePoint}">#챌린지 포인트 관리(보라)</a></li>
+						<li><a th:href="@{/admin/challengeReportList}">#챌린지 신고 관리(보라)</a></li>
                       </ul>
                     </li>
                     <li class="ripple">
@@ -68,7 +68,7 @@
                     	<span class="fa-angle-right fa right-arrow text-right"></span> 
                     </a>
                       <ul class="nav nav-list tree">
-                        <li><a th:href="@{/diet/dietBankListAdmin}">#식단 은행(영호)</a></li>
+                        <li><a th:href="@{/admin/diet/dietBankListAdmin}">#식단 은행(영호)</a></li>
                         <li><a th:href="@{#}">#개별 식단 관리(영호)</a></li>
                         <li><a th:href="@{#}">#영양성분  API 관리(영호)</a></li>
                         <li><a th:href="@{#}">#수강생 식단 관리(영호)</a></li>
@@ -80,9 +80,9 @@
                     	<span class="fa-angle-right fa right-arrow text-right"></span> 
                     </a>
                       <ul class="nav nav-list tree">
-                        <li><a th:href="@{/paymentList}">#결제 내역(수경)</a></li>
-                        <li><a th:href="@{/refundList}">#환불 내역(수경)</a></li>
-                        <li><a th:href="@{/refundStandard}">#환불 기준 관리(수경)</a></li>
+                        <li><a th:href="@{/admin/paymentList}">#결제 내역(수경)</a></li>
+                        <li><a th:href="@{/admin/refundList}">#환불 내역(수경)</a></li>
+                        <li><a th:href="@{/admin/refundStandard}">#환불 기준 관리(수경)</a></li>
                       </ul>
                     </li>
                     <li class="ripple">
@@ -91,9 +91,9 @@
                     	<span class="fa-angle-right fa right-arrow text-right"></span> 
                     </a>
                       <ul class="nav nav-list tree">
-                        <li><a th:href="@{/givePoint}">#포인트 지급(수경)</a></li>
-                        <li><a th:href="@{/pointList}">#포인트 내역(수경)</a></li>
-                        <li><a th:href="@{/pointStandard}">#포인트 지급 기준(수경)</a></li>
+                        <li><a th:href="@{/admin/givePoint}">#포인트 지급(수경)</a></li>
+                        <li><a th:href="@{/admin/pointList}">#포인트 내역(수경)</a></li>
+                        <li><a th:href="@{/admin/pointStandard}">#포인트 지급 기준(수경)</a></li>
                       </ul>
                     </li>
                     <li class="ripple">
@@ -132,8 +132,8 @@
                     	<span class="fa-angle-right fa right-arrow text-right"></span> 
                     </a>
                       <ul class="nav nav-list tree">
-                        <li><a th:href="@{/report/reportList}">#등록된 신고 관리(민식)</a></li>
-                        <li><a th:href="@{/report/reportStandardList}">#신고 기준 관리(민식)</a></li>
+                        <li><a th:href="@{/admin/reportList}">#등록된 신고 관리(민식)</a></li>
+                        <li><a th:href="@{/admin/reportStandardList}">#신고 기준 관리(민식)</a></li>
                       </ul>
                     </li>
                   </ul>

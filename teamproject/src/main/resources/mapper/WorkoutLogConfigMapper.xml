@@ -28,12 +28,43 @@
 		<association property="member" javaType="Member">
 			<id 	column="memberEmail" property="memberEmail"/>
 		</association>	
-	</resultMap>	
+	</resultMap>
+	
+	<!-- <update id="workoutLogCategoryUpdateModal" parameterType="String">
+		UPDATE 
+			workoutgoalplancategory AS wp
+		SET
+			wp.workoutGoalPlanCategoryContent=#{workoutGoalPlanCategoryContent}
+		WHERE 
+			workoutGoalPlanCategoryCode=#{workoutGoalPlanCategoryCode};
+	</update>	 -->
+	
+	<delete id="workoutLogCategoryDelete" parameterType="String">
+		DELETE 
+			 wc.workoutGoalPlanCategoryCode
+			,wc.workoutGoalPlanCategoryContent
+		FROM
+			workoutgoalplancategory AS wc
+		WHERE 
+			wc.workoutGoalPlanCategoryCode=#{workoutGoalPlanCategoryCode};	
+	</delete>
+	
+	<select id="getWorkoutLogCategoryModal" parameterType="String" resultType="WorkoutLogCategory">
+		/* 모달에서 운동 계획 카테고리명 가져오기 */
+		SELECT
+			 wp.workoutGoalPlanCategoryCode
+			,wp.workoutGoalPlanCategoryContent
+		FROM
+			workoutgoalplancategory AS wp
+		WHERE
+			wp.workoutGoalPlanCategoryCode = #{workoutGoalPlanCategoryCode};
+	</select>
 	
 	<select id="getWorkoutLogCategoryList" resultType="WorkoutLogCategory">
 		/* 운동 카테고리 조회 */
 		SELECT
-			workoutGoalPlanCategoryContent
+			workoutGoalPlanCategoryCode
+			,workoutGoalPlanCategoryContent
 		FROM
 			workoutgoalplancategory;
 	</select>
@@ -64,4 +95,7 @@
 		WHERE
 			w.memberEmail = 'id004@email.com';	
 	</select>
+	
+	
+	
 </mapper>        

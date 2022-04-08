@@ -62,7 +62,7 @@ public class ChallengeEnterController {
 		
 		log.info("challengeGather 조회  challengeGather : {}", challengeGather);
 		
-		return null;
+		return "redirect:/challenge/challengeEnter/challengeEnterPaymemt";
 		
 	}
 }
