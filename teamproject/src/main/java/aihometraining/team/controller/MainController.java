@@ -1,33 +1,23 @@
 package aihometraining.team.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class MainController {
 	
 	@GetMapping("/")
-	public String main(Model model, HttpSession session) {
+	public String main(Model model) {
 		
-		System.out.println(session.getAttribute("SLEVEL"));
-		System.out.println(session.getAttribute("SNAME"));
 		model.addAttribute("title", "메인화면");
 		
 		return "usermain";
 	}
 	@GetMapping("/admin")
-	public String usermain(Model model, HttpSession session) {
+	public String usermain(Model model) {
 		
 		model.addAttribute("title", "관리자 메인화면");
-		String sessionLevel = (String) session.getAttribute("SLEVEL");
-		
-		if(sessionLevel == null || (sessionLevel != null && !sessionLevel.equals("levelCode001"))) {
-			return "redirect:/";
-		}
 		
 		return "adminmain";
 		
@@ -63,36 +53,6 @@ public class MainController {
 		
 		return "member/wishList";
 		
-	}
-	
-	@GetMapping("/signUpForClass")
-	public String eClassTake(Model model) {
-		
-		
-		
-		model.addAttribute("title", "수강신청");
-		
-		return "eClass/eClassTake";
-	}
-
-	
-	@GetMapping("/payment")
-	public String payment(Model model) {
-		
-		
-		
-		model.addAttribute("title", "결제");
-		
-		return "payment/payment";
-	}
-	
-	@PostMapping("/payment")
-	public String payment(Model model, String a) {
-		
-		
-		model.addAttribute("title", "결제");
-		
-		return "redirect:/mypage/mypaymentList/paymentDetail";
 	}
 
 }

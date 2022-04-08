@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{${layoutDeco}}">
+	layout:decorate="~{layout/default}">
 <!-- 사용자 정의 title -->
 <th:block layout:fragment="customTitle">
 	<title th:text="${title}"></title>
@@ -111,8 +111,7 @@
 				
 				
 				<div id="paymentDetailBtnDiv">
-					<a th:if="${layoutDeco == 'layout/default'}" th:href="@{/admin/refundList}"><input type="button" class="btn btn-outline btn-default" value="환불내역 목록"></a>
-					<a th:unless="${layoutDeco == 'layout/default'}" th:href="@{/mypage/myrefundList}"><input type="button" class="btn btn-outline btn-default" value="환불내역 목록"></a>
+					<a th:href="@{/paymentList}"><input type="button" class="btn btn-outline btn-default" value="환불내역 목록"></a>
 				</div>
 			</div>
 		</div>

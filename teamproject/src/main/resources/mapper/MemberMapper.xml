@@ -132,7 +132,6 @@
 		SELECT
 		    m.memberEmail        
 		   ,m.memberPw        
-		   ,m.memberLevelCode        
 		   ,m.memberName        
 		   ,m.memberNickname      
 		   ,m.memberNewsAgree      
@@ -174,13 +173,9 @@
 		INSERT INTO member
 		( 	 memberEmail
 			,memberPw
-			,memberLevelCode
-			,memberRegDate
 		)VALUES (
 			 #{memberEmail}
 			,#{memberPw}
-			,#{memberLevelCode}
-			,CURDATE()
 		);
 	</insert>
 	
