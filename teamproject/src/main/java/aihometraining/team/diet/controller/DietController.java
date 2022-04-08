@@ -1,5 +1,6 @@
 package aihometraining.team.diet.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,10 +19,11 @@ import aihometraining.team.diet.service.DietService;
 import aihometraining.team.dto.DietBank;
 import aihometraining.team.dto.DietMealLevelList;
 import aihometraining.team.dto.DietNutrientList;
+import aihometraining.team.dto.DietOnemealConnection;
 
 
 @Controller
-@RequestMapping("/diet")
+@RequestMapping("/admin/diet")
 public class DietController {
 	
 	
@@ -102,16 +104,14 @@ public class DietController {
 									 ,@RequestParam(value="insertEmail",required=false) String insertEmail
 									 ,Model model) {
 		
-		
-		String newCode = dietMapper.selectDietBankListNewCode();
+		String newCode = dietMapper.selectDietBankListNewCode("dietbank","dietBankCode");
 		dietService.insertDietBankList2(connectEClass, insertEmail, newCode);
 		
+		
 		//생성된 식단(은행) 조회
-		DietBank newDietBankInfo = dietMapper.getDietBankListAdminByC(newCode);
+		String returnUrl = "redirect:/admin/diet/updateDietBankList?dietBankCode="+newCode;
 		
-		model.addAttribute("newDietBankInfo", newDietBankInfo);
-		
-		return "diet/updateDietBankList";
+		return returnUrl;
 	}
 	
 	
@@ -121,10 +121,30 @@ public class DietController {
 	public String updateDietBankList(Model model
 									,@RequestParam(name="dietBankCode", required = false) String dietBankCode) {
 									
+		
+		//코드넘버로 불러오기
 		model.addAttribute("title", "식단(은행) 수정");
 		
 		DietBank newDietBankInfo = dietMapper.getDietBankListAdminByC(dietBankCode);
 		model.addAttribute("newDietBankInfo", newDietBankInfo);
+		
+		
+
+		//select 시간, 요일 넘겨주기
+		List<List<HashMap<String, Object>>> selectBankDay = dietService.selectBankDay();
+		
+		model.addAttribute("Banktime", selectBankDay.get(0));
+		model.addAttribute("Bankday", selectBankDay.get(1));
+		
+		
+		//select 음식 조회, 화면에 뿌려주기
+		DietOnemealConnection dietOnemealConnection = new DietOnemealConnection();
+		dietOnemealConnection.setDietBankCode(dietBankCode);
+		
+		List<HashMap<String, Object>> selectOneMealConn = dietMapper.selectDietOneMealConnectionByBankCode(dietOnemealConnection);
+		model.addAttribute("selectOneMealConn", selectOneMealConn);
+		
+		System.out.println(selectOneMealConn+"찾아찾아");
 		
 		
 		return "diet/updateDietBankList";
@@ -151,7 +171,7 @@ public class DietController {
 		
 		
 		
-		return "redirect:/diet/dietBankListAdmin";
+		return "redirect:/admin/diet/dietBankListAdmin";
 	}
 	
 	
@@ -200,7 +220,29 @@ public class DietController {
 	}
 	
 	
-	
+	//Ajax 식단은행에서 추가시 insert, 변화내용 select
+	@PostMapping("/insertDietOneMealConnection")
+	public String dietOneMealConnection(DietOnemealConnection dietOnemealConnection
+										,Model model) {
+		
+		//새 코드 받아서 넣기
+		String dietOneMealConnectionCode = dietService.selectDietBankListNewCode("dietonemealconnection", "dietOneMealConnectionCode");
+		dietOnemealConnection.setDietOneMealConnectionCode(dietOneMealConnectionCode);
+		
+		//insert
+		int insertResult = dietService.insertDietOnemealConnection(dietOnemealConnection);
+		
+		//select
+		List<HashMap<String, Object>> selectOneMealConn = dietMapper.selectDietOneMealConnectionByBankCode(dietOnemealConnection);
+		
+		String CheckGroupNum = dietOnemealConnection.getDietOneMealConnectionGroupNum();
+		
+		
+		model.addAttribute("selectOneMealConn", selectOneMealConn);
+		
+		
+		return null; 
+	}
 	
 	
 	
