@@ -2,8 +2,8 @@ package aihometraining.team.dto;
 
 public class WishList {
 	private String wishListCode;
-	private Member member;
-	//private EClassApproved eClassApprovedCode;
+	private Member member;	//memberId
+	private EClassApproved eClassApproved;
 	private String wishListRegDate;
 	
 	public String getWishListCode() {
@@ -18,11 +18,11 @@ public class WishList {
 	public void setMember(Member member) {
 		this.member = member;
 	}
-	public EClassApproved geteClassApprovedCode() {
-		return eClassApprovedCode;
+	public EClassApproved geteClassApproved() {
+		return eClassApproved;
 	}
-	public void seteClassApprovedCode(EClassApproved eClassApprovedCode) {
-		this.eClassApprovedCode = eClassApprovedCode;
+	public void seteClassApprovedCode(EClassApproved eClassApproved) {
+		this.eClassApproved = eClassApproved;
 	}
 	public String getWishListRegDate() {
 		return wishListRegDate;
@@ -38,7 +38,7 @@ public class WishList {
 		builder.append(", member=");
 		builder.append(member);
 		builder.append(", eClassApprovedCode=");
-		builder.append(eClassApprovedCode);
+		builder.append(eClassApproved);
 		builder.append(", wishListRegDate=");
 		builder.append(wishListRegDate);
 		builder.append("]");
