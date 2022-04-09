@@ -89,6 +89,29 @@
 	</resultMap>
 	
 	
+		<select id="getworkoutLogList" resultMap="WorkoutLogResultMap">
+			/* 일지 목록 조회 */
+			SELECT 
+				  wl.workoutLogcode
+				, wl.memberEmail
+				, wl.eClassCategorySmallCode
+				, wl.eClassCategorySmallName
+				, wl.workoutLogTitle
+				, wl.workoutLogContent
+				, wl.workoutGoalPlanCode
+				, wl.eClassTaskDoCode
+				, wl.challengeEnterCode
+				, wl.workoutLogAddFileCode
+				, wl.workoutLogPrivacyBoundsCode
+				, wl.workoutLogUpdateEmail
+				, wl.workoutLogUpdateFinalDate
+				, wl.workoutLogDeleteEmail
+			FROM 
+				workoutlog AS wl
+			WHERE 
+				wl.memberEmail = 'id004@email.com';
+		</select>
+		
 		
 		<select id="getworkoutGoalList" resultMap="WorkoutGoalResultMap">
 			/* 운동 목표 목록 */

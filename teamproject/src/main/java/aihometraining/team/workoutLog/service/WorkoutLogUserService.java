@@ -30,18 +30,28 @@ public class WorkoutLogUserService {
 		
 	}
 	
-	// 일지 등록 처리
-		public int workoutLogInsert(WorkoutLog workoutLog, String sessionEmail) {
-			
-			String code = commonMapper.getNewCode("workoutLogcode", "workoutlog");
-			workoutLog.setWorkoutLogcode(code);
-			workoutLog.setMemberEmail(sessionEmail);	
-			
-			int result = workoutLogUserMapper.workoutLogInsert(workoutLog);
-			
-			return result;
-		}
+	//일지 목록 조회
+	public List<WorkoutLog>	getworkoutLogList(){
+		
+		List<WorkoutLog> workoutLogList = workoutLogUserMapper.getworkoutLogList();
+		
+		return workoutLogList;
+		
+	}
 	
+	
+	// 일지 등록 처리
+	public int workoutLogInsert(WorkoutLog workoutLog, String sessionEmail) {
+		
+		String code = commonMapper.getNewCode("workoutLogcode", "workoutlog");
+		workoutLog.setWorkoutLogcode(code);
+		workoutLog.setMemberEmail(sessionEmail);	
+		
+		int result = workoutLogUserMapper.workoutLogInsert(workoutLog);
+		
+		return result;
+	}
+
 	
 	// 운동 목표 목록 조회
 	public List<WorkoutGoal> getworkoutGoalList(){

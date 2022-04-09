@@ -16,61 +16,44 @@
                     <div class="col-lg-8 mb-5 mb-lg-0">
                         <div class="blog_left_sidebar">
                             <article class="blog_item">
-                                <div class="blog_item_img">
-                                    <img class="card-img rounded-0" th:src="@{/assets/img/workoutLogimg1.jpg}" alt="토르">
-                                    <a href="#" class="blog_item_date">
-                                        <h3>15</h3>
-                                        <p>Jan</p>
-                                    </a>
-                                </div>
-                                <div class="blog_details">
-                                    <a class="d-inline-block" th:href="@{/workoutLog/workoutLogUser/workoutLogList}">
-                                        <h2 class="blog-head" style="color: #2d2d2d;">오늘은 사이드 런지</h2>
-                                    </a>
-                                    <p> 토르: 러브 앤 썬더 개봉일 2022년 7월 8일 입니다</p>
-                                    <ul class="blog-info-link">
-                                        <li><a href="#"><i class="fa fa-heart"></i>좋아요</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i>피드백</a></li>
-                                    </ul>
-                                </div>
-                            </article>
-                            <article class="blog_item">
-                                <div class="blog_item_img embed-responsive embed-responsive-21by9">
-                                    <iframe class="embed-responsive-item" th:src="@{/assets/img/180419_Boxing_01_09.mp4}"></iframe>
-                                    <a href="#" class="blog_item_date">
-                                        <h3>15</h3>
-                                        <p>Jan</p>
-                                    </a>
-                                </div>
-                                <div class="blog_details">
-                                    <a class="d-inline-block" href="blog_details.html">
-                                        <h2 class="blog-head" style="color: #2d2d2d;">오늘은 권투 취취</h2>
-                                    </a>
-                                    <p>건들지마라</p>
-                                    <ul class="blog-info-link">
-                                        <li><a href="#"><i class="fa fa-heart"></i>좋아요</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i>피드백</a></li>
-                                    </ul>
-                                </div>
-                            </article>
-                            <article class="blog_item">
-                                <div class="blog_item_img">
-                                    <img class="card-img rounded-0" th:src="@{/assets/img/workoutLogimg2.jpg}" alt="토르">
-                                    <a href="#" class="blog_item_date">
-                                        <h3>15</h3>
-                                        <p>Jan</p>
-                                    </a>
-                                </div>
-                                <div class="blog_details">
-                                    <a class="d-inline-block" href="blog_details.html">
-                                        <h2 class="blog-head" style="color: #2d2d2d;">오늘은 배틀 로프</h2>
-                                    </a>
-                                    <p>어렵지 않아요</p>
-                                    <ul class="blog-info-link">
-                                        <li><a href="#"><i class="fa fa-heart"></i>좋아요</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i>피드백</a></li>
-                                    </ul>
-                                </div>
+		                    	<th:block th:if="${not #lists.isEmpty(workoutLogList)}" th:each="l : ${workoutLogList}">
+	                                <div class="blog_item_img">
+	                                    <img class="card-img rounded-0" th:src="@{/assets/img/workoutLogimg1.jpg}" alt="토르">
+	                                    <a href="#" class="blog_item_date">
+	                                        <h3>15</h3>
+	                                        <p>Jan</p>
+	                                    </a>
+	                                </div>
+	                                <div class="blog_details">
+			                                    <a class="d-inline-block" th:href="@{/workoutLog/workoutLogUser/workoutLogList}">
+			                                        <h2 class="blog-head" style="color: #2d2d2d;">[[${l.workoutLogTitle}]]</h2>
+			                                    </a>
+			                                    <p class="workoutLogContent">[[${l.workoutLogContent}]]</p>
+			                                    <ul class="blog-info-link">
+			                                        <li><a href="#"><i class="fa fa-heart"></i>좋아요</a></li>
+			                                        <li><a href="#"><i class="fa fa-comments"></i>피드백</a></li>
+			                                    </ul>
+	                                </div>
+			                    </th:block>
+			                    <th:block th:unless="${not #lists.isEmpty(workoutLogList)}" th:each="l : ${workoutLogList}">
+			                    	<div class="blog_item_img">
+	                                    <img class="card-img rounded-0" th:src="@{/assets/img/workoutLogimg1.jpg}" alt="토르">
+	                                    <a href="#" class="blog_item_date">
+	                                        <h3>15</h3>
+	                                        <p>Jan</p>
+	                                    </a>
+	                                </div>
+	                                <div class="blog_details">
+	                                    <a class="d-inline-block" th:href="@{/workoutLog/workoutLogUser/workoutLogList}">
+	                                        <h2 class="blog-head" style="color: #2d2d2d;">등록된 일지 제목이 없습니다.</h2>
+	                                    </a>
+	                                    <p> 등록된 일지 내용이 없습니다.</p>
+	                                    <ul class="blog-info-link">
+	                                        <li><a href="#"><i class="fa fa-heart"></i>좋아요</a></li>
+	                                        <li><a href="#"><i class="fa fa-comments"></i>피드백</a></li>
+	                                    </ul>
+	                                </div>
+								</th:block>      	  	
                             </article>
                             <nav class="blog-pagination justify-content-center d-flex">
                                 <ul class="pagination">
@@ -211,6 +194,16 @@
 				border-top: none;
 				padding: 0px;
 			}
+			
+			/* 한 줄 자르기 */ 
+			.workoutLogContent { 
+				width:200px;
+		      	padding:0 5px;
+		      	overflow:hidden;
+		      	text-overflow:ellipsis;
+		      	white-space:nowrap;
+			}
+
 		</style>
 	</th:block>
 	

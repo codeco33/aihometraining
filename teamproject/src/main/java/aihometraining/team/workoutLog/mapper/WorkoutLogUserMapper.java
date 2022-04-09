@@ -15,22 +15,25 @@ import aihometraining.team.dto.WorkoutLogPrivacybounds;
 public interface WorkoutLogUserMapper {
 	
 	//운동 목표 조회
-		public List<WorkoutGoal> getworkoutGoalList();
+	public List<WorkoutGoal> getworkoutGoalList();
 		
 	//일지 공개범위 목록 조회
-		public List<WorkoutLogPrivacybounds> getworkoutLogPrivacyboundsList();
+	public List<WorkoutLogPrivacybounds> getworkoutLogPrivacyboundsList();
 		
 	//운동 클래스 카테고리 large 목록 조회	
-		public List<EClassCategoryLarge> geteClassCategoryLargeList();
+	public List<EClassCategoryLarge> geteClassCategoryLargeList();
 		
 	//운동 클래스 카테고리 medium 목록 조회
-		public List<EClassCategoryMedium> geteClassCategoryMedium(String eClassCategoryLargeCode);
+	public List<EClassCategoryMedium> geteClassCategoryMedium(String eClassCategoryLargeCode);
 		
 	//운동 클래스 카테고리 medium 목록 조회
-		public List<EClassCategorySmall> geteClassCategorySmall(String eClassCategoryMediumCode);
+	public List<EClassCategorySmall> geteClassCategorySmall(String eClassCategoryMediumCode);
 	
 	//일지 등록 처리
-		public int workoutLogInsert(WorkoutLog workoutLog);
+	public int workoutLogInsert(WorkoutLog workoutLog);
+		
+	//일지 목록 조회
+	public List<WorkoutLog>	getworkoutLogList();
 
 		
 }

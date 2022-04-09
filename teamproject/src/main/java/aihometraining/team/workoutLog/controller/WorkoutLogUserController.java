@@ -51,14 +51,19 @@ public class WorkoutLogUserController {
 		//운동 목표 목룍 조회
 		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
 		
+		//일지 목록 조회
+		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList();
+		
 		log.info("운동 목표 목록 조회  workoutGoalList : {}", workoutGoalList);
 		
 		model.addAttribute("title", "하루 일지");
 		model.addAttribute("workoutGoalList", workoutGoalList);
+		model.addAttribute("workoutLogList", workoutLogList);
 		
 		return "workoutLog/workoutLogUser/workoutLogMain";
 			
 	}
+	
 	
 	// 일지 상세 화면
 	@GetMapping("/workoutLogList")
