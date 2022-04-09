@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import aihometraining.team.dto.EClassOpenApplyForm;
 import aihometraining.team.dto.LoginHistory;
 import aihometraining.team.dto.Member;
 import aihometraining.team.dto.MemberLevel;
+import aihometraining.team.dto.WishList;
 import aihometraining.team.mapper.MemberMapper;
 
 @Service
@@ -83,5 +85,14 @@ public class MemberService {
 		
 	}
 	
+	/**
+	 * 위시리스트
+	 * 220408 진수경
+	 */
+	public List<WishList> getWishList(String SEMAIL) {
+		List<WishList> wishList = memberMapper.getWishList(SEMAIL);
+		
+		return wishList;
+	}
 	
 }

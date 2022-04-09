@@ -5,9 +5,11 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import aihometraining.team.dto.EClassOpenApplyForm;
 import aihometraining.team.dto.LoginHistory;
 import aihometraining.team.dto.Member;
 import aihometraining.team.dto.MemberLevel;
+import aihometraining.team.dto.WishList;
 
 @Mapper
 public interface MemberMapper {
@@ -43,6 +45,9 @@ public interface MemberMapper {
 	
 	
 	/**
-	 * 진수경 작업
+	 * 위시리스트
+	 * 220408 진수경
 	 */
+	public List<WishList> getWishList(String SEMAIL);
+	
 }

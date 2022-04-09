@@ -15,6 +15,7 @@ public class EClassApproved {
 	private String eClassIntroduceCode;
 	private Date eClassApprovedDate;
 	private int eClassApprovedFinish;
+	private EClassOpenApplyForm eClassOpenApplyForm;
 	
 	public String geteClassApprovedCode() {
 		return eClassApprovedCode;
@@ -88,15 +89,45 @@ public class EClassApproved {
 	public void seteClassApprovedFinish(int eClassApprovedFinish) {
 		this.eClassApprovedFinish = eClassApprovedFinish;
 	}
+	
+	public EClassOpenApplyForm geteClassOpenApplyForm() {
+		return eClassOpenApplyForm;
+	}
+	public void seteClassOpenApplyForm(EClassOpenApplyForm eClassOpenApplyForm) {
+		this.eClassOpenApplyForm = eClassOpenApplyForm;
+	}
 	@Override
 	public String toString() {
-		return "EClassApproved [eClassApprovedCode=" + eClassApprovedCode + ", eClassTakeCode=" + eClassTakeCode
-				+ ", memberEmail=" + memberEmail + ", eClassApprovedName=" + eClassApprovedName
-				+ ", eClassApprovedSetDate=" + eClassApprovedSetDate + ", eClassApprovedStratDate="
-				+ eClassApprovedStratDate + ", eClassApprovedEndDate=" + eClassApprovedEndDate
-				+ ", eClassApprovedStudent=" + eClassApprovedStudent + ", eClassApprovedMaxStudent="
-				+ eClassApprovedMaxStudent + ", eClassIntroduceCode=" + eClassIntroduceCode + ", eClassApprovedDate="
-				+ eClassApprovedDate + ", eClassApprovedFinish=" + eClassApprovedFinish + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("EClassApproved [eClassApprovedCode=");
+		builder.append(eClassApprovedCode);
+		builder.append(", eClassTakeCode=");
+		builder.append(eClassTakeCode);
+		builder.append(", memberEmail=");
+		builder.append(memberEmail);
+		builder.append(", eClassApprovedName=");
+		builder.append(eClassApprovedName);
+		builder.append(", eClassApprovedSetDate=");
+		builder.append(eClassApprovedSetDate);
+		builder.append(", eClassApprovedStratDate=");
+		builder.append(eClassApprovedStratDate);
+		builder.append(", eClassApprovedEndDate=");
+		builder.append(eClassApprovedEndDate);
+		builder.append(", eClassApprovedStudent=");
+		builder.append(eClassApprovedStudent);
+		builder.append(", eClassApprovedMaxStudent=");
+		builder.append(eClassApprovedMaxStudent);
+		builder.append(", eClassIntroduceCode=");
+		builder.append(eClassIntroduceCode);
+		builder.append(", eClassApprovedDate=");
+		builder.append(eClassApprovedDate);
+		builder.append(", eClassApprovedFinish=");
+		builder.append(eClassApprovedFinish);
+		builder.append(", eClassOpenApplyForm=");
+		builder.append(eClassOpenApplyForm);
+		builder.append("]");
+		return builder.toString();
 	}
+	
 	
 }

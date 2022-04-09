@@ -69,99 +69,21 @@
 
 		<!-- 위시리스트 시작 -->
 		<div class="row">
-			<div class="col-lg-4 col-sm-6">
-				<div class="properties properties2 mb-30">
-				<label for="checks_3">
-					<div class="properties__card">
-						<div class="properties__img overlay1 wishListDiv">
-							<img th:src="@{assets/img/gallery/featured1.png}" alt="">
-							<div class="primary-checkbox checks">
-								<input type="checkbox" id="checks_3">
-								<label for="checks_3"></label>
-							</div>
-						</div>
-						<div class="properties__caption">
-							<p>운동클래스 카테고리</p>
-							<h3>
-								<a href="#">운동클래스 이름</a>
-							</h3>
-							<p>운동클래스 설명</p>
-							<div class="properties__footer">
-								<div class="restaurant-name">
-									<div class="rating">
-										<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="fas fa-star-half"></i>
-										<p>
-											<span>(90)</span>
-										</p>
-									</div>
-
-								</div>
-								<div class="price">
-									<span>29,900원</span>
-								</div>
-							</div>
-							<a th:href="@{/signUpForClass}" class="border-btn border-btn2">수강신청 하기</a>
-						</div>
-					</div>
-					</label>
-				</div>
-			</div>
-			<div class="col-lg-4 col-sm-6">
-				<div class="properties properties2 mb-30">
-					<label for="checks_2">
-					<div class="properties__card">
-						<div class="properties__img overlay1">
-							<img th:src="@{assets/img/gallery/featured1.png}" alt="">
-							<div class="primary-checkbox checks">
-								<input type="checkbox" id="checks_2">
-								<label for="checks_2"></label>
-							</div>
-						</div>
-						<div class="properties__caption">
-							<p>운동클래스 카테고리</p>
-							<h3>
-								<a href="#">운동클래스 이름</a>
-							</h3>
-							<p>운동클래스 설명</p>
-							<div class="properties__footer">
-								<div class="restaurant-name">
-									<div class="rating">
-										<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="fas fa-star-half"></i>
-										<p>
-											<span>(45)</span>
-										</p>
-									</div>
-
-								</div>
-								<div class="price">
-									<span>50,000원</span>
-								</div>
-							</div>
-							<a th:href="@{/signUpForClass}" class="border-btn border-btn2">수강신청 하기</a>
-						</div>
-					</div>
-					</label>
-				</div>
-			</div>
-			<div class="col-lg-4 col-sm-6">
+			<div class="col-lg-4 col-sm-6" th:if="${not #lists.isEmpty(wishList)}" th:each="l : ${wishList}">
 				<div class="properties properties2 mb-30">
 					<label for="checks_1">
 						<div class="properties__card">
 							<div class="properties__img overlay1">
-								<img th:src="@{assets/img/gallery/featured1.png}" alt="">
+								<img th:src="@{/assets/img/gallery/featured1.png}" alt="">
 								<div class="primary-checkbox checks">
 									<input type="checkbox" id="checks_1">
 									<label for="checks_1"></label>
 								</div>
 							</div>
 							<div class="properties__caption">
-								<p>운동클래스 카테고리</p>
+								<p>[[${l.eClassApproved.eClassOpenApplyForm.eClassOpenApplyCategorySamll}]]</p>
 								<h3>
-									<a href="#">운동클래스 이름</a>
+									<a href="#" th:text="${l.eClassApproved.eClassApprovedName}"></a>
 								</h3>
 								<p>운동클래스 설명</p>
 								<div class="properties__footer">
@@ -177,7 +99,7 @@
 	
 									</div>
 									<div class="price">
-										<span>35,000원</span>
+										<span>[[${l.eClassApproved.eClassOpenApplyForm.eClassOpenApplyPrice}]]원</span>
 									</div>
 								</div>
 								<a th:href="@{/signUpForClass}" class="border-btn border-btn2">수강신청 하기</a>
@@ -187,6 +109,12 @@
 				</div>
 			</div>
 		</div>
+		
+		<div class="row" th:unless="${not #lists.isEmpty(wishList)}" th:each="l : ${wishList}">
+			위시리스트가 없습니다.
+		</div>
+		
+		
 	</div>
 
 </th:block>
