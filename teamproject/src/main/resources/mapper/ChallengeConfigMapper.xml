@@ -178,15 +178,23 @@
 			,cc.challengeCategoryName
 			,cc.challengeCategoryRegDate	
 		FROM
+			member AS m
+			inner join
 			eclasscategorysmall AS ec
-			INNER join
+			ON
+			m.memberEmail = ec.memberEmail
+			inner join
 			challengecategory AS cc
 			on
-			ec.eClassCategorySmallCode = cc.eClassCategorySmallCode
-			INNER join
-			member AS m
-			on
-			cc.memberEmail = m.memberEmail
+			cc.eClassCategorySmallCode = ec.eClassCategorySmallCode
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="searchKey != null and searchKey !='' and searchValue != ''">
+				AND ${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
+			</if>
+			<if test="searchKey != null and searchKey !='' and searchValue != '' and searchDate != null and searchDate !='' and searchStart != '' and searchEnd != ''">
+				AND ${searchDate} BETWEEN #{searchStart} AND #{searchEnd}
+			</if>
+		</trim>
 			ORDER BY cast(SUBSTRING_INDEX(cc.challengeCategoryCode,'_',-1) AS UNSIGNED) ASC;
 	</select>
 	
