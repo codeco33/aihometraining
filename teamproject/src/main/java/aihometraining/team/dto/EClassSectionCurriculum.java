@@ -3,7 +3,7 @@ package aihometraining.team.dto;
 import java.sql.Date;
 
 public class EClassSectionCurriculum {
-	private String eClassSectionCurriculum;
+	private String eClassSectionCurriculumCode;
 	private String eClassApprovedCode;
 	private String memberEmail;
 	private String eClassSectionTitleCode;
@@ -14,12 +14,11 @@ public class EClassSectionCurriculum {
 	private Date eClassSectionCurriculumUpdateDate;
 	private String memberUpdateEmail;
 	private String eClassSectionCurriculumState;
-	
-	public String geteClassSectionCurriculum() {
-		return eClassSectionCurriculum;
+	public String geteClassSectionCurriculumCode() {
+		return eClassSectionCurriculumCode;
 	}
-	public void seteClassSectionCurriculum(String eClassSectionCurriculum) {
-		this.eClassSectionCurriculum = eClassSectionCurriculum;
+	public void seteClassSectionCurriculumCode(String eClassSectionCurriculumCode) {
+		this.eClassSectionCurriculumCode = eClassSectionCurriculumCode;
 	}
 	public String geteClassApprovedCode() {
 		return eClassApprovedCode;
@@ -83,10 +82,10 @@ public class EClassSectionCurriculum {
 	}
 	@Override
 	public String toString() {
-		return "EClassSectionCurriculum [eClassSectionCurriculum=" + eClassSectionCurriculum + ", eClassApprovedCode="
-				+ eClassApprovedCode + ", memberEmail=" + memberEmail + ", eClassSectionTitleCode="
-				+ eClassSectionTitleCode + ", eClassSectionCurriculumTitle=" + eClassSectionCurriculumTitle
-				+ ", eClassSectionCurriculumAddFile=" + eClassSectionCurriculumAddFile
+		return "EClassSectionCurriculum [eClassSectionCurriculumCode=" + eClassSectionCurriculumCode
+				+ ", eClassApprovedCode=" + eClassApprovedCode + ", memberEmail=" + memberEmail
+				+ ", eClassSectionTitleCode=" + eClassSectionTitleCode + ", eClassSectionCurriculumTitle="
+				+ eClassSectionCurriculumTitle + ", eClassSectionCurriculumAddFile=" + eClassSectionCurriculumAddFile
 				+ ", eClassSectionCurriculumRunningTime=" + eClassSectionCurriculumRunningTime
 				+ ", eClassSectionCurriculumRegDate=" + eClassSectionCurriculumRegDate
 				+ ", eClassSectionCurriculumUpdateDate=" + eClassSectionCurriculumUpdateDate + ", memberUpdateEmail="

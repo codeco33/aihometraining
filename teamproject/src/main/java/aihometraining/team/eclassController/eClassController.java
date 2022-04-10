@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import aihometraining.team.dto.EClassAnswer;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.EClassIntroduce;
+import aihometraining.team.dto.EClassQuestion;
+import aihometraining.team.dto.EClassSectionCurriculum;
+import aihometraining.team.dto.EClassSectionTitle;
 import aihometraining.team.eclassService.eClassService;
 import aihometraining.team.mapper.EClassMapper;
 
@@ -75,13 +79,73 @@ public class eClassController {
 	
 	@GetMapping("/eClassIntroduce")
 	public String EClassIntroduceInsert( Model model
-											,EClassIntroduce eClassIntroduce) {
+										,EClassIntroduce eClassIntroduce) {
 		
 		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassIntroduce);
 		//1 eClassIntroduceCode 자동생성
 		//2 개설된 클래스 코드
 		eClassIntroduce.setMemberEmail("id004@email.com");
 		eClassService.EClassIntroduceInsert(eClassIntroduce);
+		
+		model.addAttribute("title", "개설신청 완료");
+		
+		return "/eClassOpenApplyForm";
+	}
+	
+	@GetMapping("/eClassSectionTitle")
+	public String EClassSectionTitleInsert(  Model model
+											,EClassSectionTitle eClassSectionTitle) {
+		
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassSectionTitle);
+		//1 eClassSectionTitleCode 자동생성
+		//2 개설된 클래스 코드
+		eClassSectionTitle.setMemberEmail("id004@email.com");
+		eClassService.EClassSectionTitleInsert(eClassSectionTitle);
+		
+		model.addAttribute("title", "개설신청 완료");
+		
+		return "/eClassOpenApplyForm";
+	}
+	
+	@GetMapping("/eClassCurriculum")
+	public String EClassSectionCurriculumInsert( Model model
+												,EClassSectionCurriculum eClassSectionCurriculum) {
+		
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassSectionCurriculum);
+		//1 eClassSectionTitleCode 자동생성
+		//2 개설된 클래스 코드
+		eClassSectionCurriculum.setMemberEmail("id004@email.com");
+		eClassService.EClassSectionCurriculumInsert(eClassSectionCurriculum);
+		
+		model.addAttribute("title", "개설신청 완료");
+		
+		return "/eClassOpenApplyForm";
+	}
+	
+	@GetMapping("/eClassQuestion")
+	public String EClassQuestionInsert(  Model model
+										,EClassQuestion eClassQuestion) {
+		
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassQuestion);
+		//1 eClassSectionTitleCode 자동생성
+		//2 개설된 클래스 코드
+		eClassQuestion.setMemberEmail("id004@email.com");
+		eClassService.EClassQuestionInsert(eClassQuestion);
+		
+		model.addAttribute("title", "개설신청 완료");
+		
+		return "/eClassOpenApplyForm";
+	}
+	
+	@GetMapping("/eClassAnswer")
+	public String EClassAnswerInsert( Model model
+									 ,EClassAnswer eClassAnswer) {
+		
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassAnswer);
+		//1 eClassSectionTitleCode 자동생성
+		//2 개설된 클래스 코드
+		eClassAnswer.setMemberEmail("id004@email.com");
+		eClassService.EClassAnswerInsert(eClassAnswer);
 		
 		model.addAttribute("title", "개설신청 완료");
 		

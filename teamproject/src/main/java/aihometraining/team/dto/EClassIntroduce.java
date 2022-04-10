@@ -9,6 +9,7 @@ public class EClassIntroduce {
 	private String memberUpdateEmail;
 	private Date eClassIntroducetDate;
 	private String eClassIntroduceImg;
+	private String eClassCategorySmallCode;
 	
 	public String geteClassIntroduceCode() {
 		return eClassIntroduceCode;
@@ -46,11 +47,18 @@ public class EClassIntroduce {
 	public void seteClassIntroduceImg(String eClassIntroduceImg) {
 		this.eClassIntroduceImg = eClassIntroduceImg;
 	}
+	public String geteClassCategorySmallCode() {
+		return eClassCategorySmallCode;
+	}
+	public void seteClassCategorySmallCode(String eClassCategorySmallCode) {
+		this.eClassCategorySmallCode = eClassCategorySmallCode;
+	}
 	@Override
 	public String toString() {
 		return "EClassIntroduce [eClassIntroduceCode=" + eClassIntroduceCode + ", memberEmail=" + memberEmail
 				+ ", eClassIntroduceContent=" + eClassIntroduceContent + ", memberUpdateEmail=" + memberUpdateEmail
-				+ ", eClassIntroducetDate=" + eClassIntroducetDate + ", eClassIntroduceImg=" + eClassIntroduceImg + "]";
+				+ ", eClassIntroducetDate=" + eClassIntroducetDate + ", eClassIntroduceImg=" + eClassIntroduceImg
+				+ ", eClassCategorySmallCode=" + eClassCategorySmallCode + "]";
 	}
 	
 }
