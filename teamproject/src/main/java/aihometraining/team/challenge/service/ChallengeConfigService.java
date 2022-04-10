@@ -105,11 +105,11 @@ public class ChallengeConfigService {
 			//챌린지 카테고리 코드에 따른 참가내역 삭제(챌린지 카테고리 삭제처리 )
 			challengeConfigMapper.enterDeleteBycateCode(challengeCategoryCode);
 			
-			//챌린지 카테고리 코드에 따른 모집계획 내역 삭제(챌린지 카테고리 삭제처리 )
-			challengeConfigMapper.planDeleteBycateCode(challengeCategoryCode);
-			
 			//챌린지 카테고리 코드에 따른 모집내역 삭제(챌린지 카테고리 삭제처리 )
 			challengeConfigMapper.gatherDeleteBycateCode(challengeCategoryCode);
+			
+			//챌린지 카테고리 코드에 따른 모집계획 내역 삭제(챌린지 카테고리 삭제처리 )
+			challengeConfigMapper.planDeleteBycateCode(challengeCategoryCode);
 			
 			//챌린지 카테고리 코드에 따른 카테고리 삭제(챌린지 카테고리 삭제처리 )
 			challengeConfigMapper.challengeCategoryDelete(challengeCategoryCode);

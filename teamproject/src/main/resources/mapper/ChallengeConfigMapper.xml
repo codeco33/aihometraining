@@ -383,15 +383,28 @@
 			cc.challengeCategoryCode = #{challengeCategoryCode};
 	</delete>
 	
+	<delete id="gatherDeleteBycateCode">
+		DELETE
+			cg
+		FROM
+			challengecategory AS cc
+			INNER JOIN
+			challengegatherplan AS cp
+			on
+			cc.challengeCategoryCode = cp.challengeCategoryCode
+			INNER JOIN
+			challengegather AS cg
+			on
+			cc.challengeCategoryCode = cg.challengeCategoryCode
+		where
+			cc.challengeCategoryCode = #{challengeCategoryCode};
+	</delete>
+	
 	<delete id="planDeleteBycateCode">
 		DELETE
 			cp
 		FROM
 			challengecategory AS cc
-			INNER JOIN
-			challengegather AS cg
-			on
-			cc.challengeCategoryCode = cg.challengeCategoryCode
 			INNER JOIN
 			challengegatherplan AS cp
 			on
@@ -400,18 +413,6 @@
 			cc.challengeCategoryCode = #{challengeCategoryCode};
 	</delete>
 		
-	<delete id="gatherDeleteBycateCode">
-		DELETE
-			cg
-		FROM
-			challengecategory AS cc
-			INNER JOIN
-			challengegather AS cg
-			on
-			cc.challengeCategoryCode = cg.challengeCategoryCode
-		where
-			cc.challengeCategoryCode = #{challengeCategoryCode};
-	</delete>
 	
 	<delete id="challengeCategoryDelete">
 		DELETE
