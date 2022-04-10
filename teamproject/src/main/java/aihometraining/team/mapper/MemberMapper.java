@@ -44,10 +44,4 @@ public interface MemberMapper {
 	public int addMember(Member member);
 	
 	
-	/**
-	 * 위시리스트
-	 * 220408 진수경
-	 */
-	public List<WishList> getWishList(String SEMAIL);
-	
 }

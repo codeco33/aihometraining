@@ -1,42 +1,85 @@
 package aihometraining.team.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import aihometraining.team.dto.WishList;
+import aihometraining.team.service.PaymentService;
 
 @Controller
-@RequestMapping("/admin")
 public class PaymentController {
 	
+	private PaymentService paymentService;
 	
-	@GetMapping("/paymentList")
-	public String paymentList(Model model) {
-		
-		
-		
-		model.addAttribute("leftMenuList", "결제/환불");
-		model.addAttribute("title", "결제 내역");
-		
-		return "payment/paymentList";
+	public PaymentController(PaymentService paymentService) {
+		this.paymentService = paymentService;
 	}
 	
-	@GetMapping("/paymentList/paymentDetail")
-	public String paymentDetail(Model model) {
+	@GetMapping("/challengeadmin")
+	public String challengeadmin(Model model) {
 		
+		model.addAttribute("title", "챌린지 관리자 페이지");
 		
+		return "challenge/challengeadmin";
 		
-		model.addAttribute("leftMenuList", "결제/환불");
-		model.addAttribute("title", "결제 내역");
-		model.addAttribute("subTitle", "결제 상세 내역");
-		model.addAttribute("layoutDeco", "layout/default");
+	}
+	
+	@SuppressWarnings("null")
+	@GetMapping("/wishList")
+	public String wishList(Model model, HttpServletRequest request) {
 		
-		return "payment/paymentDetail";
+		HttpSession session = request.getSession();
+		String SEMAIL = (String) session.getAttribute("SEMAIL");
+				
+		List<WishList> wishList = paymentService.getWishList(SEMAIL);
+			
+		model.addAttribute("title", "위시리스트");
+		model.addAttribute("wishList", wishList);
+		
+		return "member/wishList";
 	}
 	
 	
+	//수강신청 화면
+	@GetMapping("/signUpForClass")
+	public String eClassTake(Model model , HttpServletRequest request
+							,@RequestParam(name="eClassCode", required = false) String eClassCode) {
+		
+		//멤버 정보 찾기
+		//운동클래스 정보 찾기
+		
+		
+		model.addAttribute("title", "수강신청");
+		
+		
+		return "eClass/eClassTake";
+	}
 
+	
+	@GetMapping("/payment")
+	public String payment(Model model) {
+		
+		
+		
+		model.addAttribute("title", "결제");
+		
+		return "payment/payment";
+	}
+	
+	@PostMapping("/payment")
+	public String payment(Model model, String a) {
+		
+		
+		model.addAttribute("title", "결제");
+		
+		return "redirect:/mypage/mypaymentList/paymentDetail";
+	}
 }

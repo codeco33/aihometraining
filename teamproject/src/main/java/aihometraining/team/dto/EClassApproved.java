@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class EClassApproved {
 	private String eClassApprovedCode;
-	private String eClassTakeCode;
+	private String eClassOpenApplyCode;
 	private String memberEmail;
 	private String eClassApprovedName;
 	private Date eClassApprovedSetDate;
@@ -15,19 +15,20 @@ public class EClassApproved {
 	private String eClassIntroduceCode;
 	private Date eClassApprovedDate;
 	private int eClassApprovedFinish;
-	private EClassOpenApplyForm eClassOpenApplyForm;
 	
+	//wishList 구현으로 추가함 -진수경
+	private EClassOpenApplyForm eClassOpenApplyForm;
 	public String geteClassApprovedCode() {
 		return eClassApprovedCode;
 	}
 	public void seteClassApprovedCode(String eClassApprovedCode) {
 		this.eClassApprovedCode = eClassApprovedCode;
 	}
-	public String geteClassTakeCode() {
-		return eClassTakeCode;
+	public String geteClassOpenApplyCode() {
+		return eClassOpenApplyCode;
 	}
-	public void seteClassTakeCode(String eClassTakeCode) {
-		this.eClassTakeCode = eClassTakeCode;
+	public void seteClassOpenApplyCode(String eClassOpenApplyCode) {
+		this.eClassOpenApplyCode = eClassOpenApplyCode;
 	}
 	public String getMemberEmail() {
 		return memberEmail;
@@ -89,20 +90,20 @@ public class EClassApproved {
 	public void seteClassApprovedFinish(int eClassApprovedFinish) {
 		this.eClassApprovedFinish = eClassApprovedFinish;
 	}
-	
 	public EClassOpenApplyForm geteClassOpenApplyForm() {
 		return eClassOpenApplyForm;
 	}
 	public void seteClassOpenApplyForm(EClassOpenApplyForm eClassOpenApplyForm) {
 		this.eClassOpenApplyForm = eClassOpenApplyForm;
 	}
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("EClassApproved [eClassApprovedCode=");
 		builder.append(eClassApprovedCode);
-		builder.append(", eClassTakeCode=");
-		builder.append(eClassTakeCode);
+		builder.append(", eClassOpenApplyCode=");
+		builder.append(eClassOpenApplyCode);
 		builder.append(", memberEmail=");
 		builder.append(memberEmail);
 		builder.append(", eClassApprovedName=");
@@ -128,6 +129,7 @@ public class EClassApproved {
 		builder.append("]");
 		return builder.toString();
 	}
+
 	
 	
 }

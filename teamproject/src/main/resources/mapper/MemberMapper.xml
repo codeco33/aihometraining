@@ -206,47 +206,4 @@
 			</if>
 		</trim>;
 	</select>
-	
-	
-	<resultMap type="EClassApproved" id="EClassApproved">
-		<id 	column="eClassApproved" 			property="eClassApproved"/>
-		<result column="eClassApprovedName" 		property="eClassApprovedName"/>
-		<result column="eClassApprovedFinish" 		property="eClassApprovedFinish"/>
-		<association property="eClassOpenApplyForm" javaType="EClassOpenApplyForm">
-			<id 	column="eClassOpenAppleyCode" 			property="eClassOpenAppleyCode"/>
-			<result column="eClassOpenApplyCategorySamll" 	property="eClassOpenApplyCategorySamll"/>
-			<result column="eClassOpenApplyPrice" 			property="eClassOpenApplyPrice"/>
-		</association>
-	</resultMap>
-
-
-	<resultMap type="WishList" id="wishListResultMap">
-		<id 	column="wishListCode" 			property="wishListCode"/>
-		<result column="wishListRegDate" 		property="wishListRegDate"/>
-		<association property="member" javaType="Member">
-			<id 	column="memberEmail"		property="memberEmail"/>
-			<result column="memberName"			property="memberName"/>
-			<result column="memberPhone"		property="memberPhone"/>
-			<result column="memberFinalPoint" 	property="memberFinalPoint"/>
-		</association>
-		<collection property="eClassApproved" resultMap="EClassApproved"/>
-	</resultMap>
-	
-	<select id="getWishList" parameterType="String" resultMap="wishListResultMap" fetchSize="1000">
-		/* 위시리스트 */
-		SELECT 
-			*
-		FROM
-			wishlist AS w
-			INNER JOIN
-			eclassapproved AS ea
-			ON
-			w.eClassApprovedCode = ea.eClassApprovedCode
-			INNER JOIN 
-			eclassopenapply AS eo
-			ON
-			ea.eClassOpenApplyCode = eo.eClassOpenAppleyCode
-		WHERE
-			w.memberEmail = #{SEMAIL};
-	</select>
 </mapper>

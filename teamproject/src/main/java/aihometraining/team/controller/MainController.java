@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import aihometraining.team.dto.EClassOpenApplyForm;
 import aihometraining.team.dto.WishList;
@@ -64,65 +65,7 @@ public class MainController {
 		return "eClass/eclassadmin";
 		
 	}
-	@GetMapping("/challengeadmin")
-	public String challengeadmin(Model model) {
-		
-		model.addAttribute("title", "챌린지 관리자 페이지");
-		
-		return "challenge/challengeadmin";
-		
-	}
 	
-	@SuppressWarnings("null")
-	@GetMapping("/wishList")
-	public String wishList(Model model, HttpServletRequest request) {
-		
-		HttpSession session = request.getSession();
-		String SEMAIL = (String) session.getAttribute("SEMAIL");
-				
-		List<WishList> wishList = memberService.getWishList(SEMAIL);
-		//List<EClassOpenApplyForm> eclassOpenApplyList = null;
-		
-		/*for(int i=0; i<wishList.size() ; i++) {
-			String eClassOpenApllyCode = wishList.get(i).geteClassApproved().geteClassTakeCode();
-			EClassOpenApplyForm eClassOpenApply = memberMapper.getEClassOpenApply(eClassOpenApllyCode);
-			
-			if(eClassOpenApply != null)eclassOpenApplyList.add(eClassOpenApply);
-		}*/
-		
-		model.addAttribute("title", "위시리스트");
-		model.addAttribute("wishList", wishList);
-		
-		return "member/wishList";
-	}
-	
-	@GetMapping("/signUpForClass")
-	public String eClassTake(Model model) {
-		
-		model.addAttribute("title", "수강신청");
-		
-		return "eClass/eClassTake";
-	}
-
-	
-	@GetMapping("/payment")
-	public String payment(Model model) {
-		
-		
-		
-		model.addAttribute("title", "결제");
-		
-		return "payment/payment";
-	}
-	
-	@PostMapping("/payment")
-	public String payment(Model model, String a) {
-		
-		
-		model.addAttribute("title", "결제");
-		
-		return "redirect:/mypage/mypaymentList/paymentDetail";
-	}
 	
 
 }

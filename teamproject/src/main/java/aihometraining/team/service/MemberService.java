@@ -85,14 +85,4 @@ public class MemberService {
 		
 	}
 	
-	/**
-	 * 위시리스트
-	 * 220408 진수경
-	 */
-	public List<WishList> getWishList(String SEMAIL) {
-		List<WishList> wishList = memberMapper.getWishList(SEMAIL);
-		
-		return wishList;
-	}
-	
 }
