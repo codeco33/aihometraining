@@ -67,14 +67,42 @@ public class WorkoutLogUserController {
 	
 	// 일지 상세 화면
 	@GetMapping("/workoutLogList")
-	public String workoutLogList(Model model) {
+	public String workoutLogList(Model model
+								,@RequestParam(value = "workoutLogTitle", required = false) String workoutLogTitle
+								,@RequestParam(value = "workoutLogContent", required = false) String workoutLogContent) {
 		
+		//운동 목표 목록 조회
 		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
-		
 		log.info("운동 목표 목록 조회  workoutGoalList : {}", workoutGoalList);
+		
+		//일지 목록 조회
+		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList();
+		log.info("일지 목록 조회  workoutLogList : {}", workoutLogList);
 		
 		model.addAttribute("title", "일지 상세 화면");
 		model.addAttribute("workoutGoalList", workoutGoalList);
+		model.addAttribute("workoutLogList", workoutLogList);
+		model.addAttribute("workoutLogTitle", workoutLogTitle);
+		model.addAttribute("workoutLogContent", workoutLogContent);
+		
+		return "workoutLog/workoutLogUser/workoutLogList";
+		
+	}
+	
+	// 일지 메인에서 피드백 클릭 시 일지 상세화면 피드백 위치로 보여주기
+	@GetMapping("/workoutLogListFeedback")
+	public String workoutLogListFeedback(Model model
+										,@RequestParam(value = "workoutLogTitle", required = false) String workoutLogTitle
+										,@RequestParam(value = "workoutLogContent", required = false) String workoutLogContent) {
+		//일지 목록 조회
+		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList();
+		log.info("일지 목록 조회  workoutLogList : {}", workoutLogList);
+		
+		model.addAttribute("title", "일지 상세 화면");
+		model.addAttribute("workoutLogList", workoutLogList);
+		model.addAttribute("workoutLogTitle", workoutLogTitle);
+		model.addAttribute("workoutLogContent", workoutLogContent);
+
 		
 		return "workoutLog/workoutLogUser/workoutLogList";
 		
@@ -114,7 +142,7 @@ public class WorkoutLogUserController {
 	// Ajax : 운동 계획 카테고리 대-중 분류
 	@PostMapping("/geteClassCategoryMedium")
 	@ResponseBody
-	public List<EClassCategoryMedium> geteClassCategoryMedium(@RequestParam(value = "eClassCategoryLargeCode") String eClassCategoryLargeCode){
+	public List<EClassCategoryMedium> geteClassCategoryMedium(@RequestParam(value = "eClassCategoryLargeCode", required = false) String eClassCategoryLargeCode){
 		
 		log.info("운동클래스 카테고리 medium 목록 조회 : {}", eClassCategoryLargeCode);
 		
@@ -125,7 +153,7 @@ public class WorkoutLogUserController {
 	// Ajax : 운동 계획 카테고리 중-소 분류
 	@PostMapping("/geteClassCategorySmall")
 	@ResponseBody
-	public List<EClassCategorySmall> geteClassCategorySmall(@RequestParam(value = "eClassCategoryMediumCode") String eClassCategoryMediumCode){
+	public List<EClassCategorySmall> geteClassCategorySmall(@RequestParam(value = "eClassCategoryMediumCode", required = false) String eClassCategoryMediumCode){
 		
 		log.info("운동클래스 카테고리 small 목록 조회 : {}", eClassCategoryMediumCode);
 		

@@ -75,6 +75,7 @@
 	<resultMap type="WorkoutGoalPlan" id="WorkoutGoalPlanResultmap">
 		<id 	column="workoutLogcode" 					property="workoutLogcode"/>
 		<result column="memberEmail" 						property="memberEmail"/>
+		<result column="workoutLogLikeCount" 				property="workoutLogLikeCount"/>
 		<result column="workoutGoalCode" 					property="workoutGoalCode"/>
 		<result column="workoutGoalPlanStartDate" 			property="workoutGoalPlanStartDate"/>
 		<result column="workoutGoalPlanFinalDate" 			property="workoutGoalPlanFinalDate"/>
@@ -88,12 +89,23 @@
 		<result column="workoutGoalPlanCategoryCode" 		property="workoutGoalPlanCategoryCode"/>	
 	</resultMap>
 	
+		<update id="workoutLogLikeCountUpdate" parameterType="String">
+			/* 좋아요 카운트 */
+			UPDATE 
+				workoutlog
+			SET
+				workoutLogLikeCount=workoutLogLikeCount+1
+			WHERE 
+				workoutLogcode=#{workoutLogcode};
+		</update>
+	
 	
 		<select id="getworkoutLogList" resultMap="WorkoutLogResultMap">
 			/* 일지 목록 조회 */
 			SELECT 
 				  wl.workoutLogcode
 				, wl.memberEmail
+				, wl.workoutLogLikeCount
 				, wl.eClassCategorySmallCode
 				, wl.eClassCategorySmallName
 				, wl.workoutLogTitle

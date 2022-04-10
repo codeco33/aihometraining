@@ -30,6 +30,13 @@ public class WorkoutLogUserService {
 		
 	}
 	
+	//일지 좋아요 카운트
+	public void workoutLogLikeCountUpdate(String workoutLogcode) {
+		
+		workoutLogUserMapper.workoutLogLikeCountUpdate(workoutLogcode);
+		
+	}
+	
 	//일지 목록 조회
 	public List<WorkoutLog>	getworkoutLogList(){
 		
