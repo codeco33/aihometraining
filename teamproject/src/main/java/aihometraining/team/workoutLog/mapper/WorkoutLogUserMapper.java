@@ -9,6 +9,7 @@ import aihometraining.team.dto.EClassCategoryMedium;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.WorkoutGoal;
 import aihometraining.team.dto.WorkoutLog;
+import aihometraining.team.dto.WorkoutLogLike;
 import aihometraining.team.dto.WorkoutLogPrivacybounds;
 
 @Mapper
@@ -35,8 +36,15 @@ public interface WorkoutLogUserMapper {
 	//일지 목록 조회
 	public List<WorkoutLog>	getworkoutLogList();
 	
-	//일지 좋아요 카운트
+	//일지 좋아요 카운트 값 수정하기
 	public void workoutLogLikeCountUpdate(String workoutLogcode);
+	
+	//일지 좋아요카운트 값 가져오기
+	public String getworkoutLogLikeCount(String workoutLogcode);
+	
+	//일지 좋아요 등록 처리
+	public int workoutLogLikeInsert(WorkoutLogLike workoutLogLike);
+	
 	
 
 		

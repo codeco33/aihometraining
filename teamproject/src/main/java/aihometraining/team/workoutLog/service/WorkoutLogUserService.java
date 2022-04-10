@@ -10,6 +10,7 @@ import aihometraining.team.dto.EClassCategoryLarge;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.WorkoutGoal;
 import aihometraining.team.dto.WorkoutLog;
+import aihometraining.team.dto.WorkoutLogLike;
 import aihometraining.team.dto.WorkoutLogPrivacybounds;
 import aihometraining.team.mapper.CommonMapper;
 import aihometraining.team.workoutLog.mapper.WorkoutLogUserMapper;
@@ -28,6 +29,17 @@ public class WorkoutLogUserService {
 		this.workoutLogUserMapper = workoutLogUserMapper;
 		this.commonMapper = commonMapper;
 		
+	}
+	
+	// 일지 좋아요 등록
+	public int workoutLogLikeInsert(WorkoutLogLike workoutLogLike) {
+		
+		String num = commonMapper.getNewCode("workoutLogLikeNum", "workoutloglike");
+		workoutLogLike.setWorkoutLogLikeNum(num);
+		
+		int result = workoutLogUserMapper.workoutLogLikeInsert(workoutLogLike);
+		
+		return result;
 	}
 	
 	//일지 좋아요 카운트

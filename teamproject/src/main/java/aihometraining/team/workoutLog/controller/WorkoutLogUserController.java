@@ -22,6 +22,7 @@ import aihometraining.team.dto.EClassCategoryMedium;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.WorkoutGoal;
 import aihometraining.team.dto.WorkoutLog;
+import aihometraining.team.dto.WorkoutLogLike;
 import aihometraining.team.dto.WorkoutLogPrivacybounds;
 import aihometraining.team.workoutLog.mapper.WorkoutLogUserMapper;
 import aihometraining.team.workoutLog.service.WorkoutLogUserService;
@@ -64,6 +65,21 @@ public class WorkoutLogUserController {
 			
 	}
 	
+	// 일지 좋아요 Ajax
+	@PostMapping("/workoutLogLikeCountUpdate")
+    @ResponseBody
+    public String workoutLogLikeCountUpdate(@RequestParam(value = "workoutLogCode") String workoutLogCode
+    					  				   ,WorkoutLogLike workoutLogLike){
+    
+		workoutLogUserService.workoutLogLikeCountUpdate(workoutLogCode);
+		workoutLogLike.setWorkoutLogLikeEmail("id004@email.com");
+		workoutLogLike.setWorkoutLogcode(workoutLogCode);
+		workoutLogUserService.workoutLogLikeInsert(workoutLogLike);
+		
+		
+		
+		return workoutLogUserMapper.getworkoutLogLikeCount(workoutLogCode);
+	}
 	
 	// 일지 상세 화면
 	@GetMapping("/workoutLogList")
