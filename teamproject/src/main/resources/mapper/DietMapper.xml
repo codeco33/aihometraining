@@ -35,7 +35,15 @@
 	</resultMap>
 	
 	
-
+	<update id="updateDietBank" parameterType="DietOnemealConnection">
+		UPDATE dietbank
+		SET
+			memberUpdateEmail=#{memberEmail},
+			dietBankUpdateDate=CURDATE()
+		WHERE 
+			dietBankCode=#{dietBankCode};
+	
+	</update>
 
 	<select id="selectDietMealListDetail" parameterType="String" resultMap="DietMealLevelListResultMap">
 		SELECT 
@@ -194,6 +202,23 @@
 		WHERE dietBankCode = #{dietBankCode};
 	</select>
 	
+	
+	<delete id="deleteDietOneMealConnection" parameterType="String">
+	
+		DELETE FROM 
+			dietonemealconnection 
+		WHERE 
+			dietOneMealConnectionCode = #{dietOneMealConnectionCode};
+	
+	</delete>
+	
+	<delete id="deleteDietOneMealConnectionAll" parameterType="String">
+		DELETE FROM 
+			dietonemealconnection 
+		WHERE
+			dietBankCode=#{dietBankCode};
+	
+	</delete>
 
 
 	
