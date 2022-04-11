@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import aihometraining.team.dto.EClassAnswer;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.EClassIntroduce;
+import aihometraining.team.dto.EClassOpenAppleyForm;
 import aihometraining.team.dto.EClassQuestion;
 import aihometraining.team.dto.EClassSectionCurriculum;
 import aihometraining.team.dto.EClassSectionTitle;
@@ -35,4 +36,7 @@ public interface EClassMapper {
 	
 	//클래스 답변 등록 처리
 	public int EClassAnswerInsert(EClassAnswer eClassAnswer);
+	
+	//클래스 답변 등록 처리
+	public int EClassPriceInsert(EClassOpenAppleyForm eClassOpenAppleyForm);
 }

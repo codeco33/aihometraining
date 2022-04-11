@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import aihometraining.team.dto.EClassAnswer;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.EClassIntroduce;
+import aihometraining.team.dto.EClassOpenAppleyForm;
 import aihometraining.team.dto.EClassQuestion;
 import aihometraining.team.dto.EClassSectionCurriculum;
 import aihometraining.team.dto.EClassSectionTitle;
@@ -93,11 +94,24 @@ public class eClassService {
 	public int EClassAnswerInsert(EClassAnswer eClassAnswer) {
 		
 		log.info("EClassAnswerInsert EClassAnswer 데이터: {}", eClassAnswer);
-		String answerCode = commonMapper.getNewCode("EClassAnswerCode", "eclassanswer");
+		String answerCode = commonMapper.getNewCode("eClassAnswerCode", "eclassanswer");
 		log.info("eClassService EClassQuestionInsert eClassQuestion", answerCode);
 		eClassAnswer.seteClassAnswerCode(answerCode);
 		
 		int result = eClassMapper.EClassAnswerInsert(eClassAnswer);
+		
+		return result;
+	}
+	
+	//클래스 신청 폼 price 등록처리
+	public int EClassPriceInsert(EClassOpenAppleyForm eClassOpenAppleyForm) {
+		
+		log.info("EClassPriceInsert EClassOpenApplyForm 데이터: {}", eClassOpenAppleyForm);
+		String priceCode = commonMapper.getNewCode("eClassOpenAppleyCode", "eclassopenappley");
+		log.info("eClassService EClassQuestionInsert eClassQuestion", priceCode);
+		eClassOpenAppleyForm.seteClassOpenAppleyCode(priceCode);
+		
+		int result = eClassMapper.EClassPriceInsert(eClassOpenAppleyForm);
 		
 		return result;
 	}

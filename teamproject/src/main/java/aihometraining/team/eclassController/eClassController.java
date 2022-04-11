@@ -8,11 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import aihometraining.team.dto.EClassAnswer;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.EClassIntroduce;
+import aihometraining.team.dto.EClassOpenAppleyForm;
 import aihometraining.team.dto.EClassQuestion;
 import aihometraining.team.dto.EClassSectionCurriculum;
 import aihometraining.team.dto.EClassSectionTitle;
@@ -49,17 +49,16 @@ public class eClassController {
 		
 		
 		
-		log.info("eClassController.javaOpenApplyForm 데이터: {}", eClassCategoryList); //받은 내용이 여기{}에 담긴다.
+		log.info("eClassController.javaOpenAppleyForm 데이터: {}", eClassCategoryList); //받은 내용이 여기{}에 담긴다.
 
 		
 		model.addAttribute("title", "운통클래스 신청폼");
 		model.addAttribute("eClassCategoryList", eClassCategoryList);
 		
-		return "eClass/eClassOpenApplyForm";
+		return "eClass/eClassOpenAppleyForm";
 	}
 	
 	@PostMapping("/CategoryLarge")
-	@ResponseBody
 	public List<EClassCategorySmall> EClassMedium(String eClassCategoryLargeCode){
 		
 		log.info("eClassController EClassMedium 데이터: {}", eClassCategoryLargeCode);
@@ -69,7 +68,6 @@ public class eClassController {
 		return categoryLarge;
 	}
 	@PostMapping("/CategoryMedium")
-	@ResponseBody
 	public List<EClassCategorySmall> EClassSmall (String eClassCategoryMediumCode){
 	
 		List<EClassCategorySmall> categorySmall = eClassMapper.eClassCategoryMedium(eClassCategoryMediumCode);
@@ -89,7 +87,22 @@ public class eClassController {
 		
 		model.addAttribute("title", "개설신청 완료");
 		
-		return "/eClassOpenApplyForm";
+		return "/eClassOpenAppleyForm";
+	}
+	
+	@GetMapping("/eClassIntroduceCategoryInsert")
+	public String eClassIntroduceCategoryInsert( Model model
+												,EClassIntroduce eClassIntroduce) {
+		
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassIntroduce);
+		//1 eClassIntroduceCode 자동생성
+		//2 개설된 클래스 코드
+		eClassIntroduce.setMemberEmail("id004@email.com");
+		eClassService.EClassIntroduceInsert(eClassIntroduce);
+		
+		model.addAttribute("title", "개설신청 완료");
+		
+		return "/eClassOpenAppleyForm";
 	}
 	
 	@GetMapping("/eClassSectionTitle")
@@ -104,7 +117,7 @@ public class eClassController {
 		
 		model.addAttribute("title", "개설신청 완료");
 		
-		return "/eClassOpenApplyForm";
+		return "/eClassOpenAppleyForm";
 	}
 	
 	@GetMapping("/eClassCurriculum")
@@ -119,7 +132,7 @@ public class eClassController {
 		
 		model.addAttribute("title", "개설신청 완료");
 		
-		return "/eClassOpenApplyForm";
+		return "/eClassOpenAppleyForm";
 	}
 	
 	@GetMapping("/eClassQuestion")
@@ -134,7 +147,7 @@ public class eClassController {
 		
 		model.addAttribute("title", "개설신청 완료");
 		
-		return "/eClassOpenApplyForm";
+		return "/eClassOpenAppleyForm";
 	}
 	
 	@GetMapping("/eClassAnswer")
@@ -149,7 +162,22 @@ public class eClassController {
 		
 		model.addAttribute("title", "개설신청 완료");
 		
-		return "/eClassOpenApplyForm";
+		return "/eClassOpenAppleyForm";
+	}
+	
+	@GetMapping("/eClassPrice")
+	public String EClassPriceInsert( Model model
+									,EClassOpenAppleyForm eClassOpenAppleyForm) {
+		
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassOpenAppleyForm);
+		//1 eClassSectionTitleCode 자동생성
+		//2 개설된 클래스 코드
+		eClassOpenAppleyForm.seteClassOpenAppleyMemberEmail("id004@email.com");
+		eClassService.EClassPriceInsert(eClassOpenAppleyForm);
+		
+		model.addAttribute("title", "개설신청 완료");
+		
+		return "/eClassOpenAppleyForm";
 	}
 	
 	@GetMapping("/eClassApproved")

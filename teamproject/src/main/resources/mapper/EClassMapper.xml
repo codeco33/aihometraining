@@ -5,56 +5,6 @@
 
 <mapper namespace="aihometraining.team.mapper.EClassMapper">
 	
-	 <resultMap type="EClassOpenApplyForm" id="EClassOpenApplyFormResultMap">
-	
-		<result column="eClassOpenAppleyCode" 			property="eClassOpenAppleyCode"/>
-		<result column="eClassOpenApplyMemberEmail"		property="eClassOpenApplyMemberEmail"/>
-		<result column="eClassOpenApplyName" 			property="eClassOpenApplyName"/>
-		<result column="eClassOpenApplyCategorySamll" 	property="eClassOpenApplyCategorySamll"/>
-		<result column="eClassOpenApplyPrice" 			property="eClassOpenApplyPrice"/>
-		<result column="eClassIntroduceCode"			property="eClassIntroduceCode"/>
-		<result column="eClassOpenApplyDate"			property="eClassOpenApplyDate"/>
-		<result column="eClassOpenApplyApproveState"	property="eClassOpenApplyApproveState"/>
-		
-			<association property="member" javaType="Member">
-				<id 	column="memberEmail" 			property="memberEmail"/>
-				<result column="memberPw" 				property="memberPw"/>
-				<result column="memberLevelCode" 		property="memberLevelCode"/>
-				<result column="memberNewsAgree" 		property="memberNewsAgree"/>
-				<result column="memberRegDate" 			property="memberRegDate"/>
-				<result column="memberName" 			property="memberName"/>
-				<result column="memberPhone"	 		property="memberPhone"/>
-				<result column="memberNickname" 		property="memberNickname"/>
-				<result column="memberBirthday" 		property="memberBirthday"/>
-				<result column="memberGender" 			property="memberGender"/>
-				<result column="memberRecommendEmail" 	property="memberRecommendEmail"/>
-				<result column="memberFinalPoint" 		property="memberFinalPoint"/>
-			</association>
-			
-			<association property="eClassCategorySmall" javaType="EClassCategorySmall">
-				<id 	column="eClassCategorySmallCode" 				property="eClassCategorySmallCode"/>
-				<result column="eClassCategorySmallName" 				property="eClassCategorySmallName"/>
-				<result column="eClassCategoryMediumCode" 				property="eClassCategoryMediumCode"/>
-				<result column="eClassCategoryMediumName" 				property="eClassCategoryMediumName"/>
-				<result column="eClassCategoryLargeCode" 				property="eClassCategoryLargeCode"/>
-				<result column="eClassCategoryLargeName" 				property="eClassCategoryLargeName"/>
-				<result column="memberEmail" 							property="memberEmail"/>
-				<result column="eClassCategorySmallRegDate" 			property="eClassCategorySmallRegDate"/>
-				<result column="updateMemberEmail" 						property="updateMemberEmail"/>
-				<result column="eClassCategorySmallFinalUpdateDate" 	property="eClassCategorySmallFinalUpdateDate"/>
-			</association>
-			
-			<association property="eClassIntroduce" javaType="EClassIntroduce">
-				<id 	column="eClassIntroduceCode" 		property="eClassIntroduceCode"/>
-				<result column="memberEmail" 				property="memberEmail"/>
-				<result column="eClassIntroduceContent" 	property="eClassIntroduceContent"/>
-				<result column="memberUpdateEmail" 			property="memberUpdateEmail"/>
-				<result column="eClassIntroducetDate" 		property="eClassIntroducetDate"/>
-				<result column="eClassIntroduceImg" 		property="eClassIntroduceImg"/>
-			</association>
-			
-	</resultMap>
-	
 	<resultMap type="EClassCategorySmall" id="eClassCategorySmallResultMap">
 	
 		<result column="eClassCategorySmallCode" 			property="eClassCategorySmallCode"/>
@@ -74,11 +24,11 @@
 	
 		<result column="eClassIntroduceCode" 		property="eClassIntroduceCode"/>
 		<result column="memberEmail" 				property="memberEmail"/>
+		<result column="eClassCategorySmallCode"	property="eClassCategorySmallCode"/>
 		<result column="eClassIntroduceContent" 	property="eClassIntroduceContent"/>
 		<result column="memberUpdateEmail" 			property="memberUpdateEmail"/>
 		<result column="eClassIntroducetDate"		property="eClassIntroducetDate"/>
 		<result column="eClassIntroduceImg"			property="eClassIntroduceImg"/>
-		<result column="eClassCategorySmallCode"	property="eClassCategorySmallCode"/>
 		
 			<association property="eClassCategorySmall" javaType="EClassCategorySmall">
 				<id 	column="eClassCategorySmallCode" 				property="eClassCategorySmallCode"/>
@@ -95,7 +45,7 @@
 	
 	</resultMap>
 	
-	<resultMap type="eclasssectiontitle" id="eclasssectiontitleMap">
+	<resultMap type="EClassSectionTitle" id="eclasssectiontitleResultMap">
 	
 		<result column="eClassSectionTitleCode" 		property="eClassSectionTitleCode"/>
 		<result column="memberEmail" 					property="memberEmail"/>
@@ -106,7 +56,7 @@
 		
 	</resultMap>
 	
-	<resultMap type="eclasssectioncurriculum" id="eclasssectioncurriculumMap">
+	<resultMap type="EClassSectionCurriculum" id="eclasssectioncurriculumResultMap">
 	
 		<result column="eClassSectionCurriculumCode" 		property="eClassSectionCurriculumCode"/>
 		<result column="memberEmail" 						property="memberEmail"/>
@@ -121,7 +71,7 @@
 	
 	</resultMap>
 	
-	<resultMap type="eclassquestion" id="eclassquestionMap">
+	<resultMap type="EClassQuestion" id="eclassquestionResultMap">
 	
 		<result column="eClassQuestionCode" 		property="eClassQuestionCode"/>
 		<result column="memberEmail" 				property="memberEmail"/>
@@ -132,7 +82,7 @@
 	
 	</resultMap>
 	
-	<resultMap type="eclassanswer" id="eclassanswerMap">
+	<resultMap type="EClassAnswer" id="eclassanswerResultMap">
 	
 		<result column="eClassAnswerCode" 			property="eClassAnswerCode"/>
 		<result column="eClassQuestionCode" 		property="eClassQuestionCode"/>
@@ -144,8 +94,68 @@
 	
 	</resultMap>
 	
+	<resultMap type="EClassOpenAppleyForm" id="eclassopenappleyResultMap">
+	
+		<result column="eClassOpenAppleyCode" 			property="eClassOpenAppleyCode"/>
+		<result column="eClassOpenAppleyMemberEmail" 	property="eClassOpenAppleyMemberEmail"/>
+		<result column="eClassOpenAppleyName" 			property="eClassOpenAppleyName"/>
+		<result column="eClassOpenAppleyPrice"			property="eClassOpenAppleyPrice"/>
+		<result column="eClassIntroduceCode"			property="eClassIntroduceCode"/>
+		<result column="eClassSectionTitleCode"			property="eClassSectionTitleCode"/>
+		<result column="eClassSectionCurriculumCode"	property="eClassSectionCurriculumCode"/>
+		<result column="eClassQuestionCode"				property="eClassQuestionCode"/>
+		<result column="eClassAnswerCode"				property="eClassAnswerCode"/>
+		<result column="eClassOpenAppleySetDate"		property="eClassOpenAppleySetDate"/>
+		<result column="eClassOpenAppleyStratDate"		property="eClassOpenAppleyStratDate"/>
+		<result column="eClassOpenAppleyEndDate"		property="eClassOpenAppleyEndDate"/>
+		<result column="eClassOpenAppleyStudent"		property="eClassOpenAppleyStudent"/>
+		<result column="eClassOpenAppleyMaxStudent"		property="eClassOpenAppleyMaxStudent"/>
+		<result column="eClassOpenAppleyDate"			property="eClassOpenAppleyDate"/>
+		<result column="eClassOpenAppleyApproveState"	property="eClassOpenAppleyApproveState"/>
+	
+	</resultMap>
+	
+	<insert id="EClassPriceInsert" parameterType="EClassOpenAppleyForm">
+		/* Price등록처리 */
+		INSERT INTO eclassopenappley(
+			 eClassOpenAppleyCode
+			,eClassOpenAppleyMemberEmail
+			,eClassOpenAppleyName
+			,eClassOpenAppleyPrice
+			,eClassIntroduceCode
+			,eClassSectionTitleCode
+			,eClassSectionCurriculumCode
+			,eClassQuestionCode
+			,eClassAnswerCode
+			,eClassOpenAppleySetDate
+			,eClassOpenAppleyStratDate
+			,eClassOpenAppleyEndDate
+			,eClassOpenAppleyStudent
+			,eClassOpenAppleyMaxStudent
+			,eClassOpenAppleyDate
+			,eClassOpenAppleyApproveState
+		)VALUES(
+			 #{eClassOpenAppleyCode}
+			,#{eClassOpenAppleyMemberEmail}
+			,#{eClassOpenAppleyName}
+			,#{eClassOpenAppleyPrice}
+			,#{eClassIntroduceCode}
+			,#{eClassSectionTitleCode}
+			,#{eClassSectionCurriculumCode}
+			,#{eClassQuestionCode}
+			,#{eClassAnswerCode}
+			,#{eClassOpenAppleySetDate}
+			,#{eClassOpenAppleyStratDate}
+			,#{eClassOpenAppleyEndDate}
+			,#{eClassOpenAppleyStudent}
+			,#{eClassOpenAppleyMaxStudent}
+			,NOW()
+			,0
+		);
+	</insert>
+	
 	<insert id="EClassAnswerInsert" parameterType="EClassAnswer">
-		/* Question 등록처리 */
+		/* Answer 등록처리 */
 		INSERT INTO eclassanswer(
 			 eClassAnswerCode
 			,eClassQuestionCode
@@ -226,7 +236,7 @@
 			,#{eClassSectionTitleName}
 			,NOW()
 			,NULL
-			,null
+			,NULL
 		);
 	</insert>
 	
@@ -235,19 +245,19 @@
 		INSERT INTO eclassintroduce (
 			 eClassIntroduceCode
 			,memberEmail
+			,eClassCategorySmallCode
 			,eClassIntroduceContent
 			,memberUpdateEmail
 			,eClassIntroducetDate
 			,eClassIntroduceImg
-			,eClassCategorySmallCode
 		)VALUES (
 			 #{eClassIntroduceCode}
 			,#{memberEmail}
+			,#{eClassCategorySmallCode}
 			,#{eClassIntroduceContent}
 			,null
 			,NOW()
 			,NULL
-			,#{eClassCategorySmallCode}
 		);
 	</insert>
 	

@@ -13,6 +13,21 @@ jQuery(document).ready(function($){
 	});
 	
 	$('.introduce').click(function(){
+		var eClassCategorySmallCode = $('select[name="eClassCategorySmallCode"]').val();
+		console.log(eClassCategorySmallCode);
+		$.ajax({
+			url	: 'http://localhost/OpenApplyForm',
+			type : 'get',
+			data : {
+				'eClassCategorySmallCode' : eClassCategorySmallCode
+			},
+			dataType : 'json',
+			success : function(data) {
+				var eClassCategorySmallName = $('option[name="eClassCategorySmallName"]').val();
+				console.log(data);
+				console.log(eClassCategorySmallName);
+			}
+		});
 		$('.introduceBox').css('display','none');
 		$('.sectionTitleBox').css('display','block');
 	});
@@ -36,7 +51,7 @@ jQuery(document).ready(function($){
 		$('.answerBox').css('display','none');
 		$('.applyBox').css('display','block');
 	});
-			//운동 계획 카테고리 대-중 분류
+			//운동 카테고리 대-중 분류
 		  $(document).on('change',"#eClassCategoryLargeCode", function(e) {
 			  console.log("이거 되나?medium");
             var eClassCategoryLargeCode = $('select[name="eClassCategoryLargeCode"]').val();
@@ -66,7 +81,7 @@ jQuery(document).ready(function($){
                 });
             });
 		  
-		  //운동 계획 카테고리 중-소 분류
+		  //운동 카테고리 중-소 분류
 		  $(document).on('change',"#eClassCategoryMediumCode", function(e) {
 			  console.log("이거 되나?small");
             var eClassCategoryMediumCode = $('select[name="eClassCategoryMediumCode"]').val();
@@ -95,4 +110,5 @@ jQuery(document).ready(function($){
                         }
                 });
 		  });
+		  
 });
