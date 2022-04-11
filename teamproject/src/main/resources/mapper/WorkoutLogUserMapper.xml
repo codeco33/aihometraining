@@ -5,7 +5,7 @@
         
 	<mapper namespace="aihometraining.team.workoutLog.mapper.WorkoutLogUserMapper">
 	<resultMap type="WorkoutGoal" id="WorkoutGoalResultMap">
-			<id		column="workoutGoalCode" 		property="workoutGoalCode"/>
+			<result	column="workoutGoalCode" 		property="workoutGoalCode"/>
 			<result column="memberEmail" 			property="memberEmail"/>
 			<result column="workoutGoalContent" 	property="workoutGoalContent"/>
 			<result column="workoutGoalStartDate" 	property="workoutGoalStartDate"/>
@@ -19,12 +19,12 @@
 	</resultMap>
 		
 	<resultMap type="WorkoutLogPrivacybounds" id="WorkoutLogPrivacyboundsResultMap">	
-			<id 	column="workoutLogPrivacyBoundsCode" 		property="workoutLogPrivacyBoundsCode"/>
+			<result	column="workoutLogPrivacyBoundsCode" 		property="workoutLogPrivacyBoundsCode"/>
 			<result column="workoutLogPrivacyBoundsContent" 	property="workoutLogPrivacyBoundsContent"/>
 	</resultMap>
 	
 	<resultMap type="EClassCategoryLarge" id="EClassCategoryLargeResultMap">
-			<id 	column="eClassCategoryLargeCode" 			property="eClassCategoryLargeCode"/>
+			<result	column="eClassCategoryLargeCode" 			property="eClassCategoryLargeCode"/>
 			<result column="eClassCategoryLargeName" 			property="eClassCategoryLargeName"/>
 			<result column="eClassCategoryLargeRegEmail" 		property="eClassCategoryLargeRegEmail"/>
 			<result column="eClassCategoryLargeRegDate" 		property="eClassCategoryLargeRegDate"/>
@@ -33,7 +33,7 @@
 	</resultMap>
 	
 	<resultMap type="EClassCategoryMedium" id="EClassCategoryMediumResultMap">
-			<id 	column="eClassCategoryMediumCode" 			property="eClassCategoryMediumCode"/>
+			<result	column="eClassCategoryMediumCode" 			property="eClassCategoryMediumCode"/>
 			<result column="eClassCategoryMediumName" 			property="eClassCategoryMediumName"/>
 			<result column="eClassCategoryLargeCode" 			property="eClassCategoryLargeCode"/>
 			<result column="eClassCategoryLargeName" 			property="eClassCategoryLargeName"/>
@@ -44,7 +44,7 @@
 	</resultMap>
 	
 	<resultMap type="EClassCategorySmall" id="EClassCategorySmallResultMap">	
-			<id 	column="eClassCategorySmallCode" 				property="eClassCategorySmallCode"/>
+			<result	column="eClassCategorySmallCode" 				property="eClassCategorySmallCode"/>
 			<result column="eClassCategorySmallName" 				property="eClassCategorySmallName"/>
 			<result column="eClassCategoryMediumCode" 				property="eClassCategoryMediumCode"/>
 			<result column="eClassCategoryMediumName" 				property="eClassCategoryMediumName"/>
@@ -57,7 +57,7 @@
 	</resultMap>
 	
 	<resultMap type="WorkoutLog" id="WorkoutLogResultMap">
-			<id 	column="workoutLogcode" 				property="workoutLogcode"/>
+			<result	column="workoutLogcode" 				property="workoutLogcode"/>
 			<result column="memberEmail" 					property="memberEmail"/>
 			<result column="eClassCategorySmallCode" 		property="eClassCategorySmallCode"/>
 			<result column="eClassCategorySmallName" 		property="eClassCategorySmallName"/>
@@ -73,8 +73,9 @@
 	</resultMap>
 	
 	<resultMap type="WorkoutGoalPlan" id="WorkoutGoalPlanResultmap">
-		<id 	column="workoutLogcode" 					property="workoutLogcode"/>
+		<result	column="workoutLogcode" 					property="workoutLogcode"/>
 		<result column="memberEmail" 						property="memberEmail"/>
+		<result column="workoutLogLikeCount" 				property="workoutLogLikeCount"/>
 		<result column="workoutGoalCode" 					property="workoutGoalCode"/>
 		<result column="workoutGoalPlanStartDate" 			property="workoutGoalPlanStartDate"/>
 		<result column="workoutGoalPlanFinalDate" 			property="workoutGoalPlanFinalDate"/>
@@ -88,7 +89,115 @@
 		<result column="workoutGoalPlanCategoryCode" 		property="workoutGoalPlanCategoryCode"/>	
 	</resultMap>
 	
+	<resultMap type="WorkoutLogLike" id="WorkoutLogLikeResultmap">
+		<result	column="workoutLogLikeNum" 				property="workoutLogLikeNum"/>
+		<result column="workoutLogLikeEmail" 			property="workoutLogLikeEmail"/>
+		<result column="workoutLogcode" 				property="workoutLogcode"/>
+		<result column="workoutLogLikeRegDate" 			property="workoutLogLikeRegDate"/>
+		
+		<association property="member" javaType="Member">
+			<id 	column="memberEmail" property="memberEmail"/>
+		</association>	
+		
+		<association property="workoutLog" javaType="WorkoutLog">
+			<id 	column="workoutLogcode" 				property="workoutLogcode"/>
+			<result column="memberEmail" 					property="memberEmail"/>
+			<result column="eClassCategorySmallCode" 		property="eClassCategorySmallCode"/>
+			<result column="eClassCategorySmallName" 		property="eClassCategorySmallName"/>
+			<result column="workoutLogTitle" 				property="workoutLogTitle"/>
+			<result column="workoutLogContent" 				property="workoutLogContent"/>
+			<result column="workoutGoalPlanCode" 			property="workoutGoalPlanCode"/>
+			<result column="eClassTaskDoCode" 				property="eClassTaskDoCode"/>
+			<result column="challengeEnterCode" 			property="challengeEnterCode"/>
+			<result column="workoutLogAddFileCode" 			property="workoutLogAddFileCode"/>
+			<result column="workoutLogPrivacyBoundsCode" 	property="workoutLogPrivacyBoundsCode"/>
+			<result column="workoutLogUpdateEmail" 			property="workoutLogUpdateEmail"/>
+			<result column="workoutLogDeleteEmail" 			property="workoutLogDeleteEmail"/>
+		</association>	
+	</resultMap>
 	
+	
+		<select id="getworkoutLogLikeList" resultMap="WorkoutLogLikeResultmap">
+			/* 일지 좋아요 목록 조회 */
+			SELECT
+				  wl.workoutLogLikeCount
+				,wll.workoutLogLikeNum
+				,wll.workoutLogLikeEmail
+				,wll.workoutLogcode
+				,wll.workoutLogLikeRegDate
+			FROM
+				workoutlog AS wl
+				INNER JOIN
+				workoutloglike AS wll
+				ON 
+				wl.workoutLogcode = wll.workoutLogcode
+			WHERE
+				wl.workoutLogcode = 'workoutLogcode_1';	
+	
+		</select>
+	
+		<insert id="workoutLogLikeInsert" parameterType="WorkoutLogLike">
+			/* 일지 좋아요 등록 */
+			INSERT INTO 
+				  workoutloglike
+			(
+				  workoutLogLikeNum
+				, workoutLogLikeEmail
+				, workoutLogcode
+				, workoutLogLikeRegDate
+			)VALUES (
+				  #{workoutLogLikeNum}
+				, #{workoutLogLikeEmail}
+				, #{workoutLogcode}
+				, NOW()
+			);
+		</insert>
+	
+		<select id="getworkoutLogLikeCount" parameterType="String" resultType="String">
+			/* 일지 좋아요 갯수 조회 */
+			SELECT
+				wl.workoutLogLikeCount
+			FROM
+				workoutlog AS wl
+			WHERE
+				wl.workoutLogcode = #{workoutLogcode};
+		</select>
+		
+		<update id="workoutLogLikeCountUpdate" parameterType="String">
+			/* 좋아요 카운트 수정 */
+			UPDATE 
+				workoutlog
+			SET
+				workoutLogLikeCount=workoutLogLikeCount+1
+			WHERE 
+				workoutLogcode=#{workoutLogcode};
+		</update>
+	
+	
+		<select id="getworkoutLogList" resultMap="WorkoutLogResultMap">
+			/* 일지 목록 조회 */
+			SELECT 
+				  wl.workoutLogcode
+				, wl.memberEmail
+				, wl.workoutLogLikeCount
+				, wl.eClassCategorySmallCode
+				, wl.eClassCategorySmallName
+				, wl.workoutLogTitle
+				, wl.workoutLogContent
+				, wl.workoutGoalPlanCode
+				, wl.eClassTaskDoCode
+				, wl.challengeEnterCode
+				, wl.workoutLogAddFileCode
+				, wl.workoutLogPrivacyBoundsCode
+				, wl.workoutLogUpdateEmail
+				, wl.workoutLogUpdateFinalDate
+				, wl.workoutLogDeleteEmail
+			FROM 
+				workoutlog AS wl
+			WHERE 
+				wl.memberEmail = 'id004@email.com';
+		</select>
+		
 		
 		<select id="getworkoutGoalList" resultMap="WorkoutGoalResultMap">
 			/* 운동 목표 목록 */

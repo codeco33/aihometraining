@@ -16,61 +16,46 @@
                     <div class="col-lg-8 mb-5 mb-lg-0">
                         <div class="blog_left_sidebar">
                             <article class="blog_item">
-                                <div class="blog_item_img">
-                                    <img class="card-img rounded-0" th:src="@{/assets/img/workoutLogimg1.jpg}" alt="토르">
-                                    <a href="#" class="blog_item_date">
-                                        <h3>15</h3>
-                                        <p>Jan</p>
-                                    </a>
-                                </div>
-                                <div class="blog_details">
-                                    <a class="d-inline-block" th:href="@{/workoutLog/workoutLogUser/workoutLogList}">
-                                        <h2 class="blog-head" style="color: #2d2d2d;">오늘은 사이드 런지</h2>
-                                    </a>
-                                    <p> 토르: 러브 앤 썬더 개봉일 2022년 7월 8일 입니다</p>
-                                    <ul class="blog-info-link">
-                                        <li><a href="#"><i class="fa fa-heart"></i>좋아요</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i>피드백</a></li>
-                                    </ul>
-                                </div>
-                            </article>
-                            <article class="blog_item">
-                                <div class="blog_item_img embed-responsive embed-responsive-21by9">
-                                    <iframe class="embed-responsive-item" th:src="@{/assets/img/180419_Boxing_01_09.mp4}"></iframe>
-                                    <a href="#" class="blog_item_date">
-                                        <h3>15</h3>
-                                        <p>Jan</p>
-                                    </a>
-                                </div>
-                                <div class="blog_details">
-                                    <a class="d-inline-block" href="blog_details.html">
-                                        <h2 class="blog-head" style="color: #2d2d2d;">오늘은 권투 취취</h2>
-                                    </a>
-                                    <p>건들지마라</p>
-                                    <ul class="blog-info-link">
-                                        <li><a href="#"><i class="fa fa-heart"></i>좋아요</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i>피드백</a></li>
-                                    </ul>
-                                </div>
-                            </article>
-                            <article class="blog_item">
-                                <div class="blog_item_img">
-                                    <img class="card-img rounded-0" th:src="@{/assets/img/workoutLogimg2.jpg}" alt="토르">
-                                    <a href="#" class="blog_item_date">
-                                        <h3>15</h3>
-                                        <p>Jan</p>
-                                    </a>
-                                </div>
-                                <div class="blog_details">
-                                    <a class="d-inline-block" href="blog_details.html">
-                                        <h2 class="blog-head" style="color: #2d2d2d;">오늘은 배틀 로프</h2>
-                                    </a>
-                                    <p>어렵지 않아요</p>
-                                    <ul class="blog-info-link">
-                                        <li><a href="#"><i class="fa fa-heart"></i>좋아요</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i>피드백</a></li>
-                                    </ul>
-                                </div>
+		                    	<th:block th:if="${not #lists.isEmpty(workoutLogList)}" th:each="l : ${workoutLogList}">
+	                                <div class="blog_item_img">
+	                                    <img class="card-img rounded-0" th:src="@{/assets/img/workoutLogimg1.jpg}" alt="토르">
+	                                    <a href="#" class="blog_item_date">
+	                                        <h3>15</h3>
+	                                        <p>Jan</p>
+	                                    </a>
+	                                </div>
+	                                <div class="blog_details">
+	                              		<!-- get방식으로 보내준것 /member/modifyMember?memberId=id001&memberName=홍01 -->
+										<!-- <a th:href="@{/member/modifyMember(memberId=${l.memberId}, memberName=${l.memberName})}">수정</a> -->
+	                                    <a class="d-inline-block" th:href="@{/workoutLog/workoutLogUser/workoutLogList(workoutLogTitle=${l.workoutLogTitle},workoutLogContent=${l.workoutLogContent})}">
+	                                        <h2 class="blog-head" style="color: #2d2d2d;">[[${l.workoutLogTitle}]]</h2>
+	                                    </a>
+	                                    <p class="workoutLogContent">[[${l.workoutLogContent}]]</p>
+	                                    <ul class="blog-info-link">
+	                                        <li><a href="#" onclick="return false;" class="workoutLogLikeCount" th:data-workoutLogCode="${l.workoutLogcode}"><i class="fa fa-heart"></i>좋아요([[${l.workoutLogLikeCount}]])</a></li>
+	                                        <li><a th:href="@{/workoutLog/workoutLogUser/workoutLogListFeedback(workoutLogTitle=${l.workoutLogTitle},workoutLogContent=${l.workoutLogContent})}"><i class="fa fa-comments"></i>피드백</a></li>
+	                                    </ul>
+	                                </div>
+			                    </th:block>
+			                    <th:block th:unless="${not #lists.isEmpty(workoutLogList)}" th:each="l : ${workoutLogList}">
+			                    	<div class="blog_item_img">
+	                                    <img class="card-img rounded-0" th:src="@{/assets/img/workoutLogimg1.jpg}" alt="토르">
+	                                    <a href="#" class="blog_item_date">
+	                                        <h3>15</h3>
+	                                        <p>Jan</p>
+	                                    </a>
+	                                </div>
+	                                <div class="blog_details">
+	                                    <a class="d-inline-block" th:href="@{/workoutLog/workoutLogUser/workoutLogList}">
+	                                        <h2 class="blog-head" style="color: #2d2d2d;">등록된 일지 제목이 없습니다.</h2>
+	                                    </a>
+	                                    <p> 등록된 일지 내용이 없습니다.</p>
+	                                    <ul class="blog-info-link">
+	                                        <li><a href="#"><i class="fa fa-heart"></i>좋아요 </a></li>
+	                                        <li><a href="#"><i class="fa fa-comments"></i>피드백</a></li>
+	                                    </ul>
+	                                </div>
+								</th:block>      	  	
                             </article>
                             <nav class="blog-pagination justify-content-center d-flex">
                                 <ul class="pagination">
@@ -211,13 +196,25 @@
 				border-top: none;
 				padding: 0px;
 			}
+			
+			/* 한 줄 자르기 */ 
+			.workoutLogContent { 
+				width:200px;
+		      	padding:0 5px;
+		      	overflow:hidden;
+		      	text-overflow:ellipsis;
+		      	white-space:nowrap;
+			}
+
 		</style>
 	</th:block>
 	
 	<!-- 사용자 정의 Script -->
 	<th:block layout:fragment="customScript">
 		<script>
-		$(document).ready(function($) {
+		
+			// to do List
+			$(document).ready(function($) {
 			    "use strict"
 			    //todo list
 			    $(".tdl-new").on('keypress', function(e) {
@@ -249,152 +246,30 @@
 			        });
 			        return false;
 			    });
-			})(jQuery);
-			
-		$(document).ready(function($) {
-			    "use strict"
-			    $('#todo_list').slimscroll({
-			        position: "right",
-			        size: "5px",
-			        height: "250px",
-			        color: "transparent"
-			    });
-			    $('#activity').slimscroll({
-			        position: "right",
-			        size: "5px",
-			        height: "390px",
-			        color: "transparent"
-			    });
-			})(jQuery);
-			// Widget - Todo
-			$(document).ready(function( $ ) {
-				'use strict';
-				if ( $.isFunction($.fn[ 'themePluginWidgetTodoList' ]) ) {
-					$(function() {
-						$('[data-plugin-todo-list], ul.widget-todo-list').each(function() {
-							var $this = $( this ),
-								opts = {};
-							var pluginOptions = $this.data('plugin-options');
-							if (pluginOptions)
-								opts = pluginOptions;
-							$this.themePluginWidgetTodoList(opts);
-						});
-					});
-				}
-			}).apply(this, [ jQuery ]);
-			// Widget - Todo
-			$(document).ready(function(theme, $) {
-
-				theme = theme || {};
-
-				var instanceName = '__widgetTodoList';
-
-				var WidgetTodoList = function($el, opts) {
-					return this.initialize($el, opts);
-				};
-
-				WidgetTodoList.defaults = {
-				};
-
-				WidgetTodoList.prototype = {
-					initialize: function($el, opts) {
-						if ( $el.data( instanceName ) ) {
-							return this;
-						}
-
-						this.$el = $el;
-
-						this
-							.setData()
-							.setOptions(opts)
-							.build()
-							.events();
-
-						return this;
-					},
-
-					setData: function() {
-						this.$el.data(instanceName, this);
-
-						return this;
-					},
-
-					setOptions: function(opts) {
-						this.options = $.extend( true, {}, WidgetTodoList.defaults, opts );
-
-						return this;
-					},
-
-					check: function( input, label ) {
-						if ( input.is(':checked') ) {
-							label.addClass('line-through');
-						} else {
-							label.removeClass('line-through');
-						}
-					},
-
-					build: function() {
-						var _self = this,
-							$check = this.$el.find('.todo-check');
-
-						$check.each(function () {
-							var label = $(this).closest('li').find('.todo-label');
-							_self.check( $(this), label );
-						});
-
-						return this;
-					},
-
-					events: function() {
-						var _self = this,
-							$remove = this.$el.find( '.todo-remove' ),
-							$check = this.$el.find('.todo-check'),
-							$window = $( window );
-
-						$remove.on('click.widget-todo-list', function( ev ) {
-							ev.preventDefault();
-							$(this).closest("li").remove();
-						});
-
-						$check.on('change', function () {
-							var label = $(this).closest('li').find('.todo-label');
-							_self.check( $(this), label );
-						});
-
-						if ( $.isFunction( $.fn.sortable ) ) {
-							this.$el.sortable({
-								sort: function(event, ui) {
-									var top = event.pageY - _self.$el.offset().top - (ui.helper.outerHeight(true) / 2);
-									ui.helper.css({'top' : top + 'px'});
-							    }
-							});
-						}
-
-						return this;
-					}
-				};
-
-				// expose to scope
-				$.extend(theme, {
-					WidgetTodoList: WidgetTodoList
-				});
-
-				// jquery plugin
-				$.fn.themePluginWidgetTodoList = function(opts) {
-					return this.each(function() {
-						var $this = $(this);
-
-						if ($this.data(instanceName)) {
-							return $this.data(instanceName);
-						} else {
-							return new WidgetTodoList($this, opts);
-						}
-
-					});
-				}
-
-			}).apply(this, [ window.theme, jQuery ]);
-			
+			});
+		
+			// 일지 좋아요 Ajax
+			$(function() {
+				$(".workoutLogLikeCount").on("click", function() {
+	                var workoutLogCode = $(this).attr('data-workoutLogCode');
+	                var text = $(this);
+	                console.log(workoutLogCode);
+	                    $.ajax({
+	                        url : '/workoutLog/workoutLogUser/workoutLogLikeCountUpdate',
+	                        type : 'post',
+	                        data : {
+	                            	'workoutLogCode' : workoutLogCode
+	                        },
+	                        dataType : 'text',
+	                        success : function(data) {
+	                        	console.log(data);
+	                        	console.log($(this));
+	                        	text.empty();
+	                            text.append('<i class="fa fa-heart"></i>좋아요(' + data + ')');
+	                        }
+	                    });
+	       		 })
+			});	
 		</script>
 	</th:block>
 	

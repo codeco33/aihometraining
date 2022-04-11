@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import aihometraining.team.dto.EClassCategoryLarge;
-import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.WorkoutGoal;
 import aihometraining.team.dto.WorkoutLog;
+import aihometraining.team.dto.WorkoutLogLike;
 import aihometraining.team.dto.WorkoutLogPrivacybounds;
 import aihometraining.team.mapper.CommonMapper;
 import aihometraining.team.workoutLog.mapper.WorkoutLogUserMapper;
@@ -30,18 +30,54 @@ public class WorkoutLogUserService {
 		
 	}
 	
-	// 일지 등록 처리
-		public int workoutLogInsert(WorkoutLog workoutLog, String sessionEmail) {
-			
-			String code = commonMapper.getNewCode("workoutLogcode", "workoutlog");
-			workoutLog.setWorkoutLogcode(code);
-			workoutLog.setMemberEmail(sessionEmail);	
-			
-			int result = workoutLogUserMapper.workoutLogInsert(workoutLog);
-			
-			return result;
-		}
+	// 일지 좋아요 목록 조회
+	public List<WorkoutLogLike> getworkoutLogLikeList() {
+		
+		workoutLogUserMapper.getworkoutLogLikeList();
+		
+		return null;
+	}
 	
+	// 일지 좋아요 등록
+	public int workoutLogLikeInsert(WorkoutLogLike workoutLogLike) {
+		
+		String num = commonMapper.getNewCode("workoutLogLikeNum", "workoutloglike");
+		workoutLogLike.setWorkoutLogLikeNum(num);
+		
+		int result = workoutLogUserMapper.workoutLogLikeInsert(workoutLogLike);
+		
+		return result;
+	}
+	
+	//일지 좋아요 카운트
+	public void workoutLogLikeCountUpdate(String workoutLogcode) {
+		
+		workoutLogUserMapper.workoutLogLikeCountUpdate(workoutLogcode);
+		
+	}
+	
+	//일지 목록 조회
+	public List<WorkoutLog>	getworkoutLogList(){
+		
+		List<WorkoutLog> workoutLogList = workoutLogUserMapper.getworkoutLogList();
+		
+		return workoutLogList;
+		
+	}
+	
+	
+	// 일지 등록 처리
+	public int workoutLogInsert(WorkoutLog workoutLog, String sessionEmail) {
+		
+		String code = commonMapper.getNewCode("workoutLogcode", "workoutlog");
+		workoutLog.setWorkoutLogcode(code);
+		workoutLog.setMemberEmail(sessionEmail);	
+		
+		int result = workoutLogUserMapper.workoutLogInsert(workoutLog);
+		
+		return result;
+	}
+
 	
 	// 운동 목표 목록 조회
 	public List<WorkoutGoal> getworkoutGoalList(){

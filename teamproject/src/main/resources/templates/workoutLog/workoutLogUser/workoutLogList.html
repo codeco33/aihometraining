@@ -15,67 +15,50 @@
                     <div class="col-lg-8 mb-5 mb-lg-0">
                         <div class="blog_left_sidebar">
                             <article class="blog_item">
-                                <div class="blog_item_img">
-                                    <img class="card-img rounded-0" th:src="@{/assets/img/workoutLogimg1.jpg}" alt="토르">
-                                    <a href="#" class="blog_item_date">
-                                        <h3>23</h3>
-                                        <p>Mar</p>
-                                    </a>
-                                </div>
-                                <div class="blog_details">
-                                    <a class="d-inline-block" th:href="@{/workoutLog/workoutLogUser/workoutLogList}">
-                                        <h2 class="blog-head" style="color: #2d2d2d;">오늘은 사이드 런지</h2>
-                                    </a>
-                                    <p> 토르: 러브 앤 썬더 개봉일 2022년 7월 8일 입니다</p>
-                                    <ul class="blog-info-link">
-                                        <li><a href="#"><i class="fa fa-heart"></i>좋아요</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i>피드백</a></li>
-                                    </ul>
-					                <p class="excert">
-					                    MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-					                    should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-					                    fraction of the camp price. However, who has the willpower
-					                </p>
-					                <p>
-					                    MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-					                    should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-					                    fraction of the camp price. However, who has the willpower to actually sit through a
-					                    self-imposed MCSE training. who has the willpower to actually
-					                </p>
-		               			</div>
-		               			
-					            <div class = "row justify-content-center mt-4">
-			               			<div class="col-lg-4 mb-2 mb-lg-0" style="display: inline-block">
-				               			<a th:href="@{/workoutLog/workoutLogUser/workoutLogUpdate}">
-					                        <button class="button button-contactForm" id="button">
-					                        	일지 수정
-					                        </button>
-					                	</a>
-				                	</div>
-				                	<div class="col-lg-4 mb-2 mb-lg-0" style="display: inline-block">
-				               			<a th:href="@{/workoutLog/workoutLogUser/workoutLogUpdate}">
-					                        <button class="button button-contactForm" id="button" >
-					                        	일지 삭제
-					                        </button>
-					                	</a>
-				                	</div>
-					            </div>
+	                                <div class="blog_item_img">
+	                                    <img class="card-img rounded-0" th:src="@{/assets/img/workoutLogimg1.jpg}" alt="토르">
+	                                    <a href="#" class="blog_item_date">
+	                                        <h3>23</h3>
+	                                        <p>Mar</p>
+	                                    </a>
+	                                </div>
+	                                <div class="blog_details">
+	                                    <h2 class="blog-head" style="color: #2d2d2d;" th:text="${workoutLogTitle}"></h2>
+	                                    <th:block th:if="${not #lists.isEmpty(workoutLogLikeList)}" th:each="l : ${workoutLogLikeList}">
+		                                    <ul class="blog-info-link">
+		                                        <li><a href="#" onclick="return false;" class="workoutLogLikeCount" th:data-workoutLogLikeCount="${l.workoutLogLikeCount}"><i class="fa fa-heart"></i>좋아요([[${l.workoutLogLikeCount}]])</a></li>
+		                                        <li><a href="#"><i class="fa fa-comments" ></i>피드백</a></li>
+		                                    </ul>
+		                                </th:block>
+					                    <th:block th:unless="${not #lists.isEmpty(workoutLogLikeList)}" th:each="l : ${workoutLogLikeList}">
+					                    	< <ul class="blog-info-link">
+		                                        <li><a href="#"><i class="fa fa-heart"></i>좋아요가 없습니다.</a></li>
+		                                        <li><a href="#"><i class="fa fa-comments" ></i>피드백</a></li>
+		                                    </ul>
+										</th:block>      	    
+						                <p class="excert" th:text="${workoutLogContent}">
+						                    
+						                </p>
+							            <div class = "row justify-content-center mt-4">
+					               			<div class="col-lg-4 mb-2 mb-lg-0" style="display: inline-block">
+						               			<a th:href="@{/workoutLog/workoutLogUser/workoutLogUpdate}">
+							                        <button class="button button-contactForm" id="button">
+							                        	일지 수정
+							                        </button>
+							                	</a>
+						                	</div>
+						                	<div class="col-lg-4 mb-2 mb-lg-0" style="display: inline-block">
+						               			<a th:href="@{/workoutLog/workoutLogUser/workoutLogUpdate}">
+							                        <button class="button button-contactForm" id="button" >
+							                        	일지 삭제
+							                        </button>
+							                	</a>
+						                	</div>
+							            </div>
+			               			</div>
                             </article>     
 		                </div>
 			            <div class="navigation-top">
-			               <div class="d-sm-flex justify-content-between text-center">
-			                  <p class="like-info"><span class="align-middle"><i class="fa fa-heart"></i></span> Lily and 4
-			                  people like this</p>
-			                  <div class="col-sm-4 text-center my-2 my-sm-0">
-			                     <!-- <p class="comment-count"><span class="align-middle"><i class="fa fa-comment"></i></span> 06 Comments</p> -->
-			                  </div>
-			                  <ul class="social-icons">
-			                     <li><a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a></li>
-			                     <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-			                     <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
-			                     <li><a href="#"><i class="fab fa-behance"></i></a></li>
-			                  </ul>
-			               </div>
 			               <div class="navigation-area">
 			                  <div class="row">
 			                     <div
@@ -97,29 +80,28 @@
 			                        </a>
 			                     </div>
 			                  </div>
-			                  <div
-			                  class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-			                  <div class="detials">
-			                     <p>다음 일지</p>
-			                     <a href="#">
-			                        <h4 style="color: #2d2d2d;">오늘은 달리기</h4>
-			                     </a>
-			                  </div>
-			                  <div class="arrow">
-			                     <a href="#">
-			                        <span class="lnr text-white ti-arrow-right"></span>
-			                     </a>
-			                  </div>
-			                  <div class="thumb">
-			                     <a href="#">
-			                        <img class="img-fluid" src="" alt="">
-			                     </a>
+			                  <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+				                  <div class="detials">
+				                     <p>다음 일지</p>
+				                     <a href="#">
+				                        <h4 style="color: #2d2d2d;">오늘은 달리기</h4>
+				                     </a>
+				                  </div>
+				                  <div class="arrow">
+				                     <a href="#">
+				                        <span class="lnr text-white ti-arrow-right"></span>
+				                     </a>
+				                  </div>
+				                  <div class="thumb">
+				                     <a href="#">
+				                        <img class="img-fluid" src="" alt="">
+				                     </a>
+				                  </div>
 			                  </div>
 			               </div>
-			            </div>
-			         </div>
+			           </div>
 			      </div>
-			      <div class="comments-area">
+			      <div class="comments-area" id="feedback">
 			         <h4>피드백</h4>
 			         <div class="comment-list">
 			            <div class="single-comment justify-content-between d-flex">
@@ -319,7 +301,6 @@
 	</th:block>
 	
 	<th:block layout:fragment="customCss">
-		<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
 		<!-- Custom Stylesheet -->
     	<style>
 			.progress-bar.color-7 {
@@ -344,6 +325,29 @@
 	<!-- 사용자 정의 Script -->
 	<th:block layout:fragment="customScript">
 		<script>
+			// 일지 좋아요 Ajax
+			$(function() {
+				$(".workoutLogLikeCount").on("click", function() {
+	                var workoutLogLikeCount = $(this).attr('data-workoutLogLikeCount');
+	                var text = $(this);
+	                console.log(workoutLogLikeCount);
+	                    $.ajax({
+	                        url : '/workoutLog/workoutLogUser/workoutLogList',
+	                        type : 'post',
+	                        data : {
+	                            	'workoutLogLikeCount' : workoutLogLikeCount
+	                        },
+	                        dataType : 'text',
+	                        success : function(data) {
+	                        	console.log(data);
+	                        	console.log($(this));
+	                        	text.empty();
+	                            text.append('<i class="fa fa-heart"></i>좋아요(' + data + ')');
+	                        }
+	                    });
+	       		 })
+			});			
+		
 		</script>
 	</th:block>
 	
