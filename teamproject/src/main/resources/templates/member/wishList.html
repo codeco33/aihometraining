@@ -104,7 +104,7 @@
 										<span>[[${l.eClassApproved.eClassOpenApplyForm.eClassOpenApplyPrice}]]원</span>
 									</div>
 								</div>
-								<a th:href="@{/signUpForClass(eClassCode=${l.eClassApproved.eClassApprovedCode})}" class="border-btn border-btn2">수강신청 하기</a>
+								<a th:href="@{/signUpForClass(eClassCode=${l.eClassApproved.eClassApprovedCode}, memberEmail=${l.member.memberEmail})}" class="border-btn border-btn2">수강신청 하기</a>
 							</div>
 						</div>
 					</label>

@@ -117,12 +117,12 @@
 						
 						<!-- 클래스정보 -->
 						<div class="form-group">
-							<label class="inputTitle">클래 이름</label>
-							<input type="text" name="eClassName" class="form-control-plaintext" readonly value="운동클래스 이름">
+							<label class="inputTitle">운동클래스 이름</label>
+							<input type="text" name="eClassName" class="form-control-plaintext" readonly th:value="${eClassTake.eClassApproved.eClassApprovedName}">
 						</div>
 						<div class="form-group">
-							<label class="inputTitle">강사이름</label>
-							<input type="text" name="eClassPrice" class="form-control-plaintext" readonly value="이순신">
+							<label class="inputTitle">강사 이름</label>
+							<input type="text" name="eClassPrice" class="form-control-plaintext" readonly th:value="${eClassTake.eClassApproved.eClassApprovedName}">
 						</div>
 						<div class="form-group">
 							<label class="inputTitle">커리큘럼 기간</label>

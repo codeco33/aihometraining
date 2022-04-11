@@ -46,14 +46,21 @@
 	<resultMap type="WishList" id="wishListResultMap">
 		<id 	column="wishListCode" 			property="wishListCode"/>
 		<result column="wishListRegDate" 		property="wishListRegDate"/>
-		<collection property="member" resultMap="memberResultMap"/>
+		<collection property="Member" resultMap="memberResultMap"/>
 		<collection property="eClassApproved" resultMap="EClassApproved"/>
 	</resultMap>
 	
 	<select id="getWishList" parameterType="String" resultMap="wishListResultMap" fetchSize="1000">
 		/* 위시리스트 */
 		SELECT 
-			*
+			 w.eClassApprovedCode
+			,w.memberEmail
+			,ec.eClassCategoryMediumName
+			,ec.eClassCategorySmallName
+			,ea.eClassApprovedName
+			,ei.eClassIntroduceContent
+			,ei.eClassIntroduceImg
+			,eo.eClassOpenApplyPrice
 		FROM
 			wishlist AS w
 			INNER JOIN
@@ -74,5 +81,43 @@
 			eo.eClassIntroduceCode = ei.eClassIntroduceCode
 		WHERE
 			w.memberEmail = #{SEMAIL};
+	</select>
+	
+	<select id="getEClassTake" parameterType="String" resultMap="wishListResultMap">
+		SELECT 
+			 w.eClassApprovedCode
+			,ea.eClassApprovedName
+			,cm.memberName
+			,ea.eClassApprovedSetDate
+			,eo.eClassOpenApplyPrice
+			,sm.memberName
+			,sm.memberEmail
+			,sm.memberPhone
+		FROM
+			wishlist AS w
+			INNER JOIN
+			eclassapproved AS ea
+			ON
+			w.eClassApprovedCode = ea.eClassApprovedCode
+			INNER JOIN 
+			eclassopenapply AS eo
+			ON
+			ea.eClassOpenApplyCode = eo.eClassOpenApplyCode
+			INNER JOIN 
+			eclasscategorysmall AS ec
+			ON
+			eo.eClassOpenApplyCategorySamll = ec.eClassCategorySmallCode
+			INNER JOIN 
+			member AS cm
+			ON 
+			ea.memberEmail = cm.memberEmail
+			INNER JOIN 
+			member AS sm
+			ON 
+			w.memberEmail = sm.memberEmail
+		WHERE
+			w.memberEmail = #{memberEmail}
+			AND
+			w.eClassApprovedCode = #{eClassCode};
 	</select>
 </mapper>

@@ -18,6 +18,8 @@ public class EClassApproved {
 	
 	//wishList 구현으로 추가함 -진수경
 	private EClassOpenApplyForm eClassOpenApplyForm;
+	private Member member;
+	
 	public String geteClassApprovedCode() {
 		return eClassApprovedCode;
 	}
@@ -126,8 +128,16 @@ public class EClassApproved {
 		builder.append(eClassApprovedFinish);
 		builder.append(", eClassOpenApplyForm=");
 		builder.append(eClassOpenApplyForm);
+		builder.append(", member=");
+		builder.append(member);
 		builder.append("]");
 		return builder.toString();
+	}
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
 	

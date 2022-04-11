@@ -27,4 +27,10 @@ public class PaymentService {
 		return wishList;
 	}
 	
+	//수강신청 화면
+	public WishList getEClassTake(String eClassCode, String memberEmail) {
+		
+		return paymentMapper.getEClassTake(eClassCode, memberEmail);
+	}
+	
 }

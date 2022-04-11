@@ -32,6 +32,7 @@ public class PaymentController {
 		
 	}
 	
+	//위시리스트
 	@SuppressWarnings("null")
 	@GetMapping("/wishList")
 	public String wishList(Model model, HttpServletRequest request) {
@@ -51,13 +52,15 @@ public class PaymentController {
 	//수강신청 화면
 	@GetMapping("/signUpForClass")
 	public String eClassTake(Model model , HttpServletRequest request
-							,@RequestParam(name="eClassCode", required = false) String eClassCode) {
+							,@RequestParam(name="eClassCode", required = false) String eClassCode
+							,@RequestParam(name="memberEmail", required = false) String memberEmail) {
 		
 		//멤버 정보 찾기
 		//운동클래스 정보 찾기
-		
+		WishList eClassTake = paymentService.getEClassTake(eClassCode, memberEmail);
 		
 		model.addAttribute("title", "수강신청");
+		model.addAttribute("eClassTake", eClassTake);
 		
 		
 		return "eClass/eClassTake";
