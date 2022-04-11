@@ -66,10 +66,17 @@
 			<result column="workoutGoalPlanCode" 			property="workoutGoalPlanCode"/>
 			<result column="eClassTaskDoCode" 				property="eClassTaskDoCode"/>
 			<result column="challengeEnterCode" 			property="challengeEnterCode"/>
-			<result column="workoutLogAddFileCode" 			property="workoutLogAddFileCode"/>
 			<result column="workoutLogPrivacyBoundsCode" 	property="workoutLogPrivacyBoundsCode"/>
 			<result column="workoutLogUpdateEmail" 			property="workoutLogUpdateEmail"/>
 			<result column="workoutLogDeleteEmail" 			property="workoutLogDeleteEmail"/>
+			
+			<collection property="fileList" javaType="List" ofType="FileDto">
+				<id column="fileIdx" 						property="fileIdx"/>
+				<result	column="fileOriginalName" 			property="fileOriginalName"/>
+				<result column="fileNewName" 				property="fileNewName"/>
+				<result column="filePath" 					property="filePath"/>
+				<result column="fileSize" 					property="fileSize"/>
+			</collection>
 	</resultMap>
 	
 	<resultMap type="WorkoutGoalPlan" id="WorkoutGoalPlanResultmap">
@@ -109,13 +116,11 @@
 			<result column="workoutGoalPlanCode" 			property="workoutGoalPlanCode"/>
 			<result column="eClassTaskDoCode" 				property="eClassTaskDoCode"/>
 			<result column="challengeEnterCode" 			property="challengeEnterCode"/>
-			<result column="fileIdx" 						property="fileIdx"/>
 			<result column="workoutLogPrivacyBoundsCode" 	property="workoutLogPrivacyBoundsCode"/>
 			<result column="workoutLogUpdateEmail" 			property="workoutLogUpdateEmail"/>
 			<result column="workoutLogDeleteEmail" 			property="workoutLogDeleteEmail"/>
 		</association>	
 	</resultMap>
-	
 	
 		<select id="getworkoutLogLikeList" resultMap="WorkoutLogLikeResultmap">
 			/* 일지 좋아요 목록 조회 */
@@ -187,15 +192,26 @@
 				, wl.workoutGoalPlanCode
 				, wl.eClassTaskDoCode
 				, wl.challengeEnterCode
-				, wl.fileIdx
+				, f.fileIdx
+				, f.filepath
+				, SUBSTRING_INDEX(f.fileOriginalName,'.',1)
 				, wl.workoutLogPrivacyBoundsCode
 				, wl.workoutLogUpdateEmail
 				, wl.workoutLogUpdateFinalDate
 				, wl.workoutLogDeleteEmail
 			FROM 
 				workoutlog AS wl
-			WHERE 
-				wl.memberEmail = 'id004@email.com';
+				LEFT JOIN 
+				tb_file_control AS fc
+				ON
+				wl.workoutLogcode = fc.referenceCode
+				LEFT JOIN 
+				tb_file AS f
+				ON 
+				fc.fileIdx = f.fileIdx
+			WHERE
+				wl.memberEmail = 'id005@email.com';
+				
 		</select>
 		
 		
@@ -268,7 +284,6 @@
 				,workoutGoalPlanCode
 				,eClassTaskDoCode
 				,challengeEnterCode
-				,fileIdx
 				,workoutLogPrivacyBoundsCode
 				,workoutLogUpdateEmail
 				,workoutLogUpdateFinalDate
@@ -283,7 +298,6 @@
 			 	,#{workoutGoalPlanCode}
 			 	,#{eClassTaskDoCode}
 			 	,#{challengeEnterCode}
-			 	,#{fileIdx}
 			 	,#{workoutLogPrivacyBoundsCode}
 			 	,#{workoutLogUpdateEmail}
 			 	,NOW()
