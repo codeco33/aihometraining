@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import aihometraining.team.challenge.service.ChallengeGatherService;
 import aihometraining.team.dto.LoginHistory;
 import aihometraining.team.dto.Member;
 import aihometraining.team.dto.MemberLevel;
@@ -33,10 +34,12 @@ public class MemberController {
 	//DI 의존성 주입 생성자 메소드 주입 방식
 	private MemberService memberService;
 	private MemberMapper memberMapper;
+	private ChallengeGatherService challengeGatherService;
 	
-	public MemberController(MemberService memberService, MemberMapper memberMapper) {
+	public MemberController(MemberService memberService, MemberMapper memberMapper, ChallengeGatherService challengeGatherService) {
 		this.memberService = memberService;
 		this.memberMapper = memberMapper;
+		this.challengeGatherService = challengeGatherService;
 	}
 	
 	/* 마이페이지 화면 */
@@ -100,9 +103,17 @@ public class MemberController {
 			String sessionLevelCode = checkMember.getMemberLevelCode();
 			String sessionName = checkMember.getMemberName();
 			
+			String getMaker = challengeGatherService.getChallengeMaker(memberEmail);
+			if(getMaker == null || getMaker =="") {
+				getMaker = "권한없음";
+			}else {
+				getMaker = "권한있음";
+			}
+			
 			session.setAttribute("SEMAIL", 	memberEmail);
 			session.setAttribute("SLEVEL", 	sessionLevelCode);
 			session.setAttribute("SNAME", 	sessionName);
+			session.setAttribute("SCHALLENGE", getMaker);
 			
 			log.info("로그인 성공");
 			

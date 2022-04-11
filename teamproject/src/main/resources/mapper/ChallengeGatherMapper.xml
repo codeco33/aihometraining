@@ -239,4 +239,14 @@
 		);
 	
 	</insert>
+	
+	<select id="getChallengeMaker" parameterType="String" resultType="String">
+		/* 챌린지 개설자 가져오기 */
+		SELECT
+			DISTINCT(cg.memberEmail)
+		FROM
+			challengegather AS cg
+		WHERE
+			cg.memberEmail = #{memberEmail};
+	</select>
 </mapper>
