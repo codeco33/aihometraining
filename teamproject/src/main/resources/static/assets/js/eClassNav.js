@@ -16,7 +16,7 @@ jQuery(document).ready(function($){
 		var eClassCategorySmallCode = $('select[name="eClassCategorySmallCode"]').val();
 		console.log(eClassCategorySmallCode);
 		$.ajax({
-			url	: 'http://localhost/OpenApplyForm',
+			url	: '/eClassIntroduceCategoryInsert',
 			type : 'get',
 			data : {
 				'eClassCategorySmallCode' : eClassCategorySmallCode
