@@ -11,7 +11,7 @@ package aihometraining.team.dto;
 		 * , workoutGoalPlanContent
 		 * , workoutGoalPlanUpdateEmail 
 		 * , workoutGoalPlanFinalUpdateTime 
-		 * , AIworkoutVideoCode 
+		 * , fileIdx 
 		 * , AIWorkoutPerformanceCount 
 		 * , AIWorkoutPerformanceGoal 
 		 * , workoutGoalPlanAchieveState 
@@ -27,14 +27,22 @@ package aihometraining.team.dto;
 		private String workoutGoalPlanContent;
 		private String workoutGoalPlanUpdateEmail;
 		private String workoutGoalPlanFinalUpdateTime;
-		private String AIworkoutVideoCode;
+		private String fileIdx;
 		private String AIWorkoutPerformanceCount;
 		private String AIWorkoutPerformanceGoal;
 		private String workoutGoalPlanAchieveState;
 		private String workoutGoalPlanCategoryCode;
 		
 		
+		private FileDto fileDto;
 		
+		
+		public FileDto getFileDto() {
+			return fileDto;
+		}
+		public void setFileDto(FileDto fileDto) {
+			this.fileDto = fileDto;
+		}
 		public String getWorkoutGoalPlanCode() {
 			return workoutGoalPlanCode;
 		}
@@ -83,11 +91,11 @@ package aihometraining.team.dto;
 		public void setWorkoutGoalPlanFinalUpdateTime(String workoutGoalPlanFinalUpdateTime) {
 			this.workoutGoalPlanFinalUpdateTime = workoutGoalPlanFinalUpdateTime;
 		}
-		public String getAIworkoutVideoCode() {
-			return AIworkoutVideoCode;
+		public String getFileIdx() {
+			return fileIdx;
 		}
-		public void setAIworkoutVideoCode(String aIworkoutVideoCode) {
-			AIworkoutVideoCode = aIworkoutVideoCode;
+		public void setFileIdx(String fileIdx) {
+			this.fileIdx = fileIdx;
 		}
 		public String getAIWorkoutPerformanceCount() {
 			return AIWorkoutPerformanceCount;
@@ -117,36 +125,17 @@ package aihometraining.team.dto;
 		
 		@Override
 		public String toString() {
-			StringBuilder builder = new StringBuilder();
-			builder.append("workoutgoalplan [workoutGoalPlanCode=");
-			builder.append(workoutGoalPlanCode);
-			builder.append(", memberEmail=");
-			builder.append(memberEmail);
-			builder.append(", workoutGoalCode=");
-			builder.append(workoutGoalCode);
-			builder.append(", workoutGoalPlanStartDate=");
-			builder.append(workoutGoalPlanStartDate);
-			builder.append(", workoutGoalPlanFinalDate=");
-			builder.append(workoutGoalPlanFinalDate);
-			builder.append(", workoutGoalPlanContent=");
-			builder.append(workoutGoalPlanContent);
-			builder.append(", workoutGoalPlanUpdateEmail=");
-			builder.append(workoutGoalPlanUpdateEmail);
-			builder.append(", workoutGoalPlanFinalUpdateTime=");
-			builder.append(workoutGoalPlanFinalUpdateTime);
-			builder.append(", AIworkoutVideoCode=");
-			builder.append(AIworkoutVideoCode);
-			builder.append(", AIWorkoutPerformanceCount=");
-			builder.append(AIWorkoutPerformanceCount);
-			builder.append(", AIWorkoutPerformanceGoal=");
-			builder.append(AIWorkoutPerformanceGoal);
-			builder.append(", workoutGoalPlanAchieveState=");
-			builder.append(workoutGoalPlanAchieveState);
-			builder.append(", workoutGoalPlanCategoryCode=");
-			builder.append(workoutGoalPlanCategoryCode);
-			builder.append("]");
-			return builder.toString();
+			return "WorkoutGoalPlan [workoutGoalPlanCode=" + workoutGoalPlanCode + ", memberEmail=" + memberEmail
+					+ ", workoutGoalCode=" + workoutGoalCode + ", workoutGoalPlanStartDate=" + workoutGoalPlanStartDate
+					+ ", workoutGoalPlanFinalDate=" + workoutGoalPlanFinalDate + ", workoutGoalPlanContent="
+					+ workoutGoalPlanContent + ", workoutGoalPlanUpdateEmail=" + workoutGoalPlanUpdateEmail
+					+ ", workoutGoalPlanFinalUpdateTime=" + workoutGoalPlanFinalUpdateTime + ", fileIdx=" + fileIdx
+					+ ", AIWorkoutPerformanceCount=" + AIWorkoutPerformanceCount + ", AIWorkoutPerformanceGoal="
+					+ AIWorkoutPerformanceGoal + ", workoutGoalPlanAchieveState=" + workoutGoalPlanAchieveState
+					+ ", workoutGoalPlanCategoryCode=" + workoutGoalPlanCategoryCode + ", fileDto=" + fileDto + "]";
 		}
+		
+		
 		
 		
 
