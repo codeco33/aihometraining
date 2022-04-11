@@ -82,7 +82,7 @@
 		<result column="workoutGoalPlanContent" 			property="workoutGoalPlanContent"/>
 		<result column="workoutGoalPlanUpdateEmail" 		property="workoutGoalPlanUpdateEmail"/>
 		<result column="workoutGoalPlanFinalUpdateTime" 	property="workoutGoalPlanFinalUpdateTime"/>
-		<result column="AIworkoutVideoCode" 				property="AIworkoutVideoCode"/>
+		<result column="fileIdx" 							property="fileIdx"/>
 		<result column="AIWorkoutPerformanceCount" 			property="AIWorkoutPerformanceCount"/>
 		<result column="AIWorkoutPerformanceGoal" 			property="AIWorkoutPerformanceGoal"/>
 		<result column="workoutGoalPlanAchieveState" 		property="workoutGoalPlanAchieveState"/>
@@ -109,7 +109,7 @@
 			<result column="workoutGoalPlanCode" 			property="workoutGoalPlanCode"/>
 			<result column="eClassTaskDoCode" 				property="eClassTaskDoCode"/>
 			<result column="challengeEnterCode" 			property="challengeEnterCode"/>
-			<result column="workoutLogAddFileCode" 			property="workoutLogAddFileCode"/>
+			<result column="fileIdx" 						property="fileIdx"/>
 			<result column="workoutLogPrivacyBoundsCode" 	property="workoutLogPrivacyBoundsCode"/>
 			<result column="workoutLogUpdateEmail" 			property="workoutLogUpdateEmail"/>
 			<result column="workoutLogDeleteEmail" 			property="workoutLogDeleteEmail"/>
@@ -187,7 +187,7 @@
 				, wl.workoutGoalPlanCode
 				, wl.eClassTaskDoCode
 				, wl.challengeEnterCode
-				, wl.workoutLogAddFileCode
+				, wl.fileIdx
 				, wl.workoutLogPrivacyBoundsCode
 				, wl.workoutLogUpdateEmail
 				, wl.workoutLogUpdateFinalDate
@@ -268,7 +268,7 @@
 				,workoutGoalPlanCode
 				,eClassTaskDoCode
 				,challengeEnterCode
-				,workoutLogAddFileCode
+				,fileIdx
 				,workoutLogPrivacyBoundsCode
 				,workoutLogUpdateEmail
 				,workoutLogUpdateFinalDate
@@ -283,7 +283,7 @@
 			 	,#{workoutGoalPlanCode}
 			 	,#{eClassTaskDoCode}
 			 	,#{challengeEnterCode}
-			 	,#{workoutLogAddFileCode}
+			 	,#{fileIdx}
 			 	,#{workoutLogPrivacyBoundsCode}
 			 	,#{workoutLogUpdateEmail}
 			 	,NOW()

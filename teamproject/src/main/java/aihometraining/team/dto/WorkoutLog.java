@@ -12,7 +12,7 @@ public class WorkoutLog {
 	 * workoutGoalPlanCode, 
 	 * eClassTaskDoCode, 
 	 * challengeEnterCode,
-	 * workoutLogAddFileCode, 
+	 * fileIdx, 
 	 * workoutLogPrivacyBoundsCode, 
 	 * workoutLogUpdateEmail,
 	 * workoutLogUpdateFinalDate, 
@@ -29,11 +29,12 @@ public class WorkoutLog {
 	private String workoutGoalPlanCode;
 	private String eClassTaskDoCode;
 	private String challengeEnterCode;
-	private String workoutLogAddFileCode;
+	private String fileIdx;
 	private String workoutLogPrivacyBoundsCode;
 	private String workoutLogUpdateEmail;
 	private String workoutLogUpdateFinalDate;
 	private String workoutLogDeleteEmail;
+	
 	
 	
 	public String getWorkoutLogcode() {
@@ -96,11 +97,11 @@ public class WorkoutLog {
 	public void setChallengeEnterCode(String challengeEnterCode) {
 		this.challengeEnterCode = challengeEnterCode;
 	}
-	public String getWorkoutLogAddFileCode() {
-		return workoutLogAddFileCode;
+	public String getFileIdx() {
+		return fileIdx;
 	}
-	public void setWorkoutLogAddFileCode(String workoutLogAddFileCode) {
-		this.workoutLogAddFileCode = workoutLogAddFileCode;
+	public void setFileIdx(String fileIdx) {
+		this.fileIdx = fileIdx;
 	}
 	public String getWorkoutLogPrivacyBoundsCode() {
 		return workoutLogPrivacyBoundsCode;
@@ -151,8 +152,8 @@ public class WorkoutLog {
 		builder.append(eClassTaskDoCode);
 		builder.append(", challengeEnterCode=");
 		builder.append(challengeEnterCode);
-		builder.append(", workoutLogAddFileCode=");
-		builder.append(workoutLogAddFileCode);
+		builder.append(", fileIdx=");
+		builder.append(fileIdx);
 		builder.append(", workoutLogPrivacyBoundsCode=");
 		builder.append(workoutLogPrivacyBoundsCode);
 		builder.append(", workoutLogUpdateEmail=");
@@ -164,6 +165,9 @@ public class WorkoutLog {
 		builder.append("]");
 		return builder.toString();
 	}
+	
+	
+	
 	
 	
 	
