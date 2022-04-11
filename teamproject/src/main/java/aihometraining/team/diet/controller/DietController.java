@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -41,16 +44,7 @@ public class DietController {
 	
 	
 	
-	@GetMapping("/dietBankList")
-	public String getDietBankList(Model model) {
-		
-		
-		model.addAttribute("title", "식단 은행 테스트");
-		model.addAttribute("role", "식단은행 테스트페이지");
-		
-		return "diet/dietBankList";
-		
-	}
+	
 	
 	
 	//식단 은행 관리자 페이지 조회
@@ -104,7 +98,9 @@ public class DietController {
 									 ,@RequestParam(value="insertEmail",required=false) String insertEmail
 									 ,Model model) {
 		
-		String newCode = dietMapper.selectDietBankListNewCode("dietbank","dietBankCode");
+		String newCode = dietService.selectDietBankListNewCode("dietbank","dietBankCode");
+		
+		
 		dietService.insertDietBankList2(connectEClass, insertEmail, newCode);
 		
 		
@@ -119,8 +115,10 @@ public class DietController {
 	//식단 은행 식단 수정
 	@GetMapping("/updateDietBankList")
 	public String updateDietBankList(Model model
-									,@RequestParam(name="dietBankCode", required = false) String dietBankCode) {
-									
+									,@RequestParam(name="dietBankCode", required = false) String dietBankCode
+									){
+		
+		//System.out.println(session.getAttributeNames()+"세션스");
 		
 		//코드넘버로 불러오기
 		model.addAttribute("title", "식단(은행) 수정");
@@ -220,7 +218,7 @@ public class DietController {
 	}
 	
 	
-	//Ajax 식단은행에서 추가시 insert, 변화내용 select
+	//Ajax 식단은행에서 추가 버튼 insert, 내역update, 변화내용 select
 	@PostMapping("/insertDietOneMealConnection")
 	public String dietOneMealConnection(DietOnemealConnection dietOnemealConnection
 										,Model model) {
@@ -232,16 +230,45 @@ public class DietController {
 		//insert
 		int insertResult = dietService.insertDietOnemealConnection(dietOnemealConnection);
 		
+		//update
+		int updateResult = dietService.updateDietBank(dietOnemealConnection);
+		
+		
 		//select
 		List<HashMap<String, Object>> selectOneMealConn = dietMapper.selectDietOneMealConnectionByBankCode(dietOnemealConnection);
-		
-		String CheckGroupNum = dietOnemealConnection.getDietOneMealConnectionGroupNum();
-		
 		
 		model.addAttribute("selectOneMealConn", selectOneMealConn);
 		
 		
-		return null; 
+		
+		
+		
+		return "diet/AjaxTable/DietBankConnMealListDayAjax"; 
+	}
+	
+	//Ajax 식단은행에서 제거버튼 누를 때 delete, 내역update, 변화내용 select
+	@PostMapping("/deleteDietOneMealConnection")
+	public String deleteDietOneMealConnection(DietOnemealConnection dietOnemealConnection
+											 ,Model model) {
+		
+
+		//delete
+		String dietOneMealConnectionCode = dietOnemealConnection.getDietOneMealConnectionCode();
+		int deleteResult = dietService.deleteDietOneMealConnection(dietOneMealConnectionCode);
+		
+		//update
+		int updateResult = dietService.updateDietBank(dietOnemealConnection);
+		
+		
+		//select
+		List<HashMap<String, Object>> selectOneMealConn = dietMapper.selectDietOneMealConnectionByBankCode(dietOnemealConnection);
+		
+		model.addAttribute("selectOneMealConn", selectOneMealConn);
+		
+	
+		
+		
+		return "diet/AjaxTable/DietBankConnMealListDayAjax";
 	}
 	
 	

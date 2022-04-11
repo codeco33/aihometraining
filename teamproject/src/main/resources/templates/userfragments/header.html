@@ -31,14 +31,13 @@
                                                 <ul class="submenu">
                                                     <li><a th:href="@{/challenge/challengeGather/challengeGatherList}">#모집 중 챌린지</a></li>
                                                     <li><a th:href="@{/challenge/challengeEnter/challengeEnterList}">#참가 챌린지(보라)</a></li>
-                                                    <li><a href="#">#챌린지(보라)</a></li>
+                                                    <li><a th:if="${session.SCHALLENGE == '권한있음' || session.SLEVEL == 'levelCode001'}" th:href="@{/challengeadmin}">#챌린지관리자(보라)</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="#">#식단</a>
                                                 <ul class="submenu">
-                                                    <li><a th:href="@{/diet/dietBankList}">#식단 은행(영호)</a></li>
-                                                    <li><a href="#">#개인 식단(영호)</a></li>
-                                                    <li><a href="#">#인기 식단(영호)</a></li>
+                                                    <li><a th:href="@{/diet/mypage/dietBankList}">#식단은행(영호)</a></li>
+                                                    <li><a th:href="@{/diet/mypage/dietMyList}">#개인식단(영호)</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="#">#일지</a>

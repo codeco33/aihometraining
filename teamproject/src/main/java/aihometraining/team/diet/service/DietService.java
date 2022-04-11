@@ -43,19 +43,27 @@ public class DietService {
 	
 	public int deleteDietBankList(String dietBankCode) {
 		
+		dietMapper.deleteDietOneMealConnectionAll(dietBankCode);
 		dietMapper.deleteDietBankList(dietBankCode);
+		
 		
 		return 0; 
 	}
 	
 	public String selectDietBankListNewCode(String tableName, String columName){
 	
+		
+		
 		String result = dietMapper.selectDietBankListNewCode(tableName, columName);
+		
 		
 		if(result == null) {
 			result =  columName+"1";
 		}
 		
+		
+		
+
 		
 		return result;
 	}
@@ -102,8 +110,30 @@ public class DietService {
 		selectBankDay.add(MealDayList);	
 			
 		
-		
-		
 		return selectBankDay;
 	}	
+	
+	
+	public int deleteDietOneMealConnection(String dietOneMealConnectionCode) {
+		
+		int result = dietMapper.deleteDietOneMealConnection(dietOneMealConnectionCode);
+		
+		return result;  
+	}
+	
+	
+	public int updateDietBank(DietOnemealConnection dietOnemealConnection) {
+		
+		//id001@email.com 관리자 페이지 업데이트로 일단 정해놓기, session값 받게 되면 변경
+		
+		dietOnemealConnection.setMemberEmail("id001@email.com");
+		
+		
+		int result = dietMapper.updateDietBank(dietOnemealConnection);
+		
+		return result;
+	}
+		
+	
+	
 }

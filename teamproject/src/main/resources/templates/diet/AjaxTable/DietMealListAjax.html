@@ -47,7 +47,10 @@
 				,memberEmail = $('#DietUpMemberEmail').text()
 				,dietOneMealConnectionGroupNum = $('.modal-title').text();
 				
-				console.log($('.modal-title').text());
+				var titleName = $('.modal-title').text();
+				 
+				 
+				 
 				 
 				 $.ajax({
 							 url: '/admin/diet/insertDietOneMealConnection'
@@ -61,6 +64,18 @@
 							 
 							,dataType: 'text'
 							,success: function(data){
+								$('#MealListContent').replaceWith(data);
+								
+								 $('.todayTrLine').each(function(index,item){
+							     	var groupName = $(this).attr('value');
+									if(groupName == titleName){
+											$(this).show();
+										} else{
+											$(this).hide();
+										}
+						     	});
+								
+								
 								
 							}
 						});
