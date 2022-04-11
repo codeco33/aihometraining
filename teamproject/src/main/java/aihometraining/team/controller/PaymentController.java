@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import aihometraining.team.dto.EClassApproved;
+import aihometraining.team.dto.Member;
 import aihometraining.team.dto.WishList;
 import aihometraining.team.service.PaymentService;
 
@@ -55,12 +57,13 @@ public class PaymentController {
 							,@RequestParam(name="eClassCode", required = false) String eClassCode
 							,@RequestParam(name="memberEmail", required = false) String memberEmail) {
 		
-		//멤버 정보 찾기
-		//운동클래스 정보 찾기
-		WishList eClassTake = paymentService.getEClassTake(eClassCode, memberEmail);
+		Member member = paymentService.getEClassTakeMember(memberEmail);
+		EClassApproved eClassApproved = paymentService.getEClassApproved(eClassCode);
+		
 		
 		model.addAttribute("title", "수강신청");
-		model.addAttribute("eClassTake", eClassTake);
+		model.addAttribute("member", member);
+		model.addAttribute("eClassApproved", eClassApproved);
 		
 		
 		return "eClass/eClassTake";

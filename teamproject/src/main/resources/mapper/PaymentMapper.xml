@@ -19,10 +19,9 @@
 		<result column="memberFinalPoint" 		property="memberFinalPoint"/>
 	</resultMap>
 
-	<resultMap type="eClassOpenApplyForm" id="EClassOpenApplyForm">
+	<resultMap type="EClassOpenApplyForm" id="eClassOpenApplyResultMap">
 		<id 	column="eClassOpenAppleyCode" 			property="eClassOpenAppleyCode"/>
-		<result column="eClassOpenApplyCategorySamll" 	property="eClassOpenApplyCategorySamll"/>
-		<result column="eClassOpenApplyPrice" 			property="eClassOpenApplyPrice"/>
+		<result column="eClassOpenAppleyPrice" 			property="eClassOpenApplyPrice"/>
 		<association property="eClassCategorySmall" javaType="EClassCategorySmall">
 			<id 	column="eClassCategorySmallCode" 	property="eClassCategorySmallCode"/>
 			<result column="eClassCategorySmallName" 	property="eClassCategorySmallName"/>
@@ -36,88 +35,80 @@
 		</association>
 	</resultMap>
 	
-	<resultMap type="EClassApproved" id="EClassApproved">
+	<resultMap type="EClassApproved" id="eClassApprovedResultMap">
 		<id 	column="eClassApprovedCode" 			property="eClassApprovedCode"/>
 		<result column="eClassApprovedName" 		property="eClassApprovedName"/>
 		<result column="eClassApprovedFinish" 		property="eClassApprovedFinish"/>
-		<collection property="eClassOpenApplyForm" resultMap="EClassOpenApplyForm"/>
+		<collection property="eClassOpenApplyForm" resultMap="eClassOpenApplyResultMap"/>
 	</resultMap>
 
 	<resultMap type="WishList" id="wishListResultMap">
 		<id 	column="wishListCode" 			property="wishListCode"/>
 		<result column="wishListRegDate" 		property="wishListRegDate"/>
-		<collection property="Member" resultMap="memberResultMap"/>
-		<collection property="eClassApproved" resultMap="EClassApproved"/>
+		<collection property="member" resultMap="memberResultMap"/>
+		<collection property="eClassApproved" resultMap="eClassApprovedResultMap"/>
 	</resultMap>
 	
 	<select id="getWishList" parameterType="String" resultMap="wishListResultMap" fetchSize="1000">
-		/* 위시리스트 */
-		SELECT 
-			 w.eClassApprovedCode
-			,w.memberEmail
-			,ec.eClassCategoryMediumName
-			,ec.eClassCategorySmallName
+		SELECT
+			wi.memberEmail
 			,ea.eClassApprovedName
+			,eo.eClassOpenAppleyPrice
 			,ei.eClassIntroduceContent
 			,ei.eClassIntroduceImg
-			,eo.eClassOpenApplyPrice
+			,ec.eClassCategoryMediumName
+			,ec.eClassCategorySmallName
 		FROM
-			wishlist AS w
-			INNER JOIN
-			eclassapproved AS ea
-			ON
-			w.eClassApprovedCode = ea.eClassApprovedCode
+			wishlist AS wi
 			INNER JOIN 
-			eclassopenapply AS eo
-			ON
-			ea.eClassOpenApplyCode = eo.eClassOpenApplyCode
+			eclassapproved AS ea
+			ON 
+			wi.eClassApprovedCode = ea.eClassApprovedCode
+			INNER JOIN 
+			eclassopenappley AS eo
+			ON 
+			ea.eClassOpenApplyCode = eo.eClassOpenAppleyCode 
 			INNER JOIN 
 			eclasscategorysmall AS ec
-			ON
-			eo.eClassOpenApplyCategorySamll = ec.eClassCategorySmallCode
+			ON 
+			eo.eClassCategorySmallCode = ec.eClassCategorySmallCode
 			INNER JOIN 
 			eclassintroduce AS ei
 			ON 
 			eo.eClassIntroduceCode = ei.eClassIntroduceCode
 		WHERE
-			w.memberEmail = #{SEMAIL};
+			wi.memberEmail = #{SEMAIL};
 	</select>
 	
-	<select id="getEClassTake" parameterType="String" resultMap="wishListResultMap">
-		SELECT 
-			 w.eClassApprovedCode
-			,ea.eClassApprovedName
-			,cm.memberName
-			,ea.eClassApprovedSetDate
-			,eo.eClassOpenApplyPrice
-			,sm.memberName
-			,sm.memberEmail
-			,sm.memberPhone
+	<select id="getEClassTakeMember" parameterType="String" resultMap="memberResultMap" fetchSize="1000">
+		/*수강신청 회원 정보 조회*/
+		SELECT
+			 memberEmail
+			,memberName
 		FROM
-			wishlist AS w
-			INNER JOIN
-			eclassapproved AS ea
-			ON
-			w.eClassApprovedCode = ea.eClassApprovedCode
-			INNER JOIN 
-			eclassopenapply AS eo
-			ON
-			ea.eClassOpenApplyCode = eo.eClassOpenApplyCode
-			INNER JOIN 
-			eclasscategorysmall AS ec
-			ON
-			eo.eClassOpenApplyCategorySamll = ec.eClassCategorySmallCode
-			INNER JOIN 
-			member AS cm
-			ON 
-			ea.memberEmail = cm.memberEmail
-			INNER JOIN 
-			member AS sm
-			ON 
-			w.memberEmail = sm.memberEmail
+			member
 		WHERE
-			w.memberEmail = #{memberEmail}
-			AND
-			w.eClassApprovedCode = #{eClassCode};
+			memberEmail = #{memberEmail};
 	</select>
+	
+	<select id="getEClassApproved" parameterType="String" resultMap="eClassApprovedResultMap" fetchSize="1000">
+		/*수강신청 운동클래스 정보 조회*/
+		SELECT
+			 ea.eClassApprovedName
+			,m.memberName
+			,eo.eClassOpenAppleyPrice
+		FROM
+			eclassapproved AS ea
+			INNER JOIN 
+			eclassopenappley AS eo
+			ON 
+			ea.eClassOpenApplyCode = eo.eClassOpenAppleyCode
+			INNER JOIN
+			member AS m
+			ON 
+			m.memberEmail = ea.memberEmail
+		WHERE
+			ea.eClassApprovedCode = #{eClassCode};
+	</select>
+	
 </mapper>
