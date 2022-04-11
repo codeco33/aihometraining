@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import aihometraining.team.challenge.service.ChallengeConfigService;
 import aihometraining.team.dto.ChallengeCategory;
 import aihometraining.team.dto.ChallengeGather;
+import aihometraining.team.dto.ChallengePointGive;
 import aihometraining.team.dto.ChallengeSetting;
 import aihometraining.team.dto.EClassCategorySmall;
 
@@ -61,27 +62,51 @@ public class ChallengeConfigController {
 	}
 	
 	//챌린지 관리설정
-	@GetMapping("/configList")
-	public String challengeConfigList(Model model) {
-		
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		/* paramMap.put("memberEmail", "id001@email.com"); */
-		
-		//List<ChallengeCategory> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
-		List<Map<String, Object>> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
-		List<ChallengeSetting> challengeSettingList = challengeConfigService.getChallengeSettingList();
-		
-		paramMap = null;
-		
-		log.info("챌린지 카테고리 조회  challengeCategoryList : {}", challengeCategoryList);
-		
-		model.addAttribute("title", "챌린지 관리 설정");
-		model.addAttribute("leftMenuList", "챌린지");
-		model.addAttribute("challengeCategoryList", challengeCategoryList);
-		model.addAttribute("challengeSettingList", challengeSettingList);
-		return "challenge/challengeConfig/challengeConfigList";
-		
-	}
+		@GetMapping("/configList")
+		public String challengeConfigList(Model model  
+										 ,@RequestParam(value="searchKey", required = false) String searchKey
+										 ,@RequestParam(value="searchValue", required = false) String searchValue
+										 ,@RequestParam(value="searchDate", required = false) String searchDate
+										 ,@RequestParam(value="searchStart", required = false) String searchStart
+										 ,@RequestParam(value="searchEnd", required = false) String searchEnd) {
+			
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+			/* paramMap.put("memberEmail", "id001@email.com"); */
+			//searchKey = challengeCategoryName challengeCategoryName(property) -> challengeCategoryName(colum) => searchKey = challengeCategoryName
+			//searchKey = eClassCategorySmallName eClassCategorySmallName(property) -> eClassCategorySmallName(colum) => searchKey = eClassCategorySmallName
+			
+			if(searchKey != null) {
+				if("challengeCategoryName".equals(searchKey)) {
+					searchKey = "challengeCategoryName";
+					searchDate = "challengeCategoryRegDate";
+				}else if("eClassCategorySmallName".equals(searchKey)) {
+					searchKey = "eClassCategorySmallName";
+					searchDate = "challengeCategoryRegDate";
+				}
+			}
+			
+			
+			paramMap.put("searchKey", searchKey);
+			paramMap.put("searchValue", searchValue);
+			paramMap.put("searchDate", searchDate);
+			paramMap.put("searchStart", searchStart);
+			paramMap.put("searchEnd", searchEnd);
+			
+			//List<ChallengeCategory> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
+			List<Map<String, Object>> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
+			List<ChallengeSetting> challengeSettingList = challengeConfigService.getChallengeSettingList();
+			
+			paramMap = null;
+			
+			log.info("챌린지 카테고리 조회  challengeCategoryList : {}", challengeCategoryList);
+			
+			model.addAttribute("title", "챌린지 관리 설정");
+			model.addAttribute("leftMenuList", "챌린지");
+			model.addAttribute("challengeCategoryList", challengeCategoryList);
+			model.addAttribute("challengeSettingList", challengeSettingList);
+			return "challenge/challengeConfig/challengeConfigList";
+			
+		}
 	
 	//챌린지 카테고리 등록폼
 	@GetMapping("/challengeCategoryInsert")
@@ -275,11 +300,29 @@ public class ChallengeConfigController {
 	@GetMapping("/challengePoint")
 	public String challengePoint(Model model) {
 		
+		//챌린지 포인트 관리 목록 조회
+		List<ChallengePointGive> pointList = challengeConfigService.getChallengePointList();
+		
+		log.info("챌린지 포인트 목록 조회 pointList: {}", pointList);
+		
 		model.addAttribute("title", "챌린지 포인트 관리");
 		model.addAttribute("leftMenuList", "챌린지");
+		model.addAttribute("pointList", pointList);
 		
 		return "challenge/challengeConfig/challengePoint";
+	}
+	
+	//ajax
+	//챌린지 포인트 코드별 포인트 관리 세부 조회
+	@PostMapping("/pointDetail")
+	@ResponseBody
+	public List<ChallengePointGive> getPointDetailByCode(String challengePointGiveCode){
 		
+		log.info("챌린지 포인트 관리 String challengePointGiveCode : {}", challengePointGiveCode);
+		
+		List<ChallengePointGive> pointDetailList = challengeConfigService.getPointDetailByCode(challengePointGiveCode);
+		
+		return pointDetailList;
 	}
 	
 	/**
