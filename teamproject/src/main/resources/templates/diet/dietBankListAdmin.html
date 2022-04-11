@@ -18,8 +18,8 @@
                     <div class="col-lg-8">
                          <div class="col-md-10">
                             <div class="input-group">
-                              <input type="text" class="form-control" aria-label="...">
-                              <div class="input-group-btn">
+                              <input type="text" class="form-control" aria-label="..." placeholder ="검색할 게 없어서 검색기능 못씀">
+                              <div class="input-group-btn" >
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">검색<span class="caret"></span></button>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                   <li><a href="#">Action</a></li>
@@ -54,7 +54,7 @@
 					      </div>
 					      <div class="modal-body">
 							 <h4>아래와 같이 식단을 생성합니다</h4>
-							 <form th:action="@{/diet/insertDietBankList2}" method="post">
+							 <form th:action="@{/admin/diet/insertDietBankList2}" method="post">
 						        <table id="insertTable">
 				                    <tbody>
 				                      <tr>
@@ -116,12 +116,12 @@
                         <td th:text="${d.memberUpdateEmail}" class="text-center"></td>
                         <td th:text="${d.dietBankUpdateDate}" class="text-center"></td>
                         <td class="col-md-1 text-center" >
-                        	<a th:href="@{/diet/updateDietBankList(dietBankCode=${d.dietBankCode})}">
+                        	<a th:href="@{/admin/diet/updateDietBankList(dietBankCode=${d.dietBankCode})}">
                         		<button class="btn btn-default">확인/수정</button>	
                         	</a>
                         </td>
                         <td class="col-md-1 text-center" > 
-                        	<a th:href="@{/diet/deleteDietBankList(dietBankCode=${d.dietBankCode})}">
+                        	<a th:href="@{/admin/diet/deleteDietBankList(dietBankCode=${d.dietBankCode})}">
                         		<button class="btn btn-default">삭제</button>	
                         	</a>
                         </td>
@@ -141,10 +141,6 @@
                             </a>
                           </li>
                           <li class="active"><a href="#">1</a></li>
-                          <li><a href="#">2</a></li>
-                          <li><a href="#">3</a></li>
-                          <li><a href="#">4</a></li>
-                          <li><a href="#">5</a></li>
                           <li>
                             <a href="#" aria-label="Next">
                               <span aria-hidden="true">&raquo;</span>
@@ -155,7 +151,6 @@
                 </div>
               </div>
             </div>  
-          </div>
           </div>
 
 
@@ -187,7 +182,7 @@
 					console.log(memberEmail+"임시 이메일 나중엔 로그인 기록으로 변환");
 					
 						$.ajax({
-							 url: '/diet/insertDietBankList'
+							 url: '/admin/diet/insertDietBankList'
 							,type: 'POST'
 							,data: {'memberEmail' : memberEmail}
 							,dataType: 'json'
