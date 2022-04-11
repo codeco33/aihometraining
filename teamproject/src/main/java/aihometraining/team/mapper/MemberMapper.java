@@ -40,4 +40,5 @@ public interface MemberMapper {
 	
 	// 회원 가입
 	public int addMember(Member member);
+	
 }
