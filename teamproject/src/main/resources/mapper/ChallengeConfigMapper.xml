@@ -282,116 +282,134 @@
 			challengecategory AS cc
 			INNER JOIN
 			challengegather AS cg
-			on
+			ON
 			cc.challengeCategoryCode = cg.challengeCategoryCode
-			INNER JOIN
-			challengegatherplan AS cp
-			on
-			cc.challengeCategoryCode = cp.challengeCategoryCode
+			INNER join
+			challengegatherplan AS cgp
+			ON
+			cc.challengeCategoryCode = cgp.challengeCategoryCode
+			INNER join
+			challengegatherplando AS cgd
+			ON
+			cc.challengeCategoryCode = cgd.challengeCategoryCode
 			INNER JOIN
 			challengeenter AS ce
-			on
-			cc.challengeCategoryCode = ce.challengeCategoryCode
-			INNER join
-			challengegatherplando AS cpd
-			on
-			cc.challengeCategoryCode = cpd.challengeCategoryCode
+			ON
+			cc.challengeCategoryCode = ce.challengeCategoryCode  
 			INNER JOIN
 			challengepointgive AS cpg
-			on
+			ON
 			cc.challengeCategoryCode = cpg.challengeCategoryCode
 			INNER JOIN
 			challengereport AS cr
-			on
-			cc.challengeCategoryCode = cr.challengeCategoryCode
+			ON
+			cr.challengeCategoryCode = cc.challengeCategoryCode
 		where
 			cc.challengeCategoryCode = #{challengeCategoryCode};
 	</delete>
 	
 	<delete id="pointDeleteBycateCode" parameterType="String">
+		/* 챌린지 카테고리 코드에 따른 포인트 내역 삭제(챌린지 카테고리 삭제처리 )*/
 		DELETE
 			cpg
 		FROM
 			challengecategory AS cc
 			INNER JOIN
 			challengegather AS cg
-			on
+			ON
 			cc.challengeCategoryCode = cg.challengeCategoryCode
-			INNER JOIN
-			challengegatherplan AS cp
-			on
-			cc.challengeCategoryCode = cp.challengeCategoryCode
+			INNER join
+			challengegatherplan AS cgp
+			ON
+			cc.challengeCategoryCode = cgp.challengeCategoryCode
+			INNER join
+			challengegatherplando AS cgd
+			ON
+			cc.challengeCategoryCode = cgd.challengeCategoryCode
 			INNER JOIN
 			challengeenter AS ce
-			on
-			cc.challengeCategoryCode = ce.challengeCategoryCode
-			INNER join
-			challengegatherplando AS cpd
-			on
-			cc.challengeCategoryCode = cpd.challengeCategoryCode
+			ON
+			cc.challengeCategoryCode = ce.challengeCategoryCode  
 			INNER JOIN
 			challengepointgive AS cpg
-			on
+			ON
 			cc.challengeCategoryCode = cpg.challengeCategoryCode
 		where
 			cc.challengeCategoryCode = #{challengeCategoryCode};
 	</delete>
 	
-	<delete id="planDoDeleteBycateCode" parameterType="String">
-		DELETE
-			cpd
-		FROM
-			challengecategory AS cc
-			INNER JOIN
-			challengegather AS cg
-			on
-			cc.challengeCategoryCode = cg.challengeCategoryCode
-			INNER JOIN
-			challengegatherplan AS cp
-			on
-			cc.challengeCategoryCode = cp.challengeCategoryCode
-			INNER JOIN
-			challengeenter AS ce
-			on
-			cc.challengeCategoryCode = ce.challengeCategoryCode
-			INNER join
-			challengegatherplando AS cpd
-			on
-			cc.challengeCategoryCode = cpd.challengeCategoryCode
-		where
-			cc.challengeCategoryCode = #{challengeCategoryCode};
-	</delete>
-	
-	<delete id="enterDeleteBycateCode">
+	<delete id="enterDeleteBycateCode" parameterType="String">
+		/* 챌린지 카테고리 코드에 따른 챌린지참여 내역 삭제(챌린지 카테고리 삭제처리 )*/
 		DELETE
 			ce
 		FROM
 			challengecategory AS cc
 			INNER JOIN
 			challengegather AS cg
-			on
+			ON
 			cc.challengeCategoryCode = cg.challengeCategoryCode
-			INNER JOIN
-			challengegatherplan AS cp
-			on
-			cc.challengeCategoryCode = cp.challengeCategoryCode
+			INNER join
+			challengegatherplan AS cgp
+			ON
+			cc.challengeCategoryCode = cgp.challengeCategoryCode
+			INNER join
+			challengegatherplando AS cgd
+			ON
+			cc.challengeCategoryCode = cgd.challengeCategoryCode
 			INNER JOIN
 			challengeenter AS ce
-			on
+			ON
 			cc.challengeCategoryCode = ce.challengeCategoryCode
 		where
 			cc.challengeCategoryCode = #{challengeCategoryCode};
 	</delete>
 	
+	<delete id="planDoDeleteBycateCode">
+		/* 챌린지 카테고리 코드에 따른 챌린지실행 내역 삭제(챌린지 카테고리 삭제처리 )*/
+		DELETE
+			cgd
+		FROM
+			challengecategory AS cc
+			INNER JOIN
+			challengegather AS cg
+			ON
+			cc.challengeCategoryCode = cg.challengeCategoryCode
+			INNER join
+			challengegatherplan AS cgp
+			ON
+			cc.challengeCategoryCode = cgp.challengeCategoryCode
+			INNER join
+			challengegatherplando AS cgd
+			ON
+			cc.challengeCategoryCode = cgd.challengeCategoryCode
+		where
+			cc.challengeCategoryCode = #{challengeCategoryCode};
+	</delete>
+	
+	<delete id="planDeleteBycateCode">
+		/* 챌린지 카테고리 코드에 따른 챌린지 모집계획 내역 삭제(챌린지 카테고리 삭제처리 )*/
+		DELETE
+			cgp
+		FROM
+			challengecategory AS cc
+			INNER JOIN
+			challengegather AS cg
+			ON
+			cc.challengeCategoryCode = cg.challengeCategoryCode
+			INNER join
+			challengegatherplan AS cgp
+			ON
+			cc.challengeCategoryCode = cgp.challengeCategoryCode
+		where
+			cc.challengeCategoryCode = #{challengeCategoryCode};
+	</delete>
+		
 	<delete id="gatherDeleteBycateCode">
+		/* 챌린지 카테고리 코드에 따른 챌린지 모집 내역 삭제(챌린지 카테고리 삭제처리 )*/
 		DELETE
 			cg
 		FROM
 			challengecategory AS cc
-			INNER JOIN
-			challengegatherplan AS cp
-			on
-			cc.challengeCategoryCode = cp.challengeCategoryCode
 			INNER JOIN
 			challengegather AS cg
 			on
@@ -400,21 +418,8 @@
 			cc.challengeCategoryCode = #{challengeCategoryCode};
 	</delete>
 	
-	<delete id="planDeleteBycateCode">
-		DELETE
-			cp
-		FROM
-			challengecategory AS cc
-			INNER JOIN
-			challengegatherplan AS cp
-			on
-			cc.challengeCategoryCode = cp.challengeCategoryCode
-		where
-			cc.challengeCategoryCode = #{challengeCategoryCode};
-	</delete>
-		
-	
 	<delete id="challengeCategoryDelete">
+		/* 챌린지 카테고리 코드에 따른 챌린지 카테고리 내역 삭제(챌린지 카테고리 삭제처리 )*/
 		DELETE
 			cc
 		FROM
