@@ -14,15 +14,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.Member;
 import aihometraining.team.dto.WishList;
+import aihometraining.team.mapper.PaymentMapper;
 import aihometraining.team.service.PaymentService;
 
 @Controller
 public class PaymentController {
 	
 	private PaymentService paymentService;
+	private PaymentMapper paymentMapper;
 	
-	public PaymentController(PaymentService paymentService) {
+	public PaymentController(PaymentService paymentService, PaymentMapper paymentMapper) {
 		this.paymentService = paymentService;
+		this.paymentMapper = paymentMapper;
 	}
 	
 	@GetMapping("/challengeadmin")
@@ -50,6 +53,15 @@ public class PaymentController {
 		return "member/wishList";
 	}
 	
+	//위시리스트 삭제
+	@PostMapping("/wishList")
+	public String wishList(@RequestParam(name="wishListCode", required = false) String wishListCode) {
+		paymentMapper.deleteWishList(wishListCode);
+		
+		return "redirect:/wishList";
+	}
+	
+	
 	
 	//수강신청 화면
 	@GetMapping("/signUpForClass")
@@ -68,6 +80,7 @@ public class PaymentController {
 		
 		return "eClass/eClassTake";
 	}
+	
 
 	
 	@GetMapping("/payment")

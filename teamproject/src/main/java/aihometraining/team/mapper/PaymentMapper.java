@@ -11,12 +11,14 @@ import aihometraining.team.dto.WishList;
 @Mapper
 public interface PaymentMapper {
 	
-	//위시리스트
+	//위시리스트 조회
 	public List<WishList> getWishList(String SEMAIL);
 	
-	//멤버정보
+	//수강신청 멤버정보
 	public Member getEClassTakeMember(String memberEmail);
-	//운동클래스정보
+	//수강신청 운동클래스정보
 	public EClassApproved getEClassApproved(String eClassCode);
 	
+	//위시리스트 삭제
+	public void deleteWishList(String wishListCode);
 }

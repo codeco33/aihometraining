@@ -6,6 +6,7 @@
 <th:block layout:fragment="customTitle">
 	<title th:text="${title}"></title>
 </th:block>
+
 <!-- 사용자 정의 Css -->
 <th:block layout:fragment="customCss">
 	<style type="text/css">
@@ -32,7 +33,6 @@
 </style>
 </th:block>
 
-
 <th:block layout:fragment="customContents">
 	<div class="container">
 		<!-- 전체선택박스 & 정렬기준 -->
@@ -43,23 +43,21 @@
 					<input type="checkbox" id="default-checkbox"> <label for="default-checkbox"></label>
 				</div>
 				<label for="default-checkbox" class="allCheck">전체선택</label>
-				<a href="#" class="genric-btn primary-border small deleteBtn">선택삭제</a>
+				<button type="button" class="genric-btn primary-border small deleteBtn">선택삭제</button>
 			</div>
 
 			<!-- 정렬기준 -->
 			<div class="default-select" id="default-select">
 				<select style="display: none;">
-					<option value=" 1">최신순</option>
-					<option value="1">제목순</option>
-					<option value="1">학생수순</option>
-					<option value="1">평점순</option>
+					<option value="1">최신순</option>
+					<option value="2">제목순</option>
+					<option value="3">평점순</option>
 				</select>
 				<div class="nice-select" tabindex="0">
 					<span class="current">최신순</span>
 					<ul class="list">
 						<li data-value=" 1" class="option">최신순</li>
 						<li data-value="1" class="option">제목순</li>
-						<li data-value="1" class="option">학생수순</li>
 						<li data-value="1" class="option">평점순</li>
 					</ul>
 				</div>
@@ -69,16 +67,16 @@
 
 		<!-- 위시리스트 시작 -->
 		<div class="row">
-			<div class="col-lg-4 col-sm-6" th:if="${not #lists.isEmpty(wishList)}" th:each="l : ${wishList}">
+			<div class="col-lg-4 col-sm-6 rowProperties" th:if="${not #lists.isEmpty(wishList)}" th:each="l : ${wishList}">
 				<div class="properties properties2 mb-30">
-					<label for="checks_1">
+					<label >
 						<div class="properties__card">
 							<div class="properties__img overlay1">
 								<img th:src="@{/assets/img/gallery/featured1.png}" alt="">
 								<!-- <img th:src="@{/webapp/file/} + ${이미지파일명()}"> -->
 								<div class="primary-checkbox checks">
-									<input type="checkbox" id="checks_1">
-									<label for="checks_1"></label>
+									<input type="checkbox" class="checks" th:data-wishlistcode="${l.wishListCode}">
+									<label></label>
 								</div>
 							</div>
 							<div class="properties__caption">
@@ -120,6 +118,67 @@
 	</div>
 
 </th:block>
-
+<!-- 사용자 정의 js -->
+<th:block layout:fragment="customScript">
+	<script type="text/javascript">
+		$(function(){
+			var $allCheck = $('#default-checkbox');
+			
+			//checkbox,label for값 주기
+			$('.rowProperties').each(function(index){
+				$(this).find('label').attr('for', 'checks_'+index);
+				$(this).find('input[type="checkbox"]').attr('id','checks_'+index);
+			});
+			
+			//위시리스트 전체선택 클릭 이벤트
+			$allCheck.click(function(){
+				$('.checks').prop('checked', $(this).prop('checked'))
+			});
+			
+			//위시리스트 하나라도 체크해제시 전체선택 풀리게
+			$('.checks').click(function() {
+				var len = $('.checks').length;
+				var checkLen = $('.checks:checked').length;
+				
+				if(len != checkLen)
+					$allCheck.prop('checked', false);
+				else
+					$allCheck.prop('checked', true);
+			});
+			
+			//위시리스트 삭제 이벤트
+			$('.deleteBtn').click(function() {
+				var checkedDiv = [];
+				$('.checks:checked').each(function(){
+					checkedDiv.push($(this).attr('data-wishlistcode'));
+				});
+				
+				var result = confirm(checkedDiv +'정말 삭제하시겠습니까?');
+				
+				if(result == true){
+					$('.checks:checked').each(function() {
+						$(this).parents('.rowProperties').remove();
+					});
+					$.ajax({
+						url: "/wishList",
+						type: "POST",
+						data: "wishListCode=" + checkedDiv,
+						success : function(data){
+					      alert("성공")
+					    },
+					    error : function(){
+					      alert("에러")		
+					    }
+					  });
+				}
+				
+			});
+			
+			//위시리스트 정렬
+			
+			
+		});
+	</script>
+</th:block>
 
 </html>

@@ -52,6 +52,7 @@
 	<select id="getWishList" parameterType="String" resultMap="wishListResultMap" fetchSize="1000">
 		SELECT
 			wi.memberEmail
+			,wi.wishListCode
 			,ea.eClassApprovedName
 			,eo.eClassOpenAppleyPrice
 			,ei.eClassIntroduceContent
@@ -77,7 +78,8 @@
 			ON 
 			eo.eClassIntroduceCode = ei.eClassIntroduceCode
 		WHERE
-			wi.memberEmail = #{SEMAIL};
+			wi.memberEmail = #{SEMAIL}
+		ORDER BY wi.wishListRegDate desc;
 	</select>
 	
 	<select id="getEClassTakeMember" parameterType="String" resultMap="memberResultMap" fetchSize="1000">
@@ -111,4 +113,12 @@
 			ea.eClassApprovedCode = #{eClassCode};
 	</select>
 	
+	<delete id="removeMember" parameterType="String">
+		/* 위시리스트 삭제 */
+		DELETE
+		FROM
+			wishList
+		WHERE
+			wishListCode = #{wishListCode};
+	</delete>
 </mapper>
