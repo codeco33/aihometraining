@@ -12,85 +12,34 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/mediaelementplayer.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/bootstrap-datepicker.css}"/>
 	<style type="text/css">
-		
-		.col-md-11 {
-			padding:0;
-		}
-		.col-sm-10 {
-			paddig: 0;
-		}
-		.control-label{
-			padding: 0;
-			padding-top:10px;
-		}
-		.formChecks label {
-			margin-right: 10px;
-			padding-top: 7px;
-		}
-		.dateInput {
-			width: 100px;
-			height: 33px;
-			margin-bottom: 5px;
-		}		
-
-		.form-group {
-			padding-bottom: 38px;
-			border-bottom: 1px solid #efefef;
-			margin-bottom: 0;
-		}
-				
-		input[name="searchKey"] {
-			width: 70%;
-			height: 33px;
-		}
-		
-		.searchBtnDiv {
-			text-align: center;
-			margin-top: 10px;
-		}
-		.searchBtnDiv .btn-flip {
-			height: 40px !important;
-		}
-		.dateInputDiv {
-			display:flex;
-		}
 		.panel-heading > h4 {
-			font-weight: bold;
-			margin-bottom: 0;
-			border-bottom: 2px solid #58666e;
-			padding-bottom: 5px;
-		}
-		 .panel-body:nth-child(2) {
-			padding-top: 0;
-		}
-		@media (max-width: 768px){
-		.form-group {
-			padding-bottom: 10px;
+		    font-weight: bold;
+		    margin-bottom: 0;
+		    border-bottom: 2px solid #58666e;
+		    padding-bottom: 5px;
 		}
 		
-		.dateInputDiv {
-			display:block;
+		.input-group {
+		    position: relative;
+		    display: flex;
+		    border-collapse: separate !important;
+		    padding-bottom: 10px;
+		    margin-top: -10px;
+		    margin-left: 15px;
+		    border-bottom: 1px solid #efefef;
+		    margin-bottom: 0;
 		}
+		.input-group input[name=searchValue] {
+			border-top-right-radius: 4px !important; 
+			border-bottom-right-radius: 4px !important;
 		}
 		
-		@media (min-width: 768px) and (max-width: 1036px){
-		.form-group:nth-child(3) {
-			padding-bottom: 75px;
+		.form-control {
+		    line-height: 1.7;
 		}
-		.dateInputDiv {
-			display:block;
-		}
-		}
-		
-		@media (min-width: 767px) and (max-width: 819px){
-		.form-group:nth-child(1) {
-			padding-bottom: 70px;
-		}
-		}
-		@media (min-width: 1037px){
-		.form-group:nth-child(3) {
-			padding-top: 5px;
-		}
+		.searchBtnDiv {
+		    text-align: center;
+		    margin-top: 10px;
 		}
 	</style>
 </th:block>
@@ -108,47 +57,45 @@
 				<!-- 챌린지 카테고리 검색 폼 Start -->
 				<div th:fragment="searchCategoryFragment">
 					<form class="searchCateTableForm" th:action="@{/admin/configList}" method="get">
-						<div class="form-group">
-							<label class="col-sm-2 col-md-1 control-label text-center"><b> 카테고리 검색</b></label>
-							<div class="col-sm-10 col-md-11">
-			                    <select class="select2-A" name="searchKey" >
-			                        <option value="challengeCategoryName">카테고리명</option>
-			                        <option value="eClassCategorySmallName">운동클래스</option>
-			                    </select>
-				                <input type="text" name="searchValue" placeholder="검색키워드를 입력해주세요."/>
-							</div>
+						
+						<div class="input-group">
+						  <span class="form-control" style="width: 180px;">카테고리 검색</span>
+						  <select class="form-control" name="searchKey"  style="width: 130px;" required="required">
+						  	<option value="challengeCategoryName">카테고리명</option>
+			              	<option value="eClassCategorySmallName">운동클래스</option>
+						  </select>
+						  <input class="form-control" type="text" name="searchValue" placeholder="검색키워드를 입력해주세요." required="required"/>
 						</div>
 				                 
-						<div class="form-group">
-							<label class="col-sm-2 col-md-1 control-label text-center"><b>등록일자</b></label>
-							<div class="col-sm-10 col-md-11 dateInputDiv">
-								<div class="input-daterange input-group" id="datepicker" style="height: 33px !important;">
-									<input type="hidden" name="searchDate"/>	                    
-									<input type="text" class="input-sm form-control" name="searchStart" placeholder="시작일" style=" text-align: center; width: 130px" required/>
-									<span class="input-group-addon">부터</span>
-									<input type="text" class="input-sm form-control" name="searchEnd" placeholder="종료일" style=" text-align: center; width: 130px" required/>
-								 	<span class="input-group-addon">까지</span>
-								</div>
-								<div style="margin-left: 10px; margin-top: 2.5px;">
-									<input type="button" class="btn btn-round btn-default" value="오늘"/>
-									<input type="button" class="btn btn-round btn-default" value="1주일"/>
-									<input type="button" class="btn btn-round btn-default" value="1개월"/>
-									<input type="button" class="btn btn-round btn-default" value="3개월"/>
-									<input type="button" class="btn btn-round btn-default" value="1년"/>
-								</div>
-		                  	</div>
+						<div class="input-group" style="margin-top: 10px;">
+							<span class="form-control" style="width: 130px;">등록일자</span>
+							<div class="input-daterange" id="datepicker" style="height: 33px !important;">
+								<input type="hidden" name="searchDate"/>	                    
+								<input type="text" class="form-control" name="searchStart" placeholder="시작일" style=" text-align: center; width: 130px" required="required"/>
+								<span class="form-control" style="width: 60px;">부터</span>
+								<input type="text" class="form-control" name="searchEnd" placeholder="종료일" style=" text-align: center; width: 130px" required="required"/>
+							 	<span class="form-control" style="width: 60px;">까지</span>
+							</div>
+							<div style="margin-left: 10px; margin-top: 2.5px;">
+								<input type="button" class="btn btn-round btn-default" value="오늘"/>
+								<input type="button" class="btn btn-round btn-default" value="1주일"/>
+								<input type="button" class="btn btn-round btn-default" value="1개월"/>
+								<input type="button" class="btn btn-round btn-default" value="3개월"/>
+								<input type="button" class="btn btn-round btn-default" value="1년"/>
+							</div>
+		                  	
 					   	</div>
 				        <div class="searchBtnDiv">
-							<button type="submit" class="btn-flip btn btn-gradient btn-primary ">
+							<button type="submit" class="searchBtn btn-flip btn btn-gradient btn-primary">
 									검색 <span class="fa fa-search"></span>
 							</button>
-							<button type="button" class="btn-flip btn btn-outline btn-default">
+							<button type="submit" class="searchResetBtn btn-flip btn btn-outline btn-default">
 									초기화
 							</button>
 						</div>
 					</form>
 				</div>			
-				<!-- 챌린지 카테고리 검색 폼 End -->						
+				<!-- 챌린지 카테고리 검색 폼 End -->			
 							
 				<!--챌린지 카테고리 데이터 테이블 Start-->
 				<div class="responsive-table" >
@@ -193,7 +140,7 @@
 								</td>
 							</tr>
 							<tr th:unless="${not #lists.isEmpty(challengeCategoryList)}">
-								<td colspan="6">등록된 정보가 없습니다.</td>
+								<td colspan="7">등록된 정보가 없습니다.</td>
 							</tr>															
 						</tbody>
 					</table>
@@ -215,47 +162,46 @@
 	        </div>
 	        
 			<div class="panel-body">
-				<!-- 챌린지 세팅 검색 폼 Start-->
-				<form class="searchSetTableForm">
-					<div class="form-group">
-						<label class="col-sm-2 col-md-1 control-label text-center"><b> 카테고리 검색</b></label>
-						<div class="col-sm-10 col-md-11">
-	                        <select class="select2-A">
-	                            <option data-column="1">카테고리명</option>
-	                            <option data-column="2">운동클래스</option>
-	                        </select>
-			                <input type="text" name="searchKey">
-						</div>
+				<!-- 챌린지 카테고리 검색 폼 Start -->
+				<form class="searchCateTableForm" th:action="@{/admin/configList}" method="get">
+					<div class="input-group">
+					  <span class="form-control" style="width: 180px;">카테고리 검색</span>
+					  <select class="form-control" name="searchKey"  style="width: 130px;" required="required">
+					  	<option value="challengeCategoryName">카테고리명</option>
+		              	<option value="eClassCategorySmallName">운동클래스</option>
+					  </select>
+					  <input class="form-control" type="text" name="searchValue" placeholder="검색키워드를 입력해주세요." required="required"/>
 					</div>
-                    
-					<div class="form-group">
-						<label class="col-sm-2 col-md-1 control-label text-center"><b>등록일자</b></label>
-						<div class="col-sm-10 col-md-11 dateInputDiv">
-	                        <div>
-	                        <input type="text" class="form-text mask-placeholder dateInput" placeholder="____/__/__"  required>
-	                        	부터
-	                        <input type="text" class="form-text mask-placeholder dateInput" placeholder="____/__/__"  required>
-	                        	까지
-	                        </div>
-	                        <div>
-	                        <input type="button" class="btn btn-round btn-default" value="오늘"/>
-	                        <input type="button" class="btn btn-round btn-default" value="1주일"/>
-	                        <input type="button" class="btn btn-round btn-default" value="1개월"/>
-	                        <input type="button" class="btn btn-round btn-default" value="3개월"/>
-	                        <input type="button" class="btn btn-round btn-default" value="1년"/>
-	                        </div>
-	                    </div>
+			                 
+					<div class="input-group" style="margin-top: 10px;">
+						<span class="form-control" style="width: 130px;">등록일자</span>
+						<div class="input-daterange" id="datepicker" style="height: 33px !important;">
+							<input type="hidden" name="searchDate"/>	                    
+							<input type="text" class="form-control" name="searchStart" placeholder="시작일" style=" text-align: center; width: 130px" required="required"/>
+							<span class="form-control" style="width: 60px;">부터</span>
+							<input type="text" class="form-control" name="searchEnd" placeholder="종료일" style=" text-align: center; width: 130px" required="required"/>
+						 	<span class="form-control" style="width: 60px;">까지</span>
+						</div>
+						<div style="margin-left: 10px; margin-top: 2.5px;">
+							<input type="button" class="btn btn-round btn-default" value="오늘"/>
+							<input type="button" class="btn btn-round btn-default" value="1주일"/>
+							<input type="button" class="btn btn-round btn-default" value="1개월"/>
+							<input type="button" class="btn btn-round btn-default" value="3개월"/>
+							<input type="button" class="btn btn-round btn-default" value="1년"/>
+						</div>
+	                  	
 				   	</div>
-                    <div class="searchBtnDiv">
-						<button type="button" class="btn-flip btn btn-gradient btn-primary ">
+			        <div class="searchBtnDiv">
+						<button type="submit" class="searchBtn btn-flip btn btn-gradient btn-primary">
 								검색 <span class="fa fa-search"></span>
 						</button>
-						<button type="button" class="btn-flip btn btn-outline btn-default">
+						<button type="submit" class="searchResetBtn btn-flip btn btn-outline btn-default">
 								초기화
 						</button>
 					</div>
 				</form>
-				<!-- 챌린지 세팅 검색 폼 End-->
+							
+				<!-- 챌린지 카테고리 검색 폼 End -->	
 				
 				<!--챌린지 카테고리 데이터 테이블 Start-->
 				<div class="responsive-table" >
@@ -313,13 +259,7 @@
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script type="text/javascript">
 	
-		
-		
-
 		$(document).ready(function() {
-			/* 검색 일자 형식 지정*/
-			$('.mask-placeholder').mask("0000/00/00", {placeholder: "____/__/__"});
-			
 			/* datepicker Start */
 			$('.input-daterange').datepicker({
 				format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
@@ -344,6 +284,20 @@
 			    language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
 			});
 			/* datepicker End */
+			
+			$('.searchBtn').click(function(){
+				$('select[name="searchKey"]').attr("required" , true);
+				$('input[name="searchValue"]').attr("required" , true);
+				$('input[name="searchStart"]').attr("required" , true);
+				$('input[name="searchEnd"]').attr("required" , true);
+			});
+			$('.searchResetBtn').click(function(){
+				$('select[name="searchKey"]').attr("required" , false);
+				$('input[name="searchValue"]').attr("required" , false);
+				$('input[name="searchStart"]').attr("required" , false);
+				$('input[name="searchEnd"]').attr("required" , false);
+			});
+			
 			
 			/*sweetalret으로 삭제 처리는 어떻게 해야하나*/
 			$('.cateDelete').click(function(){

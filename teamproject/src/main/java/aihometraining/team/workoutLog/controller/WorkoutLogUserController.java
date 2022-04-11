@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -16,14 +17,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import aihometraining.team.dto.EClassCategoryLarge;
 import aihometraining.team.dto.EClassCategoryMedium;
 import aihometraining.team.dto.EClassCategorySmall;
+import aihometraining.team.dto.FileDto;
 import aihometraining.team.dto.WorkoutGoal;
 import aihometraining.team.dto.WorkoutLog;
 import aihometraining.team.dto.WorkoutLogLike;
 import aihometraining.team.dto.WorkoutLogPrivacybounds;
+import aihometraining.team.util.FileUtil;
 import aihometraining.team.workoutLog.mapper.WorkoutLogUserMapper;
 import aihometraining.team.workoutLog.service.WorkoutLogUserService;
 
@@ -39,10 +43,12 @@ public class WorkoutLogUserController {
 	private WorkoutLogUserService workoutLogUserService;
 	private WorkoutLogUserMapper workoutLogUserMapper;
 	
+	
 	public WorkoutLogUserController(WorkoutLogUserService workoutLogUserService, WorkoutLogUserMapper workoutLogUserMapper) {
 		
 		this.workoutLogUserService = workoutLogUserService;
 		this.workoutLogUserMapper = workoutLogUserMapper;
+		
 	}
 	
 	// 일지 메인 화면
@@ -85,8 +91,9 @@ public class WorkoutLogUserController {
 	@GetMapping("/workoutLogList")
 	public String workoutLogList(Model model
 								,@RequestParam(value = "workoutLogTitle", required = false) String workoutLogTitle
-								,@RequestParam(value = "workoutLogContent", required = false) String workoutLogContent) {
-		
+								,@RequestParam(value = "workoutLogContent", required = false) String workoutLogContent
+								,@RequestParam(value = "filePath", required = false) String filePath) {
+		log.info("파일 주소 : " , filePath);
 		//운동 목표 목록 조회
 		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
 		log.info("운동 목표 목록 조회  workoutGoalList : {}", workoutGoalList);
@@ -185,13 +192,27 @@ public class WorkoutLogUserController {
 	
 	//일지 등록 처리
 		@PostMapping("/workoutLogInsert")
-		public String workoutLogInsert(WorkoutLog workoutLog, HttpSession session) {
+		public String workoutLogInsert(WorkoutLog workoutLog
+									 , HttpSession session
+									 , @RequestParam MultipartFile[] fileImage
+									 , HttpServletRequest request) {
 			
 			String sessionEmail = (String) session.getAttribute("SEMAIL");	//형변환을 해줘라
 			
+			//파일 업로드 
+			String serverName = request.getServerName();
+			String fileRealPath = "";
+			if("localhost".equals(serverName)) {				
+				fileRealPath = System.getProperty("user.dir") + "/src/main/resources/static/";
+				//fileRealPath = request.getSession().getServletContext().getRealPath("/WEB-INF/classes/static/");
+			}else {
+				fileRealPath = request.getSession().getServletContext().getRealPath("/WEB-INF/classes/static/");
+			}
+			
+			
 			log.info("일지 등록 폼에서 입력받은 데이터: {}", workoutLog);
 			
-			workoutLogUserService.workoutLogInsert(workoutLog, sessionEmail);
+			workoutLogUserService.workoutLogInsert(workoutLog, sessionEmail, fileImage, fileRealPath );
 			
 			return "redirect:/workoutLog/workoutLogUser/workoutLogMain";
 			

@@ -13,7 +13,7 @@
 				<div class="row justify-content-center">
 					<div class="col-lg-8 col-md-8">
 						<h3 class="mb-30">오늘 일지 등록</h3>
-						<form class="mb-5" id="workoutLogInsert" th:action="@{/workoutLog/workoutLogUser/workoutLogInsert}" method="post">
+						<form class="mb-5" id="workoutLogInsert" th:action="@{/workoutLog/workoutLogUser/workoutLogInsert}" method="post" enctype="multipart/form-data">
 							<!-- 일지 제목 -->
 							<div class="mt-10">
 								<input type="text" name="workoutLogTitle" placeholder="일지 제목" onfocus="this.placeholder = ''" onblur="this.placeholder = '일지 제목'" required class="single-input">
@@ -70,7 +70,7 @@
 									</div>
 							</div>
 							<div class="mt-2">
-								<input type="file" name="workoutLogAddfile" placeholder="일지 첨부파일"
+								<input type="file" name="fileImage" multiple="multiple" placeholder="일지 첨부파일"
 								onfocus="this.placeholder = ''" onblur="this.placeholder = '일지 첨부파일'" required
 								class="single-input">
 							</div>
@@ -244,13 +244,6 @@
 				
 				
 			});
-			
-			
-			
-			
-			
-			
-			
 			
 			
 		});
