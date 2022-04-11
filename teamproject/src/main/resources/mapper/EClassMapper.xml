@@ -46,7 +46,6 @@
 			
 			<association property="eClassIntroduce" javaType="EClassIntroduce">
 				<id 	column="eClassIntroduceCode" 		property="eClassIntroduceCode"/>
-				<result column="eClassApprovedCode" 		property="eClassApprovedCode"/>
 				<result column="memberEmail" 				property="memberEmail"/>
 				<result column="eClassIntroduceContent" 	property="eClassIntroduceContent"/>
 				<result column="memberUpdateEmail" 			property="memberUpdateEmail"/>
@@ -99,7 +98,6 @@
 	<resultMap type="eclasssectiontitle" id="eclasssectiontitleMap">
 	
 		<result column="eClassSectionTitleCode" 		property="eClassSectionTitleCode"/>
-		<result column="eClassApprovedCode" 			property="eClassApprovedCode"/>
 		<result column="memberEmail" 					property="memberEmail"/>
 		<result column="eClassSectionTitleName" 		property="eClassSectionTitleName"/>
 		<result column="eClassSectionTitleDate"			property="eClassSectionTitleDate"/>
@@ -111,7 +109,6 @@
 	<resultMap type="eclasssectioncurriculum" id="eclasssectioncurriculumMap">
 	
 		<result column="eClassSectionCurriculumCode" 		property="eClassSectionCurriculumCode"/>
-		<result column="eClassApprovedCode" 				property="eClassApprovedCode"/>
 		<result column="memberEmail" 						property="memberEmail"/>
 		<result column="eClassSectionTitleCode" 			property="eClassSectionTitleCode"/>
 		<result column="eClassSectionCurriculumTitle"		property="eClassSectionCurriculumTitle"/>
@@ -127,7 +124,6 @@
 	<resultMap type="eclassquestion" id="eclassquestionMap">
 	
 		<result column="eClassQuestionCode" 		property="eClassQuestionCode"/>
-		<result column="eClassApprovedCode" 		property="eClassApprovedCode"/>
 		<result column="memberEmail" 				property="memberEmail"/>
 		<result column="eClassQuestionTitle" 		property="eClassQuestionTitle"/>
 		<result column="eClassQuestionRegDate"		property="eClassQuestionRegDate"/>
@@ -173,7 +169,6 @@
 		/* Question 등록처리 */
 		INSERT INTO eclassquestion(
 			 eClassQuestionCode
-			,eClassApprovedCode
 			,memberEmail
 			,eClassQuestionTitle
 			,eClassQuestionRegDate
@@ -181,7 +176,6 @@
 			,eClassQuestionUpdateDate
 		)VALUES(
 			 #{eClassQuestionCode}
-			,#{eClassApprovedCode}
 			,#{memberEmail}
 			,#{eClassQuestionTitle}
 			,NOW()
@@ -194,7 +188,6 @@
 		/* SectionCurriculum 등록처리 */
 		INSERT INTO eclasssectioncurriculum(
 			 eClassSectionCurriculumCode
-			,eClassApprovedCode
 			,memberEmail
 			,eClassSectionTitleCode
 			,eClassSectionCurriculumTitle
@@ -206,7 +199,6 @@
 			,eClassSectionCurriculumState
 		)VALUES(
 			 #{eClassSectionCurriculumCode}
-			,#{eClassApprovedCode}
 			,#{memberEmail}
 			,#{eClassSectionTitleCode}
 			,#{eClassSectionCurriculumTitle}
@@ -223,7 +215,6 @@
 		/* SectionTitle 등록처리 */
 		INSERT INTO eclasssectiontitle(
 			 eClassSectionTitleCode
-			,eClassApprovedCode
 			,memberEmail
 			,eClassSectionTitleName
 			,eClassSectionTitleDate
@@ -231,7 +222,6 @@
 			,memberUpdateEmail
 		)VALUES(
 			 #{eClassSectionTitleCode}
-			,#{eClassApprovedCode}
 			,#{memberEmail}
 			,#{eClassSectionTitleName}
 			,NOW()

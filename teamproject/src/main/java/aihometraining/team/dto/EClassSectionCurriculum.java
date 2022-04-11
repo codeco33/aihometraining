@@ -4,7 +4,6 @@ import java.sql.Date;
 
 public class EClassSectionCurriculum {
 	private String eClassSectionCurriculumCode;
-	private String eClassApprovedCode;
 	private String memberEmail;
 	private String eClassSectionTitleCode;
 	private String eClassSectionCurriculumTitle;
@@ -14,17 +13,12 @@ public class EClassSectionCurriculum {
 	private Date eClassSectionCurriculumUpdateDate;
 	private String memberUpdateEmail;
 	private String eClassSectionCurriculumState;
+	
 	public String geteClassSectionCurriculumCode() {
 		return eClassSectionCurriculumCode;
 	}
 	public void seteClassSectionCurriculumCode(String eClassSectionCurriculumCode) {
 		this.eClassSectionCurriculumCode = eClassSectionCurriculumCode;
-	}
-	public String geteClassApprovedCode() {
-		return eClassApprovedCode;
-	}
-	public void seteClassApprovedCode(String eClassApprovedCode) {
-		this.eClassApprovedCode = eClassApprovedCode;
 	}
 	public String getMemberEmail() {
 		return memberEmail;
@@ -82,14 +76,13 @@ public class EClassSectionCurriculum {
 	}
 	@Override
 	public String toString() {
-		return "EClassSectionCurriculum [eClassSectionCurriculumCode=" + eClassSectionCurriculumCode
-				+ ", eClassApprovedCode=" + eClassApprovedCode + ", memberEmail=" + memberEmail
-				+ ", eClassSectionTitleCode=" + eClassSectionTitleCode + ", eClassSectionCurriculumTitle="
+		return "EClassSectionCurriculum [eClassSectionCurriculumCode=" + eClassSectionCurriculumCode + ", memberEmail="
+				+ memberEmail + ", eClassSectionTitleCode=" + eClassSectionTitleCode + ", eClassSectionCurriculumTitle="
 				+ eClassSectionCurriculumTitle + ", eClassSectionCurriculumAddFile=" + eClassSectionCurriculumAddFile
 				+ ", eClassSectionCurriculumRunningTime=" + eClassSectionCurriculumRunningTime
 				+ ", eClassSectionCurriculumRegDate=" + eClassSectionCurriculumRegDate
 				+ ", eClassSectionCurriculumUpdateDate=" + eClassSectionCurriculumUpdateDate + ", memberUpdateEmail="
 				+ memberUpdateEmail + ", eClassSectionCurriculumState=" + eClassSectionCurriculumState + "]";
 	}
-	
+
 }
