@@ -1,5 +1,7 @@
 package aihometraining.team.dto;
 
+import java.util.List;
+
 public class WorkoutLog {
 	
 	/*
@@ -35,8 +37,14 @@ public class WorkoutLog {
 	private String workoutLogUpdateFinalDate;
 	private String workoutLogDeleteEmail;
 	
+	private List<FileDto> fileList;
 	
-	
+	public List<FileDto> getFileList() {
+		return fileList;
+	}
+	public void setFileList(List<FileDto> fileList) {
+		this.fileList = fileList;
+	}
 	public String getWorkoutLogcode() {
 		return workoutLogcode;
 	}
@@ -162,6 +170,8 @@ public class WorkoutLog {
 		builder.append(workoutLogUpdateFinalDate);
 		builder.append(", workoutLogDeleteEmail=");
 		builder.append(workoutLogDeleteEmail);
+		builder.append(", fileList=");
+		builder.append(fileList);
 		builder.append("]");
 		return builder.toString();
 	}

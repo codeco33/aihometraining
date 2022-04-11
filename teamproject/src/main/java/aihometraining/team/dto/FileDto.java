@@ -7,6 +7,8 @@ public class FileDto {
 	private String fileNewName;
 	private String filePath;
 	private Long fileSize;
+	
+	
 	public String getFileIdx() {
 		return fileIdx;
 	}
