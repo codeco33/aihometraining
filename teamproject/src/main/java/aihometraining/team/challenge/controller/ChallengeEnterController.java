@@ -1,5 +1,9 @@
 package aihometraining.team.challenge.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -8,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import aihometraining.team.challenge.service.ChallengeEnterService;
+import aihometraining.team.dto.ChallengeEnter;
 import aihometraining.team.dto.ChallengeGather;
 
 @Controller
@@ -15,14 +21,29 @@ import aihometraining.team.dto.ChallengeGather;
 public class ChallengeEnterController {
 	
 	
-	private static final Logger log = LoggerFactory.getLogger(ChallengeEnterController.class);
-
+private static final Logger log = LoggerFactory.getLogger(ChallengeEnterController.class);
+	
+	//DI 의존성 주입
+	private ChallengeEnterService challengeEnterService;
+	
+	public ChallengeEnterController(ChallengeEnterService challengeEnterService) {
+		this.challengeEnterService = challengeEnterService;
+	}
 	
 	@GetMapping("/challengeEnterList")
-	public String challengeEnterList(Model model) {
+	public String challengeEnterList(Model model, HttpSession session) {
+		
+		log.info("참가챌린지 목록조회시 session: {}", session);
+		
+		String sEmail = (String) session.getAttribute("SEMAIL");
+		
+		List<ChallengeEnter> challengeEnterList = challengeEnterService.getChallengeEnterListByEmail(sEmail);
+		
+		log.info("참가챌린지 목록조회 challengeEnterList: {}", challengeEnterList);
 		
 		model.addAttribute("title", "참가 챌린지 목록");
 		model.addAttribute("headerList", "챌린지");
+		model.addAttribute("challengeEnterList", challengeEnterList);
 		
 		return "challenge/challengeEnter/challengeEnterList";
 		
