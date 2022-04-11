@@ -45,6 +45,10 @@ public interface WorkoutLogUserMapper {
 	//일지 좋아요 등록 처리
 	public int workoutLogLikeInsert(WorkoutLogLike workoutLogLike);
 	
+	//일지 좋아요 목록 조회
+	public List<WorkoutLogLike> getworkoutLogLikeList();
+		
+	
 	
 
 		

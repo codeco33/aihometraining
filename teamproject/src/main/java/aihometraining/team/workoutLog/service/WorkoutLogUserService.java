@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import aihometraining.team.dto.EClassCategoryLarge;
-import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.WorkoutGoal;
 import aihometraining.team.dto.WorkoutLog;
 import aihometraining.team.dto.WorkoutLogLike;
@@ -29,6 +28,14 @@ public class WorkoutLogUserService {
 		this.workoutLogUserMapper = workoutLogUserMapper;
 		this.commonMapper = commonMapper;
 		
+	}
+	
+	// 일지 좋아요 목록 조회
+	public List<WorkoutLogLike> getworkoutLogLikeList() {
+		
+		workoutLogUserMapper.getworkoutLogLikeList();
+		
+		return null;
 	}
 	
 	// 일지 좋아요 등록

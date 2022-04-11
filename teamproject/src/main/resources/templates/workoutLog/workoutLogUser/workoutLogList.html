@@ -23,11 +23,19 @@
 	                                    </a>
 	                                </div>
 	                                <div class="blog_details">
-	                                        <h2 class="blog-head" style="color: #2d2d2d;" th:text="${workoutLogTitle}"></h2>
-	                                    <ul class="blog-info-link">
-	                                        <li><a href="#"><i class="fa fa-heart"></i>좋아요</a></li>
-	                                        <li><a href="#"><i class="fa fa-comments" ></i>피드백</a></li>
-	                                    </ul>
+	                                    <h2 class="blog-head" style="color: #2d2d2d;" th:text="${workoutLogTitle}"></h2>
+	                                    <th:block th:if="${not #lists.isEmpty(workoutLogLikeList)}" th:each="l : ${workoutLogLikeList}">
+		                                    <ul class="blog-info-link">
+		                                        <li><a href="#" onclick="return false;" class="workoutLogLikeCount" th:data-workoutLogLikeCount="${l.workoutLogLikeCount}"><i class="fa fa-heart"></i>좋아요([[${l.workoutLogLikeCount}]])</a></li>
+		                                        <li><a href="#"><i class="fa fa-comments" ></i>피드백</a></li>
+		                                    </ul>
+		                                </th:block>
+					                    <th:block th:unless="${not #lists.isEmpty(workoutLogLikeList)}" th:each="l : ${workoutLogLikeList}">
+					                    	< <ul class="blog-info-link">
+		                                        <li><a href="#"><i class="fa fa-heart"></i>좋아요가 없습니다.</a></li>
+		                                        <li><a href="#"><i class="fa fa-comments" ></i>피드백</a></li>
+		                                    </ul>
+										</th:block>      	    
 						                <p class="excert" th:text="${workoutLogContent}">
 						                    
 						                </p>
@@ -51,19 +59,6 @@
                             </article>     
 		                </div>
 			            <div class="navigation-top">
-			               <div class="d-sm-flex justify-content-between text-center">
-			                  <p class="like-info"><span class="align-middle"><i class="fa fa-heart"></i></span> Lily and 4
-			                  people like this</p>
-			                  <div class="col-sm-4 text-center my-2 my-sm-0">
-			                     <!-- <p class="comment-count"><span class="align-middle"><i class="fa fa-comment"></i></span> 06 Comments</p> -->
-			                  </div>
-			                  <ul class="social-icons">
-			                     <li><a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a></li>
-			                     <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-			                     <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
-			                     <li><a href="#"><i class="fab fa-behance"></i></a></li>
-			                  </ul>
-			               </div>
 			               <div class="navigation-area">
 			                  <div class="row">
 			                     <div
@@ -330,6 +325,29 @@
 	<!-- 사용자 정의 Script -->
 	<th:block layout:fragment="customScript">
 		<script>
+			// 일지 좋아요 Ajax
+			$(function() {
+				$(".workoutLogLikeCount").on("click", function() {
+	                var workoutLogLikeCount = $(this).attr('data-workoutLogLikeCount');
+	                var text = $(this);
+	                console.log(workoutLogLikeCount);
+	                    $.ajax({
+	                        url : '/workoutLog/workoutLogUser/workoutLogList',
+	                        type : 'post',
+	                        data : {
+	                            	'workoutLogLikeCount' : workoutLogLikeCount
+	                        },
+	                        dataType : 'text',
+	                        success : function(data) {
+	                        	console.log(data);
+	                        	console.log($(this));
+	                        	text.empty();
+	                            text.append('<i class="fa fa-heart"></i>좋아요(' + data + ')');
+	                        }
+	                    });
+	       		 })
+			});			
+		
 		</script>
 	</th:block>
 	

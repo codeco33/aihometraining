@@ -95,11 +95,16 @@ public class WorkoutLogUserController {
 		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList();
 		log.info("일지 목록 조회  workoutLogList : {}", workoutLogList);
 		
+		//일지 좋아요 목록 조회
+		List<WorkoutLogLike> workoutLogLikeList = workoutLogUserService.getworkoutLogLikeList();
+		log.info("일지 목록 조회  workoutLogLikeList : {}", workoutLogLikeList);
+		
 		model.addAttribute("title", "일지 상세 화면");
 		model.addAttribute("workoutGoalList", workoutGoalList);
 		model.addAttribute("workoutLogList", workoutLogList);
 		model.addAttribute("workoutLogTitle", workoutLogTitle);
 		model.addAttribute("workoutLogContent", workoutLogContent);
+		model.addAttribute("workoutLogLikeList", workoutLogLikeList);
 		
 		return "workoutLog/workoutLogUser/workoutLogList";
 		
