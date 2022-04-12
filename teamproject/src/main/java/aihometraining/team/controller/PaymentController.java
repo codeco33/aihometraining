@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.EClassTake;
@@ -88,8 +89,7 @@ public class PaymentController {
 	}
 	
 	@PostMapping("/signUpForClass")
-	public String eClassTake(EClassTake eClassTake) {
-		
+	public String eClassTake(EClassTake eClassTake, RedirectAttributes reAttr) {
 		
 		
 		//수강신청 insert하기
@@ -102,8 +102,6 @@ public class PaymentController {
 	
 	@GetMapping("/payment")
 	public String payment(Model model) {
-		
-		
 		
 		//결제화면 model에 담기
 		model.addAttribute("title", "결제");
