@@ -1,5 +1,7 @@
 package aihometraining.team.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import aihometraining.team.dto.EClassApproved;
+import aihometraining.team.dto.EClassTake;
 import aihometraining.team.dto.Member;
 import aihometraining.team.dto.WishList;
 import aihometraining.team.mapper.PaymentMapper;
@@ -58,6 +61,27 @@ public class PaymentService {
 		}else {
 			return true;
 		}
+	}
+	
+	//수강신청
+	public void addEClassTake(EClassTake eClassTake) {
+		String eClassApprovedCode = eClassTake.geteClassApprovedCode();
+		
+		int len = eClassTake.getMemberEmail().indexOf("@");
+		String memberId = eClassTake.getMemberEmail().substring(0, len);
+		
+		String eClassTakeCode =  eClassApprovedCode+"_"+memberId;
+		
+		SimpleDateFormat date = new SimpleDateFormat("yyyyMMddhhmm");
+		
+		String paymentGroupCode = "e"+date.format(new Date())+"_"+memberId;
+		
+		
+		//dto에 위에서 만들어진 코드를 세팅해주기
+		eClassTake.seteClassTakeCode(eClassTakeCode);
+		eClassTake.setPaymentGroupCode(paymentGroupCode);
+		
+		paymentMapper.addEClassTake(eClassTake);
 	}
 	
 

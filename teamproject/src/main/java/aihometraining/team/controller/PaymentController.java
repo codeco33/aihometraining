@@ -13,20 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import aihometraining.team.dto.EClassApproved;
+import aihometraining.team.dto.EClassTake;
 import aihometraining.team.dto.Member;
 import aihometraining.team.dto.WishList;
-import aihometraining.team.mapper.PaymentMapper;
 import aihometraining.team.service.PaymentService;
 
 @Controller
 public class PaymentController {
 	
 	private PaymentService paymentService;
-	private PaymentMapper paymentMapper;
 	
-	public PaymentController(PaymentService paymentService, PaymentMapper paymentMapper) {
+	public PaymentController(PaymentService paymentService) {
 		this.paymentService = paymentService;
-		this.paymentMapper = paymentMapper;
 	}
 	
 	@GetMapping("/challengeadmin")
@@ -89,6 +87,17 @@ public class PaymentController {
 		return "eClass/eClassTake";
 	}
 	
+	@PostMapping("/signUpForClass")
+	public String eClassTake(EClassTake eClassTake) {
+		
+		
+		
+		//수강신청 insert하기
+		paymentService.addEClassTake(eClassTake);
+		
+		return "redirect:/payment";
+	}
+	
 
 	
 	@GetMapping("/payment")
@@ -96,6 +105,7 @@ public class PaymentController {
 		
 		
 		
+		//결제화면 model에 담기
 		model.addAttribute("title", "결제");
 		
 		return "payment/payment";
@@ -104,7 +114,7 @@ public class PaymentController {
 	@PostMapping("/payment")
 	public String payment(Model model, String a) {
 		
-		
+		//결제처리
 		model.addAttribute("title", "결제");
 		
 		return "redirect:/mypage/mypaymentList/paymentDetail";

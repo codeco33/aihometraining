@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import aihometraining.team.dto.EClassApproved;
+import aihometraining.team.dto.EClassTake;
 import aihometraining.team.dto.Member;
 import aihometraining.team.dto.WishList;
 
@@ -21,4 +22,8 @@ public interface PaymentMapper {
 	
 	//위시리스트 삭제
 	public int deleteWishList(String wishListCode);
+	
+	//수강신청하기
+	public void addEClassTake(EClassTake eClassTake);
+	
 }

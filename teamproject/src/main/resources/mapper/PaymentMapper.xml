@@ -100,6 +100,7 @@
 		/*수강신청 운동클래스 정보 조회*/
 		SELECT
 			 ea.eClassApprovedName
+			,ea.eClassApprovedCode
 			,m.memberName
 			,eo.eClassOpenAppleyPrice
 			,ea.eClassApprovedSetDate
@@ -125,4 +126,26 @@
 		WHERE
 			wishListCode = #{wishListCode};
 	</delete>
+	
+	<insert id="addEClassTake" parameterType="EClassTake">
+		/* 수강신청 */
+		INSERT INTO eclasstake(
+			  eClassTakeCode
+			, memberEmail
+			, memberPhone
+			, eClassApprovedCode
+			, eClassTakeRegDate
+			, eClassTakeState
+			, paymentGroupCode
+			)
+		VALUES (
+			  #{eClassTakeCode}
+			, #{memberEmail}
+			, #{memberPhone}
+			, #{eClassApprovedCode}
+			, NOW()
+			, '수강예정'
+			, #{paymentGroupCode}
+		);
+	</insert>
 </mapper>

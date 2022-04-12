@@ -2,9 +2,9 @@ package aihometraining.team.dto;
 
 public class EClassTake {
 	private String eClassTakeCode;
-	private Member member;
+	private String memberEmail;
 	private String memberPhone;
-	private EClassApproved eClassApproved;
+	private String eClassApprovedCode;
 	private String eClassTakeRegDate;
 	private String eClassTakeState;
 	private String paymentGroupCode;
@@ -14,11 +14,11 @@ public class EClassTake {
 	public void seteClassTakeCode(String eClassTakeCode) {
 		this.eClassTakeCode = eClassTakeCode;
 	}
-	public Member getMember() {
-		return member;
+	public String getMemberEmail() {
+		return memberEmail;
 	}
-	public void setMember(Member member) {
-		this.member = member;
+	public void setMemberEmail(String memberEmail) {
+		this.memberEmail = memberEmail;
 	}
 	public String getMemberPhone() {
 		return memberPhone;
@@ -26,11 +26,11 @@ public class EClassTake {
 	public void setMemberPhone(String memberPhone) {
 		this.memberPhone = memberPhone;
 	}
-	public EClassApproved geteClassApproved() {
-		return eClassApproved;
+	public String geteClassApprovedCode() {
+		return eClassApprovedCode;
 	}
-	public void seteClassApproved(EClassApproved eClassApproved) {
-		this.eClassApproved = eClassApproved;
+	public void seteClassApprovedCode(String eClassApprovedCode) {
+		this.eClassApprovedCode = eClassApprovedCode;
 	}
 	public String geteClassTakeRegDate() {
 		return eClassTakeRegDate;
@@ -55,12 +55,12 @@ public class EClassTake {
 		StringBuilder builder = new StringBuilder();
 		builder.append("EClassTake [eClassTakeCode=");
 		builder.append(eClassTakeCode);
-		builder.append(", member=");
-		builder.append(member);
+		builder.append(", memberEmail=");
+		builder.append(memberEmail);
 		builder.append(", memberPhone=");
 		builder.append(memberPhone);
-		builder.append(", eClassApproved=");
-		builder.append(eClassApproved);
+		builder.append(", eClassApprovedCode=");
+		builder.append(eClassApprovedCode);
 		builder.append(", eClassTakeRegDate=");
 		builder.append(eClassTakeRegDate);
 		builder.append(", eClassTakeState=");
@@ -70,6 +70,8 @@ public class EClassTake {
 		builder.append("]");
 		return builder.toString();
 	}
+	
+	
 	
 	
 }

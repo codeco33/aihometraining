@@ -112,7 +112,7 @@
    	<!-- Courses area start -->
 	<div id="eClassTakeSection" class="fix services-area services-area2">
 		<div class="container">
-			<form id="eClassTakeForm" class="row justify-content-center" th:action="@{/payment}" method="get">
+			<form id="eClassTakeForm" class="row justify-content-center" th:action="@{/signUpForClass}" method="post">
 				
 				<div class="single-services mb-30 col-lg-6">
 					<div class="features-caption">
@@ -122,6 +122,7 @@
 						<div class="form-group">
 							<label class="inputTitle">운동클래스 이름</label>
 							<input type="text" name="eClassName" class="form-control-plaintext" readonly th:value="${eClassApproved.eClassApprovedName}">
+							<input type="text" name="eClassApprovedCode" class="form-control-plaintext" hidden th:value="${eClassApproved.eClassApprovedCode}">
 						</div>
 						<div class="form-group">
 							<label class="inputTitle">강사 이름</label>
@@ -167,7 +168,7 @@
 							<label class="inputTitle">월 정기 결제 금액</label>
 							<input type="text" name="paymentTotalPayPrice" class="form-control-plaintext totalPayPrice" readonly th:value="${eClassApproved.eClassOpenApplyForm.eClassOpenApplyPrice}"> 
 						</div>
-						<button id="eClassTakeBtn" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit">수강신청서 제출</button>
+						<button id="eClassTakeBtn" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="button">수강신청서 제출</button>
 					</div>
 				</div>
 				
@@ -189,8 +190,9 @@
 	<th:block layout:fragment="customBodyScript">
 		<script type="text/javascript">
 			$(function(){
-				 $('#eClassTakeForm').validate({
-			            rules: {
+				//휴대폰번호 유효성 검사
+				$('#eClassTakeForm').validate({
+			          rules: {
 			            	memberPhone: {
 			                    required: true,
 			                    digits : true,
@@ -206,6 +208,15 @@
 			                    maxlength : "휴대폰 번호 11자리를 입력해주세요"
 			                }
 			            }
+				 });
+				 
+				//수강신청 버튼 클릭 이벤트
+				 $('#eClassTakeBtn').click(function(){
+					 var result = confirm('수강신청 하시겠습니까?');
+					 
+					 if(result == true){
+						 $('#eClassTakeForm').submit();
+					 }
 				 });
 			});
 		</script>
