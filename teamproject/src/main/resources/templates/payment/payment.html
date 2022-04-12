@@ -234,9 +234,9 @@
 				<div id="totalPriceDiv" class="single-services mb-30">
 					<div id="totalPriceStrDiv">
 						<span>총 결제금액</span>
-						<span>27,000</span>
+						<span class="totalprice">27,000</span>
 					</div>
-					<button id="paymentBtn" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit">결제하기</button>
+					<button id="paymentBtn" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="button">결제하기</button>
 				</div>
 				
 				
@@ -252,10 +252,12 @@
 	</div>
 
 	<th:block th:replace="userfragments/userJavaScripts :: userJSFragment"></th:block>
+	<script src ="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 	<th:block layout:fragment="customBodyScript">
 		<script type="text/javascript">
 		 
 			$(function(){
+				//인증번호 유효성 검사
 				 $('#paymentForm').validate({
 			            rules: {
 			            	memberPhoneCertify: {
@@ -274,6 +276,7 @@
 			            }
 				});
 				 
+				 //결제방식 클릭할때 색 바뀌게 하기
 				$('.paymentMethodBtn').click(function(){
 					 if($(this).children('input[type="radio"]').prop('checked') == true){
 						//$(this).prarents('div .row').find('.paymentMethodBtn').removeClass('.paymentMethodBtn:hover');
@@ -294,12 +297,56 @@
 				});
 				
 				//포인트 잔액 바뀌면 체크버튼 풀리게하기
+				$('input[name="pointUseInput"]').
 
 				
-				 
+		    /*아임포트 카카오페이 결제*/
+			  $('#paymentBtn').click(function () {
+			        // getter
+			        var IMP = window.IMP;
+			        IMP.init('imp03955010');
+			        var money = $('.totalprice').text();
+			        console.log(money);
+
+			        IMP.request_pay({
+			            pg: 'card',
+			            merchant_uid: 'merchant_' + new Date().getTime(),
+			            name: '운동클래스 이름',
+			            amount: 500,
+			            buyer_email: 'iamport@siot.do',
+			            buyer_name: '구매자이름',
+			            buyer_tel: '010-1234-5678',
+			            buyer_addr: '전라북도 전주시',
+			            buyer_postcode: '123-456',
+			            
+			        }, function (rsp) {
+			            console.log(rsp);
+			            if (rsp.success) {
+			                var msg = '결제가 완료되었습니다.';
+			                msg += '고유ID : ' + rsp.imp_uid;
+			                msg += '상점 거래ID : ' + rsp.merchant_uid;
+			                msg += '결제 금액 : ' + rsp.paid_amount;
+			                msg += '카드 승인번호 : ' + rsp.apply_num;
+			                $.ajax({
+			                    type: "GET", 
+			                    url: "/mypage/mypaymentList/paymentDetail", //충전 금액값을 보낼 url 설정
+			                    data: {
+			                        "amount" : money
+			                    },
+			                });
+			            } else {
+			                var msg = '결제에 실패하였습니다.';
+			                msg += '에러내용 : ' + rsp.error_msg;
+			            }
+			            alert(msg);
+			            document.location.href="/mypage/mySignUpForClassList"; //alert창 확인 후 이동할 url 설정
+			        });
+			    });
 				
-				 
-			});
+				
+				//포인트 할인 적용 버튼 클릭 이벤트
+				$('#pointUseBtn').click
+	});
 		</script>
 	</th:block>
 </body>

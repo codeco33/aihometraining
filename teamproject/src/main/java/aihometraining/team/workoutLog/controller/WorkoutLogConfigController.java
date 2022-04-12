@@ -1,5 +1,6 @@
 package aihometraining.team.workoutLog.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,9 +39,37 @@ public class WorkoutLogConfigController {
 	
 	//운동 일지 관리자 메인 화면
 	@GetMapping("/workoutLogConfigMain")
-	public String workoutLogConfigMain(Model model) {
+	public String workoutLogConfigMain(Model model
+									  ,@RequestParam(value="searchKey", required = false) String searchKey
+									  ,@RequestParam(value="searchValue", required = false) String searchValue
+									  ,@RequestParam(value="searchDate", required = false) String searchDate
+									  ,@RequestParam(value="searchStart", required = false) String searchStart
+									  ,@RequestParam(value="searchEnd", required = false) String searchEnd) {
 		
-		List<WorkoutLog> workoutLogList = workoutLogConfigService.getWorkoutLogList();
+		Map<String, Object> paramMap = new HashMap<String,Object>();
+		
+		if(searchKey != null) {
+			if("memberEmail".equals(searchKey)) {
+				searchKey = "memberEmail";
+				searchDate = "workoutLogUpdateFinalDate";
+			}else if("eClassCategorySmallName".equals(searchKey)) {
+				searchKey = "eClassCategorySmallName";
+				searchDate = "workoutLogUpdateFinalDate";
+			}
+		}
+		
+		paramMap.put("searchKey", searchKey);
+		paramMap.put("searchValue", searchValue);
+		paramMap.put("searchKey", searchKey);
+		paramMap.put("searchDate", searchDate);
+		paramMap.put("searchStart", searchStart);
+		paramMap.put("searchEnd", searchEnd);
+		
+		List<Map<String, Object>> workoutLogList = workoutLogConfigService.getWorkoutLogList(paramMap);
+		
+		paramMap = null;
+		
+		log.info("일지 검색 workoutLogList : {}", workoutLogList);
 		
 		model.addAttribute("title", "일지 관리자 화면");
 		model.addAttribute("leftMenuList", "일지");

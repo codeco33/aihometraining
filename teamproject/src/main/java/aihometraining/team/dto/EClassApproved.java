@@ -4,10 +4,10 @@ import java.sql.Date;
 
 public class EClassApproved {
 	private String eClassApprovedCode;
-	private String eClassTakeCode;
+	private String eClassOpenApplyCode;
 	private String memberEmail;
 	private String eClassApprovedName;
-	private Date eClassApprovedSetDate;
+	private String eClassApprovedSetDate;
 	private Date eClassApprovedStratDate;
 	private Date eClassApprovedEndDate;
 	private int eClassApprovedStudent;
@@ -16,17 +16,21 @@ public class EClassApproved {
 	private Date eClassApprovedDate;
 	private int eClassApprovedFinish;
 	
+	//wishList 구현으로 추가함 -진수경
+	private EClassOpenApplyForm eClassOpenApplyForm;
+	private Member member;
+	
 	public String geteClassApprovedCode() {
 		return eClassApprovedCode;
 	}
 	public void seteClassApprovedCode(String eClassApprovedCode) {
 		this.eClassApprovedCode = eClassApprovedCode;
 	}
-	public String geteClassTakeCode() {
-		return eClassTakeCode;
+	public String geteClassOpenApplyCode() {
+		return eClassOpenApplyCode;
 	}
-	public void seteClassTakeCode(String eClassTakeCode) {
-		this.eClassTakeCode = eClassTakeCode;
+	public void seteClassOpenApplyCode(String eClassOpenApplyCode) {
+		this.eClassOpenApplyCode = eClassOpenApplyCode;
 	}
 	public String getMemberEmail() {
 		return memberEmail;
@@ -40,10 +44,10 @@ public class EClassApproved {
 	public void seteClassApprovedName(String eClassApprovedName) {
 		this.eClassApprovedName = eClassApprovedName;
 	}
-	public Date geteClassApprovedSetDate() {
+	public String geteClassApprovedSetDate() {
 		return eClassApprovedSetDate;
 	}
-	public void seteClassApprovedSetDate(Date eClassApprovedSetDate) {
+	public void seteClassApprovedSetDate(String eClassApprovedSetDate) {
 		this.eClassApprovedSetDate = eClassApprovedSetDate;
 	}
 	public Date geteClassApprovedStratDate() {
@@ -88,15 +92,54 @@ public class EClassApproved {
 	public void seteClassApprovedFinish(int eClassApprovedFinish) {
 		this.eClassApprovedFinish = eClassApprovedFinish;
 	}
+	public EClassOpenApplyForm geteClassOpenApplyForm() {
+		return eClassOpenApplyForm;
+	}
+	public void seteClassOpenApplyForm(EClassOpenApplyForm eClassOpenApplyForm) {
+		this.eClassOpenApplyForm = eClassOpenApplyForm;
+	}
+	
 	@Override
 	public String toString() {
-		return "EClassApproved [eClassApprovedCode=" + eClassApprovedCode + ", eClassTakeCode=" + eClassTakeCode
-				+ ", memberEmail=" + memberEmail + ", eClassApprovedName=" + eClassApprovedName
-				+ ", eClassApprovedSetDate=" + eClassApprovedSetDate + ", eClassApprovedStratDate="
-				+ eClassApprovedStratDate + ", eClassApprovedEndDate=" + eClassApprovedEndDate
-				+ ", eClassApprovedStudent=" + eClassApprovedStudent + ", eClassApprovedMaxStudent="
-				+ eClassApprovedMaxStudent + ", eClassIntroduceCode=" + eClassIntroduceCode + ", eClassApprovedDate="
-				+ eClassApprovedDate + ", eClassApprovedFinish=" + eClassApprovedFinish + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("EClassApproved [eClassApprovedCode=");
+		builder.append(eClassApprovedCode);
+		builder.append(", eClassOpenApplyCode=");
+		builder.append(eClassOpenApplyCode);
+		builder.append(", memberEmail=");
+		builder.append(memberEmail);
+		builder.append(", eClassApprovedName=");
+		builder.append(eClassApprovedName);
+		builder.append(", eClassApprovedSetDate=");
+		builder.append(eClassApprovedSetDate);
+		builder.append(", eClassApprovedStratDate=");
+		builder.append(eClassApprovedStratDate);
+		builder.append(", eClassApprovedEndDate=");
+		builder.append(eClassApprovedEndDate);
+		builder.append(", eClassApprovedStudent=");
+		builder.append(eClassApprovedStudent);
+		builder.append(", eClassApprovedMaxStudent=");
+		builder.append(eClassApprovedMaxStudent);
+		builder.append(", eClassIntroduceCode=");
+		builder.append(eClassIntroduceCode);
+		builder.append(", eClassApprovedDate=");
+		builder.append(eClassApprovedDate);
+		builder.append(", eClassApprovedFinish=");
+		builder.append(eClassApprovedFinish);
+		builder.append(", eClassOpenApplyForm=");
+		builder.append(eClassOpenApplyForm);
+		builder.append(", member=");
+		builder.append(member);
+		builder.append("]");
+		return builder.toString();
 	}
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
+	
 	
 }

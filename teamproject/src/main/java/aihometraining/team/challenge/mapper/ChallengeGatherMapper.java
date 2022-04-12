@@ -29,4 +29,7 @@ public interface ChallengeGatherMapper {
 		
 	//챌린지 모집 계획 등록처리
 	public void challengeGatherPlanInsert(ChallengeGatherPlan challengeGatherPlan);
+	
+	////챌린지 개설자 가져오기
+	public String getChallengeMaker(String memberEmail);
 }

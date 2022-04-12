@@ -33,6 +33,7 @@ public class ChallengeGatherPlan {
 	private ChallengeGather challengeGather;
 	private ChallengeCategory challengeCategory;
 	private ChallengeSetting challengeSetting;
+	
 	public String getChallengeGatherPlanCode() {
 		return challengeGatherPlanCode;
 	}

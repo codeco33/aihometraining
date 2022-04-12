@@ -28,6 +28,7 @@ public class WebConfig implements WebMvcConfigurer{
 				.excludePathPatterns("/Doc/**")
 				.excludePathPatterns("/form/**")
 				.excludePathPatterns("/fullcalendar/**")
+				.excludePathPatterns("/images/**")
 				.excludePathPatterns("/todolist/**");
 		
 		registry.addInterceptor(loginInterceptor)
@@ -38,9 +39,10 @@ public class WebConfig implements WebMvcConfigurer{
 				.excludePathPatterns("/form/**")
 				.excludePathPatterns("/fullcalendar/**")
 				.excludePathPatterns("/todolist/**")
+				.excludePathPatterns("/images/**")
 				.excludePathPatterns("/")
-				.excludePathPatterns("/admin/addMember")
-				.excludePathPatterns("/admin/login");
+				.excludePathPatterns("/addMember")
+				.excludePathPatterns("/login");
 		
 		
 		WebMvcConfigurer.super.addInterceptors(registry);

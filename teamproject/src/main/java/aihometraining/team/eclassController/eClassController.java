@@ -2,35 +2,39 @@ package aihometraining.team.eclassController;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import aihometraining.team.challenge.controller.ChallengeConfigController;
 import aihometraining.team.dto.EClassAnswer;
-import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.EClassIntroduce;
-import aihometraining.team.dto.EClassOpenApplyForm;
+import aihometraining.team.dto.EClassOpenAppleyForm;
 import aihometraining.team.dto.EClassQuestion;
 import aihometraining.team.dto.EClassSectionCurriculum;
 import aihometraining.team.dto.EClassSectionTitle;
 import aihometraining.team.eclassService.eClassService;
+import aihometraining.team.mapper.EClassMapper;
 
 @Controller
 public class eClassController {
 	
-	private static final Logger log = LoggerFactory.getLogger(ChallengeConfigController.class);
+	private static final Logger log = LoggerFactory.getLogger(eClassController.class);
 	
 	private eClassService eClassService;
+	private EClassMapper eClassMapper;
 	
-	public eClassController( eClassService eClassService) {
+	public eClassController( eClassService eClassService, EClassMapper eClassMapper) {
 		
 		this.eClassService = eClassService;
+		this.eClassMapper = eClassMapper;
 	}
 	
 	@GetMapping("/eClassApprovedList")
@@ -45,37 +49,53 @@ public class eClassController {
 	public String OpenApplyForm(Model model) {
 		
 		//운동 클래스 카테고리 조회
-		List<EClassCategorySmall> eClassCategoryList = eClassService.eClassCategoryList();
+		List<EClassCategorySmall> eClassCategoryLargeList = eClassService.eClassCategoryLargeList();
+		List<EClassCategorySmall> eClassCategoryMediumList = eClassService.eClassCategoryMediumList();
 		
-		
-		
-		log.info("eClassController.javaOpenApplyForm 데이터: {}", eClassCategoryList); //받은 내용이 여기{}에 담긴다.
+		log.info("eClassController.javaOpenAppleyForm 데이터: {}", eClassCategoryLargeList); //받은 내용이 여기{}에 담긴다.
+		log.info("eClassController.javaOpenAppleyForm 데이터: {}", eClassCategoryMediumList); //받은 내용이 여기{}에 담긴다.
 
 		
 		model.addAttribute("title", "운통클래스 신청폼");
-		model.addAttribute("eClassCategoryList", eClassCategoryList);
+		model.addAttribute("eClassCategoryLargeList", eClassCategoryLargeList);
+		model.addAttribute("eClassCategoryMediumList", eClassCategoryMediumList);
 		
-		return "eClass/eClassOpenApplyForm";
-	}
-	@PostMapping("/EClassOpenApplyForm")
-	public String EClassOpenApplyFormInsert( Model model
-											,EClassOpenApplyForm eClassOpenApplyForm
-											,EClassApproved eClassApproved
-											,EClassIntroduce eClassIntroduce
-											,EClassSectionTitle eClassSectionTitle
-											,EClassSectionCurriculum eClassSectionCurriculum
-											,EClassQuestion eClassQuestion
-											,EClassAnswer eClassAnswer) {
-		
-		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassApproved,eClassIntroduce,eClassSectionTitle,eClassSectionCurriculum,eClassQuestion,eClassAnswer);
-		
-		eClassService.EClassOpenApplyFormInsert(eClassOpenApplyForm, eClassApproved,eClassIntroduce,eClassSectionTitle,eClassSectionCurriculum,eClassQuestion,eClassAnswer);
-		
-		model.addAttribute("title", "개설신청 완료");
-		
-		return "";
+		return "eClass/eClassOpenAppleyForm";
 	}
 	
+	@PostMapping("/CategoryLarge")
+	@ResponseBody
+	public List<EClassCategorySmall> EClassLarge(@RequestParam(value="eClassCategoryLargeCode", required = false) String eClassCategoryLargeCode){
+		
+		log.info("eClassController EClassLarge 데이터: {}", eClassCategoryLargeCode);
+		
+		List<EClassCategorySmall> categoryLarge = eClassMapper.eClassCategoryLarge(eClassCategoryLargeCode);
+		
+		return categoryLarge;
+	}
+	@PostMapping("/CategoryMedium")
+	@ResponseBody
+	public List<EClassCategorySmall> EClassMedium (@RequestParam(value = "eClassCategoryMediumCode", required = false) String eClassCategoryMediumCode){
+	
+		List<EClassCategorySmall> categoryMedium = eClassMapper.eClassCategoryMedium(eClassCategoryMediumCode);
+		
+		return categoryMedium;
+	}
+	
+	@GetMapping("/eClassIntroduce")
+	public List<EClassIntroduce> EClassIntroduceInsert( @RequestParam(value = "EClassIntroduceInsert", required = false)EClassIntroduce eClassIntroduce
+														,HttpSession session) {
+		
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassIntroduce);
+		//1 eClassIntroduceCode 자동생성
+		//2 개설된 클래스 코드
+		String mamberEmail = (String) session.getAttribute("SEMAIL");
+		eClassService.EClassIntroduceInsert(eClassIntroduce, mamberEmail);
+		//int intorduce = eClassMapper.EClassIntroduceInsert(eClassIntroduce, mamberEmail);
+		
+		return null;
+	}
+
 	@GetMapping("/eClassApproved")
 	public String eClassApproved(Model model) {
 	

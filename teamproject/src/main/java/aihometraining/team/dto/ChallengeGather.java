@@ -1,5 +1,7 @@
 package aihometraining.team.dto;
 
+import java.util.List;
+
 public class ChallengeGather {
 	private String challengeGatherCode;
 	private String memberEmail;
@@ -19,7 +21,10 @@ public class ChallengeGather {
 	private String challengeGatherEndDate;
 	
 	private Member member;
-	private ChallengeCategory ChallengeCategory;
+	private ChallengeCategory challengeCategory;
+	private ChallengeGatherPlan challengeGatherPlan;
+	private List<ChallengeEnter> challengeEnterList;
+	private List<ChallengeGatherPlanDo> challengeGatherPlanDoList;
 	
 	public String getChallengeGatherCode() {
 		return challengeGatherCode;
@@ -124,12 +129,29 @@ public class ChallengeGather {
 		this.member = member;
 	}
 	public ChallengeCategory getChallengeCategory() {
-		return ChallengeCategory;
+		return challengeCategory;
 	}
 	public void setChallengeCategory(ChallengeCategory challengeCategory) {
-		ChallengeCategory = challengeCategory;
+		this.challengeCategory = challengeCategory;
 	}
-	
+	public ChallengeGatherPlan getChallengeGatherPlan() {
+		return challengeGatherPlan;
+	}
+	public void setChallengeGatherPlan(ChallengeGatherPlan challengeGatherPlan) {
+		this.challengeGatherPlan = challengeGatherPlan;
+	}
+	public List<ChallengeEnter> getChallengeEnterList() {
+		return challengeEnterList;
+	}
+	public void setChallengeEnterList(List<ChallengeEnter> challengeEnterList) {
+		this.challengeEnterList = challengeEnterList;
+	}
+	public List<ChallengeGatherPlanDo> getChallengeGatherPlanDoList() {
+		return challengeGatherPlanDoList;
+	}
+	public void setChallengeGatherPlanDoList(List<ChallengeGatherPlanDo> challengeGatherPlanDoList) {
+		this.challengeGatherPlanDoList = challengeGatherPlanDoList;
+	}
 	@Override
 	public String toString() {
 		return "ChallengeGather [challengeGatherCode=" + challengeGatherCode + ", memberEmail=" + memberEmail
@@ -141,7 +163,9 @@ public class ChallengeGather {
 				+ ", challengeStartDate=" + challengeStartDate + ", challengeEndDate=" + challengeEndDate
 				+ ", challengeGatherRegDate=" + challengeGatherRegDate + ", memberEnterEmail=" + memberEnterEmail
 				+ ", challengeGatherStartDate=" + challengeGatherStartDate + ", challengeGatherEndDate="
-				+ challengeGatherEndDate + ", member=" + member + ", ChallengeCategory=" + ChallengeCategory + "]";
+				+ challengeGatherEndDate + ", member=" + member + ", challengeCategory=" + challengeCategory
+				+ ", challengeGatherPlan=" + challengeGatherPlan + ", challengeEnterList=" + challengeEnterList
+				+ ", challengeGatherPlanDoList=" + challengeGatherPlanDoList + "]";
 	}
 	
 	
