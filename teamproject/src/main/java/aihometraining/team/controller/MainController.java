@@ -1,14 +1,31 @@
 package aihometraining.team.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import aihometraining.team.dto.EClassOpenApplyForm;
+import aihometraining.team.dto.WishList;
+import aihometraining.team.mapper.MemberMapper;
+import aihometraining.team.service.MemberService;
 
 @Controller
 public class MainController {
+	
+	private MemberService memberService;
+	private MemberMapper memberMapper;
+	
+	public MainController(MemberService memberService, MemberMapper memberMapper) {
+		this.memberService = memberService;
+		this.memberMapper = memberMapper;
+	}
 	
 	@GetMapping("/")
 	public String main(Model model, HttpSession session) {
@@ -48,51 +65,7 @@ public class MainController {
 		return "eClass/eclassadmin";
 		
 	}
-	@GetMapping("/challengeadmin")
-	public String challengeadmin(Model model) {
-		
-		model.addAttribute("title", "챌린지 관리자 페이지");
-		
-		return "challenge/challengeadmin";
-		
-	}
-	@GetMapping("/wishList")
-	public String wishList(Model model) {
-		
-		model.addAttribute("title", "위시리스트");
-		
-		return "member/wishList";
-		
-	}
 	
-	@GetMapping("/signUpForClass")
-	public String eClassTake(Model model) {
-		
-		
-		
-		model.addAttribute("title", "수강신청");
-		
-		return "eClass/eClassTake";
-	}
-
 	
-	@GetMapping("/payment")
-	public String payment(Model model) {
-		
-		
-		
-		model.addAttribute("title", "결제");
-		
-		return "payment/payment";
-	}
-	
-	@PostMapping("/payment")
-	public String payment(Model model, String a) {
-		
-		
-		model.addAttribute("title", "결제");
-		
-		return "redirect:/mypage/mypaymentList/paymentDetail";
-	}
 
 }
