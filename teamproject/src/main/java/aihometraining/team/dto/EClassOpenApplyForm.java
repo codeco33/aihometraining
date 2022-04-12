@@ -12,6 +12,22 @@ public class EClassOpenApplyForm {
 	private Date	eClassOpenApplyDate;
 	private int 	eClassOpenApplyApproveState;
 	
+	//wishList 구현으로 추가함 -진수경
+	private EClassCategorySmall eClassCategorySmall;
+	private EClassIntroduce eClassIntroduce;
+	public EClassCategorySmall geteClassCategorySmall() {
+		return eClassCategorySmall;
+	}
+	public void seteClassCategorySmall(EClassCategorySmall eClassCategorySmall) {
+		this.eClassCategorySmall = eClassCategorySmall;
+	}
+	public EClassIntroduce geteClassIntroduce() {
+		return eClassIntroduce;
+	}
+	public void seteClassIntroduce(EClassIntroduce eClassIntroduce) {
+		this.eClassIntroduce = eClassIntroduce;
+	}
+	
 	public String geteClassOpenAppleyCode() {
 		return eClassOpenAppleyCode;
 	}
@@ -66,6 +82,7 @@ public class EClassOpenApplyForm {
 				+ eClassOpenApplyMemberEmail + ", eClassOpenApplyName=" + eClassOpenApplyName
 				+ ", eClassOpenApplyCategorySamll=" + eClassOpenApplyCategorySamll + ", eClassOpenApplyPrice="
 				+ eClassOpenApplyPrice + ", eClassIntroduceCode=" + eClassIntroduceCode + ", eClassOpenApplyDate="
-				+ eClassOpenApplyDate + ", eClassOpenApplyApproveState=" + eClassOpenApplyApproveState + "]";
+				+ eClassOpenApplyDate + ", eClassOpenApplyApproveState=" + eClassOpenApplyApproveState 
+				+ ", eClassCategorySmall=" + eClassCategorySmall + ", eClassIntroduce=" + eClassIntroduce +"]";
 	}
 }

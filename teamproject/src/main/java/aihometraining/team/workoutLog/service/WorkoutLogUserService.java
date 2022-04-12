@@ -47,14 +47,6 @@ public class WorkoutLogUserService {
 		
 	}
 	
-	// 일지 좋아요 목록 조회
-	public List<WorkoutLogLike> getworkoutLogLikeList() {
-		
-		workoutLogUserMapper.getworkoutLogLikeList();
-		
-		return null;
-	}
-	
 	// 일지 좋아요 등록
 	public int workoutLogLikeInsert(WorkoutLogLike workoutLogLike) {
 		
@@ -67,9 +59,9 @@ public class WorkoutLogUserService {
 	}
 	
 	//일지 좋아요 카운트
-	public void workoutLogLikeCountUpdate(String workoutLogcode) {
+	public void workoutLogLikeCountUpdate(String workoutLogCode) {
 		
-		workoutLogUserMapper.workoutLogLikeCountUpdate(workoutLogcode);
+		workoutLogUserMapper.workoutLogLikeCountUpdate(workoutLogCode);
 		
 	}
 	
@@ -88,8 +80,8 @@ public class WorkoutLogUserService {
 	// 일지 등록 처리
 	public int workoutLogInsert(WorkoutLog workoutLog, String sessionEmail, MultipartFile[] fileImage, String fileRealPath) {
 		
-		String code = commonMapper.getNewCode("workoutLogcode", "workoutlog");
-		workoutLog.setWorkoutLogcode(code);
+		String code = commonMapper.getNewCode("workoutLogCode", "workoutlog");
+		workoutLog.setWorkoutLogCode(code);
 		workoutLog.setMemberEmail(sessionEmail);	
 		
 		int result =workoutLogUserMapper.workoutLogInsert(workoutLog);

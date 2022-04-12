@@ -43,6 +43,20 @@
 		.studentDropdown:before {
 			left: 79px;
 		}
+		.dropdown-menu .divider {
+			margin: 0;
+		}
+		.studentDropdown {
+			padding: 2px 0;
+		}
+		.studentDropdown a {
+			font-size: 14px !important;
+			font-weight: bold !important;
+			padding-top: 10px !important;
+		}
+		.studentDropDownTd .avatar {
+			margin-top: 0 !important;
+		}
 </style>
 </th:block>
 
@@ -69,7 +83,7 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td class="dropdown avatar-dropdown">
+								<td class="dropdown avatar-dropdown studentDropDownTd">
 										일길동
 										<img th:src="@{/asset/img/avatar.jpg}" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 										<ul class="dropdown-menu user-dropdown studentDropdown">
@@ -82,7 +96,7 @@
 								<td>62일</td>
 							</tr>
 							<tr>
-								<td class="dropdown avatar-dropdown">
+								<td class="dropdown avatar-dropdown studentDropDownTd">
 									이길동
 									<img th:src="@{/asset/img/avatar.jpg}" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 									<ul class="dropdown-menu user-dropdown studentDropdown">
@@ -113,6 +127,7 @@
 
 	<!-- custom -->
 	<script th:src="@{/asset/js/main.js}"></script>
+	
 	<script type="text/javascript">
 		
 		$(document).ready(function() {
@@ -122,6 +137,8 @@
 				pageLength : 10,
 				filter : false
 			});
+			
+			
 		});
 	</script>
 </th:block>

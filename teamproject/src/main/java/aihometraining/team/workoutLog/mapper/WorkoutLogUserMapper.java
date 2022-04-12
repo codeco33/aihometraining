@@ -37,10 +37,10 @@ public interface WorkoutLogUserMapper {
 	public List<WorkoutLog>	getworkoutLogList();
 	
 	//일지 좋아요 카운트 값 수정하기
-	public void workoutLogLikeCountUpdate(String workoutLogcode);
+	public void workoutLogLikeCountUpdate(String workoutLogCode);
 	
 	//일지 좋아요카운트 값 가져오기
-	public String getworkoutLogLikeCount(String workoutLogcode);
+	public String getworkoutLogLikeCount(String workoutLogCode);
 	
 	//일지 좋아요 등록 처리
 	public int workoutLogLikeInsert(WorkoutLogLike workoutLogLike);

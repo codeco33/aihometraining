@@ -5,7 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+
 
 @Controller
 public class MainController {
@@ -48,51 +48,7 @@ public class MainController {
 		return "eClass/eclassadmin";
 		
 	}
-	@GetMapping("/challengeadmin")
-	public String challengeadmin(Model model) {
-		
-		model.addAttribute("title", "챌린지 관리자 페이지");
-		
-		return "challenge/challengeadmin";
-		
-	}
-	@GetMapping("/wishList")
-	public String wishList(Model model) {
-		
-		model.addAttribute("title", "위시리스트");
-		
-		return "member/wishList";
-		
-	}
 	
-	@GetMapping("/signUpForClass")
-	public String eClassTake(Model model) {
-		
-		
-		
-		model.addAttribute("title", "수강신청");
-		
-		return "eClass/eClassTake";
-	}
-
 	
-	@GetMapping("/payment")
-	public String payment(Model model) {
-		
-		
-		
-		model.addAttribute("title", "결제");
-		
-		return "payment/payment";
-	}
-	
-	@PostMapping("/payment")
-	public String payment(Model model, String a) {
-		
-		
-		model.addAttribute("title", "결제");
-		
-		return "redirect:/mypage/mypaymentList/paymentDetail";
-	}
 
 }
