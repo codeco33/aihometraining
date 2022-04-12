@@ -31,22 +31,29 @@ public class eClassService {
 	}
 	
 	//클래스 카테고리 조회
-	public List<EClassCategorySmall> eClassCategoryList() {
+	public List<EClassCategorySmall> eClassCategoryLargeList() {
 		
-		List<EClassCategorySmall> eClassCategoryList = eClassMapper.eClassCategoryList();
+		List<EClassCategorySmall> eClassCategoryLargeList = eClassMapper.eClassCategoryLargeList();
 		
-		return eClassCategoryList;
+		return eClassCategoryLargeList;
+	}
+	public List<EClassCategorySmall> eClassCategoryMediumList() {
+		
+		List<EClassCategorySmall> eClassCategoryMediumList = eClassMapper.eClassCategoryMediumList();
+		
+		return eClassCategoryMediumList;
 	}
 	
 	//클래스 신청 폼 introduce 등록처리
-	public int EClassIntroduceInsert(EClassIntroduce eClassIntroduce) {
+	public int EClassIntroduceInsert(EClassIntroduce eClassIntroduce, String mamberEmail) {
 		
 		log.info("EClassIntroduceInsert eClassIntroduce 데이터: {}", eClassIntroduce);
 		String introduceCode = commonMapper.getNewCode("eClassIntroduceCode", "eclassintroduce");
 		log.info("eClassService EClassIntroduceInsert introduceCode",introduceCode);
 		eClassIntroduce.seteClassIntroduceCode(introduceCode);
+		eClassIntroduce.setMemberEmail(mamberEmail);
 		
-		int result = eClassMapper.EClassIntroduceInsert(eClassIntroduce);
+		int result = eClassMapper.EClassIntroduceInsert(eClassIntroduce,mamberEmail);
 		
 		return result;
 	}

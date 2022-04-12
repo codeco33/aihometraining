@@ -16,14 +16,15 @@ import aihometraining.team.dto.EClassSectionTitle;
 public interface EClassMapper {
 	
 	//클래스 카테고리 조회
-	public List<EClassCategorySmall> eClassCategoryList();
+	public List<EClassCategorySmall> eClassCategoryLargeList();
+	public List<EClassCategorySmall> eClassCategoryMediumList();
 	
 	//클래스 단계별 카테고리 조회
 	public List<EClassCategorySmall> eClassCategoryLarge(String eClassCategoryLargeCode);
 	public List<EClassCategorySmall> eClassCategoryMedium(String eClassCategoryMediumCode);
 	
 	//클래스 소개 등록 처리
-	public int EClassIntroduceInsert(EClassIntroduce eClassIntroduce);
+	public int EClassIntroduceInsert(EClassIntroduce eClassIntroduce, String memberEmail);
 	
 	//클래스 섹션 등록 처리
 	public int EClassSectionTitleInsert(EClassSectionTitle eClassSectionTitle);

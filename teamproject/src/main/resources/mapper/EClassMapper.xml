@@ -261,17 +261,22 @@
 		);
 	</insert>
 	
-	<select id="eClassCategoryList" resultType="EClassCategorySmall">
+	<select id="eClassCategoryLargeList" parameterType="String" resultType="EClassCategoryLarge">
 		/* 카테고리 조회 */
 		SELECT
-			 cs.eClassCategorySmallCode
-			,cs.eClassCategorySmallName
-			,cs.eClassCategoryMediumCode
-			,cs.eClassCategoryMediumName
-			,cs.eClassCategoryLargeCode
+			 cs.eClassCategoryLargeCode
 			,cs.eClassCategoryLargeName
 		FROM
-			eclasscategorysmall AS cs;
+			eclasscategorylarge AS cs;
+	</select>
+	
+	<select id="eClassCategoryMediumList" parameterType="String" resultType="EClassCategoryMedium">
+		/* 카테고리 조회 */
+		SELECT
+			 cs.eClassCategoryMediumCode
+			,cs.eClassCategoryMediumName
+		FROM
+			eclasscategorymedium AS cs;
 	</select>
 	
 	<select id="eClassCategoryLarge" parameterType="String" resultMap="eClassCategorySmallResultMap">
@@ -282,7 +287,9 @@
 		FROM
 			eclasscategorysmall AS cs 
 		WHERE
-			cs.eClassCategoryLargeCode = #{eClassCategoryLargeCode};
+			cs.eClassCategoryLargeCode = #{eClassCategoryLargeCode}
+		GROUP BY 
+			eClassCategoryMediumName;
 	</select>
 	
 	<select id="eClassCategoryMedium" parameterType="String" resultMap="eClassCategorySmallResultMap">

@@ -2,6 +2,8 @@ package aihometraining.team.eclassController;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -47,24 +49,25 @@ public class eClassController {
 	public String OpenApplyForm(Model model) {
 		
 		//운동 클래스 카테고리 조회
-		List<EClassCategorySmall> eClassCategoryList = eClassService.eClassCategoryList();
+		List<EClassCategorySmall> eClassCategoryLargeList = eClassService.eClassCategoryLargeList();
+		List<EClassCategorySmall> eClassCategoryMediumList = eClassService.eClassCategoryMediumList();
 		
-		
-		
-		log.info("eClassController.javaOpenAppleyForm 데이터: {}", eClassCategoryList); //받은 내용이 여기{}에 담긴다.
+		log.info("eClassController.javaOpenAppleyForm 데이터: {}", eClassCategoryLargeList); //받은 내용이 여기{}에 담긴다.
+		log.info("eClassController.javaOpenAppleyForm 데이터: {}", eClassCategoryMediumList); //받은 내용이 여기{}에 담긴다.
 
 		
 		model.addAttribute("title", "운통클래스 신청폼");
-		model.addAttribute("eClassCategoryList", eClassCategoryList);
+		model.addAttribute("eClassCategoryLargeList", eClassCategoryLargeList);
+		model.addAttribute("eClassCategoryMediumList", eClassCategoryMediumList);
 		
 		return "eClass/eClassOpenAppleyForm";
 	}
 	
 	@PostMapping("/CategoryLarge")
 	@ResponseBody
-	public List<EClassCategorySmall> EClassMedium(@RequestParam(value="eClassCategoryLargeCode", required = false) String eClassCategoryLargeCode){
+	public List<EClassCategorySmall> EClassLarge(@RequestParam(value="eClassCategoryLargeCode", required = false) String eClassCategoryLargeCode){
 		
-		log.info("eClassController EClassMedium 데이터: {}", eClassCategoryLargeCode);
+		log.info("eClassController EClassLarge 데이터: {}", eClassCategoryLargeCode);
 		
 		List<EClassCategorySmall> categoryLarge = eClassMapper.eClassCategoryLarge(eClassCategoryLargeCode);
 		
@@ -72,101 +75,27 @@ public class eClassController {
 	}
 	@PostMapping("/CategoryMedium")
 	@ResponseBody
-	public List<EClassCategorySmall> EClassSmall (@RequestParam(value = "eClassCategoryMediumCode", required = false) String eClassCategoryMediumCode){
+	public List<EClassCategorySmall> EClassMedium (@RequestParam(value = "eClassCategoryMediumCode", required = false) String eClassCategoryMediumCode){
 	
-		List<EClassCategorySmall> categorySmall = eClassMapper.eClassCategoryMedium(eClassCategoryMediumCode);
+		List<EClassCategorySmall> categoryMedium = eClassMapper.eClassCategoryMedium(eClassCategoryMediumCode);
 		
-		return categorySmall;
+		return categoryMedium;
 	}
 	
 	@GetMapping("/eClassIntroduce")
-	public List<EClassIntroduce> EClassIntroduceInsert(  @RequestParam(value = "EClassIntroduceInsert", required = false)EClassIntroduce eClassIntroduce) {
+	public List<EClassIntroduce> EClassIntroduceInsert( @RequestParam(value = "EClassIntroduceInsert", required = false)EClassIntroduce eClassIntroduce
+														,HttpSession session) {
 		
 		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassIntroduce);
 		//1 eClassIntroduceCode 자동생성
 		//2 개설된 클래스 코드
-		eClassIntroduce.setMemberEmail("id004@email.com");
-		eClassService.EClassIntroduceInsert(eClassIntroduce);
-		
+		String mamberEmail = (String) session.getAttribute("SEMAIL");
+		eClassService.EClassIntroduceInsert(eClassIntroduce, mamberEmail);
+		//int intorduce = eClassMapper.EClassIntroduceInsert(eClassIntroduce, mamberEmail);
 		
 		return null;
 	}
-	
-	@GetMapping("/eClassCurriculum")
-	public String EClassSectionTitleInsert(  Model model
-											,EClassSectionTitle eClassSectionTitle) {
-		
-		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassSectionTitle);
-		//1 eClassSectionTitleCode 자동생성
-		//2 개설된 클래스 코드
-		eClassSectionTitle.setMemberEmail("id004@email.com");
-		eClassService.EClassSectionTitleInsert(eClassSectionTitle);
-		
-		model.addAttribute("title", "개설신청 완료");
-		
-		return "/eClassOpenAppleyForm";
-	}
-	
-	@GetMapping("/eClassCurriculum")
-	public String EClassSectionCurriculumInsert( Model model
-												,EClassSectionCurriculum eClassSectionCurriculum) {
-		
-		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassSectionCurriculum);
-		//1 eClassSectionTitleCode 자동생성
-		//2 개설된 클래스 코드
-		eClassSectionCurriculum.setMemberEmail("id004@email.com");
-		eClassService.EClassSectionCurriculumInsert(eClassSectionCurriculum);
-		
-		model.addAttribute("title", "개설신청 완료");
-		
-		return "/eClassOpenAppleyForm";
-	}
-	
-	@GetMapping("/eClassQuestion")
-	public String EClassQuestionInsert(  Model model
-										,EClassQuestion eClassQuestion) {
-		
-		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassQuestion);
-		//1 eClassSectionTitleCode 자동생성
-		//2 개설된 클래스 코드
-		eClassQuestion.setMemberEmail("id004@email.com");
-		eClassService.EClassQuestionInsert(eClassQuestion);
-		
-		model.addAttribute("title", "개설신청 완료");
-		
-		return "/eClassOpenAppleyForm";
-	}
-	
-	@GetMapping("/eClassAnswer")
-	public String EClassAnswerInsert( Model model
-									 ,EClassAnswer eClassAnswer) {
-		
-		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassAnswer);
-		//1 eClassSectionTitleCode 자동생성
-		//2 개설된 클래스 코드
-		eClassAnswer.setMemberEmail("id004@email.com");
-		eClassService.EClassAnswerInsert(eClassAnswer);
-		
-		model.addAttribute("title", "개설신청 완료");
-		
-		return "/eClassOpenAppleyForm";
-	}
-	
-	@GetMapping("/eClassPrice")
-	public String EClassPriceInsert( Model model
-									,EClassOpenAppleyForm eClassOpenAppleyForm) {
-		
-		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassOpenAppleyForm);
-		//1 eClassSectionTitleCode 자동생성
-		//2 개설된 클래스 코드
-		eClassOpenAppleyForm.seteClassOpenAppleyMemberEmail("id004@email.com");
-		eClassService.EClassPriceInsert(eClassOpenAppleyForm);
-		
-		model.addAttribute("title", "개설신청 완료");
-		
-		return "/eClassOpenAppleyForm";
-	}
-	
+
 	@GetMapping("/eClassApproved")
 	public String eClassApproved(Model model) {
 	
