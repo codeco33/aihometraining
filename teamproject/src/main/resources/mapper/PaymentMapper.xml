@@ -36,9 +36,10 @@
 	</resultMap>
 	
 	<resultMap type="EClassApproved" id="eClassApprovedResultMap">
-		<id 	column="eClassApprovedCode" 			property="eClassApprovedCode"/>
+		<id 	column="eClassApprovedCode" 		property="eClassApprovedCode"/>
 		<result column="eClassApprovedName" 		property="eClassApprovedName"/>
 		<result column="eClassApprovedFinish" 		property="eClassApprovedFinish"/>
+		<result column="eClassApprovedSetDate" 		property="eClassApprovedSetDate"/>
 		<collection property="member" resultMap="memberResultMap"/>
 		<collection property="eClassOpenApplyForm" resultMap="eClassOpenApplyResultMap"/>
 	</resultMap>
@@ -54,6 +55,7 @@
 		SELECT
 			wi.memberEmail
 			,wi.wishListCode
+			,wi.eClassApprovedCode
 			,ea.eClassApprovedName
 			,eo.eClassOpenAppleyPrice
 			,ei.eClassIntroduceContent
@@ -100,6 +102,7 @@
 			 ea.eClassApprovedName
 			,m.memberName
 			,eo.eClassOpenAppleyPrice
+			,ea.eClassApprovedSetDate
 		FROM
 			eclassapproved AS ea
 			INNER JOIN 
