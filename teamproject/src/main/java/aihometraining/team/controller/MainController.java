@@ -49,7 +49,7 @@ public class MainController {
 		return "adminmain";
 		
 	}
-	@GetMapping("/mypage/mypage")
+	@GetMapping("/mypage")
 	public String mypage(Model model) {
 		
 		model.addAttribute("title", "마이페이지");
