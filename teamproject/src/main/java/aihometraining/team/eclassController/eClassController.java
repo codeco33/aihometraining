@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import aihometraining.team.dto.EClassAnswer;
 import aihometraining.team.dto.EClassCategorySmall;
@@ -59,7 +61,8 @@ public class eClassController {
 	}
 	
 	@PostMapping("/CategoryLarge")
-	public List<EClassCategorySmall> EClassMedium(String eClassCategoryLargeCode){
+	@ResponseBody
+	public List<EClassCategorySmall> EClassMedium(@RequestParam(value="eClassCategoryLargeCode", required = false) String eClassCategoryLargeCode){
 		
 		log.info("eClassController EClassMedium 데이터: {}", eClassCategoryLargeCode);
 		
@@ -68,7 +71,8 @@ public class eClassController {
 		return categoryLarge;
 	}
 	@PostMapping("/CategoryMedium")
-	public List<EClassCategorySmall> EClassSmall (String eClassCategoryMediumCode){
+	@ResponseBody
+	public List<EClassCategorySmall> EClassSmall (@RequestParam(value = "eClassCategoryMediumCode", required = false) String eClassCategoryMediumCode){
 	
 		List<EClassCategorySmall> categorySmall = eClassMapper.eClassCategoryMedium(eClassCategoryMediumCode);
 		
@@ -76,8 +80,7 @@ public class eClassController {
 	}
 	
 	@GetMapping("/eClassIntroduce")
-	public String EClassIntroduceInsert( Model model
-										,EClassIntroduce eClassIntroduce) {
+	public List<EClassIntroduce> EClassIntroduceInsert(  @RequestParam(value = "EClassIntroduceInsert", required = false)EClassIntroduce eClassIntroduce) {
 		
 		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassIntroduce);
 		//1 eClassIntroduceCode 자동생성
@@ -85,27 +88,11 @@ public class eClassController {
 		eClassIntroduce.setMemberEmail("id004@email.com");
 		eClassService.EClassIntroduceInsert(eClassIntroduce);
 		
-		model.addAttribute("title", "개설신청 완료");
 		
-		return "/eClassOpenAppleyForm";
+		return null;
 	}
 	
-	@GetMapping("/eClassIntroduceCategoryInsert")
-	public String eClassIntroduceCategoryInsert( Model model
-												,EClassIntroduce eClassIntroduce) {
-		
-		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassIntroduce);
-		//1 eClassIntroduceCode 자동생성
-		//2 개설된 클래스 코드
-		eClassIntroduce.setMemberEmail("id004@email.com");
-		eClassService.EClassIntroduceInsert(eClassIntroduce);
-		
-		model.addAttribute("title", "개설신청 완료");
-		
-		return "/eClassOpenAppleyForm";
-	}
-	
-	@GetMapping("/eClassSectionTitle")
+	@GetMapping("/eClassCurriculum")
 	public String EClassSectionTitleInsert(  Model model
 											,EClassSectionTitle eClassSectionTitle) {
 		

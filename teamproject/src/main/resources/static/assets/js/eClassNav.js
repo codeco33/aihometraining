@@ -16,15 +16,15 @@ jQuery(document).ready(function($){
 		var eClassCategorySmallCode = $('select[name="eClassCategorySmallCode"]').val();
 		console.log(eClassCategorySmallCode);
 		$.ajax({
-			url	: '/eClassIntroduceCategoryInsert',
+			url	: '/EClassIntroduceInsert',
 			type : 'get',
 			data : {
-				'eClassCategorySmallCode' : eClassCategorySmallCode
+				'EClassIntroduceInsert' : EClassIntroduceInsert
 			},
 			dataType : 'json',
 			success : function(data) {
-				var eClassCategorySmallName = $('option[name="eClassCategorySmallName"]').val();
-				console.log(data);
+				//var eClassCategorySmallName = $('option[name="eClassCategorySmallName"]').val();
+				console.log(JSON.stringify(data));
 				console.log(eClassCategorySmallName);
 			}
 		});
