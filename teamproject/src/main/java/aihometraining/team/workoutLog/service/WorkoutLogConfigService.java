@@ -64,4 +64,14 @@ public class WorkoutLogConfigService {
 		return workoutLogList;
 		
 	}
+	
+	// 새롭게 등록된 일지 조회
+	public List<WorkoutLog> getNewWorkoutLog(){
+		
+		List<WorkoutLog> workoutLogNewList = workoutLogConfigMapper.getNewWorkoutLog();
+		
+		return workoutLogNewList;
+		
+	}
+	
 }

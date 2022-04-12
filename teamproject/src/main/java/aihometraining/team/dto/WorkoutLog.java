@@ -38,7 +38,20 @@ public class WorkoutLog {
 	private String workoutLogDeleteEmail;
 	
 	
+	private Member member;
 	private List<FileDto> fileList;
+
+	
+	
+
+	public Member getMember() {
+		return member;
+	}
+
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
 
 
 	public String getWorkoutLogCode() {
@@ -193,16 +206,46 @@ public class WorkoutLog {
 
 	@Override
 	public String toString() {
-		return "WorkoutLog [workoutLogCode=" + workoutLogCode + ", memberEmail=" + memberEmail
-				+ ", workoutLogLikeCount=" + workoutLogLikeCount + ", eClassCategorySmallCode="
-				+ eClassCategorySmallCode + ", eClassCategorySmallName=" + eClassCategorySmallName
-				+ ", workoutLogTitle=" + workoutLogTitle + ", workoutLogContent=" + workoutLogContent
-				+ ", workoutGoalPlanCode=" + workoutGoalPlanCode + ", eClassTaskDoCode=" + eClassTaskDoCode
-				+ ", challengeEnterCode=" + challengeEnterCode + ", workoutLogPrivacyBoundsCode="
-				+ workoutLogPrivacyBoundsCode + ", workoutLogUpdateEmail=" + workoutLogUpdateEmail
-				+ ", workoutLogUpdateFinalDate=" + workoutLogUpdateFinalDate + ", workoutLogDeleteEmail="
-				+ workoutLogDeleteEmail + ", fileList=" + fileList + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("WorkoutLog [workoutLogCode=");
+		builder.append(workoutLogCode);
+		builder.append(", memberEmail=");
+		builder.append(memberEmail);
+		builder.append(", workoutLogLikeCount=");
+		builder.append(workoutLogLikeCount);
+		builder.append(", eClassCategorySmallCode=");
+		builder.append(eClassCategorySmallCode);
+		builder.append(", eClassCategorySmallName=");
+		builder.append(eClassCategorySmallName);
+		builder.append(", workoutLogTitle=");
+		builder.append(workoutLogTitle);
+		builder.append(", workoutLogContent=");
+		builder.append(workoutLogContent);
+		builder.append(", workoutGoalPlanCode=");
+		builder.append(workoutGoalPlanCode);
+		builder.append(", eClassTaskDoCode=");
+		builder.append(eClassTaskDoCode);
+		builder.append(", challengeEnterCode=");
+		builder.append(challengeEnterCode);
+		builder.append(", workoutLogPrivacyBoundsCode=");
+		builder.append(workoutLogPrivacyBoundsCode);
+		builder.append(", workoutLogUpdateEmail=");
+		builder.append(workoutLogUpdateEmail);
+		builder.append(", workoutLogUpdateFinalDate=");
+		builder.append(workoutLogUpdateFinalDate);
+		builder.append(", workoutLogDeleteEmail=");
+		builder.append(workoutLogDeleteEmail);
+		builder.append(", member=");
+		builder.append(member);
+		builder.append(", fileList=");
+		builder.append(fileList);
+		builder.append("]");
+		return builder.toString();
 	}
+
+	
+	
+
 
 		
 	

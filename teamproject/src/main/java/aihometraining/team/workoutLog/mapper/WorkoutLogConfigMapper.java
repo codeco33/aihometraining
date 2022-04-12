@@ -37,6 +37,9 @@ public interface WorkoutLogConfigMapper {
 	
 	//운동 계획 카테고리 삭제 
 	public int workoutLogCategoryDelete(String workoutGoalPlanCategoryCode);
+	
+	//새롭게 등록된 일지 조회
+	public List<WorkoutLog> getNewWorkoutLog();
 	 
 	 
 	
