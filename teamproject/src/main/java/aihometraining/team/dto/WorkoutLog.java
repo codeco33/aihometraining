@@ -5,8 +5,9 @@ import java.util.List;
 public class WorkoutLog {
 	
 	/*
-	 * workoutLogcode, 
-	 * memberEmail, 
+	 * workoutLogCode, 
+	 * memberEmail,
+	 * workoutLogLikeCount, 
 	 * eClassCategorySmallCode,
 	 * eClassCategorySmallName, 
 	 * workoutLogTitle, 

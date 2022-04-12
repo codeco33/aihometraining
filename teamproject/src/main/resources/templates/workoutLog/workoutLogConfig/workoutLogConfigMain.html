@@ -8,6 +8,61 @@
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
+		<div class="col-md-12">
+			<div class="pannel">
+				<div class="panel-heading bg-white border-none">
+		        	<h4><span class="icon-book-open"></span> 새롭게 등록된 일지</h4>
+		        </div>
+				<div class="span12">
+		    	    <div class="well"> 
+		                <div id="myCarousel" class="carousel slide">
+		                 
+		                <ol class="carousel-indicators">
+		                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		                    <li data-target="#myCarousel" data-slide-to="1"></li>
+		                    <li data-target="#myCarousel" data-slide-to="2"></li>
+		                </ol>
+		                 
+		                <!-- Carousel items -->
+		                <div class="carousel-inner">
+		                    
+		                <div class="item active">
+		                	<div class="row-fluid">
+		                	  <div class="col-sm-6 col-md-3 product-grid"><a href="#x" class="thumbnail"><img th:src="@{/assets/img/workoutLogImg1.jpg}" alt="Image" /></a></div>
+		                	  <div class="col-sm-6 col-md-3 product-grid"><a href="#x" class="thumbnail"><img th:src="@{/assets/img/workoutLogImg1.jpg}" alt="Image" /></a></div>
+		                	  <div class="col-sm-6 col-md-3 product-grid"><a href="#x" class="thumbnail"><img th:src="@{/assets/img/workoutLogImg1.jpg}" alt="Image" /></a></div>
+		                	  <div class="col-sm-6 col-md-3 product-grid"><a href="#x" class="thumbnail"><img th:src="@{/assets/img/workoutLogImg1.jpg}" alt="Image" /></a></div>
+		                	</div><!--/row-fluid-->
+		                </div><!--/item-->
+		                 
+		                <div class="item">
+		                	<div class="row-fluid">
+		                		<div class="col-sm-6 col-md-3 product-grid"><a href="#x" class="thumbnail"><img th:src="@{/assets/img/workoutLogImg1.jpg}" alt="Image" /></a></div>
+		                	  <div class="col-sm-6 col-md-3 product-grid"><a href="#x" class="thumbnail"><img th:src="@{/assets/img/workoutLogImg1.jpg}" alt="Image" /></a></div>
+		                	  <div class="col-sm-6 col-md-3 product-grid"><a href="#x" class="thumbnail"><img th:src="@{/assets/img/workoutLogImg1.jpg}" alt="Image" /></a></div>
+		                	  <div class="col-sm-6 col-md-3 product-grid"><a href="#x" class="thumbnail"><img th:src="@{/assets/img/workoutLogImg1.jpg}" alt="Image" /></a></div>
+		                	</div><!--/row-fluid-->
+		                </div><!--/item-->
+		                 
+		                <div class="item">
+		                	<div class="row-fluid">
+		                		<div class="col-sm-6 col-md-3 product-grid"><a href="#x" class="thumbnail"><img th:src="@{/assets/img/workoutLogImg1.jpg}" alt="Image" /></a></div>
+		                	  <div class="col-sm-6 col-md-3 product-grid"><a href="#x" class="thumbnail"><img th:src="@{/assets/img/workoutLogImg1.jpg}" alt="Image" /></a></div>
+		                	  <div class="col-sm-6 col-md-3 product-grid"><a href="#x" class="thumbnail"><img th:src="@{/assets/img/workoutLogImg1.jpg}" alt="Image" /></a></div>
+		                	  <div class="col-sm-6 col-md-3 product-grid"><a href="#x" class="thumbnail"><img th:src="@{/assets/img/workoutLogImg1.jpg}" alt="Image" /></a></div>
+		                	</div><!--/row-fluid-->
+		                </div><!--/item-->
+		                 
+		                </div><!--/carousel-inner-->
+		                 
+		                <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+		                <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+		                </div><!--/myCarousel-->
+		                 
+		            </div><!--/well-->   
+				</div>
+			</div>
+		</div>
 	
 		<div class="col-md-12">
 			<div class="panel">
@@ -15,65 +70,76 @@
 		        	<h4><span class="icon-book-open"></span> 새롭게 등록된 일지</h4>
 		        </div>
 				<div class="panel-body">
+		        	<th:block th:if="${not #lists.isEmpty(workoutLogList)}" th:each="l : ${workoutLogList}">
 		        	<div class="col-sm-6 col-md-3 product-grid">
 		            	<div class="thumbnail">
 		              		<a href="#">
 		                		<img th:src="@{/assets/img/workoutLogImg1.jpg}" alt="...">
 		                	</a>
 		                	<div class="caption">
-		                		<a href="#">
-		                  			<h4>오늘은 사이드 런지</h4>
+		                		<a th:href="@{/workoutLog/workoutLogUser/workoutLogList(workoutLogTitle=${l.workoutLogTitle},workoutLogContent=${l.workoutLogContent})}">
+		                  			<h4>[[${l.workoutLogTitle}]]</h4>
 		                		</a>	
+		                		<p class="workoutLogContent">[[${l.workoutLogContent}]]</p>
 		                 		<span class="fa fa-heart">좋아요  | 0</span>
 		                	</div>
 		              	</div>
 		        	</div>
-		            <div class="col-sm-6 col-md-3 product-grid">
-		            	<div class="thumbnail">
-		              		<a href="#">
-		                		<img th:src="@{/assets/img/workoutLogImg1.jpg}" alt="...">
-		                	</a>
-		                	<div class="caption">
-		                		<a href="#">
-		                  			<h4>오늘은 권투 취취</h4>
-		                		</a>	
-		                    	<span class="fa fa-heart">좋아요  | 10</span>
-		                	</div>
-		              	</div>
-		            </div>
-		            <div class="col-sm-6 col-md-3 product-grid">
-		            	<div class="thumbnail">
-		                	<a href="#">
-		                		<img th:src="@{/assets/img/workoutLogImg1.jpg}" alt="...">
-		                	</a>
-		                	<div class="caption">
-		                		<a href="#">
-		                  			<h4>오늘은 마동석</h4>
-		                		</a>	
-		                    	<span class="fa fa-heart">좋아요  | 503</span>
-		                	</div>
-		              	</div>
-		            </div>
-		            <div class="col-sm-6 col-md-3 product-grid">
-		            	<div class="thumbnail">
-		                	<a href="#">
-		                		<img th:src="@{/assets/img/workoutLogImg1.jpg}" alt="...">
-		                	</a>
-		                	<div class="caption">
-		                		<a href="#">
-		                  			<h4>오늘은 배틀 로프</h4>
-		                		</a>	
-		                    	<span class="fa fa-heart">좋아요  | 2810</span>
-		                	</div>
-		              	</div>
-		            </div>
+		              	</th:block>
 		        </div>
-			</div>		
+			</div>	
+			
+				
 	        <div class="panel">
+	        
 		        <div class="panel-heading bg-white border-none">
 		        	<h4><span class="icon-book-open"></span> 전체 일지 목록</h4>
 		        </div>
+				
 				<div class="panel-body">
+					<!-- 운동 일지 검색 폼 Start -->
+					<form class="searchWorkoutLogTableForm" th:action="@{/admin/workoutLogConfigMain}" method="get">
+						
+						<div class="input-group">
+						  <span class="form-control" style="width: 180px;">일지 검색</span>
+						  <select class="form-control" name="searchKey"  style="width: 130px;" required="required">
+						  	<option value="memberEmail">회원이메일</option>
+			              	<option value="workoutLogTitle">일지 제목</option>
+						  </select>
+						  <input class="form-control" type="text" name="searchValue" placeholder="검색키워드를 입력해주세요." required="required"/>
+						</div>
+				                 
+						<div class="input-group" style="margin-top: 10px;">
+							<span class="form-control" style="width: 130px;">등록일자</span>
+							<div class="input-daterange" id="datepicker" style="height: 33px !important;">
+								<input type="hidden" name="searchDate"/>	                    
+								<input type="text" class="form-control" name="searchStart" placeholder="시작일" style=" text-align: center; width: 130px" required="required"/>
+								<span class="form-control" style="width: 60px;">부터</span>
+								<input type="text" class="form-control" name="searchEnd" placeholder="종료일" style=" text-align: center; width: 130px" required="required"/>
+							 	<span class="form-control" style="width: 60px;">까지</span>
+							</div>
+							<div style="margin-left: 10px; margin-top: 2.5px;">
+								<input type="button" class="btn btn-round btn-default" value="오늘"/>
+								<input type="button" class="btn btn-round btn-default" value="1주일"/>
+								<input type="button" class="btn btn-round btn-default" value="1개월"/>
+								<input type="button" class="btn btn-round btn-default" value="3개월"/>
+								<input type="button" class="btn btn-round btn-default" value="1년"/>
+							</div>
+		                  	
+					   	</div>
+				        <div class="searchBtnDiv">
+							<button type="submit" class="searchBtn btn-flip btn btn-gradient btn-primary">
+									검색 <span class="fa fa-search"></span>
+							</button>
+							<button type="submit" class="searchResetBtn btn-flip btn btn-outline btn-default">
+									초기화
+							</button>
+						</div>
+					</form>
+				</div>			
+			<!-- 운동 일지 검색 폼 End -->	
+				
+				
 					<div class="responsive-table">
 	                	<table id="workoutLogList" class="table table-striped table-bordered" style="width:100%" cellspacing="0">
 		                	<thead>
@@ -96,7 +162,7 @@
 			                        	</a>
 			                        </td>
 			                        <td>Edinburgh</td>
-			                        <td>61</td>
+			                        <td th:text="${wl.workoutLogLikeCount}"></td>
 			                        <td th:text="${wl.workoutLogUpdateFinalDate}"></td>
 		                      	</tr>
 		                      	<tr th:unless="${not #lists.isEmpty(workoutLogList)}">
@@ -107,13 +173,13 @@
 					</div>
 				</div>
 			</div>	
-		</div>	
-		
 	</th:block>
 	
 	<!-- 사용자 정의 Css -->
 	<th:block layout:fragment="customCss">
 		<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/simple-line-icons.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/mediaelementplayer.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/bootstrap-datepicker.css}"/>
 	
 		<style type="text/css">
 			.panel-heading > h4 {
@@ -122,8 +188,66 @@
 				border-bottom: 2px solid #58666e;
 				padding-bottom: 5px;
 			}
-			 .panel-body:nth-child(2) {
-				padding-top: 0;
+			.responsive-table{
+			    padding: 15px !important;
+			}
+			.input-group {
+		    position: relative;
+		    display: flex;
+		    border-collapse: separate !important;
+		    padding-bottom: 10px;
+		    margin-top: 10px;
+		    margin-left: 15px;
+		    border-bottom: 1px solid #efefef;
+		    margin-bottom: 0;
+			}
+			.input-group input[name=searchValue] {
+				border-top-right-radius: 4px !important; 
+				border-bottom-right-radius: 4px !important;
+			}
+			
+			.form-control {
+			    line-height: 1.7;
+			}
+			.searchBtnDiv {
+			    text-align: center;
+			    margin-top: 10px;
+			}
+			/* Removes the default 20px margin and creates some padding space for the indicators and controls */
+			.carousel {
+			    margin-bottom: 0;
+				padding: 0 40px 30px 40px;
+			}
+			/* Reposition the controls slightly */
+			.carousel-control {
+				left: -12px;
+				width: 5%;
+			}
+			.carousel-control.right {
+				right: -12px;
+			}
+			/* Changes the position of the indicators */
+			.carousel-indicators {
+				right: 50%;
+				top: auto;
+				bottom: 0px;
+				margin-right: -19px;
+			}
+			/* Changes the colour of the indicators */
+			.carousel-indicators li {
+				background: #c0c0c0;
+			}
+			.carousel-indicators .active {
+			background: #333333;
+			}
+			
+			/* 한 줄 자르기 */ 
+			.workoutLogContent { 
+				width:200px;
+		      	padding:0 5px;
+		      	overflow:hidden;
+		      	text-overflow:ellipsis;
+		      	white-space:nowrap;
 			}
 		</style>
 	</th:block>
@@ -139,31 +263,83 @@
 		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
 		<script th:src="@{/asset/js/plugins/jquery.dataTables.min.js}"></script>
 		<script th:src="@{/asset/js/plugins/dataTables.bootstrap.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/bootstrap-datepicker.js}"></script>
+		<script th:src="@{/asset/js/plugins/bootstrap-datepicker.ko.min.js}"></script>
 		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.mask.min.js}"></script>
 		
 		<!-- custom -->
 		<script th:src="@{/asset/js/main.js}"></script>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		
 		<script type="text/javascript">
-		  $(document).ready(function(){
-		 	/* 데이터 테이블 생성*/
-		    var table = $('#workoutLogList').DataTable({
-		    	order : [ 0, 'desc' ],
-				lengthChange : false,
-				pageLength : 15,
-				filter: false,
-				 dom: '<"top"i>rt<"bottom"p><"clear">',
-		    });
-		 	
-		    /* 레코드 수 포맷 */
-			var info = table.page.info();			
-			$('#workoutLogList_info').html('전체 ' + info.recordsTotal + ' 건').css('font-weight','bold');
-			
-			$('#workoutLogList').click(function(){
-				$('#workoutLogList_info').html('전체 ' + info.recordsTotal + ' 건');
+		
+			$(document).ready(function(){
+				
+				/* datepicker Start */
+				$('.input-daterange').datepicker({
+					format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
+				    /* startDate: '-3d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주) */
+				    autoclose : true,	//사용자가 날짜를 클릭하면 자동 캘린더가 닫히는 옵션
+				    calendarWeeks : false, //캘린더 옆에 몇 주차인지 보여주는 옵션 기본값 false 보여주려면 true
+				    clearBtn : false, //날짜 선택한 값 초기화 해주는 버튼 보여주는 옵션 기본값 false 보여주려면 true
+				    datesDisabled : ['2019-06-24','2019-06-26'],//선택 불가능한 일 설정 하는 배열 위에 있는 format 과 형식이 같아야함.
+				    disableTouchKeyboard : false,	//모바일에서 플러그인 작동 여부 기본값 false 가 작동 true가 작동 안함.
+				    immediateUpdates: false,	//사용자가 보는 화면으로 바로바로 날짜를 변경할지 여부 기본값 :false 
+				    multidate : false, //여러 날짜 선택할 수 있게 하는 옵션 기본값 :false 
+				    multidateSeparator :",", //여러 날짜를 선택했을 때 사이에 나타나는 글짜 2019-05-01,2019-06-01
+				    templates : {
+				        leftArrow: '&laquo;',
+				        rightArrow: '&raquo;'
+			    	}, //다음달 이전달로 넘어가는 화살표 모양 커스텀 마이징 
+				    showWeekDays : true ,// 위에 요일 보여주는 옵션 기본값 : true
+				    title: "등록일",	//캘린더 상단에 보여주는 타이틀
+				    todayHighlight : true ,	//오늘 날짜에 하이라이팅 기능 기본값 :false 
+				    toggleActive : true,	//이미 선택된 날짜 선택하면 기본값 : false인경우 그대로 유지 true인 경우 날짜 삭제
+				    weekStart : 0 ,//달력 시작 요일 선택하는 것 기본값은 0인 일요일 
+				    language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
+				});
+				/* datepicker End */
+				
+				$('.searchBtn').click(function(){
+					$('select[name="searchKey"]').attr("required" , true);
+					$('input[name="searchValue"]').attr("required" , true);
+					$('input[name="searchStart"]').attr("required" , true);
+					$('input[name="searchEnd"]').attr("required" , true);
+				});
+				$('.searchResetBtn').click(function(){
+					$('select[name="searchKey"]').attr("required" , false);
+					$('input[name="searchValue"]').attr("required" , false);
+					$('input[name="searchStart"]').attr("required" , false);
+					$('input[name="searchEnd"]').attr("required" , false);
+				});
+				
+				
+				
+			 	/* 데이터 테이블 생성*/
+			    var table = $('#workoutLogList').DataTable({
+			    	order : [ 0, 'desc' ],
+					lengthChange : false,
+					pageLength : 15,
+					filter: false,
+					 dom: '<"top"i>rt<"bottom"p><"clear">',
+			    });
+			 	
+			    /* 레코드 수 포맷 */
+				var info = table.page.info();			
+				$('#workoutLogList_info').html('전체 ' + info.recordsTotal + ' 건').css('font-weight','bold');
+				
+				$('#workoutLogList').click(function(){
+					$('#workoutLogList_info').html('전체 ' + info.recordsTotal + ' 건');
+				});
+			 
+				
+				//썸네일 슬라이더
+				 $('#myCarousel').carousel({
+				    interval: 10000
+				})
+			    
 			});
-		 
-		    
-		  });
 		</script>
 		
 	</th:block>
