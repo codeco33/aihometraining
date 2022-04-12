@@ -64,7 +64,7 @@
 											<li><a th:if="${session.SEMAIL != null && session.SLEVEL != 'levelCode001'}">#회원 메뉴</a>
 											<!-- <img th:src="@{/asset/img/avatar.jpg}" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/> -->
 												<ul class="submenu">
-													<li><a th:if="${session.SEMAIL != null}" th:href="@{/member/mypage}"><span class="fa fa-user"></span>마이페이지</a></li>
+													<li><a th:if="${session.SEMAIL != null}" th:href="@{/mypage/mypage}"><span class="fa fa-user"></span>마이페이지</a></li>
 													<li role="separator" class="divider"></li>
 													<li><a th:if="${session.SEMAIL != null}" th:href="@{/wishList}"><span class="fa fa-calendar"></span>#위시리스트</a></li>
 													<li><a th:if="${session.SEMAIL != null}" th:href="@{/admin/logout}" ><span class="fa fa-power-off"></span>로그아웃</a></li>
