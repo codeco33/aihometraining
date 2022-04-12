@@ -42,16 +42,6 @@ public class MemberController {
 		this.challengeGatherService = challengeGatherService;
 	}
 	
-	/* 마이페이지 화면 */
-	@GetMapping("/mypage")
-	public String mypage(Model model) {
-		
-		model.addAttribute("title", "마이페이지");
-		
-		return "member/mypage";
-	}
-	
-	
 	/* 로그인 이력 조회 */
 	@SuppressWarnings("unchecked")
 	@GetMapping("/loginHistory")
