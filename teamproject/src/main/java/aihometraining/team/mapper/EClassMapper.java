@@ -27,17 +27,17 @@ public interface EClassMapper {
 	public int EClassIntroduceInsert(EClassIntroduce eClassIntroduce, String memberEmail);
 	
 	//클래스 섹션 등록 처리
-	public int EClassSectionTitleInsert(EClassSectionTitle eClassSectionTitle);
+	public int EClassSectionTitleInsert(EClassSectionTitle eClassSectionTitle, String memberEmail);
 
 	//클래스 커리큘럼 등록 처리
-	public int EClassSectionCurriculumInsert(EClassSectionCurriculum eClassSectionCurriculum);
+	public int EClassSectionCurriculumInsert(EClassSectionCurriculum eClassSectionCurriculum, String memberEmail);
 
 	//클래스 질문 등록 처리
-	public int EClassQuestionInsert(EClassQuestion eClassQuestion);
+	public int EClassQuestionInsert(EClassQuestion eClassQuestion, String memberEmail);
 	
 	//클래스 답변 등록 처리
-	public int EClassAnswerInsert(EClassAnswer eClassAnswer);
+	public int EClassAnswerInsert(EClassAnswer eClassAnswer, String memberEmail);
 	
-	//클래스 답변 등록 처리
-	public int EClassPriceInsert(EClassOpenAppleyForm eClassOpenAppleyForm);
+	//클래스 세부설정 등록 처리
+	public int EClassPriceInsert(EClassOpenAppleyForm eClassOpenAppleyForm, String memberEmail);
 }
