@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{layout/userdefault}">
@@ -8,8 +8,9 @@
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
-	    <form class="form-default" th:action="@{/member/addInfo}" method="POST">
-	        <div class="login-form">
+		<!-- 회원 추가 정보 입력 area start -->
+	    <form class="form-default" th:action="@{/addInfo}" method="POST">
+	        <div>
 	            <h2>회원 추가 정보 입력</h2>
 	            <div class="form-input">
 	                <label for="name">이름</label>
@@ -25,7 +26,7 @@
 	            </div>
 	            <div class="form-input">
 	                <label for="name">생년월일</label>
-	                <input type="text" name="text" placeholder="950703">
+	                <input type="text" name="text" placeholder="000101">
 	            </div>
 	            <div class="form-input">
 	                <label for="name">성별</label>

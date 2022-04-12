@@ -1,7 +1,6 @@
 package aihometraining.team.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,20 +10,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import aihometraining.team.challenge.service.ChallengeGatherService;
-import aihometraining.team.dto.LoginHistory;
 import aihometraining.team.dto.Member;
 import aihometraining.team.dto.MemberLevel;
 import aihometraining.team.mapper.MemberMapper;
 import aihometraining.team.service.MemberService;
 
 @Controller
-@RequestMapping("/admin")
 public class MemberController {
 
 	
@@ -42,40 +38,13 @@ public class MemberController {
 		this.challengeGatherService = challengeGatherService;
 	}
 	
-	/* 마이페이지 화면 */
-	@GetMapping("/mypage")
-	public String mypage(Model model) {
-		
-		model.addAttribute("title", "마이페이지");
-		
-		return "member/mypage";
-	}
-	
-	
-	/* 로그인 이력 조회 */
-	@SuppressWarnings("unchecked")
-	@GetMapping("/loginHistory")
-	public String getLoginHistory(Model model) {
-		
-		Map<String, Object> resultMap = memberService.getLoginHistory();
-		
-		List<LoginHistory> loginList  = (List<LoginHistory>) resultMap.get("loginList");
-		List<Map<String, Object>> loginMapList = (List<Map<String, Object>>) resultMap.get("loginMapList");
-		
-		model.addAttribute("title", "로그인 이력");
-		model.addAttribute("loginList",		loginList);
-		model.addAttribute("loginMapList",	loginMapList);
-		
-		return "member/loginHistory";
-	}
-	
 	/* 로그아웃 */
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 	
 		session.invalidate();
 		
-		return "redirect:/admin/login";
+		return "redirect:/login";
 	}
 	
 	/* 로그인 */
@@ -122,7 +91,7 @@ public class MemberController {
 		
 		reAttr.addAttribute("result", "등록된 회원이 없습니다.");
 		
-		return "redirect:/admin/login";
+		return "redirect:/login";
 	}
 	
 	
@@ -140,14 +109,14 @@ public class MemberController {
 			memberService.removeMember(member);
 			log.info("회원 탈퇴 성공");
 			
-			return "redirect:/member/memberList";
+			return "redirect:/";
 		}
 		
 		reAttr.addAttribute("memberEmail", memberEmail);
 		reAttr.addAttribute("result", "회원의 정보가 일치하지 않습니다.");
 		log.info("회원 탈퇴 실패");
 		
-		return "redirect:/admin/removeMember";
+		return "redirect:/removeMember";
 	
 	}
 	
@@ -170,7 +139,7 @@ public class MemberController {
 	public String modifyMember(Member member) {
 		log.info("회원 수정 화면에서 입력받은 값: {}", member);
 		memberService.modifyMember(member);
-		return "redirect:/admin/memberList";
+		return "redirect:/";
 	}
 	
 	/* 회원 수정 화면 */
@@ -241,45 +210,7 @@ public class MemberController {
 		return "member/addInfo";
 	}
 	
-	/* 회원 목록 조회 */
-
-	@GetMapping("/memberList")
-	public String getMemberList(Model model
-							   ,@RequestParam(value="searchKey", required = false) String searchKey
-							   ,@RequestParam(value="searchValue", required = false) String searchValue) {
-		
-		
-		log.info("회원 목록 요청");
-		log.info("searchValue:{}", searchValue);
-		
-		if(searchKey != null) {
-			if("memberEmail".equals(searchKey)) {
-				searchKey = "memberEmail";
-			}else if("memberLevelCode".equals(searchKey)) {
-				searchKey = "memberLevelCode";
-			}
-		}
-		
-		List<Member> memberList = memberService.getMemberList(searchKey, searchValue);
-
-		model.addAttribute("title", "회원 목록 조회");
-		model.addAttribute("memberList", memberList);
-		
-		return "member/memberList";
-	}
 	
-	/* 회원 권한 목록 조회 */
-	@GetMapping("/memberLevelList")
-	public String memberLevelList(Model model) {
-		
-		List<MemberLevel> memberLevelList = memberService.getMemberLevelList();
-		
-		model.addAttribute("leftMenuList", "회원 권한 목록 조회");
-		model.addAttribute("title", "회원 권한 목록 조회");
-		model.addAttribute("memberLevelList", memberLevelList);
-		
-		
-		return "member/memberLevelList";
-	}
+
 	
 }

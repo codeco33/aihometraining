@@ -18,7 +18,7 @@ import aihometraining.team.mapper.EClassCategoryMapper;
 import aihometraining.team.service.EClassCategoryService;
 
 @Controller
-@RequestMapping("/eClass/eClassConfig")
+@RequestMapping("/admin/eClassConfig")
 public class EClassCategoryController {
 	
 	

@@ -1,6 +1,7 @@
 package aihometraining.team.workoutLog.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,9 +57,9 @@ public class WorkoutLogConfigService {
 	
 	
 	// 운동 일지 목록 조회
-	public List<WorkoutLog> getWorkoutLogList(){
+	public List<Map<String, Object>> getWorkoutLogList(Map<String, Object> paramMap){
 		
-		List<WorkoutLog> workoutLogList = workoutLogConfigMapper.getWorkoutLogList();
+		List<Map<String, Object>> workoutLogList = workoutLogConfigMapper.getWorkoutLogList(paramMap);
 		
 		return workoutLogList;
 		

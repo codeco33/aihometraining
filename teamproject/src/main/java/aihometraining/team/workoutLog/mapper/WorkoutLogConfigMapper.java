@@ -18,7 +18,10 @@ public interface WorkoutLogConfigMapper {
 	public int workoutGoalCategoryInsert(WorkoutLogCategory workoutLogCategory);
 	
 	//운동 일지 목록 조회
-	public List<WorkoutLog> getWorkoutLogList();
+	//public List<WorkoutLog> getWorkoutLogList();
+	
+	//운동 일지 목록 조회(검색)
+	public List<Map<String,Object>> getWorkoutLogList(Map<String,Object> paramMap);
 	
 	/*
 	 * 모달에서 운동 계획 카테고리명 가져오기 
