@@ -48,8 +48,8 @@
                                                 </ul>
                                             </li>
                                             <!-- Button -->
-                                            <li class="button-header margin-left "><a th:if="${session.SEMAIL == null}" th:href="@{/admin/login}" class="btn">#로그인(민식2)</a></li>
-                                            <li class="button-header"><a th:if="${session.SEMAIL == null}" th:href="@{/admin/addMember}" class="btn btn3">#회원가입(민식)</a></li>
+                                            <li class="button-header margin-left "><a th:if="${session.SEMAIL == null}" th:href="@{/login}" class="btn">#로그인(민식2)</a></li>
+                                            <li class="button-header"><a th:if="${session.SEMAIL == null}" th:href="@{/addMember}" class="btn btn3">#회원가입(민식)</a></li>
 											<li th:if="${session.SEMAIL != null}" class="user-name"><span>[[${session.SNAME}]]님이 로그인하셨습니다.</span></li>
 											<li><a th:if="${session.SEMAIL != null && session.SLEVEL == 'levelCode001'}">#관리자메뉴</a>
 											<!-- <img th:src="@{/asset/img/avatar.jpg}" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/> -->
@@ -58,16 +58,16 @@
 													<li role="separator" class="divider"></li>
 													<li><a th:href="@{/wishList}"><span class="fa fa-calendar"></span>#위시리스트</a></li>
 													<li><a th:if="${session.SEMAIL != null && session.SLEVEL == 'levelCode001'}" th:href="@{/admin}"><span class="fa fa-cogs"></span>관리자 페이지</a></li>
-													<li><a th:if="${session.SEMAIL != null}" th:href="@{/admin/logout}" ><span class="fa fa-power-off"></span>로그아웃</a></li>
+													<li><a th:if="${session.SEMAIL != null}" th:href="@{/logout}" ><span class="fa fa-power-off"></span>로그아웃</a></li>
 												</ul>
 											</li>
 											<li><a th:if="${session.SEMAIL != null && session.SLEVEL != 'levelCode001'}">#회원 메뉴</a>
 											<!-- <img th:src="@{/asset/img/avatar.jpg}" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/> -->
 												<ul class="submenu">
-													<li><a th:if="${session.SEMAIL != null}" th:href="@{/member/mypage}"><span class="fa fa-user"></span>마이페이지</a></li>
+													<li><a th:if="${session.SEMAIL != null}" th:href="@{/mypage}"><span class="fa fa-user"></span>마이페이지</a></li>
 													<li role="separator" class="divider"></li>
 													<li><a th:if="${session.SEMAIL != null}" th:href="@{/wishList}"><span class="fa fa-calendar"></span>#위시리스트</a></li>
-													<li><a th:if="${session.SEMAIL != null}" th:href="@{/admin/logout}" ><span class="fa fa-power-off"></span>로그아웃</a></li>
+													<li><a th:if="${session.SEMAIL != null}" th:href="@{/logout}" ><span class="fa fa-power-off"></span>로그아웃</a></li>
 												</ul>
 											</li>
                                         </ul>
