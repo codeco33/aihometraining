@@ -36,10 +36,10 @@
 					                    <div class="section-tittle section-tittle2 mb-20">
 					                        <div class="front-text">
 					                            <h2 class="">
-					                            	<a th:href="@{/challenge/challengeEnter/challengeEnterDetail}" th:text="${l.challengeGather.challengeGatherName}"></a>
+					                            	<a th:href="@{/challenge/challengeEnter/challengeEnterDetail(challengeGatherCode=${l.challengeGather.challengeGatherCode})}" th:text="${l.challengeGather.challengeGatherName}"></a>
 					                            </h2>
 					                            <p th:text="${l.challengeGather.challengeGatherIntro}"></p>
-					                            <a th:href="@{/challenge/challengeEnter/challengePlanDoInsert}" class="genric-btn primary radius">인증 하기</a>
+					                            <a th:href="@{/challenge/challengeEnter/challengePlanDoInsert(challengeEnterCode=${l.challengeEnterCode})}" class="genric-btn primary radius">인증 하기</a>
 					                        </div>
 					                    </div>
 					                </div>

@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import aihometraining.team.challenge.service.ChallengeEnterService;
 import aihometraining.team.dto.ChallengeEnter;
@@ -50,10 +51,18 @@ private static final Logger log = LoggerFactory.getLogger(ChallengeEnterControll
 	}
 	
 	@GetMapping("/challengeEnterDetail")
-	public String challengeEnterDetail(Model model) {
+	public String challengeEnterDetail(Model model
+									  ,@RequestParam(value="challengeGatherCode", required = false) String challengeGatherCode) {
+		
+		log.info("참가챌린지 세부조회 화면 스트링 값 challengeEnterCode: {}", challengeGatherCode);
+		
+		ChallengeGather enterDetail = challengeEnterService.getChallengeEnterByCode(challengeGatherCode);
+		
+		log.info("참가챌린지 세부 조회  enterDetail: {}", enterDetail);
 		
 		model.addAttribute("title", "참가 챌린지 세부정보");
 		model.addAttribute("headerList", "챌린지");
+		model.addAttribute("enterDetail", enterDetail);
 		
 		return "challenge/challengeEnter/challengeEnterDetail";
 		
