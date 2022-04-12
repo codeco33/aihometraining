@@ -82,7 +82,7 @@ public class WorkoutLogUserController {
     
 		workoutLogUserService.workoutLogLikeCountUpdate(workoutLogCode);
 		workoutLogLike.setWorkoutLogLikeEmail("id004@email.com");
-		workoutLogLike.setWorkoutLogcode(workoutLogCode);
+		workoutLogLike.setWorkoutLogCode(workoutLogCode);
 		workoutLogUserService.workoutLogLikeInsert(workoutLogLike);
 		
 		

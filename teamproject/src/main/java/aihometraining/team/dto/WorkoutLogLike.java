@@ -5,17 +5,19 @@ public class WorkoutLogLike {
 	/*
 	 * workoutLogLikeNum 
 	 * workoutLogLikeEmail 
-	 * workoutLogcode 
+	 * workoutLogCode 
 	 * workoutLogLikeRegDate
 	 */
 	
 	private String workoutLogLikeNum;
 	private String workoutLogLikeEmail;
-	private String workoutLogcode;
+	private String workoutLogCode;
 	private String workoutLogLikeRegDate;
 	
 	private Member member;
 	private WorkoutLog workoutLog;
+	
+	
 	
 	public String getWorkoutLogLikeNum() {
 		return workoutLogLikeNum;
@@ -29,11 +31,11 @@ public class WorkoutLogLike {
 	public void setWorkoutLogLikeEmail(String workoutLogLikeEmail) {
 		this.workoutLogLikeEmail = workoutLogLikeEmail;
 	}
-	public String getWorkoutLogcode() {
-		return workoutLogcode;
+	public String getWorkoutLogCode() {
+		return workoutLogCode;
 	}
-	public void setWorkoutLogcode(String workoutLogcode) {
-		this.workoutLogcode = workoutLogcode;
+	public void setWorkoutLogCode(String workoutLogCode) {
+		this.workoutLogCode = workoutLogCode;
 	}
 	public String getWorkoutLogLikeRegDate() {
 		return workoutLogLikeRegDate;
@@ -50,13 +52,17 @@ public class WorkoutLogLike {
 		builder.append(workoutLogLikeNum);
 		builder.append(", workoutLogLikeEmail=");
 		builder.append(workoutLogLikeEmail);
-		builder.append(", workoutLogcode=");
-		builder.append(workoutLogcode);
+		builder.append(", workoutLogCode=");
+		builder.append(workoutLogCode);
 		builder.append(", workoutLogLikeRegDate=");
 		builder.append(workoutLogLikeRegDate);
 		builder.append("]");
 		return builder.toString();
 	}
+	
+	
+	
+	
 	
 	
 	
