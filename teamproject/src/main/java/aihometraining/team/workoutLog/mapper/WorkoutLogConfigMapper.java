@@ -1,6 +1,7 @@
 package aihometraining.team.workoutLog.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -17,17 +18,26 @@ public interface WorkoutLogConfigMapper {
 	public int workoutGoalCategoryInsert(WorkoutLogCategory workoutLogCategory);
 	
 	//운동 일지 목록 조회
-	public List<WorkoutLog> getWorkoutLogList();
+	//public List<WorkoutLog> getWorkoutLogList();
 	
-	//모달에서 운동 계획 카테고리명 가져오기
-	public WorkoutLogCategory getWorkoutLogCategoryModal(String workoutGoalPlanCategoryCode);
+	//운동 일지 목록 조회(검색)
+	public List<Map<String,Object>> getWorkoutLogList(Map<String,Object> paramMap);
 	
 	/*
-	 * //모달에서 운동 계획 카테고리명 수정 처리 public WorkoutLogCategory
-	 * workoutLogCategoryUpdateModal(String workoutGoalPlanCategoryCode);
+	 * 모달에서 운동 계획 카테고리명 가져오기 
+	 * public WorkoutLogCategory getWorkoutLogCategoryModal(String workoutGoalPlanCategoryCode);
+	 * 
 	 */
 	
-	//운동 계획 카테고리 삭제
+	//모달에서 운동 계획 카테고리명 수정 처리 
+	public int workoutLogCategoryUpdateModal(Map<String, Object> paramMap);
+	
+	//운동 계획 카테고리에 따른 운동 계획 삭제
+	public int GoalPlanInCategoryCodeDelete(String workoutGoalPlanCategoryCode);
+	
+	//운동 계획 카테고리 삭제 
 	public int workoutLogCategoryDelete(String workoutGoalPlanCategoryCode);
+	 
+	 
 	
 }

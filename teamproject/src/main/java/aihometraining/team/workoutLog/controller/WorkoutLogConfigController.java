@@ -1,6 +1,8 @@
 package aihometraining.team.workoutLog.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,9 +39,37 @@ public class WorkoutLogConfigController {
 	
 	//운동 일지 관리자 메인 화면
 	@GetMapping("/workoutLogConfigMain")
-	public String workoutLogConfigMain(Model model) {
+	public String workoutLogConfigMain(Model model
+									  ,@RequestParam(value="searchKey", required = false) String searchKey
+									  ,@RequestParam(value="searchValue", required = false) String searchValue
+									  ,@RequestParam(value="searchDate", required = false) String searchDate
+									  ,@RequestParam(value="searchStart", required = false) String searchStart
+									  ,@RequestParam(value="searchEnd", required = false) String searchEnd) {
 		
-		List<WorkoutLog> workoutLogList = workoutLogConfigService.getWorkoutLogList();
+		Map<String, Object> paramMap = new HashMap<String,Object>();
+		
+		if(searchKey != null) {
+			if("memberEmail".equals(searchKey)) {
+				searchKey = "memberEmail";
+				searchDate = "workoutLogUpdateFinalDate";
+			}else if("eClassCategorySmallName".equals(searchKey)) {
+				searchKey = "eClassCategorySmallName";
+				searchDate = "workoutLogUpdateFinalDate";
+			}
+		}
+		
+		paramMap.put("searchKey", searchKey);
+		paramMap.put("searchValue", searchValue);
+		paramMap.put("searchKey", searchKey);
+		paramMap.put("searchDate", searchDate);
+		paramMap.put("searchStart", searchStart);
+		paramMap.put("searchEnd", searchEnd);
+		
+		List<Map<String, Object>> workoutLogList = workoutLogConfigService.getWorkoutLogList(paramMap);
+		
+		paramMap = null;
+		
+		log.info("일지 검색 workoutLogList : {}", workoutLogList);
 		
 		model.addAttribute("title", "일지 관리자 화면");
 		model.addAttribute("leftMenuList", "일지");
@@ -71,7 +101,7 @@ public class WorkoutLogConfigController {
 		
 		workoutLogConfigService.workoutGoalCategoryInsert(workoutLogCategory);
 		
-		return "redirect:/workoutLog/workoutLogConfig/workoutCategoryList";
+		return "redirect:/admin/workoutCategoryList";
 		
 	}
 	
@@ -86,37 +116,34 @@ public class WorkoutLogConfigController {
 		return "workoutLog/workoutLogConfig/workoutCategoryInsert";
 	}
 	
-	// A-jax : 운동 계획 카테고리 수정 모달에 데이터값 가져오기
-	@PostMapping("/workoutLogCategoryModal")
-	@ResponseBody
-	public WorkoutLogCategory getWorkoutLogCategoryModal(@RequestParam(name="workoutLogCategoryCode", required = false) String workoutGoalPlanCategoryCode){
-		
-		WorkoutLogCategory workoutLogCategoryModal = workoutLogConfigMapper.getWorkoutLogCategoryModal(workoutGoalPlanCategoryCode);
-		
-		log.info("운동 계획 카테고리명 조회  workoutGoalPlanCategoryCode : {}", workoutGoalPlanCategoryCode);
-		
-		return workoutLogCategoryModal;
-	}
-	
 	/*
-	 * //A-jax : 운동 계획 카테고리명 수정처리
+	 * // A-jax : 운동 계획 카테고리 수정 모달에 데이터값 가져오기
 	 * 
-	 * @PostMapping("/workoutLogCategoryUpdateModal")
+	 * @PostMapping("/workoutLogCategoryModal")
+	 * @ResponseBody 
+	 * public WorkoutLogCategory getWorkoutLogCategoryModal(@RequestParam(name="workoutLogCategoryCode", required = false) String workoutGoalPlanCategoryCode){
 	 * 
-	 * @ResponseBody public WorkoutLogCategory
-	 * workoutLogCategoryUpdateModal(@RequestParam(name="workoutLogCategoryCode",
-	 * required = false) String workoutGoalPlanCategoryCode){
+	 * WorkoutLogCategory workoutLogCategoryModal = workoutLogConfigMapper.getWorkoutLogCategoryModal(workoutGoalPlanCategoryCode);
 	 * 
-	 * WorkoutLogCategory workoutLogCategoryUpdateModal =
-	 * workoutLogConfigMapper.workoutLogCategoryUpdateModal(
-	 * workoutGoalPlanCategoryCode);
+	 * log.info("운동 계획 카테고리명 조회  workoutGoalPlanCategoryCode : {}", workoutGoalPlanCategoryCode);
 	 * 
-	 * log.info("운동 계획 카테고리명 수정  workoutGoalPlanCategoryCode : {}",
-	 * workoutGoalPlanCategoryCode);
+	 * return workoutLogCategoryModal; 
 	 * 
-	 * return workoutLogCategoryUpdateModal; }
+	 * }
 	 */
 	
+	
+	//A-jax : 운동 계획 카테고리명 수정처리
+	@PostMapping("/workoutLogCategoryUpdateModal")
+	@ResponseBody 
+	public int workoutLogCategoryUpdateModal(@RequestParam Map<String, Object> paramMap){	
+		  
+		log.info("workoutLogCategoryUpdateModal : {}", paramMap.toString());
+		  
+		return  workoutLogConfigMapper.workoutLogCategoryUpdateModal(paramMap); 	  
+	}
+	 
+	 
 	//운동 계획 카테고리 수정
 	@GetMapping("/workoutCategoryUpdate")
 	public String workoutCategoryUpdate(Model model) {
@@ -130,12 +157,13 @@ public class WorkoutLogConfigController {
 	
 	//운동 계획 카테고리 삭제
 	@GetMapping("/workoutCategoryDelete")
-	public String workoutCategoryDelete(Model model) {
+	public String workoutCategoryDelete(@RequestParam(name="workoutGoalPlanCategoryCode", required = false) String workoutGoalPlanCategoryCode, WorkoutLogCategory workoutLogCategory) {
 		
-		model.addAttribute("title", "운동 계획 카테고리 삭제");
-		model.addAttribute("leftMenuList", "일지");
+		log.info("운동 카테고리 등록 폼에서 삭제 할 데이터: {}", workoutGoalPlanCategoryCode);
 		
-		return "workoutLog/workoutLogConfig/workoutCategoryDelete";
+		workoutLogConfigService.workoutGoalCategoryDelete(workoutGoalPlanCategoryCode);
+		
+		return "redirect:/admin/workoutCategoryList";
 		
 	}
 	

@@ -109,6 +109,15 @@ public class ChallengeGatherService {
 		
 	}
 	
+	//챌린지 개설자 가져오기
+	public String getChallengeMaker(String memberEmail) {
+		
+		String getMater = challengeGatherMapper.getChallengeMaker(memberEmail);
+		
+		return getMater;
+		
+	}
+	
 	
 	
 }

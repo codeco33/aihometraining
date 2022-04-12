@@ -1,6 +1,7 @@
 package aihometraining.team.workoutLog.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,10 +47,19 @@ public class WorkoutLogConfigService {
 		
 	}
 	
-	// 운동 일지 목록 조회
-	public List<WorkoutLog> getWorkoutLogList(){
+	// 운동 계획 카테고리 삭제 처리
+	public void workoutGoalCategoryDelete(String workoutGoalPlanCategoryCode) {
 		
-		List<WorkoutLog> workoutLogList = workoutLogConfigMapper.getWorkoutLogList();
+		workoutLogConfigMapper.GoalPlanInCategoryCodeDelete(workoutGoalPlanCategoryCode);
+		workoutLogConfigMapper.workoutLogCategoryDelete(workoutGoalPlanCategoryCode);
+		
+	}
+	
+	
+	// 운동 일지 목록 조회
+	public List<Map<String, Object>> getWorkoutLogList(Map<String, Object> paramMap){
+		
+		List<Map<String, Object>> workoutLogList = workoutLogConfigMapper.getWorkoutLogList(paramMap);
 		
 		return workoutLogList;
 		

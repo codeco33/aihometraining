@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import aihometraining.team.challenge.mapper.ChallengeConfigMapper;
 import aihometraining.team.dto.ChallengeCategory;
 import aihometraining.team.dto.ChallengeGather;
+import aihometraining.team.dto.ChallengePointGive;
 import aihometraining.team.dto.ChallengeSetting;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.mapper.CommonMapper;
@@ -104,11 +105,11 @@ public class ChallengeConfigService {
 			//챌린지 카테고리 코드에 따른 참가내역 삭제(챌린지 카테고리 삭제처리 )
 			challengeConfigMapper.enterDeleteBycateCode(challengeCategoryCode);
 			
-			//챌린지 카테고리 코드에 따른 모집계획 내역 삭제(챌린지 카테고리 삭제처리 )
-			challengeConfigMapper.planDeleteBycateCode(challengeCategoryCode);
-			
 			//챌린지 카테고리 코드에 따른 모집내역 삭제(챌린지 카테고리 삭제처리 )
 			challengeConfigMapper.gatherDeleteBycateCode(challengeCategoryCode);
+			
+			//챌린지 카테고리 코드에 따른 모집계획 내역 삭제(챌린지 카테고리 삭제처리 )
+			challengeConfigMapper.planDeleteBycateCode(challengeCategoryCode);
 			
 			//챌린지 카테고리 코드에 따른 카테고리 삭제(챌린지 카테고리 삭제처리 )
 			challengeConfigMapper.challengeCategoryDelete(challengeCategoryCode);
@@ -165,5 +166,22 @@ public class ChallengeConfigService {
 		
 		return challengeIngList;
 		
+	}
+	
+	//챌린지 포인트 관리 목록 조회
+	public List<ChallengePointGive> getChallengePointList() {
+		
+		List<ChallengePointGive> pointList = challengeConfigMapper.getChallengePointList();
+		
+		return pointList;
+		
+	}
+	
+	//챌린지 포인트 코드별 포인트 관리 세부 조회
+	public List<ChallengePointGive> getPointDetailByCode(String challengePointGiveCode) {
+		
+		List<ChallengePointGive> pointDetailList = challengeConfigMapper.getPointDetailByCode(challengePointGiveCode);
+		
+		return pointDetailList;
 	}
 }

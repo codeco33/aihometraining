@@ -1,6 +1,12 @@
 package aihometraining.team.workoutLog.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,13 +17,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import aihometraining.team.dto.EClassCategoryLarge;
 import aihometraining.team.dto.EClassCategoryMedium;
 import aihometraining.team.dto.EClassCategorySmall;
+import aihometraining.team.dto.FileDto;
 import aihometraining.team.dto.WorkoutGoal;
 import aihometraining.team.dto.WorkoutLog;
+import aihometraining.team.dto.WorkoutLogLike;
 import aihometraining.team.dto.WorkoutLogPrivacybounds;
+import aihometraining.team.util.FileUtil;
 import aihometraining.team.workoutLog.mapper.WorkoutLogUserMapper;
 import aihometraining.team.workoutLog.service.WorkoutLogUserService;
 
@@ -33,10 +43,12 @@ public class WorkoutLogUserController {
 	private WorkoutLogUserService workoutLogUserService;
 	private WorkoutLogUserMapper workoutLogUserMapper;
 	
+	
 	public WorkoutLogUserController(WorkoutLogUserService workoutLogUserService, WorkoutLogUserMapper workoutLogUserMapper) {
 		
 		this.workoutLogUserService = workoutLogUserService;
 		this.workoutLogUserMapper = workoutLogUserMapper;
+		
 	}
 	
 	// 일지 메인 화면
@@ -46,25 +58,81 @@ public class WorkoutLogUserController {
 		//운동 목표 목룍 조회
 		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
 		
-		log.info("운동 목표 목록 조회  workoutGoalList : {}", workoutGoalList);
+		//log.info("운동 목표 목록 조회  workoutGoalList : {}", workoutGoalList);
+		
+		//일지 목록 조회
+		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList();
+		
+		log.info("일지 목록 조회  workoutLogList : {}", workoutLogList);
+
 		
 		model.addAttribute("title", "하루 일지");
 		model.addAttribute("workoutGoalList", workoutGoalList);
+		model.addAttribute("workoutLogList", workoutLogList);
 		
 		return "workoutLog/workoutLogUser/workoutLogMain";
 			
 	}
 	
+	// 일지 좋아요 Ajax
+	@PostMapping("/workoutLogLikeCountUpdate")
+    @ResponseBody
+    public String workoutLogLikeCountUpdate(@RequestParam(value = "workoutLogCode") String workoutLogCode
+    					  				   ,WorkoutLogLike workoutLogLike){
+    
+		workoutLogUserService.workoutLogLikeCountUpdate(workoutLogCode);
+		workoutLogLike.setWorkoutLogLikeEmail("id004@email.com");
+		workoutLogLike.setWorkoutLogCode(workoutLogCode);
+		workoutLogUserService.workoutLogLikeInsert(workoutLogLike);
+		
+		
+		
+		return workoutLogUserMapper.getworkoutLogLikeCount(workoutLogCode);
+	}
+	
 	// 일지 상세 화면
 	@GetMapping("/workoutLogList")
-	public String workoutLogList(Model model) {
-		
+	public String workoutLogList(Model model
+								,@RequestParam(value = "workoutLogTitle", required = false) String workoutLogTitle
+								,@RequestParam(value = "workoutLogContent", required = false) String workoutLogContent
+								,@RequestParam(value = "workoutLogCode", required = false) String workoutLogCode
+								,@RequestParam(value = "filePath", required = false) String filePath) {
+		log.info("파일 주소 : " , filePath);
+		//운동 목표 목록 조회
 		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
-		
 		log.info("운동 목표 목록 조회  workoutGoalList : {}", workoutGoalList);
+		
+		//일지 목록 조회
+		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList();
+		log.info("일지 목록 조회  workoutLogList : {}", workoutLogList);
+		
+		log.info("일지 코드  workoutLogCode : {}", workoutLogCode);
 		
 		model.addAttribute("title", "일지 상세 화면");
 		model.addAttribute("workoutGoalList", workoutGoalList);
+		model.addAttribute("workoutLogList", workoutLogList);
+		model.addAttribute("workoutLogTitle", workoutLogTitle);
+		model.addAttribute("workoutLogContent", workoutLogContent);
+		model.addAttribute("workoutLogCode", workoutLogCode);
+		
+		return "workoutLog/workoutLogUser/workoutLogList";
+		
+	}
+	
+	// 일지 메인에서 피드백 클릭 시 일지 상세화면 피드백 위치로 보여주기
+	@GetMapping("/workoutLogListFeedback")
+	public String workoutLogListFeedback(Model model
+										,@RequestParam(value = "workoutLogTitle", required = false) String workoutLogTitle
+										,@RequestParam(value = "workoutLogContent", required = false) String workoutLogContent) {
+		//일지 목록 조회
+		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList();
+		log.info("일지 목록 조회  workoutLogList : {}", workoutLogList);
+		
+		model.addAttribute("title", "일지 상세 화면");
+		model.addAttribute("workoutLogList", workoutLogList);
+		model.addAttribute("workoutLogTitle", workoutLogTitle);
+		model.addAttribute("workoutLogContent", workoutLogContent);
+
 		
 		return "workoutLog/workoutLogUser/workoutLogList";
 		
@@ -104,7 +172,7 @@ public class WorkoutLogUserController {
 	// Ajax : 운동 계획 카테고리 대-중 분류
 	@PostMapping("/geteClassCategoryMedium")
 	@ResponseBody
-	public List<EClassCategoryMedium> geteClassCategoryMedium(@RequestParam(value = "eClassCategoryLargeCode") String eClassCategoryLargeCode){
+	public List<EClassCategoryMedium> geteClassCategoryMedium(@RequestParam(value = "eClassCategoryLargeCode", required = false) String eClassCategoryLargeCode){
 		
 		log.info("운동클래스 카테고리 medium 목록 조회 : {}", eClassCategoryLargeCode);
 		
@@ -115,7 +183,7 @@ public class WorkoutLogUserController {
 	// Ajax : 운동 계획 카테고리 중-소 분류
 	@PostMapping("/geteClassCategorySmall")
 	@ResponseBody
-	public List<EClassCategorySmall> geteClassCategorySmall(@RequestParam(value = "eClassCategoryMediumCode") String eClassCategoryMediumCode){
+	public List<EClassCategorySmall> geteClassCategorySmall(@RequestParam(value = "eClassCategoryMediumCode", required = false) String eClassCategoryMediumCode){
 		
 		log.info("운동클래스 카테고리 small 목록 조회 : {}", eClassCategoryMediumCode);
 		
@@ -125,16 +193,32 @@ public class WorkoutLogUserController {
 	
 	
 	//일지 등록 처리
-	@PostMapping("/workoutLogInsert")
-	public String workoutLogInsert(WorkoutLog workoutLog) {
-		
-		log.info("일지 등록 폼에서 입력받은 데이터: {}", workoutLog);
-		
-		workoutLogUserService.workoutLogInsert(workoutLog);
-		
-		return "redirect:/workoutLog/workoutLogUser/workoutLogMain";
-		
-	}
+		@PostMapping("/workoutLogInsert")
+		public String workoutLogInsert(WorkoutLog workoutLog
+									 , HttpSession session
+									 , @RequestParam MultipartFile[] fileImage
+									 , HttpServletRequest request) {
+			
+			String sessionEmail = (String) session.getAttribute("SEMAIL");	//형변환을 해줘라
+			
+			//파일 업로드 
+			String serverName = request.getServerName();
+			String fileRealPath = "";
+			if("localhost".equals(serverName)) {				
+				fileRealPath = System.getProperty("user.dir") + "/src/main/resources/static/";
+				//fileRealPath = request.getSession().getServletContext().getRealPath("/WEB-INF/classes/static/");
+			}else {
+				fileRealPath = request.getSession().getServletContext().getRealPath("/WEB-INF/classes/static/");
+			}
+			
+			
+			log.info("일지 등록 폼에서 입력받은 데이터: {}", workoutLog);
+			
+			workoutLogUserService.workoutLogInsert(workoutLog, sessionEmail, fileImage, fileRealPath );
+			
+			return "redirect:/workoutLog/workoutLogUser/workoutLogMain";
+			
+		}
 	
 	
 	
@@ -186,6 +270,34 @@ public class WorkoutLogUserController {
 		
 	}
 	
+	
+	
+	
+	//달력 이벤트 가져오기
+	@GetMapping("/calendarEvents")
+	@ResponseBody
+	public List<Map<String,Object>> calendarEvents(@RequestParam Map<String, Object> paramMap) {
+		
+		System.out.println(paramMap.toString());
+		
+		List<Map<String,Object>> calList = new ArrayList<Map<String,Object>>();
+		Map<String, Object> map = null;
+		
+		map = new HashMap<String, Object>();
+		map.put("title", "삼일절");
+		map.put("start", "2022-03-01");
+		map.put("end", "2022-03-01");		
+		calList.add(map);
+		
+		map = new HashMap<String, Object>();
+		map.put("title", "삼일절1");
+		map.put("start", "2022-03-02");
+		map.put("end", "2022-03-02");		
+		calList.add(map);
+		
+		return calList;
+		
+	}
 	
 }
 
