@@ -57,8 +57,9 @@
 	</resultMap>
 	
 	<resultMap type="WorkoutLog" id="WorkoutLogResultMap">
-			<result	column="workoutLogcode" 				property="workoutLogcode"/>
+			<result	column="workoutLogCode" 				property="workoutLogCode"/>
 			<result column="memberEmail" 					property="memberEmail"/>
+			<result column="workoutLogLikeCount" 			property="workoutLogLikeCount"/>
 			<result column="eClassCategorySmallCode" 		property="eClassCategorySmallCode"/>
 			<result column="eClassCategorySmallName" 		property="eClassCategorySmallName"/>
 			<result column="workoutLogTitle" 				property="workoutLogTitle"/>
@@ -80,9 +81,8 @@
 	</resultMap>
 	
 	<resultMap type="WorkoutGoalPlan" id="WorkoutGoalPlanResultmap">
-		<result	column="workoutLogcode" 					property="workoutLogcode"/>
+		<result	column="workoutGoalPlanCode" 				property="workoutGoalPlanCode"/>
 		<result column="memberEmail" 						property="memberEmail"/>
-		<result column="workoutLogLikeCount" 				property="workoutLogLikeCount"/>
 		<result column="workoutGoalCode" 					property="workoutGoalCode"/>
 		<result column="workoutGoalPlanStartDate" 			property="workoutGoalPlanStartDate"/>
 		<result column="workoutGoalPlanFinalDate" 			property="workoutGoalPlanFinalDate"/>
@@ -99,7 +99,7 @@
 	<resultMap type="WorkoutLogLike" id="WorkoutLogLikeResultmap">
 		<result	column="workoutLogLikeNum" 				property="workoutLogLikeNum"/>
 		<result column="workoutLogLikeEmail" 			property="workoutLogLikeEmail"/>
-		<result column="workoutLogcode" 				property="workoutLogcode"/>
+		<result column="workoutLogCode" 				property="workoutLogCode"/>
 		<result column="workoutLogLikeRegDate" 			property="workoutLogLikeRegDate"/>
 		
 		<association property="member" javaType="Member">
@@ -107,8 +107,9 @@
 		</association>	
 		
 		<association property="workoutLog" javaType="WorkoutLog">
-			<id 	column="workoutLogcode" 				property="workoutLogcode"/>
+			<id 	column="workoutLogCode" 				property="workoutLogCode"/>
 			<result column="memberEmail" 					property="memberEmail"/>
+			<result column="workoutLogLikeCount" 			property="workoutLogLikeCount"/>
 			<result column="eClassCategorySmallCode" 		property="eClassCategorySmallCode"/>
 			<result column="eClassCategorySmallName" 		property="eClassCategorySmallName"/>
 			<result column="workoutLogTitle" 				property="workoutLogTitle"/>
@@ -122,24 +123,6 @@
 		</association>	
 	</resultMap>
 	
-		<select id="getworkoutLogLikeList" resultMap="WorkoutLogLikeResultmap">
-			/* 일지 좋아요 목록 조회 */
-			SELECT
-				  wl.workoutLogLikeCount
-				,wll.workoutLogLikeNum
-				,wll.workoutLogLikeEmail
-				,wll.workoutLogcode
-				,wll.workoutLogLikeRegDate
-			FROM
-				workoutlog AS wl
-				INNER JOIN
-				workoutloglike AS wll
-				ON 
-				wl.workoutLogcode = wll.workoutLogcode
-			WHERE
-				wl.workoutLogcode = 'workoutLogcode_1';	
-	
-		</select>
 	
 		<insert id="workoutLogLikeInsert" parameterType="WorkoutLogLike">
 			/* 일지 좋아요 등록 */
@@ -148,12 +131,12 @@
 			(
 				  workoutLogLikeNum
 				, workoutLogLikeEmail
-				, workoutLogcode
+				, workoutLogCode
 				, workoutLogLikeRegDate
 			)VALUES (
 				  #{workoutLogLikeNum}
 				, #{workoutLogLikeEmail}
-				, #{workoutLogcode}
+				, #{workoutLogCode}
 				, NOW()
 			);
 		</insert>
@@ -165,7 +148,7 @@
 			FROM
 				workoutlog AS wl
 			WHERE
-				wl.workoutLogcode = #{workoutLogcode};
+				wl.workoutLogCode = #{workoutLogCode};
 		</select>
 		
 		<update id="workoutLogLikeCountUpdate" parameterType="String">
@@ -175,14 +158,14 @@
 			SET
 				workoutLogLikeCount=workoutLogLikeCount+1
 			WHERE 
-				workoutLogcode=#{workoutLogcode};
+				workoutLogCode=#{workoutLogCode};
 		</update>
 	
 	
 		<select id="getworkoutLogList" resultMap="WorkoutLogResultMap">
 			/* 일지 목록 조회 */
 			SELECT 
-				  wl.workoutLogcode
+				  wl.workoutLogCode
 				, wl.memberEmail
 				, wl.workoutLogLikeCount
 				, wl.eClassCategorySmallCode
@@ -275,7 +258,7 @@
 		<insert id="workoutLogInsert" parameterType="workoutLog">
 			/* 일지 등록 처리 */
 			INSERT INTO workoutlog
-			(	 workoutLogcode
+			(	 workoutLogCode
 				,memberEmail
 				,eClassCategorySmallCode
 				,eClassCategorySmallName
@@ -289,7 +272,7 @@
 				,workoutLogUpdateFinalDate
 				,workoutLogDeleteEmail
 			)VALUES (
-			 	 #{workoutLogcode}
+			 	 #{workoutLogCode}
 			 	,#{memberEmail}
 			 	,#{eClassCategorySmallCode}
 			 	,#{eClassCategorySmallName}

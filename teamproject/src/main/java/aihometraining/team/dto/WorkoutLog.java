@@ -5,8 +5,9 @@ import java.util.List;
 public class WorkoutLog {
 	
 	/*
-	 * workoutLogcode, 
-	 * memberEmail, 
+	 * workoutLogCode, 
+	 * memberEmail,
+	 * workoutLogLikeCount, 
 	 * eClassCategorySmallCode,
 	 * eClassCategorySmallName, 
 	 * workoutLogTitle, 
@@ -21,7 +22,7 @@ public class WorkoutLog {
 	 * workoutLogDeleteEmail
 	 */
 
-	private String workoutLogcode;
+	private String workoutLogCode;
 	private String memberEmail;
 	private String workoutLogLikeCount;
 	private String eClassCategorySmallCode;
@@ -40,14 +41,13 @@ public class WorkoutLog {
 	private List<FileDto> fileList;
 
 
-
-	public String getWorkoutLogcode() {
-		return workoutLogcode;
+	public String getWorkoutLogCode() {
+		return workoutLogCode;
 	}
 
 
-	public void setWorkoutLogcode(String workoutLogcode) {
-		this.workoutLogcode = workoutLogcode;
+	public void setWorkoutLogCode(String workoutLogCode) {
+		this.workoutLogCode = workoutLogCode;
 	}
 
 
@@ -193,7 +193,7 @@ public class WorkoutLog {
 
 	@Override
 	public String toString() {
-		return "WorkoutLog [workoutLogcode=" + workoutLogcode + ", memberEmail=" + memberEmail
+		return "WorkoutLog [workoutLogCode=" + workoutLogCode + ", memberEmail=" + memberEmail
 				+ ", workoutLogLikeCount=" + workoutLogLikeCount + ", eClassCategorySmallCode="
 				+ eClassCategorySmallCode + ", eClassCategorySmallName=" + eClassCategorySmallName
 				+ ", workoutLogTitle=" + workoutLogTitle + ", workoutLogContent=" + workoutLogContent
@@ -203,6 +203,10 @@ public class WorkoutLog {
 				+ ", workoutLogUpdateFinalDate=" + workoutLogUpdateFinalDate + ", workoutLogDeleteEmail="
 				+ workoutLogDeleteEmail + ", fileList=" + fileList + "]";
 	}
+
+		
+	
+	
 
 
 	
