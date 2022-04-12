@@ -23,19 +23,41 @@ public class PaymentService {
 	}
 
 	//위시리스트 화면
-	public List<WishList> getWishList(String SEMAIL) {
-		List<WishList> wishList = paymentMapper.getWishList(SEMAIL);
+	public List<WishList> getWishList(String SEMAIL, String sortStandard) {
+		String sortStr = "wi.wishListRegDate desc";
+		List<WishList> wishList;
+		
+		if(sortStandard == null) {
+			wishList = paymentMapper.getWishList(SEMAIL, sortStr);
+		}else {
+			wishList = paymentMapper.getWishList(SEMAIL, sortStandard);
+		}
 		
 		return wishList;
 	}
 	
 	//수강신청 멤버 정보
 	public Member getEClassTakeMember(String memberEmail) {
-		return null;
+		return paymentMapper.getEClassTakeMember(memberEmail);
 	}
 	//수강신청 운동클래스 정보
 	public EClassApproved getEClassApproved(String eClassCode) {
-		return null;
+		return paymentMapper.getEClassApproved(eClassCode);
+	}
+	
+	//위시리스트 삭제
+	public boolean deleteWishList(String[] wishListCodeArray) {
+		int cnt = 0;
+		for(String wishListCode:wishListCodeArray) {
+			int result = paymentMapper.deleteWishList(wishListCode);
+			if( result == 1)cnt++;
+		}
+		
+		if(cnt == 0) {
+			return false;
+		}else {
+			return true;
+		}
 	}
 	
 

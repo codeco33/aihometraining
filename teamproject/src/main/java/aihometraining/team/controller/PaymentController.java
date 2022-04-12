@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.Member;
@@ -38,14 +39,16 @@ public class PaymentController {
 	}
 	
 	//위시리스트
-	@SuppressWarnings("null")
 	@GetMapping("/wishList")
-	public String wishList(Model model, HttpServletRequest request) {
+	public String wishList(Model model, HttpServletRequest request
+							,@RequestParam(name="sortStandard", required = false) String sortStandard) {
 		
 		HttpSession session = request.getSession();
 		String SEMAIL = (String) session.getAttribute("SEMAIL");
-				
-		List<WishList> wishList = paymentService.getWishList(SEMAIL);
+		
+		System.out.println(sortStandard);
+		
+		List<WishList> wishList = paymentService.getWishList(SEMAIL, sortStandard);
 			
 		model.addAttribute("title", "위시리스트");
 		model.addAttribute("wishList", wishList);
@@ -55,12 +58,17 @@ public class PaymentController {
 	
 	//위시리스트 삭제
 	@PostMapping("/wishList")
-	public String wishList(@RequestParam(name="wishListCode", required = false) String wishListCode) {
-		paymentMapper.deleteWishList(wishListCode);
+	@ResponseBody
+	public boolean wishList(@RequestParam(name="wishListCode", required = false) String[] wishListCodeArray) {
 		
-		return "redirect:/wishList";
+		boolean result = paymentService.deleteWishList(wishListCodeArray);
+		if(result == true) {
+			return true;
+		}else {
+			return false;
+		}
+		
 	}
-	
 	
 	
 	//수강신청 화면

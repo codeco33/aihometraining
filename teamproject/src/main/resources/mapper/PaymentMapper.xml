@@ -39,6 +39,7 @@
 		<id 	column="eClassApprovedCode" 			property="eClassApprovedCode"/>
 		<result column="eClassApprovedName" 		property="eClassApprovedName"/>
 		<result column="eClassApprovedFinish" 		property="eClassApprovedFinish"/>
+		<collection property="member" resultMap="memberResultMap"/>
 		<collection property="eClassOpenApplyForm" resultMap="eClassOpenApplyResultMap"/>
 	</resultMap>
 
@@ -79,7 +80,7 @@
 			eo.eClassIntroduceCode = ei.eClassIntroduceCode
 		WHERE
 			wi.memberEmail = #{SEMAIL}
-		ORDER BY wi.wishListRegDate desc;
+		ORDER BY ${sortStandard};
 	</select>
 	
 	<select id="getEClassTakeMember" parameterType="String" resultMap="memberResultMap" fetchSize="1000">
@@ -113,11 +114,11 @@
 			ea.eClassApprovedCode = #{eClassCode};
 	</select>
 	
-	<delete id="removeMember" parameterType="String">
+	<delete id="deleteWishList" parameterType="String">
 		/* 위시리스트 삭제 */
 		DELETE
 		FROM
-			wishList
+			wishlist
 		WHERE
 			wishListCode = #{wishListCode};
 	</delete>

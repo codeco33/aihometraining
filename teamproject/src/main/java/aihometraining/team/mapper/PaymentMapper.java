@@ -12,7 +12,7 @@ import aihometraining.team.dto.WishList;
 public interface PaymentMapper {
 	
 	//위시리스트 조회
-	public List<WishList> getWishList(String SEMAIL);
+	public List<WishList> getWishList(String SEMAIL, String sortStandard);
 	
 	//수강신청 멤버정보
 	public Member getEClassTakeMember(String memberEmail);
@@ -20,5 +20,5 @@ public interface PaymentMapper {
 	public EClassApproved getEClassApproved(String eClassCode);
 	
 	//위시리스트 삭제
-	public void deleteWishList(String wishListCode);
+	public int deleteWishList(String wishListCode);
 }
