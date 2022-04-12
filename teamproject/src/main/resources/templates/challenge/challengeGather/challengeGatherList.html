@@ -6,7 +6,22 @@
 	<th:block layout:fragment="customTitle">
 		<title th:text="${title}"></title>
 	</th:block>
-	
+	<th:block layout:fragment="customCss">
+		<style type="text/css">
+		.noteButton {
+		    z-index: 3;
+		}
+		.chatButton {
+    		z-index: 3;
+		}
+		.alimButton {
+			z-index: 3;
+		}
+		#scrollUp, #back-top {
+			z-index: 3;
+		}
+		</style>
+	</th:block>
 	<th:block layout:fragment="customContents">
 		<!-- 챌린지 모집 area start -->
 		<div class="container">
@@ -83,6 +98,9 @@
 			  </div>
 			</div>
 	</th:block>
+	
+	
+	
 	<th:block layout:fragment="customBodyScript">
 		<script>
 				
