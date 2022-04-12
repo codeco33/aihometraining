@@ -93,14 +93,15 @@ public class WorkoutLogUserController {
 	// 일지 상세 화면
 	@GetMapping("/workoutLogList")
 	public String workoutLogList(Model model
-								,@RequestParam(value = "workoutLogTitle", required = false) String workoutLogTitle
-								,@RequestParam(value = "workoutLogContent", required = false) String workoutLogContent
 								,@RequestParam(value = "workoutLogCode", required = false) String workoutLogCode
 								,@RequestParam(value = "filePath", required = false) String filePath) {
 		log.info("파일 주소 : " , filePath);
 		//운동 목표 목록 조회
 		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
 		log.info("운동 목표 목록 조회  workoutGoalList : {}", workoutGoalList);
+		
+		WorkoutLog workoutLogbyCode = workoutLogUserService.getworkoutLogByCode(workoutLogCode);
+		log.info("일지 코드로 일지 목록 조회  workoutLogbyCode : {}", workoutLogbyCode);
 		
 		//일지 목록 조회
 		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList();
@@ -111,9 +112,7 @@ public class WorkoutLogUserController {
 		model.addAttribute("title", "일지 상세 화면");
 		model.addAttribute("workoutGoalList", workoutGoalList);
 		model.addAttribute("workoutLogList", workoutLogList);
-		model.addAttribute("workoutLogTitle", workoutLogTitle);
-		model.addAttribute("workoutLogContent", workoutLogContent);
-		model.addAttribute("workoutLogCode", workoutLogCode);
+		model.addAttribute("workoutLogbyCode", workoutLogbyCode);
 		
 		return "workoutLog/workoutLogUser/workoutLogList";
 		
@@ -227,7 +226,17 @@ public class WorkoutLogUserController {
 	
 	public String workoutLogUpdate(Model model) {
 		
+		//일지 공개범위 목록 조회
+		List<WorkoutLogPrivacybounds> workoutLogPrivacyboundsList = workoutLogUserService.getworkoutLogPrivacyboundsList();
+		log.info("일지 공개범위 목록 조회  workoutlogPrivacyboundsList : {}", workoutLogPrivacyboundsList);
+		
+		//운동 클래스 카테고리 large 목록 조회
+		List<EClassCategoryLarge> eClassCategoryLargeList = workoutLogUserService.geteClassCategoryLargeList();
+		log.info("운동 클래스 카테고리 large 목록 조회  eClassCategoryLargeList : {}", eClassCategoryLargeList);
+		
 		model.addAttribute("title", "일지 수정 화면");
+		model.addAttribute("workoutLogPrivacyboundsList", workoutLogPrivacyboundsList);
+		model.addAttribute("eClassCategoryLargeList", eClassCategoryLargeList);
 		
 		return "workoutLog/workoutLogUser/workoutLogUpdate";
 		

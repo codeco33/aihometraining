@@ -76,6 +76,13 @@ public class WorkoutLogUserService {
 		
 	}
 	
+	//일지 코드로 일지 목록 조회
+	public WorkoutLog getworkoutLogByCode(String workoutLogCode) {
+		
+		return workoutLogUserMapper.getworkoutLogByCode(workoutLogCode);
+		
+	}
+	
 	
 	// 일지 등록 처리
 	public int workoutLogInsert(WorkoutLog workoutLog, String sessionEmail, MultipartFile[] fileImage, String fileRealPath) {

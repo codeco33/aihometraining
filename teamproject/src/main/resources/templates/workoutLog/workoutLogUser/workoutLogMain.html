@@ -37,7 +37,7 @@
 	                              		<!-- get방식으로 보내준것 /member/modifyMember?memberId=id001&memberName=홍01 -->
 										<!-- <a th:href="@{/member/modifyMember(memberId=${l.memberId}, memberName=${l.memberName})}">수정</a> -->
 	                                    <a class="d-inline-block" 
-	                                    th:href="@{/workoutLog/workoutLogUser/workoutLogList(workoutLogTitle=${l.workoutLogTitle},workoutLogContent=${l.workoutLogContent})}">
+	                                    th:href="@{/workoutLog/workoutLogUser/workoutLogList(workoutLogTitle=${l.workoutLogTitle},workoutLogContent=${l.workoutLogContent},workoutLogCode=${l.workoutLogCode})}">
 	                                        <h2 class="blog-head" style="color: #2d2d2d;">[[${l.workoutLogTitle}]]</h2>
 	                                    </a>
 	                                    <p class="workoutLogContent">[[${l.workoutLogContent}]]</p>

@@ -47,6 +47,9 @@ public interface WorkoutLogUserMapper {
 	
 	//일지 좋아요 목록 조회
 	public List<WorkoutLogLike> getworkoutLogLikeList();
+	
+	//일지 코드로 일지 목록 조회
+	public WorkoutLog getworkoutLogByCode(String workoutLogCode);
 		
 	
 	
