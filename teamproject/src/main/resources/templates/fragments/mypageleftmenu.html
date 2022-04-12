@@ -15,6 +15,16 @@
                     </li>
                       <li class="ripple">
                       <a class="tree-toggle nav-header">
+                        <span class="fa fa-users"></span> 회원 관리
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a th:if="${session.SEMAIL != null}" th:href="@{/mypage/modifyMember(memberEmail=${session.SEMAIL})} ">회원 정보 수정</a></li>
+                        <li><a th:if="${session.SEMAIL != null}" th:href="@{/mypage/removeMember}">회원 탈퇴</a></li>
+                      </ul>
+                    </li>
+                      <li class="ripple">
+                      <a class="tree-toggle nav-header">
                         <span class="fa fa-users"></span> 운동클래스
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>

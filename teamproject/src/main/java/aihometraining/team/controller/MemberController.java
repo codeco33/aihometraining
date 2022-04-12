@@ -1,6 +1,5 @@
 package aihometraining.team.controller;
 
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import aihometraining.team.challenge.service.ChallengeGatherService;
 import aihometraining.team.dto.Member;
-import aihometraining.team.dto.MemberLevel;
 import aihometraining.team.mapper.MemberMapper;
 import aihometraining.team.service.MemberService;
 
@@ -47,7 +45,7 @@ public class MemberController {
 		return "redirect:/login";
 	}
 	
-	/* 로그인 */
+	/* 로그인 */ 
 	@GetMapping("/login")
 	public String login(Model model
 					   ,@RequestParam(value="result", required = false) String result) {
@@ -92,70 +90,6 @@ public class MemberController {
 		reAttr.addAttribute("result", "등록된 회원이 없습니다.");
 		
 		return "redirect:/login";
-	}
-	
-	
-	/* 회원 탈퇴 처리 */
-	@PostMapping("/removeMember")
-	public String removeMember(@RequestParam(name="memberEmail", required = false) String memberEmail
-							  ,@RequestParam(name="memberPw", required = false, defaultValue = "") String memberPw
-							  ,RedirectAttributes reAttr) {
-		
-		log.info("회원 탈퇴 처리 memberEmail: {}", memberEmail);
-		log.info("회원 탈퇴 처리 memberPw: {}", memberPw);
-		Member member = memberMapper.getMemberInfoByEmail(memberEmail);
-		
-		if(member != null && member.getMemberPw() != null && memberPw.equals(member.getMemberPw())) {
-			memberService.removeMember(member);
-			log.info("회원 탈퇴 성공");
-			
-			return "redirect:/";
-		}
-		
-		reAttr.addAttribute("memberEmail", memberEmail);
-		reAttr.addAttribute("result", "회원의 정보가 일치하지 않습니다.");
-		log.info("회원 탈퇴 실패");
-		
-		return "redirect:/removeMember";
-	
-	}
-	
-	/* 회원 탈퇴 화면	 */
-	@GetMapping("/removeMember")
-	public String removeMember(@RequestParam(name="memberEmail", required = false) String memberEmail
-							  ,@RequestParam(name="result", required = false) String result
-							  ,Model model) {
-		
-		model.addAttribute("title", "회원 탈퇴 화면");
-		model.addAttribute("memberEmail", memberEmail);
-		if(result != null) model.addAttribute("result", result);
-		
-		return "member/removeMember";
-	}
-	
-	
-	/* 회원 수정 처리 */
-	@PostMapping("/modifyMember")
-	public String modifyMember(Member member) {
-		log.info("회원 수정 화면에서 입력받은 값: {}", member);
-		memberService.modifyMember(member);
-		return "redirect:/";
-	}
-	
-	/* 회원 수정 화면 */
-	@GetMapping("/modifyMember")
-	public String modifyMember(Model model
-							  ,@RequestParam(name="memberEmail", required = false) String memberEmail) {
-		log.info("회원 수정 화면 폼 쿼리 스트링 memberEmail : {}", memberEmail);
-		
-		Member member = memberService.getMemberInfoByEmail(memberEmail);
-		List<MemberLevel> memberLevelList = memberService.getMemberLevelList();
-		
-		model.addAttribute("title", "회원수정화면");
-		model.addAttribute("member", member);
-		model.addAttribute("levelList", memberLevelList);
-		
-		return "member/modifyMember";
 	}
 	
 	
