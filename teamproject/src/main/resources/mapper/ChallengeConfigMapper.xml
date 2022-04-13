@@ -189,10 +189,12 @@
 			cc.eClassCategorySmallCode = ec.eClassCategorySmallCode
 		<trim prefix="WHERE" prefixOverrides="AND |OR ">
 			<if test="searchKey != null and searchKey !='' and searchValue != ''">
-				AND ${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
+				AND 
+					${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
 			</if>
 			<if test="searchKey != null and searchKey !='' and searchValue != '' and searchDate != null and searchDate !='' and searchStart != '' and searchEnd != ''">
-				AND ${searchDate} BETWEEN #{searchStart} AND #{searchEnd}
+				AND 
+					${searchDate} BETWEEN #{searchStart} AND #{searchEnd}
 			</if>
 		</trim>
 			ORDER BY cast(SUBSTRING_INDEX(cc.challengeCategoryCode,'_',-1) AS UNSIGNED) ASC;
@@ -481,14 +483,18 @@
 			cg.challengeCategoryCode = cc.challengeCategoryCode
 		<trim prefix="WHERE" prefixOverrides="AND |OR ">
 			<if test="searchKey != null and searchKey !='' and searchValue != ''">
-				AND ${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
+				AND 
+					${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
 			</if>
 			<if test='searchKey != null and searchKey !="" and searchValue != "" and searchDate != null and searchDate !="" and searchDate.equals("challengeGatherRegDate") and searchStart != "" and searchEnd != ""'>
-				AND ${searchDate} BETWEEN #{searchStart} AND #{searchEnd}
+				AND 
+					${searchDate} BETWEEN #{searchStart} AND #{searchEnd}
 			</if>
 			<if test="searchKey != null and searchKey !='' and searchValue != '' and searchDate != null and searchDate !='' and gatherStartDate != null and gatherStartDate !='' and gatherEndDate != null and gatherEndDate !='' and searchStart != '' and searchEnd != ''">
-				AND ${gatherStartDate} <![CDATA[>]]> #{searchStart}
-				AND	${gatherEndDate} <![CDATA[<=]]> #{searchEnd}
+				AND 
+					${gatherStartDate} <![CDATA[>]]> #{searchStart}
+				AND	
+					${gatherEndDate} <![CDATA[<=]]> #{searchEnd}
 			</if>
 		</trim>
 			ORDER BY cast(SUBSTRING_INDEX(cg.challengeGatherCode,'_',-1) AS UNSIGNED) ASC;
@@ -516,9 +522,8 @@
 			cg.challengeGatherCode = #{challengeGatherCode};
 	</select>
 	
-	<select id="getChallengeIngList" parameterType="ChallengeGather" resultMap="challengeGatherResultMap">
+	<select id="getChallengeIngList" parameterType="map" resultType="map" resultMap="challengeGatherResultMap">
 		/* 진행 챌린지 목록 조회 */
-		<![CDATA[  
 			SELECT
 				 cg.challengeGatherCode
 				,cg.memberEmail
@@ -534,11 +539,30 @@
 				challengecategory AS cc
 				on
 				cg.challengeCategoryCode = cc.challengeCategoryCode
-			WHERE
-				cg.challengeStartDate <= CURDATE()
-			AND
-				cg.challengeEndDate > CURDATE();
-		  ]]>
+		  <trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="searchKey != null and searchKey !='' and searchValue != ''">
+				AND 
+					${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
+			</if>
+			<if test='searchKey != null and searchKey !="" and searchValue != "" and searchDate != null and searchDate !="" and searchDate.equals("challengeGatherRegDate") and searchStart != "" and searchEnd != ""'>
+				AND 
+					${searchDate} BETWEEN #{searchStart} AND #{searchEnd}
+			</if>
+			<if test="searchKey != null and searchKey !='' and searchValue != '' and searchDate != null and searchDate !='' and ingStartDate != null and ingStartDate !='' and ingEndDate != null and ingEndDate !='' and searchStart != '' and searchEnd != ''">
+				AND 
+					${ingStartDate} <![CDATA[>]]> #{searchStart}
+				AND	
+					${ingEndDate} <![CDATA[<=]]> #{searchEnd}
+			</if>
+		
+				AND  
+					cg.challengeStartDate <![CDATA[<=]]> CURDATE()
+				AND
+					cg.challengeEndDate <![CDATA[>]]> CURDATE()
+		  
+		</trim>
+			ORDER BY cast(SUBSTRING_INDEX(cg.challengeGatherCode,'_',-1) AS UNSIGNED) ASC;
+		  
 	</select>
 	
 	<select id="getChallengePointList" parameterType="ChallengePointGive" resultMap="challengePointGiveResultMap">

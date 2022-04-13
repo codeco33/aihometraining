@@ -75,7 +75,7 @@ public interface ChallengeConfigMapper {
 	public List<ChallengeGather> getListDetailByCode(String challengeGatherCode);
 	
 	//진행 챌린지 목록 조회
-	public List<ChallengeGather> getChallengeIngList();
+	public List<Map<String,Object>> getChallengeIngList(Map<String, Object> paramMap);
 	
 	//챌린지 포인트 관리 목록 조회
 	public List<ChallengePointGive> getChallengePointList();
