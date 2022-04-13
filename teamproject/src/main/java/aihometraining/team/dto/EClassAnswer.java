@@ -11,6 +11,15 @@ public class EClassAnswer {
 	private String memberUpdateEmail;
 	private Date eClassAnswerUpdateDate;
 	
+	private EClassQuestion eClassQuestion;
+	
+	public EClassQuestion geteClassQuestion() {
+		return eClassQuestion;
+	}
+	public void seteClassQuestion(EClassQuestion eClassQuestion) {
+		this.eClassQuestion = eClassQuestion;
+	}
+	
 	public String geteClassAnswerCode() {
 		return eClassAnswerCode;
 	}

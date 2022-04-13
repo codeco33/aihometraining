@@ -55,18 +55,25 @@ public class DietUserController {
 	}
 	
 	
+	//개인 식단 페이지 이동, 음식 대분류 조회
 	@GetMapping("/dietMyList")
 	public String selectDietMyList(Model model) {
 		model.addAttribute("title", "개인 식단페이지");
 		model.addAttribute("role", "개인 식단 페이지 테스트");
 		
+		
+		//음식 대분류 조회
+		List<DietMealLevelList> mainMealSort = dietMapper.selectDietMealLevelList();
+		model.addAttribute("mainMealSort", mainMealSort);
+		
+		
 		return "diet/dietMyList";
 	}
-
 	
 	
-	
-	
-	
+	
+		
+		
+		
 	
 }
