@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import aihometraining.team.dto.EClassCategoryLarge;
 import aihometraining.team.dto.EClassCategoryMedium;
 import aihometraining.team.dto.EClassCategorySmall;
+import aihometraining.team.dto.EClassTake;
 import aihometraining.team.dto.FileDto;
 import aihometraining.team.dto.WorkoutGoal;
 import aihometraining.team.dto.WorkoutLog;
@@ -255,11 +256,18 @@ public class WorkoutLogUserController {
 		
 	}
 	
+	
+	
 	// 운동 목표 등록
 	@GetMapping("/workoutGoalInsert")
 	public String workoutGoalInsert(Model model) {
 		
+		// 수강 중인 운동 클래스 목록 조회
+		List<EClassTake> eClassTakeList = workoutLogUserService.geteClassTakeList();
+		
+		
 		model.addAttribute("title", "운동 목표 등록");
+		model.addAttribute("eClassTakeList", eClassTakeList);
 		
 		return "workoutLog/workoutLogUser/workoutGoalInsert";
 		

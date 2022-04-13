@@ -123,6 +123,19 @@
 		</association>	
 	</resultMap>
 		
+	<resultMap type="EClassTake" id="EClassTakeResultmap">
+		<result	column="eClassTakeCode" 				property="eClassTakeCode"/>
+		<result column="member" 			property="member"/>
+		<result column="memberPhone" 				property="memberPhone"/>
+		<result column="eClassApproved" 			property="eClassApproved"/>
+		<result column="eClassTakeRegDate" 			property="eClassTakeRegDate"/>
+		<result column="eClassTakeState" 			property="eClassTakeState"/>
+		<result column="paymentGroupCode" 			property="paymentGroupCode"/>
+		
+		<association property="member" javaType="Member">
+			<id 	column="memberEmail" property="memberEmail"/>
+		</association>	
+	</resultMap>
 		
 	
 		<insert id="workoutLogLikeInsert" parameterType="WorkoutLogLike">
@@ -233,6 +246,18 @@
 				
 		</select>
 		
+		<select id="geteClassTakeList" resultMap="EClassTakeResultmap">
+			SELECT
+				 et.eClassTakeCode
+				,et.memberEmail
+				,et.eClassTakeState
+			FROM
+				eclasstake AS et
+			WHERE
+				 et.eClassTakeState = '수강중'
+				and
+				 et.memberEmail = 'id008@email.com';
+		</select>
 		
 		<select id="getworkoutGoalList" resultMap="WorkoutGoalResultMap">
 			/* 운동 목표 목록 */

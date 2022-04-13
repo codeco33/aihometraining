@@ -103,13 +103,11 @@
 		</div>
 		<div class="col-md-12">
 			<div class="panel">
-	
 				<div class="panel-heading bg-white border-none">
 					<h4>
 						<span class="icon-book-open"></span> 전체 일지 목록
 					</h4>
 				</div>
-	
 				<div class="panel-body">
 					<!-- 운동 일지 검색 폼 Start -->
 					<form class="searchWorkoutLogTableForm"
@@ -160,7 +158,6 @@
 					</form>
 				</div>
 				<!-- 운동 일지 검색 폼 End -->
-	
 				<div class="responsive-table">
 					<table id="workoutLogList"
 						class="table table-striped table-bordered" style="width: 100%"
@@ -296,14 +293,14 @@
 		<script th:src="@{/asset/js/plugins/bootstrap-datepicker.ko.min.js}"></script>
 		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
 		<script th:src="@{/asset/js/plugins/jquery.mask.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.validate.min.js}"></script>
 	
 		<!-- custom -->
 		<script th:src="@{/asset/js/main.js}"></script>
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	
 		<script type="text/javascript">
-			$(document).ready(
-					function() {
+			$(document).ready(function() {
 	
 						/* datepicker Start */
 						$('.input-daterange').datepicker({
@@ -362,7 +359,7 @@
 								function() {
 									$('#workoutLogList_info').html(
 											'전체 ' + info.recordsTotal + ' 건');
-								});
+						});
 	
 						//썸네일 슬라이더
 						$('#myCarousel').carousel({

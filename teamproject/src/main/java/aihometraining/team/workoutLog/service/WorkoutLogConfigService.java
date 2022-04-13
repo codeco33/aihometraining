@@ -27,9 +27,9 @@ public class WorkoutLogConfigService {
 	}
 	
 	// 운동 계획 카테고리 목록 조회
-	public List<WorkoutLogCategory> getWorkoutLogCategoryList(){
+	public List<Map<String, Object>> getWorkoutLogCategoryList(Map<String,Object> paramMap){
 		
-		List<WorkoutLogCategory> workoutLogCategoryList = workoutLogConfigMapper.getWorkoutLogCategoryList();
+		List<Map<String, Object>> workoutLogCategoryList = workoutLogConfigMapper.getWorkoutLogCategoryList(paramMap);
 		
 		return workoutLogCategoryList;
 		

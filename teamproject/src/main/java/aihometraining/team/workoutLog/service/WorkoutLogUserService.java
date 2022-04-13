@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import aihometraining.team.dto.EClassCategoryLarge;
+import aihometraining.team.dto.EClassTake;
 import aihometraining.team.dto.FileDto;
 import aihometraining.team.dto.WorkoutGoal;
 import aihometraining.team.dto.WorkoutLog;
@@ -120,6 +121,15 @@ public class WorkoutLogUserService {
 		List<WorkoutGoal> workoutGoalList = workoutLogUserMapper.getworkoutGoalList();
 		
 		return workoutGoalList;
+		
+	}
+	
+	// 수강 중인 운동 클래스 목록 조회
+	public List<EClassTake> geteClassTakeList(){
+		
+		List<EClassTake> eClassTakeList = workoutLogUserMapper.geteClassTakeList();
+		
+		return eClassTakeList;
 		
 	}
 	
