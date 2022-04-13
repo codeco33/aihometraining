@@ -20,6 +20,10 @@
 		#scrollUp, #back-top {
 			z-index: 3;
 		}
+		.cmxform .inputTitle {
+		    color: #96979f;
+		    font-size: 13px;
+		}
 		</style>
 	</th:block>
 	<th:block layout:fragment="customContents">
@@ -81,7 +85,6 @@
 			  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <h5 class="modal-title" id="GatherDetailModalLabel">챌린지 제목</h5>
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
@@ -100,6 +103,7 @@
 	</th:block>
 	
 	
+			
 	
 	<th:block layout:fragment="customBodyScript">
 		<script>
@@ -117,18 +121,44 @@
 							console.log(data);
 							console.log(data.length);
 							for(var i=0; i<data.length; i++){
+							
+							var modalhader = '<h5 class="modal-title" id="GatherDetailModalLabel"  style="font-weight: bold; font-size: large;">' +data[i].challengeGather.challengeGatherName + '</h5>';
+								
 							var modalbody = '';
 								
-								modalbody += '<input class="mt-2 p-2 form-control" name="challengeCategoryCode" value="'+ data[i].challengeCategory.challengeCategoryName +'"style="background-color: #f9f9ff; border: none;">'
-								modalbody += '<input class="mt-2 p-2 form-control" name="challengeGatherIntro" value="'+ data[i].challengeGather.challengeGatherIntro +'"style="background-color: #f9f9ff; border: none;">'
-								modalbody += '<input class="mt-2 p-2 form-control" name="challengeGatherMaxPeople" value="'+ data[i].challengeGather.challengeGatherMaxPeople +'"style="background-color: #f9f9ff; border: none;">'
-								modalbody += '<input class="mt-2 p-2 form-control" name="challengeGatherProveMethod" value="'+ data[i].challengeGather.challengeGatherProveMethod +'"style="background-color: #f9f9ff; border: none;">'
-								modalbody += '<input class="mt-2 p-2 form-control" name="challengeGatherProveFrequency" value="'+ data[i].challengeGather.challengeGatherProveFrequency +'"style="background-color: #f9f9ff; border: none;">'
-								modalbody += '<input class="mt-2 p-2 form-control" name="challengeStartDate" value="'+ data[i].challengeGather.challengeStartDate +'"style="background-color: #f9f9ff; border: none;">'
-								modalbody += '<input class="mt-2 p-2 form-control" name="challengeEndDate" value="'+ data[i].challengeGather.challengeEndDate +'"style="background-color: #f9f9ff; border: none;">'
-								
-								
+								modalbody += '<div class="form-group">'+
+												'<label class="inputTitle">챌린지 카테고리</label>'+
+												'<input class="mt-2 p-2 form-control" name="challengeCategoryCode" readonly value="'+ data[i].challengeCategory.challengeCategoryName +'"style="background-color: #f9f9ff; border: none;">'+
+											 '</div>'
+								modalbody += '<div class="form-group">'+
+											 	'<label class="inputTitle">챌린지 소개글</label>'+
+												'<input class="mt-2 p-2 form-control" name="challengeGatherIntro" readonly value="'+ data[i].challengeGather.challengeGatherIntro +'"style="background-color: #f9f9ff; border: none;">'+
+											 '</div>'	
+								modalbody += '<div class="form-group">'+
+							 				 	'<label class="inputTitle">챌린지 최대 참여 인원수</label>'+
+							 				 	'<input class="mt-2 p-2 form-control" name="challengeGatherMaxPeople" readonly value="'+ data[i].challengeGather.challengeGatherMaxPeople +'"style="background-color: #f9f9ff; border: none;">'+
+											 '</div>'
+								modalbody += '<div class="form-group">'+
+			 				 					'<label class="inputTitle">인증 방법</label>'+
+			 				 					'<input class="mt-2 p-2 form-control" name="challengeGatherProveMethod" readonly value="'+ data[i].challengeGather.challengeGatherProveMethod +'"style="background-color: #f9f9ff; border: none;">'+
+			 				 				 '</div>'
+								modalbody += '<div class="form-group">'+
+			 				 				 	'<label class="inputTitle">인증 빈도</label>'+
+			 				 				 	'<input class="mt-2 p-2 form-control" name="challengeGatherProveFrequency" readonly value="'+ data[i].challengeGather.challengeGatherProveFrequency +'"style="background-color: #f9f9ff; border: none;">'+
+			 				 				 '</div>'	
+								modalbody += '<div class="form-group">'+
+					 				 			 '<label class="inputTitle">인증 빈도</label>'+
+					 				 			 '<input class="mt-2 p-2 form-control" name="challengeStartDate" readonly value="'+ data[i].challengeGather.challengeStartDate +'"style="background-color: #f9f9ff; border: none;">'+
+					 				 		 '</div>'	 
+								modalbody += '<div class="form-group">'+
+					 				 			 '<label class="inputTitle">인증 빈도</label>'+
+					 				 			 '<input class="mt-2 p-2 form-control" name="challengeEndDate" readonly value="'+ data[i].challengeGather.challengeEndDate +'"style="background-color: #f9f9ff; border: none;">'+
+					 				 		 '</div>'
+					 				 		 
+								$('.modal-header').empty();
 								$('.modal-body').empty();
+								
+								$('.modal-header').prepend(modalhader);
 								$('.modal-body').append(modalbody);
 								
 								$('#GatherDetailModal').modal();
