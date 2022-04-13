@@ -124,10 +124,10 @@
 	</resultMap>
 		
 	<resultMap type="EClassTake" id="EClassTakeResultmap">
-		<result	column="eClassTakeCode" 				property="eClassTakeCode"/>
-		<result column="member" 			property="member"/>
+		<result	column="eClassTakeCode" 			property="eClassTakeCode"/>
+		<result column="memberEmail" 				property="memberEmail"/>
 		<result column="memberPhone" 				property="memberPhone"/>
-		<result column="eClassApproved" 			property="eClassApproved"/>
+		<result column="eClassApprovedCode" 		property="eClassApprovedCode"/>
 		<result column="eClassTakeRegDate" 			property="eClassTakeRegDate"/>
 		<result column="eClassTakeState" 			property="eClassTakeState"/>
 		<result column="paymentGroupCode" 			property="paymentGroupCode"/>
@@ -247,12 +247,18 @@
 		</select>
 		
 		<select id="geteClassTakeList" resultMap="EClassTakeResultmap">
+			/* 수강 중인 운동 클래스 목록 조회 */
 			SELECT
 				 et.eClassTakeCode
 				,et.memberEmail
 				,et.eClassTakeState
+				,ep.eClassApprovedName
 			FROM
 				eclasstake AS et
+				INNER JOIN 
+				eclassapproved AS ep
+				ON 
+				et.eClassApprovedCode = ep.eClassApprovedCode
 			WHERE
 				 et.eClassTakeState = '수강중'
 				and

@@ -31,10 +31,10 @@
 				                    <label class="control-label pl-3" style="color:#BDBDCC; font-size: 13px;">수강 중인 클래스 </label>
 				                    <div class="form-select mb-3 pl-3 pr-3">
 				                    	<select id="eClassApprovedCode" name="eClassApprovedCode" required>
-											<th:block th:if="${not #lists.isEmpty(challengeCateList)}" th:each="l : ${challengeCateList}" >
-												<option th:value="${l.challengeCategoryCode}">[[${l.challengeCategoryName}]]</option>
+											<th:block th:if="${not #lists.isEmpty(eClassTakeList)}" th:each="l : ${eClassTakeList}" >
+												<option th:value="${l.eClassTakeCode}">[[${l.challengeCategoryName}]]</option>
 											</th:block>
-											<th:block th:unless="${not #lists.isEmpty(challengeCateList)}">
+											<th:block th:unless="${not #lists.isEmpty(eClassTakeList)}">
 												<option >등록된 카테고리가 없습니다.</option>
 											</th:block>
 										</select>
