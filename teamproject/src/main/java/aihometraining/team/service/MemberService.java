@@ -12,7 +12,6 @@ import aihometraining.team.dto.EClassOpenApplyForm;
 import aihometraining.team.dto.LoginHistory;
 import aihometraining.team.dto.Member;
 import aihometraining.team.dto.MemberLevel;
-import aihometraining.team.dto.WishList;
 import aihometraining.team.mapper.MemberMapper;
 
 @Service
