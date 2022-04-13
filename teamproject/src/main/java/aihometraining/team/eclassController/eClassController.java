@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,6 +26,7 @@ import aihometraining.team.eclassService.eClassService;
 import aihometraining.team.mapper.EClassMapper;
 
 @Controller
+@RequestMapping(value="/eClass" , method = {RequestMethod.GET,RequestMethod.POST})
 public class eClassController {
 	
 	private static final Logger log = LoggerFactory.getLogger(eClassController.class);
@@ -82,18 +85,31 @@ public class eClassController {
 		return categoryMedium;
 	}
 	
-	@GetMapping("/eClassIntroduce")
-	public List<EClassIntroduce> EClassIntroduceInsert( @RequestParam(value = "EClassIntroduceInsert", required = false)EClassIntroduce eClassIntroduce
-														,HttpSession session) {
+	@PostMapping("/openAppleyForm")
+	public String EClassOpenAppleyFormInsert( EClassIntroduce eClassIntroduce
+											, EClassSectionTitle eClassSectionTitle
+											, EClassSectionCurriculum eClassSectionCurriculum
+											, EClassQuestion eClassQuestion
+											, EClassAnswer eClassAnswer
+											, EClassOpenAppleyForm eClassOpenAppleyForm
+											, HttpSession session) {
 		
 		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassIntroduce);
-		//1 eClassIntroduceCode 자동생성
-		//2 개설된 클래스 코드
 		String mamberEmail = (String) session.getAttribute("SEMAIL");
 		eClassService.EClassIntroduceInsert(eClassIntroduce, mamberEmail);
-		//int intorduce = eClassMapper.EClassIntroduceInsert(eClassIntroduce, mamberEmail);
+		eClassService.EClassSectionTitleInsert(eClassSectionTitle, mamberEmail);
+		eClassService.EClassSectionCurriculumInsert(eClassSectionCurriculum, mamberEmail);
+		eClassService.EClassQuestionInsert(eClassQuestion, mamberEmail);
+		eClassService.EClassAnswerInsert(eClassAnswer, mamberEmail);
+		eClassService.EClassPriceInsert(  eClassOpenAppleyForm
+										, mamberEmail
+										, eClassIntroduce
+										, eClassSectionTitle
+										, eClassSectionCurriculum
+										, eClassQuestion
+										, eClassAnswer);
 		
-		return null;
+		return "redirect:/eClass/eclassApprovedList";
 	}
 
 	@GetMapping("/eClassApproved")
