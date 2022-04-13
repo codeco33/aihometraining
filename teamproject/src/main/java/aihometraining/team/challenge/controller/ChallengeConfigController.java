@@ -266,9 +266,9 @@ public class ChallengeConfigController {
 							   ,@RequestParam(value="searchKey", required = false) String searchKey
 							   ,@RequestParam(value="searchValue", required = false) String searchValue
 							   ,@RequestParam(value="searchDate", required = false) String searchDate
-							   ,@RequestParam(value="gatherStartDate", required = false) String gatherStartDate
 							   ,@RequestParam(value="searchStart", required = false) String searchStart
 							   ,@RequestParam(value="searchEnd", required = false) String searchEnd
+							   ,@RequestParam(value="gatherStartDate", required = false) String gatherStartDate
 							   ,@RequestParam(value="gatherEndDate", required = false) String gatherEndDate) {
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
@@ -436,10 +436,35 @@ public class ChallengeConfigController {
 	
 	//챌린지 포인트 관리
 	@GetMapping("/challengePoint")
-	public String challengePoint(Model model) {
+	public String challengePoint(Model model
+							   ,@RequestParam(value="searchKey", required = false) String searchKey
+							   ,@RequestParam(value="searchValue", required = false) String searchValue
+							   ,@RequestParam(value="searchDate", required = false) String searchDate
+							   ,@RequestParam(value="searchStart", required = false) String searchStart
+							   ,@RequestParam(value="searchEnd", required = false) String searchEnd) {
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		if(searchKey != null) {
+			if("challengeCategoryName".equals(searchKey)) {
+				searchKey = "challengeCategoryName";
+				searchDate = "challengeCategoryRegDate";
+			}else if("eClassCategorySmallName".equals(searchKey)) {
+				searchKey = "eClassCategorySmallName";
+				searchDate = "challengeCategoryRegDate";
+			}
+		}
+		
+		paramMap.put("searchKey", searchKey);
+		paramMap.put("searchValue", searchValue);
+		paramMap.put("searchDate", searchDate);
+		paramMap.put("searchStart", searchStart);
+		paramMap.put("searchEnd", searchEnd);
 		
 		//챌린지 포인트 관리 목록 조회
-		List<ChallengePointGive> pointList = challengeConfigService.getChallengePointList();
+		List<Map<String, Object>> pointList = challengeConfigService.getChallengePointList(paramMap);
+		
+		paramMap = null;
 		
 		log.info("챌린지 포인트 목록 조회 pointList: {}", pointList);
 		
@@ -461,6 +486,14 @@ public class ChallengeConfigController {
 		List<ChallengePointGive> pointDetailList = challengeConfigService.getPointDetailByCode(challengePointGiveCode);
 		
 		return pointDetailList;
+	}
+	//챌린지 포인트지급 페이지로 연결(수경님)
+	@PostMapping("/challengePoint")
+	public String challengePointGiveUpdate(ChallengePointGive challengePointGive) {
+		log.info("모달에서 보낸 값 조회  challengePointGive : {}", challengePointGive);
+		
+		return "point/givePoint";
+		
 	}
 	
 	/**
