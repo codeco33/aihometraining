@@ -43,9 +43,9 @@ public class ChallengeConfigService {
 	}
 	
 	//챌린지 세팅 목록 조회
-		public List<ChallengeSetting> getChallengeSettingList(){
+		public List<Map<String, Object>> getChallengeSettingList(Map<String, Object> paramMap){
 			
-			List<ChallengeSetting> challengeSettingList = challengeConfigMapper.getChallengeSettingList();
+			List<Map<String, Object>> challengeSettingList = challengeConfigMapper.getChallengeSettingList(paramMap);
 			
 			return challengeSettingList;
 			

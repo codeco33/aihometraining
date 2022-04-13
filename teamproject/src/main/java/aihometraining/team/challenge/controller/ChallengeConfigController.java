@@ -68,7 +68,9 @@ public class ChallengeConfigController {
 										 ,@RequestParam(value="searchValue", required = false) String searchValue
 										 ,@RequestParam(value="searchDate", required = false) String searchDate
 										 ,@RequestParam(value="searchStart", required = false) String searchStart
-										 ,@RequestParam(value="searchEnd", required = false) String searchEnd) {
+										 ,@RequestParam(value="searchEnd", required = false) String searchEnd
+										 ,@RequestParam(value="searchKey2", required = false) String searchKey2
+										 ,@RequestParam(value="searchValue2", required = false) String searchValue2) {
 			
 			Map<String, Object> paramMap = new HashMap<String, Object>();
 			/* paramMap.put("memberEmail", "id001@email.com"); */
@@ -84,17 +86,25 @@ public class ChallengeConfigController {
 					searchDate = "challengeCategoryRegDate";
 				}
 			}
-			
+			if(searchKey2 != null) {
+				if("challengeSettingCode".equals(searchKey2)) {
+					searchKey2 = "challengeSettingCode";
+				}else if("challengeSettingUpdateDo".equals(searchKey2)) {
+					searchKey2 = "challengeSettingUpdateDo";
+				}
+			}
 			
 			paramMap.put("searchKey", searchKey);
 			paramMap.put("searchValue", searchValue);
+			paramMap.put("searchKey2", searchKey2);
+			paramMap.put("searchValue2", searchValue2);
 			paramMap.put("searchDate", searchDate);
 			paramMap.put("searchStart", searchStart);
 			paramMap.put("searchEnd", searchEnd);
 			
 			//List<ChallengeCategory> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
 			List<Map<String, Object>> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
-			List<ChallengeSetting> challengeSettingList = challengeConfigService.getChallengeSettingList();
+			List<Map<String, Object>> challengeSettingList = challengeConfigService.getChallengeSettingList(paramMap);
 			
 			paramMap = null;
 			

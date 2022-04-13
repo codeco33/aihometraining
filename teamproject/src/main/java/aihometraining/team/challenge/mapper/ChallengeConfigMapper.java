@@ -22,7 +22,7 @@ public interface ChallengeConfigMapper {
 	public List<Map<String,Object>> getChallengeCategoryList(Map<String, Object> paramMap);
 	
 	//세팅 목록 조회
-	public List<ChallengeSetting> getChallengeSettingList();
+	public List<Map<String,Object>> getChallengeSettingList(Map<String, Object> paramMap);
 	
 	//운동클래스카테고리small 조회
 	public List<EClassCategorySmall> getClassCategoryList();
