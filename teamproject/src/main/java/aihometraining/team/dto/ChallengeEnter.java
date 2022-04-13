@@ -28,6 +28,7 @@ public class ChallengeEnter {
 	private ChallengeCategory challengeCategory;
 	private ChallengeGather challengeGather;
 	private Member member;
+	
 	public String getChallengeEnterCode() {
 		return challengeEnterCode;
 	}
