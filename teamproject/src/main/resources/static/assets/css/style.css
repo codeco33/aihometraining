@@ -7375,6 +7375,12 @@ b, sup, sub, u, del {
 	text-align: center;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .courses-area .properties__background div a:hover{
 	color: #4255A4
 }

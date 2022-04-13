@@ -10,6 +10,7 @@ public class EClassIntroduce {
 	private String memberUpdateEmail;
 	private Date eClassIntroducetDate;
 	private String eClassIntroduceImg;
+	
 	public String geteClassIntroduceCode() {
 		return eClassIntroduceCode;
 	}

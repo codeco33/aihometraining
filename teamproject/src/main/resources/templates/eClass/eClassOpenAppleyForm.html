@@ -8,198 +8,234 @@
 	</th:block>
 
 	<th:block layout:fragment="customContents">
-		<div class="container" style="border-radius: 30px; border: solid 5px #aa00cc; ">
-			<div class="row">
-				<div class="col-12" style="padding-top: 10px;">
-					<div class="col-12" style="text-align: center; border-radius: 30px; border: solid 3px #aa00cc; ">
-						<h2 style="padding-top: 5px; margin-top: 5px;">소개하기</h2>
-					</div>
-					<div style="padding: 10px; height: 600px;">
-						<div class="row" style="border-radius: 30px;">
-							<div class="col-3" style="border-radius: 30px;border: solid 1px #aa00cc;">
-								<h6 style="padding-top: 15px; text-align: center;">카테고리를 선택해주세요</h6>
-							</div>
-							<div class="col-3">
-								<select name="eClassCategoryLargeCode" id="eClassCategoryLargeCode">
-									<option> 운동 카테고리 대분류 선택하세요 </option>
-									<th:block th:if="${not #lists.isEmpty(eClassCategoryLargeList)}" th:each="eccl : ${eClassCategoryLargeList}">
-										<option th:value = "${eccl.eClassCategoryLargeCode}">[[${eccl.eClassCategoryLargeName}]]</option>
-									</th:block>
-									<th:block th:unless="${not #lists.isEmpty(eClassCategoryLargeList)}" th:each="eccl : ${eClassCategoryLargeList}">
-										<option>등록된 카테고리가 없습니다.</option>
-									</th:block>
-								</select>
-							</div>
-							<div class="col-3">
-								<select name="eClassCategoryMediumCode" id="eClassCategoryMediumCode">
-									<option> :::: </option>
-								</select>
-							</div>
-							<div class="col-3">
-								<select name="eClassCategorySmallCode" id="eClassCategorySmallCode">
-									<option> :::: </option>
-								</select>
+		<form th:action="@{/openAppleyForm}">
+			<div class="container" style="border-radius: 30px; border: solid 5px #aa00cc;">
+				<div class="row" style="margin: 5px;">
+					<div class="col-12" style="padding-top: 10px;">
+						<div class="row">
+							<div class="col-12" style="text-align: center; border-radius: 30px; border: solid 3px #aa00cc; ">
+								<h2 style="padding-top: 5px; margin-top: 5px;">소개하기</h2>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-9" style="padding: 10px;">
-								<textarea rows="20" style="resize:none; width: 100%;" name="eClassIntroduceContent" placeholder="개설 하려는 클래스를 소개 시켜주세요"></textarea>
+						<div style="padding: 10px; height: 600px;">
+							<div class="row" style="border-radius: 30px;">
+								<div class="col-3" style="border-radius: 30px;border: solid 1px #aa00cc;">
+									<h6 style="padding-top: 15px; text-align: center;">카테고리를 선택해주세요</h6>
+								</div>
+								<div class="col-3">
+									<select name="eClassCategoryLargeCode" id="eClassCategoryLargeCode">
+										<option> 운동 카테고리 대분류 선택하세요 </option>
+										<th:block th:if="${not #lists.isEmpty(eClassCategoryLargeList)}" th:each="eccl : ${eClassCategoryLargeList}">
+											<option th:value = "${eccl.eClassCategoryLargeCode}">[[${eccl.eClassCategoryLargeName}]]</option>
+										</th:block>
+										<th:block th:unless="${not #lists.isEmpty(eClassCategoryLargeList)}" th:each="eccl : ${eClassCategoryLargeList}">
+											<option>등록된 카테고리가 없습니다.</option>
+										</th:block>
+									</select>
+								</div>
+								<div class="col-3">
+									<select name="eClassCategoryMediumCode" id="eClassCategoryMediumCode">
+										<option> :::: </option>
+									</select>
+								</div>
+								<div class="col-3">
+									<select name="eClassCategorySmallCode" id="eClassCategorySmallCode">
+										<option> :::: </option>
+									</select>
+								</div>
 							</div>
-							<div class="col-3" style="padding: 10px; text-align: center;">
-								<div style="border: solid 1px; width: 100%; height: 400px;">이미지를 등록해주세요!</div>
-								<div style="padding: 10px;">
-									<input type="file" multiple="multiple" class="introducefile" name="eClassIntroduceImg">
+							<div class="row">
+								<div class="col-9" style="padding: 10px;">
+									<textarea rows="20" style="resize:none; width: 100%;" name="eClassIntroduceContent" placeholder="개설 하려는 클래스를 소개 시켜주세요"></textarea>
+								</div>
+								<div class="col-3" style="padding: 10px; text-align: center;">
+									<div style="border: solid 1px; width: 100%; height: 400px;">이미지를 등록해주세요!</div>
+									<div style="padding: 10px;">
+										<input type="file" multiple="multiple" class="introducefile" name="eClassIntroduceImg">
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			
-			<div class="col-12" style="padding-top: 10px;">
-				<div class="col-12" style="text-align: center; border-radius: 30px; border: solid 3px #aa00cc;">
-					<h2 style="padding-top: 5px; margin-top: 5px;">섹션 정하기</h2>
+				
+				<div class="row" style="margin: 5px;">
+					<div class="col-12" style="padding-top: 10px;">
+						<div class="col-12" style="text-align: center; border-radius: 30px; border: solid 3px #aa00cc;">
+							<h2 style="padding-top: 5px; margin-top: 5px;">섹션 정하기</h2>
+						</div>
+						<div class="row">
+							<div class="col-8" id="section">
+								<div class="row" id="title">
+									<div class="col-12" style=" padding: 10px;">
+										<input type="text" style="width: 100%; height: 50px;" name="eClassSectionTitleName" placeholder="섹션 제목을 정해주세요">
+										<div class="row" id="sectionCurriculum" style="margin: 5px;">
+											<div class="col-6 offset-md-1">
+												<div id="curriculum">
+													<div  id="sectionCurriculumBox">
+														<input type="text" name="eClassSectionCurriculumTitle" style="width: 100%;" placeholder="커리큘럼 이름을 정해주세요">
+														<input type="file" name="eClassSectionCurriculumAddFile">
+													</div>
+												</div>
+											</div>
+											<div class="col-2">
+												<button type="button" class="curriculumAdd btn btn4">커리큘럼 추가</button>
+											</div>
+											<div class="col-2">
+												<button type="button" class="curriculumDle btn btn4">커리큘럼 삭제</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-3" style="padding: 10px; margin-top: 10px;">
+								<button type="button" class="titleAdd btn btn4" id="sectionTitleBtn">섹션 추가</button>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="row">
-					<div class="9" id="section">
-						<div class="row" id="title">
-							<div class="col-12" style=" padding: 10px;">
-								<input type="text" style="width: 100%; height: 50px;" name="eClassSectionTitleName" placeholder="섹션 제목을 정해주세요">
-								<div class="row" id="sectionCurriculum">
+				
+				<div class="row" style="margin: 5px;">
+					<div class="col-12" style="padding: 10px; margin-top: 30px;">
+						<div class="col-12" style="text-align: center; border-radius: 30px; border: solid 3px #aa00cc;">
+							<h2 style="padding-top: 5px; margin-top: 5px;">클래스에 대한 질문 및 답변</h2>
+						</div>
+						<div class="row">
+							<div class="col-8" id="questionTitle" style="padding-top: 10px;">
+								<div class="row">
+									<div class="col-12" style="padding: 10px;">
+										<input type="text" name="eClassQuestionTitle" id="questionName" style="width: 100%; height: 50px; border: solid 1px;" placeholder="자주 묻는 질문을 등록해주세요">
+										<div class="row" style="margin: 5px;">
+											<div class="col-6 offset-md-1">
+												<input type="text" name="eClassAnsweTitle" style="width: 100%; border: solid 1px;" placeholder="어떻게 답하실건가요?">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-2" style="margin-top: 30px;">
+								<button type="button" class="questionAdd btn btn4">질문 추가</button>
+							</div>
+							<div class="col-2" style="margin-top: 30px;">
+								<button type="button" class="questionDle btn btn4">질문 삭제</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row" style="margin: 5px;">
+					<div class="col-12" style="margin-top: 30px;">
+						<div class="col-12" style="text-align: center; border-radius: 30px; border: solid 3px #aa00cc;">
+							<h2 style="padding-top: 5px; margin-top: 5px;">세부 설정</h2>
+						</div>
+						<div class="row">
+							<div class="col-12" style="padding-top: 10px; border-radius: 30px; border: solid 1px #aa00cc; margin-top: 10px;">
+								<div class="row">
 									<div class="col-6">
-										<div id="curriculum">
-											<div  id="sectionCurriculumBox">
-												<input type="text" name="eClassSectionCurriculumTitle" style="width: 100%;" placeholder="커리큘럼 이름을 정해주세요">
-												<input type="file" name="eClassSectionCurriculumAddFile">
+										<div class="row">
+											<div class="col-6" style="margin-top: 5px;">
+												<h5>수강생 모집 시작 날짜</h5>
+											</div>
+											<div class="col-6" style="margin-bottom: 10px;">
+												<input type="date" style="width: 100%" name="eClassOpenAppleyStratDate">
 											</div>
 										</div>
 									</div>
 									<div class="col-6">
-										<button type="button" class="curriculumAdd btn btn4">커리큘럼 추가</button>
-										<button type="button" class="curriculumDle btn btn4">커리큘럼 삭제</button>
+										<div class="row">
+											<div class="col-6" style="margin-top: 5px;">
+												<h5>수강생 모집 종료 날짜</h5>
+											</div>
+											<div class="col-6" style="margin-bottom: 10px;">
+												<input type="date" style="width: 100%" name="eClassOpenAppleyEndDate">
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
+							<div class="col-12" style="padding-top: 10px; border-radius: 30px; border: solid 1px #aa00cc; margin-top: 10px;">
+								<div class="row">
+									<div class="col-2" style="margin-top: 5px;">
+										<h5> 참가 인원 </h5>
+									</div>
+									<div class="col-4 offset-md-1">
+										<div class="row">
+											<div class="col-3" style="margin-top: 7px;">
+												<h6>최소</h6>
+											</div>
+											<div class="col-3" style="margin-bottom: 10px;">
+												<input type="number" style="width: 100%;" name="eClassOpenAppleyStudent" placeholder="1">
+											</div>
+											<div class="col-3" style="margin-top: 7px;">
+												<h6>명</h6>
+											</div>
+										</div>
+									</div>
+									<div class="col-4 offset-md-1">
+										<div class="row">
+											<div class="col-3" style="margin-top: 7px;">
+												<h6 style="color: #de00fd;">최대</h6>
+											</div>
+											<div class="col-3" style="margin-bottom: 10px;">
+												<input type="number" style="width: 100%;" name="eClassOpenAppleyMaxStudent" placeholder="0">
+											</div>
+											<div class="col-3" style="margin-top: 7px;">
+												<h6>명</h6>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-12" style="padding-top: 10px; border-radius: 30px; border: solid 1px #aa00cc; margin-top: 10px;">
+								<div class="row">
+									<div class="col-6">
+										<div class="row">
+											<div class="col-5" style="margin-top: 7px;">
+												<h6>기간 및 금액 설정</h6>
+											</div>
+											<div class="col-4">
+												<input type="number" style="width: 100%;" name="eClassOpenAppleySetDate" placeholder="1">
+											</div>
+											<div class="col-2" style="padding: 5px;">
+												<h6>개월</h6>
+											</div>
+										</div>
+									</div>
+									<div class="col-6">
+										<div class="row">
+											<div class="col-5">
+												<h6>금액 설정</h6>
+											</div>
+											<div class="col-4">
+												<input type="number" style="width: 100%;" name="eClassOpenAppleyPrice" placeholder="0">
+											</div>
+											<div class="col-2">
+												<h6>원</h6>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-12" style="height: 100px; margin-top: 15px">
+								<input name="eClassOpenAppleyName" style="height: 80%; width: 100%; font-size: 50px; text-align: center;" placeholder="클래스 이름을 정해주세요">
+							</div>
 						</div>
-					</div>
-					<div class="col-3" style="padding: 10px; margin-top: 10px;">
-						<button type="button" class="titleAdd btn btn4" id="sectionTitleBtn">섹션 추가</button>
 					</div>
 				</div>
 			</div>
-			
-			<div class="col-12">
+			<div class="container" style="padding-top: 20px;">
 				<div class="row">
-					<div class="col-6" id="questionTitle" style="padding-top: 10px;">
-						<input type="text" name="eClassQuestionTitle" id="questionName" style="width: 100%; border: solid 1px;" placeholder="자주 묻는 질문을 등록해주세요">
-					</div>
-					<div class="col-6" style="padding-top: 10px;">
-						<button type="button" class="questionAdd btn btn4">질문 추가</button>
-						<button type="button" class="questionDle btn btn4">질문 삭제</button>
+					<div class="col-12" style="text-align: center;">
+						<button type="submit" class="btn">개설 신청하기</button>
 					</div>
 				</div>
 			</div>
-			
-			
-			<div class="col-12">
-				<div class="col-12" style="text-align: center; border-radius: 30px; border: solid 3px #fff;">
-					<h4 style="padding-top: 5px; margin-top: 5px; color: #fff;">질문에 대해 답변하기</h4>
-				</div>
-				<div class="row">
-					<div class="col-7" style="padding: 10px 10px;">
-						<input type="text" style="width: 100%" readonly="readonly" placeholder="DB에서 받아온 질문">
-					</div>
-					<div class="col-6">
-						<input type="text" name="eClassAnsweTitle" style="width: 100%; border: solid 1px;" placeholder="어떻게 답하실건가요?">
-					</div>
-				</div>
-			</div>
-			
-			<div class="col-12">
-				<div class="col-12" style="text-align: center; border-radius: 30px; border: solid 3px #fff;">
-					<h4 style="padding-top: 5px; margin-top: 5px; color: #fff;">클래스 옵션 설정</h4>
-				</div>
-				<div class="row">
-					<div class="col-12" style="padding-top: 10px;">
-						<div class="row">
-							<div class="col-6" style="border: solid #fff 1px; padding: 15px;">
-								<div class="col-6">
-									<h5 style="color: #fff">수강생 모집 시작 날짜</h5>
-								</div>
-								<div class="col-6">
-									<input type="date" style="width: 100%" name="eClassOpenAppleyStratDate">
-								</div>
-							</div>
-							<div class="col-6" style="border: solid #fff 1px; padding: 15px;">
-								<div class="col-6">
-									<h5 style="color: #fff">수강생 모집 종료 날짜</h5>
-								</div>
-								<div class="col-6">
-									<input type="date" style="width: 100%" name="eClassOpenAppleyEndDate">
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-12" style="padding: 15px;">
-						<div class="row" style="padding-top: 5px; border: solid #fff 1px;">
-							<div class="col-2">
-								<h5 style="color: #fff; padding: 5px;"> 참가 인원 </h5>
-							</div>
-							<div class="col-4 offset-md-1">
-								<div class="row">
-									<div class="col-6">
-										<input type="number" style="width: 100%;" name="eClassOpenAppleyStudent" placeholder="최소 참가 인원">
-									</div>
-									<div class="col-6" style="padding: 5px;">
-										<h6 style="color: #fff; padding: 5px;">명</h6>
-									</div>
-								</div>
-							</div>
-							<div class="col-4 offset-md-1">
-								<div class="row">
-									<div class="col-6">
-										<input type="number" style="width: 100%;" name="eClassOpenAppleyMaxStudent" placeholder="최대 참가 인원">
-									</div>
-									<div class="col-6" style="padding: 5px;">
-										<h6 style="color: #fff; padding: 5px;">명</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-12">
-						<div class="row">
-							<div class="col-6" style="border: solid #fff 1px;">
-								<div class="row">
-									<div class="col-6">
-										<input type="number" style="width: 100%; padding: 5px;" name="eClassOpenAppleySetDate" placeholder="커리큘럼 진행 기간일">
-									</div>
-									<div class="col-6" style="padding: 5px;">
-										<h6 style="color: #fff;">일</h6>
-									</div>
-								</div>
-							</div>
-							<div class="col-6" style="border: solid #fff 1px;">
-								<div class="row">
-									<div class="col-6">
-										<input type="number" style="width: 100%; padding: 5px;" name="eClassOpenAppleyPrice" placeholder="가격을 정해주세요">
-									</div>
-									<div class="col-6" style="padding: 5px;">
-										<h6 style="color: #fff;">원</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-12" style="height: 100px; margin-top: 15px">
-						<input name="eClassOpenAppleyName" style="height: 80%; width: 100%; font-size: 50px; text-align: center;" placeholder="클래스 이름을 정해주세요">
-					</div>
-				</div>
-			</div>
-		</div>
+		</form>
 			
 	</th:block>
+	
 	<th:block layout:fragment="customBodyScript">
 		<script th:src="@{/assets/js/eClassNav.js}"></script>
 	</th:block>
+	
 </html>

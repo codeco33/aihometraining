@@ -1,4 +1,4 @@
-package aihometraining.team.eclassController;
+package aihometraining.team.eClassController;
 
 import java.util.List;
 
@@ -82,18 +82,35 @@ public class eClassController {
 		return categoryMedium;
 	}
 	
-	@GetMapping("/eClassIntroduce")
-	public List<EClassIntroduce> EClassIntroduceInsert( @RequestParam(value = "EClassIntroduceInsert", required = false)EClassIntroduce eClassIntroduce
-														,HttpSession session) {
+	@GetMapping("/openAppleyForm")
+	public String EClassOpenAppleyFormInsert( EClassIntroduce eClassIntroduce
+											, EClassSectionTitle eClassSectionTitle
+											, EClassSectionCurriculum eClassSectionCurriculum
+											, EClassQuestion eClassQuestion
+											, EClassAnswer eClassAnswer
+											, EClassOpenAppleyForm eClassOpenAppleyForm
+											, HttpSession session) {
 		
-		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassIntroduce);
-		//1 eClassIntroduceCode 자동생성
-		//2 개설된 클래스 코드
 		String mamberEmail = (String) session.getAttribute("SEMAIL");
 		eClassService.EClassIntroduceInsert(eClassIntroduce, mamberEmail);
-		//int intorduce = eClassMapper.EClassIntroduceInsert(eClassIntroduce, mamberEmail);
+		eClassService.EClassSectionTitleInsert(eClassSectionTitle, mamberEmail);
+		eClassService.EClassSectionCurriculumInsert(eClassSectionCurriculum, mamberEmail);
+		eClassService.EClassQuestionInsert(eClassQuestion, mamberEmail);
+		eClassService.EClassAnswerInsert(eClassAnswer, mamberEmail);
+		eClassService.EClassPriceInsert(  eClassOpenAppleyForm
+										, mamberEmail
+										, eClassIntroduce
+										, eClassSectionTitle
+										, eClassSectionCurriculum
+										, eClassQuestion
+										, eClassAnswer);
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassIntroduce);
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassSectionTitle);
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassSectionCurriculum);
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassQuestion);
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassAnswer);
 		
-		return null;
+		return "redirect:/eClass/eclassApprovedList";
 	}
 
 	@GetMapping("/eClassApproved")

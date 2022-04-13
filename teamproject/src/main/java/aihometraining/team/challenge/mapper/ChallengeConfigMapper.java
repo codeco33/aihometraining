@@ -22,7 +22,7 @@ public interface ChallengeConfigMapper {
 	public List<Map<String,Object>> getChallengeCategoryList(Map<String, Object> paramMap);
 	
 	//세팅 목록 조회
-	public List<ChallengeSetting> getChallengeSettingList();
+	public List<Map<String,Object>> getChallengeSettingList(Map<String, Object> paramMap);
 	
 	//운동클래스카테고리small 조회
 	public List<EClassCategorySmall> getClassCategoryList();
@@ -69,13 +69,13 @@ public interface ChallengeConfigMapper {
 	public void challengeSettingUpdate(ChallengeSetting challengeSetting);
 	
 	//모집 챌린지 목록 조회
-	public List<ChallengeGather> getGetherList();
+	public List<Map<String,Object>> getGetherList(Map<String, Object> paramMap);
 	
 	//모집 챌린지 코드별 모집 챌린지 세부 정보 조회
 	public List<ChallengeGather> getListDetailByCode(String challengeGatherCode);
 	
 	//진행 챌린지 목록 조회
-	public List<ChallengeGather> getChallengeIngList();
+	public List<Map<String,Object>> getChallengeIngList(Map<String, Object> paramMap);
 	
 	//챌린지 포인트 관리 목록 조회
 	public List<ChallengePointGive> getChallengePointList();
