@@ -69,7 +69,7 @@ public interface ChallengeConfigMapper {
 	public void challengeSettingUpdate(ChallengeSetting challengeSetting);
 	
 	//모집 챌린지 목록 조회
-	public List<ChallengeGather> getGetherList();
+	public List<Map<String,Object>> getGetherList(Map<String, Object> paramMap);
 	
 	//모집 챌린지 코드별 모집 챌린지 세부 정보 조회
 	public List<ChallengeGather> getListDetailByCode(String challengeGatherCode);

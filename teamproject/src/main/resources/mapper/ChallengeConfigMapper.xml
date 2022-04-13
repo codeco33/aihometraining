@@ -462,7 +462,7 @@
 		WHERE challengeSettingCode= #{challengeSettingCode};
 	</update>
 	
-	<select id="getGetherList" parameterType="ChallengeGather" resultMap="challengeGatherResultMap">
+	<select id="getGetherList" parameterType="map" resultType="map" resultMap="challengeGatherResultMap">
 		/* 모집 챌린지 목록 조회 */
 		SELECT 
 			 cg.challengeGatherCode
@@ -478,7 +478,20 @@
 			INNER join
 			challengecategory AS cc
 			on
-			cg.challengeCategoryCode = cc.challengeCategoryCode;
+			cg.challengeCategoryCode = cc.challengeCategoryCode
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="searchKey != null and searchKey !='' and searchValue != ''">
+				AND ${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
+			</if>
+			<if test='searchKey != null and searchKey !="" and searchValue != "" and searchDate != null and searchDate !="" and searchDate.equals("challengeGatherRegDate") and searchStart != "" and searchEnd != ""'>
+				AND ${searchDate} BETWEEN #{searchStart} AND #{searchEnd}
+			</if>
+			<if test="searchKey != null and searchKey !='' and searchValue != '' and searchDate != null and searchDate !='' and gatherStartDate != null and gatherStartDate !='' and gatherEndDate != null and gatherEndDate !='' and searchStart != '' and searchEnd != ''">
+				AND ${gatherStartDate} <![CDATA[>]]> #{searchStart}
+				AND	${gatherEndDate} <![CDATA[<=]]> #{searchEnd}
+			</if>
+		</trim>
+			ORDER BY cast(SUBSTRING_INDEX(cg.challengeGatherCode,'_',-1) AS UNSIGNED) ASC;
 	</select>
 	
 	<select id="getListDetailByCode" parameterType="String" resultMap="challengeGatherResultMap">
