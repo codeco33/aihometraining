@@ -98,7 +98,13 @@ public class eClassController {
 		eClassService.EClassSectionCurriculumInsert(eClassSectionCurriculum, mamberEmail);
 		eClassService.EClassQuestionInsert(eClassQuestion, mamberEmail);
 		eClassService.EClassAnswerInsert(eClassAnswer, mamberEmail);
-		eClassService.EClassPriceInsert(eClassOpenAppleyForm, mamberEmail);
+		eClassService.EClassPriceInsert(  eClassOpenAppleyForm
+										, mamberEmail
+										, eClassIntroduce
+										, eClassSectionTitle
+										, eClassSectionCurriculum
+										, eClassQuestion
+										, eClassAnswer);
 		
 		return null;
 	}

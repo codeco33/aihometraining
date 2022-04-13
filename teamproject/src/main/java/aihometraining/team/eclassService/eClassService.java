@@ -49,11 +49,11 @@ public class eClassService {
 		
 		log.info("EClassIntroduceInsert eClassIntroduce 데이터: {}", eClassIntroduce);
 		String introduceCode = commonMapper.getNewCode("eClassIntroduceCode", "eclassintroduce");
-		log.info("eClassService EClassIntroduceInsert introduceCode",introduceCode);
+		log.info("eClassService EClassIntroduceInsert introduceCode: {}",introduceCode);
 		eClassIntroduce.seteClassIntroduceCode(introduceCode);
 		eClassIntroduce.setMemberEmail(mamberEmail);
 		
-		int result = eClassMapper.EClassIntroduceInsert(eClassIntroduce,mamberEmail);
+		int result = eClassMapper.EClassIntroduceInsert(eClassIntroduce);
 		
 		return result;
 	}
@@ -67,7 +67,7 @@ public class eClassService {
 		eClassSectionTitle.seteClassSectionTitleCode(sectiontitleCode);
 		eClassSectionTitle.setMemberEmail(memberEmail);
 		
-		int result = eClassMapper.EClassSectionTitleInsert(eClassSectionTitle, memberEmail);
+		int result = eClassMapper.EClassSectionTitleInsert(eClassSectionTitle);
 		
 		return result;
 	}
@@ -81,7 +81,7 @@ public class eClassService {
 		eClassSectionCurriculum.seteClassSectionCurriculumCode(curriculumCode);
 		eClassSectionCurriculum.setMemberEmail(memberEmail);
 		
-		int result = eClassMapper.EClassSectionCurriculumInsert(eClassSectionCurriculum,memberEmail);
+		int result = eClassMapper.EClassSectionCurriculumInsert(eClassSectionCurriculum);
 		
 		return result;
 	}
@@ -95,7 +95,7 @@ public class eClassService {
 		eClassQuestion.seteClassQuestionCode(questionCode);
 		eClassQuestion.setMemberEmail(memberEmail);
 		
-		int result = eClassMapper.EClassQuestionInsert(eClassQuestion, memberEmail);
+		int result = eClassMapper.EClassQuestionInsert(eClassQuestion);
 		
 		return result;
 	}
@@ -109,21 +109,32 @@ public class eClassService {
 		eClassAnswer.seteClassAnswerCode(answerCode);
 		eClassAnswer.setMemberEmail(memberEmail);
 		
-		int result = eClassMapper.EClassAnswerInsert(eClassAnswer, memberEmail);
+		int result = eClassMapper.EClassAnswerInsert(eClassAnswer);
 		
 		return result;
 	}
 	
 	//클래스 신청 폼 price 등록처리
-	public int EClassPriceInsert(EClassOpenAppleyForm eClassOpenAppleyForm, String memberEmail) {
+	public int EClassPriceInsert( EClassOpenAppleyForm eClassOpenAppleyForm
+								, String memberEmail
+								, EClassIntroduce eClassIntroduce
+								, EClassSectionTitle eClassSectionTitle
+								, EClassSectionCurriculum eClassSectionCurriculum
+								, EClassQuestion eClassQuestion
+								, EClassAnswer eClassAnswer) {
 		
 		log.info("EClassPriceInsert EClassOpenApplyForm 데이터: {}", eClassOpenAppleyForm);
 		String priceCode = commonMapper.getNewCode("eClassOpenAppleyCode", "eclassopenappley");
 		log.info("eClassService EClassQuestionInsert eClassQuestion", priceCode);
 		eClassOpenAppleyForm.seteClassOpenAppleyCode(priceCode);
 		eClassOpenAppleyForm.seteClassOpenAppleyMemberEmail(memberEmail);
+		eClassIntroduce.geteClassIntroduceCode();
+		eClassSectionTitle.geteClassSectionTitleCode();
+		eClassSectionCurriculum.geteClassSectionCurriculumCode();
+		eClassQuestion.geteClassQuestionCode();
+		eClassAnswer.geteClassAnswerCode();
 		
-		int result = eClassMapper.EClassPriceInsert(eClassOpenAppleyForm, memberEmail);
+		int result = eClassMapper.EClassPriceInsert(eClassOpenAppleyForm);
 		
 		return result;
 	}

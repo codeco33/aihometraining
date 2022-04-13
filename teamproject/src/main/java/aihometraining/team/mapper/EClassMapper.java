@@ -24,20 +24,20 @@ public interface EClassMapper {
 	public List<EClassCategorySmall> eClassCategoryMedium(String eClassCategoryMediumCode);
 	
 	//클래스 소개 등록 처리
-	public int EClassIntroduceInsert(EClassIntroduce eClassIntroduce, String memberEmail);
+	public int EClassIntroduceInsert(EClassIntroduce eClassIntroduce);
 	
 	//클래스 섹션 등록 처리
-	public int EClassSectionTitleInsert(EClassSectionTitle eClassSectionTitle, String memberEmail);
+	public int EClassSectionTitleInsert(EClassSectionTitle eClassSectionTitle);
 
 	//클래스 커리큘럼 등록 처리
-	public int EClassSectionCurriculumInsert(EClassSectionCurriculum eClassSectionCurriculum, String memberEmail);
+	public int EClassSectionCurriculumInsert(EClassSectionCurriculum eClassSectionCurriculum);
 
 	//클래스 질문 등록 처리
-	public int EClassQuestionInsert(EClassQuestion eClassQuestion, String memberEmail);
+	public int EClassQuestionInsert(EClassQuestion eClassQuestion);
 	
 	//클래스 답변 등록 처리
-	public int EClassAnswerInsert(EClassAnswer eClassAnswer, String memberEmail);
+	public int EClassAnswerInsert(EClassAnswer eClassAnswer);
 	
 	//클래스 세부설정 등록 처리
-	public int EClassPriceInsert(EClassOpenAppleyForm eClassOpenAppleyForm, String memberEmail);
+	public int EClassPriceInsert( EClassOpenAppleyForm eClassOpenAppleyForm);
 }
