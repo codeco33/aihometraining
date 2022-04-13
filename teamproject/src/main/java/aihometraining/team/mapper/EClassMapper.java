@@ -39,5 +39,10 @@ public interface EClassMapper {
 	public int EClassAnswerInsert(EClassAnswer eClassAnswer);
 	
 	//클래스 세부설정 등록 처리
-	public int EClassPriceInsert( EClassOpenAppleyForm eClassOpenAppleyForm);
+	public int EClassPriceInsert( EClassOpenAppleyForm eClassOpenAppleyForm
+								, EClassIntroduce eClassIntroduce
+								, EClassSectionTitle eClassSectionTitle
+								, EClassSectionCurriculum eClassSectionCurriculum
+								, EClassQuestion eClassQuestion
+								, EClassAnswer eClassAnswer);
 }

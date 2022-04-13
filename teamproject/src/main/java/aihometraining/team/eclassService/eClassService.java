@@ -134,7 +134,12 @@ public class eClassService {
 		eClassQuestion.geteClassQuestionCode();
 		eClassAnswer.geteClassAnswerCode();
 		
-		int result = eClassMapper.EClassPriceInsert(eClassOpenAppleyForm);
+		int result = eClassMapper.EClassPriceInsert( eClassOpenAppleyForm
+													, eClassIntroduce
+													, eClassSectionTitle
+													, eClassSectionCurriculum
+													, eClassQuestion
+													, eClassAnswer);
 		
 		return result;
 	}
