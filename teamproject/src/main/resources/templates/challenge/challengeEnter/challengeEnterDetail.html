@@ -8,137 +8,99 @@
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
-		<!-- 참가 챌린지 세부사항  area start -->
-		<div class="container">
-		    <div class="row justify-content-center">
-				<div class="col-xl-7 col-lg-8">
-		        	<div class="section-tittle text-center mb-55">
-		                <h2>참가 중인 챌린지의 세부사항</h2>
-		            </div>
-		        </div>
-		        <!-- userdefault 에서 customContects블럭 위치 조정함  -->
-		        <div class="row section-top-border">
-			        <div class="properties__card">
-				        <div class="properties__background overlay1">
-		                    <div class="p-5"></div>
-		                </div>
-				        <section class="about-area2 fix pb-padding">
-				            	<div class="front-text ml-5 mb-3">
-				            		<h2>
-				            			<a th:href="@{/challenge/challengeEnter/challengeEnterList}">참가 챌린지 제목</a>
-				            		</h2>
-				            	</div>
-				            <div class="support-wrapper align-items-center">
-				                <div class="right-content2">
-				                    <!-- section tittle -->
-				                    <div class="section-tittle section-tittle2 mb-20">
-				                        <div class="front-text">
-				                            <div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">
-												챌린지 카테고리 : 운동
+		<!-- 참가 챌린지 세부정보 start -->
+		<div id="enterDetailInfo" class="fix services-area services-area2">
+			<div class="container">
+				<div class="row justify-content-center">
+					
+					<div class="single-services mb-30 col-lg-6">
+						<div class="features-caption">
+							<h3 class="captionTitle" th:text="${enterDetail.challengeGatherName}"></h3>
+							
+							<!-- 클래스정보 -->
+							<div class="form-group">
+								<label class="inputTitle">챌린지 카테고리</label>
+								<input type="text" name="challengeCategoryName" class="form-control-plaintext" readonly th:value="${enterDetail.challengeCategory.challengeCategoryName}">
+							</div>
+							<div class="form-group">
+								<label class="inputTitle">챌린지 인증 방법</label>
+								<input type="text" name="challengeGatherProveMethod" class="form-control-plaintext" readonly th:value="${enterDetail.challengeGatherProveMethod}">
+							</div>
+							<div class="form-group">
+								<label class="inputTitle">챌린지 필수 인증 횟수</label>
+								<input type="text" name="challengeGatherPlanProveNumber" class="form-control-plaintext" readonly th:value="${enterDetail.challengeGatherPlan.challengeGatherPlanProveNumber}">
+							</div>
+						
+							<div class="form-group form-border"></div>
+							
+							<div class="form-group">
+								<label class="inputTitle">챌린지 시작일</label>
+								<input type="text" name="challengeStartDate" class="form-control-plaintext" readonly th:value="${enterDetail.challengeStartDate}">
+							</div>
+							<div class="form-group">
+								<label class="inputTitle">챌린지 종료일</label>
+								<input type="text" name="challengeEndDate" class="form-control-plaintext" readonly th:value="${enterDetail.challengeEndDate}">
+							</div>
+							
+							<div style="border-bottom: 2px solid #58666e;"></div>
+							
+							<!-- 참가자 정보 -->
+							<div class="form-group mt-3">
+								<table class="table">
+									<thead>
+									  <tr class="theadTr">
+									  	<th scope="col">참가 회원 이메일</th>
+									  	<th scope="col">참가 회원 인증 상태</th>
+									  	<th scope="col">챌린지 진행률</th>
+									  	</tr>
+									</thead>
+									<tbody>
+									  <tr th:if="${not #lists.isEmpty(enterDetail.challengeGatherPlanDoList)}" th:each="el : ${enterDetail.challengeGatherPlanDoList}">
+									    <td th:text="${el.memberEnterEmail}"></td>
+									    <td th:text="${el.challengeGatherPlanDoState}"></td>
+									    <td>
+									    	<div class="progress">
+												<div class="progress-bar color-7" role="progressbar" th:style="${'width:'+ el.challengeGatherPlanDoAchieveRateAfterProve}+'%;'"
+												th:aria-valuenow="${el.challengeGatherPlanDoAchieveRateAfterProve}" aria-valuemin="0" aria-valuemax="100">[[${el.challengeGatherPlanDoAchieveRateAfterProve}]]</div>
 											</div>
-				                            <div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">
-												챌린지 인증 방법 : 사진
-											</div>
-				                            <div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">
-												챌린지 인증 횟수 : 30
-											</div>
-				                            <div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">
-												챌린지 시작일 : 2022-3-30
-											</div>
-				                            <div class="mt-2 p-2" style="background-color: #f9f9ff; border: none;">
-												챌린지 종료일 : 2022-4-30
-											</div>
-				                        </div>
-				                    </div>
-				                </div>
-				                <div class="left-table">
-				                    <!-- right contents start -->
-				                    <div class="progress-table-wrap">
-										<div class="progress-table">
-											<table class="table table-hover">
-												<thead>
-												  <tr>
-												    <th scope="col">#</th>
-												    <th scope="col">참가 회원 이메일</th>
-												    <th scope="col">참가 회원 인증 상태</th>
-												    <th scope="col">참가 회원 진행률</th>
-												  </tr>
-												</thead>
-												<tbody>
-												  <tr>
-												    <th scope="row">1</th>
-												    <td>id001@email.com</td>
-												    <td>인증</td>
-												    <td>
-												    	<div class="progress">
-															<div class="progress-bar color-7" role="progressbar" style="width: 30%"
-															aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-														</div>
-												    </td>
-												  </tr>
-												  <tr>
-												    <th scope="row">2</th>
-												    <td>id001@email.com</td>
-												    <td>미인증</td>
-												    <td>
-													    <div class="progress">
-															<div class="progress-bar color-7" role="progressbar" style="width: 30%"
-															aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-														</div>
-												    </td>
-												  </tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-							    	<!-- right contents end -->
-				                </div>
-				            </div>
-				            <div class="row justify-content-center">
-								<a th:href="@{/challenge/challengeEnter/challengePlanDoInsert}" class="genric-btn primary radius mt-2">인증 하기</a>
-				            </div>
-				        </section>
-			        </div>
-		        </div>
-	        </div>
-        </div>
+									    </td>
+									  </tr>
+									  <tr th:unless="${not #lists.isEmpty(enterDetail.challengeGatherPlanDoList)}">
+									    <td colspan="3">참가중인 회원이 없습니다.</td>
+									  </tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="row justify-content-center">
+							<a th:href="@{/challenge/challengeEnter/challengePlanDoInsert}" class="genric-btn primary radius mt-2">인증 하기</a>
+			            </div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!-- 참가 챌린지 세부사항 area end -->
 	</th:block>
 	
-	<th:block layout:fragment="customBodyScript">
+	<th:block layout:fragment="customCss">
 		<style>
-			.container .properties__card {
-			    box-shadow: rgba(2, 25, 65, 0.08) 0px 6px 6px 4px;
-			    border-radius: 10px;
-			    transition: all 0.4s ease 0s;
+			.container {
+				margin-top: 20px;
 			}
-			.container .properties__background div {
-			    padding: 29px 20px 20px 20px;
-			    width: 100%;
-			    border-radius: 10px 10px 0 0;
-			    position: relative;
-			    background-color: #ffffff;
-			    font-size: 25px;
-			    color: #fff;
-			    text-align: center;
+			.services-area .single-services {
+			    box-shadow: 3px 5px 20px rgb(66 85 164 / 20%) !important;
+			    display: block;
 			}
-			
-			.container .front-text h2 a {
-			    font-size: 30px;
-			    font-weight: bold;
-			    color: #4255A4;
-			    outline: medium none;
-			}
-			.courses-area .front-text h2 a:hover {
-			    color: #bdbdbd;
-			    outline: medium none;
-			}
-			
 			.container .support-wrapper .left-table {
 				width: 46%;
 				/* padding-left: 40px; */
 				
 			}
+			#enterDetailInfo .inputTitle {
+			    color: #96979f;
+			    font-size: 13px;
+			}
+			
 			
 			@media only screen and (min-width: 1200px) and (max-width: 1440px) {
 				.container .support-wrapper .left-table {

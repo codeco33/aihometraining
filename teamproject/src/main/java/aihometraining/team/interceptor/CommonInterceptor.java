@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
 
 
 @Component
@@ -46,14 +45,14 @@ public class CommonInterceptor implements HandlerInterceptor{
 	      
 	      log.info("CommonInterceptor =====================================START");
 	      log.info("ACCESS INFO =====================================START");
-	      log.info("PORT          ::::::      {}", request.getLocalPort());
-	      log.info("SERVER NAME    ::::::      {}", request.getServerName());
-	      log.info("HTTP METHOD    ::::::      {}", request.getMethod());
-	      log.info("URI          ::::::      {}", request.getRequestURI());
+	      log.info("PORT          	::::::      {}", request.getLocalPort());
+	      log.info("SERVER NAME    	::::::      {}", request.getServerName());
+	      log.info("HTTP METHOD    	::::::      {}", request.getMethod());
+	      log.info("URI          	::::::      {}", request.getRequestURI());
 	      if(method != null) {         
-	         log.info("Controller    ::::::      {}", method.getBean().getClass().getSimpleName());
+	         log.info("Controller   ::::::      {}", method.getBean().getClass().getSimpleName());
 	      }
-	      log.info("PARAMETER    ::::::      {}", param);
+	      log.info("PARAMETER   	::::::      {}", param);
 	      log.info("ACCESS INFO =====================================END");
 	      log.info("CommonInterceptor =====================================END");
 	      
