@@ -13,7 +13,7 @@ import aihometraining.team.service.ReportService;
 
 
 @Controller
-@RequestMapping("/report")
+@RequestMapping("/admin")
 public class ReportController {
 	
 	

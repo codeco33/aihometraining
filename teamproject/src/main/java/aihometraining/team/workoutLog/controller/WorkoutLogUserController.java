@@ -58,10 +58,13 @@ public class WorkoutLogUserController {
 		//운동 목표 목룍 조회
 		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
 		
+		//log.info("운동 목표 목록 조회  workoutGoalList : {}", workoutGoalList);
+		
 		//일지 목록 조회
 		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList();
 		
-		log.info("운동 목표 목록 조회  workoutGoalList : {}", workoutGoalList);
+		log.info("일지 목록 조회  workoutLogList : {}", workoutLogList);
+
 		
 		model.addAttribute("title", "하루 일지");
 		model.addAttribute("workoutGoalList", workoutGoalList);
@@ -79,7 +82,7 @@ public class WorkoutLogUserController {
     
 		workoutLogUserService.workoutLogLikeCountUpdate(workoutLogCode);
 		workoutLogLike.setWorkoutLogLikeEmail("id004@email.com");
-		workoutLogLike.setWorkoutLogcode(workoutLogCode);
+		workoutLogLike.setWorkoutLogCode(workoutLogCode);
 		workoutLogUserService.workoutLogLikeInsert(workoutLogLike);
 		
 		
@@ -92,6 +95,7 @@ public class WorkoutLogUserController {
 	public String workoutLogList(Model model
 								,@RequestParam(value = "workoutLogTitle", required = false) String workoutLogTitle
 								,@RequestParam(value = "workoutLogContent", required = false) String workoutLogContent
+								,@RequestParam(value = "workoutLogCode", required = false) String workoutLogCode
 								,@RequestParam(value = "filePath", required = false) String filePath) {
 		log.info("파일 주소 : " , filePath);
 		//운동 목표 목록 조회
@@ -102,16 +106,14 @@ public class WorkoutLogUserController {
 		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList();
 		log.info("일지 목록 조회  workoutLogList : {}", workoutLogList);
 		
-		//일지 좋아요 목록 조회
-		List<WorkoutLogLike> workoutLogLikeList = workoutLogUserService.getworkoutLogLikeList();
-		log.info("일지 목록 조회  workoutLogLikeList : {}", workoutLogLikeList);
+		log.info("일지 코드  workoutLogCode : {}", workoutLogCode);
 		
 		model.addAttribute("title", "일지 상세 화면");
 		model.addAttribute("workoutGoalList", workoutGoalList);
 		model.addAttribute("workoutLogList", workoutLogList);
 		model.addAttribute("workoutLogTitle", workoutLogTitle);
 		model.addAttribute("workoutLogContent", workoutLogContent);
-		model.addAttribute("workoutLogLikeList", workoutLogLikeList);
+		model.addAttribute("workoutLogCode", workoutLogCode);
 		
 		return "workoutLog/workoutLogUser/workoutLogList";
 		

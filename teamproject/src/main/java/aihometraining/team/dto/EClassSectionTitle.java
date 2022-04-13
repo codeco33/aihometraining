@@ -4,7 +4,6 @@ import java.sql.Date;
 
 public class EClassSectionTitle {
 	private String eClassSectionTitleCode;
-	private String eClassApprovedCode;
 	private String memberEmail;
 	private String eClassSectionTitleName;
 	private Date eClassSectionTitleDate;
@@ -16,12 +15,6 @@ public class EClassSectionTitle {
 	}
 	public void seteClassSectionTitleCode(String eClassSectionTitleCode) {
 		this.eClassSectionTitleCode = eClassSectionTitleCode;
-	}
-	public String geteClassApprovedCode() {
-		return eClassApprovedCode;
-	}
-	public void seteClassApprovedCode(String eClassApprovedCode) {
-		this.eClassApprovedCode = eClassApprovedCode;
 	}
 	public String getMemberEmail() {
 		return memberEmail;
@@ -55,11 +48,10 @@ public class EClassSectionTitle {
 	}
 	@Override
 	public String toString() {
-		return "EClassSectionTitle [eClassSectionTitleCode=" + eClassSectionTitleCode + ", eClassApprovedCode="
-				+ eClassApprovedCode + ", memberEmail=" + memberEmail + ", eClassSectionTitleName="
-				+ eClassSectionTitleName + ", eClassSectionTitleDate=" + eClassSectionTitleDate
-				+ ", eClassSectionTitleUpdateDate=" + eClassSectionTitleUpdateDate + ", memberUpdateEmail="
-				+ memberUpdateEmail + "]";
+		return "EClassSectionTitle [eClassSectionTitleCode=" + eClassSectionTitleCode + ", memberEmail=" + memberEmail
+				+ ", eClassSectionTitleName=" + eClassSectionTitleName + ", eClassSectionTitleDate="
+				+ eClassSectionTitleDate + ", eClassSectionTitleUpdateDate=" + eClassSectionTitleUpdateDate
+				+ ", memberUpdateEmail=" + memberUpdateEmail + "]";
 	}
 	
 }

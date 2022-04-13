@@ -99,6 +99,9 @@
 	    font-weight: bold !important;
 	    color: #696dff !important;
 	}
+	.captionTitleSmall {
+		font-size: 13px;
+	}
 </style>
 <body>
 	<div id="preloader-active" th:replace="userfragments/preloader :: preloaderFragment"></div>
@@ -109,7 +112,7 @@
    	<!-- Courses area start -->
 	<div id="eClassTakeSection" class="fix services-area services-area2">
 		<div class="container">
-			<form id="eClassTakeForm" class="row justify-content-center" th:action="@{/payment}" method="get">
+			<form id="eClassTakeForm" class="row justify-content-center" th:action="@{/signUpForClass}" method="post">
 				
 				<div class="single-services mb-30 col-lg-6">
 					<div class="features-caption">
@@ -118,15 +121,16 @@
 						<!-- 클래스정보 -->
 						<div class="form-group">
 							<label class="inputTitle">운동클래스 이름</label>
-							<input type="text" name="eClassName" class="form-control-plaintext" readonly >
+							<input type="text" name="eClassName" class="form-control-plaintext" readonly th:value="${eClassApproved.eClassApprovedName}">
+							<input type="text" name="eClassApprovedCode" class="form-control-plaintext" hidden th:value="${eClassApproved.eClassApprovedCode}">
 						</div>
 						<div class="form-group">
 							<label class="inputTitle">강사 이름</label>
-							<input type="text" name="eClassPrice" class="form-control-plaintext" readonly>
+							<input type="text" name="eClassPrice" class="form-control-plaintext" readonly th:value="${eClassApproved.member.memberName}">
 						</div>
 						<div class="form-group">
 							<label class="inputTitle">커리큘럼 기간</label>
-							<input type="text" name="eClassApprovedSetDate" class="form-control-plaintext" readonly value="3개월">
+							<input type="text" name="eClassApprovedSetDate" class="form-control-plaintext" readonly th:value="${eClassApproved.eClassApprovedSetDate}+'개월'">
 						</div>
 					
 						<div class="form-group form-border"></div>
@@ -134,11 +138,11 @@
 						<!-- 수강신청자 정보 -->
 						<div class="form-group">
 							<label class="inputTitle">이름</label>
-							<input type="text" name="memberName" class="form-control-plaintext" readonly value="홍길동">
+							<input type="text" name="memberName" class="form-control-plaintext" readonly th:value="${member.memberName}">
 						</div>
 						<div class="form-group">
 							<label class="inputTitle">이메일</label>
-							<input type="text" name="memberEmail" class="form-control-plaintext" readonly value="id004@email.com">
+							<input type="text" name="memberEmail" class="form-control-plaintext" readonly th:value="${member.memberEmail}">
 						</div>
 						<div class="form-group">
 							<label class="inputTitle">휴대폰 번호</label>
@@ -152,18 +156,19 @@
 					<div class="features-caption">
 						<h3 class="captionTitle">
 							가격 정보
-							<small>* 기간내 미 결제시, 자동으로 수강 신청이 취소됩니다.</small>
+							<small class="captionTitleSmall">* 기간내 미 결제시, 자동으로 수강 신청이 취소됩니다.</small>
 						</h3>
 					
 						<div class="form-group">
 							<label class="inputTitle">클래스 금액</label>
-							<input type="text" name="eClassPrice" class="form-control-plaintext" readonly value="87,000  (월 29,000원 × 3)">
+							<input type="text" name="eClassPrice" class="form-control-plaintext" readonly 
+									th:value="(${eClassApproved.eClassOpenApplyForm.eClassOpenApplyPrice}*${eClassApproved.eClassApprovedSetDate})+'원 ('+${eClassApproved.eClassOpenApplyForm.eClassOpenApplyPrice}+'원 x '+${eClassApproved.eClassApprovedSetDate}+'개월)'">
 						</div>
 						<div class="form-group">
 							<label class="inputTitle">월 정기 결제 금액</label>
-							<input type="text" name="paymentTotalPayPrice" class="form-control-plaintext totalPayPrice" readonly value="29,000"> 
+							<input type="text" name="paymentTotalPayPrice" class="form-control-plaintext totalPayPrice" readonly th:value="${eClassApproved.eClassOpenApplyForm.eClassOpenApplyPrice}"> 
 						</div>
-						<button id="eClassTakeBtn" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit">수강신청서 제출</button>
+						<button id="eClassTakeBtn" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="button">수강신청서 제출</button>
 					</div>
 				</div>
 				
@@ -185,8 +190,9 @@
 	<th:block layout:fragment="customBodyScript">
 		<script type="text/javascript">
 			$(function(){
-				 $('#eClassTakeForm').validate({
-			            rules: {
+				//휴대폰번호 유효성 검사
+				$('#eClassTakeForm').validate({
+			          rules: {
 			            	memberPhone: {
 			                    required: true,
 			                    digits : true,
@@ -202,6 +208,15 @@
 			                    maxlength : "휴대폰 번호 11자리를 입력해주세요"
 			                }
 			            }
+				 });
+				 
+				//수강신청 버튼 클릭 이벤트
+				 $('#eClassTakeBtn').click(function(){
+					 var result = confirm('수강신청 하시겠습니까?');
+					 
+					 if(result == true){
+						 $('#eClassTakeForm').submit();
+					 }
 				 });
 			});
 		</script>

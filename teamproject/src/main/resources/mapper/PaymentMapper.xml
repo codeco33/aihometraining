@@ -36,9 +36,11 @@
 	</resultMap>
 	
 	<resultMap type="EClassApproved" id="eClassApprovedResultMap">
-		<id 	column="eClassApprovedCode" 			property="eClassApprovedCode"/>
+		<id 	column="eClassApprovedCode" 		property="eClassApprovedCode"/>
 		<result column="eClassApprovedName" 		property="eClassApprovedName"/>
 		<result column="eClassApprovedFinish" 		property="eClassApprovedFinish"/>
+		<result column="eClassApprovedSetDate" 		property="eClassApprovedSetDate"/>
+		<collection property="member" resultMap="memberResultMap"/>
 		<collection property="eClassOpenApplyForm" resultMap="eClassOpenApplyResultMap"/>
 	</resultMap>
 
@@ -53,6 +55,7 @@
 		SELECT
 			wi.memberEmail
 			,wi.wishListCode
+			,wi.eClassApprovedCode
 			,ea.eClassApprovedName
 			,eo.eClassOpenAppleyPrice
 			,ei.eClassIntroduceContent
@@ -79,7 +82,7 @@
 			eo.eClassIntroduceCode = ei.eClassIntroduceCode
 		WHERE
 			wi.memberEmail = #{SEMAIL}
-		ORDER BY wi.wishListRegDate desc;
+		ORDER BY ${sortStandard};
 	</select>
 	
 	<select id="getEClassTakeMember" parameterType="String" resultMap="memberResultMap" fetchSize="1000">
@@ -97,8 +100,10 @@
 		/*수강신청 운동클래스 정보 조회*/
 		SELECT
 			 ea.eClassApprovedName
+			,ea.eClassApprovedCode
 			,m.memberName
 			,eo.eClassOpenAppleyPrice
+			,ea.eClassApprovedSetDate
 		FROM
 			eclassapproved AS ea
 			INNER JOIN 
@@ -113,12 +118,34 @@
 			ea.eClassApprovedCode = #{eClassCode};
 	</select>
 	
-	<delete id="removeMember" parameterType="String">
+	<delete id="deleteWishList" parameterType="String">
 		/* 위시리스트 삭제 */
 		DELETE
 		FROM
-			wishList
+			wishlist
 		WHERE
 			wishListCode = #{wishListCode};
 	</delete>
+	
+	<insert id="addEClassTake" parameterType="EClassTake">
+		/* 수강신청 */
+		INSERT INTO eclasstake(
+			  eClassTakeCode
+			, memberEmail
+			, memberPhone
+			, eClassApprovedCode
+			, eClassTakeRegDate
+			, eClassTakeState
+			, paymentGroupCode
+			)
+		VALUES (
+			  #{eClassTakeCode}
+			, #{memberEmail}
+			, #{memberPhone}
+			, #{eClassApprovedCode}
+			, NOW()
+			, '수강예정'
+			, #{paymentGroupCode}
+		);
+	</insert>
 </mapper>

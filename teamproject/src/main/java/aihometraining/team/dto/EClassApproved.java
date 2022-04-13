@@ -7,7 +7,7 @@ public class EClassApproved {
 	private String eClassOpenApplyCode;
 	private String memberEmail;
 	private String eClassApprovedName;
-	private Date eClassApprovedSetDate;
+	private String eClassApprovedSetDate;
 	private Date eClassApprovedStratDate;
 	private Date eClassApprovedEndDate;
 	private int eClassApprovedStudent;
@@ -44,10 +44,10 @@ public class EClassApproved {
 	public void seteClassApprovedName(String eClassApprovedName) {
 		this.eClassApprovedName = eClassApprovedName;
 	}
-	public Date geteClassApprovedSetDate() {
+	public String geteClassApprovedSetDate() {
 		return eClassApprovedSetDate;
 	}
-	public void seteClassApprovedSetDate(Date eClassApprovedSetDate) {
+	public void seteClassApprovedSetDate(String eClassApprovedSetDate) {
 		this.eClassApprovedSetDate = eClassApprovedSetDate;
 	}
 	public Date geteClassApprovedStratDate() {

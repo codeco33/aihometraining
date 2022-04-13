@@ -7,7 +7,6 @@ public class EClassQuestion {
 	private String eClassApprovedCode;
 	private String memberEmail;
 	private String eClassQuestionTitle;
-	private String eClassQuestionContent;
 	private Date eClassQuestionRegDate;
 	private String memberUpdateEmail;
 	private Date eClassQuestionUpdateDate;
@@ -36,12 +35,6 @@ public class EClassQuestion {
 	public void seteClassQuestionTitle(String eClassQuestionTitle) {
 		this.eClassQuestionTitle = eClassQuestionTitle;
 	}
-	public String geteClassQuestionContent() {
-		return eClassQuestionContent;
-	}
-	public void seteClassQuestionContent(String eClassQuestionContent) {
-		this.eClassQuestionContent = eClassQuestionContent;
-	}
 	public Date geteClassQuestionRegDate() {
 		return eClassQuestionRegDate;
 	}
@@ -60,14 +53,12 @@ public class EClassQuestion {
 	public void seteClassQuestionUpdateDate(Date eClassQuestionUpdateDate) {
 		this.eClassQuestionUpdateDate = eClassQuestionUpdateDate;
 	}
-	
 	@Override
 	public String toString() {
 		return "EClassQuestion [eClassQuestionCode=" + eClassQuestionCode + ", eClassApprovedCode=" + eClassApprovedCode
 				+ ", memberEmail=" + memberEmail + ", eClassQuestionTitle=" + eClassQuestionTitle
-				+ ", eClassQuestionContent=" + eClassQuestionContent + ", eClassQuestionRegDate="
-				+ eClassQuestionRegDate + ", memberUpdateEmail=" + memberUpdateEmail + ", eClassQuestionUpdateDate="
-				+ eClassQuestionUpdateDate + "]";
+				+ ", eClassQuestionRegDate=" + eClassQuestionRegDate + ", memberUpdateEmail=" + memberUpdateEmail
+				+ ", eClassQuestionUpdateDate=" + eClassQuestionUpdateDate + "]";
 	}
 	
 }

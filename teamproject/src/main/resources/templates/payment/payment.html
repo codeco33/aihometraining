@@ -257,6 +257,7 @@
 		<script type="text/javascript">
 		 
 			$(function(){
+				//인증번호 유효성 검사
 				 $('#paymentForm').validate({
 			            rules: {
 			            	memberPhoneCertify: {
@@ -275,6 +276,7 @@
 			            }
 				});
 				 
+				 //결제방식 클릭할때 색 바뀌게 하기
 				$('.paymentMethodBtn').click(function(){
 					 if($(this).children('input[type="radio"]').prop('checked') == true){
 						//$(this).prarents('div .row').find('.paymentMethodBtn').removeClass('.paymentMethodBtn:hover');
@@ -295,6 +297,7 @@
 				});
 				
 				//포인트 잔액 바뀌면 체크버튼 풀리게하기
+				$('input[name="pointUseInput"]').
 
 				
 		    /*아임포트 카카오페이 결제*/
@@ -339,6 +342,10 @@
 			            document.location.href="/mypage/mySignUpForClassList"; //alert창 확인 후 이동할 url 설정
 			        });
 			    });
+				
+				
+				//포인트 할인 적용 버튼 클릭 이벤트
+				$('#pointUseBtn').click
 	});
 		</script>
 	</th:block>
