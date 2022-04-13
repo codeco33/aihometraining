@@ -1,4 +1,4 @@
-package aihometraining.team.eclassController;
+package aihometraining.team.eClassController;
 
 import java.util.List;
 
@@ -10,8 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -26,7 +24,6 @@ import aihometraining.team.eclassService.eClassService;
 import aihometraining.team.mapper.EClassMapper;
 
 @Controller
-@RequestMapping(value="/eClass" , method = {RequestMethod.GET,RequestMethod.POST})
 public class eClassController {
 	
 	private static final Logger log = LoggerFactory.getLogger(eClassController.class);
@@ -85,7 +82,7 @@ public class eClassController {
 		return categoryMedium;
 	}
 	
-	@PostMapping("/openAppleyForm")
+	@GetMapping("/openAppleyForm")
 	public String EClassOpenAppleyFormInsert( EClassIntroduce eClassIntroduce
 											, EClassSectionTitle eClassSectionTitle
 											, EClassSectionCurriculum eClassSectionCurriculum
@@ -94,7 +91,6 @@ public class eClassController {
 											, EClassOpenAppleyForm eClassOpenAppleyForm
 											, HttpSession session) {
 		
-		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassIntroduce);
 		String mamberEmail = (String) session.getAttribute("SEMAIL");
 		eClassService.EClassIntroduceInsert(eClassIntroduce, mamberEmail);
 		eClassService.EClassSectionTitleInsert(eClassSectionTitle, mamberEmail);
@@ -108,6 +104,11 @@ public class eClassController {
 										, eClassSectionCurriculum
 										, eClassQuestion
 										, eClassAnswer);
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassIntroduce);
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassSectionTitle);
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassSectionCurriculum);
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassQuestion);
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassAnswer);
 		
 		return "redirect:/eClass/eclassApprovedList";
 	}
