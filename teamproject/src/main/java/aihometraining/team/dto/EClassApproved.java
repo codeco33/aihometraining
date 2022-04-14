@@ -16,9 +16,6 @@ public class EClassApproved {
 	private Date eClassApprovedDate;
 	private int eClassApprovedFinish;
 	
-	//wishList 구현으로 추가함 -진수경
-	private EClassOpenApplyForm eClassOpenApplyForm;
-	private Member member;
 	
 	public String geteClassApprovedCode() {
 		return eClassApprovedCode;
@@ -92,13 +89,6 @@ public class EClassApproved {
 	public void seteClassApprovedFinish(int eClassApprovedFinish) {
 		this.eClassApprovedFinish = eClassApprovedFinish;
 	}
-	public EClassOpenApplyForm geteClassOpenApplyForm() {
-		return eClassOpenApplyForm;
-	}
-	public void seteClassOpenApplyForm(EClassOpenApplyForm eClassOpenApplyForm) {
-		this.eClassOpenApplyForm = eClassOpenApplyForm;
-	}
-	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -126,20 +116,10 @@ public class EClassApproved {
 		builder.append(eClassApprovedDate);
 		builder.append(", eClassApprovedFinish=");
 		builder.append(eClassApprovedFinish);
-		builder.append(", eClassOpenApplyForm=");
-		builder.append(eClassOpenApplyForm);
-		builder.append(", member=");
-		builder.append(member);
 		builder.append("]");
 		return builder.toString();
 	}
-	public Member getMember() {
-		return member;
-	}
-	public void setMember(Member member) {
-		this.member = member;
-	}
-
+	
 	
 	
 }
