@@ -44,14 +44,6 @@ public class eClassService {
 		return eClassCategoryMediumList;
 	}
 	
-	//신청한 클래스 조회
-	public List<EClassOpenAppleyForm> eClassOpenAppleyList (){
-		
-		List<EClassOpenAppleyForm> eClassOpenAppleyList = eClassMapper.eClassOpenAppleyList();
-		
-		return eClassOpenAppleyList;
-	}
-	
 	//클래스 신청 폼 introduce 등록처리
 	public int EClassIntroduceInsert(EClassIntroduce eClassIntroduce, String mamberEmail) {
 		

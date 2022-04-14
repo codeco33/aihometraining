@@ -148,11 +148,13 @@ public class eClassController {
 	
 	@GetMapping("/myApplyList")
 	public String MyApplyList(Model model
-							 ,HttpSession httpSession) {
+							 ,HttpSession session) {
 		
-		List<EClassOpenAppleyForm> eClassOpenAppleyList = eClassService.eClassOpenAppleyList();
-			
-		log.info("eClassOpenAppleyList MyApplyList : {}",eClassOpenAppleyList);
+		String mamberEmail = (String) session.getAttribute("SEMAIL");
+
+		List<EClassOpenAppleyForm> eClassOpenAppleyList = eClassMapper.eClassOpenAppleyList();
+		
+		log.info("eClassOpenAppleyList MyApplyList : {}",mamberEmail);
 		
 		model.addAttribute("title", "나의 개설신청 현황");
 		model.addAttribute("eClassOpenAppleyList", eClassOpenAppleyList);
