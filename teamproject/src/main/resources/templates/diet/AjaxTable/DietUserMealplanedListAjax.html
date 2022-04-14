@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+	<div class="card-body" id="myDietPlanedList" th:fragment="fragment-myPlanedMealList">
+	    <table class="table table-hover MyPlanedDietTable" >
+		    <thead class="">
+		      <tr>
+		      	<th></th>
+		        <th class=" text-center">식품명</th>
+		        <th class=" text-center">1회제공량</th>
+		        <th class=" text-center">에너지(㎉)</th>
+		        <th class=" text-center">탄수화물(g)</th>
+		        <th class=" text-center">단백질(g)</th>
+		        <th class=" text-center">지방(g)</th>
+		        <th class=" text-center">나트륨(㎎)</th>
+		        <th class=" text-center"></th>
+		      </tr>
+		    </thead>
+		    <tbody>
+			  <tr class="planListTr" th:each="s : ${UserdietPlanList}" th:value="${s.dietPlanTime}">
+			   	<td>
+			   		<span class="badge rounded-pill bg-primary" style="color:white">완료</span>
+					<span class="badge rounded-pill bg-secondary" style="color:white">미완료</span>
+			   	</td>
+			    <td th:text="${s.nutrientsAPIName}"></td>
+			    <td th:text="${s.nutrientsAPIServe}"></td>
+			    <td th:text="${s.nutrientsAPIKcal}"></td>
+			    <td th:text="${s.nutrientsAPICarbo}"></td>
+			    <td th:text="${s.nutrientsAPIPro}"></td>
+			    <td th:text="${s.nutrientsAPIFat}"></td>
+			    <td th:text="${s.nutrientsAPINatr}"></td>
+			    <td class="text-center pl-0 pr-0" >
+			    	<button class="genric-btn primary-border small planDo-Btn">
+			    		실행
+			    	</button>
+			    	<button class="genric-btn primary-border small planDel-Btn" th:value="${s.dietPlanCode}">
+			    		삭제
+			    	</button>
+			    </td>
+			  </tr>
+		  </table>
+		  	<button class="genric-btn primary-border radius addDiet-btn " data-toggle="modal" data-target="#myModal">
+				<i class="bi bi-plus-square"></i>
+				  	식단 계획 추가하기
+			</button>
+	  </div>
+
+	
+				                
+	  
+	<th:block layout:fragment="customBodyScript">	
+		<script type="text/javascript">
+			$(document).ready(function(){
+				dayChange();
+			});
+			
+			
+			$('.planDel-Btn').click(function(e){
+				var dietPlanCode = $(e.target).attr('value')
+				var dietPlanDay = $('#datePicker').val();
+				console.log(memberEmail);
+				console.log(dietPlanDay);
+				
+				$.ajax({ url: '/diet/mypage/deleteUserDietPlan'
+						,type: 'POST'
+						,data: 
+						{'memberEmail' : memberEmail,
+						 'dietPlanDay' : dietPlanDay,
+						 'dietPlanCode' : dietPlanCode
+						  }
+						,dataType: 'text'
+						,success: function(data){
+							if(data = 1){
+								console.log("돼");
+									$.ajax({
+									 url: '/diet/mypage/selectChangedDietPlanList'
+									,type: 'POST'
+									,data: 
+									{'memberEmail' : memberEmail,
+									 'dietPlanDay' : dietPlanDay,
+									  }
+									,dataType: 'text'
+									,success: function(data){
+										$('#myDietPlanedList').replaceWith(data);
+										
+									}
+								});
+							}
+						}
+					});
+			});
+		
+		</script>
+	</th:block>	  
+	  
+	  
+</html>
+
+

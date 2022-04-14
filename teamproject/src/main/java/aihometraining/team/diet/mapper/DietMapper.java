@@ -9,6 +9,7 @@ import aihometraining.team.dto.DietBank;
 import aihometraining.team.dto.DietMealLevelList;
 import aihometraining.team.dto.DietNutrientList;
 import aihometraining.team.dto.DietOnemealConnection;
+import aihometraining.team.dto.DietPlan;
 
 
 
@@ -53,6 +54,14 @@ public interface DietMapper {
 	//요일별 식단 삭제
 	public int deleteDietOneMealConnection(String dietOneMealConnectionCode);	
 	
+	//User 식단 계획 생성
+	public int insertUserDietPlan(DietPlan dietplan);
+	
+	//User 식단 계획 조회
+	public List<HashMap<String, Object>> selectUserDietPlan(DietPlan dietplan);
+	
+	//User 식단 계획 삭제
+	public int deleteUserDietPlan(DietPlan dietplan);
 	
 	
 }
