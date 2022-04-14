@@ -391,4 +391,21 @@
 			 es.eClassCategoryMediumCode = #{eClassCategoryMediumCode};
 	</select>
 	
+	<select id="eClassOpenAppleyList" parameterType="String" resultMap="eClassOpenappleyResultMap">
+		/* 신청한 운동클래스 리스트 */
+		SELECT
+			 op.eClassOpenAppleyName
+			,op.eClassOpenAppleyPrice
+			,it.eClassIntroduceImg
+			,it.eClassIntroduceContent
+		FROM
+			eclassopenappley AS op
+		INNER JOIN 
+			eclassintroduce AS it
+		ON
+			op.eClassIntroduceCode = it.eClassIntroduceCode
+		WHERE 
+			op.eClassOpenAppleyMemberEmail = #{eClassOpenAppleyMemberEmail};
+	</select>
+	
 </mapper>

@@ -44,6 +44,13 @@ public class eClassService {
 		return eClassCategoryMediumList;
 	}
 	
+	//신청한 클래스 조회
+	public List<EClassOpenAppleyForm> eClassOpenAppleyList (){
+		List<EClassOpenAppleyForm> eClassOpenAppleyList = eClassMapper.eClassOpenAppleyList();
+		
+		return eClassOpenAppleyList;
+	}
+	
 	//클래스 신청 폼 introduce 등록처리
 	public int EClassIntroduceInsert(EClassIntroduce eClassIntroduce, String mamberEmail) {
 		
@@ -73,13 +80,17 @@ public class eClassService {
 	}
 	
 	//클래스 신청 폼 sectionculum 등록처리
-	public int EClassSectionCurriculumInsert(EClassSectionCurriculum eClassSectionCurriculum, String memberEmail) {
+	public int EClassSectionCurriculumInsert( EClassSectionCurriculum eClassSectionCurriculum
+											, String memberEmail
+											, EClassSectionTitle eClassSectionTitle) {
 		
 		log.info("EClassSectionCurriculumInsert eClassSectionCurriculum 데이터: {}", eClassSectionCurriculum);
 		String curriculumCode = commonMapper.getNewCode("eClassSectionCurriculumCode", "eclasssectioncurriculum");
+		String titleCode = eClassSectionTitle.geteClassSectionTitleCode();
 		log.info("eClassService EClassSectionCurriculumInsert eClassSectionCurriculum", curriculumCode);
 		eClassSectionCurriculum.seteClassSectionCurriculumCode(curriculumCode);
 		eClassSectionCurriculum.setMemberEmail(memberEmail);
+		eClassSectionCurriculum.seteClassSectionTitleCode(titleCode);
 		
 		int result = eClassMapper.EClassSectionCurriculumInsert(eClassSectionCurriculum);
 		
@@ -101,13 +112,17 @@ public class eClassService {
 	}
 	
 	//클래스 신청 폼 answer 등록처리
-	public int EClassAnswerInsert(EClassAnswer eClassAnswer, String memberEmail) {
+	public int EClassAnswerInsert(EClassAnswer eClassAnswer
+								, String memberEmail
+								, EClassQuestion eClassQuestion) {
 		
 		log.info("EClassAnswerInsert EClassAnswer 데이터: {}", eClassAnswer);
 		String answerCode = commonMapper.getNewCode("eClassAnswerCode", "eclassanswer");
+		String questionCode = eClassQuestion.geteClassQuestionCode();
 		log.info("eClassService EClassQuestionInsert eClassQuestion", answerCode);
 		eClassAnswer.seteClassAnswerCode(answerCode);
 		eClassAnswer.setMemberEmail(memberEmail);
+		eClassAnswer.seteClassQuestionCode(questionCode);
 		
 		int result = eClassMapper.EClassAnswerInsert(eClassAnswer);
 		
@@ -123,23 +138,37 @@ public class eClassService {
 								, EClassQuestion eClassQuestion
 								, EClassAnswer eClassAnswer) {
 		
-		log.info("EClassPriceInsert EClassOpenApplyForm 데이터: {}", eClassOpenAppleyForm);
+		
 		String priceCode = commonMapper.getNewCode("eClassOpenAppleyCode", "eclassopenappley");
 		log.info("eClassService EClassQuestionInsert eClassQuestion", priceCode);
+		
 		eClassOpenAppleyForm.seteClassOpenAppleyCode(priceCode);
 		eClassOpenAppleyForm.seteClassOpenAppleyMemberEmail(memberEmail);
-		eClassIntroduce.geteClassIntroduceCode();
-		eClassSectionTitle.geteClassSectionTitleCode();
-		eClassSectionCurriculum.geteClassSectionCurriculumCode();
-		eClassQuestion.geteClassQuestionCode();
-		eClassAnswer.geteClassAnswerCode();
 		
-		int result = eClassMapper.EClassPriceInsert( eClassIntroduce
-													,eClassSectionTitle
-													,eClassSectionCurriculum
-													,eClassQuestion
-													,eClassAnswer
-													,eClassOpenAppleyForm);
+		String introduceCode = eClassIntroduce.geteClassIntroduceCode();
+		eClassOpenAppleyForm.seteClassIntroduceCode(introduceCode);
+		
+		String sectionCode = eClassSectionTitle.geteClassSectionTitleCode();
+		eClassOpenAppleyForm.seteClassSectionTitleCode(sectionCode);
+		
+		String curriculumCode = eClassSectionCurriculum.geteClassSectionCurriculumCode();
+		eClassOpenAppleyForm.seteClassSectionCurriculumCode(curriculumCode);
+		
+		String questionCode = eClassQuestion.geteClassQuestionCode();
+		eClassOpenAppleyForm.seteClassQuestionCode(questionCode);
+		
+		String answerCode = eClassAnswer.geteClassAnswerCode();
+		eClassOpenAppleyForm.seteClassAnswerCode(answerCode);
+		
+		log.info("EClassPriceInsert EClassOpenApplyForm 데이터: {}", eClassOpenAppleyForm);
+		
+		log.info("eClassService EClassPriceInsert 에 들어온 데이터 : {}", introduceCode);
+		log.info("eClassService EClassPriceInsert 에 들어온 데이터 : {}", sectionCode);
+		log.info("eClassService EClassPriceInsert 에 들어온 데이터 : {}", curriculumCode);
+		log.info("eClassService EClassPriceInsert 에 들어온 데이터 : {}", questionCode);
+		log.info("eClassService EClassPriceInsert 에 들어온 데이터 : {}", answerCode);
+		
+		int result = eClassMapper.EClassPriceInsert( eClassOpenAppleyForm);
 		
 		return result;
 	}
