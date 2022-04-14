@@ -147,10 +147,13 @@ public class eClassController {
 	}
 	
 	@GetMapping("/myApplyList")
-	public String MyApplyList(Model model) {
+	public String MyApplyList(Model model
+							 ,HttpSession httpSession) {
 		
 		List<EClassOpenAppleyForm> eClassOpenAppleyList = eClassService.eClassOpenAppleyList();
 			
+		log.info("eClassOpenAppleyList MyApplyList : {}",eClassOpenAppleyList);
+		
 		model.addAttribute("title", "나의 개설신청 현황");
 		model.addAttribute("eClassOpenAppleyList", eClassOpenAppleyList);
 		

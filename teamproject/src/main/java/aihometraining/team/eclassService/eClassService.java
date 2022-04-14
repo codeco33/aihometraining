@@ -46,6 +46,7 @@ public class eClassService {
 	
 	//신청한 클래스 조회
 	public List<EClassOpenAppleyForm> eClassOpenAppleyList (){
+		
 		List<EClassOpenAppleyForm> eClassOpenAppleyList = eClassMapper.eClassOpenAppleyList();
 		
 		return eClassOpenAppleyList;

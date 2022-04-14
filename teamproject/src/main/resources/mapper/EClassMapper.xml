@@ -405,7 +405,7 @@
 		ON
 			op.eClassIntroduceCode = it.eClassIntroduceCode
 		WHERE 
-			op.eClassOpenAppleyMemberEmail = #{eClassOpenAppleyMemberEmail};
+			op.eClassOpenAppleyMemberEmail = #{memberEmail};
 	</select>
 	
 </mapper>
