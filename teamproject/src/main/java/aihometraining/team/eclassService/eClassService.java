@@ -44,6 +44,13 @@ public class eClassService {
 		return eClassCategoryMediumList;
 	}
 	
+	public List<EClassOpenAppleyForm> MyApplyList(String memberEmail){
+		
+		List<EClassOpenAppleyForm> eClassOpenApply = eClassMapper.eClassOpenAppleyList(memberEmail);
+		
+		return eClassOpenApply;
+	}
+	
 	//클래스 신청 폼 introduce 등록처리
 	public int EClassIntroduceInsert(EClassIntroduce eClassIntroduce, String mamberEmail) {
 		

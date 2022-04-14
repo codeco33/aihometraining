@@ -24,7 +24,7 @@ public interface EClassMapper {
 	public List<EClassCategorySmall> eClassCategoryMedium(String eClassCategoryMediumCode);
 	
 	//신청한 클래스 조회
-	public List<EClassOpenAppleyForm> eClassOpenAppleyList();
+	public List<EClassOpenAppleyForm> eClassOpenAppleyList(String memberEmail);
 	
 	//클래스 소개 등록 처리
 	public int EClassIntroduceInsert(EClassIntroduce eClassIntroduce);

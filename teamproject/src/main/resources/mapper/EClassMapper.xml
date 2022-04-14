@@ -396,8 +396,9 @@
 		SELECT
 			 op.eClassOpenAppleyName
 			,op.eClassOpenAppleyPrice
+			,op.eClassOpenAppleyApproveState
 			,it.eClassIntroduceImg
-			,it.eClassIntroduceContent
+			,it.eClassIntroduceContent	
 		FROM
 			eclassopenappley AS op
 		INNER JOIN 
@@ -405,7 +406,7 @@
 		ON
 			op.eClassIntroduceCode = it.eClassIntroduceCode
 		WHERE 
-			op.eClassOpenAppleyMemberEmail = #{memberEmail};
+			op.eClassOpenAppleyMemberEmail = #{eClassOpenAppleyMemberEmail};
 	</select>
 	
 </mapper>

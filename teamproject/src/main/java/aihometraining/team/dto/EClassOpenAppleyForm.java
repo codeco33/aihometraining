@@ -21,14 +21,12 @@ public class EClassOpenAppleyForm {
 	private int 	eClassOpenAppleyApproveState;
 	private String	eClassCategorySmallCode;
 	
-	
-	//외래키 설정
 	private EClassIntroduce eClassIntroduce;
-	private EClassSectionTitle eclassSectionTitle;
+	private EClassSectionTitle eClassSectionTitle;
 	private EClassSectionCurriculum eClassSectionCurriculum;
 	private EClassQuestion eClassQuestion;
 	private EClassAnswer eClassAnswer;
-	private EClassCategorySmall eClassCategorySmall;
+	
 	public String geteClassOpenAppleyCode() {
 		return eClassOpenAppleyCode;
 	}
@@ -137,11 +135,11 @@ public class EClassOpenAppleyForm {
 	public void seteClassIntroduce(EClassIntroduce eClassIntroduce) {
 		this.eClassIntroduce = eClassIntroduce;
 	}
-	public EClassSectionTitle getEclassSectionTitle() {
-		return eclassSectionTitle;
+	public EClassSectionTitle geteClassSectionTitle() {
+		return eClassSectionTitle;
 	}
-	public void setEclassSectionTitle(EClassSectionTitle eclassSectionTitle) {
-		this.eclassSectionTitle = eclassSectionTitle;
+	public void seteClassSectionTitle(EClassSectionTitle eClassSectionTitle) {
+		this.eClassSectionTitle = eClassSectionTitle;
 	}
 	public EClassSectionCurriculum geteClassSectionCurriculum() {
 		return eClassSectionCurriculum;
@@ -161,12 +159,6 @@ public class EClassOpenAppleyForm {
 	public void seteClassAnswer(EClassAnswer eClassAnswer) {
 		this.eClassAnswer = eClassAnswer;
 	}
-	public EClassCategorySmall geteClassCategorySmall() {
-		return eClassCategorySmall;
-	}
-	public void seteClassCategorySmall(EClassCategorySmall eClassCategorySmall) {
-		this.eClassCategorySmall = eClassCategorySmall;
-	}
 	@Override
 	public String toString() {
 		return "EClassOpenAppleyForm [eClassOpenAppleyCode=" + eClassOpenAppleyCode + ", eClassOpenAppleyMemberEmail="
@@ -180,9 +172,8 @@ public class EClassOpenAppleyForm {
 				+ ", eClassOpenAppleyMaxStudent=" + eClassOpenAppleyMaxStudent + ", eClassOpenAppleyDate="
 				+ eClassOpenAppleyDate + ", eClassOpenAppleyApproveState=" + eClassOpenAppleyApproveState
 				+ ", eClassCategorySmallCode=" + eClassCategorySmallCode + ", eClassIntroduce=" + eClassIntroduce
-				+ ", eclassSectionTitle=" + eclassSectionTitle + ", eClassSectionCurriculum=" + eClassSectionCurriculum
-				+ ", eClassQuestion=" + eClassQuestion + ", eClassAnswer=" + eClassAnswer + ", eClassCategorySmall="
-				+ eClassCategorySmall + "]";
+				+ ", eClassSectionTitle=" + eClassSectionTitle + ", eClassSectionCurriculum=" + eClassSectionCurriculum
+				+ ", eClassQuestion=" + eClassQuestion + ", eClassAnswer=" + eClassAnswer + "]";
 	}
 	
 	
