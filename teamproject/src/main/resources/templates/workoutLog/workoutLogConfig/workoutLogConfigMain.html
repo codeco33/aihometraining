@@ -30,7 +30,7 @@
 						        	<div th:if="${index.index < 4}" class="col-sm-6 col-md-3 product-grid">
 						            	<div class="thumbnail">
 						              		<a href="#">
-						                		<img th:src="@{/assets/img/workoutLogImg1.jpg}" alt="...">
+						                		<img th:src="@{/assets/img/workoutLogimg1.jpg}" alt="...">
 						                	</a>
 						                	<div class="caption">
 						                		<a th:href="@{/workoutLog/workoutLogUser/workoutLogNewList(workoutLogTitle=${l.workoutLogTitle},workoutLogContent=${l.workoutLogContent})}">
@@ -47,8 +47,8 @@
 							<!--/item-->
 							<div class="item">
 								<div class="row-fluid">
-									<th:block th:if="${not #lists.isEmpty(workoutLogNewList)}" th:each="l,index : ${workoutLogNewList}">
-						        	<div th:if="${index.index > 3 &&index.index <7}" class="col-sm-6 col-md-3 product-grid">
+									<th:block th:if="${i.count > 4}" th:each="l,i : ${workoutLogNewList}">
+						        	<div th:if="${i.index > 3 && i.index <7}" class="col-sm-6 col-md-3 product-grid">
 						            	<div class="thumbnail">
 						              		<a href="#">
 						                		<img th:src="@{/assets/img/workoutLogImg1.jpg}" alt="...">
@@ -70,7 +70,7 @@
 							<div class="item">
 								<div class="row-fluid">
 									<th:block th:if="${not #lists.isEmpty(workoutLogNewList)}" th:each="l,index : ${workoutLogNewList}">
-						        	<div th:if="${index.index > 7 &&index.index<11}" class="col-sm-6 col-md-3 product-grid">
+						        	<div th:if="${index.index > 7 && index.index<11}" class="col-sm-6 col-md-3 product-grid">
 						            	<div class="thumbnail">
 						              		<a href="#">
 						                		<img th:src="@{/assets/img/workoutLogImg1.jpg}" alt="...">

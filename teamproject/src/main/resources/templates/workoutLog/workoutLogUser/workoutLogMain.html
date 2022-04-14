@@ -43,7 +43,7 @@
 	                                    <p class="workoutLogContent">[[${l.workoutLogContent}]]</p>
 	                                    <ul class="blog-info-link">
 	                                        <li><a href="#" onclick="return false;" class="workoutLogLikeCount" th:data-workoutLogCode="${l.workoutLogCode}"><i class="fa fa-heart"></i>좋아요([[${l.workoutLogLikeCount}]])</a></li>
-	                                        <li><a th:href="@{/workoutLog/workoutLogUser/workoutLogListFeedback(workoutLogTitle=${l.workoutLogTitle},workoutLogContent=${l.workoutLogContent})}"><i class="fa fa-comments"></i>피드백</a></li>
+	                                        <li><a th:href="@{/workoutLog/workoutLogUser/workoutLogList#feedback(workoutLogTitle=${l.workoutLogTitle},workoutLogContent=${l.workoutLogContent},workoutLogCode=${l.workoutLogCode})}"><i class="fa fa-comments"></i>피드백</a></li>
 	                                    </ul>
 	                                </div>
 			                    </th:block>

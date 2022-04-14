@@ -40,170 +40,135 @@ public class WorkoutLog {
 	
 	private Member member;
 	private List<FileDto> fileList;
-
+	private WorkoutLogPrivacybounds workoutLogPrivacybounds;
+	private EClassCategorySmall eClassCategorySmall;
+	private EClassCategoryMedium eClassCategoryMedium;
+	private EClassCategoryLarge eClassCategoryLarge;
 	
 	
-
-	public Member getMember() {
-		return member;
-	}
-
-
-	public void setMember(Member member) {
-		this.member = member;
-	}
-
-
+	
 	public String getWorkoutLogCode() {
 		return workoutLogCode;
 	}
-
-
 	public void setWorkoutLogCode(String workoutLogCode) {
 		this.workoutLogCode = workoutLogCode;
 	}
-
-
 	public String getMemberEmail() {
 		return memberEmail;
 	}
-
-
 	public void setMemberEmail(String memberEmail) {
 		this.memberEmail = memberEmail;
 	}
-
-
 	public String getWorkoutLogLikeCount() {
 		return workoutLogLikeCount;
 	}
-
-
 	public void setWorkoutLogLikeCount(String workoutLogLikeCount) {
 		this.workoutLogLikeCount = workoutLogLikeCount;
 	}
-
-
 	public String geteClassCategorySmallCode() {
 		return eClassCategorySmallCode;
 	}
-
-
 	public void seteClassCategorySmallCode(String eClassCategorySmallCode) {
 		this.eClassCategorySmallCode = eClassCategorySmallCode;
 	}
-
-
 	public String geteClassCategorySmallName() {
 		return eClassCategorySmallName;
 	}
-
-
 	public void seteClassCategorySmallName(String eClassCategorySmallName) {
 		this.eClassCategorySmallName = eClassCategorySmallName;
 	}
-
-
 	public String getWorkoutLogTitle() {
 		return workoutLogTitle;
 	}
-
-
 	public void setWorkoutLogTitle(String workoutLogTitle) {
 		this.workoutLogTitle = workoutLogTitle;
 	}
-
-
 	public String getWorkoutLogContent() {
 		return workoutLogContent;
 	}
-
-
 	public void setWorkoutLogContent(String workoutLogContent) {
 		this.workoutLogContent = workoutLogContent;
 	}
-
-
 	public String getWorkoutGoalPlanCode() {
 		return workoutGoalPlanCode;
 	}
-
-
 	public void setWorkoutGoalPlanCode(String workoutGoalPlanCode) {
 		this.workoutGoalPlanCode = workoutGoalPlanCode;
 	}
-
-
 	public String geteClassTaskDoCode() {
 		return eClassTaskDoCode;
 	}
-
-
 	public void seteClassTaskDoCode(String eClassTaskDoCode) {
 		this.eClassTaskDoCode = eClassTaskDoCode;
 	}
-
-
 	public String getChallengeEnterCode() {
 		return challengeEnterCode;
 	}
-
-
 	public void setChallengeEnterCode(String challengeEnterCode) {
 		this.challengeEnterCode = challengeEnterCode;
 	}
-
-
 	public String getWorkoutLogPrivacyBoundsCode() {
 		return workoutLogPrivacyBoundsCode;
 	}
-
-
 	public void setWorkoutLogPrivacyBoundsCode(String workoutLogPrivacyBoundsCode) {
 		this.workoutLogPrivacyBoundsCode = workoutLogPrivacyBoundsCode;
 	}
-
-
 	public String getWorkoutLogUpdateEmail() {
 		return workoutLogUpdateEmail;
 	}
-
-
 	public void setWorkoutLogUpdateEmail(String workoutLogUpdateEmail) {
 		this.workoutLogUpdateEmail = workoutLogUpdateEmail;
 	}
-
-
 	public String getWorkoutLogUpdateFinalDate() {
 		return workoutLogUpdateFinalDate;
 	}
-
-
 	public void setWorkoutLogUpdateFinalDate(String workoutLogUpdateFinalDate) {
 		this.workoutLogUpdateFinalDate = workoutLogUpdateFinalDate;
 	}
-
-
 	public String getWorkoutLogDeleteEmail() {
 		return workoutLogDeleteEmail;
 	}
-
-
 	public void setWorkoutLogDeleteEmail(String workoutLogDeleteEmail) {
 		this.workoutLogDeleteEmail = workoutLogDeleteEmail;
 	}
-
-
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
 	public List<FileDto> getFileList() {
 		return fileList;
 	}
-
-
 	public void setFileList(List<FileDto> fileList) {
 		this.fileList = fileList;
 	}
-
-
+	public WorkoutLogPrivacybounds getWorkoutLogPrivacybounds() {
+		return workoutLogPrivacybounds;
+	}
+	public void setWorkoutLogPrivacybounds(WorkoutLogPrivacybounds workoutLogPrivacybounds) {
+		this.workoutLogPrivacybounds = workoutLogPrivacybounds;
+	}
+	public EClassCategorySmall geteClassCategorySmall() {
+		return eClassCategorySmall;
+	}
+	public void seteClassCategorySmall(EClassCategorySmall eClassCategorySmall) {
+		this.eClassCategorySmall = eClassCategorySmall;
+	}
+	public EClassCategoryMedium geteClassCategoryMedium() {
+		return eClassCategoryMedium;
+	}
+	public void seteClassCategoryMedium(EClassCategoryMedium eClassCategoryMedium) {
+		this.eClassCategoryMedium = eClassCategoryMedium;
+	}
+	public EClassCategoryLarge geteClassCategoryLarge() {
+		return eClassCategoryLarge;
+	}
+	public void seteClassCategoryLarge(EClassCategoryLarge eClassCategoryLarge) {
+		this.eClassCategoryLarge = eClassCategoryLarge;
+	}
+	
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -239,18 +204,28 @@ public class WorkoutLog {
 		builder.append(member);
 		builder.append(", fileList=");
 		builder.append(fileList);
+		builder.append(", workoutLogPrivacybounds=");
+		builder.append(workoutLogPrivacybounds);
+		builder.append(", eClassCategorySmall=");
+		builder.append(eClassCategorySmall);
+		builder.append(", eClassCategoryMedium=");
+		builder.append(eClassCategoryMedium);
+		builder.append(", eClassCategoryLarge=");
+		builder.append(eClassCategoryLarge);
 		builder.append("]");
 		return builder.toString();
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	
 	
 
-
-		
-	
-	
-
-
-	
 }

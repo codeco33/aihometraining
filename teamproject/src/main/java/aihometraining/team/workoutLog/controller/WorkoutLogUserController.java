@@ -16,14 +16,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import aihometraining.team.dto.EClassCategoryLarge;
 import aihometraining.team.dto.EClassCategoryMedium;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.EClassTake;
 import aihometraining.team.dto.FileDto;
+import aihometraining.team.dto.Member;
 import aihometraining.team.dto.WorkoutGoal;
 import aihometraining.team.dto.WorkoutLog;
 import aihometraining.team.dto.WorkoutLogLike;
@@ -191,6 +194,17 @@ public class WorkoutLogUserController {
 		
 	}
 	
+	// Ajax : 일지 수정 시 공개범위 선택 
+	@PostMapping("/getworkoutLogPrivacyboundsList")
+	@ResponseBody
+	public List<WorkoutLogPrivacybounds> getworkoutLogPrivacyboundsList(@RequestParam(value = "workoutLogPrivacyBoundsCode", required = false) String workoutLogPrivacyBoundsCode){
+		
+		log.info("수정 화면 - 공개 범위 선택 : {}", workoutLogPrivacyBoundsCode);
+		
+		return workoutLogUserMapper.getworkoutLogPrivacyboundsList();
+		
+	}
+	
 	
 	//일지 등록 처리
 		@PostMapping("/workoutLogInsert")
@@ -220,12 +234,26 @@ public class WorkoutLogUserController {
 			
 		}
 	
+	// 일지 수정 처리
+	@PostMapping("/workoutLogUpdate")
+	public String workoutLogUpdate(WorkoutLog workoutLog, RedirectAttributes reAttr) {
+		
+		workoutLogUserService.workoutLogUpdate(workoutLog);
+		log.info("일지 수정 처리: {}", workoutLog);
+		
+		reAttr.addAttribute("workoutLogCode", workoutLog.getWorkoutLogCode());
+		
+		return "redirect:/workoutLog/workoutLogUser/workoutLogList";
+	}
+	
 	
 	
 	// 일지 수정 화면
 	@GetMapping("/workoutLogUpdate")
-	
-	public String workoutLogUpdate(Model model) {
+	public String workoutLogUpdate( Model model
+								  , @RequestParam(name="workoutLogCode", required = false) String workoutLogCode) {	
+		
+		log.info("일지 수정화면 폼 쿼리 스트링 workoutLogCode : {}", workoutLogCode);
 		
 		//일지 공개범위 목록 조회
 		List<WorkoutLogPrivacybounds> workoutLogPrivacyboundsList = workoutLogUserService.getworkoutLogPrivacyboundsList();
@@ -235,9 +263,14 @@ public class WorkoutLogUserController {
 		List<EClassCategoryLarge> eClassCategoryLargeList = workoutLogUserService.geteClassCategoryLargeList();
 		log.info("운동 클래스 카테고리 large 목록 조회  eClassCategoryLargeList : {}", eClassCategoryLargeList);
 		
+		//수정화면 - 일지 코드로 일지 조회
+		WorkoutLog workoutLog = workoutLogUserService.getworkoutLogByLogCode(workoutLogCode);
+		log.info("수정화면 - 일지 코드로 일지 조회  workoutLog : {}", workoutLog);
+		
 		model.addAttribute("title", "일지 수정 화면");
 		model.addAttribute("workoutLogPrivacyboundsList", workoutLogPrivacyboundsList);
 		model.addAttribute("eClassCategoryLargeList", eClassCategoryLargeList);
+		model.addAttribute("workoutLog", workoutLog);
 		
 		return "workoutLog/workoutLogUser/workoutLogUpdate";
 		
@@ -263,11 +296,13 @@ public class WorkoutLogUserController {
 	public String workoutGoalInsert(Model model) {
 		
 		// 수강 중인 운동 클래스 목록 조회
-		List<EClassTake> eClassTakeList = workoutLogUserService.geteClassTakeList();
-		
+		/*
+		 * List<EClassTake> eClassTakeList = workoutLogUserService.geteClassTakeList();
+		 * log.info("수강 중인 운동 클래스 목록 조회  eClassTakeList : {}", eClassTakeList);
+		 */
 		
 		model.addAttribute("title", "운동 목표 등록");
-		model.addAttribute("eClassTakeList", eClassTakeList);
+		//model.addAttribute("eClassTakeList", eClassTakeList);
 		
 		return "workoutLog/workoutLogUser/workoutGoalInsert";
 		

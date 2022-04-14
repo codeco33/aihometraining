@@ -84,6 +84,21 @@ public class WorkoutLogUserService {
 		
 	}
 	
+	// 일지 수정 화면 - 일지 코드로 일지 조회
+	public WorkoutLog getworkoutLogByLogCode(String workoutLogCode){
+		
+		return workoutLogUserMapper.getworkoutLogByLogCode(workoutLogCode);
+		
+	}
+	
+	// 일지 수정 처리 
+	public int workoutLogUpdate(WorkoutLog workoutLog) {
+		
+		int result = workoutLogUserMapper.workoutLogUpdate(workoutLog);
+		
+		return result;
+	}
+	
 	
 	// 일지 등록 처리
 	public int workoutLogInsert(WorkoutLog workoutLog, String sessionEmail, MultipartFile[] fileImage, String fileRealPath) {
@@ -125,13 +140,15 @@ public class WorkoutLogUserService {
 	}
 	
 	// 수강 중인 운동 클래스 목록 조회
-	public List<EClassTake> geteClassTakeList(){
-		
-		List<EClassTake> eClassTakeList = workoutLogUserMapper.geteClassTakeList();
-		
-		return eClassTakeList;
-		
-	}
+	/*
+	 * public List<EClassTake> geteClassTakeList(){
+	 * 
+	 * List<EClassTake> eClassTakeList = workoutLogUserMapper.geteClassTakeList();
+	 * 
+	 * return eClassTakeList;
+	 * 
+	 * }
+	 */
 	
 	// 일지 공개범위 목록 조회
 	public List<WorkoutLogPrivacybounds> getworkoutLogPrivacyboundsList(){

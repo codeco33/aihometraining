@@ -32,7 +32,7 @@
 				                    <div class="form-select mb-3 pl-3 pr-3">
 				                    	<select id="eClassApprovedCode" name="eClassApprovedCode" required>
 											<th:block th:if="${not #lists.isEmpty(eClassTakeList)}" th:each="l : ${eClassTakeList}" >
-												<option th:value="${l.eClassTakeCode}">[[${l.challengeCategoryName}]]</option>
+												<option th:value="${l.eClassTakeCode}">[[${l.eClassApprovedName}]]</option>
 											</th:block>
 											<th:block th:unless="${not #lists.isEmpty(eClassTakeList)}">
 												<option >등록된 카테고리가 없습니다.</option>
@@ -302,77 +302,25 @@
                         eClassApprovedCode: {
                             required: true
                         },
-                        challengeGatherProveMethod: {
+                        start_date: {
                             required: true
                         },
-                        challengeGatherProveContent: {
-                            required: true
-                        },
-                        challengeGatherPlanProveNumber: {
-                            required: true
-                        },
-                        challengeGatherProveMethod2: {
-                            required: true
-                        },
-                        challengeGatherProveContent2: {
-                            required: true
-                        },
-                        challengeCategory: {
-                            required: true
-                        },
-                        challengeGatherStart: {
-                            required: true
-                        },
-                        challengeGatherEnd: {
-                            required: true
-                        },
-                        challengeStart: {
-                            required: true
-                        },
-                        challengeEnd: {
+                        end_date: {
                             required: true
                         }
-                        
                     },
                     messages: {
-                    	challengeGatherName: {
-                            required: "챌린지명을 입력해주세요"
+                    	workoutGoalContent: {
+                            required: "운동 목표 내용을 입력해주세요"
                         },
-                        challengeGatherMaxPeople: {
-                            required: "최대인원을 입력해주세요"
+                        eClassApprovedCode: {
+                            required: "수강 중인 클래스를 선택해주세요"
                         },
-                        challengeGatherProveMethod: {
-                            required: "인증방법을 입력해주세요"
+                        start_date: {
+                            required: "운동 목표 시작일을 선택해주세요"
                         },
-                        challengeGatherProveContent: {
-                            required: "인증내용을 입력해주세요"
-                        },
-                        challengeGatherPlanProveNumber: {
-                            required: "인증회수를 입력해주세요"
-                        },
-                        challengeGatherProveMethod2: {
-                            required: "인증방법"
-                        },
-                        challengeGatherProveContent2: {
-                            required: "인증내용"
-                        },
-                        challengeCategory: {
-                        	required: "카테고리를 선택해주세요."
-                        },
-                        challengeGatherStart: {
-                        	required: "모집 시작일을 선택해주세요."
-                        },
-                        challengeGatherEnd: {
-                        	required: "모집 종료일일 선택해주세요."
-                        },
-                        challengeStart: {
-                        	required: "챌린지 시작일을 선택해주세요."
-                        },
-                        challengeEnd: {
-                        	required: "챌린지 종료일일 선택해주세요."
-                        },
-                        challengeGatherProveFrequency: {
-                        	required: "인증빈도를 입력해주세요."
+                        end_date: {
+                            required: "운동 목표 종료일을 선택해주세요"
                         }
                         
                     }
@@ -394,7 +342,7 @@
 				   jQuery('#start_date, #end_date, #birth_date').datepicker({
 
 				   });
-				});
+			});
 		</script>
 		
 	</th:block>
