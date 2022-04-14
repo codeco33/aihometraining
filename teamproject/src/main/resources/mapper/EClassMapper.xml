@@ -31,6 +31,7 @@
 		<result column="eClassIntroduceImg"			property="eClassIntroduceImg"/>
 		
 			<association property="eClassCategorySmall" javaType="EClassCategorySmall">
+			
 				<id 	column="eClassCategorySmallCode" 				property="eClassCategorySmallCode"/>
 				<result column="eClassCategorySmallName" 				property="eClassCategorySmallName"/>
 				<result column="eClassCategoryMediumCode" 				property="eClassCategoryMediumCode"/>
@@ -41,11 +42,12 @@
 				<result column="eClassCategorySmallRegDate" 			property="eClassCategorySmallRegDate"/>
 				<result column="updateMemberEmail" 						property="updateMemberEmail"/>
 				<result column="eClassCategorySmallFinalUpdateDate" 	property="eClassCategorySmallFinalUpdateDate"/>
+				
 			</association>
 	
 	</resultMap>
 	
-	<resultMap type="EClassSectionTitle" id="eclasssectiontitleResultMap">
+	<resultMap type="EClassSectionTitle" id="eClassSectionTitleResultMap">
 	
 		<result column="eClassSectionTitleCode" 		property="eClassSectionTitleCode"/>
 		<result column="memberEmail" 					property="memberEmail"/>
@@ -56,7 +58,7 @@
 		
 	</resultMap>
 	
-	<resultMap type="EClassSectionCurriculum" id="eclasssectioncurriculumResultMap">
+	<resultMap type="EClassSectionCurriculum" id="eClassSectionCurriculumResultMap">
 	
 		<result column="eClassSectionCurriculumCode" 		property="eClassSectionCurriculumCode"/>
 		<result column="memberEmail" 						property="memberEmail"/>
@@ -68,10 +70,21 @@
 		<result column="eClassSectionCurriculumUpdateDate"	property="eClassSectionCurriculumUpdateDate"/>
 		<result column="memberUpdateEmail"					property="memberUpdateEmail"/>
 		<result column="eClassSectionCurriculumState"		property="eClassSectionCurriculumState"/>
+			
+			<association property="eClassSectionTitle" javaType="EClassSectionTitle">
+				
+				<id 	column="eClassSectionTitleCode" 		property="eClassSectionTitleCode"/>
+				<result column="memberEmail" 					property="memberEmail"/>
+				<result column="eClassSectionTitleName" 		property="eClassSectionTitleName"/>
+				<result column="eClassSectionTitleDate"			property="eClassSectionTitleDate"/>
+				<result column="eClassSectionTitleUpdateDate"	property="eClassSectionTitleUpdateDate"/>
+				<result column="memberUpdateEmail"				property="memberUpdateEmail"/>
+				
+			</association>
 	
 	</resultMap>
 	
-	<resultMap type="EClassQuestion" id="eclassquestionResultMap">
+	<resultMap type="EClassQuestion" id="eClassQuestionResultMap">
 	
 		<result column="eClassQuestionCode" 		property="eClassQuestionCode"/>
 		<result column="memberEmail" 				property="memberEmail"/>
@@ -82,7 +95,7 @@
 	
 	</resultMap>
 	
-	<resultMap type="EClassAnswer" id="eclassanswerResultMap">
+	<resultMap type="EClassAnswer" id="eClassAnswerResultMap">
 	
 		<result column="eClassAnswerCode" 			property="eClassAnswerCode"/>
 		<result column="eClassQuestionCode" 		property="eClassQuestionCode"/>
@@ -92,9 +105,20 @@
 		<result column="memberUpdateEmail"			property="memberUpdateEmail"/>
 		<result column="eClassAnswerUpdateDate"		property="eClassAnswerUpdateDate"/>
 	
+			<association property="eClassQuestion" javaType="EClassQuestion">
+				
+				<id 	column="eClassQuestionCode" 		property="eClassQuestionCode"/>
+				<result column="memberEmail" 				property="memberEmail"/>
+				<result column="eClassQuestionTitle" 		property="eClassQuestionTitle"/>
+				<result column="eClassQuestionRegDate"		property="eClassQuestionRegDate"/>
+				<result column="memberUpdateEmail"			property="memberUpdateEmail"/>
+				<result column="eClassQuestionUpdateDate"	property="eClassQuestionUpdateDate"/>
+				
+			</association>
+			
 	</resultMap>
 	
-	<resultMap type="EClassOpenAppleyForm" id="eclassopenappleyResultMap">
+	<resultMap type="EClassOpenAppleyForm" id="eClassOpenappleyResultMap">
 	
 		<result column="eClassOpenAppleyCode" 			property="eClassOpenAppleyCode"/>
 		<result column="eClassOpenAppleyMemberEmail" 	property="eClassOpenAppleyMemberEmail"/>
@@ -112,7 +136,69 @@
 		<result column="eClassOpenAppleyMaxStudent"		property="eClassOpenAppleyMaxStudent"/>
 		<result column="eClassOpenAppleyDate"			property="eClassOpenAppleyDate"/>
 		<result column="eClassOpenAppleyApproveState"	property="eClassOpenAppleyApproveState"/>
+		<result column="eClassCategorySmallCode"		property="eClassCategorySmallCode"/>
 	
+			<association property="eClassIntroduce" javaType="EClassIntroduce">
+			
+				<id 	column="eClassIntroduceCode" 		property="eClassIntroduceCode"/>
+				<result column="memberEmail" 				property="memberEmail"/>
+				<result column="eClassCategorySmallCode"	property="eClassCategorySmallCode"/>
+				<result column="eClassIntroduceContent" 	property="eClassIntroduceContent"/>
+				<result column="memberUpdateEmail" 			property="memberUpdateEmail"/>
+				<result column="eClassIntroducetDate"		property="eClassIntroducetDate"/>
+				<result column="eClassIntroduceImg"			property="eClassIntroduceImg"/>
+				
+			</association>
+			
+			<association property="eClassSectionTitle" javaType="EClassSectionTitle">
+			
+				<id 	column="eClassSectionTitleCode" 		property="eClassSectionTitleCode"/>
+				<result column="memberEmail" 					property="memberEmail"/>
+				<result column="eClassSectionTitleName" 		property="eClassSectionTitleName"/>
+				<result column="eClassSectionTitleDate"			property="eClassSectionTitleDate"/>
+				<result column="eClassSectionTitleUpdateDate"	property="eClassSectionTitleUpdateDate"/>
+				<result column="memberUpdateEmail"				property="memberUpdateEmail"/>
+				
+			</association>
+			
+			<association property="eClassSectionCurriculum" javaType="EClassSectionCurriculum">
+			
+				<id 	column="eClassSectionCurriculumCode" 		property="eClassSectionCurriculumCode"/>
+				<result column="memberEmail" 						property="memberEmail"/>
+				<result column="eClassSectionTitleCode" 			property="eClassSectionTitleCode"/>
+				<result column="eClassSectionCurriculumTitle"		property="eClassSectionCurriculumTitle"/>
+				<result column="eClassSectionCurriculumAddFile"		property="eClassSectionCurriculumAddFile"/>
+				<result column="eClassSectionCurriculumRunningTime"	property="eClassSectionCurriculumRunningTime"/>
+				<result column="eClassSectionCurriculumRegDate"		property="eClassSectionCurriculumRegDate"/>
+				<result column="eClassSectionCurriculumUpdateDate"	property="eClassSectionCurriculumUpdateDate"/>
+				<result column="memberUpdateEmail"					property="memberUpdateEmail"/>
+				<result column="eClassSectionCurriculumState"		property="eClassSectionCurriculumState"/>
+				
+			</association>
+			
+			<association property="eClassQuestion" javaType="EClassQuestion">
+				
+				<id 	column="eClassQuestionCode" 		property="eClassQuestionCode"/>
+				<result column="memberEmail" 				property="memberEmail"/>
+				<result column="eClassQuestionTitle" 		property="eClassQuestionTitle"/>
+				<result column="eClassQuestionRegDate"		property="eClassQuestionRegDate"/>
+				<result column="memberUpdateEmail"			property="memberUpdateEmail"/>
+				<result column="eClassQuestionUpdateDate"	property="eClassQuestionUpdateDate"/>
+				
+			</association>
+			
+			<association property="eClassAnswer" javaType="EClassAnswer">
+			
+				<id 	column="eClassAnswerCode" 			property="eClassAnswerCode"/>
+				<result column="eClassQuestionCode" 		property="eClassQuestionCode"/>
+				<result column="memberEmail" 				property="memberEmail"/>
+				<result column="eClassAnsweTitle" 			property="eClassAnsweTitle"/>
+				<result column="eClassAnswerRegDate"		property="eClassAnswerRegDate"/>
+				<result column="memberUpdateEmail"			property="memberUpdateEmail"/>
+				<result column="eClassAnswerUpdateDate"		property="eClassAnswerUpdateDate"/>
+			
+			</association>
+			
 	</resultMap>
 	
 	<insert id="EClassPriceInsert" parameterType="EClassOpenAppleyForm">
@@ -134,6 +220,7 @@
 			,eClassOpenAppleyMaxStudent
 			,eClassOpenAppleyDate
 			,eClassOpenAppleyApproveState
+			,eClassCategorySmallCode
 		)VALUES(
 			 #{eClassOpenAppleyCode}
 			,#{eClassOpenAppleyMemberEmail}
@@ -151,6 +238,7 @@
 			,#{eClassOpenAppleyMaxStudent}
 			,NOW()
 			,0
+			,#{eClassCategorySmallCode}
 		);
 	</insert>
 	
@@ -302,4 +390,22 @@
 		WHERE 	
 			 es.eClassCategoryMediumCode = #{eClassCategoryMediumCode};
 	</select>
+	
+	<select id="eClassOpenAppleyList" parameterType="String" resultMap="eClassOpenappleyResultMap">
+		/* 신청한 운동클래스 리스트 */
+		SELECT
+			 op.eClassOpenAppleyName
+			,op.eClassOpenAppleyPrice
+			,it.eClassIntroduceImg
+			,it.eClassIntroduceContent
+		FROM
+			eclassopenappley AS op
+		INNER JOIN 
+			eclassintroduce AS it
+		ON
+			op.eClassIntroduceCode = it.eClassIntroduceCode
+		WHERE 
+			op.eClassOpenAppleyMemberEmail = #{eClassOpenAppleyMemberEmail};
+	</select>
+	
 </mapper>

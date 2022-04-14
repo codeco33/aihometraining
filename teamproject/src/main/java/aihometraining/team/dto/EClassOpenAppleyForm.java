@@ -19,7 +19,16 @@ public class EClassOpenAppleyForm {
 	private int		eClassOpenAppleyMaxStudent;
 	private Date	eClassOpenAppleyDate;
 	private int 	eClassOpenAppleyApproveState;
+	private String	eClassCategorySmallCode;
 	
+	
+	//외래키 설정
+	private EClassIntroduce eClassIntroduce;
+	private EClassSectionTitle eclassSectionTitle;
+	private EClassSectionCurriculum eClassSectionCurriculum;
+	private EClassQuestion eClassQuestion;
+	private EClassAnswer eClassAnswer;
+	private EClassCategorySmall eClassCategorySmall;
 	public String geteClassOpenAppleyCode() {
 		return eClassOpenAppleyCode;
 	}
@@ -38,10 +47,10 @@ public class EClassOpenAppleyForm {
 	public void seteClassOpenAppleyName(String eClassOpenAppleyName) {
 		this.eClassOpenAppleyName = eClassOpenAppleyName;
 	}
-	public int geteClassOpenApplyPrice() {
+	public int geteClassOpenAppleyPrice() {
 		return eClassOpenAppleyPrice;
 	}
-	public void seteClassOpenApplyPrice(int eClassOpenAppleyPrice) {
+	public void seteClassOpenAppleyPrice(int eClassOpenAppleyPrice) {
 		this.eClassOpenAppleyPrice = eClassOpenAppleyPrice;
 	}
 	public String geteClassIntroduceCode() {
@@ -116,18 +125,65 @@ public class EClassOpenAppleyForm {
 	public void seteClassOpenAppleyApproveState(int eClassOpenAppleyApproveState) {
 		this.eClassOpenAppleyApproveState = eClassOpenAppleyApproveState;
 	}
+	public String geteClassCategorySmallCode() {
+		return eClassCategorySmallCode;
+	}
+	public void seteClassCategorySmallCode(String eClassCategorySmallCode) {
+		this.eClassCategorySmallCode = eClassCategorySmallCode;
+	}
+	public EClassIntroduce geteClassIntroduce() {
+		return eClassIntroduce;
+	}
+	public void seteClassIntroduce(EClassIntroduce eClassIntroduce) {
+		this.eClassIntroduce = eClassIntroduce;
+	}
+	public EClassSectionTitle getEclassSectionTitle() {
+		return eclassSectionTitle;
+	}
+	public void setEclassSectionTitle(EClassSectionTitle eclassSectionTitle) {
+		this.eclassSectionTitle = eclassSectionTitle;
+	}
+	public EClassSectionCurriculum geteClassSectionCurriculum() {
+		return eClassSectionCurriculum;
+	}
+	public void seteClassSectionCurriculum(EClassSectionCurriculum eClassSectionCurriculum) {
+		this.eClassSectionCurriculum = eClassSectionCurriculum;
+	}
+	public EClassQuestion geteClassQuestion() {
+		return eClassQuestion;
+	}
+	public void seteClassQuestion(EClassQuestion eClassQuestion) {
+		this.eClassQuestion = eClassQuestion;
+	}
+	public EClassAnswer geteClassAnswer() {
+		return eClassAnswer;
+	}
+	public void seteClassAnswer(EClassAnswer eClassAnswer) {
+		this.eClassAnswer = eClassAnswer;
+	}
+	public EClassCategorySmall geteClassCategorySmall() {
+		return eClassCategorySmall;
+	}
+	public void seteClassCategorySmall(EClassCategorySmall eClassCategorySmall) {
+		this.eClassCategorySmall = eClassCategorySmall;
+	}
 	@Override
 	public String toString() {
 		return "EClassOpenAppleyForm [eClassOpenAppleyCode=" + eClassOpenAppleyCode + ", eClassOpenAppleyMemberEmail="
 				+ eClassOpenAppleyMemberEmail + ", eClassOpenAppleyName=" + eClassOpenAppleyName
-				+ ", eClassOpenApplyPrice=" + eClassOpenAppleyPrice + ", eClassIntroduceCode=" + eClassIntroduceCode
+				+ ", eClassOpenAppleyPrice=" + eClassOpenAppleyPrice + ", eClassIntroduceCode=" + eClassIntroduceCode
 				+ ", eClassSectionTitleCode=" + eClassSectionTitleCode + ", eClassSectionCurriculumCode="
 				+ eClassSectionCurriculumCode + ", eClassQuestionCode=" + eClassQuestionCode + ", eClassAnswerCode="
 				+ eClassAnswerCode + ", eClassOpenAppleySetDate=" + eClassOpenAppleySetDate
 				+ ", eClassOpenAppleyStratDate=" + eClassOpenAppleyStratDate + ", eClassOpenAppleyEndDate="
 				+ eClassOpenAppleyEndDate + ", eClassOpenAppleyStudent=" + eClassOpenAppleyStudent
 				+ ", eClassOpenAppleyMaxStudent=" + eClassOpenAppleyMaxStudent + ", eClassOpenAppleyDate="
-				+ eClassOpenAppleyDate + ", eClassOpenAppleyApproveState=" + eClassOpenAppleyApproveState + "]";
+				+ eClassOpenAppleyDate + ", eClassOpenAppleyApproveState=" + eClassOpenAppleyApproveState
+				+ ", eClassCategorySmallCode=" + eClassCategorySmallCode + ", eClassIntroduce=" + eClassIntroduce
+				+ ", eclassSectionTitle=" + eclassSectionTitle + ", eClassSectionCurriculum=" + eClassSectionCurriculum
+				+ ", eClassQuestion=" + eClassQuestion + ", eClassAnswer=" + eClassAnswer + ", eClassCategorySmall="
+				+ eClassCategorySmall + "]";
 	}
+	
 	
 }

@@ -14,6 +14,15 @@ public class EClassSectionCurriculum {
 	private String memberUpdateEmail;
 	private String eClassSectionCurriculumState;
 	
+	private EClassSectionTitle eClassSectionTitle;
+	
+	public EClassSectionTitle geteClassSectionTitle() {
+		return eClassSectionTitle;
+	}
+	public void seteClassSectionTitle(EClassSectionTitle eClassSectionTitle) {
+		this.eClassSectionTitle = eClassSectionTitle;
+	}
+	
 	public String geteClassSectionCurriculumCode() {
 		return eClassSectionCurriculumCode;
 	}
