@@ -68,7 +68,9 @@ public class ChallengeConfigController {
 										 ,@RequestParam(value="searchValue", required = false) String searchValue
 										 ,@RequestParam(value="searchDate", required = false) String searchDate
 										 ,@RequestParam(value="searchStart", required = false) String searchStart
-										 ,@RequestParam(value="searchEnd", required = false) String searchEnd) {
+										 ,@RequestParam(value="searchEnd", required = false) String searchEnd
+										 ,@RequestParam(value="searchKey2", required = false) String searchKey2
+										 ,@RequestParam(value="searchValue2", required = false) String searchValue2) {
 			
 			Map<String, Object> paramMap = new HashMap<String, Object>();
 			/* paramMap.put("memberEmail", "id001@email.com"); */
@@ -84,17 +86,25 @@ public class ChallengeConfigController {
 					searchDate = "challengeCategoryRegDate";
 				}
 			}
-			
+			if(searchKey2 != null) {
+				if("challengeSettingCode".equals(searchKey2)) {
+					searchKey2 = "challengeSettingCode";
+				}else if("challengeSettingUpdateDo".equals(searchKey2)) {
+					searchKey2 = "challengeSettingUpdateDo";
+				}
+			}
 			
 			paramMap.put("searchKey", searchKey);
 			paramMap.put("searchValue", searchValue);
+			paramMap.put("searchKey2", searchKey2);
+			paramMap.put("searchValue2", searchValue2);
 			paramMap.put("searchDate", searchDate);
 			paramMap.put("searchStart", searchStart);
 			paramMap.put("searchEnd", searchEnd);
 			
 			//List<ChallengeCategory> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
 			List<Map<String, Object>> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
-			List<ChallengeSetting> challengeSettingList = challengeConfigService.getChallengeSettingList();
+			List<Map<String, Object>> challengeSettingList = challengeConfigService.getChallengeSettingList(paramMap);
 			
 			paramMap = null;
 			
@@ -252,9 +262,73 @@ public class ChallengeConfigController {
 	
 	//챌린지 모집 중인 목록
 	@GetMapping("/challengeList")
-	public String challengeList(Model model) {
+	public String challengeList(Model model
+							   ,@RequestParam(value="searchKey", required = false) String searchKey
+							   ,@RequestParam(value="searchValue", required = false) String searchValue
+							   ,@RequestParam(value="searchDate", required = false) String searchDate
+							   ,@RequestParam(value="gatherStartDate", required = false) String gatherStartDate
+							   ,@RequestParam(value="searchStart", required = false) String searchStart
+							   ,@RequestParam(value="searchEnd", required = false) String searchEnd
+							   ,@RequestParam(value="gatherEndDate", required = false) String gatherEndDate) {
 		
-		List<ChallengeGather> gatherList = challengeConfigService.getGetherList();
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		if(searchKey != null) {
+			if("challengeGatherCode".equals(searchKey)) {
+				searchKey = "challengeGatherCode";
+				if(searchDate != null) {
+					if("challengeGatherRegDate".equals(searchDate)) {
+						searchDate = "challengeGatherRegDate";
+					}else{
+						gatherStartDate = "challengeGatherStartDate";
+						gatherEndDate = "challengeGatherEndDate";
+					}
+				}
+			}else if("memberEmail".equals(searchKey)) {
+				searchKey = "cg.memberEmail";
+				if(searchDate != null) {
+					if("challengeGatherRegDate".equals(searchDate)) {
+						searchDate = "challengeGatherRegDate";
+					}else{
+						gatherStartDate = "challengeGatherStartDate";
+						gatherEndDate = "challengeGatherEndDate";
+					}
+				}
+			}else if("challengeCategoryName".equals(searchKey)) {
+				searchKey = "challengeCategoryName";
+				if(searchDate != null) {
+					if("challengeGatherRegDate".equals(searchDate)) {
+						searchDate = "challengeGatherRegDate";
+					}else{
+						gatherStartDate = "challengeGatherStartDate";
+						gatherEndDate = "challengeGatherEndDate";
+					}
+				}
+			}else if("challengeGatherName".equals(searchKey)) {
+				searchKey = "challengeGatherName";
+				if(searchDate != null) {
+					if("challengeGatherRegDate".equals(searchDate)) {
+						searchDate = "challengeGatherRegDate";
+					}else{
+						gatherStartDate = "challengeGatherStartDate";
+						gatherEndDate = "challengeGatherEndDate";
+					}
+				}
+			}
+		}
+		
+		
+		paramMap.put("searchKey", searchKey);
+		paramMap.put("searchValue", searchValue);
+		paramMap.put("searchDate", searchDate);
+		paramMap.put("gatherStartDate", gatherStartDate);
+		paramMap.put("searchStart", searchStart);
+		paramMap.put("searchEnd", searchEnd);
+		paramMap.put("gatherEndDate", gatherEndDate);
+		
+		List<Map<String, Object>> gatherList = challengeConfigService.getGetherList(paramMap);
+		
+		paramMap = null;
 		
 		log.info("모집챌린지 gatherList : {}", gatherList);
 		
@@ -282,9 +356,73 @@ public class ChallengeConfigController {
 	
 	//진행중인 챌린지 목록
 	@GetMapping("/challengeListIng")
-	public String challengeListIng(Model model) {
+	public String challengeListIng(Model model
+								   ,@RequestParam(value="searchKey", required = false) String searchKey
+								   ,@RequestParam(value="searchValue", required = false) String searchValue
+								   ,@RequestParam(value="searchDate", required = false) String searchDate
+								   ,@RequestParam(value="ingStartDate", required = false) String ingStartDate
+								   ,@RequestParam(value="searchStart", required = false) String searchStart
+								   ,@RequestParam(value="searchEnd", required = false) String searchEnd
+								   ,@RequestParam(value="ingEndDate", required = false) String ingEndDate) {
 		
-		List<ChallengeGather> challengeIngList = challengeConfigService.getChallengeIngList();
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		if(searchKey != null) {
+			if("challengeGatherCode".equals(searchKey)) {
+				searchKey = "challengeGatherCode";
+				if(searchDate != null) {
+					if("challengeGatherRegDate".equals(searchDate)) {
+						searchDate = "challengeGatherRegDate";
+					}else{
+						ingStartDate = "challengeGatherStartDate";
+						ingEndDate = "challengeGatherEndDate";
+					}
+				}
+			}else if("memberEmail".equals(searchKey)) {
+				searchKey = "cg.memberEmail";
+				if(searchDate != null) {
+					if("challengeGatherRegDate".equals(searchDate)) {
+						searchDate = "challengeGatherRegDate";
+					}else{
+						ingStartDate = "challengeGatherStartDate";
+						ingEndDate = "challengeGatherEndDate";
+					}
+				}
+			}else if("challengeCategoryName".equals(searchKey)) {
+				searchKey = "challengeCategoryName";
+				if(searchDate != null) {
+					if("challengeGatherRegDate".equals(searchDate)) {
+						searchDate = "challengeGatherRegDate";
+					}else{
+						ingStartDate = "challengeGatherStartDate";
+						ingEndDate = "challengeGatherEndDate";
+					}
+				}
+			}else if("challengeGatherName".equals(searchKey)) {
+				searchKey = "challengeGatherName";
+				if(searchDate != null) {
+					if("challengeGatherRegDate".equals(searchDate)) {
+						searchDate = "challengeGatherRegDate";
+					}else{
+						ingStartDate = "challengeGatherStartDate";
+						ingEndDate = "challengeGatherEndDate";
+					}
+				}
+			}
+		}
+		
+		paramMap.put("searchKey", searchKey);
+		paramMap.put("searchValue", searchValue);
+		paramMap.put("searchDate", searchDate);
+		paramMap.put("ingStartDate", ingStartDate);
+		paramMap.put("searchStart", searchStart);
+		paramMap.put("searchEnd", searchEnd);
+		paramMap.put("ingEndDate", ingEndDate);
+		
+		List<Map<String, Object>> challengeIngList = challengeConfigService.getChallengeIngList(paramMap);
+		
+		paramMap = null;
 		
 		log.info("진행 챌린지 목록 조회 challengeIngList: {}", challengeIngList);
 		

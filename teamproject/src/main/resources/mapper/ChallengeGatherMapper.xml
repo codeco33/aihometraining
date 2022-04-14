@@ -139,6 +139,7 @@
 		SELECT
 			 cg.challengeGatherCode
 			,cg.challengeCategoryCode
+			,cc.challengeCategoryName
 			,cg.memberEmail
 			,cg.challengeGatherName
 			,cg.challengeGatherIntro
@@ -157,6 +158,10 @@
 			challengegatherplan AS cp
 			on
 			cg.challengeGatherCode = cp.challengeGatherCode
+			INNER join
+			challengecategory AS cc
+			on
+			cc.challengeCategoryCode = cg.challengeCategoryCode
 		WHERE
 			cg.challengeGatherCode = #{challengeGatherCode};
 	</select>

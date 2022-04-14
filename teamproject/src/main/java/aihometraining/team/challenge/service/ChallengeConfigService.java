@@ -3,6 +3,8 @@ package aihometraining.team.challenge.service;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +19,10 @@ import aihometraining.team.mapper.CommonMapper;
 @Service
 @Transactional
 public class ChallengeConfigService {
+	
+	
+	private static final Logger log = LoggerFactory.getLogger(ChallengeConfigService.class);
+
 	
 	//DI 의존성 주입
 	private ChallengeConfigMapper challengeConfigMapper;
@@ -37,9 +43,9 @@ public class ChallengeConfigService {
 	}
 	
 	//챌린지 세팅 목록 조회
-		public List<ChallengeSetting> getChallengeSettingList(){
+		public List<Map<String, Object>> getChallengeSettingList(Map<String, Object> paramMap){
 			
-			List<ChallengeSetting> challengeSettingList = challengeConfigMapper.getChallengeSettingList();
+			List<Map<String, Object>> challengeSettingList = challengeConfigMapper.getChallengeSettingList(paramMap);
 			
 			return challengeSettingList;
 			
@@ -67,8 +73,9 @@ public class ChallengeConfigService {
 	public int challengeCategoryInsert(ChallengeCategory challengeCategory, String sEmail) {
 		//pk컬럼에 들어갈 코드를 자동으로 만들어주는 Mapper      //pk로 쓸 db의 컬럼명                     //코드가 들어갈 db의 테이블명
 		String newCode = commonMapper.getNewCode("challengeCategoryCode", "challengecategory");
-		
-		
+		String introduceCode = commonMapper.getNewCode("eClassIntroduceCode", "eclassintroduce");
+		log.info("새로 생성된 코드: {}",newCode);
+		log.info("새로 생성된 코드introduceCode: {}",introduceCode);
 		
 		//dto에 위에서 만들어진 코드를 세팅해주기
 		challengeCategory.setChallengeCategoryCode(newCode);
@@ -91,29 +98,29 @@ public class ChallengeConfigService {
 		return result;
 	}
 	
-	//카테고리 삭제처리 프로세스
-		public void categoryDeleteBycateCode(String challengeCategoryCode) {
-			//챌린지 카테고리 코드에 따른 신고내역 삭제(챌린지 카테고리 삭제처리 )
-			challengeConfigMapper.reportDeleteBycateCode(challengeCategoryCode);
-			
-			//챌린지 카테고리 코드에 따른 포인트내역 삭제(챌린지 카테고리 삭제처리 )
-			challengeConfigMapper.pointDeleteBycateCode(challengeCategoryCode);
-			
-			//챌린지 카테고리 코드에 따른 실행내역 삭제(챌린지 카테고리 삭제처리 )
-			challengeConfigMapper.planDoDeleteBycateCode(challengeCategoryCode);
-			
-			//챌린지 카테고리 코드에 따른 참가내역 삭제(챌린지 카테고리 삭제처리 )
-			challengeConfigMapper.enterDeleteBycateCode(challengeCategoryCode);
-			
-			//챌린지 카테고리 코드에 따른 모집내역 삭제(챌린지 카테고리 삭제처리 )
-			challengeConfigMapper.gatherDeleteBycateCode(challengeCategoryCode);
-			
-			//챌린지 카테고리 코드에 따른 모집계획 내역 삭제(챌린지 카테고리 삭제처리 )
-			challengeConfigMapper.planDeleteBycateCode(challengeCategoryCode);
-			
-			//챌린지 카테고리 코드에 따른 카테고리 삭제(챌린지 카테고리 삭제처리 )
-			challengeConfigMapper.challengeCategoryDelete(challengeCategoryCode);
-		}
+	//카테고리 삭제처리 프로세스(챌린지신고 1 -> 챌린지포인트 2 ->챌린지참여 3->챌린지실행 4->챌린지모집계획 5->챌린지 모집 6->챌린지 카테고리 7
+	public void categoryDeleteBycateCode(String challengeCategoryCode) {
+		///* 챌린지 카테고리 코드에 따른 신고내역 삭제(챌린지 카테고리 삭제처리 )*/
+		challengeConfigMapper.reportDeleteBycateCode(challengeCategoryCode);
+		
+		///* 챌린지 카테고리 코드에 따른 포인트 내역 삭제(챌린지 카테고리 삭제처리 )*/
+		challengeConfigMapper.pointDeleteBycateCode(challengeCategoryCode);
+		
+		///* 챌린지 카테고리 코드에 따른 챌린지참여 내역 삭제(챌린지 카테고리 삭제처리 )*/
+		challengeConfigMapper.enterDeleteBycateCode(challengeCategoryCode);
+		
+		///* 챌린지 카테고리 코드에 따른 챌린지실행 내역 삭제(챌린지 카테고리 삭제처리 )*/
+		challengeConfigMapper.planDoDeleteBycateCode(challengeCategoryCode);
+		
+		///* 챌린지 카테고리 코드에 따른 챌린지 모집계획 내역 삭제(챌린지 카테고리 삭제처리 )*/
+		challengeConfigMapper.planDeleteBycateCode(challengeCategoryCode);
+		
+		///* 챌린지 카테고리 코드에 따른 챌린지 모집계획 내역 삭제(챌린지 카테고리 삭제처리 )*/
+		challengeConfigMapper.gatherDeleteBycateCode(challengeCategoryCode);
+		
+		///* 챌린지 카테고리 코드에 따른 챌린지 모집 내역 삭제(챌린지 카테고리 삭제처리 )*/
+		challengeConfigMapper.challengeCategoryDelete(challengeCategoryCode);
+	}
 	
 	//세팅 등록 처리
 	public void challengeSettingInsert(ChallengeSetting challengeSetting) {
@@ -142,9 +149,9 @@ public class ChallengeConfigService {
 	}
 	
 	//모집 챌린지 목록 조회
-	public List<ChallengeGather> getGetherList(){
+	public List<Map<String,Object>> getGetherList(Map<String, Object> paramMap){
 		
-		List<ChallengeGather> gatherList = challengeConfigMapper.getGetherList();
+		List<Map<String, Object>> gatherList = challengeConfigMapper.getGetherList(paramMap);
 		
 		return gatherList;
 		
@@ -160,9 +167,9 @@ public class ChallengeConfigService {
 	}
 	
 	//진행 챌린지 목록 조회
-	public List<ChallengeGather> getChallengeIngList() {
+	public List<Map<String, Object>> getChallengeIngList(Map<String, Object> paramMap) {
 		
-		List<ChallengeGather> challengeIngList = challengeConfigMapper.getChallengeIngList();
+		List<Map<String, Object>> challengeIngList = challengeConfigMapper.getChallengeIngList(paramMap);
 		
 		return challengeIngList;
 		
