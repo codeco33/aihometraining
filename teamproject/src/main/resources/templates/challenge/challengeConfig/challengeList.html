@@ -58,7 +58,6 @@
 	        
 			<div class="panel-body">
 				<!-- 모집 챌린지 검색 폼 -->
-				<div th:fragment="searchCategoryFragment">
 					<form class="searchCateTableForm" th:action="@{/admin/challengeList}" method="get">
 						
 						<div class="input-group">
@@ -111,7 +110,6 @@
 							</button>
 						</div>
 					</form>
-				</div>		
 							
 				<!-- 데이터 테이블 -->
 				<div class="responsive-table" >
@@ -215,12 +213,14 @@
 				$('input[name="searchValue"]').attr("required" , true);
 				$('input[name="searchStart"]').attr("required" , true);
 				$('input[name="searchEnd"]').attr("required" , true);
+				$('input[name="searchDate"]').attr("required" , true);
 			});
 			$('.searchResetBtn').click(function(){
 				$('select[name="searchKey"]').attr("required" , false);
 				$('input[name="searchValue"]').attr("required" , false);
 				$('input[name="searchStart"]').attr("required" , false);
 				$('input[name="searchEnd"]').attr("required" , false);
+				$('input[name="searchDate"]').attr("required" , false);
 			});
 			
 			 

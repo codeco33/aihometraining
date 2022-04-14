@@ -58,7 +58,7 @@
 				<div th:fragment="searchCategoryFragment">
 					<form class="searchCateTableForm" th:action="@{/admin/configList}" method="get">
 						
-						<div class="input-group">
+						<div class="input-group" id="cateSearch">
 						  <span class="form-control" style="width: 180px;">카테고리 검색</span>
 						  <select class="form-control" name="searchKey"  style="width: 130px;" required="required">
 						  	<option value="challengeCategoryName">카테고리명</option>
@@ -162,35 +162,16 @@
 	        </div>
 	        
 			<div class="panel-body">
-				<!-- 챌린지 카테고리 검색 폼 Start -->
-				<form class="searchCateTableForm" th:action="@{/admin/configList}" method="get">
+				<!-- 챌린지 세팅 검색 폼 Start -->
+				<form class="searchSettingTableForm" th:action="@{/admin/configList}" method="get">
 					<div class="input-group">
 					  <span class="form-control" style="width: 180px;">카테고리 검색</span>
-					  <select class="form-control" name="searchKey"  style="width: 130px;" required="required">
-					  	<option value="challengeCategoryName">카테고리명</option>
-		              	<option value="eClassCategorySmallName">운동클래스</option>
+					  <select class="form-control" name="searchKey2"  style="width: 130px;" required="required">
+					  	<option value="challengeSettingCode">세팅코드</option>
+		              	<option value="challengeSettingUpdateDo">세팅값</option>
 					  </select>
-					  <input class="form-control" type="text" name="searchValue" placeholder="검색키워드를 입력해주세요." required="required"/>
+					  <input class="form-control" type="text" name="searchValue2" placeholder="검색키워드를 입력해주세요." required="required"/>
 					</div>
-			                 
-					<div class="input-group" style="margin-top: 10px;">
-						<span class="form-control" style="width: 130px;">등록일자</span>
-						<div class="input-daterange" id="datepicker" style="height: 33px !important;">
-							<input type="hidden" name="searchDate"/>	                    
-							<input type="text" class="form-control" name="searchStart" placeholder="시작일" style=" text-align: center; width: 130px" required="required"/>
-							<span class="form-control" style="width: 60px;">부터</span>
-							<input type="text" class="form-control" name="searchEnd" placeholder="종료일" style=" text-align: center; width: 130px" required="required"/>
-						 	<span class="form-control" style="width: 60px;">까지</span>
-						</div>
-						<div style="margin-left: 10px; margin-top: 2.5px;">
-							<input type="button" class="btn btn-round btn-default" value="오늘"/>
-							<input type="button" class="btn btn-round btn-default" value="1주일"/>
-							<input type="button" class="btn btn-round btn-default" value="1개월"/>
-							<input type="button" class="btn btn-round btn-default" value="3개월"/>
-							<input type="button" class="btn btn-round btn-default" value="1년"/>
-						</div>
-	                  	
-				   	</div>
 			        <div class="searchBtnDiv">
 						<button type="submit" class="searchBtn btn-flip btn btn-gradient btn-primary">
 								검색 <span class="fa fa-search"></span>
@@ -288,12 +269,16 @@
 			$('.searchBtn').click(function(){
 				$('select[name="searchKey"]').attr("required" , true);
 				$('input[name="searchValue"]').attr("required" , true);
+				$('select[name="searchKey2"]').attr("required" , true);
+				$('input[name="searchValue2"]').attr("required" , true);
 				$('input[name="searchStart"]').attr("required" , true);
 				$('input[name="searchEnd"]').attr("required" , true);
 			});
 			$('.searchResetBtn').click(function(){
 				$('select[name="searchKey"]').attr("required" , false);
 				$('input[name="searchValue"]').attr("required" , false);
+				$('select[name="searchKey2"]').attr("required" , false);
+				$('input[name="searchValue2"]').attr("required" , false);
 				$('input[name="searchStart"]').attr("required" , false);
 				$('input[name="searchEnd"]').attr("required" , false);
 			});

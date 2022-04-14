@@ -23,8 +23,11 @@ public interface EClassMapper {
 	public List<EClassCategorySmall> eClassCategoryLarge(String eClassCategoryLargeCode);
 	public List<EClassCategorySmall> eClassCategoryMedium(String eClassCategoryMediumCode);
 	
+	//신청한 클래스 조회
+	public List<EClassOpenAppleyForm> eClassOpenAppleyList();
+	
 	//클래스 소개 등록 처리
-	public int EClassIntroduceInsert(EClassIntroduce eClassIntroduce, String memberEmail);
+	public int EClassIntroduceInsert(EClassIntroduce eClassIntroduce);
 	
 	//클래스 섹션 등록 처리
 	public int EClassSectionTitleInsert(EClassSectionTitle eClassSectionTitle);
@@ -38,6 +41,7 @@ public interface EClassMapper {
 	//클래스 답변 등록 처리
 	public int EClassAnswerInsert(EClassAnswer eClassAnswer);
 	
-	//클래스 답변 등록 처리
+	//클래스 세부설정 등록 처리
 	public int EClassPriceInsert(EClassOpenAppleyForm eClassOpenAppleyForm);
+
 }

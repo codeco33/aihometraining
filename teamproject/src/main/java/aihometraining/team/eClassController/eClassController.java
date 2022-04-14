@@ -1,4 +1,4 @@
-package aihometraining.team.eclassController;
+package aihometraining.team.eClassController;
 
 import java.util.List;
 
@@ -82,18 +82,44 @@ public class eClassController {
 		return categoryMedium;
 	}
 	
-	@GetMapping("/eClassIntroduce")
-	public List<EClassIntroduce> EClassIntroduceInsert( @RequestParam(value = "EClassIntroduceInsert", required = false)EClassIntroduce eClassIntroduce
-														,HttpSession session) {
+	@GetMapping("/openAppley")
+	public String EClassOpenAppleyFormInsert( EClassIntroduce eClassIntroduce
+											, EClassSectionTitle eClassSectionTitle
+											, EClassSectionCurriculum eClassSectionCurriculum
+											, EClassQuestion eClassQuestion
+											, EClassAnswer eClassAnswer
+											, EClassOpenAppleyForm eClassOpenAppleyForm
+											, HttpSession session) {
 		
-		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassIntroduce);
-		//1 eClassIntroduceCode 자동생성
-		//2 개설된 클래스 코드
-		String mamberEmail = (String) session.getAttribute("SEMAIL");
-		eClassService.EClassIntroduceInsert(eClassIntroduce, mamberEmail);
-		//int intorduce = eClassMapper.EClassIntroduceInsert(eClassIntroduce, mamberEmail);
 		
-		return null;
+		  String mamberEmail = (String) session.getAttribute("SEMAIL");
+		  eClassService.EClassIntroduceInsert(eClassIntroduce, mamberEmail);
+		  eClassService.EClassSectionTitleInsert(eClassSectionTitle, mamberEmail);
+		  eClassService.EClassSectionCurriculumInsert(eClassSectionCurriculum,
+		  mamberEmail, eClassSectionTitle);
+		  eClassService.EClassQuestionInsert(eClassQuestion, mamberEmail);
+		  eClassService.EClassAnswerInsert(eClassAnswer, mamberEmail, eClassQuestion);
+		  eClassService.EClassPriceInsert( eClassOpenAppleyForm , mamberEmail ,
+		  eClassIntroduce , eClassSectionTitle , eClassSectionCurriculum ,
+		  eClassQuestion , eClassAnswer);
+		  
+		  String qusetionCode = eClassQuestion.geteClassQuestionCode();
+		  eClassAnswer.seteClassQuestionCode(qusetionCode);
+		  
+		  log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassIntroduce);
+		  log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassSectionTitle);
+		  log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassSectionCurriculum);
+		  log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassQuestion);
+		  log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassAnswer);
+		 
+		return "redirect:/eClass/eClassOpenAppleyComplete";
+	}
+	@GetMapping("/eClassOpenAppleyComplete")
+	public String complete (Model model) {
+		
+		model.addAttribute("title", "신청완료");
+		
+		return "eClass/eClassOpenAppleyComplete";
 	}
 
 	@GetMapping("/eClassApproved")
@@ -122,10 +148,13 @@ public class eClassController {
 	
 	@GetMapping("/myApplyList")
 	public String MyApplyList(Model model) {
+		
+		List<EClassOpenAppleyForm> eClassOpenAppleyList = eClassService.eClassOpenAppleyList();
 			
 		model.addAttribute("title", "나의 개설신청 현황");
+		model.addAttribute("eClassOpenAppleyList", eClassOpenAppleyList);
 		
-		return "/eClass/myEClassApplyList";
+		return "eClass/myEClassApplyList";
 	}
 	
 	@GetMapping("/eclassadmin/studentList")
@@ -133,7 +162,7 @@ public class eClassController {
 		
 		model.addAttribute("title", "수강생 목록");
 		
-		return "/eClass/studentList";
+		return "eClass/studentList";
 	}
 	
 }
