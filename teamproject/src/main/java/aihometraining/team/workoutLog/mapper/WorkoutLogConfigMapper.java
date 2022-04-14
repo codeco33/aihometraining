@@ -11,8 +11,8 @@ import aihometraining.team.dto.WorkoutLogCategory;
 @Mapper
 public interface WorkoutLogConfigMapper {
 	
-	//운동 카테고리 조회
-	public List<WorkoutLogCategory> getWorkoutLogCategoryList();
+	//운동 카테고리 조회(검색)
+	public List<Map<String,Object>> getWorkoutLogCategoryList(Map<String,Object> paramMap);
 	
 	//운동 카테고리 등록
 	public int workoutGoalCategoryInsert(WorkoutLogCategory workoutLogCategory);
@@ -37,6 +37,9 @@ public interface WorkoutLogConfigMapper {
 	
 	//운동 계획 카테고리 삭제 
 	public int workoutLogCategoryDelete(String workoutGoalPlanCategoryCode);
+	
+	//새롭게 등록된 일지 조회
+	public List<WorkoutLog> getNewWorkoutLog();
 	 
 	 
 	

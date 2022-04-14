@@ -50,7 +50,7 @@ public class WorkoutLogConfigController {
 		
 		if(searchKey != null) {
 			if("memberEmail".equals(searchKey)) {
-				searchKey = "memberEmail";
+				searchKey = "w.memberEmail";	//쿼리문과 동일하게(모호하다며 찾을 수 없다며)
 				searchDate = "workoutLogUpdateFinalDate";
 			}else if("eClassCategorySmallName".equals(searchKey)) {
 				searchKey = "eClassCategorySmallName";
@@ -67,6 +67,9 @@ public class WorkoutLogConfigController {
 		
 		List<Map<String, Object>> workoutLogList = workoutLogConfigService.getWorkoutLogList(paramMap);
 		
+		List<WorkoutLog> workoutLogNewList = workoutLogConfigService.getNewWorkoutLog();
+		log.info("새로운 일지 목록 workoutLogNewList : {}", workoutLogNewList);
+		
 		paramMap = null;
 		
 		log.info("일지 검색 workoutLogList : {}", workoutLogList);
@@ -74,6 +77,7 @@ public class WorkoutLogConfigController {
 		model.addAttribute("title", "일지 관리자 화면");
 		model.addAttribute("leftMenuList", "일지");
 		model.addAttribute("workoutLogList", workoutLogList);
+		model.addAttribute("workoutLogNewList", workoutLogNewList);
 		
 		return "workoutLog/workoutLogConfig/workoutLogConfigMain";
 		
@@ -81,10 +85,35 @@ public class WorkoutLogConfigController {
 	
 	//운동 계획 카테고리 목록
 	@GetMapping("/workoutCategoryList")
-	public String workoutCategoryList(Model model) {
+	public String workoutCategoryList( Model model
+									  ,@RequestParam(value="searchKey", required = false) String searchKey
+									  ,@RequestParam(value="searchValue", required = false) String searchValue
+									  ,@RequestParam(value="searchDate", required = false) String searchDate
+									  ,@RequestParam(value="searchStart", required = false) String searchStart
+									  ,@RequestParam(value="searchEnd", required = false) String searchEnd) {
 		
+		Map<String, Object> paramMap = new HashMap<String,Object>();
 		
-		List<WorkoutLogCategory> workoutLogCategoryList = workoutLogConfigService.getWorkoutLogCategoryList();
+		if(searchKey != null) {
+			if("memberEmail".equals(searchKey)) {
+				searchKey = "w.memberEmail";	//쿼리문과 동일하게(모호하다며 찾을 수 없다며)
+				searchDate = "workoutLogUpdateFinalDate";
+			}else if("eClassCategorySmallName".equals(searchKey)) {
+				searchKey = "eClassCategorySmallName";
+				searchDate = "workoutLogUpdateFinalDate";
+			}
+		}
+		
+		paramMap.put("searchKey", searchKey);
+		paramMap.put("searchValue", searchValue);
+		paramMap.put("searchKey", searchKey);
+		paramMap.put("searchDate", searchDate);
+		paramMap.put("searchStart", searchStart);
+		paramMap.put("searchEnd", searchEnd);
+		
+		List<Map<String, Object>> workoutLogCategoryList = workoutLogConfigService.getWorkoutLogCategoryList(paramMap);
+		
+		paramMap = null;
 		
 		model.addAttribute("title", "운동 계획 카테고리 목록");
 		model.addAttribute("leftMenuList", "일지");
