@@ -28,8 +28,51 @@
 			
 		<association property="member" javaType="Member">
 			<id 	column="memberEmail" property="memberEmail"/>
-		</association>	
+		</association>
+		
+		<collection property="fileList" javaType="List" ofType="FileDto">
+				<id column="fileIdx" 						property="fileIdx"/>
+				<result	column="fileOriginalName" 			property="fileOriginalName"/>
+				<result column="fileNewName" 				property="fileNewName"/>
+				<result column="filePath" 					property="filePath"/>
+				<result column="fileSize" 					property="fileSize"/>
+			</collection>	
 	</resultMap>
+	
+	<select id="getNewWorkoutLog" resultMap="WorkoutLogResultMap">
+		/* 새롭게 등록된 일지 조회 */
+		SELECT 
+				  wl.workoutLogCode
+				, wl.memberEmail
+				, wl.workoutLogLikeCount
+				, wl.eClassCategorySmallCode
+				, wl.eClassCategorySmallName
+				, wl.workoutLogTitle
+				, wl.workoutLogContent
+				, wl.workoutGoalPlanCode
+				, wl.eClassTaskDoCode
+				, wl.challengeEnterCode
+				, f.fileIdx
+				, f.filepath
+				, SUBSTRING_INDEX(f.fileOriginalName,'.',1)
+				, wl.workoutLogPrivacyBoundsCode
+				, wl.workoutLogUpdateEmail
+				, wl.workoutLogUpdateFinalDate
+				, wl.workoutLogDeleteEmail
+		FROM 
+				workoutlog AS wl
+				LEFT JOIN 
+				tb_file_control AS fc
+				ON
+				wl.workoutLogcode = fc.referenceCode
+				LEFT JOIN 
+				tb_file AS f
+				ON 
+				fc.fileIdx = f.fileIdx
+		WHERE
+				wl.workoutLogUpdateFinalDate = CURDATE();
+	
+	</select>
 	
 	
 	
