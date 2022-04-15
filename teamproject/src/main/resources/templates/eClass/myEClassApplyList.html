@@ -29,17 +29,24 @@
 												style="	text-align: center;
 														border: none;
 												        opacity: 1;
-												        width: 70px;">
+												        width: 70px;
+												        text-align: right;">
 										<span>원</span>
 									</div>
 									<div class="col-md-4" style="width: 100%;">
-										<div class="col-md-12" style="background-color: #FE2E2E; height: 30px;padding-top: 5px;">
-											<a href="#"><span style="color: #0abeac">반려됨</span></a>
+										<div class="col-md-12" 
+											 style="background-color: #FE2E2E; height: 30px;padding-top: 5px;"
+											 th:if="${eClassAppleyState} == '1'">
+											<a href="#"><span style="color: #0abeac">반려됨(클릭시 상세사유)</span></a>
 										</div>
-										<div class="col-md-12" style="background-color: #808080; height: 30px;padding-top: 5px;">
+										<div class="col-md-12" 
+											 style="background-color: #808080; height: 30px;padding-top: 5px;"
+											 th:unless="${eClassAppleyState} == '0'">
 											<span style="color: #fff">심사중</span>
 										</div>
-										<div class="col-md-12" style="background-color: #2E2EFE; height: 30px;padding-top: 5px;">
+										<div class="col-md-12" 
+											 style="background-color: #2E2EFE; height: 30px;padding-top: 5px;"
+											 th:unless="${eClassAppleyState} == '0'">
 											<span style="color: #fff">승인</span>
 										</div>
 									</div>

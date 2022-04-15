@@ -1,6 +1,7 @@
 package aihometraining.team.eclassService;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,9 +45,9 @@ public class eClassService {
 		return eClassCategoryMediumList;
 	}
 	
-	public List<EClassOpenAppleyForm> MyApplyList(String memberEmail){
+	public List<EClassOpenAppleyForm> MyApplyList(Map<String, Object> paramMap,String eClassOpenAppleyMemberEmail){
 		
-		List<EClassOpenAppleyForm> eClassOpenApply = eClassMapper.eClassOpenAppleyList(memberEmail);
+		List<EClassOpenAppleyForm> eClassOpenApply = eClassMapper.eClassOpenAppleyList(paramMap, eClassOpenAppleyMemberEmail);
 		
 		return eClassOpenApply;
 	}
