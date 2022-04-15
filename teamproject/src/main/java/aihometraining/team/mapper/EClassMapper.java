@@ -1,6 +1,7 @@
 package aihometraining.team.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -24,7 +25,7 @@ public interface EClassMapper {
 	public List<EClassCategorySmall> eClassCategoryMedium(String eClassCategoryMediumCode);
 	
 	//신청한 클래스 조회
-	public List<EClassOpenAppleyForm> eClassOpenAppleyList(String memberEmail);
+	public List<EClassOpenAppleyForm> eClassOpenAppleyList(Map<String, Object> paramMap,String eClassOpenAppleyMemberEmail);
 	
 	//클래스 소개 등록 처리
 	public int EClassIntroduceInsert(EClassIntroduce eClassIntroduce);

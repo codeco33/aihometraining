@@ -1,6 +1,8 @@
 package aihometraining.team.eClassController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -151,25 +153,27 @@ public class eClassController {
 	
 	@GetMapping("/myApplyList")
 	public String MyApplyList(Model model
-							 ,EClassOpenAppleyForm eClassOpenAppleyForm
 							 ,@RequestParam(value = "eClassOpenAppleyMemberEmail",required = false)String MemberEmail
+							 ,EClassOpenAppleyForm eClassOpenAppleyForm
 							 ,HttpSession session) {
 		
 		String eClassOpenAppleyMemberEmail = (String) session.getAttribute("SEMAIL");
 		int appleyState = eClassOpenAppleyForm.geteClassOpenAppleyApproveState();
 		
-		if(appleyState < 1) {
-			
-		}
-
-		List<EClassOpenAppleyForm> eClassOpenAppleyList = eClassMapper.eClassOpenAppleyList(eClassOpenAppleyMemberEmail);
+		List<EClassOpenAppleyForm> eClassOpenAppleyList = eClassMapper.eClassOpenAppleyList(null, eClassOpenAppleyMemberEmail);
 		
+		Map<String, Object> paramMap = new HashMap<String , Object>();
+		List<EClassOpenAppleyForm> stateMap = eClassService.MyApplyList(paramMap, eClassOpenAppleyMemberEmail);
+		
+		paramMap = null;
+				
 		
 		log.info("eClassOpenAppleyList MyApplyList eClassOpenAppleyMemberEmail : {}",eClassOpenAppleyMemberEmail);
 		log.info("eClassOpenAppleyList MyApplyList eClassOpenAppleyApproveState : {}",appleyState);
 		
 		model.addAttribute("title", "나의 개설신청 현황");
 		model.addAttribute("eClassOpenAppleyList", eClassOpenAppleyList);
+		model.addAttribute("eClassAppleyState", appleyState);
 		
 		
 		return "eClass/myEClassApplyList";
