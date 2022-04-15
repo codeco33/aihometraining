@@ -13,84 +13,98 @@
 				<div class="row justify-content-center">
 					<div class="col-lg-8 col-md-8">
 						<h3 class="mb-30">일지 수정</h3>
-						<form class="mb-5" id="workoutLogInsert" th:action="@{/workoutLog/workoutLogUser/workoutLogInsert}" method="post">
-							<!-- 일지 제목 -->
-							<div class="mt-10">
-								<input type="text" name="workoutLogTitle" placeholder="일지 제목" onfocus="this.placeholder = ''" onblur="this.placeholder = '일지 제목'" required class="single-input">
-							</div>
-							<div class="mt-10">
-							</div>
-							<div class="input-group-icon mt-10">
-									<div class="icon"><i class="fas fa-bookmark" aria-hidden="true"></i></div>
-									<div class="form-select">
-										<!-- 일지 공개범위 선택 -->
-										<select name="workoutLogPrivacyBoundsCode">
-											<option>공개 범위</option>
-											<th:block th:if="${not #lists.isEmpty(workoutLogPrivacyboundsList)}" th:each="wpl : ${workoutLogPrivacyboundsList}">
-												<option th:value="${wpl.workoutLogPrivacyBoundsCode}">[[${wpl.workoutLogPrivacyBoundsContent}]]</option>
-											</th:block>
-											<th:block th:unless="${not #lists.isEmpty(workoutLogPrivacyboundsList)}" th:each="wpl : ${workoutLogPrivacyboundsList}">
-												<option >등록된 카테고리가 없습니다.</option>
-											</th:block>
-										</select>
-									</div>
-							</div>
-							<div class="input-group-icon mt-10">
-									<div class="icon"><i class="fas fa-bookmark" aria-hidden="true"></i></div>
-									<div class="form-select">
-										<!-- 운동 클래스 카테고리 large 선택 -->
-										<select  name="eClassCategoryLargeCode" id="eClassCategoryLargeCode">
-												<option>운동 카테고리 대</option>
-												<th:block th:if="${not #lists.isEmpty(eClassCategoryLargeList)}" th:each="el : ${eClassCategoryLargeList}">
-												<option th:value="${el.eClassCategoryLargeCode}">[[${el.eClassCategoryLargeName}]]</option>
+						<form class="mb-5" id="workoutLogInsert" th:action="@{/workoutLog/workoutLogUser/workoutLogUpdate}" method="post" >
+								<!-- 일지 제목 -->
+								<div class="mt-10">
+									<h6>일지 제목</h6>
+									<input type="hidden" name="workoutLogCode" th:value="${workoutLog.workoutLogCode}" required class="single-input">
+									<input type="text" name="workoutLogTitle" th:value="${workoutLog.workoutLogTitle}" required class="single-input">
+								</div>
+								<div class="mt-10">
+								</div>
+								<div class="input-group-icon mt-10">
+										<div class="icon"><i class="fas fa-bookmark" aria-hidden="true"></i></div>
+										<div class="form-select">
+											<!-- 일지 공개범위 선택 -->
+											<select name="workoutLogPrivacyBoundsCode" id="workoutLogPrivacyBoundsCode">
+												<th:block th:if="${not #lists.isEmpty(workoutLogPrivacyboundsList)}" th:each="w : ${workoutLogPrivacyboundsList}">
+													<option th:value="${w.workoutLogPrivacyBoundsCode}" th:selected="${w.workoutLogPrivacyBoundsCode == workoutLog.workoutLogPrivacyBoundsCode}">
+														[[${w.workoutLogPrivacyBoundsContent}]]
+													</option>
 												</th:block>
-												<th:block th:unless="${not #lists.isEmpty(eClassCategoryLargeList)}" th:each="el : ${eClassCategoryLargeList}">
+												<th:block th:unless="${not #lists.isEmpty(workoutLogPrivacyboundsList)}">
 													<option >등록된 카테고리가 없습니다.</option>
 												</th:block>
-										</select>
-									</div>
-							</div>
-							<div class="input-group-icon mt-10">
-									<div class="icon"><i class="fas fa-bookmark" aria-hidden="true"></i></div>
-									<div class="form-select">
-										<!-- 운동 클래스 카테고리 medium 선택 -->
-										<select name="eClassCategoryMediumCode" id="eClassCategoryMediumCode">
-												<option>운동 카테고리 중</option>
-										</select>
-									</div>
-							</div>
-							<div class="input-group-icon mt-10">
-									<div class="icon"><i class="fas fa-bookmark" aria-hidden="true"></i></div>
-									<div class="form-select">
-										<!-- 운동 클래스 카테고리 small 선택 -->
-										<select  name="eClassCategorySmallCode" id="eClassCategorySmallCode">
-											<option value= "eClassCategorySmallCode" data-cate="eClassCategorySmallName">운동 카테고리 소</option>
-											<!--  <option th:value="${el.eClassCategorySmallCode}" th:data-cate="${el.eClassCategorySmallName}" ></option>-->
-										</select>
-									</div>
-							</div>
-							<div class="mt-2">
-								<input type="file" name="workoutLogAddfile" placeholder="일지 첨부파일"
-								onfocus="this.placeholder = ''" onblur="this.placeholder = '일지 첨부파일'" required
-								class="single-input">
-							</div>
-							<div class="mt-10">
-						        <div class="card p-3" style="background-color: #f9f9ff; border: none;">
-									<h6>일지 내용</h6>
-									<div class="row pt-3">
-						               <div class="col-12">
-						                  <div class="form-group">
-						                     <textarea class="form-control w-100" name="workoutLogContent" id="comment" cols="30" rows="9" placeholder="내용을 입력하세요"></textarea>
-						                  </div>
-						               </div>
-						            </div>
+											</select>
+										</div>
 								</div>
-							</div>
-							<div class="row justify-content-center mt-5">
-	                            <button class="primary-bg btn_1 boxed-btn" id="workoutLogInsertbtn" type="button">
-	                            	일지 수정
-	                            </button>
-	                        </div>
+								<div class="input-group-icon mt-10">
+										<div class="icon"><i class="fas fa-bookmark" aria-hidden="true"></i></div>
+										<div class="form-select">
+											<!-- 운동 클래스 카테고리 large 선택 -->
+											<select  name="eClassCategoryLargeCode" id="eClassCategoryLargeCode">
+													<th:block th:if="${not #lists.isEmpty(eClassCategoryLargeList)}" th:each="e : ${eClassCategoryLargeList}">
+														<option th:value="${e.eClassCategoryLargeCode}" th:selected="${e.eClassCategoryLargeCode == workoutLog.eClassCategorySmall.eClassCategoryLargeCode}">
+															[[${e.eClassCategoryLargeName}]]
+														</option>
+													</th:block>
+													<th:block th:unless="${not #lists.isEmpty(eClassCategoryLargeList)}">
+														<option>등록된 카테고리가 없습니다.</option>
+													</th:block>
+											</select>
+										</div>
+								</div>
+								<div class="input-group-icon mt-10">
+										<div class="icon"><i class="fas fa-bookmark" aria-hidden="true"></i></div>
+										<div class="form-select">
+											<!-- 운동 클래스 카테고리 medium 선택 -->
+											<select name="eClassCategoryMediumCode" id="eClassCategoryMediumCode">
+												<th:block th:if="${not #lists.isEmpty(workoutLog)}" th:each="w : ${workoutLog}">	
+													<option th:value="${w.eClassCategorySmall.eClassCategoryMediumCode}" th:selected="${w.eClassCategorySmall.eClassCategoryMediumCode == workoutLog.eClassCategorySmall.eClassCategoryMediumCode}">
+															[[${w.eClassCategorySmall.eClassCategoryMediumName}]]
+													</option>
+												</th:block>
+												<th:block th:unless="${not #lists.isEmpty(workoutLog)}">
+													<option >등록된 카테고리가 없습니다.</option>
+												</th:block>
+											</select>
+										</div>
+								</div>
+								<div class="input-group-icon mt-10">
+										<div class="icon"><i class="fas fa-bookmark" aria-hidden="true"></i></div>
+										<div class="form-select">
+											<!-- 운동 클래스 카테고리 small 선택 -->
+											<select  name="eClassCategorySmallCode" id="eClassCategorySmallCode">
+												<th:block th:if="${not #lists.isEmpty(workoutLog)}" th:each="w : ${workoutLog}">
+													<option value= "eClassCategorySmallCode" data-cate="eClassCategorySmallName">운동 카테고리 소</option>
+													<!--  <option th:value="${w.eClassCategorySmallCode}" th:data-cate="${w.eClassCategorySmallName}" ></option>-->
+													<option th:value="${w.eClassCategorySmallCode}" th:selected="${w.eClassCategorySmallCode == workoutLog.eClassCategorySmallCode}">
+															[[${w.eClassCategorySmallName}]]
+													</option>
+												</th:block>
+												<th:block th:unless="${not #lists.isEmpty(workoutLog)}">
+													<option >등록된 카테고리가 없습니다.</option>
+												</th:block>
+											</select>
+										</div>
+								</div>
+								<div class="mt-10">
+							        <div class="card p-3" style="background-color: #f9f9ff; border: none;">
+										<h6>일지 내용</h6>
+										<div class="row pt-3">
+							               <div class="col-12">
+							                  <div class="form-group">
+							                     <textarea class="form-control w-100" name="workoutLogContent" id="comment" cols="30" rows="9" th:value="${workoutLog.workoutLogContent}">[[${workoutLog.workoutLogContent}]]</textarea>
+							                  </div>
+							               </div>
+							            </div>
+									</div>
+								</div>
+								<div class="row justify-content-center mt-5">
+		                            <button class="primary-bg btn_1 boxed-btn" id="workoutLogInsertbtn" type="button">
+		                            	일지 수정
+		                            </button>
+		                        </div>
                         </form>    
 					</div>
 				</div>
@@ -218,7 +232,7 @@
                               }
                       });
                   });
-			
+			  
 			
 			//등록 처리시 form을 submit 하기 전에 특정값을 추가
 			$(document).on('click','#workoutLogInsertbtn',function(){

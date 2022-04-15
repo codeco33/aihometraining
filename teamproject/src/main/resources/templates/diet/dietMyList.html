@@ -51,51 +51,17 @@
 						  <div class="card-header">
 						    <ul class="nav nav-tabs card-header-tabs">
 						      <li class="nav-item">
-						        <a class="nav-link active Diettime-btn" style="cursor:pointer">아침 식사</a>
+						        <a class="nav-link active Diettime-btn" style="cursor:pointer">아침식사</a>
 						      </li>
 						      <li class="nav-item">
-						        <a class="nav-link Diettime-btn" style="cursor:pointer">점심 식사</a>
+						        <a class="nav-link Diettime-btn" style="cursor:pointer">점심식사</a>
 						      </li>
 						      <li class="nav-item">
-						        <a class="nav-link Diettime-btn" style="cursor:pointer">저녁 식사</a>
+						        <a class="nav-link Diettime-btn" style="cursor:pointer">저녁식사</a>
 						      </li>
 						    </ul>
 						  </div>
-						  <div class="card-body">
-						    <table class="table table-hover" >
-							    <thead>
-							      <tr>
-							        <th class=" text-center">식품명</th>
-							        <th class=" text-center">1회제공량</th>
-							        <th class=" text-center">에너지(㎉)</th>
-							        <th class=" text-center">탄수화물(g)</th>
-							        <th class=" text-center">단백질(g)</th>
-							        <th class=" text-center">지방(g)</th>
-							        <th class=" text-center">나트륨(㎎)</th>
-							        <th class=" text-center"></th>
-							      </tr>
-							    </thead>
-							    <tbody>
-							     <tr>
-							     	<td>1</td>
-							     	<td>2</td>
-							     	<td>3</td>
-							     	<td>4</td>
-							     	<td>5</td>
-							     	<td>6</td>
-							     	<td>7</td>
-							     	<td>8</td>
-							     </tr>
-							     <tr>
-							     	<td colspan="8">
-								     	<button class="genric-btn primary-border radius addDiet-btn " data-toggle="modal" data-target="#myModal">
-									     	<i class="bi bi-plus-square"></i>
-									     	식단 기록하기
-								     	</button>
-							     	</td>
-							     </tr>
-							    </tbody>
-							  </table>
+						  <div class="card-body" id="myDietPlanedList" th:replace="/diet/AjaxTable/DietUserMealplanedListAjax.html :: fragment-myPlanedMealList">
 						  </div>
 						</div>
 						
@@ -212,11 +178,59 @@
 			</script>
 				<script th:inline="javascript">
 			
+					<!-- 페이지의 기본 javascript  -->
+						
+						$(document).ready(function(){
+							dayChange();
+							})
+							
 					
 						var memberEmail = [[${session.SEMAIL}]];
-						var dietBankOneMealConnectionTime = "아침 식사";
+						var dietPlanTime = "아침식사";
+						var dayChange = function(){
+							
+							var DayCheck = null;
+							
+							$('.Diettime-btn').each(function(){
+										
+								var BtnCheck = $(this).hasClass('active');
+								
+								if(BtnCheck == true){
+									console.log($(this).text());
+									
+									DayCheck = $(this).text();
+								}
+							
+							})							
+							
+							var count = 0;
+							
+							$('.planListTr').each(function(){
+								var ListDayVal = $(this).attr('value');
+								
+								if(ListDayVal == DayCheck){
+									$(this).show();
+									count ++;
+								}else{
+									$(this).hide();
+								}
+								
+							});
+							
+							
+							console.log(count);
+								
+								if(count == 0){
+									$('.MyPlanedDietTable').hide();
+								} else{
+									$('.MyPlanedDietTable').show();
+								}
+						}
 						
-					
+						
+						
+				
+						
 					
 						$('#datePicker').datepicker({
 							 format : "yyyy-mm-dd"
@@ -227,6 +241,23 @@
 						}).datepicker("setDate",'now');
 						
 						$('#datePicker').on('changeDate',function(e){
+						
+							 var dietPlanDay = $('#datePicker').val();
+						
+							$.ajax({
+									 url: '/diet/mypage/selectChangedDietPlanList'
+									,type: 'POST'
+									,data: 
+									{'memberEmail' : memberEmail,
+									 'dietPlanDay' : dietPlanDay
+									  }
+									,dataType: 'text'
+									,success: function(data){
+										$('#myDietPlanedList').replaceWith(data);
+										
+									}
+								});
+								
 							console.log(e);
 						});
 						
@@ -235,27 +266,60 @@
 							
 							$('.Diettime-btn').removeClass( 'active' );
 							$(e.target).addClass('active');
-							dietBankOneMealConnectionTime = $(e.target).html()
+							dietPlanTime = $(e.target).html()
+							
+							dayChange();
 						});
 						
+		
+			<!-- 실행/취소 버튼 클릭 update -->
+			$('.planDo-Btn').click(function(e){
+				console.log($(e.target).attr('value'));
+			});
 						
 						
-						$('.addDiet-btn').click(function(){
-							
-							var dietBankOneMealConnectionDay = $('#datePicker').val();
-							
-							console.log(memberEmail);
-							console.log(dietBankOneMealConnectionTime);
-							console.log(dietBankOneMealConnectionDay);
-							
-							
-							
+			<!-- 삭제 버튼 클릭 해당 줄 delete -->						
+			$('.planDel-Btn').click(function(e){
+				var dietPlanCode = $(e.target).attr('value')
+				var dietPlanDay = $('#datePicker').val();
+				console.log(memberEmail);
+				console.log(dietPlanDay);
+				
+				$.ajax({ url: '/diet/mypage/deleteUserDietPlan'
+						,type: 'POST'
+						,data: 
+						{'memberEmail' : memberEmail,
+						 'dietPlanDay' : dietPlanDay,
+						 'dietPlanCode' : dietPlanCode
+						  }
+						,dataType: 'text'
+						,success: function(data){
+							if(data = 1){
+								console.log("돼");
+									$.ajax({
+									 url: '/diet/mypage/selectChangedDietPlanList'
+									,type: 'POST'
+									,data: 
+									{'memberEmail' : memberEmail,
+									 'dietPlanDay' : dietPlanDay,
+									  }
+									,dataType: 'text'
+									,success: function(data){
+										$('#myDietPlanedList').replaceWith(data);
+										
+									}
+								});
+							}
+						}
+					});
+			});
+			
+		
+		
 						
-						});
 						
 						
-						
-						<!-- Ajax select:mealSort -->
+			<!-- Ajax select:mealSort -->
 			 	$('.updateDetailBank').click(function(){
 										
 					$.ajax({
@@ -287,7 +351,7 @@
 						});
 						
 					$.ajax({
-							 url: '/admin/diet/selectDietMealList'
+							 url: '/diet/mypage/selectUserDietMealList'
 							,type: 'POST'
 							,data: {'mainMealSort' : mainMealSort}
 							,dataType: 'text'
@@ -311,7 +375,6 @@
 					
 						var searchVal = $(this).attr('value');
 						
-						console.log(searchVal);
 					
 						if(DetailMealSort == searchVal){
 
@@ -361,7 +424,7 @@
 				});
 				
 				
-			<!-- 수정모달 off -->
+			<!-- 추가모달 off -->
 				$(document).ready(function(){       
 					    $('#myModal').on('hidden.bs.modal', function () {
 					    	

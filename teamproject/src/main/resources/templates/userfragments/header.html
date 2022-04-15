@@ -22,8 +22,8 @@
                                             <li class="active" ><a th:href="@{/}">홈</a></li>
                                             <li><a href="#">#운동 클래스</a>
                                                 <ul class="submenu">
-                                                    <li><a th:href="@{/eClass/eClassApprovedList}">#신규 클래스(재환)</a></li>
-                                                    <li><a th:href="@{/eClass/OpenApplyForm}">#특가 클래스(재환)</a></li>
+                                                    <li><a th:href="@{/eClassApprovedList}">#신규 클래스(재환)</a></li>
+                                                    <li><a th:href="@{/OpenApplyForm}">#특가 클래스(재환)</a></li>
                                                     <li><a href="#">#인기 클래스(재환)</a></li>
                                                 </ul>
                                             </li>
@@ -48,7 +48,13 @@
                                                 </ul>
                                             </li>
                                             <!-- Button -->
-                                            <li class="button-header margin-left "><a th:if="${session.SEMAIL == null}" th:href="@{/login}" class="btn">#로그인(민식2)</a></li>
+                                            <li class="button-header margin-left "><a th:if="${session.SEMAIL == null}" class="btn btn3">#로그인(민식)</a>
+                                            	<ul class="submenu">
+                                            		<li><a th:href="@{/login}">관리자</a></li>
+                                            		<li><a th:href="@{/login2}">일반 회원</a></li>
+                                            		<li><a th:href="@{/login3}">미인증 회원</a></li>
+                                            	</ul>
+                                            </li>
                                             <li class="button-header"><a th:if="${session.SEMAIL == null}" th:href="@{/addMember}" class="btn btn3">#회원가입(민식)</a></li>
 											<li th:if="${session.SEMAIL != null}" class="user-name text-white"><span>[[${session.SNAME}]]님이 로그인하셨습니다.</span></li>
 											<li><a th:if="${session.SEMAIL != null && session.SLEVEL == 'levelCode001'}">#관리자메뉴</a>
@@ -56,7 +62,7 @@
 												<ul class="submenu">
 													<li><a th:if="${session.SEMAIL != null}" th:href="@{/mypage}"><span class="fa fa-user"></span>마이페이지</a></li>
 													<li role="separator" class="divider"></li>
-													<li><a th:href="@{/wishList}"><span class="fa fa-calendar"></span>#위시리스트</a></li>
+													<li><a th:href="@{#}"><span class="fa fa-calendar"></span>#위시리스트</a></li>
 													<li><a th:if="${session.SEMAIL != null && session.SLEVEL == 'levelCode001'}" th:href="@{/admin}"><span class="fa fa-cogs"></span>관리자 페이지</a></li>
 													<li><a th:if="${session.SEMAIL != null}" th:href="@{/logout}" ><span class="fa fa-power-off"></span>로그아웃</a></li>
 												</ul>
@@ -66,7 +72,7 @@
 												<ul class="submenu">
 													<li><a th:if="${session.SEMAIL != null}" th:href="@{/mypage}"><span class="fa fa-user"></span>마이페이지</a></li>
 													<li role="separator" class="divider"></li>
-													<li><a th:if="${session.SEMAIL != null}" th:href="@{/wishList}"><span class="fa fa-calendar"></span>#위시리스트</a></li>
+													<li><a th:if="${session.SEMAIL != null}" th:href="@{#}"><span class="fa fa-calendar"></span>#위시리스트</a></li>
 													<li><a th:if="${session.SEMAIL != null}" th:href="@{/logout}" ><span class="fa fa-power-off"></span>로그아웃</a></li>
 												</ul>
 											</li>

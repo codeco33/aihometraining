@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import aihometraining.team.diet.mapper.DietMapper;
 import aihometraining.team.dto.DietBank;
 import aihometraining.team.dto.DietOnemealConnection;
+import aihometraining.team.dto.DietPlan;
 
 
 @Service
@@ -134,6 +135,34 @@ public class DietService {
 		return result;
 	}
 		
+	
+	//User DietPlan 추가버튼 눌렀을 때 insert
+	public int insertUserDietPlan(DietPlan dietplan) {
+		
+		int result = dietMapper.insertUserDietPlan(dietplan);
+		
+		return result;
+	}
+	
+	//UserDietPlan 페이지 select
+	public List<HashMap<String, Object>> selectUserDietPlan(DietPlan dietplan){
+		
+		List<HashMap<String, Object>> DietPlanList = dietMapper.selectUserDietPlan(dietplan);
+		
+		return DietPlanList;
+	}
+	
+	//UserDietPlan 에서 삭제
+	public int deleteUserDietPlan(DietPlan dietplan) {
+		int deleteReuslt = dietMapper.deleteUserDietPlan(dietplan);
+		return deleteReuslt;
+	}
+	
+	//UserDietPlanUpdate
+	public int updateUserDietPlan(DietPlan dietplan) {
+		int updateResult = dietMapper.updateUserDietPlan(dietplan);
+		return updateResult;
+	}
 	
 	
 }

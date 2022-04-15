@@ -219,8 +219,70 @@
 			dietBankCode=#{dietBankCode};
 	
 	</delete>
+	
+	
+	<insert id="insertUserDietPlan" parameterType="DietPlan">
+		INSERT INTO dietplan	(
+			 dietPlanCode
+			,nutrientsAPICode
+			,memberEmail
+			,dietPlanDay
+			,dietPlanTime
+			,dietPlanDoValue
+			,dietPlanRegDate
+		)VALUES (
+			#{dietPlanCode}, 
+			#{nutrientsAPICode}, 
+			#{memberEmail}, 
+			#{dietPlanDay}, 
+			#{dietPlanTime}, 
+			0, 
+			CURDATE());
+	</insert>
+	
+	<select id="selectUserDietPlan" parameterType="DietPlan" resultType="hashmap">
+		SELECT 
+			p.dietPlanCode                     		AS dietPlanCode     
+			,p.eClassApprovedCode             		AS eClassApprovedCode
+			,p.nutrientsAPICode               		AS nutrientsAPICode
+			,p.memberEmail                    		AS memberEmail     
+			,p.dietPlanDay                   		AS dietPlanDay     
+			,p.dietPlanTime                 	    AS dietPlanTime    
+			,p.dietPlanDoValue                 		AS dietPlanDoValue 
+				,n.nutrientsAPIName                 AS nutrientsAPIName
+				,n.nutrientsAPICode                 AS nutrientsAPICode
+				,n.nutrientsAPIFoodSort             AS nutrientsAPIFoodSort
+				,n.nutrientsAPISortdetail           AS nutrientsAPISortdetail
+				,n.nutrientsAPIName                 AS nutrientsAPIName
+				,n.nutrientsAPIServe                AS nutrientsAPIServe
+				,n.nutrientsAPIKcal                 AS nutrientsAPIKcal
+				,n.nutrientsAPICarbo                AS nutrientsAPICarbo
+				,n.nutrientsAPIPro                  AS nutrientsAPIPro 
+				,n.nutrientsAPIFat                  AS nutrientsAPIFat 
+				,n.nutrientsAPINatr                 AS nutrientsAPINatr
+		FROM dietplan AS p
+		LEFT JOIN nutrientsapi AS n
+		ON	
+			p.nutrientsAPICode = n.nutrientsAPICode
+		WHERE
+			memberEmail = #{memberEmail}
+			AND
+			dietPlanDay = #{dietPlanDay};
+	</select>
 
-
+	<delete id="deleteUserDietPlan" parameterType="DietPlan">
+		DELETE FROM dietplan 
+		WHERE 
+		dietPlanCode = #{dietPlanCode};
+	</delete>
+	
+	<update id="updateUserDietPlan" parameterType="DietPlan">
+		UPDATE dietplan
+		SET
+			dietPlanDoValue=#{dietPlanDoValue}
+		WHERE 
+			dietPlanCode = #{dietPlanCode};
+	</update>
 	
 	
 </mapper>
