@@ -95,6 +95,77 @@
 			});
 			
 			
+			$('.planDo-Btn').click(function(e){
+				var dietPlanDoValue = 1;
+				var dietPlanCode = $(e.target).attr('value');
+				var dietPlanDay = $('#datePicker').val();
+				
+				$.ajax({
+					 url: '/diet/mypage/updateUserDietPlan'
+					,type: 'POST'
+					,data: 
+					{'dietPlanDoValue' : dietPlanDoValue,
+					 'dietPlanCode' : dietPlanCode
+					  }
+					,dataType: 'text'
+					,success: function(data){
+						if(data = 1){
+							console.log("돼");
+								$.ajax({
+								 url: '/diet/mypage/selectChangedDietPlanList'
+								,type: 'POST'
+								,data: 
+								{'memberEmail' : memberEmail,
+								 'dietPlanDay' : dietPlanDay,
+								  }
+								,dataType: 'text'
+								,success: function(data){
+									$('#myDietPlanedList').replaceWith(data);
+									
+								}
+							});
+						}
+						
+					}
+				});
+			});
+			
+			
+			$('.planCancel-Btn').click(function(e){
+				var dietPlanDoValue = 0;
+				var dietPlanCode = $(e.target).attr('value');
+				var dietPlanDay = $('#datePicker').val();
+				
+				$.ajax({
+					 url: '/diet/mypage/updateUserDietPlan'
+					,type: 'POST'
+					,data: 
+					{'dietPlanDoValue' : dietPlanDoValue,
+					 'dietPlanCode' : dietPlanCode
+					  }
+					,dataType: 'text'
+					,success: function(data){
+						if(data = 1){
+							console.log("돼");
+								$.ajax({
+								 url: '/diet/mypage/selectChangedDietPlanList'
+								,type: 'POST'
+								,data: 
+								{'memberEmail' : memberEmail,
+								 'dietPlanDay' : dietPlanDay,
+								  }
+								,dataType: 'text'
+								,success: function(data){
+									$('#myDietPlanedList').replaceWith(data);
+									
+								}
+							});
+						}
+					}
+				});
+			});
+			
+			
 			
 		
 		</script>

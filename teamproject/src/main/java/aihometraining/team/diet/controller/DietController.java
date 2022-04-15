@@ -23,6 +23,7 @@ import aihometraining.team.dto.DietBank;
 import aihometraining.team.dto.DietMealLevelList;
 import aihometraining.team.dto.DietNutrientList;
 import aihometraining.team.dto.DietOnemealConnection;
+import aihometraining.team.dto.DietPlan;
 
 
 @Controller
@@ -271,6 +272,17 @@ public class DietController {
 		return "diet/AjaxTable/DietBankConnMealListDayAjax";
 	}
 	
+	
+	//Ajax 식단 계획 페이지에서 실행 눌렀을 때, 혹은 취소 눌렀을 때 update
+	@PostMapping("/updateUserDietPlan")
+	@ResponseBody
+	public int updateUserDietPlan(DietPlan dietplan) {
+		
+		int updateResult = dietService.updateUserDietPlan(dietplan);
+		
+		
+		return updateResult;
+	}
 	
 	
 }
