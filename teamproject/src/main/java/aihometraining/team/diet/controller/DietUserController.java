@@ -74,14 +74,18 @@ public class DietUserController {
 		String memberEmail = (String) session.getAttribute("SEMAIL");
 		String today = LocalDate.now().toString();
 		
-		dietplan.setMemberEmail(memberEmail);
+		dietplan.setMemberEmail(memberEmail);	
 		dietplan.setDietPlanDay(today);
 
 		
 		List<HashMap<String, Object>> UserdietPlanList = dietService.selectUserDietPlan(dietplan);
-		
-		
 		model.addAttribute("UserdietPlanList",UserdietPlanList);
+		
+		HashMap<String, Object> UserdietPlanListNutrient = dietService.UserdietPlanList(UserdietPlanList);
+		model.addAttribute("UserdietPlanListNutrient", UserdietPlanListNutrient);
+		
+		log.info("UserdietPlanListNutrient : {}", UserdietPlanListNutrient);
+		
 		
 		
 		return "diet/dietMyList";
@@ -128,6 +132,13 @@ public class DietUserController {
 		List<HashMap<String, Object>> UserdietPlanList = dietService.selectUserDietPlan(dietplan);
 		model.addAttribute("UserdietPlanList",UserdietPlanList);
 
+		
+		HashMap<String, Object> UserdietPlanListNutrient = dietService.UserdietPlanList(UserdietPlanList);
+		model.addAttribute("UserdietPlanListNutrient", UserdietPlanListNutrient);
+		
+		log.info("UserdietPlanListNutrient : {}", UserdietPlanListNutrient);
+		
+		
 		return "diet/AjaxTable/DietUserMealplanedListAjax";
 	}
 	
@@ -140,6 +151,7 @@ public class DietUserController {
 		return deleteResult;
 	}
 	
+	//Ajax 식단 계획 페이지에서 실행 눌렀을 때, 혹은 취소 눌렀을 때 update
 	@PostMapping("/updateUserDietPlan")
 	@ResponseBody
 	public int updateUserDietPlan(DietPlan dietPlan) {
@@ -148,15 +160,5 @@ public class DietUserController {
 		
 		return updateResult;
 	}
-		
-		
-		
-
-
-
-		
-		
-		
-	
 }
 

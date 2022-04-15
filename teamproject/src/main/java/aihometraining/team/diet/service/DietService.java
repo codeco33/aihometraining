@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +19,11 @@ import aihometraining.team.dto.DietPlan;
 @Service
 @Transactional
 public class DietService {
+	
+	
+	private static final Logger log = LoggerFactory.getLogger(DietService.class);
+
+	
 	
 	private static final int List = 0;
 	private static final int HashMap = 0;
@@ -164,5 +171,68 @@ public class DietService {
 		return updateResult;
 	}
 	
+	//total 영양소 계산기
+	public HashMap<String, Object> UserdietPlanList(List<HashMap<String, Object>> UserdietPlanList){
+
+		
+		//총 계획 영양소들
+		Integer nutrientsAPIKcal = 0;
+		Integer nutrientsAPICarbo = 0;
+		Integer nutrientsAPIPro = 0;
+		Integer nutrientsAPIFat = 0;
+		Integer nutrientsAPINatr = 0;
+		
+		for(int i=0; i<UserdietPlanList.size(); i++) {
+			
+			HashMap<String, Object> mealList = UserdietPlanList.get(i);
+			
+			nutrientsAPIKcal += (Integer)mealList.get("nutrientsAPIKcal");
+			nutrientsAPICarbo += (Integer)mealList.get("nutrientsAPICarbo");
+			nutrientsAPIPro += (Integer)mealList.get("nutrientsAPIPro");
+			nutrientsAPIFat += (Integer)mealList.get("nutrientsAPIFat");
+			nutrientsAPINatr += (Integer)mealList.get("nutrientsAPINatr");
+		}
+		
+		HashMap<String, Object> planedNutrient = new HashMap<>();
+		
+		planedNutrient.put("nutrientsAPIKcal", nutrientsAPIKcal);
+		planedNutrient.put("nutrientsAPICarbo", nutrientsAPICarbo);
+		planedNutrient.put("nutrientsAPIPro", nutrientsAPIPro);
+		planedNutrient.put("nutrientsAPIFat", nutrientsAPIFat);
+		planedNutrient.put("nutrientsAPINatr", nutrientsAPINatr);
+		
+		//총 실행 영양소들
+		nutrientsAPIKcal = 0;
+		nutrientsAPICarbo = 0;
+		nutrientsAPIPro = 0;
+		nutrientsAPIFat = 0;
+		nutrientsAPINatr = 0;
+		
+		for(int i=0; i<UserdietPlanList.size(); i++) {
+			
+			HashMap<String, Object> mealList = UserdietPlanList.get(i);
+			
+			if (mealList.get("dietPlanDoValue").equals(1)) {
+				
+				nutrientsAPIKcal += (Integer)mealList.get("nutrientsAPIKcal");
+				nutrientsAPICarbo += (Integer)mealList.get("nutrientsAPICarbo");
+				nutrientsAPIPro += (Integer)mealList.get("nutrientsAPIPro");
+				nutrientsAPIFat += (Integer)mealList.get("nutrientsAPIFat");
+				nutrientsAPINatr += (Integer)mealList.get("nutrientsAPINatr");
+				
+			}
+		}
+		
+		planedNutrient.put("nutrientsAPIKcalDone", nutrientsAPIKcal);
+		planedNutrient.put("nutrientsAPICarboDone", nutrientsAPICarbo);
+		planedNutrient.put("nutrientsAPIProDone", nutrientsAPIPro);
+		planedNutrient.put("nutrientsAPIFatDone", nutrientsAPIFat);
+		planedNutrient.put("nutrientsAPINatrDone", nutrientsAPINatr);
+		
+		
+		
+		
+		return planedNutrient;
+	}
 	
 }

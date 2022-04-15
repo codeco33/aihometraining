@@ -66,65 +66,65 @@
 						</div>
 						
 						
-					<div>
-						<div class="card m-1" >
+					<div id="progressAll">
+						<div class="card m-1"  >
 							<div class="card-body">
 						    <h5 class="card-title">영양소 섭취</h5>
 						    <P>기준에 따른 활성화 select 하기DBㄴㄴㄴ(식단은행 있으면 식단은행으로 대체), 식단은행 가져오기 1일단위 or 1주일 단위 가능</P>
 						    	<div>
 							    	<div class="mb-3">
-										<div class="row">
-											<div class="col-auto mr-auto">칼로리</div>
-											<div class="col-auto">300kcal</div>
+										<div class="row NutrientBar">
+											<div class="col-auto mr-auto">칼로리(kcal)</div>
+											<div class="col-auto" th:text="${UserdietPlanListNutrient.nutrientsAPIKcalDone}"></div>
 											<div class="col-auto">/</div>
-											<div class="col-auto">2000kcal</div>
+											<div class="col-auto" th:text="${UserdietPlanListNutrient.nutrientsAPIKcal}"></div>
 										</div>
 										<div class="progress">
-											<div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+										  <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 									</div>
 							    	<div class="mb-3">
-										<div class="row">
-											<div class="col-auto mr-auto">탄수화물(g)</div>
-											<div class="col-auto">300kcal</div>
+										<div class="row NutrientBar">
+											<div class="col-auto mr-auto" >탄수화물(g)</div>
+											<div class="col-auto" th:text="${UserdietPlanListNutrient.nutrientsAPICarboDone}"></div>
 											<div class="col-auto">/</div>
-											<div class="col-auto">2000kcal</div>
+											<div class="col-auto" th:text="${UserdietPlanListNutrient.nutrientsAPICarbo}"></div>
 										</div>
 										<div class="progress">
-											<div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+										  <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 									</div>
 							    	<div class="mb-3">
-										<div class="row">
-											<div class="col-auto mr-auto">단백질(g)</div>
-											<div class="col-auto">300kcal</div>
+										<div class="row NutrientBar">
+											<div class="col-auto mr-auto" >단백질(g)</div>
+											<div class="col-auto" th:text="${UserdietPlanListNutrient.nutrientsAPIProDone}"></div>
 											<div class="col-auto">/</div>
-											<div class="col-auto">2000kcal</div>
+											<div class="col-auto" th:text="${UserdietPlanListNutrient.nutrientsAPIPro}"></div>
 										</div>
 										<div class="progress">
-											<div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+										  <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 									</div>
 							    	<div class="mb-3">
-										<div class="row">
+										<div class="row NutrientBar">
 											<div class="col-auto mr-auto">지방(g)</div>
-											<div class="col-auto">300kcal</div>
+											<div class="col-auto" th:text="${UserdietPlanListNutrient.nutrientsAPIFatDone}"></div>
 											<div class="col-auto">/</div>
-											<div class="col-auto">2000kcal</div>
+											<div class="col-auto" th:text="${UserdietPlanListNutrient.nutrientsAPIFat}"></div>
 										</div>
 										<div class="progress">
-											<div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+										  <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 									</div>
 							    	<div class="mb-3">
-										<div class="row">
-											<div class="col-auto mr-auto">나트륨(g)</div>
-											<div class="col-auto">300kcal</div>
+										<div class="row NutrientBar">
+											<div class="col-auto mr-auto">나트륨(mg)</div>
+											<div class="col-auto" th:text="${UserdietPlanListNutrient.nutrientsAPINatrDone}"></div>
 											<div class="col-auto">/</div>
-											<div class="col-auto">2000kcal</div>
+											<div class="col-auto" th:text="${UserdietPlanListNutrient.nutrientsAPINatr}"></div>
 										</div>
 										<div class="progress">
-											<div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+										  <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 									</div>
 								</div>
@@ -226,11 +226,26 @@
 						
 						$(document).ready(function(){
 							dayChange();
+							NutrChange();
+							
 							})
 							
 					
 						var memberEmail = [[${session.SEMAIL}]];
 						var dietPlanTime = "아침식사";
+						var NutrChange = function(){
+							$('.NutrientBar').each(function(){
+								var DoneNu = $(this).children().eq(1).text();
+								var Nu = $(this).children().eq(3).text();
+								var result = DoneNu/Nu*100+"%";
+								
+								console.log($(this).next().find('.progress-bar').attr('style',"width:"+result+";"));
+								console.log(DoneNu);
+								console.log(Nu);
+								
+							});
+						}
+						
 						var dayChange = function(){
 							
 							var DayCheck = null;
