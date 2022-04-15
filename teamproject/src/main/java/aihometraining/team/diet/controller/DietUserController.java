@@ -133,14 +133,20 @@ public class DietUserController {
 	
 	@PostMapping("/deleteUserDietPlan")
 	@ResponseBody
-	public int deleteUserDietPlan(Model model
-									,DietPlan dietplan) {
-		
+	public int deleteUserDietPlan(DietPlan dietplan) {
 		
 		int deleteResult = dietService.deleteUserDietPlan(dietplan);
 		
-		
 		return deleteResult;
+	}
+	
+	@PostMapping("/updateUserDietPlan")
+	@ResponseBody
+	public int updateUserDietPlan(DietPlan dietPlan) {
+		
+		int updateResult = dietService.updateUserDietPlan(dietPlan);
+		
+		return updateResult;
 	}
 		
 		

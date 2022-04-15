@@ -158,5 +158,11 @@ public class DietService {
 		return deleteReuslt;
 	}
 	
+	//UserDietPlanUpdate
+	public int updateUserDietPlan(DietPlan dietplan) {
+		int updateResult = dietMapper.updateUserDietPlan(dietplan);
+		return updateResult;
+	}
+	
 	
 }

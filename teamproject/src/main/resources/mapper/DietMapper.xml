@@ -276,5 +276,13 @@
 		dietPlanCode = #{dietPlanCode};
 	</delete>
 	
+	<update id="updateUserDietPlan" parameterType="DietPlan">
+		UPDATE dietplan
+		SET
+			dietPlanDoValue=#{dietPlanDoValue}
+		WHERE 
+			dietPlanCode = #{dietPlanCode};
+	</update>
+	
 	
 </mapper>
