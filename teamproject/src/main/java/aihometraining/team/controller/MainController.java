@@ -15,7 +15,7 @@ public class MainController {
 		
 		System.out.println(session.getAttribute("SLEVEL"));
 		System.out.println(session.getAttribute("SNAME"));
-		model.addAttribute("title", "메인화면");
+		model.addAttribute("title", "AI 쌍방향 홈 트레이닝 시스템");
 		
 		return "usermain";
 	}

@@ -48,7 +48,13 @@
                                                 </ul>
                                             </li>
                                             <!-- Button -->
-                                            <li class="button-header margin-left "><a th:if="${session.SEMAIL == null}" th:href="@{/login}" class="btn">#로그인(민식2)</a></li>
+                                            <li class="button-header margin-left "><a th:if="${session.SEMAIL == null}" class="btn btn3">#로그인(민식)</a>
+                                            	<ul class="submenu">
+                                            		<li><a th:href="@{/login}">관리자</a></li>
+                                            		<li><a th:href="@{/login2}">일반 회원</a></li>
+                                            		<li><a th:href="@{/login3}">미인증 회원</a></li>
+                                            	</ul>
+                                            </li>
                                             <li class="button-header"><a th:if="${session.SEMAIL == null}" th:href="@{/addMember}" class="btn btn3">#회원가입(민식)</a></li>
 											<li th:if="${session.SEMAIL != null}" class="user-name text-white"><span>[[${session.SNAME}]]님이 로그인하셨습니다.</span></li>
 											<li><a th:if="${session.SEMAIL != null && session.SLEVEL == 'levelCode001'}">#관리자메뉴</a>
