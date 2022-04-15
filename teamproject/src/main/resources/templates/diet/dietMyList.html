@@ -72,9 +72,53 @@
 						    <h5 class="card-title">영양소 섭취</h5>
 						    <P>기준에 따른 활성화 select 하기DBㄴㄴㄴ(식단은행 있으면 식단은행으로 대체), 식단은행 가져오기 1일단위 or 1주일 단위 가능</P>
 						    	<div>
-							    	<div>
+							    	<div class="mb-3">
 										<div class="row">
 											<div class="col-auto mr-auto">칼로리</div>
+											<div class="col-auto">300kcal</div>
+											<div class="col-auto">/</div>
+											<div class="col-auto">2000kcal</div>
+										</div>
+										<div class="progress">
+											<div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+									</div>
+							    	<div class="mb-3">
+										<div class="row">
+											<div class="col-auto mr-auto">탄수화물(g)</div>
+											<div class="col-auto">300kcal</div>
+											<div class="col-auto">/</div>
+											<div class="col-auto">2000kcal</div>
+										</div>
+										<div class="progress">
+											<div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+									</div>
+							    	<div class="mb-3">
+										<div class="row">
+											<div class="col-auto mr-auto">단백질(g)</div>
+											<div class="col-auto">300kcal</div>
+											<div class="col-auto">/</div>
+											<div class="col-auto">2000kcal</div>
+										</div>
+										<div class="progress">
+											<div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+									</div>
+							    	<div class="mb-3">
+										<div class="row">
+											<div class="col-auto mr-auto">지방(g)</div>
+											<div class="col-auto">300kcal</div>
+											<div class="col-auto">/</div>
+											<div class="col-auto">2000kcal</div>
+										</div>
+										<div class="progress">
+											<div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+									</div>
+							    	<div class="mb-3">
+										<div class="row">
+											<div class="col-auto mr-auto">나트륨(g)</div>
 											<div class="col-auto">300kcal</div>
 											<div class="col-auto">/</div>
 											<div class="col-auto">2000kcal</div>
@@ -274,7 +318,71 @@
 		
 			<!-- 실행/취소 버튼 클릭 update -->
 			$('.planDo-Btn').click(function(e){
-				console.log($(e.target).attr('value'));
+				var dietPlanDoValue = 1;
+				var dietPlanCode = $(e.target).attr('value');
+				var dietPlanDay = $('#datePicker').val();
+				
+				$.ajax({
+					 url: '/diet/mypage/updateUserDietPlan'
+					,type: 'POST'
+					,data: 
+					{'dietPlanDoValue' : dietPlanDoValue,
+					 'dietPlanCode' : dietPlanCode
+					  }
+					,dataType: 'text'
+					,success: function(data){
+						if(data = 1){
+							console.log("돼");
+								$.ajax({
+								 url: '/diet/mypage/selectChangedDietPlanList'
+								,type: 'POST'
+								,data: 
+								{'memberEmail' : memberEmail,
+								 'dietPlanDay' : dietPlanDay,
+								  }
+								,dataType: 'text'
+								,success: function(data){
+									$('#myDietPlanedList').replaceWith(data);
+									
+								}
+							});
+						}
+					}
+				});
+			});
+			
+			$('.planCancel-Btn').click(function(e){
+				var dietPlanDoValue = 0;
+				var dietPlanCode = $(e.target).attr('value');
+				var dietPlanDay = $('#datePicker').val();
+				
+				$.ajax({
+					 url: '/diet/mypage/updateUserDietPlan'
+					,type: 'POST'
+					,data: 
+					{'dietPlanDoValue' : dietPlanDoValue,
+					 'dietPlanCode' : dietPlanCode
+					  }
+					,dataType: 'text'
+					,success: function(data){
+						if(data = 1){
+							console.log("돼");
+								$.ajax({
+								 url: '/diet/mypage/selectChangedDietPlanList'
+								,type: 'POST'
+								,data: 
+								{'memberEmail' : memberEmail,
+								 'dietPlanDay' : dietPlanDay,
+								  }
+								,dataType: 'text'
+								,success: function(data){
+									$('#myDietPlanedList').replaceWith(data);
+									
+								}
+							});
+						}
+					}
+				});
 			});
 						
 						
