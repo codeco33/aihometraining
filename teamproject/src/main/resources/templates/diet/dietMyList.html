@@ -229,9 +229,7 @@
 						
 						
 						
-						$('.planDo-Btn').click(function(){
-								console.log(e.target);
-							})
+				
 						
 					
 						$('#datePicker').datepicker({
@@ -273,6 +271,11 @@
 							dayChange();
 						});
 						
+		
+			<!-- 실행/취소 버튼 클릭 update -->
+			$('.planDo-Btn').click(function(e){
+				console.log($(e.target).attr('value'));
+			});
 						
 						
 			<!-- 삭제 버튼 클릭 해당 줄 delete -->						

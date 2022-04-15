@@ -63,5 +63,7 @@ public interface DietMapper {
 	//User 식단 계획 삭제
 	public int deleteUserDietPlan(DietPlan dietplan);
 	
+	//User 식단 계획 실행(update)
+	public int updateUserDietPlan(DietPlan dietplan);
 	
 }

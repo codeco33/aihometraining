@@ -20,8 +20,8 @@
 		    <tbody>
 			  <tr class="planListTr" th:each="s : ${UserdietPlanList}" th:value="${s.dietPlanTime}">
 			   	<td>
-			   		<span class="badge rounded-pill bg-primary" style="color:white">완료</span>
-					<span class="badge rounded-pill bg-secondary" style="color:white">미완료</span>
+			   		<span th:if="${s.dietPlanDoValue} == 1" class="badge rounded-pill bg-primary" style="color:white">완료</span>
+					<span th:unless="${s.dietPlanDoValue} == 1" class="badge rounded-pill bg-secondary" style="color:white">미완료</span>
 			   	</td>
 			    <td th:text="${s.nutrientsAPIName}"></td>
 			    <td th:text="${s.nutrientsAPIServe}"></td>
@@ -31,8 +31,11 @@
 			    <td th:text="${s.nutrientsAPIFat}"></td>
 			    <td th:text="${s.nutrientsAPINatr}"></td>
 			    <td class="text-center pl-0 pr-0" >
-			    	<button class="genric-btn primary-border small planDo-Btn">
+			    	<button th:unless="${s.dietPlanDoValue} == 1" th:value="${s.dietPlanCode}" class="genric-btn primary-border small planDo-Btn">
 			    		실행
+			    	</button>
+			    	<button th:if="${s.dietPlanDoValue} == 1" th:value="${s.dietPlanCode}" class="genric-btn primary-border small planCancel-Btn">
+			    		취소
 			    	</button>
 			    	<button class="genric-btn primary-border small planDel-Btn" th:value="${s.dietPlanCode}">
 			    		삭제
@@ -90,6 +93,9 @@
 						}
 					});
 			});
+			
+			
+			
 		
 		</script>
 	</th:block>	  

@@ -10,7 +10,7 @@ public class DietPlan {
 	private String memberEmail;
 	private String dietPlanDay;
 	private String dietPlanTime;
-	private String dietPlanDoValue;
+	private int dietPlanDoValue;
 	private String dietPlanRegDate;
 	private String memberUpdateEmail;
 	private String dietPlanUpdateDate;
@@ -59,12 +59,7 @@ public class DietPlan {
 	public void setDietPlanTime(String dietPlanTime) {
 		this.dietPlanTime = dietPlanTime;
 	}
-	public String getDietPlanDoValue() {
-		return dietPlanDoValue;
-	}
-	public void setDietPlanDoValue(String dietPlanDoValue) {
-		this.dietPlanDoValue = dietPlanDoValue;
-	}
+
 	public String getDietPlanRegDate() {
 		return dietPlanRegDate;
 	}
@@ -82,6 +77,14 @@ public class DietPlan {
 	}
 	public void setDietPlanUpdateDate(String dietPlanUpdateDate) {
 		this.dietPlanUpdateDate = dietPlanUpdateDate;
+	}
+	
+	
+	public int getDietPlanDoValue() {
+		return dietPlanDoValue;
+	}
+	public void setDietPlanDoValue(int dietPlanDoValue) {
+		this.dietPlanDoValue = dietPlanDoValue;
 	}
 	@Override
 	public String toString() {
