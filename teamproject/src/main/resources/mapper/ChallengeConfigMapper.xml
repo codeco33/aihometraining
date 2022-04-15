@@ -571,7 +571,7 @@
 		  
 	</select>
 	
-	<select id="getChallengePointList" parameterType="ChallengePointGive" resultMap="challengePointGiveResultMap">
+	<select id="getChallengePointList" parameterType="map" resultType="map" resultMap="challengePointGiveResultMap">
 		/* 챌린지 포인트 관리 목록 조회 */
 		SELECT 
 		     cpg.challengePointGiveCode
@@ -599,7 +599,18 @@
 			INNER join
 			pointgivestandard AS ps
 			on
-			ps.pointGiveStandardCode = cpg.pointGiveStandardCode;
+			ps.pointGiveStandardCode = cpg.pointGiveStandardCode
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="searchKey != null and searchKey !='' and searchValue != ''">
+				AND 
+					${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
+			</if>
+			<if test="searchKey != null and searchKey !='' and searchValue != '' and searchDate != null and searchDate !='' and searchStart != '' and searchEnd != ''">
+				AND 
+					${searchDate} BETWEEN #{searchStart} AND #{searchEnd}
+			</if>
+		</trim>
+			ORDER BY cast(SUBSTRING_INDEX(cpg.challengePointGiveCode,'_',-1) AS UNSIGNED) ASC;
 	</select>
 	
 	<select id="getPointDetailByCode" parameterType="String" resultMap="challengePointGiveResultMap">

@@ -176,9 +176,9 @@ public class ChallengeConfigService {
 	}
 	
 	//챌린지 포인트 관리 목록 조회
-	public List<ChallengePointGive> getChallengePointList() {
+	public List<Map<String, Object>> getChallengePointList(Map<String, Object> paramMap) {
 		
-		List<ChallengePointGive> pointList = challengeConfigMapper.getChallengePointList();
+		List<Map<String, Object>> pointList = challengeConfigMapper.getChallengePointList(paramMap);
 		
 		return pointList;
 		
