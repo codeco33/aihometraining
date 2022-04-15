@@ -396,8 +396,9 @@
 		SELECT
 			 op.eClassOpenAppleyName
 			,op.eClassOpenAppleyPrice
+			,op.eClassOpenAppleyApproveState
 			,it.eClassIntroduceImg
-			,it.eClassIntroduceContent
+			,it.eClassIntroduceContent	
 		FROM
 			eclassopenappley AS op
 		INNER JOIN 

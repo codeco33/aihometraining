@@ -112,16 +112,19 @@ public class eClassController {
 		  log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassQuestion);
 		  log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassAnswer);
 		 
-		return "redirect:/eClass/eClassOpenAppleyComplete";
+		return "redirect:/eClassOpenAppleyComplete";
 	}
-	@GetMapping("/eClassOpenAppleyComplete")
+	
+	
+	@GetMapping("/eClassOpenAppleyComplete") 
 	public String complete (Model model) {
-		
+	  
 		model.addAttribute("title", "신청완료");
-		
-		return "eClass/eClassOpenAppleyComplete";
+		  
+		return "eClass/eClassOpenAppleyComplete"; 
+	
 	}
-
+	 
 	@GetMapping("/eClassApproved")
 	public String eClassApproved(Model model) {
 	
@@ -147,12 +150,27 @@ public class eClassController {
 	}
 	
 	@GetMapping("/myApplyList")
-	public String MyApplyList(Model model) {
+	public String MyApplyList(Model model
+							 ,EClassOpenAppleyForm eClassOpenAppleyForm
+							 ,@RequestParam(value = "eClassOpenAppleyMemberEmail",required = false)String MemberEmail
+							 ,HttpSession session) {
 		
-		List<EClassOpenAppleyForm> eClassOpenAppleyList = eClassService.eClassOpenAppleyList();
+		String eClassOpenAppleyMemberEmail = (String) session.getAttribute("SEMAIL");
+		int appleyState = eClassOpenAppleyForm.geteClassOpenAppleyApproveState();
+		
+		if(appleyState < 1) {
 			
+		}
+
+		List<EClassOpenAppleyForm> eClassOpenAppleyList = eClassMapper.eClassOpenAppleyList(eClassOpenAppleyMemberEmail);
+		
+		
+		log.info("eClassOpenAppleyList MyApplyList eClassOpenAppleyMemberEmail : {}",eClassOpenAppleyMemberEmail);
+		log.info("eClassOpenAppleyList MyApplyList eClassOpenAppleyApproveState : {}",appleyState);
+		
 		model.addAttribute("title", "나의 개설신청 현황");
 		model.addAttribute("eClassOpenAppleyList", eClassOpenAppleyList);
+		
 		
 		return "eClass/myEClassApplyList";
 	}
