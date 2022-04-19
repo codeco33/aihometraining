@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/mypagedefault}">
+	
+<!-- 사용자 정의 title -->
+<th:block layout:fragment="customTitle">
+	<title th:text="${title}"></title>
+</th:block>
+
+<th:block layout:fragment="customCss">
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/simple-line-icons.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/icheck/skins/flat/red.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/daterangepicker.css}" />
+	<style type="text/css">
+	
+		.ranges {
+			margin-top: 0 !important;
+		}
+		.ranges ul {
+			width: 100% !important;
+		}
+		.ranges ul li {
+			float:left;
+		}
+		.ranges .btn {
+			padding: 6px;
+		}
+		#refundList tbody td:last-child .btn-default {
+			width: 98px;
+			padding: 5px;
+		}
+		#refundList tbody td {
+			vertical-align: middle;
+		}
+		.modal-footer {
+			border-top: none;
+		}
+		.modal-title {
+			font-weight: bold;
+		}
+		.sangseTextarea {
+			height: 150px;
+			width: 100%;
+		}
+		.searchDate input[type="text"]{
+			height: 33px;
+			width: 150px;
+		}
+		.searchDate .fa-calendar {
+			margin-left: 20px;
+		}
+		.searchDate button {
+			margin-left: 20px;
+		}
+		.panel-heading {
+			padding: 15px;
+			padding-bottom: 0;
+		}
+		
+		.panel-heading>h4 {
+			font-weight: bold;
+			margin-top: 40px;
+			margin-bottom: 0;
+			border-bottom: 2px solid #58666e;
+			padding-bottom: 5px;
+		}
+		.searchDate {
+			background-color: #fff;
+			border: 5px solid #e8e8e8;
+			padding: 20px 0;
+			margin: 0 20px;
+			padding-left: 20px;
+		}
+		#paymentInfo {
+			 padding-inline-start: 25px;
+			 margin-top: 20px;
+		}
+		#paymentInfo li {
+			 list-style: disc;
+		}
+		#paymentList tbody td {
+			vertical-align: middle;
+		}
+</style>
+</th:block>
+<th:block layout:fragment="customContents">
+	<div class="col-md-12">
+	<div class="panel">
+		<div class="panel-heading bg-white border-none">
+				<div class="well" >
+					<form class="searchDate row form-inline">
+						<div class="form-group">
+							<span class="fa fa-calendar"></span>
+							<input type="text" class="startDate" name="datefilter" value="" />
+							 - 
+							<input type="text" class="endDate" name="datefilter" value="" />
+						</div>
+						<button type="button" class="btn btn-gradient btn-primary form-group">
+							검색 <span class="fa fa-search"></span>
+						</button>
+					</form>
+					<ul id="paymentInfo" class="list">
+						<li>기본적으로 최근 3개월간의 내역이 조회되며, 기간 검색시 환불처리 후 36개월 이내의 주문내역을 조회하실 수 있습니다.</li>
+						<li>환불처리 후 36개월 이상 경과한 거래 내역은 고객센터에서 문의를 통해 확인하실 수 있습니다.</li>
+						<li>환불코드를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
+					</ul>
+				</div>
+				<h4>
+					<span class="icon-credit-card icons"></span> 환불 내역 조회
+				</h4>
+			</div>
+			<div class="panel-body">
+				
+
+				<!-- 데이터 테이블 -->
+				<div class="responsive-table">
+					<table id="refundList" class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>환불처리일자<br>/환불코드</th>
+								<th colspan="2">환불상품</th>
+								<th>상태</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<p>2022-03-23</p>
+									<p><a th:href="@{/mypage/myrefundList/refundDetail(refundCode=)}">e20220224_00001</a></p>
+								</td>
+								<td>이미지</td>
+								<td>운동클래스운동클래스운동클래스운동클래스</td>
+								<td><span class="label label-primary">환불요청</span></td>
+							</tr>
+							<tr>
+								<td>
+									<p>2022-04-02</p>
+									<p><a th:href="@{/mypage/myrefundList/refundDetail(refundCode=)}">c20220223_00002</a></p>
+								</td>
+								<td>이미지</td>
+								<td>챌린지</td>
+								<td><span class="label label-warning">환불처리중</span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 환불 미승인 사유 입력 모달 -->
+	<div id="disapproveModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title">환불 미승인 사유 입력</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group col-sm-12">
+							<label class="col-sm-3 control-label text-right">환불 미승인
+								사유</label>
+							<div class="col-sm-8">
+								<div class="col-sm-12 padding-0">
+									<select class="form-control">
+										<option>option one</option>
+										<option>option two</option>
+										<option>option three</option>
+										<option>option four</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="form-group col-sm-12">
+							<label class="col-sm-3 control-label text-right">상세 사유</label>
+							<div class="col-sm-8">
+								<textarea class="sangseTextarea"></textarea>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal">저장</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+</th:block>
+
+
+
+<th:block layout:fragment="customBodyScript">
+	<!-- plugins -->
+	<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
+	<script th:src="@{/asset/js/plugins/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/asset/js/plugins/dataTables.bootstrap.min.js}"></script>
+	<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+	<script th:src="@{/asset/js/plugins/icheck.min.js}"></script>
+	<script th:src="@{/asset/js/plugins/daterangepicker.min.js}"></script>
+	<!-- custom -->
+	<script th:src="@{/asset/js/main.js}"></script>
+	<script type="text/javascript">
+		/*환불 처리 모달*/
+		$('.disapproveBtn').on('click', function() {
+			$('#disapproveModal').modal('show');
+		});
+		
+		
+
+		$(document).ready(function() {
+				var startDate = moment().subtract(3, 'month');
+				var endDate = moment();
+				
+				 $('.startDate').val(startDate.format('YYYY/MM/DD'));
+			     $('.endDate').val(endDate.format('YYYY/MM/DD'));
+			     
+				$('.searchDate div').daterangepicker(
+						{
+							autoUpdateInput : false,
+							locale: {
+					            cancelLabel: '취소',
+					            applyLabel : '완료',
+						        daysOfWeek: ["일", "월", "화", "수", "목", "금", "토"],
+						        monthNames: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+					        },
+					        maxDate: endDate,
+					        minDate: moment().subtract(36, 'month'),
+					        startDate: startDate,
+					        endDate: endDate,
+					        format: 'YYYY/MM/DD',
+					        ranges: {
+					            '오늘': [moment(), moment()],
+					            '1주일': [moment().subtract(6, 'days'), moment()],
+					            '1개월': [moment().subtract(1, 'month'), moment()],
+					            '3개월': [moment().subtract(3, 'month'), moment()],
+					            '6개월': [moment().subtract(6, 'month'), moment()]
+					        },
+					         "alwaysShowCalendars": true,
+					         "showCustomRangeLabel": false,
+					         
+					    });
+				
+				 $('.ranges').prependTo('.searchDate');
+				 $('.ranges li').addClass("btn btn-default");
+				 $('.ranges li:eq(3)').addClass("active");
+
+				/*적용버튼*/
+				$('.searchDate').on('apply.daterangepicker',function(ev, picker) {
+					$('.startDate').val(
+							picker.startDate.format('YYYY/MM/DD'));
+					$('.endDate').val(
+							picker.endDate.format('YYYY/MM/DD'));
+				});
+			
+				$('span.drp-selected').remove();
+				
+				/*ranges 버튼에 active 처리*/
+				$('.ranges li').click(function(){
+					$('.ranges li').removeClass('active');
+					$(this).addClass('active');
+				});
+				
+				/*데이터 테이블*/
+				var table = $('#refundList').DataTable({
+					order : [ 0, 'desc' ],
+					lengthChange : false,
+					pageLength : 15,
+					filter : false
+				});
+
+				/*iCheck 제이쿼리*/
+				$('input').iCheck({
+					checkboxClass : 'icheckbox_flat-red',
+					radioClass : 'iradio_flat-red'
+				});
+
+			});
+	</script>
+	<!-- end: Javascript -->
+</th:block>
+</html>

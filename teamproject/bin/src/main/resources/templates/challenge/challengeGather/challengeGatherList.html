@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/userdefault}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	<th:block layout:fragment="customCss">
+		<style type="text/css">
+		.noteButton {
+		    z-index: 3;
+		}
+		.chatButton {
+    		z-index: 3;
+		}
+		.alimButton {
+			z-index: 3;
+		}
+		#scrollUp, #back-top {
+			z-index: 3;
+		}
+		.cmxform .inputTitle {
+		    color: #96979f;
+		    font-size: 13px;
+		}
+		</style>
+	</th:block>
+	<th:block layout:fragment="customContents">
+		<!-- 챌린지 모집 area start -->
+		<div class="container">
+		    <div class="row justify-content-center">
+				<div class="col-xl-7 col-lg-8">
+		        	<div class="section-tittle text-center mb-55">
+		                <h2>모집 중인 챌린지</h2>
+		            </div>
+		        </div>
+		        <!-- userdefault 에서 customContects블럭 위치 조정함  -->
+		        <div class="row section-top-border">
+		        	<th:block th:if="${not #lists.isEmpty(challengeGatherList)}" th:each="l : ${challengeGatherList}">
+				        <div class="col-lg-4">
+				            <div class="properties properties2 mb-30">
+				                <div class="properties__card">
+				                	<div class="properties__background overlay1">
+			                            <div class="myModal">                                                                                 <!-- data-code라고만 써서 ${l.challengeGatherCode}text자체로 불러와졌다. -->
+			                            	<!-- <a href="#" data-toggle="modal" id="gatherModel" data-target="#GatherDetailModal" th:data-code="${l.challengeGatherCode}" >[[${l.challengeGatherCode}]]</a> -->
+			                            	<a th:href="@{/challenge/challengeGather/gatherDetail(challengeGatherCode=${l.challengeGatherCode})}" >[[${l.challengeGatherName}]]</a>
+			                            </div>
+			                        </div>
+				                    <div class="properties__caption">
+				                        <p>모집인원 : [[${l.challengeGatherMaxPeople}]]</p>
+				                        <h3><a href="#">[[${l.challengeGatherIntro}]]</a></h3>
+				                        <p>
+				                       	 [[${l.challengeGatherIntro}]]
+				                        </p>
+				                        <div class="properties__footer d-flex justify-content-between align-items-center">
+				                            <div class="restaurant-name" style="color: #4255A4;">
+				                                	[[${l.challengeGatherStartDate}]]
+				                            </div>
+				                            <div class="price">
+				                                <span>[[${l.challengeGatherEndDate}]]</span>
+				                            </div>
+				                        </div>
+				                    </div>
+				                </div>
+				            </div>
+				        </div>
+			        </th:block>
+			        <th:block th:unless="${not #lists.isEmpty(challengeGatherList)}" th:each="l : ${challengeGatherList}">
+			        	<div> 
+			        		등록된 챌린지가 없습니다.
+			        	</div>
+			        </th:block>        
+		        </div>
+	        </div>
+	        
+	        <div class="row justify-content-end">
+  				<a th:href="@{/challenge/challengeGather/challengeGatherInsert}" class="genric-btn primary radius">모집 등록</a>
+			</div>
+		</div>
+		<!-- 챌린지 모집 area end -->
+		
+		<!-- Modal -->
+		<div class="modal fade" id="GatherDetailModal" tabindex="-1" aria-labelledby="GatherDetailModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form class="cmxform" method="post" th:action="@{/challenge/challengeEnter/challengeEnterPaymemt}">
+						<div class="modal-body">
+						
+						</div>
+						<div class="modal-footer">
+							<button type="submit" id="modaljoin" class="btn btn-primary text-white">참가하기</button>
+							<button  type="button" id="modalclose" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</th:block>
+	
+	
+			
+	
+	<th:block layout:fragment="customBodyScript">
+		<script>
+				
+			   $('.myModal a').on('click', function(event){
+				   /* var challengeGatherCode = $(this).data('code'); */
+				   //console.log(gatherCode);
+				   event.preventDefault();
+				   console.log($(this).attr("href"));
+				   var href = $(this).attr("href");
+				   
+				   $.ajax({
+						 url: href
+						,success: function(data){
+							console.log(data);
+							console.log(data.length);
+							for(var i=0; i<data.length; i++){
+							
+							var modalhader = '<h5 class="modal-title" id="GatherDetailModalLabel"  style="font-weight: bold; font-size: large;">' +data[i].challengeGather.challengeGatherName + '</h5>';
+								
+							var modalbody = '';
+								
+								modalbody += '<div class="form-group">'+
+												'<label class="inputTitle">챌린지 카테고리</label>'+
+												'<input class="mt-2 p-2 form-control" name="challengeCategoryCode" readonly value="'+ data[i].challengeCategory.challengeCategoryName +'"style="background-color: #f9f9ff; border: none;">'+
+											 '</div>'
+								modalbody += '<div class="form-group">'+
+											 	'<label class="inputTitle">챌린지 소개글</label>'+
+												'<input class="mt-2 p-2 form-control" name="challengeGatherIntro" readonly value="'+ data[i].challengeGather.challengeGatherIntro +'"style="background-color: #f9f9ff; border: none;">'+
+											 '</div>'	
+								modalbody += '<div class="form-group">'+
+							 				 	'<label class="inputTitle">챌린지 최대 참여 인원수</label>'+
+							 				 	'<input class="mt-2 p-2 form-control" name="challengeGatherMaxPeople" readonly value="'+ data[i].challengeGather.challengeGatherMaxPeople +'"style="background-color: #f9f9ff; border: none;">'+
+											 '</div>'
+								modalbody += '<div class="form-group">'+
+			 				 					'<label class="inputTitle">인증 방법</label>'+
+			 				 					'<input class="mt-2 p-2 form-control" name="challengeGatherProveMethod" readonly value="'+ data[i].challengeGather.challengeGatherProveMethod +'"style="background-color: #f9f9ff; border: none;">'+
+			 				 				 '</div>'
+								modalbody += '<div class="form-group">'+
+			 				 				 	'<label class="inputTitle">인증 빈도</label>'+
+			 				 				 	'<input class="mt-2 p-2 form-control" name="challengeGatherProveFrequency" readonly value="'+ data[i].challengeGather.challengeGatherProveFrequency +'"style="background-color: #f9f9ff; border: none;">'+
+			 				 				 '</div>'	
+								modalbody += '<div class="form-group">'+
+					 				 			 '<label class="inputTitle">인증 빈도</label>'+
+					 				 			 '<input class="mt-2 p-2 form-control" name="challengeStartDate" readonly value="'+ data[i].challengeGather.challengeStartDate +'"style="background-color: #f9f9ff; border: none;">'+
+					 				 		 '</div>'	 
+								modalbody += '<div class="form-group">'+
+					 				 			 '<label class="inputTitle">인증 빈도</label>'+
+					 				 			 '<input class="mt-2 p-2 form-control" name="challengeEndDate" readonly value="'+ data[i].challengeGather.challengeEndDate +'"style="background-color: #f9f9ff; border: none;">'+
+					 				 		 '</div>'
+					 				 		 
+								$('.modal-header').empty();
+								$('.modal-body').empty();
+								
+								$('.modal-header').prepend(modalhader);
+								$('.modal-body').append(modalbody);
+								
+								$('#GatherDetailModal').modal();
+							}
+						}
+					});
+			   });
+			   
+			   
+			
+		</script>
+	
+</html>

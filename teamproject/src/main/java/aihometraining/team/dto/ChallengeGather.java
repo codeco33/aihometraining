@@ -19,6 +19,7 @@ public class ChallengeGather {
 	private String memberEnterEmail;
 	private String challengeGatherStartDate;
 	private String challengeGatherEndDate;
+	private int challengeEnterDeposit;
 	
 	private Member member;
 	private ChallengeCategory challengeCategory;
@@ -152,21 +153,63 @@ public class ChallengeGather {
 	public void setChallengeGatherPlanDoList(List<ChallengeGatherPlanDo> challengeGatherPlanDoList) {
 		this.challengeGatherPlanDoList = challengeGatherPlanDoList;
 	}
+	public int getChallengeEnterDeposit() {
+		return challengeEnterDeposit;
+	}
+	public void setChallengeEnterDeposit(int challengeEnterDeposit) {
+		this.challengeEnterDeposit = challengeEnterDeposit;
+	}
 	@Override
 	public String toString() {
-		return "ChallengeGather [challengeGatherCode=" + challengeGatherCode + ", memberEmail=" + memberEmail
-				+ ", challengeCategoryCode=" + challengeCategoryCode + ", challengeGatherName=" + challengeGatherName
-				+ ", challengeGatherIntro=" + challengeGatherIntro + ", challengeGatherMaxPeople="
-				+ challengeGatherMaxPeople + ", challengeGatherProveMethod=" + challengeGatherProveMethod
-				+ ", challengeGatherProveContent=" + challengeGatherProveContent + ", challengeGatherProveFrequency="
-				+ challengeGatherProveFrequency + ", challengeGatherAchieveRate=" + challengeGatherAchieveRate
-				+ ", challengeStartDate=" + challengeStartDate + ", challengeEndDate=" + challengeEndDate
-				+ ", challengeGatherRegDate=" + challengeGatherRegDate + ", memberEnterEmail=" + memberEnterEmail
-				+ ", challengeGatherStartDate=" + challengeGatherStartDate + ", challengeGatherEndDate="
-				+ challengeGatherEndDate + ", member=" + member + ", challengeCategory=" + challengeCategory
-				+ ", challengeGatherPlan=" + challengeGatherPlan + ", challengeEnterList=" + challengeEnterList
-				+ ", challengeGatherPlanDoList=" + challengeGatherPlanDoList + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("ChallengeGather [challengeGatherCode=");
+		builder.append(challengeGatherCode);
+		builder.append(", memberEmail=");
+		builder.append(memberEmail);
+		builder.append(", challengeCategoryCode=");
+		builder.append(challengeCategoryCode);
+		builder.append(", challengeGatherName=");
+		builder.append(challengeGatherName);
+		builder.append(", challengeGatherIntro=");
+		builder.append(challengeGatherIntro);
+		builder.append(", challengeGatherMaxPeople=");
+		builder.append(challengeGatherMaxPeople);
+		builder.append(", challengeGatherProveMethod=");
+		builder.append(challengeGatherProveMethod);
+		builder.append(", challengeGatherProveContent=");
+		builder.append(challengeGatherProveContent);
+		builder.append(", challengeGatherProveFrequency=");
+		builder.append(challengeGatherProveFrequency);
+		builder.append(", challengeGatherAchieveRate=");
+		builder.append(challengeGatherAchieveRate);
+		builder.append(", challengeStartDate=");
+		builder.append(challengeStartDate);
+		builder.append(", challengeEndDate=");
+		builder.append(challengeEndDate);
+		builder.append(", challengeGatherRegDate=");
+		builder.append(challengeGatherRegDate);
+		builder.append(", memberEnterEmail=");
+		builder.append(memberEnterEmail);
+		builder.append(", challengeGatherStartDate=");
+		builder.append(challengeGatherStartDate);
+		builder.append(", challengeGatherEndDate=");
+		builder.append(challengeGatherEndDate);
+		builder.append(", challengeEnterDeposit=");
+		builder.append(challengeEnterDeposit);
+		builder.append(", member=");
+		builder.append(member);
+		builder.append(", challengeCategory=");
+		builder.append(challengeCategory);
+		builder.append(", challengeGatherPlan=");
+		builder.append(challengeGatherPlan);
+		builder.append(", challengeEnterList=");
+		builder.append(challengeEnterList);
+		builder.append(", challengeGatherPlanDoList=");
+		builder.append(challengeGatherPlanDoList);
+		builder.append("]");
+		return builder.toString();
 	}
+	
 	
 	
 	
