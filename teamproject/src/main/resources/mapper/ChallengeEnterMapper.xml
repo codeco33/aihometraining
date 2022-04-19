@@ -167,6 +167,7 @@
 		<result column="memberEnterEmail" 				property="memberEnterEmail"/>
 		<result column="challengeGatherStartDate" 		property="challengeGatherStartDate"/>
 		<result column="challengeGatherEndDate" 		property="challengeGatherEndDate"/>
+		<result column="challengeEnterDeposit" 			property="challengeEnterDeposit"/>
 		
 		<association property="challengeCategory" javaType="ChallengeCategory">
 			<id 	column="challengeCategoryCode" 			property="challengeCategoryCode"/>
@@ -236,6 +237,7 @@
 			,cg.challengeStartDate
 			,cg.challengeEndDate
 			,cg.challengeGatherAchieveRate
+			,cg.challengeEnterDeposit
 		FROM
 			challengegather AS cg
 			INNER JOIN 
@@ -247,7 +249,7 @@
 			ON 
 			cg.challengeGatherCode = cp.challengeGatherCode
 		WHERE
-			cg.challengeGatherCode = #{challengeGatherCode};
+			cg.challengeGatherCode = #{challengeGatherCode}
 	</select>
 	
 	<select id="getChallengeEnterDetail" resultType="ChallengeGatherPlanDo">

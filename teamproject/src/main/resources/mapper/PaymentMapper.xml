@@ -117,7 +117,7 @@
 			ON 
 			m.memberEmail = ea.memberEmail
 		WHERE
-			ea.eClassApprovedCode = #{eClassCode};
+			ea.eClassApprovedCode = #{eClassCode}
 	</select>
 	
 	<delete id="deleteWishList" parameterType="String">
@@ -150,4 +150,24 @@
 			, #{paymentGroupCode}
 		);
 	</insert>
+	
+	<select id="getEClassTake" parameterType="String" resultType="Map">
+		SELECT
+			eclassApprovedCode
+			,memberEmail
+		FROM
+			eclasstake
+		WHERE 
+			paymentGroupCode = #{paymentGroupCode};
+	</select>
+	
+	<select id="getCallengeEnter" parameterType="String" resultType="Map">
+		SELECT
+			challengeGatherCode
+			,memberEmail
+		FROM
+			challengeenter
+		WHERE 
+			paymentGroupCode = #{paymentGroupCode};
+	</select>
 </mapper>

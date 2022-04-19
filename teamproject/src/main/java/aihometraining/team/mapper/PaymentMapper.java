@@ -1,6 +1,7 @@
 package aihometraining.team.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -25,5 +26,10 @@ public interface PaymentMapper {
 	
 	//수강신청하기
 	public void addEClassTake(EClassTake eClassTake);
+	
+	//결제화면 수강신청정보
+	public Map<String, String> getEClassTake(String paymentGroupCode);
+	//결제화면 챌린지참여정보
+	public Map<String, String> getCallengeEnter(String paymnetGroupCode);
 	
 }

@@ -1,6 +1,8 @@
 package aihometraining.team.controller;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,19 +15,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import aihometraining.team.challenge.mapper.ChallengeEnterMapper;
+import aihometraining.team.dto.ChallengeGather;
 import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.EClassTake;
 import aihometraining.team.dto.Member;
 import aihometraining.team.dto.WishList;
+import aihometraining.team.mapper.PaymentMapper;
 import aihometraining.team.service.PaymentService;
 
 @Controller
 public class PaymentController {
 	
 	private PaymentService paymentService;
+	private PaymentMapper paymentMapper;
+	private ChallengeEnterMapper challengeEnterMapper;
 	
-	public PaymentController(PaymentService paymentService) {
+	public PaymentController(PaymentService paymentService, PaymentMapper paymentMapper
+							,ChallengeEnterMapper challengeEnterMapper) {
 		this.paymentService = paymentService;
+		this.paymentMapper = paymentMapper;
+		this.challengeEnterMapper = challengeEnterMapper;
 	}
 	
 	@GetMapping("/challengeadmin")
@@ -73,8 +83,8 @@ public class PaymentController {
 	//수강신청 화면
 	@GetMapping("/signUpForClass")
 	public String eClassTake(Model model , HttpServletRequest request
-							,@RequestParam(name="eClassCode", required = false) String eClassCode
-							,@RequestParam(name="memberEmail", required = false) String memberEmail) {
+							,@RequestParam(name="eClassCode") String eClassCode
+							,@RequestParam(name="memberEmail") String memberEmail) {
 		
 		Member member = paymentService.getEClassTakeMember(memberEmail);
 		EClassApproved eClassApproved = paymentService.getEClassApproved(eClassCode);
@@ -94,23 +104,53 @@ public class PaymentController {
 		
 		//수강신청 insert하기
 		paymentService.addEClassTake(eClassTake);
+		reAttr.addAttribute("paymentGroupCode", eClassTake.getPaymentGroupCode());
 		
 		return "redirect:/payment";
 	}
 	
 
-	
+	//결제화면
 	@GetMapping("/payment")
-	public String payment(Model model) {
+	public String payment(Model model,@RequestParam(name="paymentGroupCode") String paymentGroupCode) {
 		
-		//결제화면 model에 담기
 		model.addAttribute("title", "결제");
+		String paymentGoodsName = null;
+		int paymentGoodsPrice = 0;
+		String paymentGoodsSetDate = null;
+		//PaymentGoods paymentGoods = paymentService.getPayment(paymentGroupCode);
+		
+		if(paymentGroupCode.startsWith("e")) {
+			Map<String, String> eClassCode = paymentMapper.getEClassTake(paymentGroupCode);		
+			/*
+			 * EClassApproved eClass= paymentMapper.getEClassApproved(eClassCode);
+			 * if(Objects.nonNull(eClass)) { paymentGoodsName =
+			 * eClass.geteClassApprovedName(); paymentGoodsPrice =
+			 * eClass.geteClassApprovedPrice(); paymentGoodsSetDate =
+			 * eClass.geteClassApprovedSetDate(); }
+			 */
+		}else {
+			Map<String, String> challengeCode = paymentMapper.getCallengeEnter(paymentGroupCode);
+			/*
+			 * ChallengeGather challenge=
+			 * challengeEnterMapper.getChallengeEnterByCode(challengeCode);
+			 * if(Objects.nonNull(challenge)) { paymentGoodsName =
+			 * challenge.getChallengeGatherName(); paymentGoodsPrice =
+			 * challenge.getChallengeEnterDeposit(); }
+			 */
+		}
+		
+		model.addAttribute("paymentGoodsName", paymentGoodsName);
+		model.addAttribute("paymentGoodsPrice", paymentGoodsPrice);
+		model.addAttribute("paymentGoodsSetDate", paymentGoodsSetDate);
 		
 		return "payment/payment";
 	}
 	
+	
+	
 	@PostMapping("/payment")
-	public String payment(Model model, String a) {
+	public String payment(Model model) {
 		
 		//결제처리
 		model.addAttribute("title", "결제");

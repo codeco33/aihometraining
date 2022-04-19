@@ -160,15 +160,15 @@
 						<!-- 클래스정보 -->
 						<div class="form-group">
 							<label class="inputTitle">결제상품이름</label>
-							<input type="text" name="paymentOrderName" class="form-control-plaintext" readonly value="운동클래스/챌린지 이름">
+							<input type="text" name="paymentOrderName" class="form-control-plaintext" readonly th:value="${paymentGoodsName}">
 						</div>
 						<div class="form-group">
 							<label class="inputTitle">금액</label>
-							<input type="text" name="eClassPrice" class="form-control-plaintext" readonly value="27,000">
+							<input type="text" name="eClassPrice" class="form-control-plaintext" readonly th:value="${paymentGoodsPrice}">
 						</div>
-						<div class="form-group">
-							<label class="inputTitle">(운동클래스라면)정기결제 기간</label>
-							<input type="text" name="eClassApprovedSetDate" class="form-control-plaintext" readonly value="3개월">
+						<div class="form-group" th:if=${paymentGoodsSetDate != null}>
+							<label class="inputTitle">정기결제 기간</label>
+							<input type="text" name="eClassApprovedSetDate" class="form-control-plaintext" readonly th:value="${paymentGoodsSetDate}+'개월'">
 						</div>
 					
 						<div class="form-group form-border"></div>
@@ -297,7 +297,7 @@
 				});
 				
 				//포인트 잔액 바뀌면 체크버튼 풀리게하기
-				$('input[name="pointUseInput"]').
+				//$('input[name="pointUseInput"]').
 
 				
 		    /*아임포트 카카오페이 결제*/
