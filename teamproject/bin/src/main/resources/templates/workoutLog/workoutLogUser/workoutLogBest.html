@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/userdefault}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+		<section class="blog_area section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 mb-5 mb-lg-0">
+	                    <article class="blog_item">
+	                        <div class="blog_item_img">
+	                            <img class="card-img rounded-0" th:src="@{/assets/img/workoutLogimg1.jpg}" alt="토르">
+	                            <a th:href="@{/workoutLog/workoutLogUser/workoutLogList}" class="blog_item_date">
+	                                <h3>1</h3>
+	                            </a>
+	                        </div>
+	                        <div class="blog_details">
+	                            <a class="d-inline-block" th:href="@{/workoutLog/workoutLogUser/workoutLogList}">
+	                                <h2 class="blog-head" style="color: #2d2d2d;">오늘은 사이드 런지</h2>
+	                            </a>
+	                            <ul class="blog-info-link">
+	                                <li><a href="#"><i class="fa fa-heart"></i>좋아요</a></li>
+	                            </ul>
+	                        </div>
+	                    </article>
+					</div>
+                    <div class="col-sm-4 mb-5 mb-lg-0">
+	                    <article class="blog_item">
+	                        <div class="blog_item_img">
+	                            <img class="card-img rounded-0" th:src="@{/assets/img/workoutLogimg1.jpg}" alt="토르">
+	                            <a th:href="@{/workoutLog/workoutLogUser/workoutLogList}" class="blog_item_date">
+	                                <h3>2</h3>
+	                            </a>
+	                        </div>
+	                        <div class="blog_details">
+	                            <a class="d-inline-block" th:href="@{/workoutLog/workoutLogUser/workoutLogList}">
+	                                <h2 class="blog-head" style="color: #2d2d2d;">오늘은 사이드 런지</h2>
+	                            </a>
+	                            <ul class="blog-info-link">
+	                                <li><a href="#"><i class="fa fa-heart"></i>좋아요</a></li>
+	                            </ul>
+	                        </div>
+	                    </article>
+					</div>
+                    <div class="col-sm-4 mb-5 mb-lg-0">
+	                    <article class="blog_item">
+	                        <div class="blog_item_img">
+	                            <img class="card-img rounded-0" th:src="@{/assets/img/workoutLogimg1.jpg}" alt="토르">
+	                            <a th:href="@{/workoutLog/workoutLogUser/workoutLogList}" class="blog_item_date">
+	                                <h3>3</h3>
+	                            </a>
+	                        </div>
+	                        <div class="blog_details">
+	                            <a class="d-inline-block" th:href="@{/workoutLog/workoutLogUser/workoutLogList}">
+	                                <h2 class="blog-head" style="color: #2d2d2d;">오늘은 사이드 런지</h2>
+	                            </a>
+	                            <ul class="blog-info-link">
+	                                <li><a href="#"><i class="fa fa-heart"></i>좋아요</a></li>
+	                            </ul>
+	                        </div>
+	                    </article>
+					</div>
+				</div>	
+				<div class="row">	
+                    <div class="col-sm-4 mb-5 mb-lg-0">
+	                    <article class="blog_item">
+	                        <div class="blog_item_img">
+	                            <img class="card-img rounded-0" th:src="@{/assets/img/workoutLogimg1.jpg}" alt="토르">
+	                            <a th:href="@{/workoutLog/workoutLogUser/workoutLogList}" class="blog_item_date">
+	                                <h3>4</h3>
+	                            </a>
+	                        </div>
+	                        <div class="blog_details">
+	                            <a class="d-inline-block" th:href="@{/workoutLog/workoutLogUser/workoutLogList}">
+	                                <h2 class="blog-head" style="color: #2d2d2d;">오늘은 사이드 런지</h2>
+	                            </a>
+	                            <ul class="blog-info-link">
+	                                <li><a href="#"><i class="fa fa-heart"></i>좋아요</a></li>
+	                            </ul>
+	                        </div>
+	                    </article>
+					</div>
+                    <div class="col-sm-4 mb-5 mb-lg-0">
+	                    <article class="blog_item">
+	                        <div class="blog_item_img">
+	                            <img class="card-img rounded-0" th:src="@{/assets/img/workoutLogimg1.jpg}" alt="토르">
+	                            <a th:href="@{/workoutLog/workoutLogUser/workoutLogList}" class="blog_item_date">
+	                                <h3>5</h3>
+	                            </a>
+	                        </div>
+	                        <div class="blog_details">
+	                            <a class="d-inline-block" th:href="@{/workoutLog/workoutLogUser/workoutLogList}">
+	                                <h2 class="blog-head" style="color: #2d2d2d;">오늘은 사이드 런지</h2>
+	                            </a>
+	                            <ul class="blog-info-link">
+	                                <li><a href="#"><i class="fa fa-heart"></i>좋아요</a></li>
+	                            </ul>
+	                        </div>
+	                    </article>
+					</div>
+                    <div class="col-sm-4 mb-5 mb-lg-0">
+	                    <article class="blog_item">
+	                        <div class="blog_item_img">
+	                            <img class="card-img rounded-0" th:src="@{/assets/img/workoutLogimg1.jpg}" alt="토르">
+	                            <a th:href="@{/workoutLog/workoutLogUser/workoutLogList}" class="blog_item_date">
+	                                <h3>6</h3>
+	                            </a>
+	                        </div>
+	                        <div class="blog_details">
+	                            <a class="d-inline-block" th:href="@{/workoutLog/workoutLogUser/workoutLogList}">
+	                                <h2 class="blog-head" style="color: #2d2d2d;">오늘은 사이드 런지</h2>
+	                            </a>
+	                            <ul class="blog-info-link">
+	                                <li><a href="#"><i class="fa fa-heart"></i>좋아요</a></li>
+	                            </ul>
+	                        </div>
+	                    </article>
+					</div>
+				</div>
+			</div>
+           	<nav class="blog-pagination justify-content-center d-flex">
+            	<ul class="pagination">
+                   <li class="page-item">
+                       <a href="#" class="page-link" aria-label="Previous">
+                           <i class="ti-angle-left"></i>
+                       </a>
+                   </li>
+                   <li class="page-item">
+                       <a href="#" class="page-link">1</a>
+                   </li>
+                   <li class="page-item active">
+                       <a href="#" class="page-link">2</a>
+                   </li>
+                   <li class="page-item active">
+                       <a href="#" class="page-link">3</a>
+                   </li>
+                   <li class="page-item">
+                       <a href="#" class="page-link" aria-label="Next">
+                           <i class="ti-angle-right"></i>
+                       </a>
+                   </li>
+               </ul>
+           	</nav>
+		</section>     
+	</th:block>
+	
+</html>

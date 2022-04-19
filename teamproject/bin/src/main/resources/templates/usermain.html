@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/userdefault}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+        <!--? slider Area Start-->
+                <!-- Single Slider -->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-7 col-md-12">
+                                <div class="hero__caption">
+                                    <h1 data-animation="fadeInLeft" data-delay="0.2s">2021-12-01 ~ 2022-04-28 <br> 최보라, 최민희, 이영호, 김재환, 이민식, 진수경</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+	</th:block>
+	
+	
+</html>

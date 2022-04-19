@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+<!-- 사용자 정의 title -->
+<th:block layout:fragment="customTitle">
+	<title th:text="${title}"></title>
+</th:block>
+<!-- 사용자 정의 Css -->
+<th:block layout:fragment="customCss">
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/simple-line-icons.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/mediaelementplayer.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/bootstrap-datepicker.css}"/>
+	<style type="text/css">
+		.panel-heading > h4 {
+		    font-weight: bold;
+		    margin-bottom: 0;
+		    border-bottom: 2px solid #58666e;
+		    padding-bottom: 5px;
+		}
+		
+		.input-group {
+		    position: relative;
+		    display: flex;
+		    border-collapse: separate !important;
+		    padding-bottom: 10px;
+		    margin-top: -10px;
+		    margin-left: 15px;
+		    border-bottom: 1px solid #efefef;
+		    margin-bottom: 0;
+		}
+		.input-group input[name=searchValue] {
+			border-top-right-radius: 4px !important; 
+			border-bottom-right-radius: 4px !important;
+		}
+		
+		.form-control {
+		    line-height: 1.7;
+		}
+		.searchBtnDiv {
+		    text-align: center;
+		    margin-top: 10px;
+		}
+	</style>
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<div class="col-md-12">
+	
+		<div class="panel">
+			<!-- 패널 헤더 타이틀 -->
+			<div class="panel-heading bg-white border-none">
+	          <h4><span class="icon-direction icons"></span> 챌린지 카테고리 목록</h4>
+	        </div>
+	        
+			<div class="panel-body">
+				<!-- 챌린지 카테고리 검색 폼 Start -->
+				<form class="searchCateTableForm" th:action="@{/admin/configList}" method="get">
+					<div class="input-group" id="cateSearch">
+					  <span class="form-control" style="width: 180px;">카테고리 검색</span>
+					  <select class="form-control" name="searchKey"  style="width: 130px;" required="required">
+					  	<option value="challengeCategoryName">카테고리명</option>
+		              	<option value="eClassCategorySmallName">운동클래스</option>
+					  </select>
+					  <input class="form-control" type="text" name="searchValue" placeholder="검색키워드를 입력해주세요." required="required"/>
+					</div>
+			                 
+					<div class="input-group" style="margin-top: 10px;">
+						<span class="form-control" style="width: 130px;">등록일자</span>
+						<div class="input-daterange" id="datepicker" style="height: 33px !important;">
+							<input type="hidden" name="searchDate"/>	                    
+							<input type="text" class="form-control" name="searchStart" placeholder="시작일" style=" text-align: center; width: 130px" required="required"/>
+							<span class="form-control" style="width: 60px;">부터</span>
+							<input type="text" class="form-control" name="searchEnd" placeholder="종료일" style=" text-align: center; width: 130px" required="required"/>
+						 	<span class="form-control" style="width: 60px;">까지</span>
+						</div>
+						<div style="margin-left: 10px; margin-top: 2.5px;">
+							<input type="button" class="btn btn-round btn-default" value="오늘"/>
+							<input type="button" class="btn btn-round btn-default" value="1주일"/>
+							<input type="button" class="btn btn-round btn-default" value="1개월"/>
+							<input type="button" class="btn btn-round btn-default" value="3개월"/>
+							<input type="button" class="btn btn-round btn-default" value="1년"/>
+						</div>
+	                  	
+				   	</div>
+			        <div class="searchBtnDiv">
+						<button type="submit" class="searchBtn btn-flip btn btn-gradient btn-primary">
+								검색 <span class="fa fa-search"></span>
+						</button>
+						<button type="submit" class="searchResetBtn btn-flip btn btn-outline btn-default">
+								초기화
+						</button>
+					</div>
+				</form>
+				<!-- 챌린지 카테고리 검색 폼 End -->			
+							
+				<!--챌린지 카테고리 데이터 테이블 Start-->
+				<div class="responsive-table" >
+	            	<table id="challengeCategory" class="table table-striped table-bordered" style="width: 100% " cellspacing="0">
+						<thead>
+							<tr>
+								<th>챌린지 카테고리코드</th>
+								<th>챌린지 카테고리명</th>
+								<th>운동 클래스 카테고리명</th>
+								<th>등록자 이메일</th>
+								<th>등록 날짜</th>
+								<th>수정</th>
+								<th>삭제</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- 
+							<tr th:if="${not #lists.isEmpty(challengeCategoryList)}" th:each="l : ${challengeCategoryList}">
+								<td th:text="${l.challengeCategoryName}"></td>
+								<td th:text="${l.eClassCategorySmallCode}"></td>
+								<td th:text="${l.member.memberEmail}"></td>
+								<td th:text="${l.challengeCategoryRegDate}"></td>
+								<td>
+									<a href="#">수정</a>
+								</td>
+								<td>
+									<a href="#">삭제</a>
+								</td>
+							</tr>
+							 -->
+							<tr th:if="${not #lists.isEmpty(challengeCategoryList)}" th:each="l : ${challengeCategoryList}">
+								<td class="cateCode" th:text="${l.challengeCategoryCode}"></td>
+								<td th:text="${l.challengeCategoryName}"></td>
+								<td th:text="${l.eClassCategorySmall.eClassCategorySmallName}"></td>
+								<td th:text="${l.member.memberEmail}"></td>
+								<td th:text="${l.challengeCategoryRegDate}"></td>
+								<td>
+									<a th:href="@{/admin/challengeCategoryUpdate(challengeCategoryCode=${l.challengeCategoryCode})}"><span class="label label-primary">수정</span></a>
+								</td>
+								<td>
+									<a class="cateDelete" th:href="@{#}"><span class="label label-danger">삭제</span></a>
+								</td>
+							</tr>
+							<tr th:unless="${not #lists.isEmpty(challengeCategoryList)}">
+								<td colspan="7">등록된 정보가 없습니다.</td>
+							</tr>															
+						</tbody>
+					</table>
+					<div style="text-align: center;">
+                   		<a th:href="@{/admin/challengeCategoryInsert}" class="btn btn-outline btn-info btn-sm">카테고리 등록</a>
+					</div>
+				</div>
+				<!--챌린지 카테고리 데이터 테이블 End -->
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-md-12">
+	
+		<div class="panel">
+			<!-- 챌린지 세팅 패널 헤더 타이틀 -->
+			<div class="panel-heading bg-white border-none">
+	          <h4><span class="icon-direction icons"></span> 챌린지 세팅 목록</h4>
+	        </div>
+	        
+			<div class="panel-body">
+				<!-- 챌린지 세팅 검색 폼 Start -->
+				<form class="searchSettingTableForm" th:action="@{/admin/configList}" method="get">
+					<div class="input-group">
+					  <span class="form-control" style="width: 180px;">카테고리 검색</span>
+					  <select class="form-control" name="searchKey2"  style="width: 130px;" required="required">
+					  	<option value="challengeSettingCode">세팅코드</option>
+		              	<option value="challengeSettingUpdateDo">세팅값</option>
+					  </select>
+					  <input class="form-control" type="text" name="searchValue2" placeholder="검색키워드를 입력해주세요." required="required"/>
+					</div>
+			        <div class="searchBtnDiv">
+						<button type="submit" class="searchBtn btn-flip btn btn-gradient btn-primary">
+								검색 <span class="fa fa-search"></span>
+						</button>
+						<button type="submit" class="searchResetBtn btn-flip btn btn-outline btn-default">
+								초기화
+						</button>
+					</div>
+				</form>
+							
+				<!-- 챌린지 카테고리 검색 폼 End -->	
+				
+				<!--챌린지 카테고리 데이터 테이블 Start-->
+				<div class="responsive-table" >
+	            	<table id="challengeSetting" class="table table-striped table-bordered" style="width: 100% " cellspacing="0">
+						<thead>
+							<tr>
+								<th>세팅코드</th>
+								<th>인증 기간 이후 등록 가능 여부</th>
+								<th>수정</th>
+								<th>삭제</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:if="${not #lists.isEmpty(challengeSettingList)}" th:each="l : ${challengeSettingList}">
+								<td th:text="${l.challengeSettingCode}"></td>
+								<td th:text="${l.challengeSettingUpdateDo}"></td>
+								<td>
+									<a th:href="@{/admin/challengeSettingUpdate(challengeSettingCode=${l.challengeSettingCode})}"><span class="label label-primary">수정</span></a>
+								</td>
+								<td>
+									<a href="#"><span class="label label-danger">삭제</span></a>
+								</td>
+							</tr>
+							<tr th:unless="${not #lists.isEmpty(challengeCategoryList)}">
+								<td colspan="6">등록된 정보가 없습니다.</td>
+							</tr>															
+						</tbody>
+					</table>
+					<div style="text-align: center;">
+                   		<a th:href="@{/admin/challengeSettingInsert}" class="btn btn-outline btn-info btn-sm">세팅 등록</a>
+					</div>
+				</div>
+				<!--챌린지 카테고리 데이터 테이블 End --> 		
+			</div>
+		</div>
+	</div>
+
+
+
+</th:block>
+
+<th:block layout:fragment="customBodyScript">
+
+	<!-- plugins -->
+	<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
+	<script th:src="@{/asset/js/plugins/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/asset/js/plugins/dataTables.bootstrap.min.js}"></script>
+	<script th:src="@{/asset/js/plugins/bootstrap-datepicker.js}"></script>
+	<script th:src="@{/asset/js/plugins/bootstrap-datepicker.ko.min.js}"></script>
+	<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+	<script th:src="@{/asset/js/plugins/jquery.mask.min.js}"></script>
+
+	<!-- custom -->
+	<script th:src="@{/asset/js/main.js}"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script type="text/javascript">
+	
+		$(document).ready(function() {
+			/* datepicker Start */
+			$('.input-daterange').datepicker({
+				format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
+			    /* startDate: '-3d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주) */
+			    autoclose : true,	//사용자가 날짜를 클릭하면 자동 캘린더가 닫히는 옵션
+			    calendarWeeks : false, //캘린더 옆에 몇 주차인지 보여주는 옵션 기본값 false 보여주려면 true
+			    clearBtn : false, //날짜 선택한 값 초기화 해주는 버튼 보여주는 옵션 기본값 false 보여주려면 true
+			    datesDisabled : ['2019-06-24','2019-06-26'],//선택 불가능한 일 설정 하는 배열 위에 있는 format 과 형식이 같아야함.
+			    disableTouchKeyboard : false,	//모바일에서 플러그인 작동 여부 기본값 false 가 작동 true가 작동 안함.
+			    immediateUpdates: false,	//사용자가 보는 화면으로 바로바로 날짜를 변경할지 여부 기본값 :false 
+			    multidate : false, //여러 날짜 선택할 수 있게 하는 옵션 기본값 :false 
+			    multidateSeparator :",", //여러 날짜를 선택했을 때 사이에 나타나는 글짜 2019-05-01,2019-06-01
+			    templates : {
+			        leftArrow: '&laquo;',
+			        rightArrow: '&raquo;'
+		    	}, //다음달 이전달로 넘어가는 화살표 모양 커스텀 마이징 
+			    showWeekDays : true ,// 위에 요일 보여주는 옵션 기본값 : true
+			    title: "등록일",	//캘린더 상단에 보여주는 타이틀
+			    todayHighlight : true ,	//오늘 날짜에 하이라이팅 기능 기본값 :false 
+			    toggleActive : true,	//이미 선택된 날짜 선택하면 기본값 : false인경우 그대로 유지 true인 경우 날짜 삭제
+			    weekStart : 0 ,//달력 시작 요일 선택하는 것 기본값은 0인 일요일 
+			    language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
+			});
+			/* datepicker End */
+			
+			$('.searchBtn').click(function(){
+				$('select[name="searchKey"]').attr("required" , true);
+				$('input[name="searchValue"]').attr("required" , true);
+				$('select[name="searchKey2"]').attr("required" , true);
+				$('input[name="searchValue2"]').attr("required" , true);
+				$('input[name="searchStart"]').attr("required" , true);
+				$('input[name="searchEnd"]').attr("required" , true);
+			});
+			$('.searchResetBtn').click(function(){
+				$('select[name="searchKey"]').attr("required" , false);
+				$('input[name="searchValue"]').attr("required" , false);
+				$('select[name="searchKey2"]').attr("required" , false);
+				$('input[name="searchValue2"]').attr("required" , false);
+				$('input[name="searchStart"]').attr("required" , false);
+				$('input[name="searchEnd"]').attr("required" , false);
+			});
+			
+			
+			/*sweetalret으로 삭제 처리는 어떻게 해야하나*/
+			$('.cateDelete').click(function(){
+				console.log($(this).parents('tr').find('.cateCode').text());
+				var cateCode = $(this).parents('tr').find('.cateCode').text();
+                
+				Swal.fire({
+                    title: '정말 삭제 하시겠습니까?',
+                    text: "삭제한 내용은 되돌릴 수 없습니다.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '삭제',
+                    cancelButtonText: '취소'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                    	location.href = "/admin/challengeCategoryDelete?challengeCategoryCode="+cateCode;
+                    	
+                    }
+                })
+			});
+			 
+			/* 데이터 테이블 생성*/
+			var table1 = $('#challengeCategory').DataTable({
+				order : false,
+				lengthChange : false,
+				pageLength : 15,
+				filter: false,
+				 dom: '<"top"i>rt<"bottom"p><"clear">',
+
+				 "language": {
+			     "info": "전체 _TOTAL_건",
+		    	 "paginate": {
+		                "first":      "처음",
+		                "last":       "마지막",
+		                "next":       "다음",
+		                "previous":   "이전"
+		            }
+				 }
+			});
+			
+			/* 레코드 수 포맷 */
+			var info1 = table1.page.info();			
+			$('#challengeCategory_info').html('전체 ' + info1.recordsTotal + '건').css('font-weight','bold');
+			
+			$('#challengeCategory').click(function(){
+				$('#challengeCategory_info').html('전체 ' + info1.recordsTotal + '건');
+			});
+			
+			
+			/*챌린지 세팅 데이터 테이블 생성*/ 
+			var table2 = $('#challengeSetting').DataTable({
+				order : false,
+				lengthChange : false,
+				pageLength : 15,
+				filter: false,
+				 dom: '<"top"i>rt<"bottom"p><"clear">',
+				 
+				 "language": {
+			     "info": "전체 _TOTAL_건",
+		    	 "paginate": {
+		                "first":      "처음",
+		                "last":       "마지막",
+		                "next":       "다음",
+		                "previous":   "이전"
+		            }
+				 }
+
+			});
+			
+			/* 레코드 수 포맷 */
+			var info2 = table2.page.info();			
+			$('#challengeSetting_info').html('전체 ' + info2.recordsTotal + '건').css('font-weight','bold');
+			
+			$('#challengeSetting').click(function(){
+				$('#challengeSetting_info').html('전체 ' + info2.recordsTotal + '건');
+			});
+		 
+
+		});
+	</script>
+</th:block>
+</html>
