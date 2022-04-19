@@ -116,14 +116,13 @@ public class PaymentController {
 		int paymentGoodsPrice = 0;
 		int paymentGoodsSetDate = 0;
 		String memberEmail = null;
+		String memberPhone = null;
 		
 		if(paymentGroupCode.startsWith("e")) {
 			Map<String,String> eClassTakeInfo = paymentMapper.getEClassTake(paymentGroupCode);
 			String eClassCode = eClassTakeInfo.get("eClassApprovedCode");
 			memberEmail = eClassTakeInfo.get("memberEmail");
-			
-			System.out.println(eClassCode);
-			System.out.println(memberEmail);
+			memberPhone = eClassTakeInfo.get("memberPhone");
 			
 			EClassApproved eClass= paymentMapper.getEClassApproved(eClassCode);
 			
@@ -153,6 +152,7 @@ public class PaymentController {
 		model.addAttribute("paymentGoodsPrice", paymentGoodsPrice);
 		model.addAttribute("paymentGoodsSetDate", paymentGoodsSetDate);
 		model.addAttribute("member", member);
+		model.addAttribute("memberPhone", memberPhone);
 		
 		return "payment/payment";
 	}
