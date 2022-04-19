@@ -19,9 +19,24 @@
 		<result column="memberFinalPoint" 		property="memberFinalPoint"/>
 	</resultMap>
 
-	<resultMap type="EClassOpenApplyForm" id="eClassOpenApplyResultMap">
-		<id 	column="eClassOpenAppleyCode" 			property="eClassOpenAppleyCode"/>
-		<result column="eClassOpenAppleyPrice" 			property="eClassOpenApplyPrice"/>
+	<resultMap type="eClassApproved" id="eClassApprovedResultMap">
+		<id 	column="eClassApprovedCode" 		property="eClassApprovedCode"/>
+		<result column="memberEmail" 				property="memberEmail"/>
+		<result column="eClassCategorySmallCode" 	property="eClassCategorySmallCode"/>
+		<result column="eClassIntroduceCode" 		property="eClassIntroduceCode"/>
+		<result column="eClassSectionTitleCode" 	property="eClassSectionTitleCode"/>
+		<result column="eClassSectionCurriculumCode" property="eClassSectionCurriculumCode"/>
+		<result column="eClassQuestionCode" 		property="eClassQuestionCode"/>
+		<result column="eClassAnswerCode" 			property="eClassAnswerCode"/>
+		<result column="eClassApprovedPrice" 		property="eClassApprovedPrice"/>
+		<result column="eClassApprovedName" 		property="eClassApprovedName"/>
+		<result column="eClassApprovedSetDate" 		property="eClassApprovedSetDate"/>
+		<result column="eClassApprovedStratDate" 	property="eClassApprovedStratDate"/>
+		<result column="eClassApprovedEndDate" 		property="eClassApprovedEndDate"/>
+		<result column="eClassApprovedStudent" 		property="eClassApprovedStudent"/>
+		<result column="eClassApprovedMaxStudent" 	property="eClassApprovedMaxStudent"/>
+		<result column="eClassApprovedDate" 		property="eClassApprovedDate"/>
+		<result column="eClassApprovedState" 		property="eClassApprovedState"/>
 		<association property="eClassCategorySmall" javaType="EClassCategorySmall">
 			<id 	column="eClassCategorySmallCode" 	property="eClassCategorySmallCode"/>
 			<result column="eClassCategorySmallName" 	property="eClassCategorySmallName"/>
@@ -33,23 +48,18 @@
 			<result column="eClassIntroduceContent" 	property="eClassIntroduceContent"/>
 			<result column="eClassIntroduceImg" 	property="eClassIntroduceImg"/>
 		</association>
+		<collection property="member" resultMap="memberResultMap"></collection>
 	</resultMap>
 	
-	<resultMap type="EClassApproved" id="eClassApprovedResultMap">
-		<id 	column="eClassApprovedCode" 		property="eClassApprovedCode"/>
-		<result column="eClassApprovedName" 		property="eClassApprovedName"/>
-		<result column="eClassApprovedFinish" 		property="eClassApprovedFinish"/>
-		<result column="eClassApprovedSetDate" 		property="eClassApprovedSetDate"/>
-		<collection property="member" resultMap="memberResultMap"/>
-		<collection property="eClassOpenApplyForm" resultMap="eClassOpenApplyResultMap"/>
+	<resultMap type="wishList" id="wishListResultMap">
+		<id 	column="wishListCode" 		property="wishListCode"/>
+		<result column="memberEmail" 		property="memberEmail"/>
+		<result column="wishListRegDate" 	property="wishListRegDate"/>
+		<collection property="eClassApproved" resultMap="eClassApprovedResultMap"></collection>
 	</resultMap>
-
-	<resultMap type="WishList" id="wishListResultMap">
-		<id 	column="wishListCode" 			property="wishListCode"/>
-		<result column="wishListRegDate" 		property="wishListRegDate"/>
-		<collection property="member" resultMap="memberResultMap"/>
-		<collection property="eClassApproved" resultMap="eClassApprovedResultMap"/>
-	</resultMap>
+	
+	
+	
 	
 	<select id="getWishList" parameterType="String" resultMap="wishListResultMap" fetchSize="1000">
 		SELECT
@@ -57,7 +67,7 @@
 			,wi.wishListCode
 			,wi.eClassApprovedCode
 			,ea.eClassApprovedName
-			,eo.eClassOpenAppleyPrice
+			,ea.eClassApprovedPrice
 			,ei.eClassIntroduceContent
 			,ei.eClassIntroduceImg
 			,ec.eClassCategoryMediumName
@@ -68,18 +78,14 @@
 			eclassapproved AS ea
 			ON 
 			wi.eClassApprovedCode = ea.eClassApprovedCode
-			INNER JOIN 
-			eclassopenappley AS eo
-			ON 
-			ea.eClassOpenApplyCode = eo.eClassOpenAppleyCode 
-			INNER JOIN 
+			INNER JOIN
 			eclasscategorysmall AS ec
 			ON 
-			eo.eClassCategorySmallCode = ec.eClassCategorySmallCode
+			ea.eClassCategorySmallCode = ec.eClassCategorySmallCode
 			INNER JOIN 
 			eclassintroduce AS ei
 			ON 
-			eo.eClassIntroduceCode = ei.eClassIntroduceCode
+			ea.eClassIntroduceCode = ei.eClassIntroduceCode
 		WHERE
 			wi.memberEmail = #{SEMAIL}
 		ORDER BY ${sortStandard};
@@ -102,14 +108,10 @@
 			 ea.eClassApprovedName
 			,ea.eClassApprovedCode
 			,m.memberName
-			,eo.eClassOpenAppleyPrice
+			,ea.eClassApprovedPrice
 			,ea.eClassApprovedSetDate
 		FROM
 			eclassapproved AS ea
-			INNER JOIN 
-			eclassopenappley AS eo
-			ON 
-			ea.eClassOpenApplyCode = eo.eClassOpenAppleyCode
 			INNER JOIN
 			member AS m
 			ON 

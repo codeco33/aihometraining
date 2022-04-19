@@ -3,8 +3,16 @@ package aihometraining.team.dto;
 public class WishList {
 	private String wishListCode;
 	private Member member;	//memberEmail
+	private String memberEmail;
 	private EClassApproved eClassApproved;	//eClassApprovedCode
 	private String wishListRegDate;
+
+	public String getMemberEmail() {
+		return memberEmail;
+	}
+	public void setMemberEmail(String memberEmail) {
+		this.memberEmail = memberEmail;
+	}
 	
 	public String getWishListCode() {
 		return wishListCode;
@@ -41,6 +49,8 @@ public class WishList {
 		builder.append(eClassApproved);
 		builder.append(", wishListRegDate=");
 		builder.append(wishListRegDate);
+		builder.append(", memberEmail=");
+		builder.append(memberEmail);
 		builder.append("]");
 		return builder.toString();
 	}

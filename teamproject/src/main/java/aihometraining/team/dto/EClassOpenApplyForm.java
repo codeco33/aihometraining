@@ -11,23 +11,6 @@ public class EClassOpenApplyForm {
 	private String	eClassIntroduceCode;
 	private Date	eClassOpenApplyDate;
 	private int 	eClassOpenApplyApproveState;
-	
-	//wishList 구현으로 추가함 -진수경
-	private EClassCategorySmall eClassCategorySmall;
-	private EClassIntroduce eClassIntroduce;	
-	
-	public EClassCategorySmall geteClassCategorySmall() {
-		return eClassCategorySmall;
-	}
-	public void seteClassCategorySmall(EClassCategorySmall eClassCategorySmall) {
-		this.eClassCategorySmall = eClassCategorySmall;
-	}
-	public EClassIntroduce geteClassIntroduce() {
-		return eClassIntroduce;
-	}
-	public void seteClassIntroduce(EClassIntroduce eClassIntroduce) {
-		this.eClassIntroduce = eClassIntroduce;
-	}
 	public String geteClassOpenAppleyCode() {
 		return eClassOpenAppleyCode;
 	}
@@ -78,29 +61,12 @@ public class EClassOpenApplyForm {
 	}
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("EClassOpenApplyForm [eClassOpenAppleyCode=");
-		builder.append(eClassOpenAppleyCode);
-		builder.append(", eClassOpenApplyMemberEmail=");
-		builder.append(eClassOpenApplyMemberEmail);
-		builder.append(", eClassOpenApplyName=");
-		builder.append(eClassOpenApplyName);
-		builder.append(", eClassOpenApplyCategorySamll=");
-		builder.append(eClassOpenApplyCategorySamll);
-		builder.append(", eClassOpenApplyPrice=");
-		builder.append(eClassOpenApplyPrice);
-		builder.append(", eClassIntroduceCode=");
-		builder.append(eClassIntroduceCode);
-		builder.append(", eClassOpenApplyDate=");
-		builder.append(eClassOpenApplyDate);
-		builder.append(", eClassOpenApplyApproveState=");
-		builder.append(eClassOpenApplyApproveState);
-		builder.append(", eClassCategorySmall=");
-		builder.append(eClassCategorySmall);
-		builder.append(", eClassIntroduce=");
-		builder.append(eClassIntroduce);
-		builder.append("]");
-		return builder.toString();
+		return "EClassOpenApplyForm [eClassOpenAppleyCode=" + eClassOpenAppleyCode + ", eClassOpenApplyMemberEmail="
+				+ eClassOpenApplyMemberEmail + ", eClassOpenApplyName=" + eClassOpenApplyName
+				+ ", eClassOpenApplyCategorySamll=" + eClassOpenApplyCategorySamll + ", eClassOpenApplyPrice="
+				+ eClassOpenApplyPrice + ", eClassIntroduceCode=" + eClassIntroduceCode + ", eClassOpenApplyDate="
+				+ eClassOpenApplyDate + ", eClassOpenApplyApproveState=" + eClassOpenApplyApproveState + "]";
 	}
 	
+
 }
