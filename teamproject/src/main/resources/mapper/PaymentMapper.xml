@@ -153,7 +153,7 @@
 	
 	<select id="getEClassTake" parameterType="String" resultType="Map">
 		SELECT
-			eclassApprovedCode
+			 eClassApprovedCode
 			,memberEmail
 		FROM
 			eclasstake
@@ -161,9 +161,9 @@
 			paymentGroupCode = #{paymentGroupCode};
 	</select>
 	
-	<select id="getCallengeEnter" parameterType="String" resultType="String">
+	<select id="getCallengeEnter" parameterType="String" resultType="Map">
 		SELECT
-			challengeGatherCode
+			 challengeGatherCode
 			,memberEmail
 		FROM
 			challengeenter

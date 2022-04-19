@@ -30,6 +30,6 @@ public interface PaymentMapper {
 	//결제화면 수강신청
 	public Map<String,String> getEClassTake(String paymentGroupCode);
 	//결제화면 챌린지참여
-	public String getCallengeEnter(String paymnetGroupCode);
+	public Map<String,String> getCallengeEnter(String paymnetGroupCode);
 	
 }

@@ -1,6 +1,7 @@
 package aihometraining.team.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
@@ -114,31 +115,39 @@ public class PaymentController {
 		String paymentGoodsName = null;
 		int paymentGoodsPrice = 0;
 		int paymentGoodsSetDate = 0;
-		Member member = null;
+		String memberEmail = null;
 		
 		if(paymentGroupCode.startsWith("e")) {
-			//String eClassCode = paymentMapper.getEClassTake(paymentGroupCode);		
-			//EClassApproved eClass= paymentMapper.getEClassApproved(eClassCode);
-			//paymentMapper.getEClassTakeMember(memberEmail)
-			Map<String,String> eClassBy = paymentMapper.getEClassTake(paymentGroupCode);
+			Map<String,String> eClassTakeInfo = paymentMapper.getEClassTake(paymentGroupCode);
+			String eClassCode = eClassTakeInfo.get("eClassApprovedCode");
+			memberEmail = eClassTakeInfo.get("memberEmail");
 			
-			/*if(Objects.nonNull(eClass)) { 
+			System.out.println(eClassCode);
+			System.out.println(memberEmail);
+			
+			EClassApproved eClass= paymentMapper.getEClassApproved(eClassCode);
+			
+			if(Objects.nonNull(eClass)) { 
 				paymentGoodsName = eClass.geteClassApprovedName(); 
 				paymentGoodsPrice = eClass.geteClassApprovedPrice();
 				paymentGoodsSetDate = eClass.geteClassApprovedSetDate(); 
-				//member = memberMapper.getMemberInfoByEmail(eClass.getMemberEmail());
-			}*/
+				
+			}
 			 
-		}/*else {
-			String challengeCode = paymentMapper.getCallengeEnter(paymentGroupCode);
-			ChallengeGather challenge=challengeEnterMapper.getChallengeEnterByCode(challengeCode);
+		}else {
+			Map<String,String> challengeEnterInfo = paymentMapper.getCallengeEnter(paymentGroupCode);
+			String challengeCode = challengeEnterInfo.get("challengeGatherCode");
+			memberEmail = challengeEnterInfo.get("memberEmail");
+			
+			ChallengeGather challenge = challengeEnterMapper.getChallengeEnterByCode(challengeCode);
 			  
 			if(Objects.nonNull(challenge)) { 
 				paymentGoodsName = challenge.getChallengeGatherName();
 				paymentGoodsPrice = challenge.getChallengeEnterDeposit();
 			}
-			 
-		}*/
+		}
+		
+		Member member = memberMapper.getMemberInfoByEmail(memberEmail);
 		
 		model.addAttribute("paymentGoodsName", paymentGoodsName);
 		model.addAttribute("paymentGoodsPrice", paymentGoodsPrice);
