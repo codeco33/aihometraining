@@ -1,10 +1,14 @@
 package aihometraining.team.diet.service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,9 +22,11 @@ import aihometraining.team.dto.DietPlan;
 @Transactional
 public class DietService {
 	
-	private static final int List = 0;
-	private static final int HashMap = 0;
-	private static final int String = 0;
+	
+	private static final Logger log = LoggerFactory.getLogger(DietService.class);
+
+	
+	
 	//DI 의존성 주입
 	private DietMapper dietMapper;
 	
@@ -164,5 +170,140 @@ public class DietService {
 		return updateResult;
 	}
 	
+	//total 영양소 계산기
+	public HashMap<String, Object> UserdietPlanList(List<HashMap<String, Object>> UserdietPlanList){
+
+		
+		//총 계획 영양소들
+		Integer nutrientsAPIKcal = 0;
+		Integer nutrientsAPICarbo = 0;
+		Integer nutrientsAPIPro = 0;
+		Integer nutrientsAPIFat = 0;
+		Integer nutrientsAPINatr = 0;
+		
+		for(int i=0; i<UserdietPlanList.size(); i++) {
+			
+			HashMap<String, Object> mealList = UserdietPlanList.get(i);
+			
+			nutrientsAPIKcal += (Integer)mealList.get("nutrientsAPIKcal");
+			nutrientsAPICarbo += (Integer)mealList.get("nutrientsAPICarbo");
+			nutrientsAPIPro += (Integer)mealList.get("nutrientsAPIPro");
+			nutrientsAPIFat += (Integer)mealList.get("nutrientsAPIFat");
+			nutrientsAPINatr += (Integer)mealList.get("nutrientsAPINatr");
+		}
+		
+		HashMap<String, Object> planedNutrient = new HashMap<>();
+		
+		planedNutrient.put("nutrientsAPIKcal", nutrientsAPIKcal);
+		planedNutrient.put("nutrientsAPICarbo", nutrientsAPICarbo);
+		planedNutrient.put("nutrientsAPIPro", nutrientsAPIPro);
+		planedNutrient.put("nutrientsAPIFat", nutrientsAPIFat);
+		planedNutrient.put("nutrientsAPINatr", nutrientsAPINatr);
+		
+		//총 실행 영양소들
+		nutrientsAPIKcal = 0;
+		nutrientsAPICarbo = 0;
+		nutrientsAPIPro = 0;
+		nutrientsAPIFat = 0;
+		nutrientsAPINatr = 0;
+		
+		for(int i=0; i<UserdietPlanList.size(); i++) {
+			
+			HashMap<String, Object> mealList = UserdietPlanList.get(i);
+			
+			if (mealList.get("dietPlanDoValue").equals(1)) {
+				
+				nutrientsAPIKcal += (Integer)mealList.get("nutrientsAPIKcal");
+				nutrientsAPICarbo += (Integer)mealList.get("nutrientsAPICarbo");
+				nutrientsAPIPro += (Integer)mealList.get("nutrientsAPIPro");
+				nutrientsAPIFat += (Integer)mealList.get("nutrientsAPIFat");
+				nutrientsAPINatr += (Integer)mealList.get("nutrientsAPINatr");
+				
+			}
+		}
+		
+		planedNutrient.put("nutrientsAPIKcalDone", nutrientsAPIKcal);
+		planedNutrient.put("nutrientsAPICarboDone", nutrientsAPICarbo);
+		planedNutrient.put("nutrientsAPIProDone", nutrientsAPIPro);
+		planedNutrient.put("nutrientsAPIFatDone", nutrientsAPIFat);
+		planedNutrient.put("nutrientsAPINatrDone", nutrientsAPINatr);
+		
+		
+		
+		
+		return planedNutrient;
+	}
+
+	
+	//받아온 식단은행 내 식단에 넣기
+	public int insertDietOneMealConnectionAll(DietBank dietBank) {
+		
+		//select 음식 조회
+		String dietBankCode = dietBank.getDietBankCode();
+		String pickerToday = dietBank.getDietBankUpdateDate();
+		DietOnemealConnection dietOnemealConnection = new DietOnemealConnection();
+		dietOnemealConnection.setDietBankCode(dietBankCode);
+		
+		List<HashMap<String, Object>> selectOneMealConn = dietMapper.selectDietOneMealConnectionByBankCode(dietOnemealConnection);
+		
+		
+		
+		for(int i=0; i<selectOneMealConn.size(); i++) {
+			
+		 String CheckGroup = (java.lang.String) selectOneMealConn.get(i).get("dietOneMealConnectionGroupNum");
+		 
+			String TimeValue = CheckGroup.substring(CheckGroup.lastIndexOf(" ")+1);
+			String DayValue = CheckGroup.substring(0,CheckGroup.lastIndexOf(" "));
+			
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			
+			LocalDate now = LocalDate.parse(pickerToday, formatter);
+			
+			String dietPlanCode = selectDietBankListNewCode("dietplan", "dietPlanCode");
+			String nutrientsAPICode = (java.lang.String) selectOneMealConn.get(i).get("nutrientsAPICode");
+			String memberEmail = dietBank.getMemberEmail();
+			String dietPlanDay = null;
+			String dietPlanTime = TimeValue;
+			
+			
+			
+			DietPlan dietplan = new DietPlan();
+			
+			dietplan.setDietPlanCode(dietPlanCode);
+			dietplan.setNutrientsAPICode(nutrientsAPICode);
+			dietplan.setMemberEmail(memberEmail);
+			dietplan.setDietPlanTime(dietPlanTime);
+			
+			if(DayValue.equals("월요일")) {
+			}else if(DayValue.equals("화요일")) {
+				now = now.plusDays(1);
+			}else if(DayValue.equals("수요일")) {
+				now = now.plusDays(2);
+			}else if(DayValue.equals("목요일")) {
+				now = now.plusDays(3);
+			}else if(DayValue.equals("금요일")) {
+				now = now.plusDays(4);
+			}else if(DayValue.equals("토요일")) {
+				now = now.plusDays(5);
+			}else if(DayValue.equals("일요일")) {
+				now = now.plusDays(6);
+			}
+			
+			
+			dietPlanDay = now.format(formatter);
+			
+			dietplan.setDietPlanDay(dietPlanDay);
+			
+			
+			if(nutrientsAPICode != null) {
+				log.info("최종 들어간값들!!:{}",dietplan);
+				log.info("날짜!!:{}",DayValue);
+				
+				dietMapper.insertUserDietPlan(dietplan);
+			}
+		}
+		
+		return 0;
+	}
 	
 }

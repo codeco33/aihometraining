@@ -18,4 +18,10 @@ public interface ChallengeEnterMapper {
 	
 	//참가 챌린지의 세부 정보 조회
 	public List<ChallengeGatherPlanDo> getChallengeEnterDetail(String challengeGatherCode);
+	
+	//참가 챌린지 코드별 챌린지 정보 조회
+	public List<ChallengeEnter> getChallengeEnterListByCode(String challengeEnterCode);
+	
+	//참가 챌린지 인증 등록처리
+	public int challengePlanDoInsert(ChallengeGatherPlanDo challengeGatherPlanDo);
 }

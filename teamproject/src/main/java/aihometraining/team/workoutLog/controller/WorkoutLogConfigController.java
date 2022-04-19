@@ -44,7 +44,10 @@ public class WorkoutLogConfigController {
 									  ,@RequestParam(value="searchValue", required = false) String searchValue
 									  ,@RequestParam(value="searchDate", required = false) String searchDate
 									  ,@RequestParam(value="searchStart", required = false) String searchStart
-									  ,@RequestParam(value="searchEnd", required = false) String searchEnd) {
+									  ,@RequestParam(value="searchEnd", required = false) String searchEnd
+									  ,@RequestParam(name="btnKey", required = false) String btnKey) {
+		
+		log.info("챌린지 카테고리 조회  btnKey : {}", btnKey);
 		
 		Map<String, Object> paramMap = new HashMap<String,Object>();
 		
@@ -52,18 +55,31 @@ public class WorkoutLogConfigController {
 			if("memberEmail".equals(searchKey)) {
 				searchKey = "w.memberEmail";	//쿼리문과 동일하게(모호하다며 찾을 수 없다며)
 				searchDate = "workoutLogUpdateFinalDate";
-			}else if("eClassCategorySmallName".equals(searchKey)) {
-				searchKey = "eClassCategorySmallName";
+			}else if("workoutLogTitle".equals(searchKey)) {
+				searchKey = "w.workoutLogTitle";
 				searchDate = "workoutLogUpdateFinalDate";
+			}
+		}
+		if(btnKey != null) {
+			if("오늘".equals(btnKey)) {
+				btnKey = "workoutLogUpdateFinalDate";
+			}else if("1주일".equals(btnKey)) {
+				btnKey = "-1 WEEK";
+			}else if("1개월".equals(btnKey)) {
+				btnKey = "-1 MONTH";
+			}else if("3개월".equals(btnKey)) {
+				btnKey = "-3 MONTH";
+			}else if("1년".equals(btnKey)) {
+				btnKey = "-1 YEAR";
 			}
 		}
 		
 		paramMap.put("searchKey", searchKey);
 		paramMap.put("searchValue", searchValue);
-		paramMap.put("searchKey", searchKey);
 		paramMap.put("searchDate", searchDate);
 		paramMap.put("searchStart", searchStart);
 		paramMap.put("searchEnd", searchEnd);
+		paramMap.put("btnKey", btnKey);
 		
 		List<Map<String, Object>> workoutLogList = workoutLogConfigService.getWorkoutLogList(paramMap);
 		

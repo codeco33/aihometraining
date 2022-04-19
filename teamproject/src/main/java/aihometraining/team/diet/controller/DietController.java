@@ -31,6 +31,7 @@ import aihometraining.team.dto.DietPlan;
 public class DietController {
 	
 	
+	
 	private static final Logger log = LoggerFactory.getLogger(DietController.class);
 
 	
@@ -143,7 +144,6 @@ public class DietController {
 		List<HashMap<String, Object>> selectOneMealConn = dietMapper.selectDietOneMealConnectionByBankCode(dietOnemealConnection);
 		model.addAttribute("selectOneMealConn", selectOneMealConn);
 		
-		System.out.println(selectOneMealConn+"찾아찾아");
 		
 		
 		return "diet/updateDietBankList";
@@ -273,16 +273,6 @@ public class DietController {
 	}
 	
 	
-	//Ajax 식단 계획 페이지에서 실행 눌렀을 때, 혹은 취소 눌렀을 때 update
-	@PostMapping("/updateUserDietPlan")
-	@ResponseBody
-	public int updateUserDietPlan(DietPlan dietplan) {
-		
-		int updateResult = dietService.updateUserDietPlan(dietplan);
-		
-		
-		return updateResult;
-	}
 	
 	
 }

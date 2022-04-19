@@ -59,6 +59,21 @@
 			<result column="memberFinalPoint" 				property="memberFinalPoint"/>
 		</association>
 		
+		<association property="challengeGatherPlan" javaType="ChallengeGatherPlan">
+			<id 	column="challengeGatherCode" 					property="challengeGatherCode"/>
+			<result column="challengeGatherPlanCode" 				property="challengeGatherPlanCode"/>
+			<result column="memberEmail" 							property="memberEmail"/>
+			<result column="challengeCategoryCode" 					property="challengeCategoryCode"/>
+			<result column="challengeSettingCode" 					property="challengeSettingCode"/>
+			<result column="challengeGatherPlanProveNumber" 		property="challengeGatherPlanProveNumber"/>
+			<result column="challengeGatherPlanProgress" 			property="challengeGatherPlanProgress"/>
+			<result column="challengeGatherPlanAchieveRate" 		property="challengeGatherPlanAchieveRate"/>
+			<result column="challengeGatherPlanProveState" 			property="challengeGatherPlanProveState"/>
+			<result column="challengeGatherChallengeStartDate" 		property="challengeGatherChallengeStartDate"/>
+			<result column="challengeGatherChallengeLastDate" 		property="challengeGatherChallengeLastDate"/>
+			<result column="challengeGatherPlanRound" 				property="challengeGatherPlanRound"/>
+		</association>
+		
 	</resultMap>
 
 	<resultMap type="ChallengeGather" id="challengeGatherResultMap">
@@ -200,6 +215,98 @@
 		</collection>
 	</resultMap>
 	
+	<resultMap type="ChallengeGatherPlanDo" id="ChallengeGatherPlanDoResultMap">
+		<result column="challengeGatherPlanDoCode" 						property="challengeGatherPlanDoCode"/>
+		<result column="challengeGatherPlanCode" 						property="challengeGatherPlanCode"/>
+		<result column="memberEmail" 									property="memberEmail"/>
+		<result column="challengeCategoryCode" 							property="challengeCategoryCode"/>
+		<result column="challengeSettingCode" 							property="challengeSettingCode"/>
+		<result column="challengeGatherCode" 							property="challengeGatherCode"/>
+		<result column="memberEnterEmail" 								property="memberEnterEmail"/>
+		<result column="challengeGatherPlanDoContent" 					property="challengeGatherPlanDoContent"/>
+		<result column="fileIdx" 										property="fileIdx"/>
+		<result column="challengeGatherPlanDoRegDate" 					property="challengeGatherPlanDoRegDate"/>
+		<result column="challengeGatherPlanDoState" 					property="hallengeGatherPlanDoState"/>
+		<result column="challengeGatherPlanDoAchieveRateAfterProve" 	property="challengeGatherPlanDoAchieveRateAfterProve"/>
+		<result column="challengeGatherPlanDoAchieveRate" 				property="challengeGatherPlanDoAchieveRate"/>
+		<result column="challengeGatherPlanDoProveCheckDate" 			property="challengeGatherPlanDoProveCheckDate"/>
+		
+		<association property="challengeGatherPlan" javaType="ChallengeGatherPlan">
+			<id 	column="challengeGatherCode" 					property="challengeGatherCode"/>
+			<result column="challengeGatherPlanCode" 				property="challengeGatherPlanCode"/>
+			<result column="memberEmail" 							property="memberEmail"/>
+			<result column="challengeCategoryCode" 					property="challengeCategoryCode"/>
+			<result column="challengeSettingCode" 					property="challengeSettingCode"/>
+			<result column="challengeGatherPlanProveNumber" 		property="challengeGatherPlanProveNumber"/>
+			<result column="challengeGatherPlanProgress" 			property="challengeGatherPlanProgress"/>
+			<result column="challengeGatherPlanAchieveRate" 		property="challengeGatherPlanAchieveRate"/>
+			<result column="challengeGatherPlanProveState" 			property="challengeGatherPlanProveState"/>
+			<result column="challengeGatherChallengeStartDate" 		property="challengeGatherChallengeStartDate"/>
+			<result column="challengeGatherChallengeLastDate" 		property="challengeGatherChallengeLastDate"/>
+			<result column="challengeGatherPlanRound" 				property="challengeGatherPlanRound"/>
+		</association>
+		
+		<association property="member" javaType="Member">
+			<id 	column="memberEmail" 				property="memberEmail"/>
+			<result column="memberPw" 					property="memberPw"/>
+			<result column="memberLevelCode" 			property="memberLevelCode"/>
+			<result column="memberNewsAgree" 			property="memberPw"/>
+			<result column="memberNewsAgree" 			property="memberNewsAgree"/>
+			<result column="memberRegDate" 				property="memberRegDate"/>
+			<result column="memberName" 				property="memberName"/>
+			<result column="memberPhone" 				property="memberPhone"/>
+			<result column="memberNickname" 			property="memberNickname"/>
+			<result column="memberBirthday" 			property="memberBirthday"/>
+			<result column="memberGender" 				property="memberGender"/>
+			<result column="memberRecommendEmail" 		property="memberRecommendEmail"/>
+			<result column="memberFinalPoint" 			property="memberFinalPoint"/>
+		</association>
+		
+		<association property="challengeCategory" javaType="ChallengeCategory">
+			<id 	column="challengeCategoryCode" 			property="challengeCategoryCode"/>
+			<result column="memberEmail" 					property="memberEmail"/>
+			<result column="challengeCategoryName" 			property="challengeCategoryName"/>
+			<result column="challengeCategoryRegDate" 		property="challengeCategoryRegDate"/>
+			<result column="eClassCategorySmallCode" 		property="eClassCategorySmallCode"/>
+			<result column="memberUpdateEmail" 				property="memberUpdateEmail"/>
+			<result column="memberUpdateDate" 				property="memberUpdateDate"/>
+		</association>
+		
+		<association property="challengeSetting" javaType="ChallengeSetting">
+			<id 	column="challengeSettingCode" 			property="challengeSettingCode"/>
+			<result column="challengeSettingUpdateDo" 		property="challengeSettingUpdateDo"/>
+		</association>
+		
+		<association property="challengeGather" javaType="ChallengeGather">
+			<id 	column="challengeGatherCode" property="challengeGatherCode"/>
+			<result column="memberEmail" 					property="memberEmail"/>
+			<result column="challengeCategoryCode" 			property="challengeCategoryCode"/>
+			<result column="challengeGatherName" 			property="challengeGatherName"/>
+			<result column="challengeGatherIntro" 			property="challengeGatherIntro"/>
+			<result column="challengeGatherMaxPeople" 		property="challengeGatherMaxPeople"/>
+			<result column="challengeGatherProveMethod" 	property="challengeGatherProveMethod"/>
+			<result column="challengeGatherProveContent" 	property="challengeGatherProveContent"/>
+			<result column="challengeGatherProveFrequency" 	property="challengeGatherProveFrequency"/>
+			<result column="challengeGatherAchieveRate" 	property="challengeGatherAchieveRate"/>
+			<result column="challengeStartDate" 			property="challengeStartDate"/>
+			<result column="challengeEndDate" 				property="challengeEndDate"/>
+			<result column="challengeGatherRegDate" 		property="challengeGatherRegDate"/>
+			<result column="memberEnterEmail" 				property="memberEnterEmail"/>
+			<result column="challengeGatherStartDate" 		property="challengeGatherStartDate"/>
+			<result column="challengeGatherEndDate" 		property="challengeGatherEndDate"/>
+		</association>
+		
+		<collection property="fileList" javaType="List" ofType="FileDto">
+				<id 	column="fileIdx" 						property="fileIdx"/>
+				<result	column="fileOriginalName" 			property="fileOriginalName"/>
+				<result column="fileNewName" 				property="fileNewName"/>
+				<result column="filePath" 					property="filePath"/>
+				<result column="fileSize" 					property="fileSize"/>
+			</collection>
+		
+		
+	</resultMap>
+	
 	<select id="getChallengeEnterListByEmail" parameterType="String"  resultMap="challengeEnterResultMap">
 		/* 회원 이메일별 참가 챌린지 목록 조회 */
 		SELECT
@@ -278,10 +385,64 @@
 			on
 			cpd.challengeGatherCode = ce.challengeGatherCode
 		WHERE
-			ce.challengeGatherCode = 'challengeGatherCode_1'
+			ce.challengeGatherCode = #{challengeGatherCode}
 		GROUP BY cpd.memberEnterEmail;
 	</select>
 	
+	<select id="getChallengeEnterListByCode" parameterType="String" resultMap="challengeEnterResultMap">
+		/* 참가 챌린지 코드별 챌린지 정보 조회 */
+		SELECT
+			 ce.challengeEnterCode
+			,cg.memberEmail
+			,cp.challengeSettingCode
+			,cp.challengeGatherPlanCode
+			,ce.challengeCategoryCode
+			,cc.challengeCategoryName
+			,ce.challengeGatherCode
+			,cg.challengeGatherName
+		FROM
+			challengeenter AS ce
+			INNER JOIN
+			challengecategory AS cc
+			ON
+			cc.challengeCategoryCode = ce.challengeCategoryCode
+			INNER JOIN
+			challengegather AS cg
+			ON
+			cg.challengeGatherCode = ce.challengeGatherCode
+			INNER JOIN
+			challengegatherplan AS cp
+			on
+			cp.challengeGatherCode = ce.challengeGatherCode
+		WHERE
+			ce.challengeEnterCode = #{challengeEnterCode};
+	</select>
+	
+	<insert id="challengePlanDoInsert" parameterType="ChallengeGatherPlanDo">
+		/* 챌린지 인증 등록 처리*/
+		INSERT INTO challengegatherplando
+		( 	 challengeGatherPlanDoCode
+			,challengeGatherPlanCode
+			,memberEmail
+			,challengeCategoryCode
+			,challengeSettingCode
+			,challengeGatherCode
+			,memberEnterEmail
+			,challengeGatherPlanDoContent
+			,challengeGatherPlanDoRegDate
+		)
+		VALUES (
+			 #{challengeGatherPlanDoCode}
+			,#{challengeGatherPlanCode}
+			,#{memberEmail}
+			,#{challengeCategoryCode}
+			,#{challengeSettingCode}
+			,#{challengeGatherCode}
+			,#{memberEnterEmail}
+			,#{challengeGatherPlanDoContent}
+			,CURDATE()
+		)
+	</insert>
 	
 	
 	<!-- 

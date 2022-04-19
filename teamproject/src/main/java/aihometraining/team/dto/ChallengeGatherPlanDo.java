@@ -1,5 +1,7 @@
 package aihometraining.team.dto;
 
+import java.util.List;
+
 public class ChallengeGatherPlanDo {
 	/*challengeGatherPlanDoCode, 
 	 * challengeGatherPlanCode,
@@ -10,8 +12,8 @@ public class ChallengeGatherPlanDo {
 	 *  memberEnterEmail, 
 	 *  challengeGatherPlanDoContent, 
 	 *  fileIdx, 
-	 *  challengeGatherPlanDoRegDate, c
-	 *  hallengeGatherPlanDoState, 
+	 *  challengeGatherPlanDoRegDate, 
+	 *  challengeGatherPlanDoState, 
 	 *  challengeGatherPlanDoAchieveRateAfterProve, 
 	 *  challengeGatherPlanDoAchieveRate, 
 	 *  challengeGatherPlanDoProveCheckDate*/
@@ -36,6 +38,14 @@ public class ChallengeGatherPlanDo {
 	private ChallengeCategory ChallengeCategory;
 	private ChallengeSetting ChallengeSetting;
 	private ChallengeGather ChallengeGather;
+	private List<FileDto> fileList;
+	
+	public List<FileDto> getFileList() {
+		return fileList;
+	}
+	public void setFileList(List<FileDto> fileList) {
+		this.fileList = fileList;
+	}
 	public String getChallengeGatherPlanDoCode() {
 		return challengeGatherPlanDoCode;
 	}
@@ -164,7 +174,7 @@ public class ChallengeGatherPlanDo {
 				+ challengeGatherPlanDoAchieveRate + ", challengeGatherPlanDoProveCheckDate="
 				+ challengeGatherPlanDoProveCheckDate + ", challengeGatherPlan=" + challengeGatherPlan + ", member="
 				+ member + ", ChallengeCategory=" + ChallengeCategory + ", ChallengeSetting=" + ChallengeSetting
-				+ ", ChallengeGather=" + ChallengeGather + "]";
+				+ ", ChallengeGather=" + ChallengeGather + ", fileList=" + fileList + "]";
 	}
 	
 	

@@ -2,6 +2,7 @@ package aihometraining.team.challenge.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import aihometraining.team.challenge.service.ChallengeEnterService;
 import aihometraining.team.dto.ChallengeEnter;
 import aihometraining.team.dto.ChallengeGather;
+import aihometraining.team.dto.ChallengeGatherPlanDo;
 
 @Controller
 @RequestMapping("/challenge/challengeEnter")
@@ -67,16 +70,61 @@ private static final Logger log = LoggerFactory.getLogger(ChallengeEnterControll
 		return "challenge/challengeEnter/challengeEnterDetail";
 		
 	}
-	
+	//챌린지 인증 화면
 	@GetMapping("/challengePlanDoInsert")
-	public String challengePlanDoInsert(Model model) {
+	public String challengePlanDoInsert(Model model, 
+										@RequestParam(value="challengeEnterCode", required = false) String challengeEnterCode) {
+		
+		log.info("참가 챌린지  challengeEnterCode: {}", challengeEnterCode);
+		
+		List<ChallengeEnter> challengeEnterByCode = challengeEnterService.getChallengeEnterListByCode(challengeEnterCode);
+		
+		log.info("참가 챌린지 정보조회  challengeEnterByCode: {}", challengeEnterByCode);
 		
 		model.addAttribute("title", "참가 챌린지 인증하기");
 		model.addAttribute("headerList", "챌린지");
+		model.addAttribute("challengeEnterByCode", challengeEnterByCode);
 		
 		return "challenge/challengeEnter/challengePlanDoInsert";
 		
 	}
+	//챌린지 인증 처리
+	@PostMapping("/challengePlanDoInsert")
+	public String challengePlanDoInsert(ChallengeGatherPlanDo challengeGatherPlanDo
+										, HttpSession session
+										, @RequestParam MultipartFile[] fileImage
+										, HttpServletRequest request) {
+		
+		log.info("챌린지 인증 등록 폼에서 입력받은 데이터: {}", challengeGatherPlanDo); //받은 내용이 여기{}에 담긴다.
+		
+		String sEmail = (String) session.getAttribute("SEMAIL");
+		
+		//파일 업로드 
+		String serverName = request.getServerName();
+		String fileRealPath = "";
+		if("localhost".equals(serverName)) {				
+			fileRealPath = System.getProperty("user.dir") + "/src/main/resources/static/";
+			//fileRealPath = request.getSession().getServletContext().getRealPath("/WEB-INF/classes/static/");
+		}else {
+			fileRealPath = request.getSession().getServletContext().getRealPath("/WEB-INF/classes/static/");
+		}
+		
+		challengeEnterService.challengePlanDoInsert(challengeGatherPlanDo, sEmail, fileImage, fileRealPath);
+		
+		
+		return "redirect:/challenge/challengeEnter/challengePlanDoList";
+		
+	}
+	
+	@GetMapping("/challengePlanDoList")
+	public String challengePlanDoList(Model model) {
+		
+		model.addAttribute("title", "인증 챌린지 목록");
+		model.addAttribute("leftMenuList", "챌린지");
+		
+		return "challenge/challengeEnter/challengePlanDoList";
+	}
+	
 	@GetMapping("/challengeEnterPaymemt")
 	public String challengeEnterPaymemt(Model model) {
 		
