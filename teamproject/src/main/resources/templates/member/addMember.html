@@ -34,6 +34,9 @@
 	.form-input lable	{
 		font-weight: 50;
 	}
+	.login-form .form-input input::placeholder {
+		font-size: 15px;
+	}
 </style>
 <body>
 	<div id="preloader-active" th:replace="userfragments/preloader :: preloaderFragment"></div>
@@ -68,6 +71,7 @@
 	            <div id="emailInput" class="form-input">
 	                <label for="name">이메일</label>
 	                <input type="email" name="memberEmail" placeholder="﻿example@email.com">
+	                <br/>
 	                <button class="text-dark" type="button" id="emailCheck">이메일 중복 체크</button>
 	            </div>
 	           <!--  <div class="form-input">
@@ -76,12 +80,12 @@
 	            </div> -->
 	            <div class="form-input">
 	                <label for="name">비밀번호</label>
-	                <input type="password" name="memberPw" id="password1" placeholder="********">
+	                <input type="password" name="memberPw" id="password1" placeholder="영문, 숫자, 특수 문자를 혼합하여 8~10자리로 입력해주세요.">
 	                <p id="p1" class="text-white"></p>
 	                <br/>
 	                <label for="name">비밀번호 확인</label>
-	                <input type="password" name="memberPwCheck" id="password2" placeholder="********">
-	                <p id="p2" class="text-white">영문, 숫자, 특수 문자를 혼합하여 8~10자리로 입력해주세요.</p>
+	                <input type="password" name="memberPwCheck" id="password2" placeholder="위 비밀번호와 동일하게 입력해주세요.">
+	                <p id="p2" class="text-white"></p>
 	            </div>
 	            <!-- <div class="form-input">
 	                <label for="name">비밀번호 확인</label>
@@ -215,9 +219,6 @@
                 }
             }
     	});
-		function(){
-			function()
-		}
 		if($('#password1').val() == ""){
 			$('#p1').val("영문, 숫자, 특수 문자를 혼합하여 8~10자리로 입력해주세요.");
 		}
