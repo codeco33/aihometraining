@@ -27,9 +27,6 @@ public class DietService {
 
 	
 	
-	private static final int List = 0;
-	private static final int HashMap = 0;
-	private static final int String = 0;
 	//DI 의존성 주입
 	private DietMapper dietMapper;
 	

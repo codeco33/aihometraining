@@ -1,14 +1,13 @@
 package aihometraining.team.mapper;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import aihometraining.team.dto.EClassAnswer;
+import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.EClassIntroduce;
-import aihometraining.team.dto.EClassOpenAppleyForm;
 import aihometraining.team.dto.EClassQuestion;
 import aihometraining.team.dto.EClassSectionCurriculum;
 import aihometraining.team.dto.EClassSectionTitle;
@@ -25,7 +24,7 @@ public interface EClassMapper {
 	public List<EClassCategorySmall> eClassCategoryMedium(String eClassCategoryMediumCode);
 	
 	//신청한 클래스 조회
-	public List<EClassOpenAppleyForm> eClassOpenAppleyList(Map<String, Object> paramMap,String eClassOpenAppleyMemberEmail);
+	public List<EClassApproved> eClassOpenAppleyList(String eClassOpenAppleyMemberEmail);
 	
 	//클래스 소개 등록 처리
 	public int EClassIntroduceInsert(EClassIntroduce eClassIntroduce);
@@ -43,6 +42,6 @@ public interface EClassMapper {
 	public int EClassAnswerInsert(EClassAnswer eClassAnswer);
 	
 	//클래스 세부설정 등록 처리
-	public int EClassPriceInsert(EClassOpenAppleyForm eClassOpenAppleyForm);
+	public int EClassPriceInsert(EClassApproved eClassApproved);
 
 }
