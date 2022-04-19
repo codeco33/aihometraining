@@ -126,7 +126,14 @@
 			workoutGoalPlanCategoryCode
 			,workoutGoalPlanCategoryContent
 		FROM
-			workoutgoalplancategory;
+			workoutgoalplancategory
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="searchValue != null and searchValue !=''">
+				AND 
+					workoutGoalPlanCategoryContent LIKE CONCAT('%', #{searchValue}, '%')
+			</if>
+		</trim>		
+			
 	</select>
 	
 	<insert id="workoutGoalCategoryInsert" parameterType="WorkoutLogCategory">

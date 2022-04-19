@@ -102,30 +102,17 @@ public class WorkoutLogConfigController {
 	//운동 계획 카테고리 목록
 	@GetMapping("/workoutCategoryList")
 	public String workoutCategoryList( Model model
-									  ,@RequestParam(value="searchKey", required = false) String searchKey
-									  ,@RequestParam(value="searchValue", required = false) String searchValue
-									  ,@RequestParam(value="searchDate", required = false) String searchDate
-									  ,@RequestParam(value="searchStart", required = false) String searchStart
-									  ,@RequestParam(value="searchEnd", required = false) String searchEnd) {
+									  ,@RequestParam(value="searchValue", required = false) String searchValue) {
 		
 		Map<String, Object> paramMap = new HashMap<String,Object>();
 		
-		if(searchKey != null) {
-			if("memberEmail".equals(searchKey)) {
-				searchKey = "w.memberEmail";	//쿼리문과 동일하게(모호하다며 찾을 수 없다며)
-				searchDate = "workoutLogUpdateFinalDate";
-			}else if("eClassCategorySmallName".equals(searchKey)) {
-				searchKey = "eClassCategorySmallName";
-				searchDate = "workoutLogUpdateFinalDate";
+		if(searchValue != null) {
+			if("workoutGoalPlanCategoryContent".equals(searchValue)) {
+				searchValue = "workoutGoalPlanCategoryContent";	//쿼리문과 동일하게(모호하다며 찾을 수 없다며)
 			}
 		}
 		
-		paramMap.put("searchKey", searchKey);
 		paramMap.put("searchValue", searchValue);
-		paramMap.put("searchKey", searchKey);
-		paramMap.put("searchDate", searchDate);
-		paramMap.put("searchStart", searchStart);
-		paramMap.put("searchEnd", searchEnd);
 		
 		List<Map<String, Object>> workoutLogCategoryList = workoutLogConfigService.getWorkoutLogCategoryList(paramMap);
 		
