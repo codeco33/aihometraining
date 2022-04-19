@@ -43,5 +43,8 @@ public interface EClassMapper {
 	
 	//클래스 세부설정 등록 처리
 	public int EClassPriceInsert(EClassApproved eClassApproved);
+	
+	//클래스 수정 조회
+	public EClassApproved eClassApprovedByCode(String eclassapprovedCode);
 
 }

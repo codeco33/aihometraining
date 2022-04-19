@@ -391,7 +391,8 @@
 	<select id="eClassOpenAppleyList" parameterType="String" resultMap="eClassApprovedResultMap">
 		/* 신청한 운동클래스 리스트 */
 		SELECT
-			 ea.eClassApprovedName
+			 ea.eClassApprovedCode
+			,ea.eClassApprovedName
 			,ea.eClassApprovedPrice
 			,ei.eClassIntroduceContent
 		FROM
@@ -419,10 +420,15 @@
 			eo.eClassOpenAppleyMemberEmail = #{memberEmail};
 	</select>
 	
-	<select id="eClassApprovedList" parameterType="String" resultMap="eClassApprovedResultMap">
+	<select id="eClassApprovedByCode" parameterType="String" resultMap="eClassApprovedResultMap">
 		/* 신청한 운동클래스 또는 승인된 운동클래스 수정처리를 위한 조회 */
 		SELECT
-			 ecs.eClassCategorySmallName
+			 ecs.eClassCategorySmallCode
+			,ecs.eClassCategorySmallName
+			,ecs.eClassCategoryMediumCode
+			,ecs.eClassCategoryMediumName
+			,ecs.eClassCategoryLargeCode
+			,ecs.eClassCategoryLargeName
 			,ei.eClassIntroduceContent
 			,es.eClassSectionTitleName
 			,esc.eClassSectionCurriculumTitle
@@ -462,7 +468,7 @@
 		ON
 			ea.eClassAnswerCode = ean.eClassAnswerCode
 		WHERE
-			ea.memberEmail ='id001@email.com';
+			ea.eClassApprovedCode = #{eClassApprovedCode};
 	</select>
 	
 	

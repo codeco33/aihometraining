@@ -50,6 +50,10 @@
 											 th:if="${ecoal.eClassApprovedState} == '1'">
 											<span style="color: #fff">승인</span>
 										</div>
+										<div class="col-md-12">
+											<button >취소하기</button>
+											<a th:href="@{/openAppleyUpdate(eClassApprovedCode=${ecoal.eClassApprovedCode})}"><button>수정하기</button></a>
+										</div>
 									</div>
 								</div>
 							</div>

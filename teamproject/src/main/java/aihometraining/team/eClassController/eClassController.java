@@ -119,34 +119,27 @@ public class eClassController {
 	}
 	
 	@GetMapping("/openAppleyUpdate")
-	public String EClassOpenAppleyFormUpdate( Model model
-											, EClassIntroduce eClassIntroduce
-											, EClassSectionTitle eClassSectionTitle
-											, EClassSectionCurriculum eClassSectionCurriculum
-											, EClassQuestion eClassQuestion
-											, EClassAnswer eClassAnswer
-											, EClassApproved eClassApproved
-											, HttpSession session) {
+	public String EClassOpenAppleyFormUpdate(Model model
+											,@RequestParam(value = "eClassApprovedCode",required = false)String eclassapprovedCode) {
 
-
-			String mamberEmail = (String) session.getAttribute("SEMAIL");
-			
+			EClassApproved eClassApproved = eClassService.eClassApprovedByCode(eclassapprovedCode);
+		
 			//운동 클래스 카테고리 조회
 			List<EClassCategorySmall> eClassCategoryLargeList = eClassService.eClassCategoryLargeList();
 			List<EClassCategorySmall> eClassCategoryMediumList = eClassService.eClassCategoryMediumList();
 			
-			log.info("eClassController.javaOpenAppleyForm 데이터: {}", eClassCategoryLargeList); //받은 내용이 여기{}에 담긴다.
-			log.info("eClassController.javaOpenAppleyForm 데이터: {}", eClassCategoryMediumList); //받은 내용이 여기{}에 담긴다.
-
+			log.info("eClassController.EClassOpenAppleyFormUpdate eClassCategoryLargeList 데이터: {}", eClassCategoryLargeList); //받은 내용이 여기{}에 담긴다.
+			log.info("eClassController.EClassOpenAppleyFormUpdate eClassCategoryMediumList 데이터: {}", eClassCategoryMediumList); //받은 내용이 여기{}에 담긴다.
+			log.info("eClassController.EClassOpenAppleyFormUpdate eclassapprovedCode 데이터: {}", eClassApproved); //받은 내용이 여기{}에 담긴다.
 			
-			model.addAttribute("title", "운통클래스 신청폼");
+			model.addAttribute("title", "운통클래스 신청 폼 수정화면");
 			model.addAttribute("eClassCategoryLargeList", eClassCategoryLargeList);
 			model.addAttribute("eClassCategoryMediumList", eClassCategoryMediumList);
+			model.addAttribute("eClassApproved", eClassApproved);
 			
 			
-		return "";
+		return "eClass/eClassOpenAppleyFormUpdate";
 	}
-	
 	
 	@GetMapping("/eClassOpenAppleyComplete") 
 	public String complete (Model model) {

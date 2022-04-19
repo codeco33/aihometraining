@@ -164,17 +164,28 @@ public class eClassService {
 		String answerCode = eClassAnswer.geteClassAnswerCode();
 		eClassApproved.seteClassAnswerCode(answerCode);
 		
-		log.info("eClassService EClassPriceInsert 데이터: {}", eClassApproved);
-		log.info("eClassService EClassPriceInsert 데이터: {}", memberEmail);
-		log.info("eClassService EClassPriceInsert 데이터 : {}", priceCode);
-		log.info("eClassService EClassPriceInsert 데이터 : {}", introduceCode);
-		log.info("eClassService EClassPriceInsert 데이터 : {}", sectionCode);
-		log.info("eClassService EClassPriceInsert 데이터 : {}", curriculumCode);
-		log.info("eClassService EClassPriceInsert 데이터 : {}", questionCode);
-		log.info("eClassService EClassPriceInsert 데이터 : {}", answerCode);
+		log.info("eClassService EClassPriceInsert eClassApproved 데이터: {}", eClassApproved);
+		log.info("eClassService EClassPriceInsert memberEmail 데이터: {}", memberEmail);
+		log.info("eClassService EClassPriceInsert priceCode 데이터 : {}", priceCode);
+		log.info("eClassService EClassPriceInsert introduceCode 데이터 : {}", introduceCode);
+		log.info("eClassService EClassPriceInsert sectionCode 데이터 : {}", sectionCode);
+		log.info("eClassService EClassPriceInsert curriculumCode 데이터 : {}", curriculumCode);
+		log.info("eClassService EClassPriceInsert questionCode 데이터 : {}", questionCode);
+		log.info("eClassService EClassPriceInsert answerCode 데이터 : {}", answerCode);
 		
 		int result = eClassMapper.EClassPriceInsert(eClassApproved);
 		
 		return result;
 	}
+	
+	//클래스 신청 수정조회
+	public EClassApproved eClassApprovedByCode(String eclassapprovedCode){
+		
+		EClassApproved eClassApproved = eClassMapper.eClassApprovedByCode(eclassapprovedCode);
+		
+		log.info("eClassService eClassApprovedList eClassApproved : {}", eclassapprovedCode);
+		
+		return eClassApproved;
+	}
+	
 }
