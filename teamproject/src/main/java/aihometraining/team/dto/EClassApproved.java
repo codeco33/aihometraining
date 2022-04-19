@@ -10,7 +10,7 @@ public class EClassApproved {
 	private String eClassSectionCurriculumCode;
 	private String eClassQuestionCode;
 	private String eClassAnswerCode;
-	private String eClassApprovedPrice;
+	private int eClassApprovedPrice;
 	private String eClassApprovedName;
 	private int eClassApprovedSetDate;
 	private String eClassApprovedStratDate;
@@ -74,10 +74,10 @@ public class EClassApproved {
 	public void seteClassAnswerCode(String eClassAnswerCode) {
 		this.eClassAnswerCode = eClassAnswerCode;
 	}
-	public String geteClassApprovedPrice() {
+	public int geteClassApprovedPrice() {
 		return eClassApprovedPrice;
 	}
-	public void seteClassApprovedPrice(String eClassApprovedPrice) {
+	public void seteClassApprovedPrice(int eClassApprovedPrice) {
 		this.eClassApprovedPrice = eClassApprovedPrice;
 	}
 	public String geteClassApprovedName() {

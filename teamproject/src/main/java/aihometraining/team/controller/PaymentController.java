@@ -1,7 +1,6 @@
 package aihometraining.team.controller;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,14 +37,7 @@ public class PaymentController {
 		this.challengeEnterMapper = challengeEnterMapper;
 	}
 	
-	@GetMapping("/challengeadmin")
-	public String challengeadmin(Model model) {
-		
-		model.addAttribute("title", "챌린지 관리자 페이지");
-		
-		return "challenge/challengeadmin";
-		
-	}
+
 	
 	//위시리스트
 	@GetMapping("/wishList")
@@ -117,27 +109,27 @@ public class PaymentController {
 		model.addAttribute("title", "결제");
 		String paymentGoodsName = null;
 		int paymentGoodsPrice = 0;
-		String paymentGoodsSetDate = null;
-		//PaymentGoods paymentGoods = paymentService.getPayment(paymentGroupCode);
+		int paymentGoodsSetDate = 0;
 		
 		if(paymentGroupCode.startsWith("e")) {
-			Map<String, String> eClassCode = paymentMapper.getEClassTake(paymentGroupCode);		
-			/*
-			 * EClassApproved eClass= paymentMapper.getEClassApproved(eClassCode);
-			 * if(Objects.nonNull(eClass)) { paymentGoodsName =
-			 * eClass.geteClassApprovedName(); paymentGoodsPrice =
-			 * eClass.geteClassApprovedPrice(); paymentGoodsSetDate =
-			 * eClass.geteClassApprovedSetDate(); }
-			 */
+			String eClassCode = paymentMapper.getEClassTake(paymentGroupCode);		
+			EClassApproved eClass= paymentMapper.getEClassApproved(eClassCode);
+			  
+			  if(Objects.nonNull(eClass)) { 
+				  paymentGoodsName = eClass.geteClassApprovedName(); 
+				  paymentGoodsPrice = eClass.geteClassApprovedPrice();
+				  paymentGoodsSetDate = eClass.geteClassApprovedSetDate(); 
+			  }
+			 
 		}else {
-			Map<String, String> challengeCode = paymentMapper.getCallengeEnter(paymentGroupCode);
-			/*
-			 * ChallengeGather challenge=
-			 * challengeEnterMapper.getChallengeEnterByCode(challengeCode);
-			 * if(Objects.nonNull(challenge)) { paymentGoodsName =
-			 * challenge.getChallengeGatherName(); paymentGoodsPrice =
-			 * challenge.getChallengeEnterDeposit(); }
-			 */
+			String challengeCode = paymentMapper.getCallengeEnter(paymentGroupCode);
+			  ChallengeGather challenge=challengeEnterMapper.getChallengeEnterByCode(challengeCode);
+			  
+			  if(Objects.nonNull(challenge)) { 
+				  paymentGoodsName = challenge.getChallengeGatherName();
+				  paymentGoodsPrice = challenge.getChallengeEnterDeposit();
+			  }
+			 
 		}
 		
 		model.addAttribute("paymentGoodsName", paymentGoodsName);
