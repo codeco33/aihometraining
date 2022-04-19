@@ -27,9 +27,6 @@ public class DietService {
 
 	
 	
-	private static final int List = 0;
-	private static final int HashMap = 0;
-	private static final int String = 0;
 	//DI 의존성 주입
 	private DietMapper dietMapper;
 	
@@ -237,7 +234,6 @@ public class DietService {
 		return planedNutrient;
 	}
 
-
 	
 	//받아온 식단은행 내 식단에 넣기
 	public int insertDietOneMealConnectionAll(DietBank dietBank) {
@@ -309,6 +305,5 @@ public class DietService {
 		
 		return 0;
 	}
-
 	
 }
