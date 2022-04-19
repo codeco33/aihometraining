@@ -40,22 +40,28 @@ public class MemberService {
 		
 		return resultMap;
 	}
-	
+	/*
+	 * 회원 수정
+	 * */
 	public int modifyMember(Member member) {
 		return memberMapper.modifyMember(member);
 	}
-	
+	/*
+	 * 회원 이메일로 회원 정보 가져오기
+	 * */
 	public Member getMemberInfoByEmail(String memberEmail) {
 		return memberMapper.getMemberInfoByEmail(memberEmail);
 	}
-	
+	/*
+	 * 회원 목록 조회
+	 * */
 	public List<Member> getMemberList(String searchKey, String searchValue){
 		
 		List<Member> memberList = memberMapper.getMemberList(searchKey, searchValue);
 		
 		return memberList;
 	}
-	//회원가입
+	//회원 가입
 	public int addMember(Member member) {
 		
 		member.setMemberLevelCode("levelCode003");
@@ -64,7 +70,9 @@ public class MemberService {
 		
 		return result; 
 	}
-
+	/*
+	 * 회원 권한 목록 조회
+	 * */
 	public List<MemberLevel> getMemberLevelList() {
 		
 		List<MemberLevel> memberLevelList = memberMapper.getMemberLevelList();
