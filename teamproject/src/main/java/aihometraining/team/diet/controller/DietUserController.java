@@ -84,6 +84,9 @@ public class DietUserController {
 		HashMap<String, Object> UserdietPlanListNutrient = dietService.UserdietPlanList(UserdietPlanList);
 		model.addAttribute("UserdietPlanListNutrient", UserdietPlanListNutrient);
 		
+
+		log.info("UserdietPlanListNutrient : {}", UserdietPlanListNutrient);
+
 		
 		
 		
@@ -132,6 +135,12 @@ public class DietUserController {
 		model.addAttribute("UserdietPlanList",UserdietPlanList);
 
 		
+
+		HashMap<String, Object> UserdietPlanListNutrient = dietService.UserdietPlanList(UserdietPlanList);
+		model.addAttribute("UserdietPlanListNutrient", UserdietPlanListNutrient);
+		
+		log.info("UserdietPlanListNutrient : {}", UserdietPlanListNutrient);
+
 		
 		
 		return "diet/AjaxTable/DietUserMealplanedListAjax";
@@ -155,6 +164,7 @@ public class DietUserController {
 		
 		return updateResult;
 	}
+
 	
 	//Ajax User식단표 progress-bar 
 	@PostMapping("/updateProgress")
@@ -222,5 +232,6 @@ public class DietUserController {
 		
 		return null;
 	}
+
 }
 
