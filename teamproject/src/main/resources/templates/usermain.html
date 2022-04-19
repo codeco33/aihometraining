@@ -1,25 +1,264 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layout/userdefault}">
-	<!-- 사용자 정의 title -->
-	<th:block layout:fragment="customTitle">
-		<title th:text="${title}"></title>
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head th:replace="userfragments/head :: headFragment"></head>
+
+
+<title th:text="${title}"></title>
+
+<!-- 사용자 정의 Css -->
+<style type="text/css">
+	body{
+		background-color: #ED6CFF;
+	}
+	.services-area {
+	    margin-top: 100px;
+	}
+	@font-face {
+	    font-family: 'SEBANG_Gothic_Regular';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/SEBANG_Gothic_Regular.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	*{font-family:'SEBANG_Gothic_Regular';}
+	.hero__caption h1, p{
+	 	font-family: 'SEBANG_Gothic_Regular';
+	}
+	body h1, h2, h3, h4, h5{
+		font-family: 'SEBANG_Gothic_Regular';
+	}
+	.team-area .single-cat .cat-cap h5>a {
+		color: #fff;
+	}
+	.team-area .single-cat .cat-cap p {
+		color: #fff;
+	}
+	.userMain_tab_ul li {
+		margin: 0 5px;
+	}
+	.userMain_tab_ul .single-services {
+		padding: 5px 18px;
+	}
+	.userMain_tab_ul .nav-item a{
+		color: #4255A4;
+		margin: 5px -10px;
+	}
+	.userMain_tab_ul .nav-item a:hover{
+		color: #ED6CFF;
+	}
+	.userMain_tab_ul .nav-item p{
+		color: #4255A4;
+		margin-top: 35px;
+		margin-left: -49px;
+	}
+	.userMain_tab_content div {
+		text-align: center;
+		
+	}
+	.userMain_tab_content div h3, p{
+		color: #fff;
+	}
+	.userMain_tab_content div img{
+		width: 800px;
+		height: 500px;
+		object-fit: contain;
+	}
+	.features-caption{
+		margin-top: 13px;
+	}
+</style>
+<body>
+	<div id="preloader-active" th:replace="userfragments/preloader :: preloaderFragment"></div>
+	<!-- start: Header -->
+	<div th:replace="userfragments/header :: headerFragment"></div>
+	<!-- end: Header -->
+	
+	<!-- slider-area start -->
+	<section class="slider-area ">
+	    <div class="slider-active">
+	        <!-- Single Slider -->
+	        <div class="single-slider slider-height d-flex align-items-center">
+	            <div class="container">
+	                <div class="row">
+	                    <div class="col-xl-12 col-lg-12 col-md-12">
+	                        <div class="hero__caption">
+	                            <h1 data-animation="fadeInLeft" data-delay="0.2s" style="font-size: 50px; margin-top: 20px; font-weight: 10;">AI 쌍방향 홈 트레이닝 시스템<br> 2022.04.16 | 01:26</h1>
+	                            <p data-animation="fadeInLeft" data-delay="0.4s">AI와 쌍방향으로 주고 받는 피드백을 통하여 사용자에게 비대면으로도 체계적인 운동 계획 수립과 실천하도록 도움을 제공하는 시스템</p>
+	                            <!-- <a href="#" class="btn hero-btn" data-animation="fadeInLeft" data-delay="0.7s">관리페이지</a> -->
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>          
+	        </div>
+	    </div>
+	</section>
+    <!-- slider-area end -->
+    
+    <!-- 담담기능 멤버소개 start -->    
+   	<section class="team-area section">
+	    <div class="container">
+	        <div class="row justify-content-center" style="margin-top: -250px;">
+	            <div class="col-xl-7 col-lg-8">
+	                <div class="section-tittle text-center mb-55" >
+	                    <h2 class="text-white">담당 기능</h2>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="team-active">
+	            <div class="single-cat text-center">
+	                <div class="cat-icon">
+	                    <img th:src="@{/assets/img/gallery/team2.png}" alt="" class = "rounded-circle" width = "193">
+	                </div>
+	                <div class="cat-cap">
+	                    <h5 style="color: #fff !important;"><a th:href="@{/admin/workoutLogConfigMain}">최민희</a></h5>
+	                    <p>운동 목표 및 계획 관리, 운동 일지 관리, AI 운동 영상 관리</p>
+	                </div>
+	            </div>
+	            <div class="single-cat text-center">
+	                <div class="cat-icon">
+	                    <img th:src="@{/assets/img/gallery/team1.png}" alt="" class = "rounded-circle" width = "193">
+	                </div>
+	                <div class="cat-cap">
+	                    <h5><a th:href="@{/admin/configList}">최보라</a></h5>
+	                    <p>챌린지 등록, 챌린지 참여, 챌린지 인증, 챌린지 관리</p>
+	                </div>
+	            </div>
+	            <div class="single-cat text-center">
+	                <div class="cat-icon">
+	                    <img th:src="@{/assets/img/gallery/team3.png}" alt="" class = "rounded-circle" width = "193">
+	                </div>
+	                <div class="cat-cap">
+	                    <h5><a th:href="@{#}">이영호</a></h5>
+	                    <p>식단 관리, 알림 관리, 쪽지 관리, 채팅 관리</p>
+	                </div>
+	            </div>
+	            <div class="single-cat text-center">
+	                <div class="cat-icon">
+	                    <img th:src="@{/assets/img/gallery/team4.png}" alt="" class = "rounded-circle" width = "193">
+	                </div>
+	                <div class="cat-cap">
+	                    <h5><a th:href="@{#}">이민식</a></h5>
+	                    <p>회원 관리, 로그인 관리, 운동 클래스 카테고리 관리, 신고 관리</p>
+	                </div>
+	            </div>
+	            <div class="single-cat text-center">
+	                <div class="cat-icon">
+	                    <img th:src="@{/assets/img/gallery/team5.png}" alt="" class = "rounded-circle" width = "193">
+	                </div>
+	                <div class="cat-cap">
+	                    <h5><a th:href="@{#}">김재환</a></h5>
+	                    <p>운동 클래스 등록, 과제, 운동 클래스 관리</p>
+	                </div>
+	            </div>
+	            <!-- <div class="single-cat text-center">
+	                <div class="cat-icon">
+	                    <img src="assets/img/gallery/team2.png" alt="" class = "rounded-circle" width = "193">
+	                </div>
+	                <div class="cat-cap">
+	                    <h5><a href="services.html">진수경</a></h5>
+	                    <p>결제, 포인트</p>
+	                </div>
+	            </div> -->
+	        </div>
+	    </div>
+    </section>
+    <!-- 담담기능 멤버소개 end -->
+       
+   	<!-- 담담기능 tab start -->
+   	<div class="services-area">
+	    <div class="container">
+	        <div class="row justify-content-sm-center">
+		        <!-- Nav pills -->
+				<ul class="nav userMain_tab_ul" role="tablist">
+					<li class="nav-item single-services mb-30">
+				  		<div class="features-icon">
+				           	<img th:src="@{/assets/img/icon/icon1.svg}" alt="">
+				       	</div>
+					    <a class="nav-link active" data-toggle="tab" href="#lms">이민식</a>
+					    <p>회원관리</p>
+				  	</li>
+					<li class="nav-item single-services mb-30">
+					  	<div class="features-icon">
+			           		<img th:src="@{/assets/img/icon/icon1.svg}" alt="">
+					    </div>
+					    <a class="nav-link" data-toggle="tab" href="#cmh">최민희</a>
+					    <p>운동일지</p>
+					</li>
+					<li class="nav-item single-services mb-30">
+					 	<div class="features-icon">
+					 		<img th:src="@{/assets/img/icon/icon1.svg}" alt="">
+						</div>
+						<a class="nav-link" data-toggle="tab" href="#cbr">최보라</a>
+					  	<p>챌린지</p>
+					</li>
+					<li class="nav-item single-services mb-30">
+						<div class="features-icon">
+					      	<img th:src="@{/assets/img/icon/icon1.svg}" alt="">
+					  	</div>
+					   	<a class="nav-link" data-toggle="tab" href="#kjh">김재환</a>
+						<p>운동클래스</p>
+					</li>
+				 	<li class="nav-item single-services mb-30">
+				 		<div class="features-icon">
+				          	<img th:src="@{/assets/img/icon/icon1.svg}" alt="">
+				      	</div>
+				   		<a class="nav-link" data-toggle="tab" href="#lyh">이영호</a>
+				 		<p>식단,채팅,알림,쪽지</p>
+				  	</li>
+				 	<!-- <li class="nav-item single-services mb-30">
+				 		<div class="features-icon">
+				          	<img src="assets/img/icon/icon1.svg" alt="">
+				      	</div>
+				   		<a class="nav-link" data-toggle="tab" href="#jsg1">진수경</a>
+				 		<p>결제,관리</p>
+				  	</li> -->
+				</ul>
+	        </div>
+	        <!-- Tab 정보 start -->
+	        <div class="tab-content userMain_tab_content">
+			    <div id="lms" class="container tab-pane active"><br>
+			    	<h3>이민식</h3>
+			      	<p>각자의 기능을 작성해주세요</p>
+			    </div>
+			    <div id="cmh" class="container tab-pane fade"><br>
+			      	<h3>최민희</h3>
+			      	<p>각자의 기능을 작성해주세요</p>
+			      	<img th:src="@{/assets/img/mini.png}" alt="">
+			    </div>
+			    <div id="cbr" class="container tab-pane fade"><br>
+			      	<h3>최보라</h3>
+			      	<p>각자의 기능을 작성해주세요</p>
+			    </div>
+			    <div id="kjh" class="container tab-pane fade"><br>
+			      	<h3>김재환</h3>
+			      	<p>각자의 기능을 작성해주세요</p>
+			    </div>
+			    <div id="lyh" class="container tab-pane fade"><br>
+			      	<h3>이영호</h3>
+			      	<p>각자의 기능을 작성해주세요</p>
+			    </div>
+			    <!-- <div id="jsg" class="container tab-pane fade"><br>
+			      	<h3>진수경</h3>
+			      	<p>각자의 기능을 작성해주세요</p>
+			    </div> -->
+			</div>
+			<!-- Tab 정보 end -->
+	    </div>
+    </div> 
+    <!-- 담담기능 tab End -->
+         	
+	<footer th:replace="userfragments/footer :: footerFragment"></footer>
+	<div id="back-top">
+		<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+	</div>
+
+	<th:block th:replace="userfragments/userJavaScripts :: userJSFragment"></th:block>
+	<th:block layout:fragment="customBodyScript">
+		<script type="text/javascript">
+		 
+
+		</script>
 	</th:block>
-	
-	<th:block layout:fragment="customContents">
-        <!--? slider Area Start-->
-                <!-- Single Slider -->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-6 col-lg-7 col-md-12">
-                                <div class="hero__caption">
-                                    <h1 data-animation="fadeInLeft" data-delay="0.2s">2021-12-01 ~ 2022-04-28 <br> 최보라, 최민희, 이영호, 김재환, 이민식, 진수경</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-	</th:block>
-	
-	
+</body>
 </html>

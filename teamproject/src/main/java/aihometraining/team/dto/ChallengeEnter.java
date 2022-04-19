@@ -28,7 +28,13 @@ public class ChallengeEnter {
 	private ChallengeCategory challengeCategory;
 	private ChallengeGather challengeGather;
 	private Member member;
-	
+	private ChallengeGatherPlan challengeGatherPlan;
+	public ChallengeGatherPlan getChallengeGatherPlan() {
+		return challengeGatherPlan;
+	}
+	public void setChallengeGatherPlan(ChallengeGatherPlan challengeGatherPlan) {
+		this.challengeGatherPlan = challengeGatherPlan;
+	}
 	public String getChallengeEnterCode() {
 		return challengeEnterCode;
 	}
@@ -110,7 +116,7 @@ public class ChallengeEnter {
 				+ challengeEnterDeposit + ", challengeEnterDate=" + challengeEnterDate + ", challengeServiceStartDate="
 				+ challengeServiceStartDate + ", challengeServiceEndDate=" + challengeServiceEndDate
 				+ ", challengeCategory=" + challengeCategory + ", challengeGather=" + challengeGather + ", member="
-				+ member + "]";
+				+ member + ", challengeGatherPlan=" + challengeGatherPlan + "]";
 	}
 	
 	

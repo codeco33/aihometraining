@@ -44,6 +44,8 @@ public class WorkoutLog {
 	private EClassCategorySmall eClassCategorySmall;
 	private EClassCategoryMedium eClassCategoryMedium;
 	private EClassCategoryLarge eClassCategoryLarge;
+	private EClassApproved eClassApproved;
+	private EClassTake eClassTake;
 	
 	
 	
@@ -167,6 +169,19 @@ public class WorkoutLog {
 	public void seteClassCategoryLarge(EClassCategoryLarge eClassCategoryLarge) {
 		this.eClassCategoryLarge = eClassCategoryLarge;
 	}
+	public EClassApproved geteClassApproved() {
+		return eClassApproved;
+	}
+	public void seteClassApproved(EClassApproved eClassApproved) {
+		this.eClassApproved = eClassApproved;
+	}
+	public EClassTake geteClassTake() {
+		return eClassTake;
+	}
+	public void seteClassTake(EClassTake eClassTake) {
+		this.eClassTake = eClassTake;
+	}
+	
 	
 	
 	@Override
@@ -212,9 +227,19 @@ public class WorkoutLog {
 		builder.append(eClassCategoryMedium);
 		builder.append(", eClassCategoryLarge=");
 		builder.append(eClassCategoryLarge);
+		builder.append(", eClassApproved=");
+		builder.append(eClassApproved);
+		builder.append(", eClassTake=");
+		builder.append(eClassTake);
 		builder.append("]");
 		return builder.toString();
 	}
+
+	
+	
+	
+	
+	
 	
 	
 	

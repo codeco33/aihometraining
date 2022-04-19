@@ -75,11 +75,11 @@
 						 	<span class="form-control" style="width: 60px;">까지</span>
 						</div>
 						<div style="margin-left: 10px; margin-top: 2.5px;">
-							<input type="button" class="btn btn-round btn-default" value="오늘"/>
-							<input type="button" class="btn btn-round btn-default" value="1주일"/>
-							<input type="button" class="btn btn-round btn-default" value="1개월"/>
-							<input type="button" class="btn btn-round btn-default" value="3개월"/>
-							<input type="button" class="btn btn-round btn-default" value="1년"/>
+							<input type="submit" class="btn btn-round btn-default todayBtn" name="btnKey" value="오늘"/>
+							<input type="submit" class="btn btn-round btn-default weekBtn" name="btnKey" value="1주일"/>
+							<input type="submit" class="btn btn-round btn-default monthBtn" name="btnKey" value="1개월"/>
+							<input type="submit" class="btn btn-round btn-default 3monthBtn" name="btnKey" value="3개월"/>
+							<input type="submit" class="btn btn-round btn-default yearBtn" name="btnKey" value="1년"/>
 						</div>
 	                  	
 				   	</div>
@@ -280,8 +280,68 @@
 				$('input[name="searchEnd"]').attr("required" , false);
 			});
 			
+			/*오늘 버튼 클릭시 */
+			$('.todayBtn').click(function(){
+				/* Swal.fire($(this).val()); */
+				var btnValue =$(this).val();
+				$('select[name="searchKey"]').attr("required" , false);
+				$('input[name="searchValue"]').attr("required" , false);
+				$('select[name="searchKey2"]').attr("required" , false);
+				$('input[name="searchValue2"]').attr("required" , false);
+				$('input[name="searchStart"]').attr("required" , false);
+				$('input[name="searchEnd"]').attr("required" , false);
+				
+			});
+			/*일주일 버튼 클릭시 */
+			$('.weekBtn').click(function(){
+				/* Swal.fire($(this).val()); */
+				var btnValue =$(this).val();
+				$('select[name="searchKey"]').attr("required" , false);
+				$('input[name="searchValue"]').attr("required" , false);
+				$('select[name="searchKey2"]').attr("required" , false);
+				$('input[name="searchValue2"]').attr("required" , false);
+				$('input[name="searchStart"]').attr("required" , false);
+				$('input[name="searchEnd"]').attr("required" , false);
+				
+			});
+			/*한달 버튼 클릭시 */
+			$('.monthBtn').click(function(){
+				/* Swal.fire($(this).val()); */
+				var btnValue =$(this).val();
+				$('select[name="searchKey"]').attr("required" , false);
+				$('input[name="searchValue"]').attr("required" , false);
+				$('select[name="searchKey2"]').attr("required" , false);
+				$('input[name="searchValue2"]').attr("required" , false);
+				$('input[name="searchStart"]').attr("required" , false);
+				$('input[name="searchEnd"]').attr("required" , false);
+				
+			});
+			/*3개월 버튼 클릭시 */
+			$('.3monthBtn').click(function(){
+				/* Swal.fire($(this).val()); */
+				var btnValue =$(this).val();
+				$('select[name="searchKey"]').attr("required" , false);
+				$('input[name="searchValue"]').attr("required" , false);
+				$('select[name="searchKey2"]').attr("required" , false);
+				$('input[name="searchValue2"]').attr("required" , false);
+				$('input[name="searchStart"]').attr("required" , false);
+				$('input[name="searchEnd"]').attr("required" , false);
+				
+			});
+			/*1년 버튼 클릭시 */
+			$('.yearBtn').click(function(){
+				/* Swal.fire($(this).val()); */
+				var btnValue =$(this).val();
+				$('select[name="searchKey"]').attr("required" , false);
+				$('input[name="searchValue"]').attr("required" , false);
+				$('select[name="searchKey2"]').attr("required" , false);
+				$('input[name="searchValue2"]').attr("required" , false);
+				$('input[name="searchStart"]').attr("required" , false);
+				$('input[name="searchEnd"]').attr("required" , false);
+				
+			});
 			
-			/*sweetalret으로 삭제 처리는 어떻게 해야하나*/
+			/*sweetalret start*/
 			$('.cateDelete').click(function(){
 				console.log($(this).parents('tr').find('.cateCode').text());
 				var cateCode = $(this).parents('tr').find('.cateCode').text();
@@ -302,8 +362,9 @@
                     }
                 })
 			});
-			 
-			/* 데이터 테이블 생성*/
+			/*sweetalret End*/ 
+			
+			/* 챌린지 카테고리 데이터 테이블 생성*/
 			var table1 = $('#challengeCategory').DataTable({
 				order : false,
 				lengthChange : false,

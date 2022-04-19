@@ -159,12 +159,35 @@
 			ON 
 			w.memberEmail = m.memberEmail
 			<trim prefix="WHERE" prefixOverrides="AND |OR ">
-			<if test="searchKey != null and searchKey !='' and searchValue != ''">
-				AND ${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
-			</if>
-			<if test="searchKey != null and searchKey !='' and searchValue != '' and searchDate != null and searchDate !='' and searchStart != '' and searchEnd != ''">
-				AND ${searchDate} BETWEEN #{searchStart} AND #{searchEnd}
-			</if>
+				<if test="searchKey != null and searchKey !='' and searchValue != ''">
+					AND 
+						${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
+				</if>
+				<if test="searchKey != null and searchKey !='' and searchValue != '' and searchDate != null and searchDate !='' and searchStart != '' and searchEnd != ''">
+					AND 
+						${searchDate} BETWEEN #{searchStart} AND #{searchEnd}
+				</if>
+				<if test="btnKey != null and btnKey !='' and !btnKey.equals('-1 WEEK') and !btnKey.equals('-1 MONTH') and !btnKey.equals('-3 MONTH') and !btnKey.equals('-1 YEAR')">
+					AND 
+						${btnKey} = CURDATE()
+				</if>
+				<if test="btnKey != null and btnKey !='' and btnKey.equals('-1 WEEK')">
+					AND 
+						w.workoutLogUpdateFinalDate BETWEEN DATE_ADD(NOW(),INTERVAL ${btnKey} ) AND NOW()
+				</if>
+				<if test="btnKey != null and btnKey !='' and btnKey.equals('-1 MONTH')">
+					AND 
+						w.workoutLogUpdateFinalDate BETWEEN DATE_ADD(NOW(),INTERVAL ${btnKey} ) AND NOW()
+				</if>
+				<if test="btnKey != null and btnKey !='' and btnKey.equals('-3 MONTH')">
+					AND 
+						w.workoutLogUpdateFinalDate BETWEEN DATE_ADD(NOW(),INTERVAL ${btnKey} ) AND NOW()
+				</if>
+				<if test="btnKey != null and btnKey !='' and btnKey.equals('-1 YEAR')">
+					AND 
+						w.workoutLogUpdateFinalDate BETWEEN DATE_ADD(NOW(),INTERVAL ${btnKey} ) AND NOW()
+				</if>
+			
 			</trim>
 				ORDER BY cast(SUBSTRING_INDEX(w.workoutLogCode,'_',-1) AS UNSIGNED) ASC;
 	</select>

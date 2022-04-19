@@ -240,6 +240,7 @@
 			CURDATE());
 	</insert>
 	
+	
 	<select id="selectUserDietPlan" parameterType="DietPlan" resultType="hashmap">
 		SELECT 
 			p.dietPlanCode                     		AS dietPlanCode     
