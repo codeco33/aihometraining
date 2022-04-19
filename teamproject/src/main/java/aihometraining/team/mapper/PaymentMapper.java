@@ -27,9 +27,9 @@ public interface PaymentMapper {
 	//수강신청하기
 	public void addEClassTake(EClassTake eClassTake);
 	
-	//결제화면 수강신청정보
-	public Map<String, String> getEClassTake(String paymentGroupCode);
-	//결제화면 챌린지참여정보
-	public Map<String, String> getCallengeEnter(String paymnetGroupCode);
+	//결제화면 수강신청
+	public String getEClassTake(String paymentGroupCode);
+	//결제화면 챌린지참여
+	public String getCallengeEnter(String paymnetGroupCode);
 	
 }
