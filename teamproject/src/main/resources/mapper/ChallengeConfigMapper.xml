@@ -196,6 +196,26 @@
 				AND 
 					${searchDate} BETWEEN #{searchStart} AND #{searchEnd}
 			</if>
+			<if test="btnKey != null and btnKey !='' and !btnKey.equals('-1 WEEK') and !btnKey.equals('-1 MONTH') and !btnKey.equals('-3 MONTH') and !btnKey.equals('-1 YEAR')">
+				AND 
+					${btnKey} = CURDATE()
+			</if>
+			<if test="btnKey != null and btnKey !='' and btnKey.equals('-1 WEEK')">
+				AND 
+					cc.challengeCategoryRegDate BETWEEN DATE_ADD(NOW(),INTERVAL ${btnKey} ) AND NOW()
+			</if>
+			<if test="btnKey != null and btnKey !='' and btnKey.equals('-1 MONTH')">
+				AND 
+					cc.challengeCategoryRegDate BETWEEN DATE_ADD(NOW(),INTERVAL ${btnKey} ) AND NOW()
+			</if>
+			<if test="btnKey != null and btnKey !='' and btnKey.equals('-3 MONTH')">
+				AND 
+					cc.challengeCategoryRegDate BETWEEN DATE_ADD(NOW(),INTERVAL ${btnKey} ) AND NOW()
+			</if>
+			<if test="btnKey != null and btnKey !='' and btnKey.equals('-1 YEAR')">
+				AND 
+					cc.challengeCategoryRegDate BETWEEN DATE_ADD(NOW(),INTERVAL ${btnKey} ) AND NOW()
+			</if>
 		</trim>
 			ORDER BY cast(SUBSTRING_INDEX(cc.challengeCategoryCode,'_',-1) AS UNSIGNED) ASC;
 	</select>

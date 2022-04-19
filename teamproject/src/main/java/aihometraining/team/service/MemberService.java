@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import aihometraining.team.dto.EClassOpenApplyForm;
 import aihometraining.team.dto.LoginHistory;
 import aihometraining.team.dto.Member;
 import aihometraining.team.dto.MemberLevel;

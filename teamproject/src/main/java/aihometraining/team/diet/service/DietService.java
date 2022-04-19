@@ -1,5 +1,7 @@
 package aihometraining.team.diet.service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -234,5 +236,79 @@ public class DietService {
 		
 		return planedNutrient;
 	}
+
+
+	
+	//받아온 식단은행 내 식단에 넣기
+	public int insertDietOneMealConnectionAll(DietBank dietBank) {
+		
+		//select 음식 조회
+		String dietBankCode = dietBank.getDietBankCode();
+		String pickerToday = dietBank.getDietBankUpdateDate();
+		DietOnemealConnection dietOnemealConnection = new DietOnemealConnection();
+		dietOnemealConnection.setDietBankCode(dietBankCode);
+		
+		List<HashMap<String, Object>> selectOneMealConn = dietMapper.selectDietOneMealConnectionByBankCode(dietOnemealConnection);
+		
+		
+		
+		for(int i=0; i<selectOneMealConn.size(); i++) {
+			
+		 String CheckGroup = (java.lang.String) selectOneMealConn.get(i).get("dietOneMealConnectionGroupNum");
+		 
+			String TimeValue = CheckGroup.substring(CheckGroup.lastIndexOf(" ")+1);
+			String DayValue = CheckGroup.substring(0,CheckGroup.lastIndexOf(" "));
+			
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			
+			LocalDate now = LocalDate.parse(pickerToday, formatter);
+			
+			String dietPlanCode = selectDietBankListNewCode("dietplan", "dietPlanCode");
+			String nutrientsAPICode = (java.lang.String) selectOneMealConn.get(i).get("nutrientsAPICode");
+			String memberEmail = dietBank.getMemberEmail();
+			String dietPlanDay = null;
+			String dietPlanTime = TimeValue;
+			
+			
+			
+			DietPlan dietplan = new DietPlan();
+			
+			dietplan.setDietPlanCode(dietPlanCode);
+			dietplan.setNutrientsAPICode(nutrientsAPICode);
+			dietplan.setMemberEmail(memberEmail);
+			dietplan.setDietPlanTime(dietPlanTime);
+			
+			if(DayValue.equals("월요일")) {
+			}else if(DayValue.equals("화요일")) {
+				now = now.plusDays(1);
+			}else if(DayValue.equals("수요일")) {
+				now = now.plusDays(2);
+			}else if(DayValue.equals("목요일")) {
+				now = now.plusDays(3);
+			}else if(DayValue.equals("금요일")) {
+				now = now.plusDays(4);
+			}else if(DayValue.equals("토요일")) {
+				now = now.plusDays(5);
+			}else if(DayValue.equals("일요일")) {
+				now = now.plusDays(6);
+			}
+			
+			
+			dietPlanDay = now.format(formatter);
+			
+			dietplan.setDietPlanDay(dietPlanDay);
+			
+			
+			if(nutrientsAPICode != null) {
+				log.info("최종 들어간값들!!:{}",dietplan);
+				log.info("날짜!!:{}",DayValue);
+				
+				dietMapper.insertUserDietPlan(dietplan);
+			}
+		}
+		
+		return 0;
+	}
+
 	
 }

@@ -84,7 +84,9 @@ public class DietUserController {
 		HashMap<String, Object> UserdietPlanListNutrient = dietService.UserdietPlanList(UserdietPlanList);
 		model.addAttribute("UserdietPlanListNutrient", UserdietPlanListNutrient);
 		
+
 		log.info("UserdietPlanListNutrient : {}", UserdietPlanListNutrient);
+
 		
 		
 		
@@ -133,10 +135,12 @@ public class DietUserController {
 		model.addAttribute("UserdietPlanList",UserdietPlanList);
 
 		
+
 		HashMap<String, Object> UserdietPlanListNutrient = dietService.UserdietPlanList(UserdietPlanList);
 		model.addAttribute("UserdietPlanListNutrient", UserdietPlanListNutrient);
 		
 		log.info("UserdietPlanListNutrient : {}", UserdietPlanListNutrient);
+
 		
 		
 		return "diet/AjaxTable/DietUserMealplanedListAjax";
@@ -160,5 +164,74 @@ public class DietUserController {
 		
 		return updateResult;
 	}
+
+	
+	//Ajax User식단표 progress-bar 
+	@PostMapping("/updateProgress")
+	@ResponseBody
+	public HashMap<String, Object> updateProgress(Model model, DietPlan dietplan){
+		
+		List<HashMap<String, Object>> UserdietPlanList = dietService.selectUserDietPlan(dietplan);
+		model.addAttribute("UserdietPlanList",UserdietPlanList);
+		
+		HashMap<String, Object> UserdietPlanListNutrient = dietService.UserdietPlanList(UserdietPlanList);
+		model.addAttribute("UserdietPlanListNutrient", UserdietPlanListNutrient);
+		
+		
+		
+		return UserdietPlanListNutrient;
+	}
+	
+	
+	//Ajax user diet에서 식단은행 불러오기 
+	@PostMapping("/selectDietBankList")
+	public String selectDietBankListByUser(Model model) {
+		List<DietBank> dietBankList = dietMapper.getDietBankListAdmin();
+		model.addAttribute("dietBankList", dietBankList);
+		
+		
+		
+		
+		return "diet/AjaxTable/dietMyListSelectBankAjax";
+	}
+	
+	//Ajax user diet에서 식단은행 디테일 불러오기
+	@PostMapping("/selectDietBankListDetail")
+	public String selectDietBankListDetail(Model model,DietBank dietBank) {
+		
+		//select 시간, 요일 넘겨주기
+				List<List<HashMap<String, Object>>> selectBankDay = dietService.selectBankDay();
+				
+				model.addAttribute("Banktime", selectBankDay.get(0));
+				model.addAttribute("Bankday", selectBankDay.get(1));
+				
+		//select 음식 조회, 화면에 뿌려주기
+		String dietBankCode = dietBank.getDietBankCode();
+		DietOnemealConnection dietOnemealConnection = new DietOnemealConnection();
+		dietOnemealConnection.setDietBankCode(dietBankCode);
+		
+		List<HashMap<String, Object>> selectOneMealConn = dietMapper.selectDietOneMealConnectionByBankCode(dietOnemealConnection);
+		model.addAttribute("selectOneMealConn", selectOneMealConn);		
+		
+		
+		
+		return "/diet/AjaxTable/DietMyListSelectBankDetailAjax";
+	}
+	
+	
+	//Ajax user 식단에 dietBank 내용 삽입 
+	@PostMapping("/insertDietBankListDetail")
+	@ResponseBody
+	public String insertDietBankListDetail(DietBank dietBank, HttpSession session) {
+		
+		String memberEmail = (String) session.getAttribute("SEMAIL");
+		dietBank.setMemberEmail(memberEmail);
+		
+		
+		dietService.insertDietOneMealConnectionAll(dietBank);
+		
+		return null;
+	}
+
 }
 

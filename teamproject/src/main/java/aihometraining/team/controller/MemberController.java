@@ -186,6 +186,7 @@ public class MemberController {
 	
 	
 	/**
+	 *  이메일 중복 체크
 	 *  emailCheck ajax
 	 *  @RequestParam(value = "memberEmail") == request.getParameter("memberEmail");
 	 */
@@ -204,9 +205,11 @@ public class MemberController {
 	
 	/* 회원 추가 정보 입력 폼 */
 	@GetMapping("/addInfo")
-	public String addInfo(Model model) {
+	public String addInfo(Model model, @RequestParam(value="memberEmail", required = false) String memberEmail) {
 		
 		model.addAttribute("title", "추가 정보 입력");
+		Member member = memberService.getMemberInfoByEmail(memberEmail);
+		model.addAttribute("member", member);
 		
 		return "member/addInfo";
 		
@@ -228,12 +231,14 @@ public class MemberController {
 	 * @return redirect: -> request.sendRedirect("")
 	 */
 	@PostMapping("/addMember")
-	public String addMember(Member member) {
+	public String addMember(Member member, RedirectAttributes reAttr) {
 		log.info("회원가입폼에서 입력받은 데이터: {}", member);
 		
 		memberService.addMember(member);
 		
-		return "member/addInfo";
+		reAttr.addAttribute("memberEmail", member.getMemberEmail());
+		
+		return "redirect:/addInfo";
 	}
 	
 	

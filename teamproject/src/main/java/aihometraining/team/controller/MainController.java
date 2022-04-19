@@ -48,6 +48,14 @@ public class MainController {
 		return "eClass/eclassadmin";
 		
 	}
+	@GetMapping("/challengeadmin")
+	public String challengeadmin(Model model) {
+		
+		model.addAttribute("title", "챌린지 관리자 페이지");
+		
+		return "challenge/challengeadmin";
+		
+	}
 	
 	
 
