@@ -17,6 +17,22 @@ public class EClassApproved {
 	private int eClassApprovedFinish;
 	
 	
+	public EClassOpenApplyForm geteClassOpenApplyForm() {
+		return eClassOpenApplyForm;
+	}
+	public void seteClassOpenApplyForm(EClassOpenApplyForm eClassOpenApplyForm) {
+		this.eClassOpenApplyForm = eClassOpenApplyForm;
+	}
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
+	//wishList 구현으로 추가함 -진수경
+	private EClassOpenApplyForm eClassOpenApplyForm;
+	private Member member;
+	
 	public String geteClassApprovedCode() {
 		return eClassApprovedCode;
 	}
@@ -116,9 +132,15 @@ public class EClassApproved {
 		builder.append(eClassApprovedDate);
 		builder.append(", eClassApprovedFinish=");
 		builder.append(eClassApprovedFinish);
+		builder.append(", eClassOpenApplyForm=");
+		builder.append(eClassOpenApplyForm);
+		builder.append(", member=");
+		builder.append(member);
 		builder.append("]");
 		return builder.toString();
 	}
+	
+	
 	
 	
 	
