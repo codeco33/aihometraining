@@ -20,6 +20,7 @@ import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.EClassTake;
 import aihometraining.team.dto.Member;
 import aihometraining.team.dto.WishList;
+import aihometraining.team.mapper.MemberMapper;
 import aihometraining.team.mapper.PaymentMapper;
 import aihometraining.team.service.PaymentService;
 
@@ -29,12 +30,15 @@ public class PaymentController {
 	private PaymentService paymentService;
 	private PaymentMapper paymentMapper;
 	private ChallengeEnterMapper challengeEnterMapper;
+	private MemberMapper memberMapper;
 	
 	public PaymentController(PaymentService paymentService, PaymentMapper paymentMapper
-							,ChallengeEnterMapper challengeEnterMapper) {
+							,ChallengeEnterMapper challengeEnterMapper
+							,MemberMapper memberMapper) {
 		this.paymentService = paymentService;
 		this.paymentMapper = paymentMapper;
 		this.challengeEnterMapper = challengeEnterMapper;
+		this.memberMapper = memberMapper;
 	}
 	
 
@@ -110,31 +114,36 @@ public class PaymentController {
 		String paymentGoodsName = null;
 		int paymentGoodsPrice = 0;
 		int paymentGoodsSetDate = 0;
+		Member member = null;
 		
 		if(paymentGroupCode.startsWith("e")) {
-			String eClassCode = paymentMapper.getEClassTake(paymentGroupCode);		
-			EClassApproved eClass= paymentMapper.getEClassApproved(eClassCode);
-			  
-			  if(Objects.nonNull(eClass)) { 
-				  paymentGoodsName = eClass.geteClassApprovedName(); 
-				  paymentGoodsPrice = eClass.geteClassApprovedPrice();
-				  paymentGoodsSetDate = eClass.geteClassApprovedSetDate(); 
-			  }
+			//String eClassCode = paymentMapper.getEClassTake(paymentGroupCode);		
+			//EClassApproved eClass= paymentMapper.getEClassApproved(eClassCode);
+			//paymentMapper.getEClassTakeMember(memberEmail)
+			Map<String,String> eClassBy = paymentMapper.getEClassTake(paymentGroupCode);
+			
+			/*if(Objects.nonNull(eClass)) { 
+				paymentGoodsName = eClass.geteClassApprovedName(); 
+				paymentGoodsPrice = eClass.geteClassApprovedPrice();
+				paymentGoodsSetDate = eClass.geteClassApprovedSetDate(); 
+				//member = memberMapper.getMemberInfoByEmail(eClass.getMemberEmail());
+			}*/
 			 
-		}else {
+		}/*else {
 			String challengeCode = paymentMapper.getCallengeEnter(paymentGroupCode);
-			  ChallengeGather challenge=challengeEnterMapper.getChallengeEnterByCode(challengeCode);
+			ChallengeGather challenge=challengeEnterMapper.getChallengeEnterByCode(challengeCode);
 			  
-			  if(Objects.nonNull(challenge)) { 
-				  paymentGoodsName = challenge.getChallengeGatherName();
-				  paymentGoodsPrice = challenge.getChallengeEnterDeposit();
-			  }
+			if(Objects.nonNull(challenge)) { 
+				paymentGoodsName = challenge.getChallengeGatherName();
+				paymentGoodsPrice = challenge.getChallengeEnterDeposit();
+			}
 			 
-		}
+		}*/
 		
 		model.addAttribute("paymentGoodsName", paymentGoodsName);
 		model.addAttribute("paymentGoodsPrice", paymentGoodsPrice);
 		model.addAttribute("paymentGoodsSetDate", paymentGoodsSetDate);
+		model.addAttribute("member", member);
 		
 		return "payment/payment";
 	}

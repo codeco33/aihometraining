@@ -161,7 +161,7 @@
 			paymentGroupCode = #{paymentGroupCode};
 	</select>
 	
-	<select id="getCallengeEnter" parameterType="String" resultType="Map">
+	<select id="getCallengeEnter" parameterType="String" resultType="String">
 		SELECT
 			challengeGatherCode
 			,memberEmail

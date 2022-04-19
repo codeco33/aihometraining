@@ -166,7 +166,7 @@
 							<label class="inputTitle">금액</label>
 							<input type="text" name="eClassPrice" class="form-control-plaintext" readonly th:value="${paymentGoodsPrice}">
 						</div>
-						<div class="form-group" th:if=${paymentGoodsSetDate != null}>
+						<div class="form-group" th:if="${paymentGoodsSetDate != null}">
 							<label class="inputTitle">정기결제 기간</label>
 							<input type="text" name="eClassApprovedSetDate" class="form-control-plaintext" readonly th:value="${paymentGoodsSetDate}+'개월'">
 						</div>
