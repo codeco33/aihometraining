@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="aihometraining.team.mapper.EClassCategoryMapper">
+
+	<resultMap type="EClassCategoryLarge" id="EClassCategoryLargeResultMap">
+		<result column="eClassCategoryLargeCode" 		property="eClassCategoryLargeCode"/>
+		<result column="eClassCategoryLargeName" 		property="eClassCategoryLargeName"/>
+		<result column="eClassCategoryLargeRegDate" 	property="eClassCategoryLargeRegDate"/>
+		<result column="eClassCategoryLargeRegEmail" 	property="eClassCategoryLargeRegEmail"/>
+		<result column="eClassCategoryLargeUpdateDate" 	property="eClassCategoryLargeUpdateDate"/>
+		<result column="eClassCategoryLargeUpdateEmail" property="eClassCategoryLargeUpdateEmail"/>
+		
+	</resultMap>
+	
+	<select id="getEClassCategoryLargeList" parameterType="map" resultMap="EClassCategoryLargeResultMap">
+		/*운동 클래스 카테고리 대 조회*/
+		SELECT 
+			 l.eClassCategoryLargeCode
+			,l.eClassCategoryLargeName
+			,l.eClassCategoryLargeRegDate
+			,l.eClassCategoryLargeRegEmail
+			,l.eClassCategoryLargeUpdateDate
+			,l.eClassCategoryLargeUpdateEmail	
+		FROM 
+			eclasscategorylarge AS l;
+	</select>
+	
+	
+
+	<resultMap type="EClassCategoryMedium" id="EClassCategoryMediumResultMap">
+		<result column="eClassCategoryMediumCode" 		property="eClassCategoryMediumCode"/>
+		<result column="eClassCategoryMediumName" 		property="eClassCategoryMediumName"/>
+		<result column="eClassCategoryLargeCode" 		property="eClassCategoryLargeCode"/>
+		<result column="eClassCategoryLargeName" 		property="eClassCategoryLargeName"/>
+		<result column="memberEmail" 					property="memberEmail"/>
+		<result column="eClassCategoryMediumRegDate" 	property="eClassCategoryMediumRegDate"/>
+		<result column="memberUpdateEmail" 				property="memberUpdateEmail"/>
+		<result column="eClassCategoryMediumUpdateDate" property="eClassCategoryMediumUpdateDate"/>
+		
+	</resultMap>
+	
+	<select id="getEClassCategoryMediumList" parameterType="map" resultMap="EClassCategoryMediumResultMap">
+		/*운동 클래스 카테고리 중 조회*/
+		SELECT 
+			 m.eClassCategoryMediumCode
+			,m.eClassCategoryMediumName
+			,m.eClassCategoryLargeCode
+			,m.eClassCategoryLargeName
+			,m.memberEmail
+			,m.eClassCategoryMediumRegDate
+			,m.memberUpdateEmail
+			,m.eClassCategoryMediumUpdateDate
+		FROM 
+			eclasscategorymedium AS m
+	</select>
+
+
+	<resultMap type="EClassCategorySmall" id="EClassCategorySmallResultMap">
+		<result column="eClassCategorySmallCode" 			property="eClassCategorySmallCode"/>
+		<result column="eClassCategorySmallName" 			property="eClassCategorySmallName"/>
+		<result column="eClassCategoryMediumCode" 			property="eClassCategoryMediumCode"/>
+		<result column="eClassCategoryMediumName" 			property="eClassCategoryMediumName"/>
+		<result column="eClassCategoryLargeCode" 			property="eClassCategoryLargeCode"/>
+		<result column="eClassCategoryLargeName" 			property="eClassCategoryLargeName"/>
+		<result column="memberEmail" 						property="memberEmail"/>
+		<result column="eClassCategorySmallRegDate" 		property="eClassCategorySmallRegDate"/>
+		<result column="updateMemberEmail" 					property="updateMemberEmail"/>
+		<result column="eClassCategorySmallFinalUpdateDate" property="eClassCategorySmallFinalUpdateDate"/>
+		
+	</resultMap>
+	
+	<select id="getEClassCategorySmallList" parameterType="map" resultMap="EClassCategorySmallResultMap">
+		/*운동 클래스 카테고리 소 조회*/
+		SELECT 
+			 s.eClassCategorySmallCode
+			,s.eClassCategorySmallName
+			,s.eClassCategoryMediumCode
+			,s.eClassCategoryMediumName
+			,s.eClassCategoryLargeCode
+			,s.eClassCategoryLargeName
+			,s.memberEmail
+			,s.eClassCategorySmallRegDate
+			,s.updateMemberEmail
+			,s.eClassCategorySmallFinalUpdateDate	
+		FROM 
+			eclasscategorysmall AS s
+	</select>
+
+</mapper>

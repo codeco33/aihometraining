@@ -71,8 +71,8 @@
 												<ul class="submenu">
 													<li><a th:href="@{/mypage}"><span class="fa fa-user"></span>마이페이지</a></li>
 													<li role="separator" class="divider"></li>
-													<li><a th:href="@{#}"><span class="fa fa-calendar"></span>#위시리스트</a></li>
-													<li><a th:href="@{/logout}" ><span class="fa fa-power-off"></span>로그아웃</a></li>
+													<li><a th:if="${session.SEMAIL != null}" th:href="@{/wishList}"><span class="fa fa-calendar"></span>#위시리스트</a></li>
+													<li><a th:if="${session.SEMAIL != null}" th:href="@{/logout}" ><span class="fa fa-power-off"></span>로그아웃</a></li>
 												</ul>
 											</li>
                                         </ul>

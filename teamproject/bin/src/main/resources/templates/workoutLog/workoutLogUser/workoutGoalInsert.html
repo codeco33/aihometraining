@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html class="fixed"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/userdefault}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+		<div class="container">
+		    <div class="row justify-content-center">
+				<div class="col-xl-12">
+		        	<div class="section-tittle text-center mb-55">
+		                <h2>운동 목표 등록하기</h2>
+		            </div>
+		        </div>
+		    </div>
+			<div class="container box_1170">
+		    	<div class="row justify-content-center">
+			    	<div class="properties__card col-lg-8 col-md-8">    
+				        <form class="form-contact workoutGoalInsert_form" th:action="@{workoutLog/workoutLogUser/workoutGoalInsert}" method="post" id="workoutGoalInsert" novalidate="novalidate">
+		                	<h3 class="mb-4 mt-5">운동 목표 등록사항</h3>
+			                    <div class="col-12">
+			                        <div class="form-group mb-3">
+			                            <textarea class="form-control w-100" name="workoutGoalContent" id="workoutGoalContent" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = '운동 목표'" placeholder=" 운동 목표"></textarea>
+			                        </div>
+			                    </div>
+			                    <div class="form-group">
+				                    <label class="control-label pl-3" style="color:#BDBDCC; font-size: 13px;">수강 중인 클래스 </label>
+				                    <div class="form-select mb-3 pl-3 pr-3">
+				                    	<select id="eClassApprovedCode" name="eClassApprovedCode" required>
+											<th:block th:if="${not #lists.isEmpty(eClassTakeList)}" th:each="l : ${eClassTakeList}" >
+												<option th:value="${l.eClassTakeCode}">[[${l.eClassApprovedName}]]</option>
+											</th:block>
+											<th:block th:unless="${not #lists.isEmpty(eClassTakeList)}">
+												<option >등록된 카테고리가 없습니다.</option>
+											</th:block>
+										</select>
+				                    </div>
+								</div>
+								<div class="form-row">
+			                        <div class="form-group col-6">
+			                              <label for="exhibStart">시작일</label>
+			                              <input type="text" id="start_date" class="form-control datepicker" name="exhibStart">
+			                        </div>
+			                        <div class="form-group col-6">
+			                              <label for="exhibEnd">종료일</label>
+			                              <input type="text" id="end_date" class="form-control datepicker" name="exhibEnd">
+			                        </div>
+		                     	</div>	                    
+						        <div class="row justify-content-center pb-5">
+                           			<button class="genric-btn primary-bg text-white btn_1 boxed-btn" type="submit">
+		                           		<h5 style="font: #fff;">목표 등록</h5>
+		                           </button>
+		                    	</div>    
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+						        							
+	
+	</th:block>
+	
+	<!-- 사용자 정의 Css -->
+	<th:block layout:fragment="customCss">
+		<!-- Web Fonts  -->
+		<link th:href="@{http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light}" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
+		<link rel="stylesheet" th:href="@{/form/css/bootstrap.css}" />
+		
+		<style>
+		
+		.fa-calendar {
+		    position: absolute;
+		    top: 13px;
+		    font-size: 20px;
+		    color: #1976D2;
+		    /* z-index삭제 시켜버림 */
+		    
+		}
+		
+		#fa-1 {
+		    left: calc(50% - 40px)
+		}
+		
+		#fa-2 {
+		    left: calc(100% - 40px)
+		}
+		
+		.form-control {
+			border-color: #f0e9ff !important;
+		}
+		
+		.form-control-placeholder {
+		    position: absolute;
+		    top: -10px !important;
+		    padding: 12px 2px 0 2px;
+		    opacity: 0.5
+		}
+		
+		#end-p {
+		    left: calc(50% + 4px)
+		}
+		
+		.form-control:focus+.form-control-placeholder,
+		.form-control:valid+.form-control-placeholder {
+		    font-size: 95%;
+		    top: 10px;
+		    transform: translate3d(0, -100%, 0);
+		    opacity: 1
+		}
+		
+		.form-select {
+			color: #BDBDBD;
+		    opacity: 1
+		}
+		
+		::placeholder {
+		    color: #BDBDBD;
+		    opacity: 1
+		}
+		
+		:-ms-input-placeholder {
+		    color: #BDBDBD
+		}
+		
+		::-ms-input-placeholder {
+		    color: #BDBDBD
+		}
+		
+		button:focus {
+		    -moz-box-shadow: none !important;
+		    -webkit-box-shadow: none !important;
+		    box-shadow: none !important;
+		    outline-width: 0
+		}
+		
+		.datepicker {
+		    background-color: #fff;
+		    border-radius: 0 !important;
+		    align-content: center !important;
+		    padding: 0 !important;
+		    /* 달력이 위로 올라오는거 잡아줌  */
+		    z-index: 3 !important;
+		}
+		
+		.datepicker-dropdown {
+		    border-right: #1976D2;
+		    border-left: #1976D2;
+		}
+		
+		.datepicker-dropdown.datepicker-orient-left:before {
+		    left: calc(50% - 6px) !important
+		}
+		
+		.datepicker-dropdown.datepicker-orient-left:after {
+		    left: calc(50% - 5px) !important;
+		    border-bottom-color: #1976D2
+		}
+		
+		.datepicker-dropdown.datepicker-orient-right:after {
+		    border-bottom-color: #1976D2
+		}
+		
+		.datepicker table tr td.today,
+		span.focused {
+		    border-radius: 50% !important;
+		    background-image: linear-gradient(#FFF3E0, #FFE0B2)
+		}
+		
+		thead tr:nth-child(2) {
+		    background-color: #1976D2 !important
+		}
+		
+		thead tr:nth-child(3) th {
+		    font-weight: bold !important;
+		    padding: 20px 10px !important;
+		    color: #BDBDBD !important
+		}
+		
+		tbody tr td {
+		    padding: 10px !important
+		}
+		
+		tfoot tr:nth-child(2) th {
+		    padding: 10px !important;
+		    border-top: 1px solid #CFD8DC !important
+		}
+		
+		.cw {
+		    font-size: 14px !important;
+		    background-color: #E8EAF6 !important;
+		    border-radius: 0px !important;
+		    padding: 0px 20px !important;
+		    margin-right: 10px solid #fff !important
+		}
+		
+		.old,
+		.day,
+		.new {
+		    width: 40px !important;
+		    height: 40px !important;
+		    border-radius: 0px !important
+		}
+		
+		.day.old,
+		.day.new {
+		    color: #E0E0E0 !important
+		}
+		
+		.day.old:hover,
+		.day.new:hover {
+		    border-radius: 50% !important
+		}
+		
+		.old-day:hover,
+		.day:hover,
+		.new-day:hover,
+		.month:hover,
+		.year:hover,
+		.decade:hover,
+		.century:hover {
+		    border-radius: 50% !important;
+		    background-color: #eee
+		}
+		
+		.activedate {
+		    border-radius: 50% !important;
+		    background-image: linear-gradient(#1976D2, #1976D2) !important;
+		    color: #fff !important
+		}
+		
+		.range-start,
+		.range-end {
+		    border-radius: 50% !important;
+		    background-image: linear-gradient(#1976D2, #1976D2) !important
+		}
+		
+		.range {
+		    background-color: #E3F2FD !important
+		}
+		
+		.prev,
+		.next,
+		.datepicker-switch {
+		    border-radius: 0 !important;
+		    padding: 10px 10px 10px 10px !important;
+		    font-size: 18px;
+		    opacity: 0.7;
+		    color: #fff
+		}
+		
+		.prev:hover,
+		.next:hover,
+		.datepicker-switch:hover {
+		    background-color: inherit !important;
+		    opacity: 1
+		}
+		
+		label {
+			color: #BDBDCC;
+		}
+		
+		#challengeGatherEnd-p {
+		 left: 180px;
+		}
+		#challengeEnd-p {
+		 left: 180px;
+		}
+		
+		@media screen and (max-width: 726px) {
+		    .datepicker-dropdown.datepicker-orient-right:before {
+		        right: calc(50% - 6px)
+		    }
+		
+		    .datepicker-dropdown.datepicker-orient-right:after {
+		        right: calc(50% - 5px)
+		    }
+		}
+		h2{
+			    color: #4255A4;
+		}
+		</style>
+		
+	</th:block>
+	
+	<!-- 사용자 정의 Script -->
+	<th:block layout:fragment="customBodyScript">
+		<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js}"></script>
+		<script th:src="@{/assets/js/datepicker/daterangepicker.js}"></script>
+		<script>
+			$(document).ready(function(){
+				
+				$('#workoutGoalInsert').validate({
+                    rules: {
+                    	workoutGoalContent: {
+                            required: true
+                        },
+                        eClassApprovedCode: {
+                            required: true
+                        },
+                        start_date: {
+                            required: true
+                        },
+                        end_date: {
+                            required: true
+                        }
+                    },
+                    messages: {
+                    	workoutGoalContent: {
+                            required: "운동 목표 내용을 입력해주세요"
+                        },
+                        eClassApprovedCode: {
+                            required: "수강 중인 클래스를 선택해주세요"
+                        },
+                        start_date: {
+                            required: "운동 목표 시작일을 선택해주세요"
+                        },
+                        end_date: {
+                            required: "운동 목표 종료일을 선택해주세요"
+                        }
+                        
+                    }
+            	});
+				
+						
+				$('.datepicker').datepicker({
+				format: 'yyyy-mm-dd',
+				autoclose: true,
+				calendarWeeks : true,
+				clearBtn: true,
+				disableTouchKeyboard: true
+				
+				});
+				
+			});
+			
+			document.addEventListener('DOMContentLoaded', function () {
+				   jQuery('#start_date, #end_date, #birth_date').datepicker({
+
+				   });
+			});
+		</script>
+		
+	</th:block>
+	
+</html>

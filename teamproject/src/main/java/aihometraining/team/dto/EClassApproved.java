@@ -1,6 +1,5 @@
 package aihometraining.team.dto;
 
-import java.sql.Date;
 
 public class EClassApproved {
 	private String eClassApprovedCode;
@@ -14,19 +13,19 @@ public class EClassApproved {
 	private String eClassApprovedPrice;
 	private String eClassApprovedName;
 	private int eClassApprovedSetDate;
-	private Date eClassApprovedStratDate;
-	private Date eClassApprovedEndDate;
+	private String eClassApprovedStratDate;
+	private String eClassApprovedEndDate;
 	private int eClassApprovedStudent;
 	private int eClassApprovedMaxStudent;
-	private Date eClassApprovedDate;
+	private String eClassApprovedDate;
 	private int eClassApprovedState;
-	
 	private EClassCategorySmall eClassCategorySmall;
 	private EClassIntroduce eClassIntroduce;
 	private EClassSectionTitle eClassSectionTitle;
 	private EClassSectionCurriculum eClassSectionCurriculum;
 	private EClassQuestion eClassQuestion;
 	private EClassAnswer eClassAnswer;
+	private Member member;
 	public String geteClassApprovedCode() {
 		return eClassApprovedCode;
 	}
@@ -93,16 +92,16 @@ public class EClassApproved {
 	public void seteClassApprovedSetDate(int eClassApprovedSetDate) {
 		this.eClassApprovedSetDate = eClassApprovedSetDate;
 	}
-	public Date geteClassApprovedStratDate() {
+	public String geteClassApprovedStratDate() {
 		return eClassApprovedStratDate;
 	}
-	public void seteClassApprovedStratDate(Date eClassApprovedStratDate) {
+	public void seteClassApprovedStratDate(String eClassApprovedStratDate) {
 		this.eClassApprovedStratDate = eClassApprovedStratDate;
 	}
-	public Date geteClassApprovedEndDate() {
+	public String geteClassApprovedEndDate() {
 		return eClassApprovedEndDate;
 	}
-	public void seteClassApprovedEndDate(Date eClassApprovedEndDate) {
+	public void seteClassApprovedEndDate(String eClassApprovedEndDate) {
 		this.eClassApprovedEndDate = eClassApprovedEndDate;
 	}
 	public int geteClassApprovedStudent() {
@@ -117,10 +116,10 @@ public class EClassApproved {
 	public void seteClassApprovedMaxStudent(int eClassApprovedMaxStudent) {
 		this.eClassApprovedMaxStudent = eClassApprovedMaxStudent;
 	}
-	public Date geteClassApprovedDate() {
+	public String geteClassApprovedDate() {
 		return eClassApprovedDate;
 	}
-	public void seteClassApprovedDate(Date eClassApprovedDate) {
+	public void seteClassApprovedDate(String eClassApprovedDate) {
 		this.eClassApprovedDate = eClassApprovedDate;
 	}
 	public int geteClassApprovedState() {
@@ -165,22 +164,66 @@ public class EClassApproved {
 	public void seteClassAnswer(EClassAnswer eClassAnswer) {
 		this.eClassAnswer = eClassAnswer;
 	}
-	
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
 	@Override
 	public String toString() {
-		return "EClassApproved [eClassApprovedCode=" + eClassApprovedCode + ", memberEmail=" + memberEmail
-				+ ", eClassCategorySmallCode=" + eClassCategorySmallCode + ", eClassIntroduceCode="
-				+ eClassIntroduceCode + ", eClassSectionTitleCode=" + eClassSectionTitleCode
-				+ ", eClassSectionCurriculumCode=" + eClassSectionCurriculumCode + ", eClassQuestionCode="
-				+ eClassQuestionCode + ", eClassAnswerCode=" + eClassAnswerCode + ", eClassApprovedPrice="
-				+ eClassApprovedPrice + ", eClassApprovedName=" + eClassApprovedName + ", eClassApprovedSetDate="
-				+ eClassApprovedSetDate + ", eClassApprovedStratDate=" + eClassApprovedStratDate
-				+ ", eClassApprovedEndDate=" + eClassApprovedEndDate + ", eClassApprovedStudent="
-				+ eClassApprovedStudent + ", eClassApprovedMaxStudent=" + eClassApprovedMaxStudent
-				+ ", eClassApprovedDate=" + eClassApprovedDate + ", eClassApprovedState=" + eClassApprovedState
-				+ ", eClassCategorySmall=" + eClassCategorySmall + ", eClassIntroduce=" + eClassIntroduce
-				+ ", eClassSectionTitle=" + eClassSectionTitle + ", eClassSectionCurriculum=" + eClassSectionCurriculum
-				+ ", eClassQuestion=" + eClassQuestion + ", eClassAnswer=" + eClassAnswer + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("EClassApproved [eClassApprovedCode=");
+		builder.append(eClassApprovedCode);
+		builder.append(", memberEmail=");
+		builder.append(memberEmail);
+		builder.append(", eClassCategorySmallCode=");
+		builder.append(eClassCategorySmallCode);
+		builder.append(", eClassIntroduceCode=");
+		builder.append(eClassIntroduceCode);
+		builder.append(", eClassSectionTitleCode=");
+		builder.append(eClassSectionTitleCode);
+		builder.append(", eClassSectionCurriculumCode=");
+		builder.append(eClassSectionCurriculumCode);
+		builder.append(", eClassQuestionCode=");
+		builder.append(eClassQuestionCode);
+		builder.append(", eClassAnswerCode=");
+		builder.append(eClassAnswerCode);
+		builder.append(", eClassApprovedPrice=");
+		builder.append(eClassApprovedPrice);
+		builder.append(", eClassApprovedName=");
+		builder.append(eClassApprovedName);
+		builder.append(", eClassApprovedSetDate=");
+		builder.append(eClassApprovedSetDate);
+		builder.append(", eClassApprovedStratDate=");
+		builder.append(eClassApprovedStratDate);
+		builder.append(", eClassApprovedEndDate=");
+		builder.append(eClassApprovedEndDate);
+		builder.append(", eClassApprovedStudent=");
+		builder.append(eClassApprovedStudent);
+		builder.append(", eClassApprovedMaxStudent=");
+		builder.append(eClassApprovedMaxStudent);
+		builder.append(", eClassApprovedDate=");
+		builder.append(eClassApprovedDate);
+		builder.append(", eClassApprovedState=");
+		builder.append(eClassApprovedState);
+		builder.append(", eClassCategorySmall=");
+		builder.append(eClassCategorySmall);
+		builder.append(", eClassIntroduce=");
+		builder.append(eClassIntroduce);
+		builder.append(", eClassSectionTitle=");
+		builder.append(eClassSectionTitle);
+		builder.append(", eClassSectionCurriculum=");
+		builder.append(eClassSectionCurriculum);
+		builder.append(", eClassQuestion=");
+		builder.append(eClassQuestion);
+		builder.append(", eClassAnswer=");
+		builder.append(eClassAnswer);
+		builder.append(", member=");
+		builder.append(member);
+		builder.append("]");
+		return builder.toString();
 	}
+	
 	
 }

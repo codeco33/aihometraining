@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="aihometraining.team.mapper.EClassMapper">
+	
+	<resultMap type="EClassCategorySmall" id="eClassCategorySmallResultMap">
+	
+		<result column="eClassCategorySmallCode" 			property="eClassCategorySmallCode"/>
+		<result column="eClassCategorySmallName"			property="eClassCategorySmallName"/>
+		<result column="eClassCategoryMediumCode" 			property="eClassCategoryMediumCode"/>
+		<result column="eClassCategoryMediumName" 			property="eClassCategoryMediumName"/>
+		<result column="eClassCategoryLargeCode" 			property="eClassCategoryLargeCode"/>
+		<result column="eClassCategoryLargeName"			property="eClassCategoryLargeName"/>
+		<result column="memberEmail"						property="memberEmail"/>
+		<result column="eClassCategorySmallRegDate"			property="eClassCategorySmallRegDate"/>
+		<result column="updateMemberEmail"					property="updateMemberEmail"/>
+		<result column="eClassCategorySmallFinalUpdateDate"	property="eClassCategorySmallFinalUpdateDate"/>
+		
+	</resultMap>
+	
+	<resultMap type="EClassIntroduce" id="eClassIntroduceResultMap">
+	
+		<result column="eClassIntroduceCode" 		property="eClassIntroduceCode"/>
+		<result column="memberEmail" 				property="memberEmail"/>
+		<result column="eClassCategorySmallCode"	property="eClassCategorySmallCode"/>
+		<result column="eClassIntroduceContent" 	property="eClassIntroduceContent"/>
+		<result column="memberUpdateEmail" 			property="memberUpdateEmail"/>
+		<result column="eClassIntroducetDate"		property="eClassIntroducetDate"/>
+		<result column="eClassIntroduceImg"			property="eClassIntroduceImg"/>
+		
+			<association property="eClassCategorySmall" javaType="EClassCategorySmall">
+			
+				<id 	column="eClassCategorySmallCode" 				property="eClassCategorySmallCode"/>
+				<result column="eClassCategorySmallName" 				property="eClassCategorySmallName"/>
+				<result column="eClassCategoryMediumCode" 				property="eClassCategoryMediumCode"/>
+				<result column="eClassCategoryMediumName" 				property="eClassCategoryMediumName"/>
+				<result column="eClassCategoryLargeCode" 				property="eClassCategoryLargeCode"/>
+				<result column="eClassCategoryLargeName" 				property="eClassCategoryLargeName"/>
+				<result column="memberEmail" 							property="memberEmail"/>
+				<result column="eClassCategorySmallRegDate" 			property="eClassCategorySmallRegDate"/>
+				<result column="updateMemberEmail" 						property="updateMemberEmail"/>
+				<result column="eClassCategorySmallFinalUpdateDate" 	property="eClassCategorySmallFinalUpdateDate"/>
+				
+			</association>
+	
+	</resultMap>
+	
+	<resultMap type="EClassSectionTitle" id="eClassSectionTitleResultMap">
+	
+		<result column="eClassSectionTitleCode" 		property="eClassSectionTitleCode"/>
+		<result column="memberEmail" 					property="memberEmail"/>
+		<result column="eClassSectionTitleName" 		property="eClassSectionTitleName"/>
+		<result column="eClassSectionTitleDate"			property="eClassSectionTitleDate"/>
+		<result column="eClassSectionTitleUpdateDate"	property="eClassSectionTitleUpdateDate"/>
+		<result column="memberUpdateEmail"				property="memberUpdateEmail"/>
+		
+	</resultMap>
+	
+	<resultMap type="EClassSectionCurriculum" id="eClassSectionCurriculumResultMap">
+	
+		<result column="eClassSectionCurriculumCode" 		property="eClassSectionCurriculumCode"/>
+		<result column="memberEmail" 						property="memberEmail"/>
+		<result column="eClassSectionTitleCode" 			property="eClassSectionTitleCode"/>
+		<result column="eClassSectionCurriculumTitle"		property="eClassSectionCurriculumTitle"/>
+		<result column="eClassSectionCurriculumAddFile"		property="eClassSectionCurriculumAddFile"/>
+		<result column="eClassSectionCurriculumRunningTime"	property="eClassSectionCurriculumRunningTime"/>
+		<result column="eClassSectionCurriculumRegDate"		property="eClassSectionCurriculumRegDate"/>
+		<result column="eClassSectionCurriculumUpdateDate"	property="eClassSectionCurriculumUpdateDate"/>
+		<result column="memberUpdateEmail"					property="memberUpdateEmail"/>
+		<result column="eClassSectionCurriculumState"		property="eClassSectionCurriculumState"/>
+			
+			<association property="eClassSectionTitle" javaType="EClassSectionTitle">
+				
+				<id 	column="eClassSectionTitleCode" 		property="eClassSectionTitleCode"/>
+				<result column="memberEmail" 					property="memberEmail"/>
+				<result column="eClassSectionTitleName" 		property="eClassSectionTitleName"/>
+				<result column="eClassSectionTitleDate"			property="eClassSectionTitleDate"/>
+				<result column="eClassSectionTitleUpdateDate"	property="eClassSectionTitleUpdateDate"/>
+				<result column="memberUpdateEmail"				property="memberUpdateEmail"/>
+				
+			</association>
+	
+	</resultMap>
+	
+	<resultMap type="EClassQuestion" id="eClassQuestionResultMap">
+	
+		<result column="eClassQuestionCode" 		property="eClassQuestionCode"/>
+		<result column="memberEmail" 				property="memberEmail"/>
+		<result column="eClassQuestionTitle" 		property="eClassQuestionTitle"/>
+		<result column="eClassQuestionRegDate"		property="eClassQuestionRegDate"/>
+		<result column="memberUpdateEmail"			property="memberUpdateEmail"/>
+		<result column="eClassQuestionUpdateDate"	property="eClassQuestionUpdateDate"/>
+	
+	</resultMap>
+	
+	<resultMap type="EClassAnswer" id="eClassAnswerResultMap">
+	
+		<result column="eClassAnswerCode" 			property="eClassAnswerCode"/>
+		<result column="eClassQuestionCode" 		property="eClassQuestionCode"/>
+		<result column="memberEmail" 				property="memberEmail"/>
+		<result column="eClassAnsweTitle" 			property="eClassAnsweTitle"/>
+		<result column="eClassAnswerRegDate"		property="eClassAnswerRegDate"/>
+		<result column="memberUpdateEmail"			property="memberUpdateEmail"/>
+		<result column="eClassAnswerUpdateDate"		property="eClassAnswerUpdateDate"/>
+	
+			<association property="eClassQuestion" javaType="EClassQuestion">
+				
+				<id 	column="eClassQuestionCode" 		property="eClassQuestionCode"/>
+				<result column="memberEmail" 				property="memberEmail"/>
+				<result column="eClassQuestionTitle" 		property="eClassQuestionTitle"/>
+				<result column="eClassQuestionRegDate"		property="eClassQuestionRegDate"/>
+				<result column="memberUpdateEmail"			property="memberUpdateEmail"/>
+				<result column="eClassQuestionUpdateDate"	property="eClassQuestionUpdateDate"/>
+				
+			</association>
+			
+	</resultMap>
+	
+	<resultMap type="EClassOpenAppleyForm" id="eClassOpenappleyResultMap">
+	
+		<result column="eClassOpenAppleyCode" 			property="eClassOpenAppleyCode"/>
+		<result column="eClassOpenAppleyMemberEmail" 	property="eClassOpenAppleyMemberEmail"/>
+		<result column="eClassOpenAppleyName" 			property="eClassOpenAppleyName"/>
+		<result column="eClassOpenAppleyPrice"			property="eClassOpenAppleyPrice"/>
+		<result column="eClassIntroduceCode"			property="eClassIntroduceCode"/>
+		<result column="eClassSectionTitleCode"			property="eClassSectionTitleCode"/>
+		<result column="eClassSectionCurriculumCode"	property="eClassSectionCurriculumCode"/>
+		<result column="eClassQuestionCode"				property="eClassQuestionCode"/>
+		<result column="eClassAnswerCode"				property="eClassAnswerCode"/>
+		<result column="eClassOpenAppleySetDate"		property="eClassOpenAppleySetDate"/>
+		<result column="eClassOpenAppleyStratDate"		property="eClassOpenAppleyStratDate"/>
+		<result column="eClassOpenAppleyEndDate"		property="eClassOpenAppleyEndDate"/>
+		<result column="eClassOpenAppleyStudent"		property="eClassOpenAppleyStudent"/>
+		<result column="eClassOpenAppleyMaxStudent"		property="eClassOpenAppleyMaxStudent"/>
+		<result column="eClassOpenAppleyDate"			property="eClassOpenAppleyDate"/>
+		<result column="eClassOpenAppleyApproveState"	property="eClassOpenAppleyApproveState"/>
+		<result column="eClassCategorySmallCode"		property="eClassCategorySmallCode"/>
+	
+			<association property="eClassIntroduce" javaType="EClassIntroduce">
+			
+				<id 	column="eClassIntroduceCode" 		property="eClassIntroduceCode"/>
+				<result column="memberEmail" 				property="memberEmail"/>
+				<result column="eClassCategorySmallCode"	property="eClassCategorySmallCode"/>
+				<result column="eClassIntroduceContent" 	property="eClassIntroduceContent"/>
+				<result column="memberUpdateEmail" 			property="memberUpdateEmail"/>
+				<result column="eClassIntroducetDate"		property="eClassIntroducetDate"/>
+				<result column="eClassIntroduceImg"			property="eClassIntroduceImg"/>
+				
+			</association>
+			
+			<association property="eClassSectionTitle" javaType="EClassSectionTitle">
+			
+				<id 	column="eClassSectionTitleCode" 		property="eClassSectionTitleCode"/>
+				<result column="memberEmail" 					property="memberEmail"/>
+				<result column="eClassSectionTitleName" 		property="eClassSectionTitleName"/>
+				<result column="eClassSectionTitleDate"			property="eClassSectionTitleDate"/>
+				<result column="eClassSectionTitleUpdateDate"	property="eClassSectionTitleUpdateDate"/>
+				<result column="memberUpdateEmail"				property="memberUpdateEmail"/>
+				
+			</association>
+			
+			<association property="eClassSectionCurriculum" javaType="EClassSectionCurriculum">
+			
+				<id 	column="eClassSectionCurriculumCode" 		property="eClassSectionCurriculumCode"/>
+				<result column="memberEmail" 						property="memberEmail"/>
+				<result column="eClassSectionTitleCode" 			property="eClassSectionTitleCode"/>
+				<result column="eClassSectionCurriculumTitle"		property="eClassSectionCurriculumTitle"/>
+				<result column="eClassSectionCurriculumAddFile"		property="eClassSectionCurriculumAddFile"/>
+				<result column="eClassSectionCurriculumRunningTime"	property="eClassSectionCurriculumRunningTime"/>
+				<result column="eClassSectionCurriculumRegDate"		property="eClassSectionCurriculumRegDate"/>
+				<result column="eClassSectionCurriculumUpdateDate"	property="eClassSectionCurriculumUpdateDate"/>
+				<result column="memberUpdateEmail"					property="memberUpdateEmail"/>
+				<result column="eClassSectionCurriculumState"		property="eClassSectionCurriculumState"/>
+				
+			</association>
+			
+			<association property="eClassQuestion" javaType="EClassQuestion">
+				
+				<id 	column="eClassQuestionCode" 		property="eClassQuestionCode"/>
+				<result column="memberEmail" 				property="memberEmail"/>
+				<result column="eClassQuestionTitle" 		property="eClassQuestionTitle"/>
+				<result column="eClassQuestionRegDate"		property="eClassQuestionRegDate"/>
+				<result column="memberUpdateEmail"			property="memberUpdateEmail"/>
+				<result column="eClassQuestionUpdateDate"	property="eClassQuestionUpdateDate"/>
+				
+			</association>
+			
+			<association property="eClassAnswer" javaType="EClassAnswer">
+			
+				<id 	column="eClassAnswerCode" 			property="eClassAnswerCode"/>
+				<result column="eClassQuestionCode" 		property="eClassQuestionCode"/>
+				<result column="memberEmail" 				property="memberEmail"/>
+				<result column="eClassAnsweTitle" 			property="eClassAnsweTitle"/>
+				<result column="eClassAnswerRegDate"		property="eClassAnswerRegDate"/>
+				<result column="memberUpdateEmail"			property="memberUpdateEmail"/>
+				<result column="eClassAnswerUpdateDate"		property="eClassAnswerUpdateDate"/>
+			
+			</association>
+			
+	</resultMap>
+	
+	<insert id="EClassPriceInsert" parameterType="EClassOpenAppleyForm">
+		/* Price등록처리 */
+		INSERT INTO eclassopenappley(
+			 eClassOpenAppleyCode
+			,eClassOpenAppleyMemberEmail
+			,eClassOpenAppleyName
+			,eClassOpenAppleyPrice
+			,eClassIntroduceCode
+			,eClassSectionTitleCode
+			,eClassSectionCurriculumCode
+			,eClassQuestionCode
+			,eClassAnswerCode
+			,eClassOpenAppleySetDate
+			,eClassOpenAppleyStratDate
+			,eClassOpenAppleyEndDate
+			,eClassOpenAppleyStudent
+			,eClassOpenAppleyMaxStudent
+			,eClassOpenAppleyDate
+			,eClassOpenAppleyApproveState
+			,eClassCategorySmallCode
+		)VALUES(
+			 #{eClassOpenAppleyCode}
+			,#{eClassOpenAppleyMemberEmail}
+			,#{eClassOpenAppleyName}
+			,#{eClassOpenAppleyPrice}
+			,#{eClassIntroduceCode}
+			,#{eClassSectionTitleCode}
+			,#{eClassSectionCurriculumCode}
+			,#{eClassQuestionCode}
+			,#{eClassAnswerCode}
+			,#{eClassOpenAppleySetDate}
+			,#{eClassOpenAppleyStratDate}
+			,#{eClassOpenAppleyEndDate}
+			,#{eClassOpenAppleyStudent}
+			,#{eClassOpenAppleyMaxStudent}
+			,NOW()
+			,0
+			,#{eClassCategorySmallCode}
+		);
+	</insert>
+	
+	<insert id="EClassAnswerInsert" parameterType="EClassAnswer">
+		/* Answer 등록처리 */
+		INSERT INTO eclassanswer(
+			 eClassAnswerCode
+			,eClassQuestionCode
+			,memberEmail
+			,eClassAnsweTitle
+			,eClassAnswerRegDate
+			,memberUpdateEmail
+			,eClassAnswerUpdateDate
+		)VALUES(
+			 #{eClassAnswerCode}
+			,#{eClassQuestionCode}
+			,#{memberEmail}
+			,#{eClassAnsweTitle}
+			,NOW()
+			,NULL
+			,NULL
+		);
+	</insert>
+	
+	<insert id="EClassQuestionInsert" parameterType="EClassQuestion">
+		/* Question 등록처리 */
+		INSERT INTO eclassquestion(
+			 eClassQuestionCode
+			,memberEmail
+			,eClassQuestionTitle
+			,eClassQuestionRegDate
+			,memberUpdateEmail
+			,eClassQuestionUpdateDate
+		)VALUES(
+			 #{eClassQuestionCode}
+			,#{memberEmail}
+			,#{eClassQuestionTitle}
+			,NOW()
+			,NULL
+			,NULL
+		);
+	</insert>
+	
+	<insert id="EClassSectionCurriculumInsert" parameterType="EClassSectionCurriculum">
+		/* SectionCurriculum 등록처리 */
+		INSERT INTO eclasssectioncurriculum(
+			 eClassSectionCurriculumCode
+			,memberEmail
+			,eClassSectionTitleCode
+			,eClassSectionCurriculumTitle
+			,eClassSectionCurriculumAddFile
+			,eClassSectionCurriculumRunningTime
+			,eClassSectionCurriculumRegDate
+			,eClassSectionCurriculumUpdateDate
+			,memberUpdateEmail
+			,eClassSectionCurriculumState
+		)VALUES(
+			 #{eClassSectionCurriculumCode}
+			,#{memberEmail}
+			,#{eClassSectionTitleCode}
+			,#{eClassSectionCurriculumTitle}
+			,NULL
+			,NULL
+			,NOW()
+			,NULL
+			,NULL
+			,NULL
+		);
+	</insert>
+	
+	<insert id="EClassSectionTitleInsert" parameterType="EClassSectionTitle">
+		/* SectionTitle 등록처리 */
+		INSERT INTO eclasssectiontitle(
+			 eClassSectionTitleCode
+			,memberEmail
+			,eClassSectionTitleName
+			,eClassSectionTitleDate
+			,eClassSectionTitleUpdateDate
+			,memberUpdateEmail
+		)VALUES(
+			 #{eClassSectionTitleCode}
+			,#{memberEmail}
+			,#{eClassSectionTitleName}
+			,NOW()
+			,NULL
+			,NULL
+		);
+	</insert>
+	
+	<insert id="EClassIntroduceInsert" parameterType="EClassIntroduce">
+		/* introduce 등록처리 */
+		INSERT INTO eclassintroduce (
+			 eClassIntroduceCode
+			,memberEmail
+			,eClassCategorySmallCode
+			,eClassIntroduceContent
+			,memberUpdateEmail
+			,eClassIntroducetDate
+			,eClassIntroduceImg
+		)VALUES (
+			 #{eClassIntroduceCode}
+			,#{memberEmail}
+			,#{eClassCategorySmallCode}
+			,#{eClassIntroduceContent}
+			,null
+			,NOW()
+			,NULL
+		);
+	</insert>
+	
+	<select id="eClassCategoryLargeList" parameterType="String" resultType="EClassCategoryLarge">
+		/* 카테고리 조회 */
+		SELECT
+			 cs.eClassCategoryLargeCode
+			,cs.eClassCategoryLargeName
+		FROM
+			eclasscategorylarge AS cs;
+	</select>
+	
+	<select id="eClassCategoryMediumList" parameterType="String" resultType="EClassCategoryMedium">
+		/* 카테고리 조회 */
+		SELECT
+			 cs.eClassCategoryMediumCode
+			,cs.eClassCategoryMediumName
+		FROM
+			eclasscategorymedium AS cs;
+	</select>
+	
+	<select id="eClassCategoryLarge" parameterType="String" resultMap="eClassCategorySmallResultMap">
+		/* 운동클래스 카테고리 Medium 조회 */
+		SELECT
+			 cs.eClassCategoryMediumCode
+			,cs.eClassCategoryMediumName
+		FROM
+			eclasscategorysmall AS cs 
+		WHERE
+			cs.eClassCategoryLargeCode = #{eClassCategoryLargeCode}
+		GROUP BY 
+			eClassCategoryMediumName;
+	</select>
+	
+	<select id="eClassCategoryMedium" parameterType="String" resultMap="eClassCategorySmallResultMap">
+		/* 운동클래스 카테고리 small 조회 */
+		SELECT
+			 es.eClassCategorySmallCode
+			,es.eClassCategorySmallName
+		FROM
+			 eclasscategorysmall AS es
+		WHERE 	
+			 es.eClassCategoryMediumCode = #{eClassCategoryMediumCode};
+	</select>
+	
+	<select id="eClassOpenAppleyList" parameterType="String" resultMap="eClassOpenappleyResultMap">
+		/* 신청한 운동클래스 리스트 */
+		SELECT
+			 op.eClassOpenAppleyName
+			,op.eClassOpenAppleyPrice
+			,op.eClassOpenAppleyApproveState
+			,it.eClassIntroduceImg
+			,it.eClassIntroduceContent	
+		FROM
+			eclassopenappley AS op
+		INNER JOIN 
+			eclassintroduce AS it
+		ON
+			op.eClassIntroduceCode = it.eClassIntroduceCode
+		WHERE 
+			op.eClassOpenAppleyMemberEmail = #{eClassOpenAppleyMemberEmail};
+	</select>
+	
+</mapper>
