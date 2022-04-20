@@ -207,33 +207,33 @@ public class WorkoutLogUserController {
 	
 	
 	//일지 등록 처리
-		@PostMapping("/workoutLogInsert")
-		public String workoutLogInsert(WorkoutLog workoutLog
-									 , HttpSession session
-									 , @RequestParam MultipartFile[] fileImage
-									 , HttpServletRequest request) {
-			
-			String sessionEmail = (String) session.getAttribute("SEMAIL");	//형변환을 해줘라
-			
-			//파일 업로드 
-			String serverName = request.getServerName();
-			String fileRealPath = "";
-			if("localhost".equals(serverName)) {				
-				fileRealPath = System.getProperty("user.dir") + "/src/main/resources/static/";
-				//fileRealPath = request.getSession().getServletContext().getRealPath("/WEB-INF/classes/static/");
-			}else {
-				fileRealPath = request.getSession().getServletContext().getRealPath("/WEB-INF/classes/static/");
-			}
-			
-			
-			log.info("일지 등록 폼에서 입력받은 데이터: {}", workoutLog);
-			
-			workoutLogUserService.workoutLogInsert(workoutLog, sessionEmail, fileImage, fileRealPath );
-			
-			return "redirect:/workoutLog/workoutLogUser/workoutLogMain";
-			
+	@PostMapping("/workoutLogInsert")
+	public String workoutLogInsert(WorkoutLog workoutLog
+								 , HttpSession session
+								 , @RequestParam MultipartFile[] fileImage
+								 , HttpServletRequest request) {
+		
+		String sessionEmail = (String) session.getAttribute("SEMAIL");	//형변환을 해줘라
+		
+		//파일 업로드 
+		String serverName = request.getServerName();
+		String fileRealPath = "";
+		if("localhost".equals(serverName)) {				
+			fileRealPath = System.getProperty("user.dir") + "/src/main/resources/static/";
+			//fileRealPath = request.getSession().getServletContext().getRealPath("/WEB-INF/classes/static/");
+		}else {
+			fileRealPath = request.getSession().getServletContext().getRealPath("/WEB-INF/classes/static/");
 		}
-	
+		
+		
+		log.info("일지 등록 폼에서 입력받은 데이터: {}", workoutLog);
+		
+		workoutLogUserService.workoutLogInsert(workoutLog, sessionEmail, fileImage, fileRealPath );
+		
+		return "redirect:/workoutLog/workoutLogUser/workoutLogMain";
+		
+	}
+
 	// 일지 수정 처리
 	@PostMapping("/workoutLogUpdate")
 	public String workoutLogUpdate(WorkoutLog workoutLog, RedirectAttributes reAttr) {
