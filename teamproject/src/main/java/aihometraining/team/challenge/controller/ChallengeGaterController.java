@@ -3,6 +3,7 @@ package aihometraining.team.challenge.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -102,11 +103,13 @@ public class ChallengeGaterController {
 	
 	//모집챌린지 등록처리
 	@PostMapping("/challengeGatherInsert")
-	public String challengeGatherInsert(ChallengeGather challengeGather, ChallengeGatherPlan challengeGatherPlan) {
+	public String challengeGatherInsert(ChallengeGather challengeGather, ChallengeGatherPlan challengeGatherPlan, HttpSession session) {
 		
 		log.info("모집챌린지 등록폼에서 입력받은 데이터: {}", challengeGather);
 		
-		challengeGatherService.challengeGatherInsert(challengeGather, challengeGatherPlan);
+		String sEmail = (String) session.getAttribute("SEMAIL");
+		
+		challengeGatherService.challengeGatherInsert(challengeGather, challengeGatherPlan, sEmail);
 		
 		return "redirect:/challenge/challengeGather/challengeGatherList";
 		
