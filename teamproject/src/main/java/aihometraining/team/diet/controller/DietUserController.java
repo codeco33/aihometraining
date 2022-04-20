@@ -84,7 +84,6 @@ public class DietUserController {
 		model.addAttribute("UserdietPlanListNutrient", UserdietPlanListNutrient);
 		
 
-		log.info("UserdietPlanListNutrient : {}", UserdietPlanListNutrient);
 
 		
 		
