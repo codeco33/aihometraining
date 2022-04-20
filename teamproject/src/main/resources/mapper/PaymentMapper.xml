@@ -171,4 +171,39 @@
 		WHERE 
 			paymentGroupCode = #{paymentGroupCode};
 	</select>
+	
+	<select id="getPaymentMethodCode" parameterType="String" resultType="String">
+		SELECT
+			paymentMethodCode
+		FROM
+			paymentMethod
+		WHERE 
+			paymentMethodName = #{paymentMethodName};
+	</select>
+	
+	<insert id="addPayment" parameterType="Payment">
+		INSERT INTO payment
+			( 
+			  paymentCode
+			, paymentGroupCode
+			, memberEmail
+			, paymentMethodCode
+			, paymentMethodName
+			, paymentTotalOrderPrice
+			, paymentUsePoint
+			, paymentTotalPayPrice
+			, paymentState
+			, paymentRegDate)
+			VALUES (
+			  #{paymentCode}
+			, #{paymentGroupCode}
+			, #{memberEmail}
+			, #{paymentMethodCode}
+			, #{paymentMethodName}
+			, #{paymentTotalOrderPrice}
+			, #{paymentUsePoint}
+			, #{paymentTotalPayPrice}
+			, '결제완료'
+			, NOW());
+	</insert>
 </mapper>

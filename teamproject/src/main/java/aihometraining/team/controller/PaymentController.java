@@ -20,10 +20,12 @@ import aihometraining.team.dto.ChallengeGather;
 import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.EClassTake;
 import aihometraining.team.dto.Member;
+import aihometraining.team.dto.Payment;
 import aihometraining.team.dto.WishList;
 import aihometraining.team.mapper.MemberMapper;
 import aihometraining.team.mapper.PaymentMapper;
 import aihometraining.team.service.PaymentService;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Controller
 public class PaymentController {
@@ -95,15 +97,30 @@ public class PaymentController {
 		return "eClass/eClassTake";
 	}
 	
+	//수강신청 insert
 	@PostMapping("/signUpForClass")
 	public String eClassTake(EClassTake eClassTake, RedirectAttributes reAttr) {
 		
-		
-		//수강신청 insert하기
 		paymentService.addEClassTake(eClassTake);
 		reAttr.addAttribute("paymentGroupCode", eClassTake.getPaymentGroupCode());
 		
+		//위시리스트 삭제 처리
+		
 		return "redirect:/payment";
+	}
+	
+	
+	//결제처리
+	@PostMapping("/payment")
+	public String payment(Model model, Payment payment, RedirectAttributes reAttr) {
+		
+		model.addAttribute("title", "결제");
+		
+		paymentService.addPayment(payment);
+		
+		reAttr.addAttribute("paymentCode", "1234");
+		
+		return "redirect:/mypage/mypaymentList/paymentDetail";
 	}
 	
 
@@ -153,18 +170,18 @@ public class PaymentController {
 		model.addAttribute("paymentGoodsSetDate", paymentGoodsSetDate);
 		model.addAttribute("member", member);
 		model.addAttribute("memberPhone", memberPhone);
+		model.addAttribute("paymentGroupCode", paymentGroupCode);
 		
 		return "payment/payment";
 	}
 	
 	
 	
-	@PostMapping("/payment")
-	public String payment(Model model) {
+	//문자 인증
+	@PostMapping("/memberPhoneCheck")
+	public @ResponseBody String memberPhoneCheck(@RequestParam(value="to") String to) throws CoolsmsException {
 		
-		//결제처리
-		model.addAttribute("title", "결제");
 		
-		return "redirect:/mypage/mypaymentList/paymentDetail";
+		return paymentService.PhoneNumberCheck(to);
 	}
 }
