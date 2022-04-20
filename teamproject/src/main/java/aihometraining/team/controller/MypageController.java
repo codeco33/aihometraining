@@ -125,13 +125,16 @@ public class MypageController {
 		return "point/mypointList";
 	}
 	
+	//결제 상세 내역
 	@GetMapping("/mypaymentList/paymentDetail")
-	public String paymentDetail(Model model) {
+	public String paymentDetail(Model model
+								,@RequestParam(name="paymentCode") String paymentCode) {
 		
 		model.addAttribute("title", "결제 내역");
 		model.addAttribute("leftMenuList", "거래내역");
 		model.addAttribute("subTitle", "결제 상세 내역");
 		model.addAttribute("layoutDeco", "layout/mypagedefault");
+		model.addAttribute("paymentCode", paymentCode);
 		
 		return "payment/paymentDetail";
 	}
