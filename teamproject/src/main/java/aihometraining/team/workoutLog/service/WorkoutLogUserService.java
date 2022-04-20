@@ -107,7 +107,7 @@ public class WorkoutLogUserService {
 		workoutLog.setWorkoutLogCode(code);
 		workoutLog.setMemberEmail(sessionEmail);	
 		
-		int result =workoutLogUserMapper.workoutLogInsert(workoutLog);
+		int result = workoutLogUserMapper.workoutLogInsert(workoutLog);
 		
 		List<FileDto> fileList = fileUtil.parseFileInfo(fileImage, fileRealPath);
 		

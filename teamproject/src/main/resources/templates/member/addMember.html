@@ -92,7 +92,7 @@
 	                <input type="password" placeholder="********">
 	            </div> -->
 	            <div class="form-input pt-30">
-	                <input type="submit" name="submit" value="회원 가입">
+	                <input type="submit" name="submit" id="addMemberBtn" value="회원 가입">
 	            </div>
 	        </div>
 	    </form>
@@ -133,15 +133,15 @@
 						,dataType: 'json'
 						,success: function(data){
 							console.log(data);
-							//화면에서 맨 처음 아이디를 제외한 모든 입력하는 요소는 비활성화(HTML 속성 추가 disabled="disabled")
-							//아이디 중복이 발생되지 않은 경우에 회원 가입을 할 수 있다. 입력하는 요소는 활성화
+							//화면에서 맨 처음 이메일을 제외한 모든 입력하는 요소는 비활성화(HTML 속성 추가 disabled="disabled")
+							//이메일 중복이 발생되지 않은 경우에 회원 가입을 할 수 있다. 입력하는 요소는 활성화
 							if(data){
 								$('#addMemberForm input').prop('disabled', false);
 								$('#addMemberForm select').prop('disabled', false);
 								$('#addMemberForm button').prop('disabled', false);
 								Swal.fire("사용 가능한 이메일입니다.")
 							}else{
-								//아이디 중복이 발생하는 경우에 회원 가입을 할 수 없다. 입력하는 요소는 비활성화
+								//이메일 중복이 발생하는 경우에 회원 가입을 할 수 없다. 입력하는 요소는 비활성화
 								$('#addMemberForm input').not('input[name="memberEmail"]').prop('disabled', true);
 								$('#addMemberForm button').not('#emailCheck').prop('disabled', true);
 								$('#addMemberForm select').prop('disabled', true);
@@ -156,7 +156,7 @@
 			
 			$('#addMemberBtn').click(function(){
 				var isSubmit = true;
-				var inputObj = $('addMemberForm').find('input');
+				var inputObj = $('#addMemberForm').find('input');
 				/* for(var i=0; i < inputObj.length; i++){
 					inputObj[i]
 					return false;
@@ -167,7 +167,7 @@
 					
 					//사용자가 입력하지 않은 경우
 					if(!result){
-						alert('필수 항목입니다. 입력을 해주세요.');
+						alert('필수 항목을 확인해주세요.');
 						$(this).focus();
 						isSubmit = false;
 						return false;
@@ -188,7 +188,7 @@
 		        	//console.log(res, value, regexp, re)
 		        	return res;
 		        },
-		        "영문, 숫자, 특수 문자를 혼합하여 입력해주세요."
+		        "영문, 숫자, 특수 문자를 혼합하여 8~10자리로 입력해주세요."
 		);
 		
 		$('#addMemberForm').validate({
@@ -223,42 +223,6 @@
 			$('#p1').val("영문, 숫자, 특수 문자를 혼합하여 8~10자리로 입력해주세요.");
 		}
 		
-		
-		/* function chkPW(){
-
-			 var pw = $("#password1").val();
-			 var num = pw.search(/[0-9]/g);
-			 var eng = pw.search(/[a-z]/ig);
-			 var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
-
-			 if(pw.length < 8 || pw.length > 20){
-
-			  alert("8자리 ~ 20자리 이내로 입력해주세요.");
-			  return false;
-			 }else if(pw.search(/\s/) != -1){
-			  alert("비밀번호는 공백 없이 입력해주세요.");
-			  return false;
-			 }else if(num < 0 || eng < 0 || spe < 0 ){
-			  alert("영문, 숫자, 특수 문자를 혼합하여 8~10자리로 입력해주세요.");
-			  return false;
-			 }else {
-				console.log("통과"); 
-			    return true;
-			 }
-
-			}
-		 *//* 
-		$('#password1, #password2').on('change',
-	               function() {
-	                  var password1 = $('#password1').val();
-	                  var password2 = $('#password2').val();
-	                  console.log(password1);
-	                  if(password1 == password2){
-	                	  $('#p1').text("비밀번호가 일치합니다.");
-	                  }else{
-	                	  $('#p1').text("비밀번호가 일치하지 않습니다.");
-	                  }
-	               }); */
 		</script>
 	</th:block>
 </body>
