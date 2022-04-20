@@ -130,7 +130,7 @@ public class eClassController {
 			
 			log.info("eClassController.EClassOpenAppleyFormUpdate eClassCategoryLargeList 데이터: {}", eClassCategoryLargeList); //받은 내용이 여기{}에 담긴다.
 			log.info("eClassController.EClassOpenAppleyFormUpdate eClassCategoryMediumList 데이터: {}", eClassCategoryMediumList); //받은 내용이 여기{}에 담긴다.
-			log.info("eClassController.EClassOpenAppleyFormUpdate eclassapprovedCode 데이터: {}", eClassApproved); //받은 내용이 여기{}에 담긴다.
+			log.info("eClassController.EClassOpenAppleyFormUpdate eClassApproved 데이터: {}", eClassApproved); //받은 내용이 여기{}에 담긴다.
 			
 			model.addAttribute("title", "운통클래스 신청 폼 수정화면");
 			model.addAttribute("eClassCategoryLargeList", eClassCategoryLargeList);
@@ -139,6 +139,42 @@ public class eClassController {
 			
 			
 		return "eClass/eClassOpenAppleyFormUpdate";
+	}
+	
+	@PostMapping("/openAppleyUpdate")
+	public String EClassAppleyFormUpdate( EClassCategorySmall eClassCategorySmall
+										, EClassIntroduce eClassIntroduce
+										, EClassSectionTitle eClassSectionTitle
+										, EClassSectionCurriculum eClassSectionCurriculum
+										, EClassQuestion eClassQuestion
+										, EClassAnswer eClassAnswer
+										, EClassApproved eClassApproved
+										, HttpSession session) {
+							
+		
+		String mamberEmail = (String) session.getAttribute("SEMAIL");
+		eClassService.EClassIntroduceUpdate(eClassIntroduce, mamberEmail);
+		eClassService.EClassSectionTitleUpdate(eClassSectionTitle, mamberEmail);
+		eClassService.EClassSectionCurriculumUpdate(eClassSectionCurriculum, mamberEmail);
+		eClassService.EClassQuestionInsert(eClassQuestion, mamberEmail);
+		eClassService.EClassAnswerInsert(eClassAnswer, mamberEmail, eClassQuestion);
+		eClassService.EClassPriceInsert(eClassApproved
+									  , eClassCategorySmall
+									  , mamberEmail 
+									  , eClassIntroduce 
+									  , eClassSectionTitle 
+									  , eClassSectionCurriculum 
+									  , eClassQuestion 
+									  , eClassAnswer);
+							
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassCategorySmall);
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassIntroduce);
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassSectionTitle);
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassSectionCurriculum);
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassQuestion);
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassAnswer);
+
+		return "";
 	}
 	
 	@GetMapping("/eClassOpenAppleyComplete") 

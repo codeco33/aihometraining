@@ -8,7 +8,7 @@
 	</th:block>
 
 	<th:block layout:fragment="customContents">
-		<form th:action="@{/openAppley}">
+		<form th:action="@{/openAppleyUpdate}">
 			<div class="container" style="border-radius: 30px; border: solid 5px #aa00cc;">
 				<div class="row" style="margin: 5px;">
 					<div class="col-12" style="padding-top: 10px;">
@@ -46,7 +46,7 @@
 							</div>
 							<div class="row">
 								<div class="col-9" style="padding: 10px;">
-									<textarea rows="20" style="resize:none; width: 100%;" name="eClassIntroduceContent" th:text="eClassApproved.eClassIntroduceContent"></textarea>
+									<textarea rows="20" style="resize:none; width: 100%;" name="eClassIntroduceContent"placeholder="개설 하려는 클래스를 소개 시켜주세요" th:text="${eClassApproved.eClassIntroduce.eClassIntroduceContent}"></textarea>
 								</div>
 								<div class="col-3" style="padding: 10px; text-align: center;">
 									<div style="border: solid 1px; width: 100%; height: 400px;">이미지를 등록해주세요!</div>
@@ -68,12 +68,12 @@
 							<div class="col-8" id="section">
 								<div class="row" id="title">
 									<div class="col-12" style=" padding: 10px;">
-										<input type="text" style="width: 100%; height: 50px;" name="eClassSectionTitleName" placeholder="섹션 제목을 정해주세요">
+										<input type="text" style="width: 100%; height: 50px;" name="eClassSectionTitleName" placeholder="섹션 제목을 정해주세요" th:value="${eClassApproved.eClassSectionTitle.eClassSectionTitleName}">
 										<div class="row" id="sectionCurriculum" style="margin: 5px;">
 											<div class="col-6 offset-md-1">
 												<div id="curriculum">
 													<div  id="sectionCurriculumBox">
-														<input type="text" name="eClassSectionCurriculumTitle" style="width: 100%;" placeholder="커리큘럼 이름을 정해주세요">
+														<input type="text" name="eClassSectionCurriculumTitle" style="width: 100%;" placeholder="커리큘럼 이름을 정해주세요" th:value="${eClassApproved.eClassSectionCurriculum.eClassSectionCurriculumTitle}">
 														<input type="file" name="eClassSectionCurriculumAddFile">
 													</div>
 												</div>
@@ -104,10 +104,10 @@
 							<div class="col-8" id="questionTitle" style="padding-top: 10px;">
 								<div class="row">
 									<div class="col-12" style="padding: 10px;">
-										<input type="text" name="eClassQuestionTitle" id="questionName" style="width: 100%; height: 50px; border: solid 1px;" placeholder="자주 묻는 질문을 등록해주세요">
+										<input type="text" name="eClassQuestionTitle" id="questionName" style="width: 100%; height: 50px; border: solid 1px;" placeholder="자주 묻는 질문을 등록해주세요" th:value="${eClassApproved.eClassQuestion.eClassQuestionTitle}">
 										<div class="row" style="margin: 5px;">
 											<div class="col-6 offset-md-1">
-												<input type="text" name="eClassAnsweTitle" style="width: 100%; border: solid 1px;" placeholder="어떻게 답하실건가요?">
+												<input type="text" name="eClassAnsweTitle" style="width: 100%; border: solid 1px;" placeholder="어떻게 답하실건가요?" th:value="${eClassApproved.eClassQuestion.eClassQuestionTitle}">
 											</div>
 										</div>
 									</div>
@@ -137,7 +137,7 @@
 												<h5>수강생 모집 시작 날짜</h5>
 											</div>
 											<div class="col-6" style="margin-bottom: 10px;">
-												<input type="date" style="width: 100%" name="eClassApprovedStratDate">
+												<input type="date" style="width: 100%" name="eClassApprovedStratDate" th:value="${eClassApproved.eClassApprovedStratDate}">
 											</div>
 										</div>
 									</div>
@@ -147,7 +147,7 @@
 												<h5>수강생 모집 종료 날짜</h5>
 											</div>
 											<div class="col-6" style="margin-bottom: 10px;">
-												<input type="date" style="width: 100%" name="eClassApprovedEndDate">
+												<input type="date" style="width: 100%" name="eClassApprovedEndDate" th:value="${eClassApproved.eClassApprovedEndDate}">
 											</div>
 										</div>
 									</div>
@@ -164,7 +164,7 @@
 												<h6>최소</h6>
 											</div>
 											<div class="col-3" style="margin-bottom: 10px;">
-												<input type="number" style="width: 100%;" name="eClassApprovedStudent" placeholder="1">
+												<input type="number" style="width: 100%;" name="eClassApprovedStudent" placeholder="1" th:value="${eClassApproved.eClassApprovedStudent}">
 											</div>
 											<div class="col-3" style="margin-top: 7px;">
 												<h6>명</h6>
@@ -177,7 +177,7 @@
 												<h6 style="color: #de00fd;">최대</h6>
 											</div>
 											<div class="col-3" style="margin-bottom: 10px;">
-												<input type="number" style="width: 100%;" name="eClassApprovedMaxStudent" placeholder="0">
+												<input type="number" style="width: 100%;" name="eClassApprovedMaxStudent" placeholder="1" th:value="${eClassApproved.eClassApprovedMaxStudent}">
 											</div>
 											<div class="col-3" style="margin-top: 7px;">
 												<h6>명</h6>
@@ -194,7 +194,7 @@
 												<h6>기간 및 금액 설정</h6>
 											</div>
 											<div class="col-4">
-												<input type="number" style="width: 100%;" name="eClassApprovedSetDate" placeholder="1">
+												<input type="number" style="width: 100%;" name="eClassApprovedSetDate" placeholder="1" th:value="${eClassApproved.eClassApprovedSetDate}">
 											</div>
 											<div class="col-2" style="padding: 5px;">
 												<h6>개월</h6>
@@ -207,7 +207,7 @@
 												<h6>금액 설정</h6>
 											</div>
 											<div class="col-4">
-												<input type="number" style="width: 100%;" name="eClassApprovedPrice" placeholder="0">
+												<input type="number" style="width: 100%;" name="eClassApprovedPrice" placeholder="0" th:value="${eClassApproved.eClassApprovedPrice}">
 											</div>
 											<div class="col-2">
 												<h6>원</h6>
@@ -217,7 +217,7 @@
 								</div>
 							</div>
 							<div class="col-12" style="height: 100px; margin-top: 15px">
-								<input name="eClassApprovedName" style="height: 80%; width: 100%; font-size: 50px; text-align: center;" placeholder="클래스 이름을 정해주세요">
+								<input name="eClassApprovedName" style="height: 80%; width: 100%; font-size: 50px; text-align: center;" placeholder="클래스 이름을 정해주세요" th:value="${eClassApproved.eClassApprovedName}">
 							</div>
 						</div>
 					</div>

@@ -65,6 +65,17 @@ public class eClassService {
 		return result;
 	}
 	
+	//클래스 신청 폼 introduce 수정처리
+	public int EClassIntroduceUpdate(EClassIntroduce eClassIntroduce, String mamberEmail) {
+		
+		log.info("EClassIntroduceInsert eClassIntroduce 데이터: {}", eClassIntroduce);
+		eClassIntroduce.setMemberUpdateEmail(mamberEmail);
+		
+		int result = eClassMapper.EClassIntroduceInsert(eClassIntroduce);
+		
+		return result;
+	}
+	
 	//클래스 신청 폼 sectiontitle 등록처리
 	public int EClassSectionTitleInsert(EClassSectionTitle eClassSectionTitle, String memberEmail) {
 		
@@ -73,6 +84,16 @@ public class eClassService {
 		log.info("eClassService EClassSectionTitleInsert eClassSectionTitle", sectiontitleCode);
 		eClassSectionTitle.seteClassSectionTitleCode(sectiontitleCode);
 		eClassSectionTitle.setMemberEmail(memberEmail);
+		
+		int result = eClassMapper.EClassSectionTitleInsert(eClassSectionTitle);
+		
+		return result;
+	}
+	//클래스 신청 폼 sectiontitle 수정처리
+	public int EClassSectionTitleUpdate(EClassSectionTitle eClassSectionTitle, String memberEmail) {
+		
+		log.info("EClassSectionTitleInsert eClassSectionTitle 데이터: {}", eClassSectionTitle);
+		eClassSectionTitle.setMemberUpdateEmail(memberEmail);
 		
 		int result = eClassMapper.EClassSectionTitleInsert(eClassSectionTitle);
 		
@@ -91,6 +112,17 @@ public class eClassService {
 		eClassSectionCurriculum.seteClassSectionCurriculumCode(curriculumCode);
 		eClassSectionCurriculum.setMemberEmail(memberEmail);
 		eClassSectionCurriculum.seteClassSectionTitleCode(titleCode);
+		
+		int result = eClassMapper.EClassSectionCurriculumInsert(eClassSectionCurriculum);
+		
+		return result;
+	}
+	//클래스 신청 폼 sectionculum 수정처리
+	public int EClassSectionCurriculumUpdate( EClassSectionCurriculum eClassSectionCurriculum
+											, String memberEmail) {
+		
+		log.info("EClassSectionCurriculumInsert eClassSectionCurriculum 데이터: {}", eClassSectionCurriculum);
+		eClassSectionCurriculum.setMemberUpdateEmail(memberEmail);
 		
 		int result = eClassMapper.EClassSectionCurriculumInsert(eClassSectionCurriculum);
 		
@@ -177,8 +209,30 @@ public class eClassService {
 		
 		return result;
 	}
+	//클래스 신청 폼 price 등록처리
+	public int EClassPriceUpdate( EClassApproved eClassApproved
+								, EClassCategorySmall eClassCategorySmall
+								, String memberEmail
+								, EClassIntroduce eClassIntroduce
+								, EClassSectionTitle eClassSectionTitle
+								, EClassSectionCurriculum eClassSectionCurriculum
+								, EClassQuestion eClassQuestion
+								, EClassAnswer eClassAnswer) {
+
+		eClassIntroduce.setMemberUpdateEmail(memberEmail);
+		eClassSectionTitle.setMemberUpdateEmail(memberEmail);
+		eClassSectionCurriculum.setMemberUpdateEmail(memberEmail);
+		eClassQuestion.setMemberUpdateEmail(memberEmail);
+		eClassAnswer.setMemberUpdateEmail(memberEmail);
+		
+		log.info("eClassService EClassPriceUpdate setMemberUpdateEmail : {}",memberEmail);
+		
+		int result = eClassMapper.EClassPriceInsert(eClassApproved);
+		
+		return result;
+	}
 	
-	//클래스 신청 수정조회
+	//클래스 신청 수정화면
 	public EClassApproved eClassApprovedByCode(String eclassapprovedCode){
 		
 		EClassApproved eClassApproved = eClassMapper.eClassApprovedByCode(eclassapprovedCode);
