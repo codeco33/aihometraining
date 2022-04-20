@@ -39,6 +39,65 @@
 			</collection>	
 	</resultMap>
 	
+	<resultMap type="AIVideo" id="AIVideoResultMap">
+			<result column="fileIdx" 					property="fileIdx"/>
+			<result column="memberEmail" 				property="memberEmail"/>
+			<result column="AIVideoRegDate" 			property="AIVideoRegDate"/>
+			<result column="memberUpdateEmail" 			property="memberUpdateEmail"/>
+			<result column="AIVideoUpdateDate" 			property="AIVideoUpdateDate"/>
+			<result column="AIVideoTitle" 				property="AIVideoTitle"/>
+		
+		<collection property="fileList" javaType="List" ofType="FileDto">
+				<id column="fileIdx" 						property="fileIdx"/>
+				<result	column="fileOriginalName" 			property="fileOriginalName"/>
+				<result column="fileNewName" 				property="fileNewName"/>
+				<result column="filePath" 					property="filePath"/>
+				<result column="fileSize" 					property="fileSize"/>
+		</collection>	
+	</resultMap>
+	
+	
+	
+	<select id="getWorkoutAIVideoList" resultMap="AIVideoResultMap">
+		SELECT
+			 a.fileIdx
+			,a.memberEmail
+			,a.AIVideoRegDate
+			,a.AIVideoTitle
+			,f.fileIdx
+			,f.filePath
+		FROM
+			aivideo AS a
+			INNER JOIN
+		 	tb_file_control AS fc
+		 	ON 
+		 	a.fileIdx = fc.referenceCode
+		 	INNER JOIN 
+		 	tb_file AS f
+		 	ON 
+		 	fc.fileIdx = f.fileIdx;
+	</select>
+	
+	<insert id="workoutAIVideoInsert" parameterType="AIVideo">
+		/* AI Video 영상(이미지로 대체) 등록 */
+		INSERT INTO aivideo
+		(
+				  fileIdx
+				, memberEmail
+				, AIVideoRegDate
+				, memberUpdateEmail
+				, AIVideoUpdateDate
+				, AIVideoTitle
+		)VALUES (
+				  #{fileIdx}
+				, #{memberEmail}
+				, NOW()
+				, null
+				, NOW()
+				, #{AIVideoTitle}
+		);
+	</insert>
+	
 	<select id="getNewWorkoutLog" resultMap="WorkoutLogResultMap">
 		/* 새롭게 등록된 일지 조회 */
 		SELECT 

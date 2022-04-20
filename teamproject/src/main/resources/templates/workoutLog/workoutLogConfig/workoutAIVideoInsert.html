@@ -14,37 +14,39 @@
 		        	<h4><span class="icon-social-youtube"></span> 운동 영상 등록</h4>
 		        </div>
 	            <div class="panel-body" style="padding-bottom:30px;">
-		             <div class="col-sm-12">
-		               <div class="form-group">
-		               	<div class="row">
-   							<div class="col-md-12">
-      							<div class="form-group form-animate-text" style="margin-top:40px !important;">
-									<input type="text" class="form-text" id="validate_workoutAIVideoUpdate" name="validate_workoutAIVideoUpdate" required>
-									<span class="bar"></span>
-									<label>운동 영상 제목</label>
-								</div>
-       						</div>
-		               	</div>
-		               </div>
-		             </div>
-                 			<h5>운동 영상 파일 업로드</h5>
-                    <div class="row">
-                      <div class="col-sm-12">
-                        <div class="input-group fileupload-v1">
-                          <input type="file" name="manualfile" class="fileupload-v1-file hidden"/>
-                          <input type="text" class="form-control fileupload-v1-path" placeholder="File Path..." disabled>
-                          <span class="input-group-btn">
-                            <button class="btn fileupload-v1-btn" type="button"><i class="fa fa-folder"></i> Choose File</button>
-                          </span>
-                        </div><!-- /input-group -->
-                      </div><!-- /.col-lg-6 -->
-		                <div class="panel-body">
-		                  <form action="/file-upload" class="dropzone" id="my-awesome-dropzone"></form>
-		                </div>
-		                <div style="text-align: center;">
-						  <input class="submit btn btn-danger" type="submit" value="등록">
-					   </div>
-                    </div><!-- /.row -->
+	            	<form class="mb-5" id="workoutAIVideoInsert" th:action="@{/admin/workoutAIVideoInsert}" method="post" enctype="multipart/form-data">	
+			             <div class="col-sm-12">
+			               <div class="form-group">
+			               	<div class="row">
+	   							<div class="col-md-12">
+	      							<div class="form-group form-animate-text" style="margin-top:40px !important;">
+										<input type="text" class="form-text" id="validate_workoutAIVideoInsert" name="AIVideoTitle" required>
+										<span class="bar"></span>
+										<label>운동 영상 제목</label>
+									</div>
+	       						</div>
+			               	</div>
+			               </div>
+			             </div>
+	                 	<h5>운동 영상 파일 업로드</h5>
+	                    <div class="row">
+	                    	<div class="col-sm-12">
+		                        <div class="input-group fileupload-v1">
+		                          <input type="file" name="fileImage" multiple="multiple" class="fileupload-v1-file hidden"/>
+		                          <input type="text" class="form-control fileupload-v1-path" placeholder="File Path..." disabled>
+		                          <span class="input-group-btn">
+		                            <button class="btn fileupload-v1-btn" type="button"><i class="fa fa-folder"></i> Choose File</button>
+		                          </span>
+		                        </div><!-- /input-group -->
+	                    	</div><!-- /.col-lg-6 -->
+			                <div class="panel-body">
+			                  <div class="dropzone" id="my-awesome-dropzone"></div>
+			                </div>
+			                <div style="text-align: center;">
+							  <input class="submit btn btn-danger" type="submit" value="등록">
+						   </div>
+	                    </div><!-- /.row -->
+                    </form>
               	</div>
 			</div>
 		</div>   
@@ -87,7 +89,7 @@
 		<script type="text/javascript">
 			$(document).ready(function(){
 			  
-			    $("#workoutCategoryForm").validate({
+			    $("#workoutAIVideoInsert").validate({
 			      errorElement: "em",
 			      errorPlacement: function(error, element) {
 			        $(element.parent("div").addClass("form-animate-error"));
@@ -97,10 +99,10 @@
 			        $(label.parent("div").removeClass("form-animate-error"));
 			      },
 			      rules: {
-			    	  validate_workoutAIVideoUpdate: "required",
+			    	  validate_workoutAIVideoInsert: "required",
 			      },
 			      messages: {
-			    	  validate_workoutAIVideoUpdate: "카테고리 이름을 입력해주세요.",
+			    	  validate_workoutAIVideoInsert: "AI 운동 영상 제목을 입력해주세요.",
 			      }
 			    });
 			
