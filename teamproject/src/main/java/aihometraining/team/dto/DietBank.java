@@ -14,8 +14,6 @@ public class DietBank {
 	
 	
 	
-	
-	
 	public String getDietBankCallViewId() {
 		return dietBankCallViewId;
 	}

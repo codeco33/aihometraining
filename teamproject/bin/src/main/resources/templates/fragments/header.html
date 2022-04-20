@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<!-- start: Header -->
+	<nav class="navbar navbar-default header navbar-fixed-top" th:fragment="headerFragment">
+		<div class="col-sm-12 nav-wrapper">
+        	<div class="navbar-header" style="width:100%;">
+				<div class="opener-left-menu is-open col-sm-1">
+                	<span class="top"></span>
+                	<span class="middle"></span>
+                	<span class="bottom"></span>
+              	</div>
+                <div class="col-sm-6 col-xs-10">
+					<a th:href="@{/}" class="navbar-brand"><b>AI 홈트레이닝 시스템</b></a>
+				</div>
+
+				<ul class="nav navbar-nav navbar-right user-nav col-sm-4 col-xs-2">
+					<li th:if="${session.SEMAIL != null}" class="user-name"><span>[[${session.SNAME}]]님이 로그인하셨습니다.</span></li>
+					<li class="dropdown avatar-dropdown">
+					<img th:src="@{/asset/img/avatar.jpg}" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+						<ul class="dropdown-menu user-dropdown">
+							<li><a th:if="${session.SEMAIL != null}" th:href="@{/mypage}"><span class="fa fa-user"></span>마이페이지</a></li>
+							<li><a th:if="${session.SEMAIL != null && session.SLEVEL == 'levelCode001'}" th:href="@{/admin}"><span class="fa fa-cogs"></span>관리자 페이지</a></li>
+							<li><a th:if="${session.SEMAIL != null}" th:href="@{/logout}" ><span class="fa fa-power-off"></span>로그아웃</a></li>
+						</ul>
+					</li>
+					<li ><a href="#" class="opener-right-menu"><span class="fa fa-coffee"></span></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- end: Header -->
+</html>

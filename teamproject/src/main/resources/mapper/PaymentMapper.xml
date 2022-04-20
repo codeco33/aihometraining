@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="aihometraining.team.mapper.PaymentMapper">
+
+	<resultMap type="Member" id="memberResultMap">
+		<id 	column="memberEmail" 			property="memberEmail"/>
+		<result column="memberPw" 				property="memberPw"/>
+		<result column="memberLevelCode" 		property="memberLevelCode"/>
+		<result column="memberNewsAgree" 		property="memberNewsAgree"/>
+		<result column="memberRegDate" 			property="memberRegDate"/>
+		<result column="memberName" 			property="memberName"/>
+		<result column="memberPhone"	 		property="memberPhone"/>
+		<result column="memberNickname" 		property="memberNickname"/>
+		<result column="memberBirthday" 		property="memberBirthday"/>
+		<result column="memberGender" 			property="memberGender"/>
+		<result column="memberRecommendEmail" 	property="memberRecommendEmail"/>
+		<result column="memberFinalPoint" 		property="memberFinalPoint"/>
+	</resultMap>
+
+	<resultMap type="eClassApproved" id="eClassApprovedResultMap">
+		<id 	column="eClassApprovedCode" 		property="eClassApprovedCode"/>
+		<result column="memberEmail" 				property="memberEmail"/>
+		<result column="eClassCategorySmallCode" 	property="eClassCategorySmallCode"/>
+		<result column="eClassIntroduceCode" 		property="eClassIntroduceCode"/>
+		<result column="eClassSectionTitleCode" 	property="eClassSectionTitleCode"/>
+		<result column="eClassSectionCurriculumCode" property="eClassSectionCurriculumCode"/>
+		<result column="eClassQuestionCode" 		property="eClassQuestionCode"/>
+		<result column="eClassAnswerCode" 			property="eClassAnswerCode"/>
+		<result column="eClassApprovedPrice" 		property="eClassApprovedPrice"/>
+		<result column="eClassApprovedName" 		property="eClassApprovedName"/>
+		<result column="eClassApprovedSetDate" 		property="eClassApprovedSetDate"/>
+		<result column="eClassApprovedStratDate" 	property="eClassApprovedStratDate"/>
+		<result column="eClassApprovedEndDate" 		property="eClassApprovedEndDate"/>
+		<result column="eClassApprovedStudent" 		property="eClassApprovedStudent"/>
+		<result column="eClassApprovedMaxStudent" 	property="eClassApprovedMaxStudent"/>
+		<result column="eClassApprovedDate" 		property="eClassApprovedDate"/>
+		<result column="eClassApprovedState" 		property="eClassApprovedState"/>
+		<association property="eClassCategorySmall" javaType="EClassCategorySmall">
+			<id 	column="eClassCategorySmallCode" 	property="eClassCategorySmallCode"/>
+			<result column="eClassCategorySmallName" 	property="eClassCategorySmallName"/>
+			<result column="eClassCategoryMediumName" 	property="eClassCategoryMediumName"/>
+			<result column="eClassCategoryLargeName" 	property="eClassCategoryLargeName"/>
+		</association>
+		<association property="eClassIntroduce" javaType="EClassIntroduce">
+			<id 	column="eClassIntroduceCode" 	property="eClassIntroduceCode"/>
+			<result column="eClassIntroduceContent" 	property="eClassIntroduceContent"/>
+			<result column="eClassIntroduceImg" 	property="eClassIntroduceImg"/>
+		</association>
+		<collection property="member" resultMap="memberResultMap"></collection>
+	</resultMap>
+	
+	<resultMap type="wishList" id="wishListResultMap">
+		<id 	column="wishListCode" 		property="wishListCode"/>
+		<result column="memberEmail" 		property="memberEmail"/>
+		<result column="wishListRegDate" 	property="wishListRegDate"/>
+		<collection property="eClassApproved" resultMap="eClassApprovedResultMap"></collection>
+	</resultMap>
+	
+	
+	
+	
+	<select id="getWishList" parameterType="String" resultMap="wishListResultMap" fetchSize="1000">
+		SELECT
+			wi.memberEmail
+			,wi.wishListCode
+			,wi.eClassApprovedCode
+			,ea.eClassApprovedName
+			,ea.eClassApprovedPrice
+			,ei.eClassIntroduceContent
+			,ei.eClassIntroduceImg
+			,ec.eClassCategoryMediumName
+			,ec.eClassCategorySmallName
+		FROM
+			wishlist AS wi
+			INNER JOIN 
+			eclassapproved AS ea
+			ON 
+			wi.eClassApprovedCode = ea.eClassApprovedCode
+			INNER JOIN
+			eclasscategorysmall AS ec
+			ON 
+			ea.eClassCategorySmallCode = ec.eClassCategorySmallCode
+			INNER JOIN 
+			eclassintroduce AS ei
+			ON 
+			ea.eClassIntroduceCode = ei.eClassIntroduceCode
+		WHERE
+			wi.memberEmail = #{SEMAIL}
+		ORDER BY ${sortStandard};
+	</select>
+	
+	<select id="getEClassTakeMember" parameterType="String" resultMap="memberResultMap" fetchSize="1000">
+		/*수강신청 회원 정보 조회*/
+		SELECT
+			 memberEmail
+			,memberName
+		FROM
+			member
+		WHERE
+			memberEmail = #{memberEmail};
+	</select>
+	
+	<select id="getEClassApproved" parameterType="String" resultMap="eClassApprovedResultMap" fetchSize="1000">
+		/*수강신청 운동클래스 정보 조회*/
+		SELECT
+			 ea.eClassApprovedName
+			,ea.eClassApprovedCode
+			,m.memberName
+			,ea.eClassApprovedPrice
+			,ea.eClassApprovedSetDate
+		FROM
+			eclassapproved AS ea
+			INNER JOIN
+			member AS m
+			ON 
+			m.memberEmail = ea.memberEmail
+		WHERE
+			ea.eClassApprovedCode = #{eClassCode}
+	</select>
+	
+	<delete id="deleteWishList" parameterType="String">
+		/* 위시리스트 삭제 */
+		DELETE
+		FROM
+			wishlist
+		WHERE
+			wishListCode = #{wishListCode};
+	</delete>
+	
+	<insert id="addEClassTake" parameterType="EClassTake">
+		/* 수강신청 */
+		INSERT INTO eclasstake(
+			  eClassTakeCode
+			, memberEmail
+			, memberPhone
+			, eClassApprovedCode
+			, eClassTakeRegDate
+			, eClassTakeState
+			, paymentGroupCode
+			)
+		VALUES (
+			  #{eClassTakeCode}
+			, #{memberEmail}
+			, #{memberPhone}
+			, #{eClassApprovedCode}
+			, NOW()
+			, '수강예정'
+			, #{paymentGroupCode}
+		);
+	</insert>
+	
+	<select id="getEClassTake" parameterType="String" resultType="Map">
+		SELECT
+			eclassApprovedCode
+			,memberEmail
+		FROM
+			eclasstake
+		WHERE 
+			paymentGroupCode = #{paymentGroupCode};
+	</select>
+	
+	<select id="getCallengeEnter" parameterType="String" resultType="Map">
+		SELECT
+			challengeGatherCode
+			,memberEmail
+		FROM
+			challengeenter
+		WHERE 
+			paymentGroupCode = #{paymentGroupCode};
+	</select>
+</mapper>

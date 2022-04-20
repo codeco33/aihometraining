@@ -1,7 +1,8 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layout/eclassdefault}">
+	  layout:decorate="~{layout/mypagedefault}">
 	<!-- 사용자 정의 title -->
 	<th:block layout:fragment="customTitle">
 		<title th:text="${title}"></title>
@@ -12,19 +13,19 @@
 		<div class="container-fluid">
 			<th:block th:if="${not #lists.isEmpty(eClassOpenAppleyList)}" th:each="ecoal : ${eClassOpenAppleyList}">
 				<div class="row">
-					<div class="col-md-3" style="border: solid #aa00cc 1px;margin-left: 15px;margin-top: 15px;">
+					<div class="col-md-3" style="border: solid #aa00cc 1px;margin-left: 15px;margin-top: 15px;width: 250px;height: 500px;">
 						<div class="properties properties2">
 							<div class="properties__card">
-								<div class="properties__img overlay row" style="text-align: center;">
-									<a th:href="@{/eClassApproved}"><img th:src="@{/asset/img/01_모코코콘1_07_멘탈X.png}" width="250px"height="400px" alt="클래스의 미리보기 이미지"></a>
+								<div class="properties__img overlay row" style="text-align: center;height: 350px;">
+									<a th:href="@{/eClassApproved}"><img th:src="@{/asset/img/01_모코코콘1_07_멘탈X.png}" width="100%"height="100%" alt="클래스의 미리보기 이미지"></a>
 								</div>
-								<div class="col-md-12" style="text-align: center;">
-									<h3><a th:href="@{/eClassApproved}">[[${ecoal.eClassOpenAppleyName}]]</a></h3>
+								<div class="col-md-12" style="text-align: center; padding:0px;">
+									<h3><a th:href="@{/eClassApproved}">[[${ecoal.eClassApprovedName}]]</a></h3>
 								</div>
 								<div class="row"style="text-align: center;">
 									<div class="col-md-12" >
 										<input 	type="number"
-												th:value="${ecoal.eClassOpenAppleyPrice}"
+												th:value="${ecoal.eClassApprovedPrice}"
 												disabled="disabled"
 												style="	text-align: center;
 														border: none;
@@ -33,20 +34,20 @@
 												        text-align: right;">
 										<span>원</span>
 									</div>
-									<div class="col-md-4" style="width: 100%;">
+									<div class="col-md-4" style="width: 100%; margin-top: 30px;">
 										<div class="col-md-12" 
 											 style="background-color: #FE2E2E; height: 30px;padding-top: 5px;"
-											 th:if="${eClassAppleyState} == '1'">
+											 th:if="${ecoal.eClassApprovedState} == '2'">
 											<a href="#"><span style="color: #0abeac">반려됨(클릭시 상세사유)</span></a>
 										</div>
 										<div class="col-md-12" 
 											 style="background-color: #808080; height: 30px;padding-top: 5px;"
-											 th:unless="${eClassAppleyState} == '0'">
+											 th:if="${ecoal.eClassApprovedState} == '0'">
 											<span style="color: #fff">심사중</span>
 										</div>
 										<div class="col-md-12" 
 											 style="background-color: #2E2EFE; height: 30px;padding-top: 5px;"
-											 th:unless="${eClassAppleyState} == '0'">
+											 th:if="${ecoal.eClassApprovedState} == '1'">
 											<span style="color: #fff">승인</span>
 										</div>
 									</div>
@@ -61,21 +62,34 @@
 			신청한 운동클래스가 없습니다.
 		</th:block>
 	</th:block>
-		<th:block layout:fragment="customBodyScript">	
-		<!-- plugins -->
-		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/jquery.datatables.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/datatables.bootstrap.min.js}"></script>
-		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+	
+	<th:block layout:fragment="customBodyScript">	
+	
+	<!-- plugins -->
+	<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
+	<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+	
+	<!-- custom -->
+	<script th:src="@{/asset/js/main.js}"></script>
+	<script type="text/javascript">
+		 
+	  $(document).ready(function(){
+		  
+		$('.ripple').removeClass('active');
+		$('.tree').css('display', 'none');
+		$('.tree li').css('background','none');
+		$('.tree li a').css('font-weight',400);
 		
+		$('.ripple:first').css('background', 'rgba(184, 184, 184, 0.2)').addClass('active');
 		
-		<!-- custom -->
-		<script th:src="@{/asset/js/main.js}"></script>
-		<script type="text/javascript">
-		  $(document).ready(function(){
-		    //$('#datatables-example').DataTable();
-		  });
-		</script>
-<!-- end: Javascript -->
-	</th:block>
+		  function deleteCookie(name) {
+			  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+			}
+		deleteCookie('menuLink');
+	  });
+	</script>
+	
+</th:block>
+	
+	
 </html>
