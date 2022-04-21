@@ -38,4 +38,7 @@ public interface PaymentMapper {
 	//결제방식 코드 조회
 	public String getPaymentMethodCode(String paymentMethodName);
 	
+	
+	//결제상세내역 조회
+	public Payment getPaymentDetailByPaymentCode(String paymentCode);
 }
