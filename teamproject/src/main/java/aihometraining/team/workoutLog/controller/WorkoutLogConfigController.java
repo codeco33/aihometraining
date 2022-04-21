@@ -219,6 +219,26 @@ public class WorkoutLogConfigController {
 		return "workoutLog/workoutLogConfig/workoutAIVideoList";
 		
 	}
+	//ajax 등록이미지 조회
+	@PostMapping("/workoutAIVideoImg")
+	public String workoutAIVideoImg (String AIVideoImgCodes, Model model){
+		
+		log.info("코드 뭐나어ㅘ:",AIVideoImgCodes);
+		
+		List<AIVideo> workoutAIVideoImgCodes = workoutLogConfigService.workoutAIVideoImg(AIVideoImgCodes);
+		
+		log.info("AI 등록이미지조회 workoutAIVideoImgCodes : {}", workoutAIVideoImgCodes);
+		
+		String imgPath = workoutAIVideoImgCodes.get(0).getFileList().get(0).getFilePath();
+		
+		model.addAttribute("imgPath", imgPath);
+		
+		
+		
+		return "workoutLog/workoutLogConfig/workoutAIVideoList-imgModal";
+		
+	}
+	
 	
 	//AI 운동 영상 등록
 	@GetMapping("/workoutAIVideoInsert")

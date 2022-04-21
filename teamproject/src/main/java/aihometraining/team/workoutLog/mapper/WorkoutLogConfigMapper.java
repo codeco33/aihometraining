@@ -45,6 +45,9 @@ public interface WorkoutLogConfigMapper {
 	//AIVideo 영상 목록 조회
 	public List<AIVideo> getWorkoutAIVideoList();
 	
+	//ajax 등록이미지 조회
+	public List<AIVideo> workoutAIVideoImg(String AIVideoImgCodes);
+	
 	//AIVideo 영상(이미지 대체) 등록 처리
 	public int workoutAIVideoInsert(AIVideo aiVideo);
 	 

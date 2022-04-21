@@ -18,6 +18,7 @@ import aihometraining.team.mapper.CommonMapper;
 import aihometraining.team.mapper.FileMapper;
 import aihometraining.team.util.FileUtil;
 import aihometraining.team.workoutLog.mapper.WorkoutLogConfigMapper;
+import ch.qos.logback.classic.Logger;
 
 @Service
 @Transactional
@@ -35,6 +36,7 @@ public class WorkoutLogConfigService {
 		this.commonMapper = commonMapper;
 		this.fileUtil = fileUtil;
 		this.fileMapper = fileMapper;
+		
 	}
 	
 	// 운동 계획 카테고리 목록 조회
@@ -123,5 +125,16 @@ public class WorkoutLogConfigService {
 		return AIVideoList;
 		
 	}
+	
+	//ajax 등록이미지 조회
+		public List<AIVideo> workoutAIVideoImg(String AIVideoImgCodes){
+			
+			List<AIVideo> workoutAIVideoImgCodes = workoutLogConfigMapper.workoutAIVideoImg(AIVideoImgCodes);
+			
+			
+			
+			return workoutAIVideoImgCodes;
+			
+		}
 	
 }
