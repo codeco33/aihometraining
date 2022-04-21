@@ -17,38 +17,11 @@
 					<form class="searchWorkoutLogTableForm" th:action="@{/admin/workoutCategoryList}" method="get">
 	
 						<div class="input-group">
-							<span class="form-control" style="width: 180px;">일지 검색</span> <select
-								class="form-control" name="searchKey" style="width: 130px;"
-								required="required">
-								<option value="memberEmail">회원이메일</option>
-								<option value="workoutLogTitle">일지 제목</option>
-							</select> <input class="form-control" type="text" name="searchValue"
-								placeholder="검색키워드를 입력해주세요." required="required" />
+							<span class="form-control" style="width: 180px;">일지 검색</span> 
+							<input class="form-control" name="searchKey" value="운동 계획 카테고리명" style="width: 160px;" required="required"/>
+							<input class="form-control" type="text" name="searchValue" placeholder="검색키워드를 입력해주세요." required="required" />
 						</div>
 	
-						<div class="input-group" style="margin-top: 10px;">
-							<span class="form-control" style="width: 130px;">등록일자</span>
-							<div class="input-daterange" id="datepicker"
-								style="height: 33px !important;">
-								<input type="hidden" name="searchDate" /> <input type="text"
-									class="form-control" name="searchStart" placeholder="시작일"
-									style="text-align: center; width: 130px" required="required" />
-								<span class="form-control" style="width: 60px;">부터</span> <input
-									type="text" class="form-control" name="searchEnd"
-									placeholder="종료일" style="text-align: center; width: 130px"
-									required="required" /> <span class="form-control"
-									style="width: 60px;">까지</span>
-							</div>
-							<div style="margin-left: 10px; margin-top: 2.5px;">
-								<input type="button" class="btn btn-round btn-default" value="오늘" />
-								<input type="button" class="btn btn-round btn-default"
-									value="1주일" /> <input type="button"
-									class="btn btn-round btn-default" value="1개월" /> <input
-									type="button" class="btn btn-round btn-default" value="3개월" /> <input
-									type="button" class="btn btn-round btn-default" value="1년" />
-							</div>
-	
-						</div>
 						<div class="searchBtnDiv">
 							<button type="submit"
 								class="searchBtn btn-flip btn btn-gradient btn-primary">
@@ -238,14 +211,10 @@
 				$('.searchBtn').click(function() {
 					$('select[name="searchKey"]').attr("required", true);
 					$('input[name="searchValue"]').attr("required", true);
-					$('input[name="searchStart"]').attr("required", true);
-					$('input[name="searchEnd"]').attr("required", true);
 				});
 				$('.searchResetBtn').click(function() {
 					$('select[name="searchKey"]').attr("required", false);
 					$('input[name="searchValue"]').attr("required", false);
-					$('input[name="searchStart"]').attr("required", false);
-					$('input[name="searchEnd"]').attr("required", false);
 				});
 
 			 	/* 데이터 테이블 생성*/

@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.EClassTake;
 import aihometraining.team.dto.Member;
+import aihometraining.team.dto.Payment;
 import aihometraining.team.dto.WishList;
 
 @Mapper
@@ -28,8 +29,13 @@ public interface PaymentMapper {
 	public void addEClassTake(EClassTake eClassTake);
 	
 	//결제화면 수강신청
-	public String getEClassTake(String paymentGroupCode);
+	public Map<String,String> getEClassTake(String paymentGroupCode);
 	//결제화면 챌린지참여
-	public String getCallengeEnter(String paymnetGroupCode);
+	public Map<String,String> getCallengeEnter(String paymnetGroupCode);
+	
+	//결제처리
+	public void addPayment(Payment payment);
+	//결제방식 코드 조회
+	public String getPaymentMethodCode(String paymentMethodName);
 	
 }

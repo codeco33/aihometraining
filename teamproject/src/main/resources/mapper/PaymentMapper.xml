@@ -153,8 +153,9 @@
 	
 	<select id="getEClassTake" parameterType="String" resultType="Map">
 		SELECT
-			eclassApprovedCode
+			 eClassApprovedCode
 			,memberEmail
+			,memberPhone
 		FROM
 			eclasstake
 		WHERE 
@@ -163,11 +164,46 @@
 	
 	<select id="getCallengeEnter" parameterType="String" resultType="Map">
 		SELECT
-			challengeGatherCode
+			 challengeGatherCode
 			,memberEmail
 		FROM
 			challengeenter
 		WHERE 
 			paymentGroupCode = #{paymentGroupCode};
 	</select>
+	
+	<select id="getPaymentMethodCode" parameterType="String" resultType="String">
+		SELECT
+			paymentMethodCode
+		FROM
+			paymentMethod
+		WHERE 
+			paymentMethodName = #{paymentMethodName};
+	</select>
+	
+	<insert id="addPayment" parameterType="Payment">
+		INSERT INTO payment
+			( 
+			  paymentCode
+			, paymentGroupCode
+			, memberEmail
+			, paymentMethodCode
+			, paymentMethodName
+			, paymentTotalOrderPrice
+			, paymentUsePoint
+			, paymentTotalPayPrice
+			, paymentState
+			, paymentRegDate)
+			VALUES (
+			  #{paymentCode}
+			, #{paymentGroupCode}
+			, #{memberEmail}
+			, #{paymentMethodCode}
+			, #{paymentMethodName}
+			, #{paymentTotalOrderPrice}
+			, #{paymentUsePoint}
+			, #{paymentTotalPayPrice}
+			, '결제완료'
+			, NOW());
+	</insert>
 </mapper>

@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -13,7 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import aihometraining.team.dto.AIVideo;
 import aihometraining.team.dto.WorkoutLog;
 import aihometraining.team.dto.WorkoutLogCategory;
 import aihometraining.team.workoutLog.mapper.WorkoutLogConfigMapper;
@@ -102,30 +107,17 @@ public class WorkoutLogConfigController {
 	//운동 계획 카테고리 목록
 	@GetMapping("/workoutCategoryList")
 	public String workoutCategoryList( Model model
-									  ,@RequestParam(value="searchKey", required = false) String searchKey
-									  ,@RequestParam(value="searchValue", required = false) String searchValue
-									  ,@RequestParam(value="searchDate", required = false) String searchDate
-									  ,@RequestParam(value="searchStart", required = false) String searchStart
-									  ,@RequestParam(value="searchEnd", required = false) String searchEnd) {
+									  ,@RequestParam(value="searchValue", required = false) String searchValue) {
 		
 		Map<String, Object> paramMap = new HashMap<String,Object>();
 		
-		if(searchKey != null) {
-			if("memberEmail".equals(searchKey)) {
-				searchKey = "w.memberEmail";	//쿼리문과 동일하게(모호하다며 찾을 수 없다며)
-				searchDate = "workoutLogUpdateFinalDate";
-			}else if("eClassCategorySmallName".equals(searchKey)) {
-				searchKey = "eClassCategorySmallName";
-				searchDate = "workoutLogUpdateFinalDate";
+		if(searchValue != null) {
+			if("workoutGoalPlanCategoryContent".equals(searchValue)) {
+				searchValue = "workoutGoalPlanCategoryContent";	//쿼리문과 동일하게(모호하다며 찾을 수 없다며)
 			}
 		}
 		
-		paramMap.put("searchKey", searchKey);
 		paramMap.put("searchValue", searchValue);
-		paramMap.put("searchKey", searchKey);
-		paramMap.put("searchDate", searchDate);
-		paramMap.put("searchStart", searchStart);
-		paramMap.put("searchEnd", searchEnd);
 		
 		List<Map<String, Object>> workoutLogCategoryList = workoutLogConfigService.getWorkoutLogCategoryList(paramMap);
 		
@@ -216,15 +208,20 @@ public class WorkoutLogConfigController {
 	@GetMapping("/workoutAIVideoList")
 	public String workoutAIVideoList(Model model) {
 		
+		List<AIVideo> workoutAIVideoList = workoutLogConfigService.getWorkoutAIVideoList();
+		
+		log.info("AI 운동 영상 목록 조회 workoutAIVideoList : {}", workoutAIVideoList);
+		
 		model.addAttribute("title", "AI 운동 영상 목록");
 		model.addAttribute("leftMenuList", "일지");
+		model.addAttribute("workoutAIVideoList", workoutAIVideoList);
 		
 		return "workoutLog/workoutLogConfig/workoutAIVideoList";
 		
 	}
 	
 	//AI 운동 영상 등록
-	@PostMapping("/workoutAIVideoInsert")
+	@GetMapping("/workoutAIVideoInsert")
 	public String workoutAIVideoInsert(Model model) {
 		
 		model.addAttribute("title", "운동 영상 등록");
@@ -232,6 +229,35 @@ public class WorkoutLogConfigController {
 		
 		return "workoutLog/workoutLogConfig/workoutAIVideoInsert";
 	}
+	
+	//AIVideo 영상(이미지 대체) 등록 처리
+	@PostMapping("/workoutAIVideoInsert")
+	public String workoutAIVideoInsert( AIVideo aiVideo
+									   ,HttpSession session
+									   , @RequestParam MultipartFile[] fileImage
+									   , HttpServletRequest request) {
+		
+		String sessionEmail = (String) session.getAttribute("SEMAIL");
+		
+		//파일 업로드 
+		String serverName = request.getServerName();
+		String fileRealPath = "";
+		if("localhost".equals(serverName)) {				
+			fileRealPath = System.getProperty("user.dir") + "/src/main/resources/static/";
+			//fileRealPath = request.getSession().getServletContext().getRealPath("/WEB-INF/classes/static/");
+		}else {
+			fileRealPath = request.getSession().getServletContext().getRealPath("/WEB-INF/classes/static/");
+		}
+		
+		log.info("AI운동 영상 등록 폼에서 입력받은 데이터: {}", aiVideo);
+		
+		workoutLogConfigService.workoutAIVideoInsert(aiVideo, sessionEmail, fileImage, fileRealPath);
+		
+		
+		return "redirect:/admin/workoutAIVideoList";
+		
+	}
+	
 	
 	//AI 운동 영상 수정
 	@GetMapping("/workoutAIVideoUpdate")
