@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	  
+<head th:replace="userfragments/head :: headFragment"></head>
+
+<body>
+	<div id="preloader-active" th:replace="userfragments/preloader :: preloaderFragment"></div>
+	<!-- start: Header -->
+	<div th:replace="userfragments/header :: headerFragment"></div>
+	<!-- end: Header -->
+	
+	<main>
+		<section th:replace="userfragments/slider :: sliderFragment"></section>
+        
+       		<!-- Courses area start -->
+	        <div class="courses-area section-padding40 fix">
+			    <th:block layout:fragment="customContents">
+	            
+					                    
+	               
+			    </th:block>
+	        </div>
+	        <!-- Courses area End -->     	
+        		
+	</main>
+	<footer th:replace="userfragments/footer :: footerFragment"></footer>
+	<div id="back-top">
+        <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+    </div>
+    
+    
+	<th:block th:replace="userfragments/userJavaScripts :: userJSFragment"></th:block>
+    <th:block layout:fragment="customBodyScript"></th:block>
+   
+	
+
+</body>
+</html>

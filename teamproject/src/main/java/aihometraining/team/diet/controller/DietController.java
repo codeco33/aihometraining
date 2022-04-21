@@ -23,11 +23,13 @@ import aihometraining.team.dto.DietBank;
 import aihometraining.team.dto.DietMealLevelList;
 import aihometraining.team.dto.DietNutrientList;
 import aihometraining.team.dto.DietOnemealConnection;
+import aihometraining.team.dto.DietPlan;
 
 
 @Controller
 @RequestMapping("/admin/diet")
 public class DietController {
+	
 	
 	
 	private static final Logger log = LoggerFactory.getLogger(DietController.class);
@@ -142,7 +144,6 @@ public class DietController {
 		List<HashMap<String, Object>> selectOneMealConn = dietMapper.selectDietOneMealConnectionByBankCode(dietOnemealConnection);
 		model.addAttribute("selectOneMealConn", selectOneMealConn);
 		
-		System.out.println(selectOneMealConn+"찾아찾아");
 		
 		
 		return "diet/updateDietBankList";
@@ -270,6 +271,7 @@ public class DietController {
 		
 		return "diet/AjaxTable/DietBankConnMealListDayAjax";
 	}
+	
 	
 	
 	

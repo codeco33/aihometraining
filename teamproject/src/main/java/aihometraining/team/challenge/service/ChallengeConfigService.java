@@ -73,13 +73,11 @@ public class ChallengeConfigService {
 	public int challengeCategoryInsert(ChallengeCategory challengeCategory, String sEmail) {
 		//pk컬럼에 들어갈 코드를 자동으로 만들어주는 Mapper      //pk로 쓸 db의 컬럼명                     //코드가 들어갈 db의 테이블명
 		String newCode = commonMapper.getNewCode("challengeCategoryCode", "challengecategory");
-		String introduceCode = commonMapper.getNewCode("eClassIntroduceCode", "eclassintroduce");
 		log.info("새로 생성된 코드: {}",newCode);
-		log.info("새로 생성된 코드introduceCode: {}",introduceCode);
 		
 		//dto에 위에서 만들어진 코드를 세팅해주기
 		challengeCategory.setChallengeCategoryCode(newCode);
-		challengeCategory.setMemberEmail(sEmail); //로그인 처리가 아직 안이루어져서 임의로 해놓음!
+		challengeCategory.setMemberEmail(sEmail); 
 		
 		int result = challengeConfigMapper.challengeCategoryInsert(challengeCategory);
 		
@@ -176,9 +174,9 @@ public class ChallengeConfigService {
 	}
 	
 	//챌린지 포인트 관리 목록 조회
-	public List<ChallengePointGive> getChallengePointList() {
+	public List<Map<String, Object>> getChallengePointList(Map<String, Object> paramMap) {
 		
-		List<ChallengePointGive> pointList = challengeConfigMapper.getChallengePointList();
+		List<Map<String, Object>> pointList = challengeConfigMapper.getChallengePointList(paramMap);
 		
 		return pointList;
 		

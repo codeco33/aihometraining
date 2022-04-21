@@ -5,14 +5,15 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import aihometraining.team.dto.AIVideo;
 import aihometraining.team.dto.WorkoutLog;
 import aihometraining.team.dto.WorkoutLogCategory;
 
 @Mapper
 public interface WorkoutLogConfigMapper {
 	
-	//운동 카테고리 조회
-	public List<WorkoutLogCategory> getWorkoutLogCategoryList();
+	//운동 카테고리 조회(검색)
+	public List<Map<String,Object>> getWorkoutLogCategoryList(Map<String,Object> paramMap);
 	
 	//운동 카테고리 등록
 	public int workoutGoalCategoryInsert(WorkoutLogCategory workoutLogCategory);
@@ -37,6 +38,18 @@ public interface WorkoutLogConfigMapper {
 	
 	//운동 계획 카테고리 삭제 
 	public int workoutLogCategoryDelete(String workoutGoalPlanCategoryCode);
+	
+	//새롭게 등록된 일지 조회
+	public List<WorkoutLog> getNewWorkoutLog();
+	
+	//AIVideo 영상 목록 조회
+	public List<AIVideo> getWorkoutAIVideoList();
+	
+	//ajax 등록이미지 조회
+	public List<AIVideo> workoutAIVideoImg(String AIVideoImgCodes);
+	
+	//AIVideo 영상(이미지 대체) 등록 처리
+	public int workoutAIVideoInsert(AIVideo aiVideo);
 	 
 	 
 	

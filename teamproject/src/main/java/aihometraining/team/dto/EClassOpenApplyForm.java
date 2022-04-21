@@ -11,8 +11,6 @@ public class EClassOpenApplyForm {
 	private String	eClassIntroduceCode;
 	private Date	eClassOpenApplyDate;
 	private int 	eClassOpenApplyApproveState;
-	
-		
 	public String geteClassOpenAppleyCode() {
 		return eClassOpenAppleyCode;
 	}
@@ -67,6 +65,8 @@ public class EClassOpenApplyForm {
 				+ eClassOpenApplyMemberEmail + ", eClassOpenApplyName=" + eClassOpenApplyName
 				+ ", eClassOpenApplyCategorySamll=" + eClassOpenApplyCategorySamll + ", eClassOpenApplyPrice="
 				+ eClassOpenApplyPrice + ", eClassIntroduceCode=" + eClassIntroduceCode + ", eClassOpenApplyDate="
-				+ eClassOpenApplyDate + ", eClassOpenApplyApproveState=" + eClassOpenApplyApproveState  +"]";
+				+ eClassOpenApplyDate + ", eClassOpenApplyApproveState=" + eClassOpenApplyApproveState + "]";
 	}
+	
+
 }

@@ -62,61 +62,78 @@ public class ChallengeConfigController {
 	}
 	
 	//챌린지 관리설정
-		@GetMapping("/configList")
-		public String challengeConfigList(Model model  
-										 ,@RequestParam(value="searchKey", required = false) String searchKey
-										 ,@RequestParam(value="searchValue", required = false) String searchValue
-										 ,@RequestParam(value="searchDate", required = false) String searchDate
-										 ,@RequestParam(value="searchStart", required = false) String searchStart
-										 ,@RequestParam(value="searchEnd", required = false) String searchEnd
-										 ,@RequestParam(value="searchKey2", required = false) String searchKey2
-										 ,@RequestParam(value="searchValue2", required = false) String searchValue2) {
-			
-			Map<String, Object> paramMap = new HashMap<String, Object>();
-			/* paramMap.put("memberEmail", "id001@email.com"); */
-			//searchKey = challengeCategoryName challengeCategoryName(property) -> challengeCategoryName(colum) => searchKey = challengeCategoryName
-			//searchKey = eClassCategorySmallName eClassCategorySmallName(property) -> eClassCategorySmallName(colum) => searchKey = eClassCategorySmallName
-			
-			if(searchKey != null) {
-				if("challengeCategoryName".equals(searchKey)) {
-					searchKey = "challengeCategoryName";
-					searchDate = "challengeCategoryRegDate";
-				}else if("eClassCategorySmallName".equals(searchKey)) {
-					searchKey = "eClassCategorySmallName";
-					searchDate = "challengeCategoryRegDate";
+			@GetMapping("/configList")
+			public String challengeConfigList(Model model  
+											 ,@RequestParam(value="searchKey", required = false) String searchKey
+											 ,@RequestParam(value="searchValue", required = false) String searchValue
+											 ,@RequestParam(value="searchDate", required = false) String searchDate
+											 ,@RequestParam(value="searchStart", required = false) String searchStart
+											 ,@RequestParam(value="searchEnd", required = false) String searchEnd
+											 ,@RequestParam(value="searchKey2", required = false) String searchKey2
+											 ,@RequestParam(value="searchValue2", required = false) String searchValue2
+											 ,@RequestParam(name="btnKey", required = false) String btnKey) {
+				
+				log.info("챌린지 카테고리 조회  btnKey : {}", btnKey);
+				
+				Map<String, Object> paramMap = new HashMap<String, Object>();
+				/* paramMap.put("memberEmail", "id001@email.com"); */
+				//searchKey = challengeCategoryName challengeCategoryName(property) -> challengeCategoryName(colum) => searchKey = challengeCategoryName
+				//searchKey = eClassCategorySmallName eClassCategorySmallName(property) -> eClassCategorySmallName(colum) => searchKey = eClassCategorySmallName
+				
+				if(searchKey != null) {
+					if("challengeCategoryName".equals(searchKey)) {
+						searchKey = "challengeCategoryName";
+						searchDate = "challengeCategoryRegDate";
+					}else if("eClassCategorySmallName".equals(searchKey)) {
+						searchKey = "eClassCategorySmallName";
+						searchDate = "challengeCategoryRegDate";
+					}
 				}
-			}
-			if(searchKey2 != null) {
-				if("challengeSettingCode".equals(searchKey2)) {
-					searchKey2 = "challengeSettingCode";
-				}else if("challengeSettingUpdateDo".equals(searchKey2)) {
-					searchKey2 = "challengeSettingUpdateDo";
+				if(searchKey2 != null) {
+					if("challengeSettingCode".equals(searchKey2)) {
+						searchKey2 = "challengeSettingCode";
+					}else if("challengeSettingUpdateDo".equals(searchKey2)) {
+						searchKey2 = "challengeSettingUpdateDo";
+					}
 				}
+				if(btnKey != null) {
+					if("오늘".equals(btnKey)) {
+						btnKey = "challengeCategoryRegDate";
+					}else if("1주일".equals(btnKey)) {
+						btnKey = "-1 WEEK";
+					}else if("1개월".equals(btnKey)) {
+						btnKey = "-1 MONTH";
+					}else if("3개월".equals(btnKey)) {
+						btnKey = "-3 MONTH";
+					}else if("1년".equals(btnKey)) {
+						btnKey = "-1 YEAR";
+					}
+				}
+				
+				paramMap.put("searchKey", searchKey);
+				paramMap.put("searchValue", searchValue);
+				paramMap.put("searchKey2", searchKey2);
+				paramMap.put("searchValue2", searchValue2);
+				paramMap.put("searchDate", searchDate);
+				paramMap.put("searchStart", searchStart);
+				paramMap.put("searchEnd", searchEnd);
+				paramMap.put("btnKey", btnKey);
+				
+				//List<ChallengeCategory> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
+				List<Map<String, Object>> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
+				List<Map<String, Object>> challengeSettingList = challengeConfigService.getChallengeSettingList(paramMap);
+				
+				paramMap = null;
+				
+				log.info("챌린지 카테고리 조회  challengeCategoryList : {}", challengeCategoryList);
+				
+				model.addAttribute("title", "챌린지 관리 설정");
+				model.addAttribute("leftMenuList", "챌린지");
+				model.addAttribute("challengeCategoryList", challengeCategoryList);
+				model.addAttribute("challengeSettingList", challengeSettingList);
+				return "challenge/challengeConfig/challengeConfigList";
+				
 			}
-			
-			paramMap.put("searchKey", searchKey);
-			paramMap.put("searchValue", searchValue);
-			paramMap.put("searchKey2", searchKey2);
-			paramMap.put("searchValue2", searchValue2);
-			paramMap.put("searchDate", searchDate);
-			paramMap.put("searchStart", searchStart);
-			paramMap.put("searchEnd", searchEnd);
-			
-			//List<ChallengeCategory> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
-			List<Map<String, Object>> challengeCategoryList =  challengeConfigService.getChallengeCategoryList(paramMap);
-			List<Map<String, Object>> challengeSettingList = challengeConfigService.getChallengeSettingList(paramMap);
-			
-			paramMap = null;
-			
-			log.info("챌린지 카테고리 조회  challengeCategoryList : {}", challengeCategoryList);
-			
-			model.addAttribute("title", "챌린지 관리 설정");
-			model.addAttribute("leftMenuList", "챌린지");
-			model.addAttribute("challengeCategoryList", challengeCategoryList);
-			model.addAttribute("challengeSettingList", challengeSettingList);
-			return "challenge/challengeConfig/challengeConfigList";
-			
-		}
 	
 	//챌린지 카테고리 등록폼
 	@GetMapping("/challengeCategoryInsert")
@@ -266,9 +283,9 @@ public class ChallengeConfigController {
 							   ,@RequestParam(value="searchKey", required = false) String searchKey
 							   ,@RequestParam(value="searchValue", required = false) String searchValue
 							   ,@RequestParam(value="searchDate", required = false) String searchDate
-							   ,@RequestParam(value="gatherStartDate", required = false) String gatherStartDate
 							   ,@RequestParam(value="searchStart", required = false) String searchStart
 							   ,@RequestParam(value="searchEnd", required = false) String searchEnd
+							   ,@RequestParam(value="gatherStartDate", required = false) String gatherStartDate
 							   ,@RequestParam(value="gatherEndDate", required = false) String gatherEndDate) {
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
@@ -436,10 +453,35 @@ public class ChallengeConfigController {
 	
 	//챌린지 포인트 관리
 	@GetMapping("/challengePoint")
-	public String challengePoint(Model model) {
+	public String challengePoint(Model model
+							   ,@RequestParam(value="searchKey", required = false) String searchKey
+							   ,@RequestParam(value="searchValue", required = false) String searchValue
+							   ,@RequestParam(value="searchDate", required = false) String searchDate
+							   ,@RequestParam(value="searchStart", required = false) String searchStart
+							   ,@RequestParam(value="searchEnd", required = false) String searchEnd) {
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		if(searchKey != null) {
+			if("challengeCategoryName".equals(searchKey)) {
+				searchKey = "challengeCategoryName";
+				searchDate = "challengeCategoryRegDate";
+			}else if("eClassCategorySmallName".equals(searchKey)) {
+				searchKey = "eClassCategorySmallName";
+				searchDate = "challengeCategoryRegDate";
+			}
+		}
+		
+		paramMap.put("searchKey", searchKey);
+		paramMap.put("searchValue", searchValue);
+		paramMap.put("searchDate", searchDate);
+		paramMap.put("searchStart", searchStart);
+		paramMap.put("searchEnd", searchEnd);
 		
 		//챌린지 포인트 관리 목록 조회
-		List<ChallengePointGive> pointList = challengeConfigService.getChallengePointList();
+		List<Map<String, Object>> pointList = challengeConfigService.getChallengePointList(paramMap);
+		
+		paramMap = null;
 		
 		log.info("챌린지 포인트 목록 조회 pointList: {}", pointList);
 		
@@ -461,6 +503,14 @@ public class ChallengeConfigController {
 		List<ChallengePointGive> pointDetailList = challengeConfigService.getPointDetailByCode(challengePointGiveCode);
 		
 		return pointDetailList;
+	}
+	//챌린지 포인트지급 페이지로 연결
+	@PostMapping("/challengePoint")
+	public String challengePointGiveUpdate(ChallengePointGive challengePointGive) {
+		log.info("모달에서 보낸 값 조회  challengePointGive : {}", challengePointGive);
+		
+		return "point/givePoint";
+		
 	}
 	
 	/**

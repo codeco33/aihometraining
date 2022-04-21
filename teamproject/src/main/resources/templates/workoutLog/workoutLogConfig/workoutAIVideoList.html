@@ -8,7 +8,7 @@
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
-		<form th:action="@{/admin/workoutAIVideoInsert}" method="post">
+		<form th:action="@{/admin/workoutAIVideoInsert}" method="get">
 			<div class="col-md-12">
 				<div class="panel">
 			    	<div class="panel-heading bg-white border-none">
@@ -16,7 +16,7 @@
 			        </div>	
 			        <div class="panel-body">
 		           		<div class="responsive-table">
-		             		<table id="workoutCategory" class="table table-striped table-bordered" style="width: 100% " cellspacing="0">
+		             		<table id="AIVideoList" class="table table-striped table-bordered" style="width: 100% " cellspacing="0">
 								<thead>
 									<tr>
 										<th>운동 영상 제목</th>
@@ -26,31 +26,13 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
+									<tr th:if="${not #lists.isEmpty(workoutAIVideoList)}" th:each="l : ${workoutAIVideoList}">
 										<td>
-											<!-- Button to Open the Modal -->
-											<button type="button" class="btn btn-default" data-toggle="modal" data-target="#videoModal1" data-video="https://www.youtube.com/embed/w1c5WNRdakk">
-											  	팔굽혀펴기
-											</button>
-											
-											<!-- The Modal -->
-											<div class="modal fade" id="videoModal1" tabindex="-1" role="dialog">
-											  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-											    <div class="modal-content">
-													<div class="modal-header bg-dark border-dark">
-																				<h4 class="modal-title">팔굽혀펴기 영상</h4>
-										                <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
-										            </div>
-										            <div class="modal-body bg-dark p-0">
-										                <div class="embed-responsive embed-responsive-16by9">
-										                  <iframe class="embed-responsive-item" allowfullscreen></iframe>
-										                </div>
-										            </div>
-											    </div>
-											  </div>
-											</div>
+											<button type=button class="btn btn-outline btn-default AIVideoImg"  th:data-code="${l.fileIdx}" data-toggle="modal" data-target=".AIVideoModal">
+					                         		[[${l.AIVideoTitle}]]
+					                        </button>
 										</td>
-										<td>2020.03.20</td>
+										<td>[[${l.AIVideoRegDate}]]</td>
 										<td>
 											<a th:href="@{/admin/workoutAIVideoUpdate}">수정</a>
 										</td>
@@ -58,70 +40,9 @@
 											<a th:href="@{/admin/workoutAIVideoDelete}">삭제</a>
 										</td>
 									</tr>
-									<tr>
-										<td>
-											<!-- Button to Open the Modal -->
-											<button type="button" class="btn btn-default" data-toggle="modal" data-target="#videoModal2" data-video="https://www.youtube.com/embed/V_tTIFb9slM">
-											  	권투
-											</button>
-											
-											<!-- The Modal -->
-											<div class="modal fade" id="videoModal2" tabindex="-1" role="dialog">
-											  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-											    <div class="modal-content">
-													<div class="modal-header bg-dark border-dark">
-																				<h4 class="modal-title">권투 영상</h4>
-										                <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
-										            </div>
-										            <div class="modal-body bg-dark p-0">
-										                <div class="embed-responsive embed-responsive-16by9">
-										                  <iframe class="embed-responsive-item" allowfullscreen></iframe>
-										                </div>
-										            </div>
-											    </div>
-											  </div>
-											</div>
-										</td>
-										<td>2020.03.20</td>
-										<td>
-											<a th:href="@{/admin/workoutAIVideoUpdate}">수정</a>
-										</td>
-										<td>
-											<a th:href="@{/admin/workoutAIVideoDelete}">삭제</a>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<!-- Button to Open the Modal -->
-											<button type="button" class="btn btn-default" data-toggle="modal" data-target="#videoModal3" data-video="https://www.youtube.com/embed/jc4d-hnKY9s">
-											  	요가
-											</button>
-											
-											<!-- The Modal -->
-											<div class="modal fade" id="videoModal3" tabindex="-1" role="dialog">
-											  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-											    <div class="modal-content">
-													<div class="modal-header bg-dark border-dark">
-														<h4 class="modal-title">요가 영상</h4>
-										                <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
-										            </div>
-										            <div class="modal-body bg-dark p-0">
-										                <div class="embed-responsive embed-responsive-16by9">
-										                  <iframe class="embed-responsive-item" allowfullscreen></iframe>
-										                </div>
-										            </div>
-											    </div>
-											  </div>
-											</div>
-										</td>
-										<td>2020.03.20</td>
-										<td>
-											<a th:href="@{/admin/workoutAIVideoUpdate}">수정</a>
-										</td>
-										<td>
-											<a th:href="@{/admin/workoutAIVideoDelete}">삭제</a>
-										</td>
-									</tr>
+									<tr th:unless="${not #lists.isEmpty(workoutAIVideoList)}">
+										<td colspan="4">등록된 정보가 없습니다.</td>
+									</tr>		
 								</tbody>
 		                   	</table>
 						</div>
@@ -132,6 +53,30 @@
 				</div>
 			</div>
 		</form>		
+		
+		
+		
+		<div class="modal fade AIVideoModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+					        <h4 class="modal-title" id="myModalLabel">사이드 런지</h4>
+					   </div>
+				      <div class="modal-body" id="imgModalBody">
+					        <!-- <img alt="사이드 런지" th:src="@{/assets/img/workoutLogImg1.jpg}"> -->
+					       <!-- <img  th:src="@{${ '/' + #strings.replace(${imgPath}, '\', '/')}}"  class="card-img rounded-0"  /> -->
+					        
+					        
+					  </div>
+				      	<div class="modal-footer">
+				        	<button type="button" id="cancel-insert" class="btn btn-default" data-dismiss="modal">취소</button>
+				      	</div>
+					    </div>
+					  </div>
+					</div>
+		
+		
+		
 	</th:block>
 	
 	<!-- 사용자 정의 Css -->
@@ -155,71 +100,69 @@
 	
 	<!-- start: Javascript -->
 	<th:block layout:fragment="customBodyScript">	
+		<script th:src="@{/asset/js/jquery.min.js}"></script>
+		<script th:src="@{/asset/js/jquery.ui.min.js}"></script>
+		<script th:src="@{/asset/js/bootstrap.min.js}"></script>
 		
 		<!-- plugins -->
 		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
 		<script th:src="@{/asset/js/plugins/jquery.dataTables.min.js}"></script>
 		<script th:src="@{/asset/js/plugins/dataTables.bootstrap.min.js}"></script>
 		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.mask.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.validate.min.js}"></script>
 		
 		<!-- custom -->
 		<script th:src="@{/asset/js/main.js}"></script>
 		<script type="text/javascript">
 		
-			/* 데이터테이블 */
 		  $(document).ready(function(){
-		    $('#workoutCategory').DataTable();
+			  
+			  /* 데이터 테이블 생성*/
+				var table = $('#AIVideoList').DataTable({
+					order : [ 0, 'desc' ],
+					lengthChange : false,
+					pageLength : 15,
+					filter : false,
+					dom : '<"top"i>rt<"bottom"p><"clear">',
+				});
+
+				/* 레코드 수 포맷 */
+				var info = table.page.info();
+				$('#AIVideoList_info').html(
+						'전체 ' + info.recordsTotal + ' 건').css(
+						'font-weight', 'bold');
+
+				$('#AIVideoList').click(
+						function() {
+							$('#AIVideoList_info').html(
+									'전체 ' + info.recordsTotal + ' 건');
+				});
+				
+				$('.AIVideoImg').click(function(e){
+					
+					console.log($(e.target).data('code'));
+					
+					var AIVideoImgCodes =$(e.target).data('code');
+					
+					$.ajax({
+						 url: '/admin/workoutAIVideoImg'
+						,type : 'post'
+						,data : {
+							'AIVideoImgCodes' : AIVideoImgCodes
+							}
+						,dataType : 'text'
+						,success: function(data){
+							
+							$('#imgModalBody').replaceWith(data);
+							
+						}
+					});
+					
+				});
+				
 		  });
 			
-			/* 모달 */
-		  $(document).ready(function() {
-			    // Set iframe attributes when the show instance method is called
-			    $("#videoModal1").on("show.bs.modal", function(event) {
-			        let button = $(event.relatedTarget); // Button that triggered the modal
-			        let url = button.data("video");      // Extract url from data-video attribute
-			        $(this).find("iframe").attr({
-			            src : url,
-			            allow : "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-			        });
-			    });
-
-			    // Remove iframe attributes when the modal has finished being hidden from the user
-			    $("#videoModal1").on("hidden.bs.modal", function() {
-			        $("#videoModal iframe").removeAttr("src allow");
-			    });
-			});
-		  $(document).ready(function() {
-			    // Set iframe attributes when the show instance method is called
-			    $("#videoModal2").on("show.bs.modal", function(event) {
-			        let button = $(event.relatedTarget); // Button that triggered the modal
-			        let url = button.data("video");      // Extract url from data-video attribute
-			        $(this).find("iframe").attr({
-			            src : url,
-			            allow : "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-			        });
-			    });
-
-			    // Remove iframe attributes when the modal has finished being hidden from the user
-			    $("#videoModal2").on("hidden.bs.modal", function() {
-			        $("#videoModal iframe").removeAttr("src allow");
-			    });
-			});
-		  $(document).ready(function() {
-			    // Set iframe attributes when the show instance method is called
-			    $("#videoModal3").on("show.bs.modal", function(event) {
-			        let button = $(event.relatedTarget); // Button that triggered the modal
-			        let url = button.data("video");      // Extract url from data-video attribute
-			        $(this).find("iframe").attr({
-			            src : url,
-			            allow : "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-			        });
-			    });
-
-			    // Remove iframe attributes when the modal has finished being hidden from the user
-			    $("#videoModal3").on("hidden.bs.modal", function() {
-			        $("#videoModal iframe").removeAttr("src allow");
-			    });
-			});
 		</script>
 		
 	</th:block>

@@ -27,35 +27,23 @@
 		                                </div>
 	                                </th:block>
 		                                <div class="blog_item_img">
-		                                	<img th:unless="${not #lists.isEmpty(l.fileList)}" th:src="@{/assets/img/ImgNone.png}"  class="card-img rounded-0"/>
+		                                	<img th:unless="${not #lists.isEmpty(l.fileList)}" th:src="@{/assets/img/ImgNone.jpg}"  class="card-img rounded-0"/>
 		                                    <a href="#" class="blog_item_date">
 		                                        <h3>15</h3>
 		                                        <p>Jan</p>
 		                                    </a>
 		                                </div> 
-	                                <th:block th:unless="${not #lists.isEmpty(l.fileList)}">
-		                                <div class="blog_details">
-		                                    <a class="d-inline-block" th:href="@{/workoutLog/workoutLogUser/workoutLogList}">
-		                                        <h2 class="blog-head" style="color: #2d2d2d;">등록된 일지 제목이 없습니다.</h2>
-		                                    </a>
-		                                    <p> 등록된 일지 내용이 없습니다.</p>
-		                                    <ul class="blog-info-link">
-		                                        <li><a href="#"><i class="fa fa-heart"></i>좋아요 </a></li>
-		                                        <li><a href="#"><i class="fa fa-comments"></i>피드백</a></li>
-		                                    </ul>
-		                                </div>
-	                                </th:block>
 	                                <div class="blog_details">
 	                              		<!-- get방식으로 보내준것 /member/modifyMember?memberId=id001&memberName=홍01 -->
 										<!-- <a th:href="@{/member/modifyMember(memberId=${l.memberId}, memberName=${l.memberName})}">수정</a> -->
 	                                    <a class="d-inline-block" 
-	                                    th:href="@{/workoutLog/workoutLogUser/workoutLogList(workoutLogTitle=${l.workoutLogTitle},workoutLogContent=${l.workoutLogContent})}">
+	                                    th:href="@{/workoutLog/workoutLogUser/workoutLogList(workoutLogTitle=${l.workoutLogTitle},workoutLogContent=${l.workoutLogContent},workoutLogCode=${l.workoutLogCode})}">
 	                                        <h2 class="blog-head" style="color: #2d2d2d;">[[${l.workoutLogTitle}]]</h2>
 	                                    </a>
 	                                    <p class="workoutLogContent">[[${l.workoutLogContent}]]</p>
 	                                    <ul class="blog-info-link">
 	                                        <li><a href="#" onclick="return false;" class="workoutLogLikeCount" th:data-workoutLogCode="${l.workoutLogCode}"><i class="fa fa-heart"></i>좋아요([[${l.workoutLogLikeCount}]])</a></li>
-	                                        <li><a th:href="@{/workoutLog/workoutLogUser/workoutLogListFeedback(workoutLogTitle=${l.workoutLogTitle},workoutLogContent=${l.workoutLogContent})}"><i class="fa fa-comments"></i>피드백</a></li>
+	                                        <li><a th:href="@{/workoutLog/workoutLogUser/workoutLogList#feedback(workoutLogTitle=${l.workoutLogTitle},workoutLogContent=${l.workoutLogContent},workoutLogCode=${l.workoutLogCode})}"><i class="fa fa-comments"></i>피드백</a></li>
 	                                    </ul>
 	                                </div>
 			                    </th:block>

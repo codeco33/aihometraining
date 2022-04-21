@@ -44,8 +44,8 @@ public class MemberController {
 		
 		return "redirect:/login";
 	}
-	
-	/* 로그인 */ 
+	/* 로그인 */
+	/* 관리자 로그인 */ 
 	@GetMapping("/login")
 	public String login(Model model
 					   ,@RequestParam(value="result", required = false) String result) {
@@ -57,11 +57,11 @@ public class MemberController {
 		return "member/login";
 	}
 	
-	/* 로그인 처리 */
+	/* 관리자 로그인 처리 */
 	@PostMapping("/login")
 	public String login(Member member, HttpSession session, RedirectAttributes reAttr) {
-		String memberEmail = member.getMemberEmail();
-		String memberPw = member.getMemberPw();
+		String memberEmail  = member.getMemberEmail();
+		String memberPw 	= member.getMemberPw();
 		
 		Member checkMember = memberMapper.getMemberInfoByEmail(memberEmail);
 		log.info("{}", checkMember);
@@ -91,9 +91,102 @@ public class MemberController {
 		
 		return "redirect:/login";
 	}
+	/* 일반 회원 로그인 */ 
+	@GetMapping("/login2")
+	public String login2(Model model
+			,@RequestParam(value="result", required = false) String result) {
+		
+		model.addAttribute("title", "회원 로그인");
+		
+		if(result != null) model.addAttribute("result", result);
+		
+		return "member/login2";
+	}
+	
+	/* 일반 회원 로그인 처리 */
+	@PostMapping("/login2")
+	public String login2(Member member, HttpSession session, RedirectAttributes reAttr) {
+		String memberEmail  = member.getMemberEmail();
+		String memberPw 	= member.getMemberPw();
+		
+		Member checkMember = memberMapper.getMemberInfoByEmail(memberEmail);
+		log.info("{}", checkMember);
+		
+		if(checkMember != null && checkMember.getMemberPw() != null && memberPw.equals(checkMember.getMemberPw())) {
+			String sessionLevelCode = checkMember.getMemberLevelCode();
+			String sessionName = checkMember.getMemberName();
+			
+			String getMaker = challengeGatherService.getChallengeMaker(memberEmail);
+			if(getMaker == null || getMaker =="") {
+				getMaker = "권한없음";
+			}else {
+				getMaker = "권한있음";
+			}
+			
+			session.setAttribute("SEMAIL", 	memberEmail);
+			session.setAttribute("SLEVEL", 	sessionLevelCode);
+			session.setAttribute("SNAME", 	sessionName);
+			session.setAttribute("SCHALLENGE", getMaker);
+			
+			log.info("로그인 성공");
+			
+			return "redirect:/";
+		}
+		
+		reAttr.addAttribute("result", "등록된 회원이 없습니다.");
+		
+		return "redirect:/login2";
+	}
+	/* 미인증 회원 로그인 */ 
+	@GetMapping("/login3")
+	public String login3(Model model
+			,@RequestParam(value="result", required = false) String result) {
+		
+		model.addAttribute("title", "회원 로그인");
+		
+		if(result != null) model.addAttribute("result", result);
+		
+		return "member/login3";
+	}
+	
+	/* 미인증 회원 로그인 처리 */
+	@PostMapping("/login3")
+	public String login3(Member member, HttpSession session, RedirectAttributes reAttr) {
+		String memberEmail  = member.getMemberEmail();
+		String memberPw 	= member.getMemberPw();
+		
+		Member checkMember = memberMapper.getMemberInfoByEmail(memberEmail);
+		log.info("{}", checkMember);
+		
+		if(checkMember != null && checkMember.getMemberPw() != null && memberPw.equals(checkMember.getMemberPw())) {
+			String sessionLevelCode = checkMember.getMemberLevelCode();
+			String sessionName = checkMember.getMemberName();
+			
+			String getMaker = challengeGatherService.getChallengeMaker(memberEmail);
+			if(getMaker == null || getMaker =="") {
+				getMaker = "권한없음";
+			}else {
+				getMaker = "권한있음";
+			}
+			
+			session.setAttribute("SEMAIL", 	memberEmail);
+			session.setAttribute("SLEVEL", 	sessionLevelCode);
+			session.setAttribute("SNAME", 	sessionName);
+			session.setAttribute("SCHALLENGE", getMaker);
+			
+			log.info("로그인 성공");
+			
+			return "redirect:/";
+		}
+		
+		reAttr.addAttribute("result", "등록된 회원이 없습니다.");
+		
+		return "redirect:/login3";
+	}
 	
 	
 	/**
+	 *  이메일 중복 체크
 	 *  emailCheck ajax
 	 *  @RequestParam(value = "memberEmail") == request.getParameter("memberEmail");
 	 */
@@ -112,9 +205,11 @@ public class MemberController {
 	
 	/* 회원 추가 정보 입력 폼 */
 	@GetMapping("/addInfo")
-	public String addInfo(Model model) {
+	public String addInfo(Model model, @RequestParam(value="memberEmail", required = false) String memberEmail) {
 		
 		model.addAttribute("title", "추가 정보 입력");
+		Member member = memberService.getMemberInfoByEmail(memberEmail);
+		model.addAttribute("member", member);
 		
 		return "member/addInfo";
 		
@@ -130,18 +225,21 @@ public class MemberController {
 	}
 	
 	/**
+	 * 회원 가입 처리
 	 * /addMember method 방식이 다르기 때문에 주소를 중복해서 사용 가능
 	 * @param member(회원가입 폼 전송시 요소의 name 속성의 값과  dto의 멤버변수의 이름과 같으면 자동으로 바인딩하는 객체)
 	 *        커맨드객체
 	 * @return redirect: -> request.sendRedirect("")
 	 */
 	@PostMapping("/addMember")
-	public String addMember(Member member) {
+	public String addMember(Member member, RedirectAttributes reAttr) {
 		log.info("회원가입폼에서 입력받은 데이터: {}", member);
 		
 		memberService.addMember(member);
 		
-		return "member/addInfo";
+		reAttr.addAttribute("memberEmail", member.getMemberEmail());
+		
+		return "redirect:/addInfo";
 	}
 	
 	

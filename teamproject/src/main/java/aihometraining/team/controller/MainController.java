@@ -15,7 +15,7 @@ public class MainController {
 		
 		System.out.println(session.getAttribute("SLEVEL"));
 		System.out.println(session.getAttribute("SNAME"));
-		model.addAttribute("title", "메인화면");
+		model.addAttribute("title", "AI 쌍방향 홈 트레이닝 시스템");
 		
 		return "usermain";
 	}
@@ -46,6 +46,14 @@ public class MainController {
 		model.addAttribute("title", "운동 클래스 관리자 페이지");
 		
 		return "eClass/eclassadmin";
+		
+	}
+	@GetMapping("/challengeadmin")
+	public String challengeadmin(Model model) {
+		
+		model.addAttribute("title", "챌린지 관리자 페이지");
+		
+		return "challenge/challengeadmin";
 		
 	}
 	

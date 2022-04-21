@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+		<div class="col-md-12 top-20 padding-0">
+              <div class="col-md-12">
+                <div class="panel">
+                  <div class="panel-body">
+                  
+                  
+                  <div class="col-md-12 padding-0" style="padding-bottom:20px;">
+                    <div class="col-lg-8">
+                         <div class="col-md-10">
+                            <div class="input-group">
+                              <input type="text" class="form-control" aria-label="..." placeholder ="검색할 게 없어서 검색기능 못씀">
+                              <div class="input-group-btn" >
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">검색<span class="caret"></span></button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                  <li><a href="#">Action</a></li>
+                                  <li><a href="#">Another action</a></li>
+                                  <li><a href="#">Something else here</a></li>
+                                  <li role="separator" class="divider"></li>
+                                  <li><a href="#">Separated link</a></li>
+                                </ul>
+                              </div><!-- /btn-group -->
+                            </div><!-- /input-group -->
+                          </div>
+                    </div>
+                    
+                    
+                    <!-- Small modal -->
+
+                     <div class="col-lg-1 col-lg-offset-2">
+	                         <button type=button class="btn btn-outline btn-default" id="insertDietBank" data-toggle="modal" data-target=".insertModal">
+	                         		식단 추가하기
+	                         		<i class="fa fa-plus"></i>
+	                         </button>
+                      </div>
+                    
+                 </div>
+                 
+                 <!-- 생성 모달  -->
+				<div class="modal fade insertModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+					        <h4 class="modal-title" id="myModalLabel">새 식단 생성</h4>
+					      </div>
+					      <div class="modal-body">
+							 <h4>아래와 같이 식단을 생성합니다</h4>
+							 <form th:action="@{/admin/diet/insertDietBankList2}" method="post">
+						        <table id="insertTable">
+				                    <tbody>
+				                      <tr>
+				                        <td>생성자Email</td>
+				                        <td>
+				                        	<input type="text" name="insertEmail" readonly>
+				                        </td>
+				                      </tr>
+				                      <tr>
+				                        <td>연동 클래스</td>
+				                        <td>
+				                        	<select name="connectEClass">
+				                        		
+				                        	</select>
+				                        </td>
+				                      </tr>
+				                      <tr>
+				                        <td>생성 날짜</td>
+				                        <td>
+				                        	<input type="text" readonly>
+				                        </td>
+				                      </tr>
+						        </table>
+						        
+						        
+						      </div>
+						      	<div class="modal-footer">
+						        	<button type="submit" class="btn btn-primary">확인 및 생성</button>
+						    </form>    
+						        	<button type="button" id="cancel-insert" class="btn btn-default" data-dismiss="modal">취소</button>
+						      	</div>
+					    </div>
+					  </div>
+					</div>
+                 
+                 
+                 
+                 
+                  <div class="responsive-table">
+                    <table class="table table-striped table-bordered table table-hover" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th class="text-center">식단은행 번호</th>
+                        <th class="text-center">운동클래스</th>
+                        <th class="text-center">작성자이메일</th>
+                        <th class="text-center">작성일</th>
+                        <th class="text-center">수정자이메일</th>
+                        <th class="text-center">최종수정일</th>
+                        <th class="text-center">확인/수정</th>
+                        <th class="text-center">삭제</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr th:each="d : ${dietBankList}">
+                        <td th:text="${d.dietBankCode}" class="col-md-1 text-center"></td>
+                        <td th:text="${d.eClassApprovedCode}" class="col-md-4 text-center"></td>
+                        <td th:text="${d.memberEmail}" class="text-center"></td>
+                        <td th:text="${d.dietBankInsertDate}" class="text-center"></td>
+                        <td th:text="${d.memberUpdateEmail}" class="text-center"></td>
+                        <td th:text="${d.dietBankUpdateDate}" class="text-center"></td>
+                        <td class="col-md-1 text-center" >
+                        	<a th:href="@{/admin/diet/updateDietBankList(dietBankCode=${d.dietBankCode})}">
+                        		<button class="btn btn-default">확인/수정</button>	
+                        	</a>
+                        </td>
+                        <td class="col-md-1 text-center" > 
+                        	<a th:href="@{/admin/diet/deleteDietBankList(dietBankCode=${d.dietBankCode})}">
+                        		<button class="btn btn-default">삭제</button>	
+                        	</a>
+                        </td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                  </div>
+                  <div class="col-md-6" style="padding-top:20px;">
+                    <span>showing 0-10 of 30 items</span>
+                  </div>
+                  <div class="col-md-6">
+                        <ul class="pagination pull-right">
+                          <li>
+                            <a href="#" aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                            </a>
+                          </li>
+                          <li class="active"><a href="#">1</a></li>
+                          <li>
+                            <a href="#" aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                            </a>
+                          </li>
+                        </ul>
+                  </div>
+                </div>
+              </div>
+            </div>  
+          </div>
+
+
+		
+		
+		
+		
+	</th:block>
+
+	<th:block layout:fragment="customBodyScript">	
+			<!-- plugins -->
+			<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
+			<script th:src="@{/asset/js/plugins/jquery.datatables.min.js}"></script>
+			<script th:src="@{/asset/js/plugins/datatables.bootstrap.min.js}"></script>
+			<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+			
+			
+			<!-- custom -->
+			<script th:src="@{/asset/js/main.js}"></script>
+			<script type="text/javascript">
+			  $(document).ready(function(){
+			    //$('#datatables-example').DataTable();
+			  });
+			  
+
+			 <!-- jquery insert -->
+			 	$('#insertDietBank').click(function(){
+			 		var memberEmail = "id001@email.com";
+					console.log(memberEmail+"임시 이메일 나중엔 로그인 기록으로 변환");
+					
+						$.ajax({
+							 url: '/admin/diet/insertDietBankList'
+							,type: 'POST'
+							,data: {'memberEmail' : memberEmail}
+							,dataType: 'json'
+							,success: function(data){
+								
+									var today = new Date();
+									var dd = String(today.getDate()).padStart(2, '0');
+									var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+									var yyyy = today.getFullYear();
+								
+									today = yyyy+"/"+mm+"/"+dd;
+									
+									
+								$('#insertTable').find('input').eq(0).val(memberEmail);	
+								$('#insertTable').find('input').eq(1).val(today);	
+									
+									
+								$.each(data,function(index,item){
+									
+									$('#insertTable').find('select').append("<option value="+index+">"+item+"</option>");
+								});
+							}
+						});
+				});
+				
+				$('#cancel-insert').click(function(){
+				
+					$('#insertTable').find('select').children().remove();
+				});
+				
+				
+				
+				
+				
+							  
+			  	
+			  
+			</script>
+			
+			
+	<!-- end: Javascript -->
+		</th:block>
+
+</html>

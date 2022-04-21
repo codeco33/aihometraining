@@ -42,7 +42,11 @@ public class WebConfig implements WebMvcConfigurer{
 				.excludePathPatterns("/images/**")
 				.excludePathPatterns("/")
 				.excludePathPatterns("/addMember")
-				.excludePathPatterns("/login");
+				.excludePathPatterns("/addInfo")
+				.excludePathPatterns("/login")
+				.excludePathPatterns("/login2")
+				.excludePathPatterns("/login3")
+				.excludePathPatterns("/emailCheck");
 		
 		
 		WebMvcConfigurer.super.addInterceptors(registry);

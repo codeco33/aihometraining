@@ -5,9 +5,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import aihometraining.team.dto.EClassAnswer;
+import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.EClassIntroduce;
-import aihometraining.team.dto.EClassOpenAppleyForm;
 import aihometraining.team.dto.EClassQuestion;
 import aihometraining.team.dto.EClassSectionCurriculum;
 import aihometraining.team.dto.EClassSectionTitle;
@@ -22,6 +22,9 @@ public interface EClassMapper {
 	//클래스 단계별 카테고리 조회
 	public List<EClassCategorySmall> eClassCategoryLarge(String eClassCategoryLargeCode);
 	public List<EClassCategorySmall> eClassCategoryMedium(String eClassCategoryMediumCode);
+	
+	//신청한 클래스 조회
+	public List<EClassApproved> eClassOpenAppleyList(String eClassOpenAppleyMemberEmail);
 	
 	//클래스 소개 등록 처리
 	public int EClassIntroduceInsert(EClassIntroduce eClassIntroduce);
@@ -39,10 +42,6 @@ public interface EClassMapper {
 	public int EClassAnswerInsert(EClassAnswer eClassAnswer);
 	
 	//클래스 세부설정 등록 처리
-	public int EClassPriceInsert( EClassIntroduce eClassIntroduce
-								, EClassSectionTitle eClassSectionTitle
-								, EClassSectionCurriculum eClassSectionCurriculum
-								, EClassQuestion eClassQuestion
-								, EClassAnswer eClassAnswer
-								, EClassOpenAppleyForm eClassOpenAppleyForm);
+	public int EClassPriceInsert(EClassApproved eClassApproved);
+
 }
