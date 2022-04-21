@@ -127,14 +127,14 @@ public class WorkoutLogConfigService {
 	}
 	
 	//ajax 등록이미지 조회
-		public List<AIVideo> workoutAIVideoImg(String AIVideoImgCodes){
-			
-			List<AIVideo> workoutAIVideoImgCodes = workoutLogConfigMapper.workoutAIVideoImg(AIVideoImgCodes);
-			
-			
-			
-			return workoutAIVideoImgCodes;
-			
-		}
+	public List<AIVideo> workoutAIVideoImg(String AIVideoImgCodes){
+		
+		List<AIVideo> workoutAIVideoImgCodes = workoutLogConfigMapper.workoutAIVideoImg(AIVideoImgCodes);
+		
+		
+		
+		return workoutAIVideoImgCodes;
+		
+	}
 	
 }

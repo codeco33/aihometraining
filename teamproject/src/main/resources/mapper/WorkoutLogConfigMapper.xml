@@ -67,13 +67,13 @@
 			,f.filePath
 		FROM
 			aivideo AS a
-		INNER JOIN
+			INNER JOIN
 			tb_file_control AS fc
-		ON
+			ON
 			a.fileIdx = fc.referenceCode
-		INNER JOIN
+			INNER JOIN
 			tb_file AS f
-		ON
+			ON
 			f.fileIdx = fc.fileIdx;
 	</select>
 	
@@ -86,15 +86,15 @@
 			,f.fileOriginalName
 		FROM
 			aivideo AS a
-		INNER JOIN
+			INNER JOIN
 			tb_file_control AS fc
-		ON
+			ON
 			a.fileIdx = fc.referenceCode
-		INNER JOIN
+			INNER JOIN
 			tb_file AS f
-		ON
+			ON
 			f.fileIdx = fc.fileIdx
-		WHERE
+			WHERE
 			a.fileIdx = #{fileIdx};
 	</select>
 	
