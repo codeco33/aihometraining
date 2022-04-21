@@ -103,7 +103,7 @@ public class MemberController {
 		return "member/login2";
 	}
 	
-	/* 로그인 처리 */
+	/* 일반 회원 로그인 처리 */
 	@PostMapping("/login2")
 	public String login2(Member member, HttpSession session, RedirectAttributes reAttr) {
 		String memberEmail  = member.getMemberEmail();
@@ -225,6 +225,7 @@ public class MemberController {
 	}
 	
 	/**
+	 * 회원 가입 처리
 	 * /addMember method 방식이 다르기 때문에 주소를 중복해서 사용 가능
 	 * @param member(회원가입 폼 전송시 요소의 name 속성의 값과  dto의 멤버변수의 이름과 같으면 자동으로 바인딩하는 객체)
 	 *        커맨드객체
