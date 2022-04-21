@@ -142,6 +142,16 @@ public class eClassService {
 		
 		return result;
 	}
+	//클래스 신청 폼 question 수정처리
+	public int EClassQuestionUpdate(EClassQuestion eClassQuestion, String memberEmail) {
+		
+		log.info("EClassQuestionInsert eClassQuestion 데이터: {}", eClassQuestion);
+		eClassQuestion.setMemberUpdateEmail(memberEmail);
+		
+		int result = eClassMapper.EClassQuestionUpdate(eClassQuestion);
+		
+		return result;
+	}
 	
 	//클래스 신청 폼 answer 등록처리
 	public int EClassAnswerInsert(EClassAnswer eClassAnswer
@@ -155,6 +165,17 @@ public class eClassService {
 		eClassAnswer.seteClassAnswerCode(answerCode);
 		eClassAnswer.setMemberEmail(memberEmail);
 		eClassAnswer.seteClassQuestionCode(questionCode);
+		
+		int result = eClassMapper.EClassAnswerInsert(eClassAnswer);
+		
+		return result;
+	}
+	//클래스 신청 폼 answer 수정처리
+	public int EClassAnswerUpdate(EClassAnswer eClassAnswer
+								, String memberEmail) {
+		
+		log.info("EClassAnswerInsert EClassAnswer 데이터: {}", eClassAnswer);
+		eClassAnswer.setMemberUpdateEmail(memberEmail);
 		
 		int result = eClassMapper.EClassAnswerInsert(eClassAnswer);
 		
@@ -218,12 +239,6 @@ public class eClassService {
 								, EClassSectionCurriculum eClassSectionCurriculum
 								, EClassQuestion eClassQuestion
 								, EClassAnswer eClassAnswer) {
-
-		eClassIntroduce.setMemberUpdateEmail(memberEmail);
-		eClassSectionTitle.setMemberUpdateEmail(memberEmail);
-		eClassSectionCurriculum.setMemberUpdateEmail(memberEmail);
-		eClassQuestion.setMemberUpdateEmail(memberEmail);
-		eClassAnswer.setMemberUpdateEmail(memberEmail);
 		
 		log.info("eClassService EClassPriceUpdate setMemberUpdateEmail : {}",memberEmail);
 		

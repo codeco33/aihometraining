@@ -156,7 +156,7 @@ public class eClassController {
 		eClassService.EClassIntroduceUpdate(eClassIntroduce, mamberEmail);
 		eClassService.EClassSectionTitleUpdate(eClassSectionTitle, mamberEmail);
 		eClassService.EClassSectionCurriculumUpdate(eClassSectionCurriculum, mamberEmail);
-		eClassService.EClassQuestionInsert(eClassQuestion, mamberEmail);
+		eClassService.EClassQuestionUpdate(eClassQuestion, mamberEmail);
 		eClassService.EClassAnswerInsert(eClassAnswer, mamberEmail, eClassQuestion);
 		eClassService.EClassPriceInsert(eClassApproved
 									  , eClassCategorySmall
@@ -174,7 +174,7 @@ public class eClassController {
 		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassQuestion);
 		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassAnswer);
 
-		return "";
+		return "redirect:eClass/eClassOpenAppleyComplete";
 	}
 	
 	@GetMapping("/eClassOpenAppleyComplete") 
@@ -197,7 +197,7 @@ public class eClassController {
 	@GetMapping("/eClassOpenApplyadminList")
 	public String eClassOpenApplyadminList(Model model) {
 		
-		model.addAttribute("title", "개설 신청 리스트");
+		model.addAttribute("title", "개설 신청 관리자 리스트");
 		
 		return "eClass/eClassOpenApplyadminList";
 	}
@@ -207,7 +207,7 @@ public class eClassController {
 		
 		model.addAttribute("title", "관리자 운동클래스목록");
 		
-		return "eClass/eClassApplyadminList";
+		return "eClass/eClassApprovedadminList";
 	}
 	
 	@GetMapping("/myApplyList")

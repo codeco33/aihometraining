@@ -236,7 +236,7 @@
 			,#{eClassApprovedEndDate}
 			,#{eClassApprovedStudent}
 			,#{eClassApprovedMaxStudent}
-			,#{eClassApprovedDate}
+			,NOW()
 			,0
 		);
 	</insert>
@@ -250,8 +250,8 @@
 			,eClassApprovedPrice		= #{eClassApprovedPrice}
 			,eClassApprovedName			= #{eClassApprovedName}
 			,eClassApprovedSetDate		= #{eClassApprovedSetDate}
-			,eClassApprovedStratDate	= NOW()
-			,eClassApprovedEndDate		= NOW()
+			,eClassApprovedStratDate	= #{eClassApprovedStratDate}
+			,eClassApprovedEndDate		= #{eClassApprovedEndDate}
 			,eClassApprovedStudent		= #{eClassApprovedStudent}
 			,eClassApprovedMaxStudent	= #{eClassApprovedMaxStudent}
 		WHERE 

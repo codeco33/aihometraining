@@ -53,7 +53,7 @@ public interface EClassMapper {
 	
 	//클래스 세부설정 등록 처리
 	public int EClassPriceInsert(EClassApproved eClassApproved);
-	//클래스 세부설정 등록 처리
+	//클래스 세부설정 수정 처리
 	public int EClassPriceUpdate(EClassApproved eClassApproved);
 	
 	//클래스 수정화면
