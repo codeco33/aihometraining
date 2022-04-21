@@ -156,7 +156,7 @@
 				<div class="single-services mb-30">
 					<div class="features-caption">
 						<h3 class="captionTitle">결제 정보</h3>
-						
+						<input type="text" name="paymentGroupCode" hidden th:value="${paymentGroupCode}">
 						<!-- 클래스정보 -->
 						<div class="form-group">
 							<label class="inputTitle">결제상품이름</label>
@@ -164,9 +164,9 @@
 						</div>
 						<div class="form-group">
 							<label class="inputTitle">금액</label>
-							<input type="text" name="eClassPrice" class="form-control-plaintext" readonly th:value="${paymentGoodsPrice}">
+							<input type="text" name="paymentTotalOrderPrice" class="form-control-plaintext" readonly th:value="${paymentGoodsPrice}">
 						</div>
-						<div class="form-group" th:if=${paymentGoodsSetDate != null}>
+						<div class="form-group" th:if="${paymentGoodsSetDate != null}">
 							<label class="inputTitle">정기결제 기간</label>
 							<input type="text" name="eClassApprovedSetDate" class="form-control-plaintext" readonly th:value="${paymentGoodsSetDate}+'개월'">
 						</div>
@@ -176,21 +176,22 @@
 						<!-- 수강신청자 정보 -->
 						<div class="form-group">
 							<label class="inputTitle">이름</label>
-							<input type="text" name="memberName" class="form-control-plaintext" readonly value="홍길동">
+							<input type="text" name="memberName" class="form-control-plaintext" readonly th:value="${member.memberName}">
 						</div>
 						<div class="form-group">
 							<label class="inputTitle">이메일</label>
-							<input type="text" name="memberEmail" class="form-control-plaintext" readonly value="id004@email.com">
+							<input type="text" name="memberEmail" class="form-control-plaintext" readonly th:value="${member.memberEmail}">
 						</div>
 						<div class="form-group phoneCertifyDiv">
 							<label class="inputTitle">휴대폰 번호</label><br>
 							<div class="phoneNum-formgroup">
-								<input type="text" name="memberPhone" class="phoneNum" readonly value="010-0000-0004">
-								<input type="button" id="certifyNumSendBtn" class="btn memberPhoneBtn active" value="인증번호 전송">
+								<input th:if="${memberPhone != null}" type="text" name="memberPhone" class="phoneNum" readonly th:value="${memberPhone}">
+								<input th:unless="${memberPhone != null}" type="text" name="memberPhone" class="phoneNum" >
+								<input type="button" id="memberPhoneCheck" class="btn memberPhoneBtn active" value="인증번호 전송">
 							</div>
 							<div class="phoneNum-formgroup" id="phoneCertifyDiv">
 								<input type="text" name="memberPhoneCertify" class="phoneNum">
-								<input type="button" id="AuthenticateBtn" class="btn memberPhoneBtn" value="인증하기">
+								<input type="button" id="certifyCheck" class="btn memberPhoneBtn" value="인증하기">
 							</div>
 						</div>
 					</div>
@@ -203,11 +204,12 @@
 						<div class="form-group">
 							<label class="inputTitle">포인트 사용</label>
 							<div class="phoneNum-formgroup">
-								<p>보유 포인트 : <span class="finalPoint">2,000</span>p</p><label><input type="checkbox" class="allPointUse"> 포인트 전체사용</label>
+								<p>보유 포인트 : <span class="finalPoint">[[${member.memberFinalPoint}]]</span>p</p><label><input type="checkbox" class="allPointUse"> 포인트 전체사용</label>
 							</div>
 							<div class="phoneNum-formgrou">
-								<input type="text" name="pointUseInput" class="phoneNum">
+								<input type="text" name="paymentUsePoint" class="phoneNum">
 								<input type="button" id="pointUseBtn" class="btn memberPhoneBtn active" value="적용">
+								<input type="button" id="pointUseCancelBtn" class="btn memberPhoneBtn" value="취소">
 							</div>
 						</div>
 					
@@ -219,13 +221,22 @@
 						<h3 class="captionTitle">결제 수단</h3>
 						<div class="form-group row">
 							<label class="col-xl-4 col-md-6 paymentMethodLabel">
-								<a class="genric-btn primary-border circle arrow paymentMethodBtn active"><input type="radio" name="paymentMethod" value="카드" checked><span>신용/체크카드</span></a>
+								<a class="genric-btn primary-border circle arrow paymentMethodBtn active">
+									<input type="radio" name="paymentMethodName" value="카드" checked>
+									<span>신용/체크카드</span>
+								</a>
 							</label>
 							<label class="col-xl-4 col-md-6 paymentMethodLabel">
-								<a class="genric-btn primary-border circle arrow paymentMethodBtn"><input type="radio" name="paymentMethod" value="카드"><span>가상계좌</span></a>
+								<a class="genric-btn primary-border circle arrow paymentMethodBtn">
+									<input type="radio" name="paymentMethodName" value="가상계좌">
+									<span>가상계좌</span>
+								</a>
 							</label>
 							<label class="col-xl-4 col-md-6 paymentMethodLabel">
-								<a class="genric-btn primary-border circle arrow paymentMethodBtn"><input type="radio" name="paymentMethod" value="카드"><span>카카오페이</span></a>
+								<a class="genric-btn primary-border circle arrow paymentMethodBtn">
+									<input type="radio" name="paymentMethodName" value="카카오페이">
+									<span>카카오페이</span>
+								</a>
 							</label>
 						</div>
 					
@@ -234,7 +245,8 @@
 				<div id="totalPriceDiv" class="single-services mb-30">
 					<div id="totalPriceStrDiv">
 						<span>총 결제금액</span>
-						<span class="totalprice">27,000</span>
+						<span class="totalprice"></span>
+						<input id="paymentTotalPayPrice" type="text" name="paymentTotalPayPrice" hidden>
 					</div>
 					<button id="paymentBtn" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="button">결제하기</button>
 				</div>
@@ -255,7 +267,6 @@
 	<script src ="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 	<th:block layout:fragment="customBodyScript">
 		<script type="text/javascript">
-		 
 			$(function(){
 				//인증번호 유효성 검사
 				 $('#paymentForm').validate({
@@ -287,65 +298,132 @@
 					 
 				 });
 				
+				//총 결제금액 
+				$('.totalprice').text($('input[name="paymentTotalOrderPrice"]').val());
+				$('#paymentTotalPayPrice').val($('.totalprice').text());
+				 
+				//포인트 전체사용 클릭 이벤트
 				$('.allPointUse').click(function(){
 					var point = $('.finalPoint').text();
 					if($(this).prop('checked') == true){
-						$('input[name="pointUseInput"]').val(point);
+						$('input[name="paymentUsePoint"]').val(point);
+						
 					}else {
-						$('input[name="pointUseInput"]').val('');
+						$('input[name="paymentUsePoint"]').val('');
 					}
 				});
 				
-				//포인트 잔액 바뀌면 체크버튼 풀리게하기
-				//$('input[name="pointUseInput"]').
+				//포인트 적용 버튼 클릭 이벤트
+				$('#pointUseBtn').click(function(){
+					if($('.finalPoint').text() > 0 && $('#pointUseBtn').hasClass('active') == true){
+						$('.finalPoint').text($('.finalPoint').text() - $('input[name="paymentUsePoint"]').val());
+						$('.totalprice').text($('input[name="paymentTotalOrderPrice"]').val() - $('input[name="paymentUsePoint"]').val());
+						$('.allPointUse').attr('disabled', 'disabled');
+						if($('input[name="paymentUsePoint"]').val() > 0){
+							$('#pointUseBtn').removeClass('active');
+							$('#pointUseCancelBtn').addClass('active');
+							$('input[name="paymentUsePoint"]').attr('readonly', 'readonly');
+							$('#paymentTotalPayPrice').val($('.totalprice').text());
+						}else {
+							alert('사용할 포인트를 입력해주세요');
+							$('input[name="paymentUsePoint"]').focus();
+						}
+						
+					}
+				});
+				
+				//포인트 적용 취소
+				$('#pointUseCancelBtn').click(function(){
+					if($(this).hasClass('active') == true){
+						$('.finalPoint').text(parseInt($('.finalPoint').text()) + parseInt($('input[name="paymentUsePoint"]').val()));
+						$('input[name="paymentUsePoint"]').val('').removeAttr('readonly');
+						$('.allPointUse').removeAttr('disabled').prop('checked', false);
+						$(this).removeClass('active');
+						$('#pointUseBtn').addClass('active');
+						$('.totalprice').text($('input[name="paymentTotalOrderPrice"]').val());
+						$('#paymentTotalPayPrice').val($('.totalprice').text());
+					}
+				});
+				
+					
+			    /*아임포트 카카오페이 결제*/
+				  $('#paymentBtn').click(function () {
+				        // getter
+				        var IMP = window.IMP;
+				        IMP.init('imp03955010');
+				        var paymentGoods = $('input[name="paymentOrderName"]').val();
+				        var money = $('.totalprice').text();
+				        var memberName = $('input[name="memberName"]').val();
+				        var memberEmail = $('input[name="memberEmail"]').val();
+				        var memberPhone = $('input[name="memberPhone"]').val();
+				        
+				        var len = memberEmail.indexOf("@");
+				        var memberId = memberEmail.substr(0, len);
+	
+				        IMP.request_pay({
+				            pg: 'card',
+				            paymentCode: 'p' + new Date().getTime()+'_'+memberId,
+				            name: paymentGoods,
+				            amount: money,
+				            buyer_email: memberEmail,
+				            buyer_name: memberName,
+				            buyer_tel: memberPhone,
+				        }, function (rsp) {
+				            if (rsp.success) {
+				                var msg = '결제가 완료되었습니다.';
+				                if(rsp.apply_num != null || rsp.apply_num != '')msg += '카드 승인번호 : ' + rsp.apply_num;
+				                
+				                /*
+				                $.ajax({
+				                    type: "GET", 
+				                    url: "/mypage/mypaymentList/paymentDetail", 
+				                    data: {
+				                        "amount" : money
+				                    },
+				                });
+				                */
+				                $('#paymentForm').submit();
+				            } else {
+				                var msg = '결제에 실패하였습니다.';
+				                msg += '에러내용 : ' + rsp.error_msg;
+					            document.location.href="/mypage/mySignUpForClassList"; //alert창 확인 후 이동할 url 설정
+				            }
+				            alert(msg);
+				        });
+				    });
+					
+					
+					//휴대폰번호 인증번호 보내기 버튼 클릭 이벤트
+					/*$('#memberPhoneCheck').click(function(){
+						
+						var to = $('input[name="memberPhone"]').val();
+						$.ajax({
 
-				
-		    /*아임포트 카카오페이 결제*/
-			  $('#paymentBtn').click(function () {
-			        // getter
-			        var IMP = window.IMP;
-			        IMP.init('imp03955010');
-			        var money = $('.totalprice').text();
-			        console.log(money);
+							url : "/memberPhoneCheck",
+							type : "POST",
+							data : "to=" + to,
+							dataType : "json",
+							success : function(data) {
+								const checkNum = data;
+								alert('checkNum:'+ checkNum);
+								$('#certifyCheck').addClass('active');
+								$('#certifyCheck').click(function(){
+									const userNum = $('input[name="memberPhoneCertify"]').val();
+									
+									if(checkNum == userNum){
+										alert('인증 성공하였습니다.');
+									}else {
+										alert('인증 실패하였습니다. 다시 입력해주세요.');
+									}
+								});
 
-			        IMP.request_pay({
-			            pg: 'card',
-			            merchant_uid: 'merchant_' + new Date().getTime(),
-			            name: '운동클래스 이름',
-			            amount: 500,
-			            buyer_email: 'iamport@siot.do',
-			            buyer_name: '구매자이름',
-			            buyer_tel: '010-1234-5678',
-			            buyer_addr: '전라북도 전주시',
-			            buyer_postcode: '123-456',
-			            
-			        }, function (rsp) {
-			            console.log(rsp);
-			            if (rsp.success) {
-			                var msg = '결제가 완료되었습니다.';
-			                msg += '고유ID : ' + rsp.imp_uid;
-			                msg += '상점 거래ID : ' + rsp.merchant_uid;
-			                msg += '결제 금액 : ' + rsp.paid_amount;
-			                msg += '카드 승인번호 : ' + rsp.apply_num;
-			                $.ajax({
-			                    type: "GET", 
-			                    url: "/mypage/mypaymentList/paymentDetail", //충전 금액값을 보낼 url 설정
-			                    data: {
-			                        "amount" : money
-			                    },
-			                });
-			            } else {
-			                var msg = '결제에 실패하였습니다.';
-			                msg += '에러내용 : ' + rsp.error_msg;
-			            }
-			            alert(msg);
-			            document.location.href="/mypage/mySignUpForClassList"; //alert창 확인 후 이동할 url 설정
-			        });
-			    });
-				
-				
-				//포인트 할인 적용 버튼 클릭 이벤트
-				$('#pointUseBtn').click
+							},
+							error : function() {
+								alert("에러")
+							}
+
+						});
+					});*/
 	});
 		</script>
 	</th:block>
