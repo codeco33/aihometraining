@@ -8,7 +8,7 @@
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
-		<form th:action="@{/admin/workoutAIVideoInsert}" method="post">
+		<form th:action="@{/admin/workoutAIVideoInsert}" method="get">
 			<div class="col-md-12">
 				<div class="panel">
 			    	<div class="panel-heading bg-white border-none">
@@ -29,6 +29,7 @@
 									<tr>
 										<td>
 											<!-- Button to Open the Modal -->
+											<!-- <th:block th:if="${not #lists.isEmpty(workoutAIVideoList)}" th:each="l : ${workoutAIVideoList}"> -->
 											<button type="button" class="btn btn-default" data-toggle="modal" data-target="#videoModal1" data-video="https://www.youtube.com/embed/w1c5WNRdakk">
 											  	팔굽혀펴기
 											</button>
