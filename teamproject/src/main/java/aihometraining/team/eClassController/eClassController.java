@@ -141,7 +141,7 @@ public class eClassController {
 		return "eClass/eClassOpenAppleyFormUpdate";
 	}
 	
-	@PostMapping("/openAppleyUpdate")
+	@GetMapping("/AppleyUpdate")
 	public String EClassAppleyFormUpdate( EClassCategorySmall eClassCategorySmall
 										, EClassIntroduce eClassIntroduce
 										, EClassSectionTitle eClassSectionTitle
@@ -151,14 +151,13 @@ public class eClassController {
 										, EClassApproved eClassApproved
 										, HttpSession session) {
 							
-		
 		String mamberEmail = (String) session.getAttribute("SEMAIL");
 		eClassService.EClassIntroduceUpdate(eClassIntroduce, mamberEmail);
 		eClassService.EClassSectionTitleUpdate(eClassSectionTitle, mamberEmail);
 		eClassService.EClassSectionCurriculumUpdate(eClassSectionCurriculum, mamberEmail);
 		eClassService.EClassQuestionUpdate(eClassQuestion, mamberEmail);
-		eClassService.EClassAnswerInsert(eClassAnswer, mamberEmail, eClassQuestion);
-		eClassService.EClassPriceInsert(eClassApproved
+		eClassService.EClassAnswerUpdate(eClassAnswer, mamberEmail);
+		eClassService.EClassPriceUpdate(eClassApproved
 									  , eClassCategorySmall
 									  , mamberEmail 
 									  , eClassIntroduce 
@@ -173,8 +172,9 @@ public class eClassController {
 		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassSectionCurriculum);
 		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassQuestion);
 		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassAnswer);
+		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassApproved);
 
-		return "redirect:eClass/eClassOpenAppleyComplete";
+		return "redirect:/eClassOpenAppleyComplete";
 	}
 	
 	@GetMapping("/eClassOpenAppleyComplete") 

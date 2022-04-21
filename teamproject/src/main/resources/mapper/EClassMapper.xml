@@ -285,7 +285,6 @@
 			eclassanswer AS ea
 		SET
 			 eClassAnsweTitle		= #{eClassAnsweTitle}
-			,memberUpdateEmail		= #{memberUpdateEmail}
 			,eClassAnswerUpdateDate	= NOW()
 		WHERE 
 			eq.eClassAnswerCode = #{eClassAnswerCode};
@@ -316,7 +315,6 @@
 			eclassquestion AS eq
 		SET
 			 eClassQuestionTitle		= #{eClassQuestionTitle}
-			,memberUpdateEmail			= #{memberUpdateEmail}
 			,eClassQuestionUpdateDate	= NOW()
 		WHERE 
 			eq.eClassQuestionCode = #{eClassQuestionCode}
@@ -352,14 +350,13 @@
 	<update id="EClassSectionCurriculumUpdate" parameterType="EClassSectionCurriculum">
 		/* SectionCurriculum 수정처리 */
 		UPDATE 
-			eclasssectioncurriculum AS esc
+			eclasssectioncurriculum 
 		SET
 			 eClassSectionCurriculumTitle		= #{eClassSectionCurriculumTitle}
 			,eClassSectionCurriculumAddFile		= #{eClassSectionCurriculumAddFile}
 			,eClassSectionCurriculumUpdateDate	= NOW(),
-			,memberUpdateEmail					= #{memberUpdateEmail}
 		WHERE 
-			esc.eClassSectionCurriculumCode 	= #{eClassSectionCurriculumCode};
+			eClassSectionCurriculumCode 		= #{eClassSectionCurriculumCode};
 	</update>
 	
 	<insert id="EClassSectionTitleInsert" parameterType="EClassSectionTitle">
@@ -388,7 +385,6 @@
 		SET
 			 eClassSectionTitleName			= #{eClassSectionTitleName}
 			,eClassSectionTitleUpdateDate	= NOW()
-			,memberUpdateEmail				= #{memberUpdateEmail}
 		WHERE 
 			es.eClassSectionTitleCode = #{eClassSectionTitleCode};
 	</update>
@@ -418,7 +414,6 @@
 			eclassintroduce AS ei
 		SET
 			 eClassIntroduceContent = #{eClassIntroduceContent}
-			,memberUpdateEmail 		= #{memberUpdateEmail}
 			,eClassIntroducetDate	= NOW()
 			,eClassIntroduceImg		= ''
 		WHERE 
@@ -493,10 +488,15 @@
 			,ecs.eClassCategoryMediumName
 			,ecs.eClassCategoryLargeCode
 			,ecs.eClassCategoryLargeName
+			,ei.eClassIntroduceCode
 			,ei.eClassIntroduceContent
+			,es.eClassSectionTitleCode
 			,es.eClassSectionTitleName
+			,esc.eClassSectionCurriculumCode
 			,esc.eClassSectionCurriculumTitle
+			,eq.eClassQuestionCode
 			,eq.eClassQuestionTitle
+			,ean.eClassAnswerCode
 			,ean.eClassAnsweTitle
 			,ea.eClassApprovedPrice
 			,ea.eClassApprovedName

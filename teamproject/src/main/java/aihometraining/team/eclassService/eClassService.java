@@ -64,14 +64,13 @@ public class eClassService {
 		
 		return result;
 	}
-	
 	//클래스 신청 폼 introduce 수정처리
 	public int EClassIntroduceUpdate(EClassIntroduce eClassIntroduce, String mamberEmail) {
 		
 		log.info("EClassIntroduceInsert eClassIntroduce 데이터: {}", eClassIntroduce);
 		eClassIntroduce.setMemberUpdateEmail(mamberEmail);
 		
-		int result = eClassMapper.EClassIntroduceInsert(eClassIntroduce);
+		int result = eClassMapper.EClassIntroduceUpdate(eClassIntroduce);
 		
 		return result;
 	}
@@ -95,7 +94,7 @@ public class eClassService {
 		log.info("EClassSectionTitleInsert eClassSectionTitle 데이터: {}", eClassSectionTitle);
 		eClassSectionTitle.setMemberUpdateEmail(memberEmail);
 		
-		int result = eClassMapper.EClassSectionTitleInsert(eClassSectionTitle);
+		int result = eClassMapper.EClassSectionTitleUpdate(eClassSectionTitle);
 		
 		return result;
 	}
@@ -124,7 +123,7 @@ public class eClassService {
 		log.info("EClassSectionCurriculumInsert eClassSectionCurriculum 데이터: {}", eClassSectionCurriculum);
 		eClassSectionCurriculum.setMemberUpdateEmail(memberEmail);
 		
-		int result = eClassMapper.EClassSectionCurriculumInsert(eClassSectionCurriculum);
+		int result = eClassMapper.EClassSectionCurriculumUpdate(eClassSectionCurriculum);
 		
 		return result;
 	}
@@ -177,7 +176,7 @@ public class eClassService {
 		log.info("EClassAnswerInsert EClassAnswer 데이터: {}", eClassAnswer);
 		eClassAnswer.setMemberUpdateEmail(memberEmail);
 		
-		int result = eClassMapper.EClassAnswerInsert(eClassAnswer);
+		int result = eClassMapper.EClassAnswerUpdate(eClassAnswer);
 		
 		return result;
 	}
@@ -230,7 +229,7 @@ public class eClassService {
 		
 		return result;
 	}
-	//클래스 신청 폼 price 등록처리
+	//클래스 신청 폼 price 수정처리
 	public int EClassPriceUpdate( EClassApproved eClassApproved
 								, EClassCategorySmall eClassCategorySmall
 								, String memberEmail
@@ -240,9 +239,15 @@ public class eClassService {
 								, EClassQuestion eClassQuestion
 								, EClassAnswer eClassAnswer) {
 		
-		log.info("eClassService EClassPriceUpdate setMemberUpdateEmail : {}",memberEmail);
+		log.info("eClassService EClassPriceUpdate eClassApproved : {}",eClassApproved);
+		log.info("eClassService EClassPriceUpdate eClassCategorySmall : {}",eClassCategorySmall);
+		log.info("eClassService EClassPriceUpdate eClassIntroduce : {}",eClassIntroduce);
+		log.info("eClassService EClassPriceUpdate eClassSectionTitle : {}",eClassSectionTitle);
+		log.info("eClassService EClassPriceUpdate eClassSectionCurriculum : {}",eClassSectionCurriculum);
+		log.info("eClassService EClassPriceUpdate eClassQuestion : {}",eClassQuestion);
+		log.info("eClassService EClassPriceUpdate eClassAnswer : {}",eClassAnswer);
 		
-		int result = eClassMapper.EClassPriceInsert(eClassApproved);
+		int result = eClassMapper.EClassPriceUpdate(eClassApproved);
 		
 		return result;
 	}
