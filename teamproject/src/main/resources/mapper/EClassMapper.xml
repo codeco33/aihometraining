@@ -258,6 +258,16 @@
 			ea.eClassApprovedCode = #{eClassApprovedCode};
 	</update>
 	
+	<update id="priceStateUpdate" parameterType="EClassApproved">
+		/* State 승인처리 */
+		UPDATE 
+			eclassapproved AS ea
+		SET
+			eClassApprovedState = 1
+		WHERE 
+			ea.eClassApprovedCode = #{eClassApprovedCode};
+	</update>
+	
 	<insert id="EClassAnswerInsert" parameterType="EClassAnswer">
 		/* Answer 등록처리 */
 		INSERT INTO eclassanswer(
@@ -286,6 +296,7 @@
 		SET
 			 eClassAnsweTitle		= #{eClassAnsweTitle}
 			,eClassAnswerUpdateDate	= NOW()
+			,memberUpdateEmail 		= #{memberEmail}
 		WHERE 
 			ea.eClassAnswerCode = #{eClassAnswerCode};
 	</update>
@@ -316,6 +327,7 @@
 		SET
 			 eClassQuestionTitle		= #{eClassQuestionTitle}
 			,eClassQuestionUpdateDate	= NOW()
+			,memberUpdateEmail			= #{memberEmail}
 		WHERE 
 			eq.eClassQuestionCode = #{eClassQuestionCode}
 	</update>
@@ -355,6 +367,7 @@
 			 eClassSectionCurriculumTitle		= #{eClassSectionCurriculumTitle}
 			,eClassSectionCurriculumAddFile		= #{eClassSectionCurriculumAddFile}
 			,eClassSectionCurriculumUpdateDate	= NOW()
+			,memberUpdateEmail					= #{memberEmail}
 		WHERE 
 			eClassSectionCurriculumCode 		= #{eClassSectionCurriculumCode};
 	</update>
@@ -385,6 +398,7 @@
 		SET
 			 eClassSectionTitleName			= #{eClassSectionTitleName}
 			,eClassSectionTitleUpdateDate	= NOW()
+			,memberUpdateEmail				= #{memberEmail}
 		WHERE 
 			es.eClassSectionTitleCode = #{eClassSectionTitleCode};
 	</update>
@@ -416,6 +430,7 @@
 			 eClassIntroduceContent = #{eClassIntroduceContent}
 			,eClassIntroducetDate	= NOW()
 			,eClassIntroduceImg		= ''
+			,memberUpdateEmail		= #{memberEmail}
 		WHERE 
 			ei.eClassIntroduceCode = #{eClassIntroduceCode};
 	</update>
@@ -534,6 +549,23 @@
 			ea.eClassAnswerCode = ean.eClassAnswerCode
 		WHERE
 			ea.eClassApprovedCode = #{eClassApprovedCode};
+	</select>
+	
+	<select id="eClassOpenAppleyadminList" parameterType="String" resultMap="eClassApprovedResultMap">
+		/* 클래스 등록 신청한 전체 리스트 조회 */
+		SELECT
+			 m.memberEmail
+			,ea.eClassApprovedCode
+			,ea.eClassApprovedPrice
+			,ea.eClassApprovedName
+			,ea.eClassApprovedDate
+			,ea.eClassApprovedState
+		FROM
+			member AS m
+		INNER JOIN
+			eclassapproved AS ea
+		ON
+			m.memberEmail = ea.memberEmail;
 	</select>
 	
 </mapper>

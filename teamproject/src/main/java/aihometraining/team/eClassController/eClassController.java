@@ -197,9 +197,13 @@ public class eClassController {
 	}
 	
 	@GetMapping("/eClassOpenApplyadminList")
-	public String eClassOpenApplyadminList(Model model) {
+	public String eClassOpenApplyadminList(Model model
+										  ,EClassApproved eClassApproved) {
+		
+		List<EClassApproved> adminList = eClassService.eClassOpenAppleyadminList(eClassApproved);
 		
 		model.addAttribute("title", "개설 신청 관리자 리스트");
+		model.addAttribute("adminList", adminList);
 		
 		return "eClass/eClassOpenApplyadminList";
 	}
@@ -209,7 +213,7 @@ public class eClassController {
 		
 		model.addAttribute("title", "관리자 운동클래스목록");
 		
-		return "eClass/eClassApprovedadminList";
+		return "eClass/admin/eClassApprovedadminList";
 	}
 	
 	@GetMapping("/myApplyList")
@@ -229,6 +233,13 @@ public class eClassController {
 		
 		
 		return "eClass/myEClassApplyList";
+	}
+	@GetMapping("/stateApproval")
+	public String eClassApprovedState(EClassApproved eClassApproved) {
+		
+		eClassService.priceStateUpdate(eClassApproved);
+		
+		return "redirect:/eClassOpenApplyadminList";
 	}
 	
 	@GetMapping("/eclassadmin/studentList")

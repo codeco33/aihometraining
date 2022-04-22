@@ -55,8 +55,12 @@ public interface EClassMapper {
 	public int EClassPriceInsert(EClassApproved eClassApproved);
 	//클래스 세부설정 수정 처리
 	public int EClassPriceUpdate(EClassApproved eClassApproved);
+	//클래스 세부설정 State 승인처리
+	public int priceStateUpdate(EClassApproved eClassApproved);
 	
 	//클래스 수정화면
 	public EClassApproved eClassApprovedByCode(String eclassapprovedCode);
 
+	//클래스 신청 리스트 화면(관리자)
+	public List<EClassApproved> eClassOpenAppleyadminList (EClassApproved eClassApproved);
 }

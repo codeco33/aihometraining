@@ -67,7 +67,8 @@ public class eClassService {
 	//클래스 신청 폼 introduce 수정처리
 	public int EClassIntroduceUpdate(EClassIntroduce eClassIntroduce, String mamberEmail) {
 		
-		log.info("EClassIntroduceInsert eClassIntroduce 데이터: {}", eClassIntroduce);
+		log.info("EClassIntroduceUpdate eClassIntroduce 데이터: {}", eClassIntroduce);
+		log.info("EClassIntroduceUpdate mamberEmail 데이터: {}", mamberEmail);
 		eClassIntroduce.setMemberUpdateEmail(mamberEmail);
 		
 		int result = eClassMapper.EClassIntroduceUpdate(eClassIntroduce);
@@ -91,7 +92,7 @@ public class eClassService {
 	//클래스 신청 폼 sectiontitle 수정처리
 	public int EClassSectionTitleUpdate(EClassSectionTitle eClassSectionTitle, String memberEmail) {
 		
-		log.info("EClassSectionTitleInsert eClassSectionTitle 데이터: {}", eClassSectionTitle);
+		log.info("EClassSectionTitleUpdate eClassSectionTitle 데이터: {}", eClassSectionTitle);
 		eClassSectionTitle.setMemberUpdateEmail(memberEmail);
 		
 		int result = eClassMapper.EClassSectionTitleUpdate(eClassSectionTitle);
@@ -120,7 +121,7 @@ public class eClassService {
 	public int EClassSectionCurriculumUpdate( EClassSectionCurriculum eClassSectionCurriculum
 											, String memberEmail) {
 		
-		log.info("EClassSectionCurriculumInsert eClassSectionCurriculum 데이터: {}", eClassSectionCurriculum);
+		log.info("EClassSectionCurriculumUpdate eClassSectionCurriculum 데이터: {}", eClassSectionCurriculum);
 		eClassSectionCurriculum.setMemberUpdateEmail(memberEmail);
 		
 		int result = eClassMapper.EClassSectionCurriculumUpdate(eClassSectionCurriculum);
@@ -144,7 +145,7 @@ public class eClassService {
 	//클래스 신청 폼 question 수정처리
 	public int EClassQuestionUpdate(EClassQuestion eClassQuestion, String memberEmail) {
 		
-		log.info("EClassQuestionInsert eClassQuestion 데이터: {}", eClassQuestion);
+		log.info("EClassQuestionUpdate eClassQuestion 데이터: {}", eClassQuestion);
 		eClassQuestion.setMemberUpdateEmail(memberEmail);
 		
 		int result = eClassMapper.EClassQuestionUpdate(eClassQuestion);
@@ -173,7 +174,7 @@ public class eClassService {
 	public int EClassAnswerUpdate(EClassAnswer eClassAnswer
 								, String memberEmail) {
 		
-		log.info("EClassAnswerInsert EClassAnswer 데이터: {}", eClassAnswer);
+		log.info("EClassAnswerUpdate EClassAnswer 데이터: {}", eClassAnswer);
 		eClassAnswer.setMemberUpdateEmail(memberEmail);
 		
 		int result = eClassMapper.EClassAnswerUpdate(eClassAnswer);
@@ -251,6 +252,13 @@ public class eClassService {
 		
 		return result;
 	}
+	//클래스 신청 상태 수정처리
+	public int priceStateUpdate(EClassApproved eClassApproved) {
+		
+		int result = eClassMapper.priceStateUpdate(eClassApproved);
+		
+		return result;
+	}
 	
 	//클래스 신청 수정화면
 	public EClassApproved eClassApprovedByCode(String eclassapprovedCode){
@@ -260,6 +268,13 @@ public class eClassService {
 		log.info("eClassService eClassApprovedList eClassApproved : {}", eclassapprovedCode);
 		
 		return eClassApproved;
+	}
+	
+	public List<EClassApproved> eClassOpenAppleyadminList(EClassApproved eClassApproved) {
+		
+		List<EClassApproved> adminList = eClassMapper.eClassOpenAppleyadminList(eClassApproved);
+		
+		return adminList;
 	}
 	
 }
