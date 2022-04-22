@@ -109,6 +109,13 @@
 			                            <input class="form-control" name="challengeGatherProveContent" id="challengeGatherProveContent" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = '챌린지 인증내용'" placeholder="챌린지 인증내용">
 			                        </div>
 			                    </div>
+			                    <div class="col-12">
+			                        <div class="form-group mb-3">
+			                        	<label style="vertical-align: bottom;">참여 보증금</label>
+			                            <input class="form-control" name="challengeEnterDeposit" id="challengeEnterDeposit" type="number" style="display:inline-block; width: 20%;" onfocus="this.placeholder = ''" onblur="this.placeholder = '참여보증금'" placeholder="참여보증금">
+			                            <label style=" vertical-align: bottom;">원</label>
+			                        </div>
+			                    </div>	
 			                    							
 			                <div class="form-group mt-3 row justify-content-center">
 			                    <button type="submit" class="button button-contactForm boxed-btn">모집 등록</button>
@@ -384,7 +391,13 @@
                         	range:[1,7]
                         },
                         challengeGatherIntro: {
-                            required: true
+                            required: true,
+                            maxlength: 1000
+                        },
+                        challengeEnterDeposit: {
+                            required: true,
+                            digits : true,
+                            range:[1,50000]
                         }
                         
                     },
@@ -425,7 +438,14 @@
                         	range:"1~7 사이의 숫자만 입력 가능합니다."
                         },
                         challengeGatherIntro: {
-                            required: "챌린지 소개를 입력해 주세요."
+                            required: "챌린지 소개를 입력해 주세요.",
+                            maxlength: "최대 1000글자만 쓸수 있습니다."
+                        },
+                        challengeEnterDeposit: {
+                            required: "참가자들의 보증금을 입력해 주세요.",
+                            digits : "숫자만 입력 가능합니다.",
+                            range:"최대 0~50,000원 사이의  가격만 입력이 가능합니다."
+                            
                         }
                         
                     }
