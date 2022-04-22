@@ -219,6 +219,7 @@ public class WorkoutLogConfigController {
 		return "workoutLog/workoutLogConfig/workoutAIVideoList";
 		
 	}
+	
 	//ajax 등록이미지 조회
 	@PostMapping("/workoutAIVideoImg")
 	public String workoutAIVideoImg (String AIVideoImgCodes, Model model){
@@ -252,8 +253,8 @@ public class WorkoutLogConfigController {
 	
 	//AIVideo 영상(이미지 대체) 등록 처리
 	@PostMapping("/workoutAIVideoInsert")
-	public String workoutAIVideoInsert( AIVideo aiVideo
-									   ,HttpSession session
+	public String workoutAIVideoInsert(  AIVideo aiVideo
+									   , HttpSession session
 									   , @RequestParam MultipartFile[] fileImage
 									   , HttpServletRequest request) {
 		
