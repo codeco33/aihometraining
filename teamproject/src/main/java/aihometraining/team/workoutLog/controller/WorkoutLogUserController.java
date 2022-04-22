@@ -1,6 +1,9 @@
 package aihometraining.team.workoutLog.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,7 +60,7 @@ public class WorkoutLogUserController {
 	
 	// 일지 메인 화면
 	@GetMapping("/workoutLogMain")
-	public String workoutLogMain(Model model) {
+	public String workoutLogMain(Model model) throws ParseException {
 		
 		//운동 목표 목룍 조회
 		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
@@ -68,11 +71,35 @@ public class WorkoutLogUserController {
 		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList();
 		
 		log.info("일지 목록 조회  workoutLogList : {}", workoutLogList);
-
+		
+		//일지 등록일 보여주기
+		List<String> monthList = new ArrayList<>();
+		List<String> dayList = new ArrayList<>();
+		for(int i=0; i<workoutLogList.size(); i++) {
+			 
+		    Date date1=new SimpleDateFormat("yyyy-MM-dd").parse(workoutLogList.get(i).getWorkoutLogUpdateFinalDate());  
+		    log.info("일지 date1 : {}", date1);
+		    SimpleDateFormat newMonthFormat = new SimpleDateFormat("MM월");
+		    SimpleDateFormat newDayFormat = new SimpleDateFormat("dd일");
+		    
+			
+			newMonthFormat.format(date1); 
+			newDayFormat.format(date1);
+			
+		    log.info("일지  newMonthFormat.format(date1); : {}",  newMonthFormat.format(date1));
+		    log.info("일지  newDayFormat.format(date1); : {}",  newDayFormat.format(date1));
+		    
+		    monthList.add(newMonthFormat.format(date1));
+		    dayList.add(newDayFormat.format(date1));
+		}  
+		
+		
 		
 		model.addAttribute("title", "하루 일지");
 		model.addAttribute("workoutGoalList", workoutGoalList);
 		model.addAttribute("workoutLogList", workoutLogList);
+		model.addAttribute("monthList", monthList);
+		model.addAttribute("dayList", dayList);
 		
 		return "workoutLog/workoutLogUser/workoutLogMain";
 			

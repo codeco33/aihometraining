@@ -69,6 +69,7 @@
 			<result column="challengeEnterCode" 			property="challengeEnterCode"/>
 			<result column="workoutLogPrivacyBoundsCode" 	property="workoutLogPrivacyBoundsCode"/>
 			<result column="workoutLogUpdateEmail" 			property="workoutLogUpdateEmail"/>
+			<result column="workoutLogUpdateFinalDate" 		property="workoutLogUpdateFinalDate"/>
 			<result column="workoutLogDeleteEmail" 			property="workoutLogDeleteEmail"/>
 			
 			<association property="eClassCategoryLarge" javaType="EClassCategoryLarge">
@@ -147,6 +148,7 @@
 			<result column="challengeEnterCode" 			property="challengeEnterCode"/>
 			<result column="workoutLogPrivacyBoundsCode" 	property="workoutLogPrivacyBoundsCode"/>
 			<result column="workoutLogUpdateEmail" 			property="workoutLogUpdateEmail"/>
+			<result column="workoutLogUpdateFinalDate" 		property="workoutLogUpdateFinalDate"/>
 			<result column="workoutLogDeleteEmail" 			property="workoutLogDeleteEmail"/>
 		</association>	
 	</resultMap>
