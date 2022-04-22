@@ -125,25 +125,39 @@ public class WorkoutLogUserController {
 	@GetMapping("/workoutLogList")
 	public String workoutLogList(Model model
 								,@RequestParam(value = "workoutLogCode", required = false) String workoutLogCode
-								,@RequestParam(value = "filePath", required = false) String filePath) {
+								,@RequestParam(value = "filePath", required = false) String filePath) throws ParseException {
 		log.info("파일 주소 : " , filePath);
 		//운동 목표 목록 조회
 		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
 		log.info("운동 목표 목록 조회  workoutGoalList : {}", workoutGoalList);
 		
-		WorkoutLog workoutLogbyCode = workoutLogUserService.getworkoutLogByCode(workoutLogCode);
-		log.info("일지 코드로 일지 목록 조회  workoutLogbyCode : {}", workoutLogbyCode);
-		
-		//일지 목록 조회
-		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList();
-		log.info("일지 목록 조회  workoutLogList : {}", workoutLogList);
+		//일지 코드에 대한 일지 보여주기 - 한 개의 일지 정보를 보여주므로 리스트로 가져올 필요 없음
+		WorkoutLog workoutLog = workoutLogUserService.getworkoutLogByCode(workoutLogCode);
+		log.info("일지 코드로 일지 목록 조회  workoutLogbyCode : {}", workoutLog);
 		
 		log.info("일지 코드  workoutLogCode : {}", workoutLogCode);
 		
+		//일지 등록일 보여주기 - 한 개의 일지에 대한 정보만 필요하므로 리스트로 담아줄 필요가 없다.
+		    Date date1=new SimpleDateFormat("yyyy-MM-dd").parse(workoutLog.getWorkoutLogUpdateFinalDate());  
+		    log.info("일지 date1 : {}", date1);
+		    SimpleDateFormat newMonthFormat = new SimpleDateFormat("MM월");
+		    SimpleDateFormat newDayFormat = new SimpleDateFormat("dd일");
+		    
+			
+			newMonthFormat.format(date1); 
+			newDayFormat.format(date1);
+			
+		    log.info("일지  newMonthFormat.format(date1); : {}",  newMonthFormat.format(date1));
+		    log.info("일지  newDayFormat.format(date1); : {}",  newDayFormat.format(date1));
+		    
+		    String month = newMonthFormat.format(date1);
+		    String day = newDayFormat.format(date1);
+		
 		model.addAttribute("title", "일지 상세 화면");
 		model.addAttribute("workoutGoalList", workoutGoalList);
-		model.addAttribute("workoutLogList", workoutLogList);
-		model.addAttribute("workoutLogbyCode", workoutLogbyCode);
+		model.addAttribute("workoutLog", workoutLog);
+		model.addAttribute("month", month);
+		model.addAttribute("day", day);
 		
 		return "workoutLog/workoutLogUser/workoutLogList";
 		
