@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	  
+		
+		   <div class="modal-content" id="selectDietBankModalIn" th:fragment="fragment-SelectDietBankList">
+		     <div class="modal-header">
+		       <h5 class="modal-title" id="exampleModalLabel"></h5>
+		       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		         <span aria-hidden="true">&times;</span>
+		       </button>
+		     </div>
+		     <div class="modal-body">
+		     	<div class="accordion BankAccordion">
+				  <div class="card BankList-group" th:each="d : ${dietBankList}">
+				    <div class="card-header headingBank" role="button" th:value="${d.dietBankCode}"  style="cursor:pointer;" data-toggle="collapse" th:data-target="|#Accor-${d.dietBankCode}|" aria-expanded="false" aria-controls="collapseOne">
+				      <h2 class="mb-0">
+				        <span style="font-size: 20px;" th:text="|${d.dietBankCode}(${d.memberEmail},${d.dietBankInsertDate})|">
+				        </span>
+				      </h2>
+				    </div>
+				
+				    <div th:id="|Accor-${d.dietBankCode}|" th:value="${d.dietBankCode}" class="collapse UserDietBankDetailClass" aria-labelledby="headingOne" >
+				      <div class="card-body UserDietBankDetail">
+				      	 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+		     </div>
+		     <div class="modal-footer">
+		     </div>
+		   </div>
+		 
+	
+	<th:block layout:fragment="customBodyScript">
+			<script th:inline="javascript">
+			$('.headingBank').click(function(e){
+				
+				var dietBankCode = $(this).attr('value');
+				
+				
+				$.ajax({
+						 url: '/diet/mypage/selectDietBankListDetail'
+						,type: 'POST'
+						,data: {'dietBankCode' : dietBankCode}
+						,dataType: 'text'
+						,success: function(data){
+							$(e.target).parents('.BankList-group').find('.UserDietBankDetail').replaceWith(data);
+						}
+					});
+				
+			});
+				
+				
+		</script>
+	</th:block>
+</html>

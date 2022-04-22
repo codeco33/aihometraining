@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+		<!-- start:Left Menu -->
+            <div id="left-menu" th:fragment="eclassleftmenuFragment">
+              <div class="sub-left-menu scroll">
+                <ul class="nav nav-list">
+                    <li class="time">
+                      <h1 class="animated fadeInLeft">21:00</h1>
+                      <p class="animated fadeInRight">Sat,October 1st 2029</p>
+                    </li>
+                    <li class="ripple">
+	                    <a th:href="@{/eclassadmin}">
+	                   		<span class="fa fa-home"></span> 홈
+	                    </a>
+                    </li>
+                    <li class="ripple">
+                    <a th:href="@{/eclassadmin/studentList}">
+                   		<span class="fa fa fa-users"></span> 수강생 목록
+                    </a>
+                    </li>
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header">
+                        <span class="fa-area-chart fa"></span> 일지 피드백
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="chartjs.html">일지관리</a></li>
+                      </ul>
+                    </li>
+                    <li class="ripple">
+                    <a class="tree-toggle nav-header">
+                    	<span class="fa fa-check-square-o"></span> 식단  
+                    	<span class="fa-angle-right fa right-arrow text-right"></span> 
+                    </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="formelement.html">식단 은행</a></li>
+                        <li><a href="#">개별 식단 관리</a></li>
+                        <li><a href="#">수강생 식단 관리</a></li>
+                      </ul>
+                    </li>
+                    <li class="ripple">
+                    <a class="tree-toggle nav-header">
+                    	<span class="fa fa-table"></span> 채팅
+                    	<span class="fa-angle-right fa right-arrow text-right"></span> 
+                    </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="datatables.html">채팅 내역 관리(관리자)</a></li>
+                      </ul>
+                    </li>
+                    <li class="ripple">
+                    <a class="tree-toggle nav-header">
+                    	<span class="fa fa-table"></span> 알림
+                    	<span class="fa-angle-right fa right-arrow text-right"></span> 
+                    </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="datatables.html">알림 문구 관리</a></li>
+                        <li><a href="datatables.html">알림 내역 관리</a></li>
+                        <li><a href="datatables.html">새 알림 등록</a></li>
+                      </ul>
+                    </li>
+                    <li class="ripple">
+                    <a class="tree-toggle nav-header">
+                    	<span class="fa fa-table"></span> 쪽지
+                    	<span class="fa-angle-right fa right-arrow text-right"></span> 
+                    </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="datatables.html">쪽지 관리</a></li>
+                        <li><a href="datatables.html">쪽지함</a></li>
+                      </ul>
+                    </li>
+                    <li class="ripple">
+                    <a class="tree-toggle nav-header">
+                    	<span class="fa fa-table"></span> 신고
+                    	<span class="fa-angle-right fa right-arrow text-right"></span> 
+                    </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="datatables.html">등록된 신고 관리</a></li>
+                        <li><a href="datatables.html">신고 기준 관리</a></li>
+                      </ul>
+                    </li>
+                    <li class="ripple">
+                    <a href="calendar.html">
+                   		<span class="fa fa-calendar-o"></span>Calendar
+                    </a>
+                    </li>                   
+                  </ul>
+                </div>
+            </div>
+          <!-- end: Left Menu -->
+</html>

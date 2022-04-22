@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/userdefault}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+		<!-- 참가 챌린지 세부정보 start -->
+		<div id="enterDetailInfo" class="fix services-area services-area2">
+			<div class="container">
+				<div class="row justify-content-center">
+					
+					<div class="single-services mb-30 col-lg-6">
+						<div class="features-caption">
+							<h3 class="captionTitle" th:text="${enterDetail.challengeGatherName}"></h3>
+							
+							<!-- 클래스정보 -->
+							<div class="form-group">
+								<label class="inputTitle">챌린지 카테고리</label>
+								<input type="text" name="challengeCategoryName" class="form-control-plaintext" readonly th:value="${enterDetail.challengeCategory.challengeCategoryName}">
+							</div>
+							<div class="form-group">
+								<label class="inputTitle">챌린지 인증 방법</label>
+								<input type="text" name="challengeGatherProveMethod" class="form-control-plaintext" readonly th:value="${enterDetail.challengeGatherProveMethod}">
+							</div>
+							<div class="form-group">
+								<label class="inputTitle">챌린지 필수 인증 횟수</label>
+								<input type="text" name="challengeGatherPlanProveNumber" class="form-control-plaintext" readonly th:value="${enterDetail.challengeGatherPlan.challengeGatherPlanProveNumber}">
+							</div>
+						
+							<div class="form-group form-border"></div>
+							
+							<div class="form-group">
+								<label class="inputTitle">챌린지 시작일</label>
+								<input type="text" name="challengeStartDate" class="form-control-plaintext" readonly th:value="${enterDetail.challengeStartDate}">
+							</div>
+							<div class="form-group">
+								<label class="inputTitle">챌린지 종료일</label>
+								<input type="text" name="challengeEndDate" class="form-control-plaintext" readonly th:value="${enterDetail.challengeEndDate}">
+							</div>
+							
+							<div style="border-bottom: 2px solid #58666e;"></div>
+							
+							<!-- 참가자 정보 -->
+							<div class="form-group mt-3">
+								<table class="table">
+									<thead>
+									  <tr class="theadTr">
+									  	<th scope="col">참가 회원 이메일</th>
+									  	<th scope="col">참가 회원 인증 상태</th>
+									  	<th scope="col">챌린지 진행률</th>
+									  	</tr>
+									</thead>
+									<tbody>
+									  <tr th:if="${not #lists.isEmpty(enterDetail.challengeGatherPlanDoList)}" th:each="el : ${enterDetail.challengeGatherPlanDoList}">
+									    <td th:text="${el.memberEnterEmail}"></td>
+									    <td th:text="${el.challengeGatherPlanDoState}"></td>
+									    <td>
+									    	<div class="progress">
+												<div class="progress-bar color-7" role="progressbar" th:style="${'width:'+ el.challengeGatherPlanDoAchieveRateAfterProve}+'%;'"
+												th:aria-valuenow="${el.challengeGatherPlanDoAchieveRateAfterProve}" aria-valuemin="0" aria-valuemax="100">[[${el.challengeGatherPlanDoAchieveRateAfterProve}]]</div>
+											</div>
+									    </td>
+									  </tr>
+									  <tr th:unless="${not #lists.isEmpty(enterDetail.challengeGatherPlanDoList)}">
+									    <td colspan="3">참가중인 회원이 없습니다.</td>
+									  </tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="row justify-content-center">
+							<a th:href="@{/challenge/challengeEnter/challengePlanDoInsert}" class="genric-btn primary radius mt-2">인증 하기</a>
+			            </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 참가 챌린지 세부사항 area end -->
+	</th:block>
+	
+	<th:block layout:fragment="customCss">
+		<style>
+			.container {
+				margin-top: 20px;
+			}
+			.services-area .single-services {
+			    box-shadow: 3px 5px 20px rgb(66 85 164 / 20%) !important;
+			    display: block;
+			}
+			.container .support-wrapper .left-table {
+				width: 46%;
+				/* padding-left: 40px; */
+				
+			}
+			#enterDetailInfo .inputTitle {
+			    color: #96979f;
+			    font-size: 13px;
+			}
+			
+			
+			@media only screen and (min-width: 1200px) and (max-width: 1440px) {
+				.container .support-wrapper .left-table {
+					width: 46%;
+					padding-left: 20px
+				}
+			}
+			
+			@media ( min-width : 1401px) and (max-width: 1600px) {
+				.container .support-wrapper .left-table {
+					width: 45%;
+					padding-left: 20px
+				}
+			}
+			
+			@media only screen and (min-width: 1601px) and (max-width: 1800px) {
+				.container .support-wrapper .left-table {
+					width: 40%;
+					padding-left: 20px
+				}
+			}
+			
+			@media only screen and (min-width: 992px) and (max-width: 1199px) {
+				.container .support-wrapper .left-table {
+					width: 60%;
+					padding-left: 20px;
+					padding-right: 60px;
+					padding-top: 50px
+				}
+			}
+			
+			@media only screen and (min-width: 768px) and (max-width: 991px) {
+				.container .support-wrapper .left-table {
+					width: 82%;
+					padding-left: 10px;
+					padding-right: 60px;
+					padding-top: 50px
+				}
+			}
+			
+			@media only screen and (min-width: 576px) and (max-width: 767px) {
+				.container .support-wrapper .left-table {
+					width: 100%;
+					padding-left: 5px;
+					padding-right: 60px;
+					padding-top: 50px
+				}
+			}
+			
+			@media ( max-width : 575px) {
+				.container .support-wrapper .left-table {
+					width: 100%;
+					padding-left: 5px;
+					padding-right: 60px;
+					padding-top: 50px
+				}
+			}
+		</style>
+	</th:block>
+</html>

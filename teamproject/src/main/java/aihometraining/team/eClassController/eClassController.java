@@ -150,8 +150,16 @@ public class eClassController {
 										, EClassAnswer eClassAnswer
 										, EClassApproved eClassApproved
 										, HttpSession session) {
-							
+		log.info("운동클래스 신청 수정폼에서 입력 받은 데이터 : {}",eClassCategorySmall);
+		log.info("운동클래스 신청 수정폼에서 입력 받은 데이터 eClassIntroduce.geteClassIntroduceCode() : {}",eClassIntroduce.geteClassIntroduceCode());
+		log.info("운동클래스 신청 수정폼에서 입력 받은 데이터 eClassSectionTitle.geteClassSectionTitleCode() : {}",eClassSectionTitle.geteClassSectionTitleCode());
+		log.info("운동클래스 신청 수정폼에서 입력 받은 데이터 eClassSectionCurriculum.geteClassSectionCurriculumCode() : {}",eClassSectionCurriculum.geteClassSectionCurriculumCode());
+		log.info("운동클래스 신청 수정폼에서 입력 받은 데이터eClassQuestion.geteClassQuestionCode() : {}",eClassQuestion.geteClassQuestionCode());
+		log.info("운동클래스 신청 수정폼에서 입력 받은 데이터eClassAnswer.geteClassAnswerCode() : {}",eClassAnswer.geteClassAnswerCode());
+		log.info("운동클래스 신청 수정폼에서 입력 받은 데이터eClassApproved.geteClassApprovedCode() : {}",eClassApproved.geteClassApprovedCode());
+		
 		String mamberEmail = (String) session.getAttribute("SEMAIL");
+
 		eClassService.EClassIntroduceUpdate(eClassIntroduce, mamberEmail);
 		eClassService.EClassSectionTitleUpdate(eClassSectionTitle, mamberEmail);
 		eClassService.EClassSectionCurriculumUpdate(eClassSectionCurriculum, mamberEmail);
@@ -165,14 +173,8 @@ public class eClassController {
 									  , eClassSectionCurriculum 
 									  , eClassQuestion 
 									  , eClassAnswer);
-							
-		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassCategorySmall);
-		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassIntroduce);
-		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassSectionTitle);
-		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassSectionCurriculum);
-		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassQuestion);
-		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassAnswer);
-		log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassApproved);
+
+
 
 		return "redirect:/eClassOpenAppleyComplete";
 	}

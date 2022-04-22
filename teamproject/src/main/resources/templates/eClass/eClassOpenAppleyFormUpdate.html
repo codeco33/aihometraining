@@ -9,6 +9,12 @@
 
 	<th:block layout:fragment="customContents">
 		<form th:action="@{/AppleyUpdate}">
+			<input type="hidden" name="eClassIntroduceCode" placeholder="1" th:value="${eClassApproved.eClassIntroduce.eClassIntroduceCode}">
+			<input type="hidden" name="eClassSectionTitleCode" placeholder="2" th:value="${eClassApproved.eClassSectionTitle.eClassSectionTitleCode}">
+			<input type="hidden" name="eClassSectionCurriculumCode" placeholder="3" th:value="${eClassApproved.eClassSectionCurriculum.eClassSectionCurriculumCode}">
+			<input type="hidden" name="eClassQuestionCode" placeholder="4" th:value="${eClassApproved.eClassQuestion.eClassQuestionCode}">
+			<input type="hidden" name="eClassAnswerCode" placeholder="5" th:value="${eClassApproved.eClassAnswer.eClassAnswerCode}">
+			<input type="hidden" name="eClassApprovedCode" placeholder="6" th:value="${eClassApproved.eClassApprovedCode}">
 			<div class="container" style="border-radius: 30px; border: solid 5px #aa00cc;">
 				<div class="row" style="margin: 5px;">
 					<div class="col-12" style="padding-top: 10px;">
@@ -47,6 +53,15 @@
 							<div class="row">
 								<div class="col-9" style="padding: 10px;">
 									<textarea rows="20" style="resize:none; width: 100%;" name="eClassIntroduceContent"placeholder="개설 하려는 클래스를 소개 시켜주세요" th:text="${eClassApproved.eClassIntroduce.eClassIntroduceContent}"></textarea>
+
+
+
+
+
+
+
+
+
 								</div>
 								<div class="col-3" style="padding: 10px; text-align: center;">
 									<div style="border: solid 1px; width: 100%; height: 400px;">이미지를 등록해주세요!</div>
