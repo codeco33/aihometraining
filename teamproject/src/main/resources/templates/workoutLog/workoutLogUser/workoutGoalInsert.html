@@ -32,7 +32,8 @@
 				                    <div class="form-select mb-3 pl-3 pr-3">
 				                    	<select id="eClassApprovedCode" name="eClassApprovedCode" required>
 											<th:block th:if="${not #lists.isEmpty(eClassTakeList)}" th:each="l : ${eClassTakeList}" >
-												<option th:value="${l.eClassTakeCode}">[[${l.eClassApprovedName}]]</option>
+												<option th:value="${l.eClassApprovedCode}">[[${l.geteClassApproved().geteClassApprovedName()}]]</option>
+												<option>없음</option>
 											</th:block>
 											<th:block th:unless="${not #lists.isEmpty(eClassTakeList)}">
 												<option >등록된 카테고리가 없습니다.</option>

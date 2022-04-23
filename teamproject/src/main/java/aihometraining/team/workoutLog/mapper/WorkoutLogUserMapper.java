@@ -17,10 +17,10 @@ import aihometraining.team.dto.WorkoutLogPrivacybounds;
 public interface WorkoutLogUserMapper {
 	
 	//운동 목표 조회
-	public List<WorkoutGoal> getworkoutGoalList();
+	public List<WorkoutGoal> getworkoutGoalList(String sessionEmail);
 	
 	//수강 중인 운동 클래스 목록 조회
-	//public List<EClassTake> geteClassTakeList();
+	public List<EClassTake> geteClassTakeList();
 		
 	//일지 공개범위 목록 조회
 	public List<WorkoutLogPrivacybounds> getworkoutLogPrivacyboundsList();
@@ -38,7 +38,7 @@ public interface WorkoutLogUserMapper {
 	public int workoutLogInsert(WorkoutLog workoutLog);
 		
 	//일지 목록 조회
-	public List<WorkoutLog>	getworkoutLogList();
+	public List<WorkoutLog>	getworkoutLogList(String sessionEmail);
 	
 	//일지 수정 화면 - 일지 코드로 일지 조회
 	public WorkoutLog getworkoutLogByLogCode(String workoutLogCode);

@@ -60,15 +60,17 @@ public class WorkoutLogUserController {
 	
 	// 일지 메인 화면
 	@GetMapping("/workoutLogMain")
-	public String workoutLogMain(Model model) throws ParseException {
+	public String workoutLogMain(Model model, HttpSession session) throws ParseException {
+		
+		String sessionEmail = (String) session.getAttribute("SEMAIL");
 		
 		//운동 목표 목룍 조회
-		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
+		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList(sessionEmail);
 		
 		//log.info("운동 목표 목록 조회  workoutGoalList : {}", workoutGoalList);
 		
 		//일지 목록 조회
-		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList();
+		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList(sessionEmail);
 		
 		log.info("일지 목록 조회  workoutLogList : {}", workoutLogList);
 		
@@ -124,11 +126,15 @@ public class WorkoutLogUserController {
 	// 일지 상세 화면
 	@GetMapping("/workoutLogList")
 	public String workoutLogList(Model model
+								,HttpSession session
 								,@RequestParam(value = "workoutLogCode", required = false) String workoutLogCode
 								,@RequestParam(value = "filePath", required = false) String filePath) throws ParseException {
+		
+		String sessionEmail = (String) session.getAttribute("SEMAIL");
+		
 		log.info("파일 주소 : " , filePath);
 		//운동 목표 목록 조회
-		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
+		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList(sessionEmail);
 		log.info("운동 목표 목록 조회  workoutGoalList : {}", workoutGoalList);
 		
 		//일지 코드에 대한 일지 보여주기 - 한 개의 일지 정보를 보여주므로 리스트로 가져올 필요 없음
@@ -166,10 +172,14 @@ public class WorkoutLogUserController {
 	// 일지 메인에서 피드백 클릭 시 일지 상세화면 피드백 위치로 보여주기
 	@GetMapping("/workoutLogListFeedback")
 	public String workoutLogListFeedback(Model model
+										,HttpSession session
 										,@RequestParam(value = "workoutLogTitle", required = false) String workoutLogTitle
 										,@RequestParam(value = "workoutLogContent", required = false) String workoutLogContent) {
+		
+		String sessionEmail = (String) session.getAttribute("SEMAIL");
+		
 		//일지 목록 조회
-		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList();
+		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList(sessionEmail);
 		log.info("일지 목록 조회  workoutLogList : {}", workoutLogList);
 		
 		model.addAttribute("title", "일지 상세 화면");
@@ -319,9 +329,13 @@ public class WorkoutLogUserController {
 	
 	// 운동 목표 목록 조회
 	@GetMapping("/workoutGoalList")
-	public String workoutGoalList(Model model) {
+	public String workoutGoalList(Model model, HttpSession session) {
 		
-		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
+		String sessionEmail = (String) session.getAttribute("SEMAIL");
+		
+		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList(sessionEmail);
+		
+		
 		
 		model.addAttribute("title", "운동 목표");
 		model.addAttribute("workoutGoalList", workoutGoalList);
@@ -337,14 +351,11 @@ public class WorkoutLogUserController {
 	public String workoutGoalInsert(Model model) {
 		
 		// 수강 중인 운동 클래스 목록 조회
-		/*
-		 * List<EClassTake> eClassTakeList = workoutLogUserService.geteClassTakeList();
-		 * log.info("수강 중인 운동 클래스 목록 조회  eClassTakeList : {}", eClassTakeList);
-		 */
+		 List<EClassTake> eClassTakeList = workoutLogUserService.geteClassTakeList();
+		 log.info("수강 중인 운동 클래스 목록 조회  eClassTakeList : {}", eClassTakeList);
 		
 		model.addAttribute("title", "운동 목표 등록");
-		//model.addAttribute("eClassTakeList", eClassTakeList);
-		
+		model.addAttribute("eClassTakeList", eClassTakeList);
 		return "workoutLog/workoutLogUser/workoutGoalInsert";
 		
 	}
@@ -352,9 +363,11 @@ public class WorkoutLogUserController {
 	
 	//운동 계획 화면
 	@GetMapping("/workoutGoalPlanList")
-	public String workoutGoalPlanList(Model model) {
+	public String workoutGoalPlanList(Model model, HttpSession session) {
 		
-		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
+		String sessionEmail = (String) session.getAttribute("SEMAIL");
+		
+		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList(sessionEmail);
 		
 		model.addAttribute("title", "운동 계획");
 		model.addAttribute("workoutGoalList", workoutGoalList);
