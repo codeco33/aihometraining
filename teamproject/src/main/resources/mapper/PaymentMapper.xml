@@ -238,4 +238,6 @@
 		WHERE 
 			paymentCode = #{paymentCode};
 	</select>
+	
+	<select id="getPaymentList" parameterType="String" resultMap="paymentResultMap"></select>
 </mapper>

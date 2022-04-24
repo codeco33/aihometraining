@@ -41,4 +41,7 @@ public interface PaymentMapper {
 	
 	//결제상세내역 조회
 	public Payment getPaymentDetailByPaymentCode(String paymentCode);
+	
+	//결제페이지
+	public List<Payment> getPaymentList(String memberEmail);
 }
