@@ -156,6 +156,8 @@
 			,cg.challengeEnterDeposit
 			,cp.challengeGatherPlanProveNumber
 			,cp.challengeGatherPlanRound
+			,cp.challengeGatherPlanCode
+			,cp.challengeSettingCode
 		FROM
 			challengegather AS cg
 			INNER join
@@ -238,6 +240,7 @@
 			,challengeGatherPlanProveNumber
 			,challengeGatherChallengeStartDate
 			,challengeGatherChallengeLastDate
+			,challengeGatherPlanRound
 		)VALUES (
 			 #{challengeGatherPlanCode}
 			,#{memberEmail}
@@ -247,6 +250,7 @@
 			,#{challengeGatherPlanProveNumber}
 			,#{challengeGatherChallengeStartDate}
 			,#{challengeGatherChallengeLastDate}
+			,#{challengeGatherPlanRound}
 		);
 	
 	</insert>
