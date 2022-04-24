@@ -117,8 +117,9 @@ public class PaymentController {
 		model.addAttribute("title", "결제");
 		
 		paymentService.addPayment(payment);
+		System.out.println(payment.getPaymentUsePoint());
 		
-		reAttr.addAttribute("paymentCode", "1234");
+		reAttr.addAttribute("paymentCode", payment.getPaymentCode());
 		
 		return "redirect:/mypage/mypaymentList/paymentDetail";
 	}
@@ -147,9 +148,8 @@ public class PaymentController {
 				paymentGoodsName = eClass.geteClassApprovedName(); 
 				paymentGoodsPrice = eClass.geteClassApprovedPrice();
 				paymentGoodsSetDate = eClass.geteClassApprovedSetDate(); 
-				
 			}
-			 
+			
 		}else {
 			Map<String,String> challengeEnterInfo = paymentMapper.getCallengeEnter(paymentGroupCode);
 			String challengeCode = challengeEnterInfo.get("challengeGatherCode");
