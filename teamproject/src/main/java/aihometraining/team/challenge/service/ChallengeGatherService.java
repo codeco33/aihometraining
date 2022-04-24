@@ -104,6 +104,7 @@ public class ChallengeGatherService {
 		challengeGatherPlan.setChallengeGatherChallengeStartDate(challengeGather.getChallengeStartDate());
 		challengeGatherPlan.setChallengeGatherChallengeLastDate(challengeGather.getChallengeEndDate());
 		challengeGatherPlan.setChallengeGatherPlanProveNumber(proveNumber);
+		challengeGatherPlan.setChallengeGatherPlanRound(proveNumber);
 		
 		//챌린지 모집 등록 처리
 		challengeGatherMapper.challengeGatherInsert(challengeGather);
