@@ -30,7 +30,7 @@
 			                    </div>
 			                    <div class="form-group">
 				                    <label class="control-label pl-3" style="color:#BDBDCC; font-size: 13px;">챌린지 카테고리 </label>
-				                    <div class="form-select mb-3 pl-3 pr-3">
+				                    <div class="form-select mb-3 pl-3 pr-3" >
 				                    	<select id="challengeCategoryCode" name="challengeCategoryCode" required>
 											<th:block th:if="${not #lists.isEmpty(challengeCateList)}" th:each="l : ${challengeCateList}" >
 												<option th:value="${l.challengeCategoryCode}">[[${l.challengeCategoryName}]]</option>
@@ -66,13 +66,14 @@
 		                	
 		                	
 		                	<h3 class="mb-4">챌린지 모집 계획 등록 사항</h3>
-		                	
-			                    <div class="col-12">
-			                        <div class="form-group">
-			                        	<label>주</label>
-			                            <input class="form-control valid" name="challengeGatherPlanProveNumber" id="challengeGatherPlanProveNumber" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = '챌린지 필수 인증 횟수'" placeholder="챌린지 필수 인증 횟수">
+		                		
+		                		<div class="col-12">
+			                        <div class="form-group mb-3">
+			                        	<label style="vertical-align: bottom;">주</label>
+			                            <input class="form-control" name="challengeGatherProveFrequency" id="challengeGatherProveFrequency" type="text" style="display:inline-block; width: 20%;" onfocus="this.placeholder = ''" onblur="this.placeholder = '인증빈도(주단위)'" placeholder="인증빈도(주단위)">
+			                            <label style=" vertical-align: bottom;">회</label>
 			                        </div>
-			                    </div>
+			                    </div>	
 			                    <div class="form-group">
 				                    <label class="control-label pl-3" style="color:#BDBDCC; font-size: 13px;">인증 기간 후 인증 가능 여부 </label>
 				                    <div class="form-select mb-3 pl-3 pr-3">
@@ -108,11 +109,7 @@
 			                            <input class="form-control" name="challengeGatherProveContent" id="challengeGatherProveContent" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = '챌린지 인증내용'" placeholder="챌린지 인증내용">
 			                        </div>
 			                    </div>
-			                    <div class="col-12">
-			                        <div class="form-group mb-3">
-			                            <input class="form-control" name="challengeGatherProveFrequency" id="challengeGatherProveFrequency" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = '챌린지 인증빈도(주단위)'" placeholder="챌린지 인증빈도(주단위)">
-			                        </div>
-			                    </div>									
+			                    							
 			                <div class="form-group mt-3 row justify-content-center">
 			                    <button type="submit" class="button button-contactForm boxed-btn">모집 등록</button>
 			                </div>
@@ -335,6 +332,12 @@
 		        right: calc(50% - 5px)
 		    }
 		}
+		.form-select .nice-select{
+			background: #f0e9ff;
+		}
+		.error{
+			display: flex;
+		}
 		</style>
 	</th:block>
 	
@@ -360,25 +363,27 @@
                         challengeGatherPlanProveNumber: {
                             required: true
                         },
-                        challengeGatherProveMethod2: {
-                            required: true
-                        },
-                        challengeGatherProveContent2: {
-                            required: true
-                        },
                         challengeCategory: {
                             required: true
                         },
-                        challengeGatherStart: {
+                        challengeGatherStartDate: {
                             required: true
                         },
-                        challengeGatherEnd: {
+                        challengeGatherEndDate: {
                             required: true
                         },
-                        challengeStart: {
+                        challengeStartDate: {
                             required: true
                         },
-                        challengeEnd: {
+                        challengeEndDate: {
+                            required: true
+                        },
+                        challengeGatherProveFrequency: {
+                        	required: true,
+                        	digits : true,
+                        	range:[1,7]
+                        },
+                        challengeGatherIntro: {
                             required: true
                         }
                         
@@ -399,29 +404,28 @@
                         challengeGatherPlanProveNumber: {
                             required: "인증회수를 입력해주세요"
                         },
-                        challengeGatherProveMethod2: {
-                            required: "인증방법"
-                        },
-                        challengeGatherProveContent2: {
-                            required: "인증내용"
-                        },
                         challengeCategory: {
                         	required: "카테고리를 선택해주세요."
                         },
-                        challengeGatherStart: {
+                        challengeGatherStartDate: {
                         	required: "모집 시작일을 선택해주세요."
                         },
-                        challengeGatherEnd: {
+                        challengeGatherEndDate: {
                         	required: "모집 종료일일 선택해주세요."
                         },
-                        challengeStart: {
+                        challengeStartDate: {
                         	required: "챌린지 시작일을 선택해주세요."
                         },
-                        challengeEnd: {
+                        challengeEndDate: {
                         	required: "챌린지 종료일일 선택해주세요."
                         },
                         challengeGatherProveFrequency: {
-                        	required: "인증빈도를 입력해주세요."
+                        	required: "인증빈도를 입력해주세요.",
+                        	digits : "숫자만 입력 가능합니다.",
+                        	range:"1~7 사이의 숫자만 입력 가능합니다."
+                        },
+                        challengeGatherIntro: {
+                            required: "챌린지 소개를 입력해 주세요."
                         }
                         
                     }
