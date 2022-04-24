@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import aihometraining.team.challenge.mapper.ChallengeEnterMapper;
 import aihometraining.team.challenge.service.ChallengeEnterService;
@@ -63,6 +64,7 @@ private static final Logger log = LoggerFactory.getLogger(ChallengeEnterControll
 		
 		log.info("참가챌린지 목록조회시 session: {}", session);
 		String sEmail = (String) session.getAttribute("SEMAIL");
+		
 		
 		challengeEnterService.challengeEnterInsert(challengeEnter,challengeGatherPlanDo, sEmail);
 		
@@ -167,7 +169,7 @@ private static final Logger log = LoggerFactory.getLogger(ChallengeEnterControll
 	 */
 	
 	@PostMapping("/challengeEnterPaymemt")
-	public String challengeEnterPaymemt(ChallengeGather challengeGather, Model model) {
+	public String challengeEnterPaymemt(ChallengeGather challengeGather, Model model, RedirectAttributes reAttr) {
 		
 		model.addAttribute("title", "챌린지 참가결제");
 		model.addAttribute("leftMenuList", "챌린지");
@@ -189,7 +191,26 @@ private static final Logger log = LoggerFactory.getLogger(ChallengeEnterControll
 		/* DTO안에 DTO의 property값 받는 또 다른 방법
 		 * model.addAttribute("challengeGatherPlan", challengeGatherPlan); */
 		
-		return "challenge/challengeEnter/challengeEnterPaymemt";
+		
+		/** 2022-04-24 진수경
+		 * 
+		 * 결제 기능 구현으로 수정
+		 * 
+		 * - 챌린지 참가 테이블 insert
+		 * - 결제
+		 * 		성공시 결제 테이블 insert
+		 * 		실패시 챌린지 참가 테이블 delete 
+		 */
+		
+		
+		
+		
+		
+		//결제 화면에 paymentGroupCode 넘겨주기
+		reAttr.addAttribute("paymentGroupCode", "c202204241822_id004");
+		
+		
+		return "redirect:/payment";
 		
 	}
 }
