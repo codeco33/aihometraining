@@ -22,22 +22,14 @@
 			    	<div class="properties__card col-lg-8 col-md-8">    
 				        <form class="form-contact gatherInsert_form" th:action="@{/challenge/challengeEnter/challengePlanDoInsert}" method="post" enctype="multipart/form-data" id="gatherInsert" novalidate="novalidate">
 		                	<h3 class="mb-4 mt-5">챌린지 인증 사항</h3>
-		                		<th:block th:if="${not #lists.isEmpty(challengeEnterByCode)}" th:each="l : ${challengeEnterByCode}">
+		                		<th:block th:if="${not #lists.isEmpty(planDoProveByCode)}" th:each="l : ${planDoProveByCode}">
 			                    <div class="col-12">
-			                        <div class="form-group mb-3">
-			                        	<input type="hidden" name="challengeGatherPlanCode" th:value="${l.challengeGatherPlan.challengeGatherPlanCode}">
-			                        	<input type="hidden" name="memberEmail"th:value="${l.challengeGather.memberEmail}">
-			                        	<input type="hidden" name="challengeSettingCode" th:value="${l.challengeGatherPlan.challengeSettingCode}">
-			                        	<input type="hidden" name="challengeGatherCode" th:value="${l.challengeGather.challengeGatherCode}">
-			                            <input class="form-control valid" name="challengeGatherName" id="challengeGatherName" type="text" onfocus="this.placeholder = ''" th:value="${l.challengeGather.challengeGatherName}" onblur="this.placeholder = '챌린지 모집명'" readonly="readonly">
+			                    	 <div class="form-group mb-3">
+			                    	 	<input type="hidden" name="challengeGatherPlanDoCode" th:value="${l.challengeGatherPlanDoCode}">
+			                            <input type="text" class="form-control" name="challengeGatherPlanDoProveRound" th:value="${l.challengeGatherPlanDoProveRound}" style="display:inline-block; width: 10%;" readonly="readonly">
+			                            <label style=" vertical-align: bottom;">회차</label>
 			                        </div>
 			                    </div>
-			                    <div class="col-12">
-			                        <div class="form-group mb-3">
-			                            <input type="hidden" class="form-control" name="challengeCategoryCode" th:value="${l.challengeCategoryCode}">
-			                            <input type="text" class="form-control" name="challengeCategoryName" th:value="${l.challengeCategory.challengeCategoryName}" readonly="readonly">
-			                        </div>
-			                    </div>		
 			                   	</th:block>	
 			                    <div class="col-12">
 			                        <div class="form-group mb-3">

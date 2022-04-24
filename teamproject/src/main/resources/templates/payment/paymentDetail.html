@@ -26,14 +26,15 @@
 		
 		#paymentCancelBtn{
 			padding: 5px 10px;
+			margin-left: 10px;
 		}
 		
 		.orderGoodsTable th, .orderGoodsTable td {
 			text-align: center;
 			vertical-align: middle !important;
 		}
-		td[colspan="5"] {
-			text-align: right;
+		#tfoot {
+			text-align: right !important;
 		}
 </style>
 </th:block>
@@ -61,19 +62,22 @@
 						<tbody>
 							<tr>
 								<th scope="row">결제코드</th>
-								<td>[[${paymentCode}]]</td>
+								<td th:text="${payment.paymentCode}"></td>
 							</tr>
 							<tr>
 								<th scope="row">결제일자</th>
-								<td></td>
+								<td th:text="${payment.paymentRegDate}"></td>
 							</tr>
 							<tr>
 								<th scope="row">결제자</th>
-								<td></td>
+								<td th:text="${payment.member.memberName}"></td>
 							</tr>
 							<tr>
 								<th scope="row">결제상태</th>
-								<td>결제완료 <input type="button" id="paymentCancelBtn" class="btn btn-outline btn-default" value="결제취소"></td>
+								<td>
+									[[${payment.paymentState}]]
+									<input type="button" id="paymentCancelBtn" class="btn btn-outline btn-default" value="결제취소">
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -92,19 +96,19 @@
 						<tbody>
 							<tr>
 								<th scope="row">총 주문금액</th>
-								<td>50,000</td>
+								<td th:text="${payment.paymentTotalOrderPrice} +'원'"></td>
 							</tr>
 							<tr>
 								<th scope="row">포인트 사용 금액</th>
-								<td>6,000</td>
+								<td th:text="${payment.paymentUsePoint} +'p'"></td>
 							</tr>
 							<tr>
 								<th scope="row">총 결제금액</th>
-								<td>44,000</td>
+								<td th:text="${payment.paymentTotalPayPrice} +'원'"></td>
 							</tr>
 							<tr>
 								<th scope="row">결제수단</th>
-								<td>카카오페이</td>
+								<td th:text="${payment.paymentMethod.paymentMethodName}"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -117,7 +121,6 @@
 					</div>
 					<table class="table orderGoodsTable">
 						<colgroup>
-							<col style="width: 150px">
 							<col style="width: 250px">
 							<col style="width: auto">
 							<col style="width: auto">
@@ -125,7 +128,7 @@
 						</colgroup>
 						<thead>
 							<tr>
-								<th colspan="2">상품정보</th>
+								<th>상품정보</th>
 								<th>판매가</th>
 								<th>결제상태</th>
 								<th>다음 결제 일자</th>
@@ -133,21 +136,20 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td>이미지</td>
-								<td>클래스/챌린지 제목<br>
-								클래스/챌린지 개설한 사람 이름</td>
-								<td>50,000</td>
-								<td>결제완료</td>
+								<td>
+									<h4>[[${eClass.eClassApprovedName}]]</h4>
+									[[${eClass.member.memberName}]]
+								</td>
+								<td>[[${eClass.eClassApprovedPrice}]]</td>
+								<td>[[${payment.paymentState}]]</td>
 								<td>-</td>
 							</tr>
+							<tr>
+								<td colspan="4"  id="tfoot">
+								상품구매금액 <strong>[[${payment.paymentTotalOrderPrice}]]</strong> - 포인트 사용금액 <strong>[[${payment.paymentUsePoint}]]</strong> = 합계 :  <strong>[[${payment.paymentTotalPayPrice}]]</strong> 
+								</td>
+							</tr>
 						</tbody>
-						<tfoot>
-						<tr>
-							<td colspan="5" >
-							상품구매금액 <strong>50,000</strong> - 포인트 사용금액 <strong>6,000</strong> = 합계 :  <strong>44,000</strong> 
-							</td>
-						</tr>
-						</tfoot>
 					</table>
 				</div>
 				

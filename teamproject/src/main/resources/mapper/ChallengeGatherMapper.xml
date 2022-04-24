@@ -21,6 +21,7 @@
 		<result column="memberEnterEmail" 				property="memberEnterEmail"/>
 		<result column="challengeGatherStartDate" 		property="challengeGatherStartDate"/>
 		<result column="challengeGatherEndDate" 		property="challengeGatherEndDate"/>
+		<result column="challengeEnterDeposit" 			property="challengeEnterDeposit"/>
 		
 		<association property="member" javaType="Member">
 			<id 	column="memberEmail" 				property="memberEmail"/>
@@ -97,6 +98,7 @@
 			<result column="memberEnterEmail" 				property="memberEnterEmail"/>
 			<result column="challengeGatherStartDate" 		property="challengeGatherStartDate"/>
 			<result column="challengeGatherEndDate" 		property="challengeGatherEndDate"/>
+			<result column="challengeEnterDeposit" 			property="challengeEnterDeposit"/>
 		</association>
 		
 		<association property="challengeCategory" javaType="ChallengeCategory">
@@ -119,19 +121,20 @@
 	<select id="getChallengeGatherList" resultMap="challengeGatherResultMap">
 		/*모집 챌린지 목록 조회*/
 		SELECT
-			 ch.challengeGatherCode
-			,ch.challengeGatherName
-			,ch.challengeGatherIntro
-			,ch.challengeGatherMaxPeople
-			,ch.challengeGatherProveMethod
-			,ch.challengeGatherProveContent
-			,ch.challengeGatherProveFrequency
-			,ch.challengeGatherStartDate
-			,ch.challengeGatherEndDate
-			,ch.challengeStartDate
-			,ch.challengeEndDate
+			 cg.challengeGatherCode
+			,cg.challengeGatherName
+			,cg.challengeGatherIntro
+			,cg.challengeGatherMaxPeople
+			,cg.challengeGatherProveMethod
+			,cg.challengeGatherProveContent
+			,cg.challengeGatherProveFrequency
+			,cg.challengeGatherStartDate
+			,cg.challengeGatherEndDate
+			,cg.challengeStartDate
+			,cg.challengeEndDate
+			,cg.challengeEnterDeposit
 		FROM
-			challengegather AS ch;	
+			challengegather AS cg;	
 	</select>
 	
 	<select id="getGatherDatail" parameterType="String" resultMap="challengeGatherPlanResultMap">
@@ -150,8 +153,11 @@
 			,cg.challengeEndDate
 			,cg.challengeGatherStartDate
 			,cg.challengeGatherEndDate
+			,cg.challengeEnterDeposit
 			,cp.challengeGatherPlanProveNumber
 			,cp.challengeGatherPlanRound
+			,cp.challengeGatherPlanCode
+			,cp.challengeSettingCode
 		FROM
 			challengegather AS cg
 			INNER join
@@ -202,6 +208,7 @@
 			,challengeGatherRegDate
 			,challengeGatherStartDate
 			,challengeGatherEndDate
+			,challengeEnterDeposit
 		)VALUES (
 			 #{challengeGatherCode}
 			,#{memberEmail}
@@ -217,6 +224,7 @@
 			,CURDATE()
 			,#{challengeGatherStartDate}
 			,#{challengeGatherEndDate}
+			,#{challengeEnterDeposit}
 		);
 	</insert>
 	
@@ -232,6 +240,7 @@
 			,challengeGatherPlanProveNumber
 			,challengeGatherChallengeStartDate
 			,challengeGatherChallengeLastDate
+			,challengeGatherPlanRound
 		)VALUES (
 			 #{challengeGatherPlanCode}
 			,#{memberEmail}
@@ -241,6 +250,7 @@
 			,#{challengeGatherPlanProveNumber}
 			,#{challengeGatherChallengeStartDate}
 			,#{challengeGatherChallengeLastDate}
+			,#{challengeGatherPlanRound}
 		);
 	
 	</insert>

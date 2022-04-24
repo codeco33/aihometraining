@@ -44,7 +44,7 @@
 			    text-align: center;
 			    margin-top: 10px;
 			}
-			#challengeList tr:hover{
+			#planDoList tr:hover{
 				font-weight: bold;
 			}
 		</style>
@@ -56,12 +56,12 @@
 			<div class="panel">
 				<!-- 패널 헤더 타이틀 -->
 				<div class="panel-heading bg-white border-none">
-		          <h4><span class="icon-direction icons"></span> 인증 목록</h4>
+		          <h4><span class="icon-direction icons"></span></h4>
 		        </div>
 		        
 				<div class="panel-body">
 					<!-- 인증 목록 검색 폼 -->
-						<form class="searchCateTableForm" th:action="@{/admin/challengeList}" method="get">
+						<!-- <form class="searchCateTableForm" th:action="@{/admin/challengeList}" method="get">
 							
 							<div class="input-group">
 							  <span class="form-control" style="width: 180px;">카테고리 검색</span>
@@ -112,33 +112,34 @@
 										초기화
 								</button>
 							</div>
-						</form>
+						</form> -->
 								
-					<!-- 데이터 테이블 -->
+					<!-- 인증 목록 데이터 테이블 -->
 					<div class="responsive-table" >
-		            	<table id="challengeList" class="table table-striped table-bordered table-hover" style="width: 100% " cellspacing="0">
+		            	<table id="planDoList" class="table table-striped table-bordered table-hover" style="width: 100% " cellspacing="0">
 							<thead>
 								<tr>
-									<th>챌린지 모집코드</th>
-									<th>챌린지 등록자 이메일</th>
-									<th>챌린지 카테고리 명</th>
-									<th>챌린지 모집명</th>
-									<th>챌린지 등록날짜</th>
-									<th>챌린지 모집 시작일</th>
-									<th>챌린지 모집 종료일</th>
+									<th>인증 회차</th>
+									<th>참가 챌린지명</th>
+									<th>인증 내용</th>
+									<th>인증 상태</th>
+									<th>인증 승인 날짜</th>
+									<th>인증</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:if="${not #lists.isEmpty(gatherList)}" th:each="l : ${gatherList}">
-									<td id="challengeGatherCode" th:text="${l.challengeGatherCode}"></td>
-									<td th:text="${l.memberEmail}"></td>
-									<td th:text="${l.challengeCategory.challengeCategoryName}"></td>
-									<td th:text="${l.challengeGatherName}"></td>
-									<td th:text="${l.challengeGatherRegDate}"></td>
-									<td th:text="${l.challengeGatherStartDate}"></td>
-									<td th:text="${l.challengeGatherEndDate}"></td>
+								<tr th:if="${not #lists.isEmpty(planDoList)}" th:each="l : ${planDoList}">
+									<td th:text="${l.challengeGatherPlanDoProveRound}"></td>
+									<td id="gatherName" th:text="${l.challengeGather.challengeGatherName}"></td>
+									<td th:text="${l.challengeGatherPlanDoContent}"></td>
+									<td th:text="${l.challengeGatherPlanDoState}"></td>
+									<td th:text="${l.challengeGatherPlanDoProveCheckDate}"></td>
+									<td>
+										<a th:if="${l.challengeGatherPlanDoState == '미인증'} " th:href="@{/challenge/challengeEnter/challengePlanDoInsert(challengeGatherPlanDoCode=${l.challengeGatherPlanDoCode})}"><span class="label label-primary">인증</span></a>
+									</td>
+									
 								</tr>
-								<tr th:unless="${not #lists.isEmpty(gatherList)}">
+								<tr th:unless="${not #lists.isEmpty(planDoList)}">
 									<td colspan="7">등록된 정보가 없습니다.</td>
 								</tr>															
 							</tbody>
@@ -147,25 +148,6 @@
 				</div>
 			</div>
 		</div>
-	
-		<!-- Modal Start -->
-				<div class="modal fade" id="GatherListModal" tabindex="-1" aria-labelledby="GatherListModalLabel" aria-hidden="true">
-				  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				          <span aria-hidden="true">&times;</span>
-				        </button>
-				      </div>
-				      <div class="modal-body">
-				      </div>
-				      <div class="modal-footer">
-				        <button  type="button" id="modalclose" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-		<!-- Modal End -->
 	
 	</th:block>
 	
@@ -229,7 +211,7 @@
 			
 			 
 			/* 데이터 테이블 생성*/
-			var table = $('#challengeList').DataTable({
+			var table = $('#planDoList').DataTable({
 				order : [ 0, 'asc' ],
 				lengthChange : false,
 				pageLength : 15,
@@ -248,12 +230,19 @@
 
 			});
 			
+			/* 인증챌린지명 넣기 */
+			var gatherName = $('#gatherName').text();
+			console.log(gatherName);
+			var $h4 = $('.panel-heading').find('h4');
+			console.log($h4);
+			$h4.append(' '+gatherName);
+			
 			/* 레코드 수 포맷 */
 			var info = table.page.info();			
-			$('#challengeList_info').html('전체 ' + info.recordsTotal + ' 건').css('font-weight','bold');
+			$('#planDoList_info').html('전체 ' + info.recordsTotal + ' 건').css('font-weight','bold');
 			
-			$('#challengeList').click(function(){
-				$('#challengeList_info').html('전체 ' + info.recordsTotal + ' 건');
+			$('#planDoList').click(function(){
+				$('#planDoList_info').html('전체 ' + info.recordsTotal + ' 건');
 			});
 			
 		  
