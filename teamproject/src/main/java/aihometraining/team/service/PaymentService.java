@@ -92,11 +92,9 @@ public class PaymentService {
 	//결제처리
 	public void addPayment(Payment payment) {
 		
-		//결제제코드 생성 및 셋팅
-		
 		int len = payment.getMemberEmail().indexOf("@");
 		String memberId = payment.getMemberEmail().substring(0, len);
-		SimpleDateFormat date = new SimpleDateFormat("yyyyMMddhhmm");
+		SimpleDateFormat date = new SimpleDateFormat("yyyyMMddhhmmss");
 		
 		String paymentCode = "p"+date.format(new Date())+"_"+memberId;
 		
@@ -138,6 +136,9 @@ public class PaymentService {
 		return numStr;
 		 
 	}
+	
+	
+	
 	
 	
 	

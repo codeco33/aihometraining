@@ -132,7 +132,7 @@
 	#totalPriceStrDiv span:first-child {
 		color: black;
 	}
-	#totalPriceStrDiv span:last-child {
+	.totalprice {
 		font-size: 36px !important;
 	    font-weight: bold !important;
 	    color: #696dff !important;
@@ -156,7 +156,7 @@
 				<div class="single-services mb-30">
 					<div class="features-caption">
 						<h3 class="captionTitle">결제 정보</h3>
-						<input type="text" name="paymentGroupCode" hidden th:value="${paymentGroupCode}">
+						<input type="text" name="paymentGroupCode" hidden="hidden" th:value="${paymentGroupCode}">
 						<!-- 클래스정보 -->
 						<div class="form-group">
 							<label class="inputTitle">결제상품이름</label>
@@ -228,7 +228,7 @@
 							</label>
 							<label class="col-xl-4 col-md-6 paymentMethodLabel">
 								<a class="genric-btn primary-border circle arrow paymentMethodBtn">
-									<input type="radio" name="paymentMethodName" value="가상계좌">
+									<input type="radio" name="paymentMethodName" value="무통장입금">
 									<span>가상계좌</span>
 								</a>
 							</label>
@@ -246,7 +246,7 @@
 					<div id="totalPriceStrDiv">
 						<span>총 결제금액</span>
 						<span class="totalprice"></span>
-						<input id="paymentTotalPayPrice" type="text" name="paymentTotalPayPrice" hidden>
+						<input id="paymentTotalPayPrice" type="text" name="paymentTotalPayPrice" hidden="hidden">
 					</div>
 					<button id="paymentBtn" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="button">결제하기</button>
 				</div>

@@ -1,6 +1,7 @@
 package aihometraining.team.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,10 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.Member;
 import aihometraining.team.dto.MemberLevel;
+import aihometraining.team.dto.Payment;
 import aihometraining.team.mapper.MemberMapper;
+import aihometraining.team.mapper.PaymentMapper;
 import aihometraining.team.service.MemberService;
+import aihometraining.team.service.PaymentService;
 
 @Controller
 @RequestMapping("/mypage")
@@ -27,10 +32,15 @@ public class MypageController {
 	//DI 의존성 주입 생성자 메소드 주입 방식
 	private MemberService memberService;
 	private MemberMapper memberMapper;
+	private PaymentMapper paymentMapper;
+	private PaymentService paymentService;
 	
-	public MypageController(MemberService memberService, MemberMapper memberMapper) {
+	public MypageController(MemberService memberService, MemberMapper memberMapper
+							,PaymentMapper paymentMapper, PaymentService paymentService) {
 		this.memberService = memberService;
 		this.memberMapper  = memberMapper;
+		this.paymentMapper = paymentMapper;
+		this.paymentService = paymentService;
 	}
 	
 	/* 회원 탈퇴 처리 */
@@ -130,11 +140,20 @@ public class MypageController {
 	public String paymentDetail(Model model
 								,@RequestParam(name="paymentCode") String paymentCode) {
 		
+		Payment payment = paymentMapper.getPaymentDetailByPaymentCode(paymentCode);		
+		log.info("결제정보 : {}", payment);
+		Map<String,String> eClassTakeInfo = paymentMapper.getEClassTake(payment.getPaymentGroupCode());
+		String eClassCode = eClassTakeInfo.get("eClassApprovedCode");
+		EClassApproved eClass = paymentService.getEClassApproved(eClassCode);
+		
 		model.addAttribute("title", "결제 내역");
 		model.addAttribute("leftMenuList", "거래내역");
 		model.addAttribute("subTitle", "결제 상세 내역");
 		model.addAttribute("layoutDeco", "layout/mypagedefault");
-		model.addAttribute("paymentCode", paymentCode);
+		
+		model.addAttribute("payment", payment);
+		model.addAttribute("eClass", eClass);
+		
 		
 		return "payment/paymentDetail";
 	}
