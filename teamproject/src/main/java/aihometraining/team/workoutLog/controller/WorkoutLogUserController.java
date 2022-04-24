@@ -348,15 +348,30 @@ public class WorkoutLogUserController {
 	
 	// 운동 목표 등록
 	@GetMapping("/workoutGoalInsert")
-	public String workoutGoalInsert(Model model) {
+	public String workoutGoalInsert(Model model, @RequestParam(value = "memberEmail", required = false) String memberEmail) {
 		
 		// 수강 중인 운동 클래스 목록 조회
-		 List<EClassTake> eClassTakeList = workoutLogUserService.geteClassTakeList();
+		 List<EClassTake> eClassTakeList = workoutLogUserService.geteClassTakeList(memberEmail);
 		 log.info("수강 중인 운동 클래스 목록 조회  eClassTakeList : {}", eClassTakeList);
 		
 		model.addAttribute("title", "운동 목표 등록");
 		model.addAttribute("eClassTakeList", eClassTakeList);
 		return "workoutLog/workoutLogUser/workoutGoalInsert";
+		
+	}
+	
+	// 운동 목표 등록 처리
+	@PostMapping("/workoutGoalInsert")
+	public String workoutGoalInsert(WorkoutGoal workoutGoal, HttpSession session) {
+		
+		String sessionEmail = (String) session.getAttribute("SEMAIL");
+		
+		log.info("운동 목표 등록 폼에서 입력받은 데이터: {}", workoutGoal);
+		
+		workoutLogUserService.workoutGoalInsert(workoutGoal, sessionEmail);
+		
+		
+		return "redirect:/workoutLog/workoutLogUser/workoutGoalList";
 		
 	}
 	

@@ -383,6 +383,31 @@
 				
 		</select>
 		
+		<insert id="workoutGoalInsert" parameterType="WorkoutGoal">
+			/* 운동 목표 등록 처리 */
+			INSERT INTO workoutgoal
+			(
+				   workoutGoalCode
+				 , memberEmail
+				 , workoutGoalContent
+				 , workoutGoalStartDate
+				 , workoutGoalEndDate
+				 , workoutGoalUpdateDate
+				 , eClassApprovedCode
+				 , eClassTakeCode
+			)VALUES(
+				   #{workoutGoalCode}
+				 , #{memberEmail}
+				 , #{workoutGoalContent}
+				 , #{workoutGoalStartDate}
+				 , #{workoutGoalEndDate}
+				 , NOW()
+				 , #{eClassApprovedCode}
+				 , #{eClassTakeCode}
+			);
+			
+		</insert>
+		
 		<select id="geteClassTakeList" resultMap="EClassTakeResultmap">
 			/* 수강 중인 운동 클래스 목록 조회 */
 			SELECT

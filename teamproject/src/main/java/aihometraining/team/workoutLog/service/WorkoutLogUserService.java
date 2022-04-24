@@ -139,10 +139,25 @@ public class WorkoutLogUserService {
 		
 	}
 	
+	// 운동 목표 등록 처리
+	public int workoutGoalInsert(WorkoutGoal workoutGoal, String sessionEmail) {
+		
+		String code = commonMapper.getNewCode("workoutGoalCode", "workoutgoal");
+		workoutGoal.setWorkoutGoalCode(code);
+		workoutGoal.setMemberEmail(sessionEmail);	
+		
+		int result = workoutLogUserMapper.workoutGoalInsert(workoutGoal);
+		
+		
+		return result;
+		
+	}
+	
+	
 	// 수강 중인 운동 클래스 목록 조회
-	 public List<EClassTake> geteClassTakeList(){
+	 public List<EClassTake> geteClassTakeList(String memberEmail){
 	 
-		 List<EClassTake> eClassTakeList = workoutLogUserMapper.geteClassTakeList();
+		 List<EClassTake> eClassTakeList = workoutLogUserMapper.geteClassTakeList(memberEmail);
 	  
 		 return eClassTakeList;
 	 

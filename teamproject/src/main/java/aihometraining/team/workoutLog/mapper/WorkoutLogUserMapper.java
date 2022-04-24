@@ -19,8 +19,11 @@ public interface WorkoutLogUserMapper {
 	//운동 목표 조회
 	public List<WorkoutGoal> getworkoutGoalList(String sessionEmail);
 	
+	//운동 목표 등록
+	public int workoutGoalInsert(WorkoutGoal workoutGoal);
+	
 	//수강 중인 운동 클래스 목록 조회
-	public List<EClassTake> geteClassTakeList();
+	public List<EClassTake> geteClassTakeList(String memberEmail);
 		
 	//일지 공개범위 목록 조회
 	public List<WorkoutLogPrivacybounds> getworkoutLogPrivacyboundsList();
