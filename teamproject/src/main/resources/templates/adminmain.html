@@ -26,7 +26,7 @@
 				        	<li class="active">
 					           	<a href="#tabs-demo6-area1" data-toggle="tab" title="김재환" aria-expanded="true">
 						            <span class="round-tabs one">
-						              	<i class="glyphicon glyphicon-user"> 재환</i>
+						              	<i class="glyphicon glyphicon-user"> <span class="teamName">재환</span></i>
 						            </span> 
 					          	</a>
 				        	</li>
@@ -34,7 +34,7 @@
 					        <li class="">
 					          	<a href="#tabs-demo6-area2" data-toggle="tab" title="이민식" aria-expanded="true">
 					           		<span class="round-tabs two">
-					             		<i class="glyphicon glyphicon-user"> 민식</i>
+					             		<i class="glyphicon glyphicon-user"> <span class="teamName">민식</span></i>
 					           		</span> 
 					         	</a>
 					       	</li>
@@ -42,7 +42,7 @@
 							<li class="">
 				        		<a href="#tabs-demo6-area3" data-toggle="tab" title="이영호" aria-expanded="true">
 				         			<span class="round-tabs three">
-				          				<i class="glyphicon glyphicon-user"> 영호</i>
+				          				<i class="glyphicon glyphicon-user"> <span class="teamName">영호</span></i>
 				        			</span> 
 				        		</a>
 				      		</li>
@@ -50,7 +50,7 @@
 				      		<li class="">
 				        		<a href="#tabs-demo6-area4" data-toggle="tab" title="진수경" aria-expanded="true">
 				         			<span class="round-tabs four">
-				           				<i class="glyphicon glyphicon-user"> 수경</i>
+				           				<i class="glyphicon glyphicon-user"> <span class="teamName">수경</span></i>
 				         			</span> 
 				       			</a>
 				     		</li>
@@ -58,7 +58,7 @@
 				     		<li class="">
 				     			<a href="#tabs-demo6-area5" data-toggle="tab" title="최민희" aria-expanded="true">
 				       			<span class="round-tabs five">
-				        			<i class="glyphicon glyphicon-user"> 민희</i>
+				        			<i class="glyphicon glyphicon-user"> <span class="teamName">민희</span></i>
 				      			</span> 
 				      			</a>
 				    		</li>
@@ -66,7 +66,7 @@
 				     		<li class="">
 				     			<a href="#tabs-demo6-area6" data-toggle="tab" title="최보라" aria-expanded="true">
 				       			<span class="round-tabs six">
-				        			<i class="glyphicon glyphicon-user"> 보라</i>
+				        			<i class="glyphicon glyphicon-user"> <span class="teamName">보라</span></i>
 				      			</span> 
 				      			</a>
 				    		</li>
@@ -89,7 +89,7 @@
 				     			</p>
 				
 				     			<p class="text-center">
-				       				<a th:href="@{/admin/memberList}" class="btn btn-success btn-round green" style="background: #febe29 !important"> 회원관리 <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span></a>
+				       				<a th:href="@{/admin/memberList}" class="btn btn-success btn-round green" style="background: #CDDC39 !important"> 회원관리 <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span></a>
 				     			</p>
 				   			</div>
 				   			<div class="tab-pane fade" id="tabs-demo6-area3">
@@ -104,12 +104,12 @@
 				   			</div>
 				   			<div class="tab-pane fade" id="tabs-demo6-area4">
 				     			<h3 class="head text-center">진수경</h3>
-				     			<p class="narrow text-center">
-				       				기능을 작성해주세요
-				     			</p>
-				
+				     			<p class="narrow text-center">운동클래스 수강신청</p>
+				     			<p class="narrow text-center">결제 및 환불</p>
+				     			<p class="narrow text-center">포인트 지급 및 내역 조회</p>
 				     			<p class="text-center">
-				       				<a th:href="@{#}" class="btn btn-success btn-round green" style="background: #f1685e !important"> 결제/포인트 <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span></a>
+				       				<a th:href="@{/admin/paymentList}" class="btn btn-success btn-round green" style="background: #febe29 !important"> 결제 <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span></a>
+				       				<a th:href="@{/admin/pointList}" class="btn btn-success btn-round green" style="background: #febe29 !important"> 포인트 <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span></a>
 				     			</p>
 				   			</div>
 				   			<div class="tab-pane fade" id="tabs-demo6-area5">
@@ -135,7 +135,7 @@
 				        		</p>
 				        		
 				        		<p class="text-center">
-				       				<a th:href="@{/admin/configList}" class="btn btn-success btn-round green" style="background: #CDDC39 !important"> 챌린지 <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span></a>
+				       				<a th:href="@{/admin/configList}" class="btn btn-success btn-round green" style="background: #cd7de6 !important"> 챌린지 <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span></a>
 				     			</p>
 				      		</div>
 				      		<div class="clearfix"></div>
@@ -160,8 +160,8 @@
 			    width: 16.6%;
 			}
 			.nav-tabs.nav-tabs-v5 span.round-tabs.six {
-			    color: #CDDC39;
-			    border: 2px solid #CDDC39;
+			    color: #cd7de6;
+			    border: 2px solid #cd7de6;
 			}
 			.nav-tabs.nav-tabs-v5 span.round-tabs.five {
 			    color: #ff69b4;
@@ -173,13 +173,42 @@
 			.nav-tabs.nav-tabs-v5 li.active span.round-tabs.six {
 			    background: #fff !important;
 			    border: 2px solid #ddd;
-			    color: #CDDC39;
+			    color: #cd7de6;
 			}
 			.nav-tabs.nav-tabs-v5 li.active span.round-tabs.five {
 			    background: #fff !important;
 			    border: 2px solid #ddd;
 			    color: #ff69b4;
 			}
+			
+			/* 민식님 */
+			.nav-tabs.nav-tabs-v5 li  span.round-tabs.two {
+				border: 2px solid #CDDC39;
+			    color: #CDDC39;
+			}
+			.nav-tabs.nav-tabs-v5 li.active span.round-tabs.two {
+				border: 2px solid #ddd;
+			    color: #CDDC39;
+			}
+			
+			/* 수경 */
+			.nav-tabs.nav-tabs-v5 li span.round-tabs.four {
+				border: 2px solid #febe29;
+				color: #febe29;
+			}
+			.nav-tabs.nav-tabs-v5 li.active span.round-tabs.four{
+				border: 2px solid #ddd;
+				color: #febe29;
+			}
+			
+			.teamName{
+				font-family : SEBANG_Gothic_Regular;
+				font-size: 20px;
+			}
+			.glyphicon {
+				margin-top: 2px;
+			}
+			
 		</style>
 	</th:block>
 		

@@ -6483,11 +6483,10 @@ ul li a:focus {
   }
   .user-nav .user-name,
   .user-nav .opener-right-menu,
-  #left-menu,
-  .opener-left-menu,
   #right-menu{
     display: none !important;
   }
+  
 
   #mimin-mobile,#mimin-mobile-menu-opener{display: block !important;}
 
@@ -6518,7 +6517,12 @@ ul li a:focus {
 	text-decoration: underline;
 }
 
-/*거래내역 검색 td에 cursor 모양 넣기*/
-#paymentList .searchTd {
-	cursor: pointer;
+
+/*관리자 페이지 header .dropdown-menu*/
+.adminDropDown {
+	padding: 9px 0 !important;	
+}
+
+.adminDropDown li:hover {
+	font-size: 24px;
 }
