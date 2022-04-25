@@ -1,6 +1,7 @@
 package aihometraining.team.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,9 +20,12 @@ import aihometraining.team.dto.ChallengeGather;
 import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.EClassTake;
 import aihometraining.team.dto.Member;
+import aihometraining.team.dto.Payment;
 import aihometraining.team.dto.WishList;
+import aihometraining.team.mapper.MemberMapper;
 import aihometraining.team.mapper.PaymentMapper;
 import aihometraining.team.service.PaymentService;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Controller
 public class PaymentController {
@@ -29,12 +33,15 @@ public class PaymentController {
 	private PaymentService paymentService;
 	private PaymentMapper paymentMapper;
 	private ChallengeEnterMapper challengeEnterMapper;
+	private MemberMapper memberMapper;
 	
 	public PaymentController(PaymentService paymentService, PaymentMapper paymentMapper
-							,ChallengeEnterMapper challengeEnterMapper) {
+							,ChallengeEnterMapper challengeEnterMapper
+							,MemberMapper memberMapper) {
 		this.paymentService = paymentService;
 		this.paymentMapper = paymentMapper;
 		this.challengeEnterMapper = challengeEnterMapper;
+		this.memberMapper = memberMapper;
 	}
 	
 
@@ -90,15 +97,31 @@ public class PaymentController {
 		return "eClass/eClassTake";
 	}
 	
+	//수강신청 insert
 	@PostMapping("/signUpForClass")
 	public String eClassTake(EClassTake eClassTake, RedirectAttributes reAttr) {
 		
-		
-		//수강신청 insert하기
 		paymentService.addEClassTake(eClassTake);
 		reAttr.addAttribute("paymentGroupCode", eClassTake.getPaymentGroupCode());
 		
+		//위시리스트 삭제 처리
+		
 		return "redirect:/payment";
+	}
+	
+	
+	//결제처리
+	@PostMapping("/payment")
+	public String payment(Model model, Payment payment, RedirectAttributes reAttr) {
+		
+		model.addAttribute("title", "결제");
+		
+		paymentService.addPayment(payment);
+		System.out.println(payment.getPaymentUsePoint());
+		
+		reAttr.addAttribute("paymentCode", payment.getPaymentCode());
+		
+		return "redirect:/mypage/mypaymentList/paymentDetail";
 	}
 	
 
@@ -110,43 +133,55 @@ public class PaymentController {
 		String paymentGoodsName = null;
 		int paymentGoodsPrice = 0;
 		int paymentGoodsSetDate = 0;
+		String memberEmail = null;
+		String memberPhone = null;
 		
 		if(paymentGroupCode.startsWith("e")) {
-			String eClassCode = paymentMapper.getEClassTake(paymentGroupCode);		
+			Map<String,String> eClassTakeInfo = paymentMapper.getEClassTake(paymentGroupCode);
+			String eClassCode = eClassTakeInfo.get("eClassApprovedCode");
+			memberEmail = eClassTakeInfo.get("memberEmail");
+			memberPhone = eClassTakeInfo.get("memberPhone");
+			
 			EClassApproved eClass= paymentMapper.getEClassApproved(eClassCode);
-			  
-			  if(Objects.nonNull(eClass)) { 
-				  paymentGoodsName = eClass.geteClassApprovedName(); 
-				  paymentGoodsPrice = eClass.geteClassApprovedPrice();
-				  paymentGoodsSetDate = eClass.geteClassApprovedSetDate(); 
-			  }
-			 
+			
+			if(Objects.nonNull(eClass)) { 
+				paymentGoodsName = eClass.geteClassApprovedName(); 
+				paymentGoodsPrice = eClass.geteClassApprovedPrice();
+				paymentGoodsSetDate = eClass.geteClassApprovedSetDate(); 
+			}
+			
 		}else {
-			String challengeCode = paymentMapper.getCallengeEnter(paymentGroupCode);
-			  ChallengeGather challenge=challengeEnterMapper.getChallengeEnterByCode(challengeCode);
+			Map<String,String> challengeEnterInfo = paymentMapper.getCallengeEnter(paymentGroupCode);
+			String challengeCode = challengeEnterInfo.get("challengeGatherCode");
+			memberEmail = challengeEnterInfo.get("memberEmail");
+			
+			ChallengeGather challenge = challengeEnterMapper.getChallengeEnterByCode(challengeCode);
 			  
-			  if(Objects.nonNull(challenge)) { 
-				  paymentGoodsName = challenge.getChallengeGatherName();
-				  paymentGoodsPrice = challenge.getChallengeEnterDeposit();
-			  }
-			 
+			if(Objects.nonNull(challenge)) { 
+				paymentGoodsName = challenge.getChallengeGatherName();
+				paymentGoodsPrice = challenge.getChallengeEnterDeposit();
+			}
 		}
+		
+		Member member = memberMapper.getMemberInfoByEmail(memberEmail);
 		
 		model.addAttribute("paymentGoodsName", paymentGoodsName);
 		model.addAttribute("paymentGoodsPrice", paymentGoodsPrice);
 		model.addAttribute("paymentGoodsSetDate", paymentGoodsSetDate);
+		model.addAttribute("member", member);
+		model.addAttribute("memberPhone", memberPhone);
+		model.addAttribute("paymentGroupCode", paymentGroupCode);
 		
 		return "payment/payment";
 	}
 	
 	
 	
-	@PostMapping("/payment")
-	public String payment(Model model) {
+	//문자 인증
+	@PostMapping("/memberPhoneCheck")
+	public @ResponseBody String memberPhoneCheck(@RequestParam(value="to") String to) throws CoolsmsException {
 		
-		//결제처리
-		model.addAttribute("title", "결제");
 		
-		return "redirect:/mypage/mypaymentList/paymentDetail";
+		return paymentService.PhoneNumberCheck(to);
 	}
 }

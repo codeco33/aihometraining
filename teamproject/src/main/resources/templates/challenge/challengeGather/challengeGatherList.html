@@ -49,16 +49,17 @@
 			                        </div>
 				                    <div class="properties__caption">
 				                        <p>모집인원 : [[${l.challengeGatherMaxPeople}]]</p>
-				                        <h3><a href="#">[[${l.challengeGatherIntro}]]</a></h3>
+				                        <!-- <h3><a href="#">[[${l.challengeGatherIntro}]]</a></h3> -->
 				                        <p>
 				                       	 [[${l.challengeGatherIntro}]]
 				                        </p>
 				                        <div class="properties__footer d-flex justify-content-between align-items-center">
 				                            <div class="restaurant-name" style="color: #4255A4;">
-				                                	[[${l.challengeGatherStartDate}]]
+				                            	<P style="margin-bottom: -2px;">모집기간</P>
+				                            	<label>[[${l.challengeGatherStartDate}]] ~ [[${l.challengeGatherEndDate}]]</label>
 				                            </div>
 				                            <div class="price">
-				                                <span>[[${l.challengeGatherEndDate}]]</span>
+				                                <span th:text="${l.challengeEnterDeposit}+'원'"></span>
 				                            </div>
 				                        </div>
 				                    </div>
@@ -126,34 +127,51 @@
 							var modalhader = '<h5 class="modal-title" id="GatherDetailModalLabel"  style="font-weight: bold; font-size: large;">' +data[i].challengeGather.challengeGatherName + '</h5>';
 								
 							var modalbody = '';
-								
+							
+								modalbody += '<div class="form-group">'+
+									 			 '<label class="inputTitle">챌린지 등록자</label>'+
+									 			 '<input class="mt-2 p-2 form-control" name="memberEmail" readonly value="'+ data[i].challengeGather.memberEmail +'"style="background-color: #f9f9ff; border: none;">'+
+									 		 '</div>'
 								modalbody += '<div class="form-group">'+
 												'<label class="inputTitle">챌린지 카테고리</label>'+
-												'<input class="mt-2 p-2 form-control" name="challengeCategoryCode" readonly value="'+ data[i].challengeCategory.challengeCategoryName +'"style="background-color: #f9f9ff; border: none;">'+
+												'<input class="mt-2 p-2 form-control" name="challengeCategoryName" readonly value="'+ data[i].challengeCategory.challengeCategoryName +'"style="background-color: #f9f9ff; border: none;">'+
+												'<input type="hidden" class="mt-2 p-2 form-control" name="challengeCategoryCode" readonly value="'+data[i].challengeGather.challengeCategoryCode +'"style="background-color: #f9f9ff; border: none;">'+
+												'<input type="hidden" class="mt-2 p-2 form-control" name="challengeGatherCode" readonly value="'+data[i].challengeGather.challengeGatherCode +'"style="background-color: #f9f9ff; border: none;">'+
+												'<input type="hidden" class="mt-2 p-2 form-control" name="challengeGatherName" readonly value="'+data[i].challengeGather.challengeGatherName +'"style="background-color: #f9f9ff; border: none;">'+
+												'<input type="hidden" class="mt-2 p-2 form-control" name="challengeGatherPlan.challengeGatherPlanCode" readonly value="'+data[i].challengeGatherPlanCode+'"style="background-color: #f9f9ff; border: none;">'+
+												'<input type="hidden" class="mt-2 p-2 form-control" name="challengeGatherPlan.challengeGatherPlanProveNumber" readonly value="'+data[i].challengeGatherPlanProveNumber+'"style="background-color: #f9f9ff; border: none;">'+
+												'<input type="hidden" class="mt-2 p-2 form-control" name="challengeGatherPlan.challengeSettingCode" readonly value="'+ data[i].challengeSettingCode +'"style="background-color: #f9f9ff; border: none;">'+
 											 '</div>'
 								modalbody += '<div class="form-group">'+
 											 	'<label class="inputTitle">챌린지 소개글</label>'+
-												'<input class="mt-2 p-2 form-control" name="challengeGatherIntro" readonly value="'+ data[i].challengeGather.challengeGatherIntro +'"style="background-color: #f9f9ff; border: none;">'+
+												'<textarea class="mt-2 p-2 form-control" name="challengeGatherIntro" readonly cols="30" rows="5" style="background-color: #f9f9ff; border: none;">'+data[i].challengeGather.challengeGatherIntro+'</textarea>'+
 											 '</div>'	
 								modalbody += '<div class="form-group">'+
-							 				 	'<label class="inputTitle">챌린지 최대 참여 인원수</label>'+
-							 				 	'<input class="mt-2 p-2 form-control" name="challengeGatherMaxPeople" readonly value="'+ data[i].challengeGather.challengeGatherMaxPeople +'"style="background-color: #f9f9ff; border: none;">'+
-											 '</div>'
+							 				 	'<label class="inputTitle" style="display:block;">챌린지 최대 참여 인원수</label>'+
+							 				 	'<input class="mt-2 p-2 form-control" name="challengeGatherMaxPeople" readonly value="'+ data[i].challengeGather.challengeGatherMaxPeople +'"style="background-color: #f9f9ff; border: none; display:inline-block; width: 20%">'+
+							 				 	'<label class="inputTitle">명</label>'+
+							 				 '</div>'
 								modalbody += '<div class="form-group">'+
 			 				 					'<label class="inputTitle">인증 방법</label>'+
 			 				 					'<input class="mt-2 p-2 form-control" name="challengeGatherProveMethod" readonly value="'+ data[i].challengeGather.challengeGatherProveMethod +'"style="background-color: #f9f9ff; border: none;">'+
 			 				 				 '</div>'
-								modalbody += '<div class="form-group">'+
-			 				 				 	'<label class="inputTitle">인증 빈도</label>'+
-			 				 				 	'<input class="mt-2 p-2 form-control" name="challengeGatherProveFrequency" readonly value="'+ data[i].challengeGather.challengeGatherProveFrequency +'"style="background-color: #f9f9ff; border: none;">'+
+								modalbody += '<div class="form-group mb-3">'+
+			 				 				 	'<label class="inputTitle" style="display:block;">1주일 인증 빈도</label>'+
+			 				 				 	'<input class="mt-2 p-2 form-control" name="challengeGatherProveFrequency" readonly value="'+ data[i].challengeGather.challengeGatherProveFrequency +'"style="background-color: #f9f9ff; border: none; display:inline-block; width: 20%">'+
+			 				 				 	'<label class="inputTitle">회</label>'+
 			 				 				 '</div>'	
 								modalbody += '<div class="form-group">'+
-					 				 			 '<label class="inputTitle">인증 빈도</label>'+
+					 				 			 '<label class="inputTitle">챌린지 시작일</label>'+
 					 				 			 '<input class="mt-2 p-2 form-control" name="challengeStartDate" readonly value="'+ data[i].challengeGather.challengeStartDate +'"style="background-color: #f9f9ff; border: none;">'+
 					 				 		 '</div>'	 
 								modalbody += '<div class="form-group">'+
-					 				 			 '<label class="inputTitle">인증 빈도</label>'+
+					 				 			 '<label class="inputTitle">챌린지 종료일</label>'+
 					 				 			 '<input class="mt-2 p-2 form-control" name="challengeEndDate" readonly value="'+ data[i].challengeGather.challengeEndDate +'"style="background-color: #f9f9ff; border: none;">'+
+					 				 		 '</div>'
+								modalbody += '<div class="form-group">'+
+					 				 			 '<label class="inputTitle" style="display:block;">참가 보증금</label>'+
+					 				 			 '<input class="mt-2 p-2 form-control" name="challengeEnterDeposit" readonly value="'+ data[i].challengeGather.challengeEnterDeposit +'"style="background-color: #f9f9ff; border: none; display:inline-block; width: 30%">'+
+					 				 			 '<label class="inputTitle">원</label>'+
 					 				 		 '</div>'
 					 				 		 
 								$('.modal-header').empty();

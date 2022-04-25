@@ -1,11 +1,10 @@
 package aihometraining.team.diet.controller;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -59,7 +58,7 @@ public class DietUserController {
 	
 	//개인 식단 페이지 이동, 음식 대분류 조회, 개인 식단 계획 조회
 	@GetMapping("/dietMyList")
-	public String selectDietMyList(Model model, HttpSession session) {
+	public String selectDietMyList(Model model, HttpSession session ) {
 		model.addAttribute("title", "개인 식단페이지");
 		model.addAttribute("role", "개인 식단 페이지 테스트");
 		
@@ -85,7 +84,6 @@ public class DietUserController {
 		model.addAttribute("UserdietPlanListNutrient", UserdietPlanListNutrient);
 		
 
-		log.info("UserdietPlanListNutrient : {}", UserdietPlanListNutrient);
 
 		
 		
@@ -222,7 +220,7 @@ public class DietUserController {
 	//Ajax user 식단에 dietBank 내용 삽입 
 	@PostMapping("/insertDietBankListDetail")
 	@ResponseBody
-	public String insertDietBankListDetail(DietBank dietBank, HttpSession session) {
+	public void insertDietBankListDetail(DietBank dietBank, HttpSession session) {
 		
 		String memberEmail = (String) session.getAttribute("SEMAIL");
 		dietBank.setMemberEmail(memberEmail);
@@ -230,7 +228,6 @@ public class DietUserController {
 		
 		dietService.insertDietOneMealConnectionAll(dietBank);
 		
-		return null;
 	}
 
 }

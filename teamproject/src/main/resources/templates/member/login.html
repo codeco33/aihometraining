@@ -34,6 +34,18 @@
 	.form-input lable	{
 		font-weight: 50;
 	}
+	.login-form .form-input input[type="button"] {
+	    background: #fff;
+	    color: #000;
+	    border: none;
+	    cursor: pointer;
+	    text-transform: capitalize;
+	    line-height: 1;
+	    font-size: 18px;
+	    font-weight: 700;
+	    border-radius: 20px;
+	    transition: .4s;
+	}
 </style>
 <body>
 	<div id="preloader-active" th:replace="userfragments/preloader :: preloaderFragment"></div>
@@ -73,7 +85,7 @@
                     <input type="password" name="memberPw" placeholder="비밀번호를 입력해주세요." value="pw001">
                 </div>
                 <div class="form-input pt-30">
-                    <input type="submit" name="submit" value="로그인">
+                    <input type="button" id="loginBtn" value="로그인">
                 </div>
                 <!-- Forget Password -->
                 <a th:href="@{#}" class="forget">비밀번호 찾기</a>
@@ -93,9 +105,31 @@
 
 	<th:block th:replace="userfragments/userJavaScripts :: userJSFragment"></th:block>
 	<script src ="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<th:block layout:fragment="customBodyScript">
 		<script type="text/javascript">
-		 
+		$(function(){
+			function validationCheck(data){
+				if(typeof data == 'undefined' || data == '' || data == null){
+					return false;
+				}
+				return true;
+			}
+			
+			$('#loginBtn').click(function(){
+				var inputObj = $('#loginForm').find('input');
+				var memberEmail = $('input[name="memberEmail"]').val();
+				var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; // 검증에 사용할 정규식 변수 regExp에 저장 
+				if (memberEmail.match(regExp) != null) { 
+					$('#loginForm').submit();
+					
+					} else { 
+					Swal.fire("이메일을 확인해주세요.") 
+					}
+					
+			});
+		});
+		
 
 		</script>
 	</th:block>

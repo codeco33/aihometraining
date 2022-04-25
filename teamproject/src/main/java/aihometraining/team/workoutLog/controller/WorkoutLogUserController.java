@@ -1,6 +1,9 @@
 package aihometraining.team.workoutLog.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,22 +60,48 @@ public class WorkoutLogUserController {
 	
 	// 일지 메인 화면
 	@GetMapping("/workoutLogMain")
-	public String workoutLogMain(Model model) {
+	public String workoutLogMain(Model model, HttpSession session) throws ParseException {
+		
+		String sessionEmail = (String) session.getAttribute("SEMAIL");
 		
 		//운동 목표 목룍 조회
-		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
+		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList(sessionEmail);
 		
 		//log.info("운동 목표 목록 조회  workoutGoalList : {}", workoutGoalList);
 		
 		//일지 목록 조회
-		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList();
+		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList(sessionEmail);
 		
 		log.info("일지 목록 조회  workoutLogList : {}", workoutLogList);
-
+		
+		//일지 등록일 보여주기
+		List<String> monthList = new ArrayList<>();
+		List<String> dayList = new ArrayList<>();
+		for(int i=0; i<workoutLogList.size(); i++) {
+			 
+		    Date date1=new SimpleDateFormat("yyyy-MM-dd").parse(workoutLogList.get(i).getWorkoutLogUpdateFinalDate());  
+		    log.info("일지 date1 : {}", date1);
+		    SimpleDateFormat newMonthFormat = new SimpleDateFormat("MM월");
+		    SimpleDateFormat newDayFormat = new SimpleDateFormat("dd일");
+		    
+			
+			newMonthFormat.format(date1); 
+			newDayFormat.format(date1);
+			
+		    log.info("일지  newMonthFormat.format(date1); : {}",  newMonthFormat.format(date1));
+		    log.info("일지  newDayFormat.format(date1); : {}",  newDayFormat.format(date1));
+		    
+		    monthList.add(newMonthFormat.format(date1));
+		    dayList.add(newDayFormat.format(date1));
+		}  
+		
+		
 		
 		model.addAttribute("title", "하루 일지");
 		model.addAttribute("workoutGoalList", workoutGoalList);
 		model.addAttribute("workoutLogList", workoutLogList);
+		model.addAttribute("monthList", monthList);
+		model.addAttribute("dayList", dayList);
 		
 		return "workoutLog/workoutLogUser/workoutLogMain";
 			
@@ -97,26 +126,44 @@ public class WorkoutLogUserController {
 	// 일지 상세 화면
 	@GetMapping("/workoutLogList")
 	public String workoutLogList(Model model
+								,HttpSession session
 								,@RequestParam(value = "workoutLogCode", required = false) String workoutLogCode
-								,@RequestParam(value = "filePath", required = false) String filePath) {
+								,@RequestParam(value = "filePath", required = false) String filePath) throws ParseException {
+		
+		String sessionEmail = (String) session.getAttribute("SEMAIL");
+		
 		log.info("파일 주소 : " , filePath);
 		//운동 목표 목록 조회
-		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
+		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList(sessionEmail);
 		log.info("운동 목표 목록 조회  workoutGoalList : {}", workoutGoalList);
 		
-		WorkoutLog workoutLogbyCode = workoutLogUserService.getworkoutLogByCode(workoutLogCode);
-		log.info("일지 코드로 일지 목록 조회  workoutLogbyCode : {}", workoutLogbyCode);
-		
-		//일지 목록 조회
-		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList();
-		log.info("일지 목록 조회  workoutLogList : {}", workoutLogList);
+		//일지 코드에 대한 일지 보여주기 - 한 개의 일지 정보를 보여주므로 리스트로 가져올 필요 없음
+		WorkoutLog workoutLog = workoutLogUserService.getworkoutLogByCode(workoutLogCode);
+		log.info("일지 코드로 일지 목록 조회  workoutLogbyCode : {}", workoutLog);
 		
 		log.info("일지 코드  workoutLogCode : {}", workoutLogCode);
 		
+		//일지 등록일 보여주기 - 한 개의 일지에 대한 정보만 필요하므로 리스트로 담아줄 필요가 없다.
+		    Date date1=new SimpleDateFormat("yyyy-MM-dd").parse(workoutLog.getWorkoutLogUpdateFinalDate());  
+		    log.info("일지 date1 : {}", date1);
+		    SimpleDateFormat newMonthFormat = new SimpleDateFormat("MM월");
+		    SimpleDateFormat newDayFormat = new SimpleDateFormat("dd일");
+		    
+			
+			newMonthFormat.format(date1); 
+			newDayFormat.format(date1);
+			
+		    log.info("일지  newMonthFormat.format(date1); : {}",  newMonthFormat.format(date1));
+		    log.info("일지  newDayFormat.format(date1); : {}",  newDayFormat.format(date1));
+		    
+		    String month = newMonthFormat.format(date1);
+		    String day = newDayFormat.format(date1);
+		
 		model.addAttribute("title", "일지 상세 화면");
 		model.addAttribute("workoutGoalList", workoutGoalList);
-		model.addAttribute("workoutLogList", workoutLogList);
-		model.addAttribute("workoutLogbyCode", workoutLogbyCode);
+		model.addAttribute("workoutLog", workoutLog);
+		model.addAttribute("month", month);
+		model.addAttribute("day", day);
 		
 		return "workoutLog/workoutLogUser/workoutLogList";
 		
@@ -125,10 +172,14 @@ public class WorkoutLogUserController {
 	// 일지 메인에서 피드백 클릭 시 일지 상세화면 피드백 위치로 보여주기
 	@GetMapping("/workoutLogListFeedback")
 	public String workoutLogListFeedback(Model model
+										,HttpSession session
 										,@RequestParam(value = "workoutLogTitle", required = false) String workoutLogTitle
 										,@RequestParam(value = "workoutLogContent", required = false) String workoutLogContent) {
+		
+		String sessionEmail = (String) session.getAttribute("SEMAIL");
+		
 		//일지 목록 조회
-		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList();
+		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList(sessionEmail);
 		log.info("일지 목록 조회  workoutLogList : {}", workoutLogList);
 		
 		model.addAttribute("title", "일지 상세 화면");
@@ -207,33 +258,33 @@ public class WorkoutLogUserController {
 	
 	
 	//일지 등록 처리
-		@PostMapping("/workoutLogInsert")
-		public String workoutLogInsert(WorkoutLog workoutLog
-									 , HttpSession session
-									 , @RequestParam MultipartFile[] fileImage
-									 , HttpServletRequest request) {
-			
-			String sessionEmail = (String) session.getAttribute("SEMAIL");	//형변환을 해줘라
-			
-			//파일 업로드 
-			String serverName = request.getServerName();
-			String fileRealPath = "";
-			if("localhost".equals(serverName)) {				
-				fileRealPath = System.getProperty("user.dir") + "/src/main/resources/static/";
-				//fileRealPath = request.getSession().getServletContext().getRealPath("/WEB-INF/classes/static/");
-			}else {
-				fileRealPath = request.getSession().getServletContext().getRealPath("/WEB-INF/classes/static/");
-			}
-			
-			
-			log.info("일지 등록 폼에서 입력받은 데이터: {}", workoutLog);
-			
-			workoutLogUserService.workoutLogInsert(workoutLog, sessionEmail, fileImage, fileRealPath );
-			
-			return "redirect:/workoutLog/workoutLogUser/workoutLogMain";
-			
+	@PostMapping("/workoutLogInsert")
+	public String workoutLogInsert(WorkoutLog workoutLog
+								 , HttpSession session
+								 , @RequestParam MultipartFile[] fileImage
+								 , HttpServletRequest request) {
+		
+		String sessionEmail = (String) session.getAttribute("SEMAIL");	//형변환을 해줘라
+		
+		//파일 업로드 
+		String serverName = request.getServerName();
+		String fileRealPath = "";
+		if("localhost".equals(serverName)) {				
+			fileRealPath = System.getProperty("user.dir") + "/src/main/resources/static/";
+			//fileRealPath = request.getSession().getServletContext().getRealPath("/WEB-INF/classes/static/");
+		}else {
+			fileRealPath = request.getSession().getServletContext().getRealPath("/WEB-INF/classes/static/");
 		}
-	
+		
+		
+		log.info("일지 등록 폼에서 입력받은 데이터: {}", workoutLog);
+		
+		workoutLogUserService.workoutLogInsert(workoutLog, sessionEmail, fileImage, fileRealPath );
+		
+		return "redirect:/workoutLog/workoutLogUser/workoutLogMain";
+		
+	}
+
 	// 일지 수정 처리
 	@PostMapping("/workoutLogUpdate")
 	public String workoutLogUpdate(WorkoutLog workoutLog, RedirectAttributes reAttr) {
@@ -278,9 +329,13 @@ public class WorkoutLogUserController {
 	
 	// 운동 목표 목록 조회
 	@GetMapping("/workoutGoalList")
-	public String workoutGoalList(Model model) {
+	public String workoutGoalList(Model model, HttpSession session) {
 		
-		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
+		String sessionEmail = (String) session.getAttribute("SEMAIL");
+		
+		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList(sessionEmail);
+		
+		
 		
 		model.addAttribute("title", "운동 목표");
 		model.addAttribute("workoutGoalList", workoutGoalList);
@@ -293,27 +348,41 @@ public class WorkoutLogUserController {
 	
 	// 운동 목표 등록
 	@GetMapping("/workoutGoalInsert")
-	public String workoutGoalInsert(Model model) {
+	public String workoutGoalInsert(Model model, @RequestParam(value = "memberEmail", required = false) String memberEmail) {
 		
 		// 수강 중인 운동 클래스 목록 조회
-		/*
-		 * List<EClassTake> eClassTakeList = workoutLogUserService.geteClassTakeList();
-		 * log.info("수강 중인 운동 클래스 목록 조회  eClassTakeList : {}", eClassTakeList);
-		 */
+		 List<EClassTake> eClassTakeList = workoutLogUserService.geteClassTakeList(memberEmail);
+		 log.info("수강 중인 운동 클래스 목록 조회  eClassTakeList : {}", eClassTakeList);
 		
 		model.addAttribute("title", "운동 목표 등록");
-		//model.addAttribute("eClassTakeList", eClassTakeList);
-		
+		model.addAttribute("eClassTakeList", eClassTakeList);
 		return "workoutLog/workoutLogUser/workoutGoalInsert";
+		
+	}
+	
+	// 운동 목표 등록 처리
+	@PostMapping("/workoutGoalInsert")
+	public String workoutGoalInsert(WorkoutGoal workoutGoal, HttpSession session) {
+		
+		String sessionEmail = (String) session.getAttribute("SEMAIL");
+		
+		log.info("운동 목표 등록 폼에서 입력받은 데이터: {}", workoutGoal);
+		
+		workoutLogUserService.workoutGoalInsert(workoutGoal, sessionEmail);
+		
+		
+		return "redirect:/workoutLog/workoutLogUser/workoutGoalList";
 		
 	}
 	
 	
 	//운동 계획 화면
 	@GetMapping("/workoutGoalPlanList")
-	public String workoutGoalPlanList(Model model) {
+	public String workoutGoalPlanList(Model model, HttpSession session) {
 		
-		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
+		String sessionEmail = (String) session.getAttribute("SEMAIL");
+		
+		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList(sessionEmail);
 		
 		model.addAttribute("title", "운동 계획");
 		model.addAttribute("workoutGoalList", workoutGoalList);
