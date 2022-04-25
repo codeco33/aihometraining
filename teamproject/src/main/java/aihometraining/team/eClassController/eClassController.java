@@ -176,7 +176,24 @@ public class eClassController {
 
 
 
-		return "redirect:/eClassOpenAppleyComplete";
+		return "redirect:/myEClassApplyList";
+	}
+	@GetMapping("/openAppleyDelete")
+	public String EClassAppleyFormDelete( EClassIntroduce eClassIntroduce
+										, EClassSectionTitle eClassSectionTitle
+										, EClassSectionCurriculum eClassSectionCurriculum
+										, EClassQuestion eClassQuestion
+										, EClassAnswer eClassAnswer
+										, EClassApproved eClassApproved) {
+		
+		eClassMapper.EClassIntroduceDelete(eClassIntroduce);
+		eClassMapper.EClassSectionTitleDelete(eClassSectionTitle);
+		eClassMapper.EClassSectionCurriculumDelete(eClassSectionCurriculum);
+		eClassMapper.EClassQuestionDelete(eClassQuestion);
+		eClassMapper.EClassAnswerDelete(eClassAnswer);
+		eClassMapper.EClassPriceDelete(eClassApproved);
+		
+		return "redirect:/myEClassApplyList";
 	}
 	
 	@GetMapping("/eClassOpenAppleyComplete") 
@@ -211,9 +228,9 @@ public class eClassController {
 	@GetMapping("/eClassApplyadminList")
 	public String eClassApplyadminList(Model model) {
 		
-		model.addAttribute("title", "관리자 운동클래스목록");
+		model.addAttribute("title", "승인된 운동클래스 목록(관리자)");
 		
-		return "eClass/admin/eClassApprovedadminList";
+		return "eClass/eClassApprovedadminList";
 	}
 	
 	@GetMapping("/myApplyList")

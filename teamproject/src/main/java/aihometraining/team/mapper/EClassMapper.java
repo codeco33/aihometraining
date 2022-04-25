@@ -30,31 +30,43 @@ public interface EClassMapper {
 	public int EClassIntroduceInsert(EClassIntroduce eClassIntroduce);
 	//클래스 소개 수정 처리
 	public int EClassIntroduceUpdate(EClassIntroduce eClassIntroduce);
+	//클래스 소개 삭제 처리
+	public int EClassIntroduceDelete(EClassIntroduce eClassIntroduce);
 	
 	//클래스 섹션 등록 처리
 	public int EClassSectionTitleInsert(EClassSectionTitle eClassSectionTitle);
 	//클래스 섹션 수정 처리
 	public int EClassSectionTitleUpdate(EClassSectionTitle eClassSectionTitle);
+	//클래스 섹션 삭제 처리
+	public int EClassSectionTitleDelete(EClassSectionTitle eClassSectionTitle);
 
 	//클래스 커리큘럼 등록 처리
 	public int EClassSectionCurriculumInsert(EClassSectionCurriculum eClassSectionCurriculum);
 	//클래스 커리큘럼 수정 처리
 	public int EClassSectionCurriculumUpdate(EClassSectionCurriculum eClassSectionCurriculum);
+	//클래스 커리큘럼 삭제 처리
+	public int EClassSectionCurriculumDelete(EClassSectionCurriculum eClassSectionCurriculum);
 
 	//클래스 질문 등록 처리
 	public int EClassQuestionInsert(EClassQuestion eClassQuestion);
 	//클래스 질문  수정 처리
 	public int EClassQuestionUpdate(EClassQuestion eClassQuestion);
+	//클래스 질문  삭제 처리
+	public int EClassQuestionDelete(EClassQuestion eClassQuestion);
 	
 	//클래스 답변 등록 처리
 	public int EClassAnswerInsert(EClassAnswer eClassAnswer);
 	//클래스 답변 수정 처리
 	public int EClassAnswerUpdate(EClassAnswer eClassAnswer);
+	//클래스 답변  삭제 처리
+	public int EClassAnswerDelete(EClassAnswer eClassAnswer);
 	
 	//클래스 세부설정 등록 처리
 	public int EClassPriceInsert(EClassApproved eClassApproved);
 	//클래스 세부설정 수정 처리
 	public int EClassPriceUpdate(EClassApproved eClassApproved);
+	//클래스 세부설정 삭제 처리
+	public int EClassPriceDelete(EClassApproved eClassApproved);
 	//클래스 세부설정 State 승인처리
 	public int priceStateUpdate(EClassApproved eClassApproved);
 	

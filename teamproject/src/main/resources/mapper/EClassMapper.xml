@@ -258,6 +258,15 @@
 			ea.eClassApprovedCode = #{eClassApprovedCode};
 	</update>
 	
+	<delete id="EClassPriceDelete" parameterType="EClassApproved">
+		/* Price 삭제처리 */
+		DELETE 
+		FROM 
+			eclassapproved 
+		WHERE 
+			eClassApprovedCode = #{eClassApprovedCode}
+	</delete>
+	
 	<update id="priceStateUpdate" parameterType="EClassApproved">
 		/* State 승인처리 */
 		UPDATE 
@@ -301,6 +310,15 @@
 			ea.eClassAnswerCode = #{eClassAnswerCode};
 	</update>
 	
+	<delete id="EClassAnswerDelete" parameterType="EClassAnswer">
+		/* Answer 삭제처리 */
+		DELETE 
+		FROM 
+			eclassanswer 
+		WHERE 
+			eClassAnswerCode = #{eClassAnswerCode}
+	</delete>
+	
 	<insert id="EClassQuestionInsert" parameterType="EClassQuestion">
 		/* Question 등록처리 */
 		INSERT INTO eclassquestion(
@@ -331,6 +349,15 @@
 		WHERE 
 			eq.eClassQuestionCode = #{eClassQuestionCode}
 	</update>
+	
+	<delete id="EClassQuestionDelete" parameterType="EClassQuestion">
+		/* Question 삭제처리 */
+		DELETE 
+		FROM 
+			eclassquestion 
+		WHERE 
+			eClassQuestionCode = #{eClassQuestionCode}
+	</delete>
 	
 	<insert id="EClassSectionCurriculumInsert" parameterType="EClassSectionCurriculum">
 		/* SectionCurriculum 등록처리 */
@@ -372,6 +399,15 @@
 			eClassSectionCurriculumCode 		= #{eClassSectionCurriculumCode};
 	</update>
 	
+	<delete id="EClassSectionCurriculumDelete" parameterType="EClassSectionCurriculum">
+		/* SectionCurriculum 삭제처리 */
+		DELETE 
+		FROM 
+			eclasssectioncurriculum 
+		WHERE 
+			eClassSectionCurriculumCode = #{eClassSectionCurriculumCode}
+	</delete>
+	
 	<insert id="EClassSectionTitleInsert" parameterType="EClassSectionTitle">
 		/* SectionTitle 등록처리 */
 		INSERT INTO eclasssectiontitle(
@@ -402,6 +438,15 @@
 		WHERE 
 			es.eClassSectionTitleCode = #{eClassSectionTitleCode};
 	</update>
+	
+	<delete id="EClassSectionTitleDelete" parameterType="EClassSectionTitle">
+		/* SectionTitle 삭제처리 */
+		DELETE 
+		FROM 
+			eclasssectiontitle 
+		WHERE 
+			eClassSectionTitleCode = #{eClassSectionTitleCode}
+	</delete>
 	
 	<insert id="EClassIntroduceInsert" parameterType="EClassIntroduce">
 		/* introduce 등록처리 */
@@ -434,6 +479,15 @@
 		WHERE 
 			ei.eClassIntroduceCode = #{eClassIntroduceCode};
 	</update>
+	
+	<delete id="EClassIntroduceDelete" parameterType="EClassIntroduce">
+		/* introduce 삭제기능 */
+		DELETE 
+		FROM 
+			eclassintroduce 
+		WHERE 
+			eClassIntroduceCode = #{eClassIntroduceCode};
+	</delete>
 	
 	<select id="eClassCategoryLargeList" parameterType="String" resultType="EClassCategoryLarge">
 		/* 카테고리 조회 */
