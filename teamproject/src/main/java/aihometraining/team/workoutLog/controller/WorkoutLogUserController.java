@@ -19,22 +19,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.EClassCategoryLarge;
 import aihometraining.team.dto.EClassCategoryMedium;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.EClassTake;
-import aihometraining.team.dto.FileDto;
-import aihometraining.team.dto.Member;
 import aihometraining.team.dto.WorkoutGoal;
 import aihometraining.team.dto.WorkoutLog;
 import aihometraining.team.dto.WorkoutLogLike;
 import aihometraining.team.dto.WorkoutLogPrivacybounds;
-import aihometraining.team.util.FileUtil;
 import aihometraining.team.workoutLog.mapper.WorkoutLogUserMapper;
 import aihometraining.team.workoutLog.service.WorkoutLogUserService;
 
@@ -335,7 +332,7 @@ public class WorkoutLogUserController {
 		
 		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList(sessionEmail);
 		
-		
+		log.info("운동 목표 목록 조회 workoutGoalList : {}", workoutGoalList);
 		
 		model.addAttribute("title", "운동 목표");
 		model.addAttribute("workoutGoalList", workoutGoalList);
@@ -348,14 +345,14 @@ public class WorkoutLogUserController {
 	
 	// 운동 목표 등록
 	@GetMapping("/workoutGoalInsert")
-	public String workoutGoalInsert(Model model, @RequestParam(value = "memberEmail", required = false) String memberEmail) {
+	public String workoutGoalInsert(Model model) {
 		
-		// 수강 중인 운동 클래스 목록 조회
-		 List<EClassTake> eClassTakeList = workoutLogUserService.geteClassTakeList(memberEmail);
-		 log.info("수강 중인 운동 클래스 목록 조회  eClassTakeList : {}", eClassTakeList);
+		//개설 승인된 운동 클래스 목록 조회
+		List<EClassApproved> eClassApprovedList = workoutLogUserService.geteClassApproved();
+		 log.info("수강 중인 운동 클래스 목록 조회  eClassTakeList : {}", eClassApprovedList);
 		
 		model.addAttribute("title", "운동 목표 등록");
-		model.addAttribute("eClassTakeList", eClassTakeList);
+		model.addAttribute("eClassApprovedList", eClassApprovedList);
 		return "workoutLog/workoutLogUser/workoutGoalInsert";
 		
 	}
