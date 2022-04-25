@@ -236,10 +236,46 @@
 			,#{eClassApprovedEndDate}
 			,#{eClassApprovedStudent}
 			,#{eClassApprovedMaxStudent}
-			,#{eClassApprovedDate}
+			,NOW()
 			,0
 		);
 	</insert>
+	
+	<update id="EClassPriceUpdate" parameterType="EClassApproved">
+		/* Price 수정처리 */
+		UPDATE 
+			eclassapproved AS ea
+		SET
+			 eClassCategorySmallCode	= #{eClassCategorySmallCode}
+			,eClassApprovedPrice		= #{eClassApprovedPrice}
+			,eClassApprovedName			= #{eClassApprovedName}
+			,eClassApprovedSetDate		= #{eClassApprovedSetDate}
+			,eClassApprovedStratDate	= #{eClassApprovedStratDate}
+			,eClassApprovedEndDate		= #{eClassApprovedEndDate}
+			,eClassApprovedStudent		= #{eClassApprovedStudent}
+			,eClassApprovedMaxStudent	= #{eClassApprovedMaxStudent}
+		WHERE 
+			ea.eClassApprovedCode = #{eClassApprovedCode};
+	</update>
+	
+	<delete id="EClassPriceDelete" parameterType="EClassApproved">
+		/* Price 삭제처리 */
+		DELETE 
+		FROM 
+			eclassapproved 
+		WHERE 
+			eClassApprovedCode = #{eClassApprovedCode}
+	</delete>
+	
+	<update id="priceStateUpdate" parameterType="EClassApproved">
+		/* State 승인처리 */
+		UPDATE 
+			eclassapproved AS ea
+		SET
+			eClassApprovedState = 1
+		WHERE 
+			ea.eClassApprovedCode = #{eClassApprovedCode};
+	</update>
 	
 	<insert id="EClassAnswerInsert" parameterType="EClassAnswer">
 		/* Answer 등록처리 */
@@ -262,6 +298,27 @@
 		);
 	</insert>
 	
+	<update id="EClassAnswerUpdate" parameterType="EClassAnswer">
+		/* Answer 수정처리 */
+		UPDATE 
+			eclassanswer AS ea
+		SET
+			 eClassAnsweTitle		= #{eClassAnsweTitle}
+			,eClassAnswerUpdateDate	= NOW()
+			,memberUpdateEmail 		= #{memberEmail}
+		WHERE 
+			ea.eClassAnswerCode = #{eClassAnswerCode};
+	</update>
+	
+	<delete id="EClassAnswerDelete" parameterType="EClassAnswer">
+		/* Answer 삭제처리 */
+		DELETE 
+		FROM 
+			eclassanswer 
+		WHERE 
+			eClassAnswerCode = #{eClassAnswerCode}
+	</delete>
+	
 	<insert id="EClassQuestionInsert" parameterType="EClassQuestion">
 		/* Question 등록처리 */
 		INSERT INTO eclassquestion(
@@ -280,6 +337,27 @@
 			,NULL
 		);
 	</insert>
+	
+	<update id="EClassQuestionUpdate" parameterType="EClassQuestion">
+		/* Question 수정처리 */
+		UPDATE 
+			eclassquestion AS eq
+		SET
+			 eClassQuestionTitle		= #{eClassQuestionTitle}
+			,eClassQuestionUpdateDate	= NOW()
+			,memberUpdateEmail			= #{memberEmail}
+		WHERE 
+			eq.eClassQuestionCode = #{eClassQuestionCode}
+	</update>
+	
+	<delete id="EClassQuestionDelete" parameterType="EClassQuestion">
+		/* Question 삭제처리 */
+		DELETE 
+		FROM 
+			eclassquestion 
+		WHERE 
+			eClassQuestionCode = #{eClassQuestionCode}
+	</delete>
 	
 	<insert id="EClassSectionCurriculumInsert" parameterType="EClassSectionCurriculum">
 		/* SectionCurriculum 등록처리 */
@@ -308,6 +386,28 @@
 		);
 	</insert>
 	
+	<update id="EClassSectionCurriculumUpdate" parameterType="EClassSectionCurriculum">
+		/* SectionCurriculum 수정처리 */
+		UPDATE 
+			eclasssectioncurriculum 
+		SET
+			 eClassSectionCurriculumTitle		= #{eClassSectionCurriculumTitle}
+			,eClassSectionCurriculumAddFile		= #{eClassSectionCurriculumAddFile}
+			,eClassSectionCurriculumUpdateDate	= NOW()
+			,memberUpdateEmail					= #{memberEmail}
+		WHERE 
+			eClassSectionCurriculumCode 		= #{eClassSectionCurriculumCode};
+	</update>
+	
+	<delete id="EClassSectionCurriculumDelete" parameterType="EClassSectionCurriculum">
+		/* SectionCurriculum 삭제처리 */
+		DELETE 
+		FROM 
+			eclasssectioncurriculum 
+		WHERE 
+			eClassSectionCurriculumCode = #{eClassSectionCurriculumCode}
+	</delete>
+	
 	<insert id="EClassSectionTitleInsert" parameterType="EClassSectionTitle">
 		/* SectionTitle 등록처리 */
 		INSERT INTO eclasssectiontitle(
@@ -327,6 +427,27 @@
 		);
 	</insert>
 	
+	<update id="EClassSectionTitleUpdate" parameterType="EClassSectionTitle">
+		/* SectionTitle 수정처리 */
+		UPDATE 
+			eclasssectiontitle AS es
+		SET
+			 eClassSectionTitleName			= #{eClassSectionTitleName}
+			,eClassSectionTitleUpdateDate	= NOW()
+			,memberUpdateEmail				= #{memberEmail}
+		WHERE 
+			es.eClassSectionTitleCode = #{eClassSectionTitleCode};
+	</update>
+	
+	<delete id="EClassSectionTitleDelete" parameterType="EClassSectionTitle">
+		/* SectionTitle 삭제처리 */
+		DELETE 
+		FROM 
+			eclasssectiontitle 
+		WHERE 
+			eClassSectionTitleCode = #{eClassSectionTitleCode}
+	</delete>
+	
 	<insert id="EClassIntroduceInsert" parameterType="EClassIntroduce">
 		/* introduce 등록처리 */
 		INSERT INTO eclassintroduce (
@@ -345,6 +466,28 @@
 			,NULL
 		);
 	</insert>
+	
+	<update id="EClassIntroduceUpdate" parameterType="EClassIntroduce">
+		/* 클래스 introduce 업데이트 처리 */
+		UPDATE 
+			eclassintroduce AS ei
+		SET
+			 eClassIntroduceContent = #{eClassIntroduceContent}
+			,eClassIntroducetDate	= NOW()
+			,eClassIntroduceImg		= ''
+			,memberUpdateEmail		= #{memberEmail}
+		WHERE 
+			ei.eClassIntroduceCode = #{eClassIntroduceCode};
+	</update>
+	
+	<delete id="EClassIntroduceDelete" parameterType="EClassIntroduce">
+		/* introduce 삭제기능 */
+		DELETE 
+		FROM 
+			eclassintroduce 
+		WHERE 
+			eClassIntroduceCode = #{eClassIntroduceCode};
+	</delete>
 	
 	<select id="eClassCategoryLargeList" parameterType="String" resultType="EClassCategoryLarge">
 		/* 카테고리 조회 */
@@ -391,7 +534,8 @@
 	<select id="eClassOpenAppleyList" parameterType="String" resultMap="eClassApprovedResultMap">
 		/* 신청한 운동클래스 리스트 */
 		SELECT
-			 ea.eClassApprovedName
+			 ea.eClassApprovedCode
+			,ea.eClassApprovedName
 			,ea.eClassApprovedPrice
 			,ei.eClassIntroduceContent
 		FROM
@@ -404,30 +548,26 @@
 			ea.memberEmail = #{memberEmail};
 	</select>
 	
-	<select id="eClassCategoryList" parameterType="String" resultMap="eClassCategorySmallResultMap">
-		SELECT
-			 ecs.eClassCategorySmallName
-			,ecs.eClassCategoryMediumName
-			,ecs.eClassCategoryLargeName
-		FROM
-			eclassopenappley AS eo
-		INNER JOIN
-			eclasscategorysmall AS ecs
-		ON
-			eo.eClassCategorySmallCode = ecs.eClassCategorySmallCode
-		WHERE
-			eo.eClassOpenAppleyMemberEmail = #{memberEmail};
-	</select>
-	
-	<select id="eClassApprovedList" parameterType="String" resultMap="eClassApprovedResultMap">
+	<select id="eClassApprovedByCode" parameterType="String" resultMap="eClassApprovedResultMap">
 		/* 신청한 운동클래스 또는 승인된 운동클래스 수정처리를 위한 조회 */
 		SELECT
-			 ecs.eClassCategorySmallName
+			 ecs.eClassCategorySmallCode
+			,ecs.eClassCategorySmallName
+			,ecs.eClassCategoryMediumCode
+			,ecs.eClassCategoryMediumName
+			,ecs.eClassCategoryLargeCode
+			,ecs.eClassCategoryLargeName
+			,ei.eClassIntroduceCode
 			,ei.eClassIntroduceContent
+			,es.eClassSectionTitleCode
 			,es.eClassSectionTitleName
+			,esc.eClassSectionCurriculumCode
 			,esc.eClassSectionCurriculumTitle
+			,eq.eClassQuestionCode
 			,eq.eClassQuestionTitle
+			,ean.eClassAnswerCode
 			,ean.eClassAnsweTitle
+			,ea.eClassApprovedCode
 			,ea.eClassApprovedPrice
 			,ea.eClassApprovedName
 			,ea.eClassApprovedSetDate
@@ -462,14 +602,24 @@
 		ON
 			ea.eClassAnswerCode = ean.eClassAnswerCode
 		WHERE
-			ea.memberEmail ='id001@email.com';
+			ea.eClassApprovedCode = #{eClassApprovedCode};
 	</select>
 	
-	
-	
-	
-	
-	
-	
+	<select id="eClassOpenAppleyadminList" parameterType="String" resultMap="eClassApprovedResultMap">
+		/* 클래스 등록 신청한 전체 리스트 조회 */
+		SELECT
+			 m.memberEmail
+			,ea.eClassApprovedCode
+			,ea.eClassApprovedPrice
+			,ea.eClassApprovedName
+			,ea.eClassApprovedDate
+			,ea.eClassApprovedState
+		FROM
+			member AS m
+		INNER JOIN
+			eclassapproved AS ea
+		ON
+			m.memberEmail = ea.memberEmail;
+	</select>
 	
 </mapper>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+<!-- 사용자 정의 title -->
+<th:block layout:fragment="customTitle">
+	<title th:text="${title}"></title>
+</th:block>
+<!-- 사용자 정의 Css -->
+<th:block layout:fragment="customCss">
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/simple-line-icons.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/mediaelementplayer.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/icheck/skins/flat/red.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/icheck/skins/flat/red.css}"/>
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<div class="col-md-12">
+		<div class="panel">
+			<div class="panel-body">
+				
+				
+			
+			</div>
+		</div>
+	</div>
+
+
+
+</th:block>
+
+<th:block layout:fragment="customBodyScript">
+	
+	<!-- plugins -->
+	<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
+	<script th:src="@{/asset/js/plugins/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/asset/js/plugins/dataTables.bootstrap.min.js}"></script>
+	<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+
+	<!-- custom -->
+	<script th:src="@{/asset/js/main.js}"></script>
+	<script type="text/javascript">
+	 
+		$(document).ready(function(){
+			
+					    
+		});
+	</script>
+</th:block>
+</html>

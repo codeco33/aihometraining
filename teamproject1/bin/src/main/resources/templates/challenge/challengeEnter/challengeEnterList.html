@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/userdefault}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+		<!-- 참가 챌린지  area start -->
+		<div class="container">
+		    <div class="row justify-content-center">
+				<div class="col-xl-7 col-lg-8">
+		        	<div class="section-tittle text-center mb-55">
+		                <h2>참가 중인 챌린지</h2>
+		            </div>
+		        </div>
+		        <!-- userdefault 에서 customContects블럭 위치 조정함  -->
+		        <th:block th:if="${not #lists.isEmpty(challengeEnterList)}" th:each="l : ${challengeEnterList}">
+			        <div class="row section-top-border">
+				        <div class="properties__card">
+					        <div class="properties__background overlay1">
+			                    <div class="p-5"></div>
+			                </div>
+					        <section class="about-area2 fix pb-padding">
+					            <div class="support-wrapper align-items-center">
+					                <div class="right-content2">
+					                    <!-- img -->
+					                    <div class="right-img">
+					                        <img th:src="@{/assets/img/workoutLogimg2.jpg}" alt="">
+					                    </div>
+					                </div>
+					                <div class="left-content2">
+					                    <!-- section tittle -->
+					                    <div class="section-tittle section-tittle2 mb-20">
+					                        <div class="front-text">
+					                            <h2 class="">
+					                            	<a th:href="@{/challenge/challengeEnter/challengeEnterDetail(challengeGatherCode=${l.challengeGather.challengeGatherCode})}" th:text="${l.challengeGather.challengeGatherName}"></a>
+					                            </h2>
+					                            <p th:text="${l.challengeGather.challengeGatherIntro}"></p>
+					                            <a th:href="@{/challenge/challengeEnter/challengePlanDoInsert(challengeEnterCode=${l.challengeEnterCode})}" class="genric-btn primary radius">인증 하기</a>
+					                        </div>
+					                    </div>
+					                </div>
+					            </div>
+					        </section>
+				        </div>
+			        </div>
+		        </th:block>
+		        <th:block th:unless="${not #lists.isEmpty(challengeEnterList)}">
+			        <div class="row section-top-border">
+				        <div class="properties__card" style="padding: 50px;">
+					        <div class="properties__background overlay1">
+			                    <div class="p-5"></div>
+			                </div>
+					        <section class="about-area2 fix pb-padding">
+					            <div class="support-wrapper align-items-center">
+				                    <div class="section-tittle section-tittle">
+				                        <div class="front-text">
+				                            <h2 class="gatherName">
+				                            	참가하고 있는 챌린지가 없습니다.
+				                            </h2>
+				                        </div>
+				                        <div class="form-group mt-3 row justify-content-center">
+				                        	<a th:href="@{/challenge/challengeGather/challengeGatherList}" class="genric-btn primary radius">챌린지 참가하러 가기</a>
+			                			</div>
+				                    </div>
+					            </div>
+					        </section>
+				        </div>
+			        </div>
+		        </th:block>
+	        </div>
+        </div>
+		<!-- 챌린지 모집 area end -->
+	</th:block>
+	
+	<th:block layout:fragment="customBodyScript">
+		<style>
+			.courses-area .properties__card {
+			    box-shadow: rgba(2, 25, 65, 0.08) 0px 6px 6px 4px;
+			    border-radius: 10px;
+			    transition: all 0.4s ease 0s;
+			}
+			.courses-area .properties__background div {
+			    padding: 29px 20px 20px 20px;
+			    width: 100%;
+			    border-radius: 10px 10px 0 0;
+			    position: relative;
+			    background-color: #ffffff;
+			    font-size: 25px;
+			    color: #fff;
+			    text-align: center;
+			}
+			.courses-area .front-text h2 a {
+			    font-size: 30px;
+			    font-weight: Semibold;
+			    color: #4255A4;
+			    outline: medium none;
+			}
+			.courses-area .front-text h2 a:hover {
+			    color: #bdbdbd;
+			    outline: medium none;
+			}
+		</style>
+	</th:block>
+</html>

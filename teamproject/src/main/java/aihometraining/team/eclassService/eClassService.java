@@ -64,6 +64,17 @@ public class eClassService {
 		
 		return result;
 	}
+	//클래스 신청 폼 introduce 수정처리
+	public int EClassIntroduceUpdate(EClassIntroduce eClassIntroduce, String mamberEmail) {
+		
+		log.info("EClassIntroduceUpdate eClassIntroduce 데이터: {}", eClassIntroduce);
+		log.info("EClassIntroduceUpdate mamberEmail 데이터: {}", mamberEmail);
+		eClassIntroduce.setMemberUpdateEmail(mamberEmail);
+		
+		int result = eClassMapper.EClassIntroduceUpdate(eClassIntroduce);
+		
+		return result;
+	}
 	
 	//클래스 신청 폼 sectiontitle 등록처리
 	public int EClassSectionTitleInsert(EClassSectionTitle eClassSectionTitle, String memberEmail) {
@@ -75,6 +86,16 @@ public class eClassService {
 		eClassSectionTitle.setMemberEmail(memberEmail);
 		
 		int result = eClassMapper.EClassSectionTitleInsert(eClassSectionTitle);
+		
+		return result;
+	}
+	//클래스 신청 폼 sectiontitle 수정처리
+	public int EClassSectionTitleUpdate(EClassSectionTitle eClassSectionTitle, String memberEmail) {
+		
+		log.info("EClassSectionTitleUpdate eClassSectionTitle 데이터: {}", eClassSectionTitle);
+		eClassSectionTitle.setMemberUpdateEmail(memberEmail);
+		
+		int result = eClassMapper.EClassSectionTitleUpdate(eClassSectionTitle);
 		
 		return result;
 	}
@@ -96,6 +117,17 @@ public class eClassService {
 		
 		return result;
 	}
+	//클래스 신청 폼 sectionculum 수정처리
+	public int EClassSectionCurriculumUpdate( EClassSectionCurriculum eClassSectionCurriculum
+											, String memberEmail) {
+		
+		log.info("EClassSectionCurriculumUpdate eClassSectionCurriculum 데이터: {}", eClassSectionCurriculum);
+		eClassSectionCurriculum.setMemberUpdateEmail(memberEmail);
+		
+		int result = eClassMapper.EClassSectionCurriculumUpdate(eClassSectionCurriculum);
+		
+		return result;
+	}
 	
 	//클래스 신청 폼 question 등록처리
 	public int EClassQuestionInsert(EClassQuestion eClassQuestion, String memberEmail) {
@@ -107,6 +139,16 @@ public class eClassService {
 		eClassQuestion.setMemberEmail(memberEmail);
 		
 		int result = eClassMapper.EClassQuestionInsert(eClassQuestion);
+		
+		return result;
+	}
+	//클래스 신청 폼 question 수정처리
+	public int EClassQuestionUpdate(EClassQuestion eClassQuestion, String memberEmail) {
+		
+		log.info("EClassQuestionUpdate eClassQuestion 데이터: {}", eClassQuestion);
+		eClassQuestion.setMemberUpdateEmail(memberEmail);
+		
+		int result = eClassMapper.EClassQuestionUpdate(eClassQuestion);
 		
 		return result;
 	}
@@ -125,6 +167,17 @@ public class eClassService {
 		eClassAnswer.seteClassQuestionCode(questionCode);
 		
 		int result = eClassMapper.EClassAnswerInsert(eClassAnswer);
+		
+		return result;
+	}
+	//클래스 신청 폼 answer 수정처리
+	public int EClassAnswerUpdate(EClassAnswer eClassAnswer
+								, String memberEmail) {
+		
+		log.info("EClassAnswerUpdate EClassAnswer 데이터: {}", eClassAnswer);
+		eClassAnswer.setMemberUpdateEmail(memberEmail);
+		
+		int result = eClassMapper.EClassAnswerUpdate(eClassAnswer);
 		
 		return result;
 	}
@@ -164,17 +217,64 @@ public class eClassService {
 		String answerCode = eClassAnswer.geteClassAnswerCode();
 		eClassApproved.seteClassAnswerCode(answerCode);
 		
-		log.info("eClassService EClassPriceInsert 데이터: {}", eClassApproved);
-		log.info("eClassService EClassPriceInsert 데이터: {}", memberEmail);
-		log.info("eClassService EClassPriceInsert 데이터 : {}", priceCode);
-		log.info("eClassService EClassPriceInsert 데이터 : {}", introduceCode);
-		log.info("eClassService EClassPriceInsert 데이터 : {}", sectionCode);
-		log.info("eClassService EClassPriceInsert 데이터 : {}", curriculumCode);
-		log.info("eClassService EClassPriceInsert 데이터 : {}", questionCode);
-		log.info("eClassService EClassPriceInsert 데이터 : {}", answerCode);
+		log.info("eClassService EClassPriceInsert eClassApproved 데이터: {}", eClassApproved);
+		log.info("eClassService EClassPriceInsert memberEmail 데이터: {}", memberEmail);
+		log.info("eClassService EClassPriceInsert priceCode 데이터 : {}", priceCode);
+		log.info("eClassService EClassPriceInsert introduceCode 데이터 : {}", introduceCode);
+		log.info("eClassService EClassPriceInsert sectionCode 데이터 : {}", sectionCode);
+		log.info("eClassService EClassPriceInsert curriculumCode 데이터 : {}", curriculumCode);
+		log.info("eClassService EClassPriceInsert questionCode 데이터 : {}", questionCode);
+		log.info("eClassService EClassPriceInsert answerCode 데이터 : {}", answerCode);
 		
 		int result = eClassMapper.EClassPriceInsert(eClassApproved);
 		
 		return result;
 	}
+	//클래스 신청 폼 price 수정처리
+	public int EClassPriceUpdate( EClassApproved eClassApproved
+								, EClassCategorySmall eClassCategorySmall
+								, String memberEmail
+								, EClassIntroduce eClassIntroduce
+								, EClassSectionTitle eClassSectionTitle
+								, EClassSectionCurriculum eClassSectionCurriculum
+								, EClassQuestion eClassQuestion
+								, EClassAnswer eClassAnswer) {
+		
+		log.info("eClassService EClassPriceUpdate eClassApproved : {}",eClassApproved);
+		log.info("eClassService EClassPriceUpdate eClassCategorySmall : {}",eClassCategorySmall);
+		log.info("eClassService EClassPriceUpdate eClassIntroduce : {}",eClassIntroduce);
+		log.info("eClassService EClassPriceUpdate eClassSectionTitle : {}",eClassSectionTitle);
+		log.info("eClassService EClassPriceUpdate eClassSectionCurriculum : {}",eClassSectionCurriculum);
+		log.info("eClassService EClassPriceUpdate eClassQuestion : {}",eClassQuestion);
+		log.info("eClassService EClassPriceUpdate eClassAnswer : {}",eClassAnswer);
+		
+		int result = eClassMapper.EClassPriceUpdate(eClassApproved);
+		
+		return result;
+	}
+	//클래스 신청 상태 수정처리
+	public int priceStateUpdate(EClassApproved eClassApproved) {
+		
+		int result = eClassMapper.priceStateUpdate(eClassApproved);
+		
+		return result;
+	}
+	
+	//클래스 신청 수정화면
+	public EClassApproved eClassApprovedByCode(String eclassapprovedCode){
+		
+		EClassApproved eClassApproved = eClassMapper.eClassApprovedByCode(eclassapprovedCode);
+		
+		log.info("eClassService eClassApprovedList eClassApproved : {}", eclassapprovedCode);
+		
+		return eClassApproved;
+	}
+	
+	public List<EClassApproved> eClassOpenAppleyadminList(EClassApproved eClassApproved) {
+		
+		List<EClassApproved> adminList = eClassMapper.eClassOpenAppleyadminList(eClassApproved);
+		
+		return adminList;
+	}
+	
 }

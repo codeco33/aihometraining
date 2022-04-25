@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+	
+		<div class="col-md-12 top-20 padding-0">
+              <div class="col-md-12">
+              
+                <div class="panel">
+                  <div class="panel-body">
+                  <div class="panel-heading bg-white ">
+                  	<h4>식단 일반</h4>
+                  </div>
+                  	
+                  <div class="col-md-6">
+                  <div> </div>
+						<table>
+							<tbody>
+								<tr>
+									<td class="text-right">식단은행 코드</td>
+									<td th:text=${newDietBankInfo.dietBankCode} id="DietUpdietBankCode"></td>
+								</tr>
+								<tr>
+									<td class="text-right">작성자 이메일 </td>
+									<td th:text=${newDietBankInfo.memberEmail} id="DietUpMemberEmail"></td>
+								</tr>
+								<tr>
+									<td class="text-right">현재 연동된 클래스 </td>
+									<td> <button type="button" class="btn btn-default" data-toggle="modal" data-target="#dietBankDefault">
+										  클래스 연동(클래스 데이터 생성후 구현)
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td class="text-right">작성연월일 </td>
+									<td th:text=${newDietBankInfo.dietBankInsertDate}></td>
+								</tr>
+								<tr>
+									<td class="text-right">수정자 이메일 </td>
+									<td th:text=${newDietBankInfo.memberUpdateEmail}></td>
+								</tr>
+								<tr>
+									<td class="text-right">최종수정일 </td>
+									<td th:text=${newDietBankInfo.dietBankUpdateDate}></td>
+
+								</tr>
+							</tbody>
+								
+						</table>
+						
+					
+					
+					
+					<!-- 클래스연동 Modal -->
+					<div class="modal fade" id="dietBankDefault" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h4 class="modal-title" id="myModalLabel"></h4>
+					      </div>
+					      <div class="modal-body">
+					     <form>
+					     	<h4>연동할 클래스 선택</h4>
+						    <select>
+								  <option>연동 클래스 선택</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+						    
+						       	
+						  	</div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-default" data-dismiss="modal">수정 취소</button>
+						        <button type="submit" class="btn btn-default">변경사항 적용</button>
+						      </div>
+							</form>
+					      
+					    </div>
+					  </div>
+					</div>
+                  
+                  
+                  
+                  	
+                  </div>
+                
+                  
+                 
+              <div class="col-md-12 padding-0" style="padding-bottom:20px;">
+                <div class="panel-heading bg-white ">
+                  <h4> 식단 상세</h4>
+                </div>
+              </div>
+                 
+              <div class="responsive-table" id="DietBankConnMealList" th:replace="/diet/AjaxTable/DietBankConnMealListAjax.html :: fragment-ConnMealList">
+              </div>
+                  
+                <div class="text-center">
+                  	<a th:href="@{/admin/diet/dietBankListAdmin}">
+	                	<button class="btn btn-outline btn-default">
+	                		목록으로
+	                		<i class="fa fa-list-ul"></i>
+	                	</button>
+                	</a>
+                	<a th:href="@{/admin/diet/deleteDietBankList(dietBankCode=${newDietBankInfo.dietBankCode})}">
+	                	<button class="btn btn-outline btn-default" >
+	                		삭제하기
+	                		<i class="fa fa-trash"></i>
+	                	</button>
+                	</a>
+                </div>
+                </div>
+              </div>
+            </div>  
+          </div>
+
+
+
+
+
+<!-- 수정모달 Start -->
+
+
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-lg">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel"></h4>
+		      </div>
+			      
+	<!-- modal body --> 
+		  
+		          <div class="modal-body">
+		          		<div class="panel">
+		          		
+		          		<!--현재식단  -->
+		          			<h3>현재 식단</h3>
+		          			<div class="panel-body" id="MealListContent"th:replace="/diet/AjaxTable/DietBankConnMealListDayAjax.html :: fragment-DailyMealList">
+								
+							</div>
+		          
+	<!--메뉴 대분류/상세분류/검색   -->
+			                <div class="panel">
+			                	<h3>메뉴검색</h3>
+			                	
+			                	
+			                  <div class="panel-body bg-light-grey h-auto" >
+				                  <div class="col-md-12 padding-0" >
+					                    <div class="col-md-3  padding-0">
+					                    	<select class="form-control" id="mainMealSort" onchange="MainSortchageSelect()">
+					                    	    <option selected disabled  style="display:none" >대분류</option>
+					                    	</select>
+					                    </div>
+					                    <div class="col-md-3  padding-0" >
+					                    	<select class="form-control" id="DetailMealSort" onchange="DetailSortchageSelect()">
+					                    		<option selected disabled  style="display:none">상세분류</option>
+					                    	</select>
+					                    </div>
+					                    <div class="col-md-6  padding-0">
+					                         <input type="text" class="form-control" id="searchNutrient" placeholder="분류를 선택하고 검색할 식품명을 입력하세요">
+					                    </div> 
+				                    </div>
+				                 </div>
+				                 
+				                 
+	 <!-- 식품 리스트 조회 -->
+				                  <div class="responsive-table" id="DietNutrientListTable">
+				                   
+				                  </div>
+				                </div>
+				              </div>
+				            </div>
+				      
+				      
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			</div>
+		
+<!-- 수정모달 End -->
+
+		
+	</th:block>
+	
+	
+	
+	
+	
+	
+		<th:block layout:fragment="customBodyScript">	
+			<!-- plugins -->
+			<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
+			<script th:src="@{/asset/js/plugins/jquery.datatables.min.js}"></script>
+			<script th:src="@{/asset/js/plugins/datatables.bootstrap.min.js}"></script>
+			<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+			
+			
+			<!-- custom -->
+			<script th:src="@{/asset/js/main.js}"></script>
+			<script type="text/javascript">
+			  $(document).ready(function(){
+			    //$('#datatables-example').DataTable();
+			  });
+			  
+			  
+
+
+			  $('.oneDayDelBtn').click(function(e){
+			  	
+			  	var dietOneMealConnectionCode = $(e.target).attr('value');
+			  	var dietBankCode = $('#DietUpdietBankCode').text()
+			  	var titleName = $('.modal-title').text();
+			  	 $.ajax({
+							 url: '/admin/diet/deleteDietOneMealConnection'
+							,type: 'POST'
+							,data: 
+							
+							{'dietOneMealConnectionCode' : dietOneMealConnectionCode,
+							 'dietBankCode' : dietBankCode }
+							 
+							,dataType: 'text'
+							,success: function(data){
+								$('#MealListContent').replaceWith(data);
+								
+								
+								 $('.todayTrLine').each(function(index,item){
+							     	var groupName = $(this).attr('value');
+									if(groupName == titleName){
+											$(this).show();
+										} else{
+											$(this).hide();
+										}
+						     	});
+								
+							}
+						});
+			 	 });
+			  
+			  
+			  
+			  
+ 			<!-- Ajax select:mealSort -->
+			 	$('.updateDetailBank').click(function(){
+										
+					$.ajax({
+							 url: '/admin/diet/selectDietMealLevelList'
+							,type: 'POST'
+							,dataType: 'text'
+							,success: function(data){
+								
+								
+								$("#mainMealSort").replaceWith(data);
+							}
+						});
+				});
+				
+				
+				 
+			<!-- 대 분류 선택 -->
+				function MainSortchageSelect(){
+					var mainMealSort = $('#mainMealSort option:selected').val()
+				
+					$.ajax({
+							 url: '/admin/diet/selectDietMealListDetail'
+							,type: 'POST'
+							,data: {'mainMealSort' : mainMealSort}
+							,dataType: 'text'
+							,success: function(data){
+								$("#DetailMealSort").replaceWith(data);
+							}
+						});
+						
+					$.ajax({
+							 url: '/admin/diet/selectDietMealList'
+							,type: 'POST'
+							,data: {'mainMealSort' : mainMealSort}
+							,dataType: 'text'
+							,success: function(data){
+								$("#DietNutrientListTable").replaceWith(data);
+							}
+						});
+					
+				}
+				
+				
+			<!-- 소 분류 선택 -->
+				function DetailSortchageSelect(){
+					
+					var
+					 DetailMealSort = $('#DetailMealSort option:selected').val() 
+					,NutrientListLine = $('.NutrientListLine');					
+					
+					
+					NutrientListLine.each(function(){
+					
+						var searchVal = $(this).attr('value');
+						
+						console.log(searchVal);
+					
+						if(DetailMealSort == searchVal){
+
+							$(this).show();
+						
+						}else{
+
+							$(this).hide();
+						
+						}
+					});
+				}
+				
+			<!-- 검색어 입력 -->	
+				
+				$('#searchNutrient').keyup(function(){
+					var searchKeyword = $(this).val();
+					var NutrientListLine = $('.NutrientListLine');	
+					
+					NutrientListLine.each(function(){
+					var searchLineName = $(this).children().first().text();
+					var searchResult = searchLineName.indexOf(searchKeyword);
+						
+						if(searchResult > -1){
+							$(this).show();
+						}else{
+							$(this).hide();
+						}				
+					});
+				});
+				
+				<!-- 수정모달 on --->
+				$(document).ready(function(){       
+					$('#myModal').on('show.bs.modal', function (e) {
+						 var button = $(e.relatedTarget);
+ 						 var recipient = button.data('whatever'); 		
+						 var modal = $(this);
+						 
+						 modal.find('.modal-title').text(recipient);
+
+						 var titleName = modal.find('.modal-title').text();
+						
+							
+					     $('.todayTrLine').each(function(index,item){
+					     	
+					     	var groupName = $(this).attr('value');
+							
+								if(groupName == titleName){
+									$(this).show();
+								} else{
+									$(this).hide();
+								}
+				     	});
+					});
+				});
+					
+				
+				<!-- 수정모달 off -->
+				$(document).ready(function(){       
+					    $('#myModal').on('hidden.bs.modal', function () {
+					            location.reload();
+					    });
+				});
+				
+				
+				
+			  
+			  
+			</script>
+			
+			
+	<!-- end: Javascript -->
+		</th:block>
+
+</html>

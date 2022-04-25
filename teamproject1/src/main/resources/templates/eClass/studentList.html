@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/eclassdefault}">
+<!-- 사용자 정의 title -->
+<th:block layout:fragment="customTitle">
+	<title th:text="${title}"></title>
+</th:block>
+<!-- 사용자 정의 Css -->
+<th:block layout:fragment="customCss">
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/simple-line-icons.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/mediaelementplayer.css}" />
+
+	<style type="text/css">
+		.panel-heading {
+			padding: 15px;
+			padding-bottom: 0;
+		}
+		.panel-heading>h4 {
+			font-weight: bold;
+			margin-bottom: 0;
+			border-bottom: 2px solid #58666e;
+			padding-bottom: 5px;
+		}
+		#signupforclassList td {
+			vertical-align: middle;
+		}
+		.autoCancelDate {
+			margin-top: 10px;
+			color: red;
+			margin-bottom: 0;
+		}
+		.cancelModalStr {
+			font-size: 14px;
+			margin-top: 20px;	
+		}
+		.studentDropdown {
+			margin-top: 0;
+		}
+		.studentDropdown:after {
+			left: 80px;
+		}
+		.studentDropdown:before {
+			left: 79px;
+		}
+		.dropdown-menu .divider {
+			margin: 0;
+		}
+		.studentDropdown {
+			padding: 2px 0;
+		}
+		.studentDropdown a {
+			font-size: 14px !important;
+			font-weight: bold !important;
+			padding-top: 10px !important;
+		}
+		.studentDropDownTd .avatar {
+			margin-top: 0 !important;
+		}
+</style>
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<div class="col-md-12">
+		<div class="panel">
+			<!-- 패널 헤더-->
+			<div class="panel-heading bg-white border-none">
+				<h4>
+					<span class="icons icon-user"></span> 수강생 조회
+				</h4>
+			</div>
+
+			<!-- 패널 바디 -->
+			<div class="panel-body">
+				<div class="responsive-table">
+					<table id="studentList" class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>수강생</th>
+								<th>수강신청일</th>
+								<th>남은 수강일</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="dropdown avatar-dropdown studentDropDownTd">
+										일길동
+										<img th:src="@{/asset/img/avatar.jpg}" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+										<ul class="dropdown-menu user-dropdown studentDropdown">
+											<li><a href="#">수강생 정보보기</a></li>
+											<li role="separator" class="divider"></li>
+											<li><a href="#">쪽지보내기</a></li>
+										</ul>
+								</td>
+								<td>2022-03-07</td>
+								<td>62일</td>
+							</tr>
+							<tr>
+								<td class="dropdown avatar-dropdown studentDropDownTd">
+									이길동
+									<img th:src="@{/asset/img/avatar.jpg}" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+									<ul class="dropdown-menu user-dropdown studentDropdown">
+										<li><a href="#">수강생 정보보기</a></li>
+											<li role="separator" class="divider"></li>
+											<li><a href="#">쪽지보내기</a></li>
+									</ul>
+								</td>
+								<td>2022-04-07</td>
+								<td>32일</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</th:block>
+
+<th:block layout:fragment="customBodyScript">
+
+	<!-- plugins -->
+	<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
+	<script th:src="@{/asset/js/plugins/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/asset/js/plugins/dataTables.bootstrap.min.js}"></script>
+	<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+
+	<!-- custom -->
+	<script th:src="@{/asset/js/main.js}"></script>
+	
+	<script type="text/javascript">
+		
+		$(document).ready(function() {
+			$('#studentList').dataTable({
+				order : [ 1, 'asc' ],
+				lengthChange : false,
+				pageLength : 10,
+				filter : false
+			});
+			
+			
+		});
+	</script>
+</th:block>
+</html>

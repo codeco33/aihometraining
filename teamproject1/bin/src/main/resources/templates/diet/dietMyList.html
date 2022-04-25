@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/userdefault}">
+	  
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+		<link rel="stylesheet" th:href="@{/datepicker/bootstrap-datepicker3.css}">
+		<link rel="stylesheet" th:href="@{/datepicker/bootstrap-datepicker3.standalone.css}">
+		
+	<style>
+		.date-input{
+			width:200px;
+			line-height: 40px;
+		    padding: 0 30px;
+		    font-size: 20;
+		    border: 1px solid #f0e9ff;
+		}
+		
+		.nice-select{
+			display:none;
+		}
+		
+	
+	</style>
+		
+		<div class="container">
+			 <div class="properties__card" >
+			 	 <div class="card-header" style="background-color:#fbf9ff">
+				    <div class="row p-1" >
+						<div class="col-auto mr-auto ">
+							<input type="text" id="datePicker" class="date-input">
+						</div>
+						<div class="col-auto">
+							<button class="genric-btn primary-border radius">
+								<i class="bi bi-plus-square"></i>
+								식단은행 가져오기
+							</button>
+						</div>
+					</div>
+				  </div>
+			 	
+			 	
+				<div class="card-body ">
+					
+						<div class="card text-center m-1">
+						  <div class="card-header">
+						    <ul class="nav nav-tabs card-header-tabs">
+						      <li class="nav-item">
+						        <a class="nav-link active Diettime-btn" style="cursor:pointer">아침식사</a>
+						      </li>
+						      <li class="nav-item">
+						        <a class="nav-link Diettime-btn" style="cursor:pointer">점심식사</a>
+						      </li>
+						      <li class="nav-item">
+						        <a class="nav-link Diettime-btn" style="cursor:pointer">저녁식사</a>
+						      </li>
+						    </ul>
+						  </div>
+						  <div class="card-body" id="myDietPlanedList" th:replace="/diet/AjaxTable/DietUserMealplanedListAjax.html :: fragment-myPlanedMealList">
+						  </div>
+						</div>
+						
+						
+					<div>
+						<div class="card m-1" >
+							<div class="card-body">
+						    <h5 class="card-title">영양소 섭취</h5>
+						    <P>기준에 따른 활성화 select 하기DBㄴㄴㄴ(식단은행 있으면 식단은행으로 대체), 식단은행 가져오기 1일단위 or 1주일 단위 가능</P>
+						    	<div>
+							    	<div class="mb-3">
+										<div class="row">
+											<div class="col-auto mr-auto">칼로리</div>
+											<div class="col-auto">300kcal</div>
+											<div class="col-auto">/</div>
+											<div class="col-auto">2000kcal</div>
+										</div>
+										<div class="progress">
+											<div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+									</div>
+							    	<div class="mb-3">
+										<div class="row">
+											<div class="col-auto mr-auto">탄수화물(g)</div>
+											<div class="col-auto">300kcal</div>
+											<div class="col-auto">/</div>
+											<div class="col-auto">2000kcal</div>
+										</div>
+										<div class="progress">
+											<div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+									</div>
+							    	<div class="mb-3">
+										<div class="row">
+											<div class="col-auto mr-auto">단백질(g)</div>
+											<div class="col-auto">300kcal</div>
+											<div class="col-auto">/</div>
+											<div class="col-auto">2000kcal</div>
+										</div>
+										<div class="progress">
+											<div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+									</div>
+							    	<div class="mb-3">
+										<div class="row">
+											<div class="col-auto mr-auto">지방(g)</div>
+											<div class="col-auto">300kcal</div>
+											<div class="col-auto">/</div>
+											<div class="col-auto">2000kcal</div>
+										</div>
+										<div class="progress">
+											<div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+									</div>
+							    	<div class="mb-3">
+										<div class="row">
+											<div class="col-auto mr-auto">나트륨(g)</div>
+											<div class="col-auto">300kcal</div>
+											<div class="col-auto">/</div>
+											<div class="col-auto">2000kcal</div>
+										</div>
+										<div class="progress">
+											<div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				
+			 </div>
+		</div>
+		
+		
+		
+<!-- 수정모달 Start -->
+
+
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-lg">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel"></h4>
+		      </div>
+			      
+	<!-- modal body --> 
+		  
+		          <div class="modal-body p-1">
+		          		<div class="panel">
+		          
+	<!--메뉴 대분류/상세분류/검색   -->
+			                <div class="panel">
+			                	
+			                	<!-- <div class="responsive-table" id="DietBankConnMealList" th:replace="/diet/AjaxTable/DietBankConnMealListAjax.html :: fragment-ConnMealList"> -->
+			                	
+			                	
+								<div class="panel-body bg-light-grey h-auto m-0" style="background-color:#fbf9ff" >
+				                  <div class="p-0 row p-3" >
+					                  	<div class="col-3 p-0">
+						                    <div id="testMmealSort">
+						                    	<select class="form-control" id="mainMealSort" onchange="MainSortchageSelect()" >
+						                    	    <option selected disabled  style="display:none">대분류</option>
+						                    	</select>
+						                    </div>
+						                </div> 
+						                <div class="col-3 p-0">
+						                    <div id="testDmealSort" >
+						                    	<select class="form-control" id="DetailMealSort" onchange="DetailSortchageSelect()" >
+						                    		<option selected disabled  style="display:none">상세분류</option>
+						                    	</select>
+						                    </div>
+						               </div>
+						               <div class="col-6 p-0">
+						                    <div>
+						                         <input type="text" class="form-control" id="searchNutrient" placeholder="분류를 선택하고 검색할 식품명을 입력하세요">
+						                    </div>
+						                    
+						                </div>     
+				                   </div>
+				                 </div>
+				                 
+				                 
+				                 
+	 <!-- 식품 리스트 조회 -->
+				                  <div class="responsive-table" id="DietNutrientListTable">
+				                   
+				                  </div>
+				                </div>
+				              </div>
+				            </div>
+				      
+				      
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+		
+<!-- 수정모달 End -->
+		
+	</th:block>
+	
+	
+	
+	 
+	
+	
+	<th:block layout:fragment="customBodyScript">
+	   
+			
+			<script th:src="@{/datepicker/bootstrap-datepicker.js}"></script>
+			<script th:src="@{/datepicker/bootstrap-datepicker.kr.min.js}"></script>
+
+			</script>
+				<script th:inline="javascript">
+			
+					<!-- 페이지의 기본 javascript  -->
+						
+						$(document).ready(function(){
+							dayChange();
+							})
+							
+					
+						var memberEmail = [[${session.SEMAIL}]];
+						var dietPlanTime = "아침식사";
+						var dayChange = function(){
+							
+							var DayCheck = null;
+							
+							$('.Diettime-btn').each(function(){
+										
+								var BtnCheck = $(this).hasClass('active');
+								
+								if(BtnCheck == true){
+									console.log($(this).text());
+									
+									DayCheck = $(this).text();
+								}
+							
+							})							
+							
+							var count = 0;
+							
+							$('.planListTr').each(function(){
+								var ListDayVal = $(this).attr('value');
+								
+								if(ListDayVal == DayCheck){
+									$(this).show();
+									count ++;
+								}else{
+									$(this).hide();
+								}
+								
+							});
+							
+							
+							console.log(count);
+								
+								if(count == 0){
+									$('.MyPlanedDietTable').hide();
+								} else{
+									$('.MyPlanedDietTable').show();
+								}
+						}
+						
+						
+						
+				
+						
+					
+						$('#datePicker').datepicker({
+							 format : "yyyy-mm-dd"
+							,language : "kr"
+							,todayHighlight : true
+							,todayBtn : true
+							,autoclose : true
+						}).datepicker("setDate",'now');
+						
+						$('#datePicker').on('changeDate',function(e){
+						
+							 var dietPlanDay = $('#datePicker').val();
+						
+							$.ajax({
+									 url: '/diet/mypage/selectChangedDietPlanList'
+									,type: 'POST'
+									,data: 
+									{'memberEmail' : memberEmail,
+									 'dietPlanDay' : dietPlanDay
+									  }
+									,dataType: 'text'
+									,success: function(data){
+										$('#myDietPlanedList').replaceWith(data);
+										
+									}
+								});
+								
+							console.log(e);
+						});
+						
+						
+						$('.Diettime-btn').click(function(e){
+							
+							$('.Diettime-btn').removeClass( 'active' );
+							$(e.target).addClass('active');
+							dietPlanTime = $(e.target).html()
+							
+							dayChange();
+						});
+						
+		
+			<!-- 실행/취소 버튼 클릭 update -->
+			$('.planDo-Btn').click(function(e){
+				var dietPlanDoValue = 1;
+				var dietPlanCode = $(e.target).attr('value');
+				var dietPlanDay = $('#datePicker').val();
+				
+				$.ajax({
+					 url: '/diet/mypage/updateUserDietPlan'
+					,type: 'POST'
+					,data: 
+					{'dietPlanDoValue' : dietPlanDoValue,
+					 'dietPlanCode' : dietPlanCode
+					  }
+					,dataType: 'text'
+					,success: function(data){
+						if(data = 1){
+							console.log("돼");
+								$.ajax({
+								 url: '/diet/mypage/selectChangedDietPlanList'
+								,type: 'POST'
+								,data: 
+								{'memberEmail' : memberEmail,
+								 'dietPlanDay' : dietPlanDay,
+								  }
+								,dataType: 'text'
+								,success: function(data){
+									$('#myDietPlanedList').replaceWith(data);
+									
+								}
+							});
+						}
+					}
+				});
+			});
+			
+			$('.planCancel-Btn').click(function(e){
+				var dietPlanDoValue = 0;
+				var dietPlanCode = $(e.target).attr('value');
+				var dietPlanDay = $('#datePicker').val();
+				
+				$.ajax({
+					 url: '/diet/mypage/updateUserDietPlan'
+					,type: 'POST'
+					,data: 
+					{'dietPlanDoValue' : dietPlanDoValue,
+					 'dietPlanCode' : dietPlanCode
+					  }
+					,dataType: 'text'
+					,success: function(data){
+						if(data = 1){
+							console.log("돼");
+								$.ajax({
+								 url: '/diet/mypage/selectChangedDietPlanList'
+								,type: 'POST'
+								,data: 
+								{'memberEmail' : memberEmail,
+								 'dietPlanDay' : dietPlanDay,
+								  }
+								,dataType: 'text'
+								,success: function(data){
+									$('#myDietPlanedList').replaceWith(data);
+									
+								}
+							});
+						}
+					}
+				});
+			});
+						
+						
+			<!-- 삭제 버튼 클릭 해당 줄 delete -->						
+			$('.planDel-Btn').click(function(e){
+				var dietPlanCode = $(e.target).attr('value')
+				var dietPlanDay = $('#datePicker').val();
+				console.log(memberEmail);
+				console.log(dietPlanDay);
+				
+				$.ajax({ url: '/diet/mypage/deleteUserDietPlan'
+						,type: 'POST'
+						,data: 
+						{'memberEmail' : memberEmail,
+						 'dietPlanDay' : dietPlanDay,
+						 'dietPlanCode' : dietPlanCode
+						  }
+						,dataType: 'text'
+						,success: function(data){
+							if(data = 1){
+								console.log("돼");
+									$.ajax({
+									 url: '/diet/mypage/selectChangedDietPlanList'
+									,type: 'POST'
+									,data: 
+									{'memberEmail' : memberEmail,
+									 'dietPlanDay' : dietPlanDay,
+									  }
+									,dataType: 'text'
+									,success: function(data){
+										$('#myDietPlanedList').replaceWith(data);
+										
+									}
+								});
+							}
+						}
+					});
+			});
+			
+		
+		
+						
+						
+						
+			<!-- Ajax select:mealSort -->
+			 	$('.updateDetailBank').click(function(){
+										
+					$.ajax({
+							 url: '/admin/diet/selectDietMealLevelList'
+							,type: 'POST'
+							,dataType: 'text'
+							,success: function(data){
+								
+								
+								$("#mainMealSort").replaceWith(data);
+							}
+						});
+				});
+				
+				
+				 
+			<!-- 대 분류 선택 -->
+				function MainSortchageSelect(){
+					var mainMealSort = $('#mainMealSort option:selected').val()
+				
+					$.ajax({
+							 url: '/admin/diet/selectDietMealListDetail'
+							,type: 'POST'
+							,data: {'mainMealSort' : mainMealSort}
+							,dataType: 'text'
+							,success: function(data){
+								$("#testDmealSort").replaceWith(data);
+							}
+						});
+						
+					$.ajax({
+							 url: '/diet/mypage/selectUserDietMealList'
+							,type: 'POST'
+							,data: {'mainMealSort' : mainMealSort}
+							,dataType: 'text'
+							,success: function(data){
+								$("#DietNutrientListTable").replaceWith(data);
+							}
+						});
+					
+				}
+				
+				
+			<!-- 소 분류 선택 -->
+				function DetailSortchageSelect(){
+					
+					var
+					 DetailMealSort = $('#DetailMealSort option:selected').val() 
+					,NutrientListLine = $('.NutrientListLine');					
+					
+					
+					NutrientListLine.each(function(){
+					
+						var searchVal = $(this).attr('value');
+						
+					
+						if(DetailMealSort == searchVal){
+
+							$(this).show();
+						
+						}else{
+
+							$(this).hide();
+						
+						}
+					});
+				}
+				
+			<!-- 검색어 입력 -->	
+				
+				$('#searchNutrient').keyup(function(){
+					var searchKeyword = $(this).val();
+					var NutrientListLine = $('.NutrientListLine');	
+					
+					NutrientListLine.each(function(){
+					var searchLineName = $(this).children().first().text();
+					var searchResult = searchLineName.indexOf(searchKeyword);
+						
+						if(searchResult > -1){
+							$(this).show();
+						}else{
+							$(this).hide();
+						}				
+					});
+				});
+				
+				
+			<!-- 추가모달 on --->
+				$(document).ready(function(){       
+					$('#myModal').on('show.bs.modal', function (e) {
+						$.ajax({
+							 url: '/admin/diet/selectDietMealLevelList'
+							,type: 'POST'
+							,dataType: 'text'
+							,success: function(data){
+								
+								$("#testMmealSort").replaceWith(data);
+								$("#DetailMealSort").removeAttr('style');
+							}
+						});
+					});
+				});
+				
+				
+			<!-- 추가모달 off -->
+				$(document).ready(function(){       
+					    $('#myModal').on('hidden.bs.modal', function () {
+					    	
+								$('#DetailMealSort').empty();
+								$('#DetailMealSort').append('<option selected disabled  style="display:none">상세분류</option>');
+					    		$('#DietNutrientListTable').empty();
+					    });
+				});
+					
+					
+			</script>
+	</th:block>
+	
+	
+
+</html>
