@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.EClassCategoryLarge;
 import aihometraining.team.dto.EClassCategoryMedium;
 import aihometraining.team.dto.EClassCategorySmall;
@@ -22,9 +23,12 @@ public interface WorkoutLogUserMapper {
 	//운동 목표 등록
 	public int workoutGoalInsert(WorkoutGoal workoutGoal);
 	
-	//수강 중인 운동 클래스 목록 조회
-	public List<EClassTake> geteClassTakeList(String memberEmail);
+	//개설 승인된 운동 클래스 목록 조회
+	public List<EClassApproved> geteClassApproved();
 		
+	//수강 중인  운동 클래스 목록 조회
+	public List<EClassTake> geteClassTakeList(String memberEmail);
+	
 	//일지 공개범위 목록 조회
 	public List<WorkoutLogPrivacybounds> getworkoutLogPrivacyboundsList();
 		
