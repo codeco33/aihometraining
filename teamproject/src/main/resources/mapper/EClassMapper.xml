@@ -200,6 +200,24 @@
 			
 	</resultMap>
 	
+	<resultMap type="EClassReview" id="eClassReviewResultMap">
+	
+		<result column="eClassReviewCode" 				property="eClassReviewCode"/>
+		<result column="eClassApprovedCode" 			property="eClassApprovedCode"/>
+		<result column="memberEmail" 					property="memberEmail"/>
+		<result column="eClassReviewContent"			property="eClassReviewContent"/>
+		<result column="eClassReviewScore"				property="eClassReviewScore"/>
+		<result column="eClassReviewRegDate"			property="eClassReviewRegDate"/>
+		<result column="eClassReviewUpdateDate"			property="eClassReviewUpdateDate"/>
+		<result column="memberUpdateEmail"				property="memberUpdateEmail"/>
+		<result column="eClassReviewAnswer"				property="eClassReviewAnswer"/>
+		<result column="replyMemberEmail"				property="replyMemberEmail"/>
+		<result column="eClassReviewAnswerRegDate"		property="eClassReviewAnswerRegDate"/>
+		<result column="eClassReviewAnswerUpdateDate"	property="eClassReviewAnswerUpdateDate"/>
+		<result column="replyMemberUpdateEmail"			property="replyMemberUpdateEmail"/>
+		
+	</resultMap>
+	
 	<insert id="EClassPriceInsert" parameterType="EClassApproved">
 		/* 클래스 등록 처리 */
 		INSERT INTO eclassapproved(
@@ -549,7 +567,7 @@
 	</select>
 	
 	<select id="eClassApprovedByCode" parameterType="String" resultMap="eClassApprovedResultMap">
-		/* 신청한 운동클래스 또는 승인된 운동클래스 수정처리를 위한 조회 */
+		/* 신청한 운동클래스 또는 승인된 운동클래스 조회 */
 		SELECT
 			 ecs.eClassCategorySmallCode
 			,ecs.eClassCategorySmallName
@@ -575,6 +593,16 @@
 			,ea.eClassApprovedEndDate
 			,ea.eClassApprovedStudent
 			,ea.eClassApprovedMaxStudent
+			,er.memberEmail
+			,er.eClassReviewContent
+			,er.eClassReviewScore
+			,er.eClassReviewRegDate
+			,er.eClassReviewUpdateDate
+			,er.eClassReviewAnswer
+			,er.replyMemberEmail
+			,er.eClassReviewAnswerRegDate
+			,er.eClassReviewAnswerUpdateDate
+			,er.replyMemberUpdateEmail
 		FROM
 			eclassapproved AS ea
 		INNER JOIN
@@ -601,6 +629,10 @@
 			eclassanswer AS ean
 		ON
 			ea.eClassAnswerCode = ean.eClassAnswerCode
+		INNER join
+			eclassreview AS er
+		on
+			ea.eClassApprovedCode = er.eClassReviewCode
 		WHERE
 			ea.eClassApprovedCode = #{eClassApprovedCode};
 	</select>
@@ -620,6 +652,29 @@
 			eclassapproved AS ea
 		ON
 			m.memberEmail = ea.memberEmail;
+	</select>
+	
+	<select id="eclassreview" parameterType="String" resultMap="eClassReviewResultMap">
+		/* Review 조회 */
+		SELECT
+			 er.eClassReviewContent
+			,er.memberEmail
+			,er.eClassReviewScore
+			,er.eClassReviewRegDate
+			,er.eClassReviewUpdateDate
+			,er.replyMemberEmail
+			,er.eClassReviewAnswer
+			,er.eClassReviewAnswerRegDate
+			,er.eClassReviewAnswerUpdateDate
+		FROM
+			eclassreview AS er
+		INNER JOIN
+			eclassapproved AS ea
+		ON
+			er.eClassApprovedCode = ea.eClassApprovedCode;
+		
+		WHERE
+			er.eClassReviewCode = #{eClassReviewCode};
 	</select>
 	
 </mapper>

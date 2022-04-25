@@ -206,9 +206,13 @@ public class eClassController {
 	}
 	 
 	@GetMapping("/eClassApproved")
-	public String eClassApproved(Model model) {
+	public String eClassApproved(Model model
+								,@RequestParam(value = "eClassApprovedCode",required = false)String eclassapproved) {
+		
+		EClassApproved approved = eClassService.eClassApprovedByCode(eclassapproved);
 	
 		model.addAttribute("title", "개설 승인된 클래스");
+		model.addAttribute("approved", approved);
 		
 		return "eClass/eClassApproved";
 	}
@@ -226,9 +230,13 @@ public class eClassController {
 	}
 	
 	@GetMapping("/eClassApplyadminList")
-	public String eClassApplyadminList(Model model) {
+	public String eClassApplyadminList(Model model
+									  ,EClassApproved eClassApproved) {
+		
+		List<EClassApproved> adminApprovedList = eClassService.eClassOpenAppleyadminList(eClassApproved);
 		
 		model.addAttribute("title", "승인된 운동클래스 목록(관리자)");
+		model.addAttribute("adminApprovedList", adminApprovedList);
 		
 		return "eClass/eClassApprovedadminList";
 	}
