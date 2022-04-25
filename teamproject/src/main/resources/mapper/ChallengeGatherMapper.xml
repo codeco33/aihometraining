@@ -264,4 +264,36 @@
 		WHERE
 			cg.memberEmail = #{memberEmail};
 	</select>
+	
+	<select id="getChallengeGather" parameterType="String" resultType="ChallengeGather">
+		/*챌린지 모집코드로 모집 정보 조회*/
+		SELECT 
+			 challengeGatherName
+			,memberEmail
+			,challengeEnterDeposit
+		FROM 
+			challengegather
+		WHERE 
+			challengeGatherCode = #{challengeGatherCode};
+	</select>
+	
+	<select id="getChallengeGatherPlan" parameterType="String" resultType="ChallengeGatherPlan">
+		SELECT 
+			challengeGatherPlanCode,
+			memberEmail, 
+			challengeGatherCode, 
+			challengeCategoryCode, 
+			challengeSettingCode, 
+			challengeGatherPlanProveNumber, 
+			challengeGatherPlanProgress, 
+			challengeGatherPlanAchieveRate, 
+			challengeGatherPlanProveState, 
+			challengeGatherChallengeStartDate, 
+			challengeGatherChallengeLastDate, 
+			challengeGatherPlanRound
+		FROM
+			challengegatherplan
+		WHERE
+			challengeGatherPlanCode = #{challengePlanCode};
+	</select>
 </mapper>

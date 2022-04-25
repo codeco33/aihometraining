@@ -181,8 +181,15 @@
 	
 	<select id="getCallengeEnter" parameterType="String" resultType="Map">
 		SELECT
-			 challengeGatherCode
+			challengeEnterCode
+			,challengeCategoryCode
+			,challengeEnterContent
+			,challengeGatherCode
 			,memberEmail
+			,challengeEnterDeposit
+			,challengeEnterDate
+			,challengeServiceStartDate
+			,challengeServiceEndDate
 		FROM
 			challengeenter
 		WHERE 

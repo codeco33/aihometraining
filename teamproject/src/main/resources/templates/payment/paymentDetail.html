@@ -135,12 +135,21 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
+							<tr th:if="${eClass != null}">
 								<td>
 									<h4>[[${eClass.eClassApprovedName}]]</h4>
 									[[${eClass.member.memberName}]]
 								</td>
 								<td>[[${eClass.eClassApprovedPrice}]]</td>
+								<td>[[${payment.paymentState}]]</td>
+								<td>-</td>
+							</tr>
+							<tr th:if="${challenge != null}">
+								<td>
+									<h4>[[${challenge.challengeGatherName}]]</h4>
+									[[${challenge.memberEmail}]]
+								</td>
+								<td>[[${challenge.challengeEnterDeposit}]]</td>
 								<td>[[${payment.paymentState}]]</td>
 								<td>-</td>
 							</tr>

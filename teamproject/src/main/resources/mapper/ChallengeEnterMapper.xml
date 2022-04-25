@@ -403,6 +403,7 @@
 			,cg.challengeEndDate
 			,cg.challengeGatherAchieveRate
 			,cg.challengeEnterDeposit
+			,cg.challengeCategoryCode
 		FROM
 			challengegather AS cg
 			INNER JOIN 
