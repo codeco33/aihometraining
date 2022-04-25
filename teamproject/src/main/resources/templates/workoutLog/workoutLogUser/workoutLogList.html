@@ -15,24 +15,35 @@
                     <div class="col-lg-8 mb-5 mb-lg-0">
                         <div class="blog_left_sidebar">
                             <article class="blog_item">
-	                                <div class="blog_item_img">
-	                                    <img class="card-img rounded-0" th:src="@{/assets/img/workoutLogimg1.jpg}" alt="토르">
-	                                    <a href="#" class="blog_item_date">
-	                                        <h3>23</h3>
-	                                        <p>Mar</p>
-	                                    </a>
-	                                </div>
+	                               <th:block th:if="${not #lists.isEmpty(workoutLog.fileList)}"  th:each="f ,index: ${workoutLog.fileList}">
+		                                <div class="blog_item_img" th:if="${index.index == 0}">
+		                                	<img  th:src="@{${ '/' + #strings.replace(f.filePath, '\', '/')}}"  class="card-img rounded-0"  th:alt="${f.fileOriginalName}"/>
+		                                    <a href="#" class="blog_item_date">
+		                                        <p style="font-family: SEBANG_Gothic_Regular; font-size: 20px;">[[${month}]]</p>
+		                                        <p style="font-family: SEBANG_Gothic_Regular; font-size: 20px;">[[${day}]]</p>
+		                                    </a>
+		                                </div>
+	                                </th:block>
+                                	<th:block th:unless="${not #lists.isEmpty(workoutLog.fileList)}">
+		                                <div class="blog_item_img">
+		                                	<img th:src="@{/assets/img/ImgNone.png}"  class="card-img rounded-0"/>
+		                                    <a href="#" class="blog_item_date">
+		                                        <p style="font-family: SEBANG_Gothic_Regular; font-size: 20px;">[[${month}]]</p>
+		                                        <p style="font-family: SEBANG_Gothic_Regular; font-size: 20px;">[[${day}]]</p>
+		                                    </a>
+		                                </div> 
+	                                </th:block>
 	                                <div class="blog_details">
-	                                    <h2 class="blog-head" style="color: #2d2d2d;" th:text="${workoutLogbyCode.workoutLogTitle}"></h2>
+	                                    <h2 class="blog-head" style="color: #2d2d2d;" th:text="${workoutLog.workoutLogTitle}"></h2>
 		                                    <ul class="blog-info-link">
-		                                        <li><a href="#" class="workoutLogLikeCount"><i class="fa fa-heart"></i>좋아요</a></li>
+		                                        <li><a href="#" onclick="return false;" class="workoutLogLikeCount" th:data-workoutLogCode="${workoutLog.workoutLogCode}"><i class="fa fa-heart"></i>좋아요([[${workoutLog.workoutLogLikeCount}]])</a></li>
 		                                    </ul>
-						                <p class="excert" th:text="${workoutLogbyCode.workoutLogContent}">
+						                <p class="excert" th:text="${workoutLog.workoutLogContent}">
 						                    
 						                </p>
 							            <div class = "row justify-content-center mt-4">
 					               			<div class="col-lg-4 mb-2 mb-lg-0" style="display: inline-block">
-						               			<a th:href="@{/workoutLog/workoutLogUser/workoutLogUpdate(workoutLogCode=${workoutLogbyCode.workoutLogCode})}">
+						               			<a th:href="@{/workoutLog/workoutLogUser/workoutLogUpdate(workoutLogCode=${workoutLog.workoutLogCode})}">
 							                        <button class="button button-contactForm" id="button">
 							                        	일지 수정
 							                        </button>
@@ -47,6 +58,7 @@
 						                	</div>
 							            </div>
 			               			</div>
+		                    
                             </article>     
 		                </div>
 			            <div class="navigation-top">
@@ -220,7 +232,7 @@
                          <aside class="single_sidebar_widget popular_post_widget">
 	                        <h3 class="widget_title" style="color: #2d2d2d;">오늘의 식단</h3>
 	                        <div class="media post_item">
-	                            <img th:src="@{/assets/img/post/post_1.png}" alt="post">
+	                           <!--  <img th:src="@{/assets/img/post/post_1.png}" alt="post"> -->
 	                            <div class="media-body">
 	                                <a href="blog_details.html">
 	                                    <h3 style="color: #2d2d2d;">아침</h3>
@@ -229,7 +241,7 @@
 	                            </div>
 	                        </div>
 	                        <div class="media post_item">
-	                            <img th:src="@{/assets/img/post/post_1.png}" alt="post">
+	                            <!-- <img th:src="@{/assets/img/post/post_1.png}" alt="post"> -->
 	                            <div class="media-body">
 	                                <a href="blog_details.html">
 	                                    <h3 style="color: #2d2d2d;">점심</h3>
@@ -238,7 +250,7 @@
 	                            </div>
 	                        </div>
 	                        <div class="media post_item">
-	                            <img th:src="@{/assets/img/post/post_1.png}" alt="post">
+	                            <!-- <img th:src="@{/assets/img/post/post_1.png}" alt="post"> -->
 	                            <div class="media-body">
 	                                <a href="blog_details.html">
 	                                    <h3 style="color: #2d2d2d;">저녁</h3>
@@ -328,7 +340,7 @@
 	                var text = $(this);
 	                console.log(workoutLogCode);
 	                    $.ajax({
-	                        url : '/workoutLog/workoutLogUser/workoutLogList',
+	                        url : '/workoutLog/workoutLogUser/workoutLogLikeCountUpdate',
 	                        type : 'post',
 	                        data : {
 	                            	'workoutLogCode' : workoutLogCode

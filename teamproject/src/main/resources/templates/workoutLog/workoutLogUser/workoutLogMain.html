@@ -16,23 +16,25 @@
                     <div class="col-lg-8 mb-5 mb-lg-0">
                         <div class="blog_left_sidebar">
                             <article class="blog_item">
-		                    	<th:block th:if="${not #lists.isEmpty(workoutLogList)}" th:each="l : ${workoutLogList}">
+		                    	<th:block th:if="${not #lists.isEmpty(workoutLogList)}" th:each="l,index : ${workoutLogList}">
                                 	<th:block th:if="${not #lists.isEmpty(l.fileList)}"  th:each="f ,index: ${l.fileList}">
 		                                <div class="blog_item_img" th:if="${index.index == 0}">
 		                                	<img  th:src="@{${ '/' + #strings.replace(f.filePath, '\', '/')}}"  class="card-img rounded-0"  th:alt="${f.fileOriginalName}"/>
 		                                    <a href="#" class="blog_item_date">
-		                                        <h3>15</h3>
-		                                        <p>Jan</p>
+		                                        <p style="font-family: SEBANG_Gothic_Regular; font-size: 20px;">[[${monthList.get(index.index)}]]</p>
+		                                        <p style="font-family: SEBANG_Gothic_Regular; font-size: 20px;">[[${dayList.get(index.index)}]]</p>
 		                                    </a>
 		                                </div>
 	                                </th:block>
-		                                <div class="blog_item_img">
-		                                	<img th:unless="${not #lists.isEmpty(l.fileList)}" th:src="@{/assets/img/ImgNone.jpg}"  class="card-img rounded-0"/>
-		                                    <a href="#" class="blog_item_date">
-		                                        <h3>15</h3>
-		                                        <p>Jan</p>
-		                                    </a>
-		                                </div> 
+	                                	<th:block th:unless="${not #lists.isEmpty(l.fileList)}">
+			                                <div class="blog_item_img">
+			                                	<img th:src="@{/assets/img/ImgNone.png}"  class="card-img rounded-0"/>
+			                                    <a href="#" class="blog_item_date">
+			                                        <p style="font-family: SEBANG_Gothic_Regular; font-size: 20px;">[[${monthList.get(index.index)}]]</p>
+			                                        <p style="font-family: SEBANG_Gothic_Regular; font-size: 20px;">[[${dayList.get(index.index)}]]</p>
+			                                    </a>
+			                                </div> 
+		                                </th:block>
 	                                <div class="blog_details">
 	                              		<!-- get방식으로 보내준것 /member/modifyMember?memberId=id001&memberName=홍01 -->
 										<!-- <a th:href="@{/member/modifyMember(memberId=${l.memberId}, memberName=${l.memberName})}">수정</a> -->
@@ -196,6 +198,13 @@
 		      	text-overflow:ellipsis;
 		      	white-space:nowrap;
 			}
+			@font-face {
+			    font-family: 'SEBANG_Gothic_Regular';
+			    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/SEBANG_Gothic_Regular.woff') format('woff');
+			    font-weight: normal;
+			    font-style: normal;
+			}
+			*{font-family:'SEBANG_Gothic_Regular';}
 
 		</style>
 	</th:block>
