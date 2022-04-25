@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="aihometraining.team.workoutLog.mapper.WorkoutLogConfigMapper">
+
+	<resultMap type="WorkoutLogCategory" id="WorkoutLogCategoryResultMap">
+		<result column="workoutGoalPlanCategoryCode" 		property="workoutGoalPlanCategoryCode"/>
+		<result column="workoutGoalPlanCategoryContent" 	property="workoutGoalPlanCategoryContent"/>
+	</resultMap>
+	
+	<resultMap type="WorkoutLog" id="WorkoutLogResultMap">
+			<id 	column="workoutLogCode" 				property="workoutLogCode"/>
+			<result column="memberEmail" 					property="memberEmail"/>
+			<result column="workoutLogLikeCount" 			property="workoutLogLikeCount"/>
+			<result column="eClassCategorySmallCode" 		property="eClassCategorySmallCode"/>
+			<result column="eClassCategorySmallName" 		property="eClassCategorySmallName"/>
+			<result column="workoutLogTitle" 				property="workoutLogTitle"/>
+			<result column="workoutLogContent" 				property="workoutLogContent"/>
+			<result column="workoutGoalPlanCode" 			property="workoutGoalPlanCode"/>
+			<result column="eClassTaskDoCode" 				property="eClassTaskDoCode"/>
+			<result column="challengeEnterCode" 			property="challengeEnterCode"/>
+			<result column="workoutLogAddFileCode" 			property="workoutLogAddFileCode"/>
+			<result column="workoutLogPrivacyBoundsCode" 	property="workoutLogPrivacyBoundsCode"/>
+			<result column="workoutLogUpdateEmail" 			property="workoutLogUpdateEmail"/>
+			<result column="workoutLogDeleteEmail" 			property="workoutLogDeleteEmail"/>
+			
+		<association property="member" javaType="Member">
+			<id 	column="memberEmail" property="memberEmail"/>
+		</association>
+		
+		<collection property="fileList" javaType="List" ofType="FileDto">
+				<id column="fileIdx" 						property="fileIdx"/>
+				<result	column="fileOriginalName" 			property="fileOriginalName"/>
+				<result column="fileNewName" 				property="fileNewName"/>
+				<result column="filePath" 					property="filePath"/>
+				<result column="fileSize" 					property="fileSize"/>
+			</collection>	
+	</resultMap>
+	
+	<select id="getNewWorkoutLog" resultMap="WorkoutLogResultMap">
+		/* 새롭게 등록된 일지 조회 */
+		SELECT 
+				  wl.workoutLogCode
+				, wl.memberEmail
+				, wl.workoutLogLikeCount
+				, wl.eClassCategorySmallCode
+				, wl.eClassCategorySmallName
+				, wl.workoutLogTitle
+				, wl.workoutLogContent
+				, wl.workoutGoalPlanCode
+				, wl.eClassTaskDoCode
+				, wl.challengeEnterCode
+				, f.fileIdx
+				, f.filepath
+				, SUBSTRING_INDEX(f.fileOriginalName,'.',1)
+				, wl.workoutLogPrivacyBoundsCode
+				, wl.workoutLogUpdateEmail
+				, wl.workoutLogUpdateFinalDate
+				, wl.workoutLogDeleteEmail
+		FROM 
+				workoutlog AS wl
+				LEFT JOIN 
+				tb_file_control AS fc
+				ON
+				wl.workoutLogcode = fc.referenceCode
+				LEFT JOIN 
+				tb_file AS f
+				ON 
+				fc.fileIdx = f.fileIdx
+		WHERE
+				wl.workoutLogUpdateFinalDate = CURDATE();
+	
+	</select>
+	
+	
+	
+	<delete id="GoalPlanInCategoryCodeDelete" parameterType="String">
+		/* 운동 계획 카테고리에 따른 운동 계획 삭제 */
+		DELETE 
+			wg
+		FROM
+			workoutgoalplan AS wg
+		WHERE 
+			wg.workoutGoalPlanCategoryCode=#{workoutGoalPlanCategoryCode};	
+	</delete>
+	
+	<delete id="workoutLogCategoryDelete" parameterType="String">
+		/* 운동 계획 카테고리 삭제 */
+		DELETE 
+			wc
+		FROM
+			workoutgoalplancategory AS wc
+		WHERE 
+			wc.workoutGoalPlanCategoryCode=#{workoutGoalPlanCategoryCode};	
+	</delete>
+	
+	<update id="workoutLogCategoryUpdateModal" parameterType="String">
+		/* 모달에서 카테고리명 수정처리 */
+		UPDATE 
+			workoutgoalplancategory
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="workoutGoalPlanCategoryContent !=null and workoutGoalPlanCategoryContent !=''">
+				workoutGoalPlanCategoryContent=#{workoutGoalPlanCategoryContent},
+			</if>
+		</trim>
+		WHERE 
+			workoutGoalPlanCategoryCode=#{workoutGoalPlanCategoryCode};
+	</update>
+	
+	<select id="getWorkoutLogCategoryModal" parameterType="String" resultType="WorkoutLogCategory">
+		/* 모달에서 운동 계획 카테고리명 가져오기 */
+		SELECT
+			 wp.workoutGoalPlanCategoryCode
+			,wp.workoutGoalPlanCategoryContent
+		FROM
+			workoutgoalplancategory AS wp
+		WHERE
+			wp.workoutGoalPlanCategoryCode = #{workoutGoalPlanCategoryCode};
+	</select>
+	
+	<select id="getWorkoutLogCategoryList" resultType="WorkoutLogCategory">
+		/* 운동 카테고리 조회 */
+		SELECT
+			workoutGoalPlanCategoryCode
+			,workoutGoalPlanCategoryContent
+		FROM
+			workoutgoalplancategory;
+	</select>
+	
+	<insert id="workoutGoalCategoryInsert" parameterType="WorkoutLogCategory">
+		/* 운동 카테고리 등록 */
+		INSERT INTO workoutgoalplancategory
+		(
+		   workoutGoalPlanCategoryCode
+		 , workoutGoalPlanCategoryContent
+		)VALUES (
+		   #{workoutGoalPlanCategoryCode}
+		 , #{workoutGoalPlanCategoryContent}
+		);
+	</insert>
+	
+	<select id="getWorkoutLogList" resultType="WorkoutLog">
+		/* 일지 목록 조회 */
+		SELECT
+			 w.memberEmail
+			,w.workoutLogCode 
+			,w.workoutLogTitle
+			,w.workoutLogUpdateFinalDate
+			,w.workoutLogLikeCount
+			,w.eClassCategorySmallCode
+			,w.eClassCategorySmallName
+		
+		FROM
+			workoutlog AS w
+			INNER JOIN
+			member AS m
+			ON 
+			w.memberEmail = m.memberEmail
+			<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="searchKey != null and searchKey !='' and searchValue != ''">
+				AND ${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
+			</if>
+			<if test="searchKey != null and searchKey !='' and searchValue != '' and searchDate != null and searchDate !='' and searchStart != '' and searchEnd != ''">
+				AND ${searchDate} BETWEEN #{searchStart} AND #{searchEnd}
+			</if>
+			</trim>
+				ORDER BY cast(SUBSTRING_INDEX(w.workoutLogCode,'_',-1) AS UNSIGNED) ASC;
+	</select>
+	
+	
+	
+</mapper>        

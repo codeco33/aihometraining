@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+		<div class="col-md-12">
+			<div class="panel">
+		    	<div class="panel-heading-white panel-heading">
+		        	<h4>#신고 기준 목록(이민식)</h4>
+		        </div>
+		        <div class="panel-body">
+		        	<div class="col-md-12">
+						<div class="col-md-12 top-20 padding-0">
+			            	<div class="col-md-12">
+			                	<div class="panel">
+			                    	<div class="panel-heading bg-deep-purple">
+			                    		<h6 class="text-white">신고 기준 목록</h6>
+			                    	</div>
+			                   		<div class="panel-body">
+			                     		<div class="responsive-table">
+				                     	<table id="reportStandardList" class="table table-striped table-bordered" style="width: 100%;">
+										<thead>
+											<tr>
+												<th>신고 기준 코드</th>
+												<th>신고 기준 이름</th>
+												<th>등록자 이메일</th>
+												<th>등록 날짜</th>
+												<th>수정자 이메일</th>
+												<th>수정 날짜</th>
+												<th>수정</th>
+												<th>삭제</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:if="${not #lists.isEmpty(reportStandardList)}" th:each="l : ${reportStandardList}">
+												<td th:text="${l.reportStandardCode}"></td>
+												<td th:text="${l.reportStandardName}"></td>
+												<td th:text="${l.memberEmail}"></td>
+												<td th:text="${l.reportStandardRegDate}"></td>
+												<td th:text="${l.memberUpdateEmail}"></td>
+												<td th:text="${l.reportStandardUpdateDate}"></td>
+												<td>
+													<a th:href="@{/report/modifyReportStandardList(reportStandardCode=${l.reportStandardCode})}">수정</a>
+												</td>
+												<td>
+													<a th:href="@{/report/removeReportStandardList(reportStandardCode=${l.reportStandardCode})}">삭제</a>
+												</td>
+											</tr>
+											<tr th:unless="${not #lists.isEmpty(reportStandardList)}">
+												<td colspan="7">등록된 신고 기준이 없습니다.</td>
+											</tr>
+										</tbody>
+				                        </table>
+										</div>
+									</div>
+								</div>
+							</div>  
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+	
+	<!-- start: Javascript -->
+	<th:block layout:fragment="customBodyScript">	
+		
+		<!-- plugins -->
+		<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.dataTables.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/dataTables.bootstrap.min.js}"></script>
+		<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+		
+		
+		<!-- custom -->
+		<script th:src="@{/asset/js/main.js}"></script>
+		<script type="text/javascript">
+		$(document).ready(function(){
+		    $('#reportStandardList').DataTable();		    
+		});
+		
+		</script>
+	</th:block>
+	<!-- end: Javascript -->
+</html>

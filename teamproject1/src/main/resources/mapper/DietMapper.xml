@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="aihometraining.team.diet.mapper.DietMapper">
+	
+	<resultMap type="DietBank" id="DietBankResultMap">
+		<id 	column="dietBankCode" 			property="dietBankCode"/>
+		<result column="eClassApprovedCode" 	property="eClassApprovedCode"/>
+		<result column="memberEmail" 			property="memberEmail"/>
+		<result column="dietBankInsertDate" 	property="dietBankInsertDate"/>
+		<result column="memberUpdateEmail" 		property="memberUpdateEmail"/>
+		<result column="dietBankUpdateDate" 	property="dietBankUpdateDate"/>
+	</resultMap>
+	
+	
+	<resultMap type="DietMealLevelList" 	id="DietMealLevelListResultMap">
+		<result column="nutrientsAPIFoodSort" 	property="nutrientsAPIFoodSort"/>
+		<result column="nutrientsAPISortdetail" 	property="nutrientsAPISortdetail"/>
+	</resultMap>
+	
+	
+	<resultMap type="DietNutrientList" 	id="DietNutrientListMap">
+		<id 	column="nutrientsAPICode" 			property="nutrientsAPICode"/>
+		<result column="nutrientsAPIFoodSort" 		property="nutrientsAPIFoodSort"/>
+		<result column="nutrientsAPISortdetail" 	property="nutrientsAPISortdetail"/>
+		<result column="nutrientsAPIName" 			property="nutrientsAPIName"/>
+		<result column="nutrientsAPIServe" 			property="nutrientsAPIServe"/>
+		<result column="nutrientsAPIKcal" 			property="nutrientsAPIKcal"/>
+		<result column="nutrientsAPICarbo" 			property="nutrientsAPICarbo"/>
+		<result column="nutrientsAPIPro" 			property="nutrientsAPIPro"/>
+		<result column="nutrientsAPIFat" 			property="nutrientsAPIFat"/>
+		<result column="nutrientsAPINatr" 			property="nutrientsAPINatr"/>
+	
+	</resultMap>
+	
+	
+	<update id="updateDietBank" parameterType="DietOnemealConnection">
+		UPDATE dietbank
+		SET
+			memberUpdateEmail=#{memberEmail},
+			dietBankUpdateDate=CURDATE()
+		WHERE 
+			dietBankCode=#{dietBankCode};
+	
+	</update>
+
+	<select id="selectDietMealListDetail" parameterType="String" resultMap="DietMealLevelListResultMap">
+		SELECT 
+			nutrientsAPISortdetail
+		FROM 
+			nutrientsapi
+		WHERE 
+			nutrientsAPIFoodSort = #{mainMealSort}
+		GROUP BY 
+			nutrientsAPISortdetail;
+	</select>
+	
+	
+	<select id="selectDietMealLevelList" resultMap="DietMealLevelListResultMap">
+		SELECT 
+			nutrientsAPIFoodSort
+		FROM 
+			nutrientsapi
+		GROUP BY 
+			nutrientsAPIFoodSort;
+	</select>
+
+	
+	<select id="getDietBankListAdminByC" parameterType="String" resultMap="DietBankResultMap" fetchSize="1000">
+		SELECT 
+			 dietBankCode
+			,eClassApprovedCode
+			,memberEmail
+			,dietBankInsertDate
+			,memberUpdateEmail
+			,dietBankUpdateDate	
+		FROM 
+			dietbank
+		WHERE
+			dietBankCode = #{newCode};
+	</select>
+	
+	
+	<select id="getDietBankListAdmin" resultMap="DietBankResultMap" fetchSize="1000">
+		SELECT 
+			 dietBankCode
+			,eClassApprovedCode
+			,memberEmail
+			,dietBankInsertDate
+			,memberUpdateEmail
+			,dietBankUpdateDate	
+		FROM 
+			dietbank;
+	</select>
+	
+	
+	<insert id="insertDietBankList2" parameterType="String">
+		INSERT INTO dietbank( 	
+				 dietBankCode
+			 	,memberEmail
+			 	,dietBankInsertDate
+			)VALUES (
+				 #{newCode}
+				,#{insertEmail}
+				, CURDATE()
+			);
+	</insert>
+
+
+	
+	<select id="selectDietBankListNewCode" parameterType ="String" resultType="String">
+	/* DB 테이블의 최신 pk불러오기 */
+		SELECT
+			CONCAT(#{columName},
+				CAST(
+					max(cast(substring(${columName},LENGTH(#{columName})+1) as UNSIGNED))+1
+				AS char)
+			) AS ${columName}
+		FROM
+			${tableName} ;
+		
+	</select>
+	
+	
+	<delete id="deleteDietBankList" parameterType="String">
+		DELETE FROM 
+			dietbank 
+		WHERE 
+			dietBankCode = #{dietBankCode};
+	</delete>
+	
+	
+	<select id="selectDietNutrientList" parameterType="String" resultMap="DietNutrientListMap">
+		SELECT 
+			nutrientsAPICode
+			, nutrientsAPIFoodSort
+			, nutrientsAPISortdetail
+			, nutrientsAPIName
+			, nutrientsAPIServe
+			, nutrientsAPIKcal
+			, nutrientsAPICarbo
+			, nutrientsAPIPro
+			, nutrientsAPIFat
+			, nutrientsAPINatr
+		FROM 
+			nutrientsapi	
+		WHERE
+			nutrientsAPIFoodSort = #{mainMealSort};
+	
+	</select>
+	
+	<insert id="insertDietOneMealConnection" parameterType="DietOnemealConnection">
+	
+	INSERT INTO dietonemealconnection
+		( dietOneMealConnectionCode
+		 ,dietNutrientsAPICode
+		 ,dietOneMealConnectionGroupNum
+		 ,memberEmail
+		 ,dietOneMealConnectionDate
+		 ,dietBankCode
+		 ,dietBankOneMealConnectionDay
+		 ,dietBankOneMealConnectionTime
+		)VALUES (
+		  #{dietOneMealConnectionCode}
+		 ,#{dietNutrientsAPICode}
+		 ,#{dietOneMealConnectionGroupNum}
+		 ,#{memberEmail}
+		 ,CURDATE()
+		 ,#{dietBankCode}
+		 ,#{dietBankOneMealConnectionDay}
+		 ,#{dietBankOneMealConnectionTime}
+		)
+	
+	</insert>
+	
+	<select id="selectDietOneMealConnectionByBankCode" parameterType="DietOnemealConnection" resultType="hashmap">
+		SELECT 
+			  dietOneMealConnectionCode					AS dietOneMealConnectionCode
+			, dietNutrientsAPICode                      AS dietNutrientsAPICode
+			, dietOneMealConnectionGroupNum             AS dietOneMealConnectionGroupNum
+			, memberEmail                               AS memberEmail
+			, dietOneMealConnectionDate                 AS dietOneMealConnectionDate
+			, dietBankCode                              AS dietBankCode
+			, dietBankOneMealConnectionDay              AS dietBankOneMealConnectionDay
+			, dietBankOneMealConnectionTime             AS dietBankOneMealConnectionTime
+				, n.nutrientsAPICode                    AS nutrientsAPICode
+				, n.nutrientsAPIFoodSort                AS nutrientsAPIFoodSort
+				, n.nutrientsAPISortdetail              AS nutrientsAPISortdetail
+				, n.nutrientsAPIName                    AS nutrientsAPIName
+				, n.nutrientsAPIServe                   AS nutrientsAPIServe
+				, n.nutrientsAPIKcal                    AS nutrientsAPIKcal
+				, n.nutrientsAPICarbo                   AS nutrientsAPICarbo
+				, n.nutrientsAPIPro                     AS nutrientsAPIPro
+				, n.nutrientsAPIFat                     AS nutrientsAPIFat
+				, n.nutrientsAPINatr                    AS nutrientsAPINatr
+		FROM 
+			dietonemealconnection AS d
+		LEFT JOIN
+			nutrientsapi AS n
+		ON d.dietNutrientsAPICode = n.nutrientsAPICode
+		WHERE dietBankCode = #{dietBankCode};
+	</select>
+	
+	
+	<delete id="deleteDietOneMealConnection" parameterType="String">
+	
+		DELETE FROM 
+			dietonemealconnection 
+		WHERE 
+			dietOneMealConnectionCode = #{dietOneMealConnectionCode};
+	
+	</delete>
+	
+	<delete id="deleteDietOneMealConnectionAll" parameterType="String">
+		DELETE FROM 
+			dietonemealconnection 
+		WHERE
+			dietBankCode=#{dietBankCode};
+	
+	</delete>
+	
+	
+	<insert id="insertUserDietPlan" parameterType="DietPlan">
+		INSERT INTO dietplan	(
+			 dietPlanCode
+			,nutrientsAPICode
+			,memberEmail
+			,dietPlanDay
+			,dietPlanTime
+			,dietPlanDoValue
+			,dietPlanRegDate
+		)VALUES (
+			#{dietPlanCode}, 
+			#{nutrientsAPICode}, 
+			#{memberEmail}, 
+			#{dietPlanDay}, 
+			#{dietPlanTime}, 
+			0, 
+			CURDATE());
+	</insert>
+	
+	
+	<select id="selectUserDietPlan" parameterType="DietPlan" resultType="hashmap">
+		SELECT 
+			p.dietPlanCode                     		AS dietPlanCode     
+			,p.eClassApprovedCode             		AS eClassApprovedCode
+			,p.nutrientsAPICode               		AS nutrientsAPICode
+			,p.memberEmail                    		AS memberEmail     
+			,p.dietPlanDay                   		AS dietPlanDay     
+			,p.dietPlanTime                 	    AS dietPlanTime    
+			,p.dietPlanDoValue                 		AS dietPlanDoValue 
+				,n.nutrientsAPIName                 AS nutrientsAPIName
+				,n.nutrientsAPICode                 AS nutrientsAPICode
+				,n.nutrientsAPIFoodSort             AS nutrientsAPIFoodSort
+				,n.nutrientsAPISortdetail           AS nutrientsAPISortdetail
+				,n.nutrientsAPIName                 AS nutrientsAPIName
+				,n.nutrientsAPIServe                AS nutrientsAPIServe
+				,n.nutrientsAPIKcal                 AS nutrientsAPIKcal
+				,n.nutrientsAPICarbo                AS nutrientsAPICarbo
+				,n.nutrientsAPIPro                  AS nutrientsAPIPro 
+				,n.nutrientsAPIFat                  AS nutrientsAPIFat 
+				,n.nutrientsAPINatr                 AS nutrientsAPINatr
+		FROM dietplan AS p
+		LEFT JOIN nutrientsapi AS n
+		ON	
+			p.nutrientsAPICode = n.nutrientsAPICode
+		WHERE
+			memberEmail = #{memberEmail}
+			AND
+			dietPlanDay = #{dietPlanDay};
+	</select>
+
+	<delete id="deleteUserDietPlan" parameterType="DietPlan">
+		DELETE FROM dietplan 
+		WHERE 
+		dietPlanCode = #{dietPlanCode};
+	</delete>
+	
+	<update id="updateUserDietPlan" parameterType="DietPlan">
+		UPDATE dietplan
+		SET
+			dietPlanDoValue=#{dietPlanDoValue}
+		WHERE 
+			dietPlanCode = #{dietPlanCode};
+	</update>
+	
+	
+</mapper>

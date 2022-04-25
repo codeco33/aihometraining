@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+		test1
+	
+	</th:block>
+	<th:block layout:fragment="customScript">	
+		<!-- plugins -->
+		<script src="asset/js/plugins/moment.min.js"></script>
+		<script src="asset/js/plugins/jquery.datatables.min.js"></script>
+		<script src="asset/js/plugins/datatables.bootstrap.min.js"></script>
+		<script src="asset/js/plugins/jquery.nicescroll.js"></script>
+		
+		
+		<!-- custom -->
+		<script src="asset/js/main.js"></script>
+		<script type="text/javascript">
+		  $(document).ready(function(){
+		    $('#datatables-example').DataTable();
+		  });
+		</script>
+<!-- end: Javascript -->
+	</th:block>
+</html>
