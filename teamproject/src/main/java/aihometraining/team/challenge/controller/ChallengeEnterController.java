@@ -169,7 +169,8 @@ private static final Logger log = LoggerFactory.getLogger(ChallengeEnterControll
 	 */
 	
 	@PostMapping("/challengeEnterPaymemt")
-	public String challengeEnterPaymemt(ChallengeGather challengeGather, Model model, RedirectAttributes reAttr) {
+	public String challengeEnterPaymemt(ChallengeGather challengeGather, Model model, RedirectAttributes reAttr
+										,ChallengeEnter challengeEnter) {
 		
 		model.addAttribute("title", "챌린지 참가결제");
 		model.addAttribute("leftMenuList", "챌린지");
@@ -196,15 +197,15 @@ private static final Logger log = LoggerFactory.getLogger(ChallengeEnterControll
 		 * 
 		 * 결제 기능 구현으로 수정
 		 * 
-		 * - 챌린지 참가 테이블 insert
-		 * - 결제
-		 * 		성공시 결제 테이블 insert
-		 * 		실패시 챌린지 참가 테이블 delete 
+		 * 1 챌린지 참가 테이블 insert
+		 * 2 결제
+		 * 		3-1 성공시 결제 테이블 insert
+		 * 		3-2 실패시 챌린지 참가 테이블 delete 
 		 */
 		
 		
 		
-		
+		ChallengeEnterController ce = new ChallengeEnterController(challengeEnterService);
 		
 		//결제 화면에 paymentGroupCode 넘겨주기
 		reAttr.addAttribute("paymentGroupCode", "c202204241822_id004");
