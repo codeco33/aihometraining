@@ -24,6 +24,13 @@
 		    color: #96979f;
 		    font-size: 13px;
 		}
+		.gatherIntro{
+			max-height: 5.2em; 
+			overflow: hidden;
+			display: -webkit-box;
+			-webkit-line-clamp: 3;
+			-webkit-box-orient: vertical;
+		}
 		</style>
 	</th:block>
 	<th:block layout:fragment="customContents">
@@ -50,7 +57,7 @@
 				                    <div class="properties__caption">
 				                        <p>모집인원 : [[${l.challengeGatherMaxPeople}]]</p>
 				                        <!-- <h3><a href="#">[[${l.challengeGatherIntro}]]</a></h3> -->
-				                        <p>
+				                        <p class="gatherIntro">
 				                       	 [[${l.challengeGatherIntro}]]
 				                        </p>
 				                        <div class="properties__footer d-flex justify-content-between align-items-center">
