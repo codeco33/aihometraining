@@ -12,8 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import aihometraining.team.challenge.mapper.ChallengeEnterMapper;
+import aihometraining.team.challenge.mapper.ChallengeGatherMapper;
 import aihometraining.team.dto.ChallengeEnter;
 import aihometraining.team.dto.ChallengeGather;
+import aihometraining.team.dto.ChallengeGatherPlan;
 import aihometraining.team.dto.ChallengeGatherPlanDo;
 import aihometraining.team.dto.FileDto;
 import aihometraining.team.mapper.CommonMapper;
@@ -32,12 +34,16 @@ public class ChallengeEnterService {
 	private CommonMapper commonMapper;
 	private FileUtil fileUtil;
 	private FileMapper fileMapper;
+	private ChallengeGatherMapper challengeGatherMapper;
 	
-	public ChallengeEnterService(ChallengeEnterMapper challengeEnterMapper, CommonMapper commonMapper,FileUtil fileUtil, FileMapper fileMapper) {
+	public ChallengeEnterService(ChallengeEnterMapper challengeEnterMapper, CommonMapper commonMapper
+								,FileUtil fileUtil, FileMapper fileMapper
+								,ChallengeGatherMapper challengeGatherMapper) {
 		this.challengeEnterMapper = challengeEnterMapper;
 		this.commonMapper = commonMapper;
 		this.fileUtil =  fileUtil;
 		this.fileMapper = fileMapper;
+		this.challengeGatherMapper = challengeGatherMapper;
 	}
 	
 	//회원 이메일별 참가 챌린지 목록 조회
@@ -67,17 +73,50 @@ public class ChallengeEnterService {
 		
 		log.info("참가처리(service) challengeEnter: {}", challengeEnter);
 		
-		int planProveNumber =  Integer.parseInt(challengeEnter.getChallengeGatherPlan().getChallengeGatherPlanProveNumber()); //필수 인증횟수 = 실행테이블에 insert처리될 갯수
+	}
+	
+	//결제후 참가처리시 동시에 참가자 실행테이블에 등록처리
+	/*
+	 * public void challengeGatherPlanDoInsert(ChallengeEnter
+	 * challengeEnter,ChallengeGatherPlanDo challengeGatherPlanDo) { int
+	 * planProveNumber = Integer.parseInt(challengeEnter.getChallengeGatherPlan().
+	 * getChallengeGatherPlanProveNumber()); //필수 인증횟수 = 실행테이블에 insert처리될 갯수 for(int
+	 * i=1; i<=planProveNumber; i++) { String newPlanDoCode =
+	 * commonMapper.getNewCode("challengeGatherPlanDoCode",
+	 * "challengegatherplando");
+	 * log.info("새로 생성된 코드 newPlanDoCode : {}",newPlanDoCode);
+	 * challengeGatherPlanDo.setChallengeGatherPlanDoCode(newPlanDoCode);
+	 * challengeGatherPlanDo.setChallengeGatherPlanCode(challengeEnter.
+	 * getChallengeGatherPlan().getChallengeGatherPlanCode());
+	 * challengeGatherPlanDo.setMemberEmail(challengeEnter.getChallengeGather().
+	 * getMemberEmail());
+	 * challengeGatherPlanDo.setChallengeCategoryCode(challengeEnter.
+	 * getChallengeCategoryCode());
+	 * challengeGatherPlanDo.setChallengeSettingCode(challengeEnter.
+	 * getChallengeGatherPlan().getChallengeSettingCode());
+	 * challengeGatherPlanDo.setChallengeGatherCode(challengeEnter.
+	 * getChallengeGatherCode());
+	 * challengeGatherPlanDo.setMemberEnterEmail(challengeEnter.getMemberEmail());
+	 * challengeGatherPlanDo.setChallengeGatherPlanDoState("미인증");
+	 * challengeGatherPlanDo.setChallengeGatherPlanDoProveRound(i);
+	 * log.info(" 참가자 실행테이블에 등록처리(service) challengeGatherPlanDo: {}",
+	 * challengeGatherPlanDo);
+	 * 
+	 * //결제후 참가처리시 동시에 참가자 실행테이블에 등록처리
+	 * challengeEnterMapper.challengeGatherPlanDoInsert(challengeGatherPlanDo); } }
+	 */
+	
+	public void challengeGatherPlanDoInsert(ChallengeGatherPlanDo challengeGatherPlanDo) {
+		log.info("%%%%%%%%%%%%%%%%%%%%%%% challengeGatherPlanDo : {}", challengeGatherPlanDo);
+		String challengeGatherPlanCode = challengeGatherPlanDo.getChallengeGatherPlanCode();
+		ChallengeGatherPlan challengeGatherPlan = challengeGatherMapper.getChallengeGatherPlan(challengeGatherPlanCode);
+		
+		int planProveNumber =  Integer.parseInt(challengeGatherPlan.getChallengeGatherPlanProveNumber()); //필수 인증횟수 = 실행테이블에 insert처리될 갯수
 		for(int i=1; i<=planProveNumber; i++) {
 			String newPlanDoCode = commonMapper.getNewCode("challengeGatherPlanDoCode", "challengegatherplando");
 			log.info("새로 생성된 코드 newPlanDoCode : {}",newPlanDoCode);
 			challengeGatherPlanDo.setChallengeGatherPlanDoCode(newPlanDoCode);
-			challengeGatherPlanDo.setChallengeGatherPlanCode(challengeEnter.getChallengeGatherPlan().getChallengeGatherPlanCode());
-			challengeGatherPlanDo.setMemberEmail(challengeEnter.getChallengeGather().getMemberEmail());
-			challengeGatherPlanDo.setChallengeCategoryCode(challengeEnter.getChallengeCategoryCode());
-			challengeGatherPlanDo.setChallengeSettingCode(challengeEnter.getChallengeGatherPlan().getChallengeSettingCode());
-			challengeGatherPlanDo.setChallengeGatherCode(challengeEnter.getChallengeGatherCode());
-			challengeGatherPlanDo.setMemberEnterEmail(challengeEnter.getMemberEmail());
+
 			challengeGatherPlanDo.setChallengeGatherPlanDoState("미인증");
 			challengeGatherPlanDo.setChallengeGatherPlanDoProveRound(i);
 			log.info(" 참가자 실행테이블에 등록처리(service) challengeGatherPlanDo: {}", challengeGatherPlanDo);
@@ -85,25 +124,6 @@ public class ChallengeEnterService {
 			//결제후 참가처리시 동시에 참가자 실행테이블에 등록처리
 			challengeEnterMapper.challengeGatherPlanDoInsert(challengeGatherPlanDo);
 		}
-		
-		/*
-		 * String newPlanDoCode = commonMapper.getNewCode("challengeGatherPlanDoCode",
-		 * "challengegatherplando");
-		 * log.info("새로 생성된 코드 newPlanDoCode : {}",newPlanDoCode);
-		 * challengeGatherPlanDo.setChallengeGatherPlanDoCode(newPlanDoCode);
-		 * challengeGatherPlanDo.setChallengeGatherPlanCode(challengeEnter.
-		 * getChallengeGatherPlan().getChallengeGatherPlanCode());
-		 * challengeGatherPlanDo.setMemberEmail(challengeEnter.getChallengeGather().
-		 * getMemberEmail());
-		 * challengeGatherPlanDo.setChallengeCategoryCode(challengeEnter.
-		 * getChallengeCategoryCode());
-		 * challengeGatherPlanDo.setChallengeSettingCode(challengeEnter.
-		 * getChallengeGatherPlan().getChallengeSettingCode());
-		 * challengeGatherPlanDo.setChallengeGatherCode(challengeEnter.
-		 * getChallengeGatherCode());
-		 * challengeGatherPlanDo.setMemberEnterEmail(challengeEnter.getMemberEmail());
-		 */
-		
 	}
 	
 	//참가 챌린지의 세부 정보 조회
@@ -177,6 +197,11 @@ public class ChallengeEnterService {
 		fileMapper.addFileControl(paramList);
 		
 		return result;
+		
+	}
+	
+	//챌린지 참가 처리 프로세스
+	public void addChallegeEnter() {
 		
 	}
 }
