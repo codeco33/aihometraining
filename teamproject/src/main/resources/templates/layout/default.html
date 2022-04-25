@@ -3,7 +3,18 @@
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	  
 <head th:replace="fragments/head :: headFragment"></head>
-
+<th:block layout:fragment="customCss">
+		<style type="text/css">
+			@font-face {
+			    font-family: 'SEBANG_Gothic_Regular';
+			    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/SEBANG_Gothic_Regular.woff') format('woff');
+			    font-weight: normal;
+			    font-style: normal;
+			}
+			*{font-family:'SEBANG_Gothic_Regular';}
+			}
+		</style>
+</th:block>
 <body id="mimin" class="dashboard">
 	<!-- start: Header -->
 	<nav th:replace="fragments/header :: headerFragment"></nav>
