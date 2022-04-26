@@ -12,13 +12,15 @@ public class EClassReview {
 	private Date eClassReviewRegDate;
 	private Date eClassReviewUpdateDate;
 	private String memberUpdateEmail;
+	private String eClassReviewAnswer;
 	private String replyMemberEmail;
 	private Date eClassReviewAnswerRegDate;
 	private Date eClassReviewAnswerUpdateDate;
 	private String replyMemberUpdateEmail;
 	
-	private EClassApproved eclassapproved;
+	private EClassApproved eClassApproved;
 	private Member member;
+	
 	public String geteClassReviewCode() {
 		return eClassReviewCode;
 	}
@@ -67,6 +69,12 @@ public class EClassReview {
 	public void setMemberUpdateEmail(String memberUpdateEmail) {
 		this.memberUpdateEmail = memberUpdateEmail;
 	}
+	public String geteClassReviewAnswer() {
+		return eClassReviewAnswer;
+	}
+	public void seteClassReviewAnswer(String eClassReviewAnswer) {
+		this.eClassReviewAnswer = eClassReviewAnswer;
+	}
 	public String getReplyMemberEmail() {
 		return replyMemberEmail;
 	}
@@ -92,10 +100,10 @@ public class EClassReview {
 		this.replyMemberUpdateEmail = replyMemberUpdateEmail;
 	}
 	public EClassApproved getEclassapproved() {
-		return eclassapproved;
+		return eClassApproved;
 	}
 	public void setEclassapproved(EClassApproved eclassapproved) {
-		this.eclassapproved = eclassapproved;
+		this.eClassApproved = eclassapproved;
 	}
 	public Member getMember() {
 		return member;
@@ -103,15 +111,17 @@ public class EClassReview {
 	public void setMember(Member member) {
 		this.member = member;
 	}
+	
 	@Override
 	public String toString() {
 		return "EClassReview [eClassReviewCode=" + eClassReviewCode + ", eClassApprovedCode=" + eClassApprovedCode
 				+ ", memberEmail=" + memberEmail + ", eClassReviewContent=" + eClassReviewContent
 				+ ", eClassReviewScore=" + eClassReviewScore + ", eClassReviewRegDate=" + eClassReviewRegDate
 				+ ", eClassReviewUpdateDate=" + eClassReviewUpdateDate + ", memberUpdateEmail=" + memberUpdateEmail
-				+ ", replyMemberEmail=" + replyMemberEmail + ", eClassReviewAnswerRegDate=" + eClassReviewAnswerRegDate
-				+ ", eClassReviewAnswerUpdateDate=" + eClassReviewAnswerUpdateDate + ", replyMemberUpdateEmail="
-				+ replyMemberUpdateEmail + ", eclassapproved=" + eclassapproved + ", member=" + member + "]";
+				+ ", eClassReviewAnswer=" + eClassReviewAnswer + ", replyMemberEmail=" + replyMemberEmail
+				+ ", eClassReviewAnswerRegDate=" + eClassReviewAnswerRegDate + ", eClassReviewAnswerUpdateDate="
+				+ eClassReviewAnswerUpdateDate + ", replyMemberUpdateEmail=" + replyMemberUpdateEmail
+				+ ", eClassApproved=" + eClassApproved + ", member=" + member + "]";
 	}
 	
 }

@@ -18,6 +18,7 @@ import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.EClassIntroduce;
 import aihometraining.team.dto.EClassQuestion;
+import aihometraining.team.dto.EClassReview;
 import aihometraining.team.dto.EClassSectionCurriculum;
 import aihometraining.team.dto.EClassSectionTitle;
 import aihometraining.team.eclassService.eClassService;
@@ -38,9 +39,13 @@ public class eClassController {
 	}
 	
 	@GetMapping("/eClassApprovedList")
-	public String eClassApprovedList(Model model) {
+	public String eClassApprovedList(Model model
+									,EClassApproved eClassApproved) {
+		
+		List<EClassApproved> appList = eClassService.eClassOpenAppleyadminList(eClassApproved);
 		
 		model.addAttribute("title", "개설 승인된 리스트");
+		model.addAttribute("appList", appList);
 		
 		return "eClass/eclassApprovedList";
 	}
@@ -207,12 +212,14 @@ public class eClassController {
 	 
 	@GetMapping("/eClassApproved")
 	public String eClassApproved(Model model
-								,@RequestParam(value = "eClassApprovedCode",required = false)String eclassapproved) {
+								,@RequestParam(value = "eClassApprovedCode",required = false)String eclassapprovedCode) {
 		
-		EClassApproved approved = eClassService.eClassApprovedByCode(eclassapproved);
-	
+		EClassApproved appCode = eClassService.eClassApprovedByCode(eclassapprovedCode);
+		
+		log.info("eClassController eClassApproved eclassapprovedCode : {}",eclassapprovedCode);
+		
 		model.addAttribute("title", "개설 승인된 클래스");
-		model.addAttribute("approved", approved);
+		model.addAttribute("appCode", appCode);
 		
 		return "eClass/eClassApproved";
 	}
@@ -231,12 +238,13 @@ public class eClassController {
 	
 	@GetMapping("/eClassApplyadminList")
 	public String eClassApplyadminList(Model model
-									  ,EClassApproved eClassApproved) {
+									  ,EClassApproved eClassApproved
+									  ,EClassReview eClassReview) {
 		
-		List<EClassApproved> adminApprovedList = eClassService.eClassOpenAppleyadminList(eClassApproved);
+		List<EClassApproved> adminList =  eClassService.eClassOpenAppleyadminList(eClassApproved);
 		
 		model.addAttribute("title", "승인된 운동클래스 목록(관리자)");
-		model.addAttribute("adminApprovedList", adminApprovedList);
+		model.addAttribute("adminList", adminList);
 		
 		return "eClass/eClassApprovedadminList";
 	}
@@ -259,6 +267,10 @@ public class eClassController {
 		
 		return "eClass/myEClassApplyList";
 	}
+	
+	/*
+	 * 승인처리
+	 */
 	@GetMapping("/stateApproval")
 	public String eClassApprovedState(EClassApproved eClassApproved) {
 		
