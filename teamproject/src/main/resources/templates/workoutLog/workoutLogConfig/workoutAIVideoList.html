@@ -164,10 +164,11 @@
 				var AIVideoModal = $('.AIVideoModal');
 				AIVideoModal.on('show.bs.modal', function (event) {
 					 var button = $(event.relatedTarget);
-					 
+					 console.log(button);
 					 var recipient = button.data('whatever');
+					 console.log(recipient);
 					 var modal = $(this);
-					 modal.find('.modal-title').text(recipient)
+					 modal.find('.modal-title').text(recipient);
 					})
 		  });
 			
