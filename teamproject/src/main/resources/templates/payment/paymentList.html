@@ -186,7 +186,7 @@
 							<tr>
 								<td>2022-03-23</td>
 								<!-- (paymentCode=${l.paymentCode}) -->
-								<td><a th:href="@{/admin/paymentList/paymentDetail(paymentCode=)}">e20220323_00001</a></td>
+								<td><a th:href="@{/admin/paymentList/paymentDetail(paymentCode='p20220426043618_id003')}">e20220323_00001</a></td>
 								<td>운동클래스</td>
 								<td>id005@email.com</td>
 								<td>카드</td>
@@ -195,74 +195,6 @@
 									<span class="label label-primary">결제대기</span>
 								</td>
 							</tr>
-							<tr>
-								<td>2022-02-23</td>
-								<td><a th:href="@{/admin/paymentList/paymentDetail(paymentCode=)}">c20220223_00001</a></td>
-								<td>챌린지</td>
-								<td>id005@email.com</td>
-								<td>현금</td>
-								<td>7,500</td>
-								<td>
-									<span class="label label-danger">결제취소</span>
-								</td>
-							</tr>
-							<tr>
-								<td>2022-02-23</td>
-								<td><a th:href="@{/admin/paymentList/paymentDetail(paymentCode=)}">c20220223_00002</a></td>
-								<td>챌린지</td>
-								<td>id006@email.com</td>
-								<td>현금</td>
-								<td>5,000</td>
-								<td>
-									<span class="label label-success">결제완료</span>
-								</td>
-							</tr>
-							<tr>
-								<td>2022-02-24</td>
-								<td><a th:href="@{/admin/paymentList/paymentDetail(paymentCode=)}">e20220224_00001</a></td>
-								<td>운동클래스</td>
-								<td>id006@email.com</td>
-								<td>카드</td>
-								<td>12,000</td>
-								<td>
-									<span class="label label-success">결제완료</span>
-								</td>
-							</tr>
-							<tr>
-								<td>2022-02-25</td>
-								<td><a th:href="@{/admin/paymentList/paymentDetail(paymentCode=)}">c20220225_00001</a></td>
-								<td>챌린지</td>
-								<td>id007@email.com</td>
-								<td>현금</td>
-								<td>2,000</td>
-								<td>
-									<span class="label label-danger">결제취소</span>
-								</td>
-							</tr>
-							<tr>
-								<td>2022-02-22</td>
-								<td><a th:href="@{/admin/paymentList/paymentDetail(paymentCode=)}">e20220222_00001</a></td>
-								<td>운동클래스</td>
-								<td>id007@email.com</td>
-								<td>현금</td>
-								<td>10,000</td>
-								<td>
-									<span class="label label-success">결제완료</span>
-								</td>
-							</tr>
-
-							<!-- <tr th:if="${not #lists.isEmpty(paymentList)}" th:each="l : ${paymentList}">
-								<td th:text="${l.paymentCode}"></td>
-								<td th:text="${l.memberEmail}"></td>
-								<td th:text="${l.paymentMethodName}"></td>
-								<td th:text="${l.paymentTotalOrderPrice}"></td>
-								<td th:text="${l.paymentTotalPayPrice}"></td>
-								<td th:text="${l.paymentState}"></td>
-								<td th:text="${l.paymentRegDate}"></td>
-							</tr>
-							<tr th:unless="${not #lists.isEmpty(paymentList}">
-								<td colspan="7">등록된 결제 내역이 없습니다.</td>
-							</tr> -->
 						</tbody>
 					</table>
 				</div>

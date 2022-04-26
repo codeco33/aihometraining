@@ -111,6 +111,9 @@ public class MypageController {
 		return "member/modifyMember";
 	}
 	
+	/**
+	 *  회원별 결제 내역 조회 
+	 *  */
 	@GetMapping("/mypaymentList")
 	public String mypaymentList(Model model) {
 		
@@ -120,6 +123,9 @@ public class MypageController {
 		return "payment/mypaymentList";
 	}
 	
+	/**
+	 * 회원별 환불 내역 조회
+	 * */
 	@GetMapping("/myrefundList")
 	public String myrefundList(Model model) {
 		
@@ -129,6 +135,9 @@ public class MypageController {
 		return "refund/myrefundList";
 	}
 	
+	/**
+	 *  회원별 포인트 내역 및 잔여 포인트 조회
+	 *  */
 	@GetMapping("/mypointList")
 	public String mypointList(Model model) {
 		
@@ -140,7 +149,9 @@ public class MypageController {
 		return "point/mypointList";
 	}
 	
-	//결제 상세 내역
+	/**
+	 * 결제 상세 내역 조회
+	 * */
 	@GetMapping("/mypaymentList/paymentDetail")
 	public String paymentDetail(Model model
 								,@RequestParam(name="paymentCode") String paymentCode) {
