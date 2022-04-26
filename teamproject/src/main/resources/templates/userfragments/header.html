@@ -21,9 +21,8 @@
                                             <li class="active" ><a th:href="@{/}">홈</a></li>
                                             <li><a href="#">#운동 클래스</a>
                                                 <ul class="submenu">
-                                                    <li><a th:href="@{/eClassApprovedList}">#신규 클래스(재환)</a></li>
-                                                    <li><a th:href="@{/OpenApplyForm}">#특가 클래스(재환)</a></li>
-                                                    <li><a href="#">#인기 클래스(재환)</a></li>
+                                                    <li><a th:href="@{/eClassApprovedList}">#클래스 살펴보기(재환)</a></li>
+                                                    <li><a th:href="@{/OpenApplyForm}">#클래스 신청하기(재환)</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="#">#챌린지</a>
@@ -48,7 +47,7 @@
                                             </li>
                                             <!-- Button -->
                                             <li th:if="${session.SEMAIL == null}" class="button-header margin-left "><a class="btn btn3">#로그인(민식)</a>
-                                            	<ul class="submenu">
+                                            	<ul class="submenu" style="margin-left: 20px; margin-top: 20px;">
                                             		<li><a th:href="@{/login}">관리자</a></li>
                                             		<li><a th:href="@{/login2}">일반 회원</a></li>
                                             		<li><a th:href="@{/login3}">미인증 회원</a></li>
