@@ -251,6 +251,12 @@
 					<button id="paymentBtn" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="button">결제하기</button>
 				</div>
 				
+					<input type="hidden" name="challengeGatherPlanCode" th:value="${challengeGatherPlan.challengeGatherPlanCode}">
+					<input type="hidden" name="challengeGatherPlanDo.memberEmail"  th:value="${challengeGatherPlan.memberEmail}">
+					<input type="hidden" name="challengeCategoryCode"  th:value="${challenge.challengeCategoryCode}">
+					<input type="hidden" name="challengeSettingCode"  th:value="${challengeGatherPlan.challengeSettingCode}">
+					<input type="hidden" name="challengeGatherCode"  th:value="${challenge.challengeGatherCode}">
+					<input type="hidden" name="memberEnterEmail"  th:value="${member.memberEmail}">
 				
 			</form>
 		</div>

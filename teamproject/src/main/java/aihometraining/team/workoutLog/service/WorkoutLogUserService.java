@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.EClassCategoryLarge;
 import aihometraining.team.dto.EClassTake;
 import aihometraining.team.dto.FileDto;
@@ -154,13 +155,22 @@ public class WorkoutLogUserService {
 	}
 	
 	
-	// 수강 중인 운동 클래스 목록 조회
-	 public List<EClassTake> geteClassTakeList(String memberEmail){
+	//수강 중인  운동 클래스 목록 조회
+	public List<EClassTake> geteClassTakeList(String memberEmail){
+		
+		List<EClassTake> eClassTakeList = workoutLogUserMapper.geteClassTakeList(memberEmail);
+		
+		return eClassTakeList;
+		
+	}
+	
+	//개설 승인된 운동 클래스 목록 조회
+	public List<EClassApproved> geteClassApproved(){
 	 
-		 List<EClassTake> eClassTakeList = workoutLogUserMapper.geteClassTakeList(memberEmail);
+		 List<EClassApproved> eClassApprovedList = workoutLogUserMapper.geteClassApproved();
 	  
-		 return eClassTakeList;
-	 
+		 return eClassApprovedList;
+	
 	 }
 	 
 	

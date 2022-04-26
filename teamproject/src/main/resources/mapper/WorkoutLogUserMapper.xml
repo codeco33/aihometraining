@@ -221,6 +221,27 @@
 		
 	</resultMap>
 	
+	<resultMap type="EClassApproved" id="EClassApprovedResultmap">
+		<result column="eClassApprovedCode" 				property="eClassApprovedCode"/>
+		<result column="memberEmail" 						property="memberEmail"/>
+		<result column="eClassCategorySmallCode" 			property="eClassCategorySmallCode"/>
+		<result column="eClassIntroduceCode" 				property="eClassIntroduceCode"/>
+		<result column="eClassSectionTitleCode" 			property="eClassSectionTitleCode"/>
+		<result column="eClassSectionCurriculumCode" 		property="eClassSectionCurriculumCode"/>
+		<result column="eClassQuestionCode" 				property="eClassQuestionCode"/>
+		<result column="eClassAnswerCode" 					property="eClassAnswerCode"/>
+		<result column="eClassApprovedPrice" 				property="eClassApprovedPrice"/>
+		<result column="eClassApprovedName" 				property="eClassApprovedName"/>
+		<result column="eClassApprovedSetDate" 				property="eClassApprovedSetDate"/>
+		<result column="eClassApprovedStratDate" 			property="eClassApprovedStratDate"/>
+		<result column="eClassApprovedEndDate" 				property="eClassApprovedEndDate"/>
+		<result column="eClassApprovedStudent" 				property="eClassApprovedStudent"/>
+		<result column="eClassApprovedMaxStudent" 			property="eClassApprovedMaxStudent"/>
+		<result column="eClassApprovedDate" 				property="eClassApprovedDate"/>
+		<result column="eClassApprovedState" 				property="eClassApprovedState"/>
+
+	</resultMap>
+	
 		<insert id="workoutLogLikeInsert" parameterType="WorkoutLogLike">
 			/* 일지 좋아요 등록 */
 			INSERT INTO 
@@ -408,8 +429,17 @@
 			
 		</insert>
 		
+		<select id="geteClassApproved" resultMap="EClassApprovedResultmap">
+			/* 개설 승인된 운동 클래스 목록 조회 */
+			SELECT
+				 ep.eClassApprovedName
+				,ep.eClassApprovedCode
+			FROM
+				eclassapproved AS ep;
+		</select>
+		
 		<select id="geteClassTakeList" resultMap="EClassTakeResultmap">
-			/* 수강 중인 운동 클래스 목록 조회 */
+			/* 수강 중인 클래스 목록 조회 */
 			SELECT
 				 et.memberEmail
 				,et.eClassTakeCode
@@ -426,11 +456,10 @@
 				workoutgoal AS wg
 				on
 				et.memberEmail = wg.memberEmail
-							
 			WHERE
 				 et.eClassTakeState = '수강중'
-				and
-				 et.memberEmail = #{memberEmail};
+				 and
+				 wg.memberEmail = #{memberEmail};
 		</select>
 		
 		<select id="getworkoutGoalList" resultMap="WorkoutGoalResultMap">
@@ -458,7 +487,7 @@
 			WHERE
 				 et.eClassTakeState = '수강중'
 				 and
-				 wg.memberEmail = #{memberEmail};
+				 et.memberEmail = #{memberEmail};
 		</select>
 		
 		<select id="getworkoutLogPrivacyboundsList" resultType="WorkoutLogPrivacybounds">

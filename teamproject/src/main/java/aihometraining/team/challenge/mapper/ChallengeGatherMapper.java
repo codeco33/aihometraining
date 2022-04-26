@@ -2,7 +2,6 @@ package aihometraining.team.challenge.mapper;
 
 import java.util.List;
 
-
 import org.apache.ibatis.annotations.Mapper;
 
 import aihometraining.team.dto.ChallengeCategory;
@@ -32,4 +31,10 @@ public interface ChallengeGatherMapper {
 	
 	////챌린지 개설자 가져오기
 	public String getChallengeMaker(String memberEmail);
+	
+	// 챌린지 gather 코드로 챌린지 정보 조회
+	public ChallengeGather getChallengeGather(String challengeGatherCode);
+	
+	//챌린지 플랜 코드로 챌린지플랜 테이블 조회
+	public ChallengeGatherPlan getChallengeGatherPlan(String challengePlanCode);
 }

@@ -1,6 +1,7 @@
 package aihometraining.team.challenge.controller;
 
-import java.util.HashMap;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +22,8 @@ import aihometraining.team.challenge.mapper.ChallengeEnterMapper;
 import aihometraining.team.challenge.service.ChallengeEnterService;
 import aihometraining.team.dto.ChallengeEnter;
 import aihometraining.team.dto.ChallengeGather;
-import aihometraining.team.dto.ChallengeGatherPlan;
 import aihometraining.team.dto.ChallengeGatherPlanDo;
+import aihometraining.team.mapper.CommonMapper;
 
 @Controller
 @RequestMapping("/challenge/challengeEnter")
@@ -33,9 +34,14 @@ private static final Logger log = LoggerFactory.getLogger(ChallengeEnterControll
 	
 	//DI 의존성 주입
 	private ChallengeEnterService challengeEnterService;
+	private ChallengeEnterMapper challengeEnterMapper;
+	private CommonMapper commonMapper;
 	
-	public ChallengeEnterController(ChallengeEnterService challengeEnterService) {
+	public ChallengeEnterController(ChallengeEnterService challengeEnterService, ChallengeEnterMapper challengeEnterMapper
+									,CommonMapper commonMapper) {
 		this.challengeEnterService = challengeEnterService;
+		this.challengeEnterMapper = challengeEnterMapper;
+		this.commonMapper = commonMapper;
 	}
 	
 	//참가챌린지 목록 조회
@@ -169,10 +175,10 @@ private static final Logger log = LoggerFactory.getLogger(ChallengeEnterControll
 	 */
 	
 	@PostMapping("/challengeEnterPaymemt")
-	public String challengeEnterPaymemt(ChallengeGather challengeGather, Model model, RedirectAttributes reAttr) {
+	public String challengeEnterPaymemt(ChallengeGather challengeGather, Model model, RedirectAttributes reAttr, HttpSession session
+										,ChallengeEnter challengeEnter, ChallengeGatherPlanDo challengeGatherPlanDo) {
 		
 		model.addAttribute("title", "챌린지 참가결제");
-		model.addAttribute("leftMenuList", "챌린지");
 		
 		log.info("20220422 challengeEnterPaymemt challengeGather값 조회  challengeGather : {}", challengeGather);
 		
@@ -186,7 +192,6 @@ private static final Logger log = LoggerFactory.getLogger(ChallengeEnterControll
 		log.info("돈내놔 : {}",challengeGather.getChallengeEnterDeposit());
 		
 		
-		
 		model.addAttribute("challengeGather", challengeGather);
 		/* DTO안에 DTO의 property값 받는 또 다른 방법
 		 * model.addAttribute("challengeGatherPlan", challengeGatherPlan); */
@@ -196,18 +201,34 @@ private static final Logger log = LoggerFactory.getLogger(ChallengeEnterControll
 		 * 
 		 * 결제 기능 구현으로 수정
 		 * 
-		 * - 챌린지 참가 테이블 insert
-		 * - 결제
-		 * 		성공시 결제 테이블 insert
-		 * 		실패시 챌린지 참가 테이블 delete 
+		 * 1 챌린지 참가 테이블 insert
+		 * 2 결제
+		 * 		3-1 성공시 결제 테이블> 챌린지 계 insert
+		 * 		3-2 실패시 챌린지 참가 테이블 delete 
 		 */
+		String sEmail = (String) session.getAttribute("SEMAIL");
+		challengeEnter.setMemberEmail(sEmail);
+				
+		String newCode = commonMapper.getNewCode("challengeEnterCode", "challengeenter");
+		log.info("새로 생성된 코드 newCode : {}",newCode);
+		
+		int len = challengeEnter.getMemberEmail().indexOf("@");
+		String memberId = challengeEnter.getMemberEmail().substring(0, len);
+		SimpleDateFormat date = new SimpleDateFormat("yyyyMMddhhmm");
+		
+		String paymentGroupCode = "c"+date.format(new Date())+"_"+memberId;
+		
+		challengeEnter.setChallengeEnterCode(newCode);
+		challengeEnter.setPaymentGroupCode(paymentGroupCode);
+		
+		log.info("새로 셋팅 된 challengeEnter: {}", challengeEnter);
 		
 		
-		
+		challengeEnterMapper.challengeEnterInsert(challengeEnter);
 		
 		
 		//결제 화면에 paymentGroupCode 넘겨주기
-		reAttr.addAttribute("paymentGroupCode", "c202204241822_id004");
+		reAttr.addAttribute("paymentGroupCode", challengeEnter.getPaymentGroupCode());
 		
 		
 		return "redirect:/payment";

@@ -2,8 +2,19 @@
  * (c) Mimin Admin Page v1.0
  */
 
+/*********************************************
+	폰트변경
+	작성자 : 최보라
+	작성일 : 20220426_0044
+**********************************************/
+@font-face {
+    font-family: 'SEBANG_Gothic_Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/SEBANG_Gothic_Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 body {
-  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "SEBANG_Gothic_Regular","Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 13px;
   background-color:#f0f3f4;
   line-height: 1.42857143 !important;
@@ -398,7 +409,7 @@ p.quote{
     .article-v1 .article-v1-body p{
       margin: auto auto 1.5em;
       font-weight: 400;
-      font-family: serif;
+      font-family: SEBANG_Gothic_Regular;
       font-size: 18px;
       text-indent: 2em;
     }
@@ -594,7 +605,7 @@ p.quote{
 .form-control.android[type='text'],
 .form-control.android[type='password'] {
   width: 100%;
-  font-family: "Roboto", "Droid Sans", sans-serif;
+  font-family: "SEBANG_Gothic_Regular", "Droid Sans", sans-serif;
   font-size: 16px;
   margin: 0;
   padding: 8px 8px 6px 8px;
@@ -1940,7 +1951,7 @@ ul li a:focus {
 .user-name span {
   font-size: 16px;
   font-weight: bold;
-  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "SEBANG_Gothic_Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /*-----Left menu-------*/
@@ -2013,7 +2024,7 @@ ul li a:focus {
 
 #left-menu .sub-left-menu .time h1 {
   font-weight: 500;
-  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "SEBANG_Gothic_Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 70px;
   text-align: center;
   color: #918C8C;
@@ -5505,7 +5516,7 @@ ul li a:focus {
 }
 
 .tab-content .head {
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'SEBANG_Gothic_Regular', sans-serif;
   font-size: 25px;
   text-transform: uppercase;
   padding-bottom: 10px;
@@ -6483,11 +6494,10 @@ ul li a:focus {
   }
   .user-nav .user-name,
   .user-nav .opener-right-menu,
-  #left-menu,
-  .opener-left-menu,
   #right-menu{
     display: none !important;
   }
+  
 
   #mimin-mobile,#mimin-mobile-menu-opener{display: block !important;}
 
@@ -6518,7 +6528,12 @@ ul li a:focus {
 	text-decoration: underline;
 }
 
-/*거래내역 검색 td에 cursor 모양 넣기*/
-#paymentList .searchTd {
-	cursor: pointer;
+
+/*관리자 페이지 header .dropdown-menu*/
+.adminDropDown {
+	padding: 9px 0 !important;	
+}
+
+.adminDropDown li:hover {
+	font-size: 24px;
 }

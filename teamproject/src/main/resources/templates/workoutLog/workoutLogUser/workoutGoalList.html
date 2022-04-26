@@ -50,13 +50,9 @@
 			        <!-- Single End-->
 			    </div>
 		        <div class="row justify-content-sm-center pt-5">
-		        	<th:block th:if="${not #lists.isEmpty(workoutGoalList)}" th:each="l : ${workoutGoalList}">
-			        	 <a class="d-inline-block" th:href="@{/workoutLog/workoutLogUser/workoutGoalInsert(memberEmail=${l.memberEmail})}">
-	                        <button class="button rounded-0 primary-bg text-white btn_1 boxed-btn">
-	                        	운동 목표 등록
-	                        </button>
-	                	 </a>
-                	</th:block>
+                        <button class="button rounded-0 primary-bg text-white btn_1 boxed-btn" th:onclick="|location.href='@{/workoutLog/workoutLogUser/workoutGoalInsert}'|">
+                        	운동 목표 등록
+                        </button>
 		        </div>
 			</div>
 		</div>	
