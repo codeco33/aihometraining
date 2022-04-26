@@ -28,7 +28,7 @@
 								<tbody>
 									<tr th:if="${not #lists.isEmpty(workoutAIVideoList)}" th:each="l : ${workoutAIVideoList}">
 										<td>
-											<button type=button class="btn btn-outline btn-default AIVideoImg"  th:data-code="${l.fileIdx}" data-toggle="modal" data-target=".AIVideoModal">
+											<button type=button class="btn btn-outline btn-default AIVideoImg"  th:data-code="${l.fileIdx}" data-toggle="modal" data-target=".AIVideoModal" th:data-whatever="${l.AIVideoTitle}" >
 					                         		[[${l.AIVideoTitle}]]
 					                        </button>
 										</td>
@@ -160,6 +160,16 @@
 					
 				});
 				
+				//모달 title을 버튼 이름에 맞춰 바꿔주기
+				var AIVideoModal = $('.AIVideoModal');
+				AIVideoModal.on('show.bs.modal', function (event) {
+					 var button = $(event.relatedTarget);
+					 console.log(button);
+					 var recipient = button.data('whatever');
+					 console.log(recipient);
+					 var modal = $(this);
+					 modal.find('.modal-title').text(recipient);
+					})
 		  });
 			
 		</script>
