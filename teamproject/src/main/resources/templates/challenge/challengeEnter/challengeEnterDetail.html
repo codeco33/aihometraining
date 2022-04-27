@@ -55,13 +55,13 @@
 									  	</tr>
 									</thead>
 									<tbody>
-									  <tr th:if="${not #lists.isEmpty(enterDetail.challengeGatherPlanDoList)}" th:each="el : ${enterDetail.challengeGatherPlanDoList}">
+									  <tr th:if="${not #lists.isEmpty(enterDetail.challengeGatherPlanDoList)}" th:each="el,index: ${enterDetail.challengeGatherPlanDoList}">
 									    <td th:text="${el.memberEnterEmail}"></td>
 									    <td th:text="${el.challengeGatherPlanDoState}"></td>
 									    <td>
 									    	<div class="progress">
-												<div class="progress-bar color-7" role="progressbar" th:style="${'width:'+ el.challengeGatherPlanDoAchieveRateAfterProve}+'%;'"
-												th:aria-valuenow="${el.challengeGatherPlanDoAchieveRateAfterProve}" aria-valuemin="0" aria-valuemax="100">[[${el.challengeGatherPlanDoAchieveRateAfterProve}]]</div>
+												<div class="progress-bar color-7" role="progressbar" th:style="${'width:'+ progressByMember.get(index.index)}+'%;'"
+												th:aria-valuenow="${progressByMember.get(index.index)}" aria-valuemin="0" aria-valuemax="100">[[${progressByMember.get(index.index)}]]</div>
 											</div>
 									    </td>
 									  </tr>

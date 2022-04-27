@@ -88,11 +88,16 @@ private static final Logger log = LoggerFactory.getLogger(ChallengeEnterControll
 		
 		ChallengeGather enterDetail = challengeEnterService.getChallengeEnterByCode(challengeGatherCode);
 		
+		//참가 챌린지 세부내용 중 참가자별 진행률 조회
+		List<String> progressByMember = challengeEnterMapper.getProgressByMember(challengeGatherCode);
+		log.info("참가챌린지 멤버 진행률>>>>> progressByMember: {}", progressByMember);
+		
 		log.info("참가챌린지 세부 조회  enterDetail: {}", enterDetail);
 		
 		model.addAttribute("title", "참가 챌린지 세부정보");
 		model.addAttribute("headerList", "챌린지");
 		model.addAttribute("enterDetail", enterDetail);
+		model.addAttribute("progressByMember", progressByMember);
 		
 		return "challenge/challengeEnter/challengeEnterDetail";
 		

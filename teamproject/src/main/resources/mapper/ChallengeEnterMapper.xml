@@ -448,6 +448,33 @@
 		GROUP BY cpd.memberEnterEmail;
 	</select>
 	
+	<select id="getProgressByMember" parameterType="String" resultType="String">
+		/* 참가 챌린지 세부내용 중 참가자별 진행률 조회 */
+		 SELECT
+			floor(max(cpd.challengeGatherPlanDoAchieveRateAfterProve)/cpd.challengeGatherPlanDoAchieveRate*100) AS 'result'
+		FROM
+			challengegatherplando AS cpd
+			INNER join
+			challengegatherplan AS cgp
+			on
+			cpd.challengeGatherCode = cgp.challengeGatherCode
+			INNER join
+			challengecategory AS cc
+			on
+			cpd.challengeCategoryCode = cc.challengeCategoryCode
+			INNER join
+			challengeenter AS ce
+			ON
+			cpd.challengeGatherCode = ce.challengeGatherCode
+			INNER join
+			challengegather AS cg
+			on
+			cpd.challengeGatherCode = ce.challengeGatherCode
+		WHERE
+			ce.challengeGatherCode = #{challengeGatherCode}
+		GROUP BY cpd.memberEnterEmail;
+	</select>
+	
 	<select id="getPlanDoProveByCode" parameterType="String" resultMap="ChallengeGatherPlanDoResultMap">
 		/* 실행 코드별 챌린지 정보 조회  */
 		SELECT
