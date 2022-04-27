@@ -200,6 +200,46 @@
 			
 	</resultMap>
 	
+	<resultMap type="EClassReview" id="eClassReviewResultMap">
+	
+		<result column="eClassReviewCode" 				property="eClassReviewCode"/>
+		<result column="eClassApprovedCode" 			property="eClassApprovedCode"/>
+		<result column="memberEmail" 					property="memberEmail"/>
+		<result column="eClassReviewContent"			property="eClassReviewContent"/>
+		<result column="eClassReviewScore"				property="eClassReviewScore"/>
+		<result column="eClassReviewRegDate"			property="eClassReviewRegDate"/>
+		<result column="eClassReviewUpdateDate"			property="eClassReviewUpdateDate"/>
+		<result column="memberUpdateEmail"				property="memberUpdateEmail"/>
+		<result column="eClassReviewAnswer"				property="eClassReviewAnswer"/>
+		<result column="replyMemberEmail"				property="replyMemberEmail"/>
+		<result column="eClassReviewAnswerRegDate"		property="eClassReviewAnswerRegDate"/>
+		<result column="eClassReviewAnswerUpdateDate"	property="eClassReviewAnswerUpdateDate"/>
+		<result column="replyMemberUpdateEmail"			property="replyMemberUpdateEmail"/>
+		
+			<association property="eClassApproved" javaType="EClassApproved">
+			
+				<id		column="eClassApprovedCode" 			property="eClassApprovedCode"/>
+				<result column="memberEmail" 					property="memberEmail"/>
+				<result column="eClassCategorySmallCode" 		property="eClassCategorySmallCode"/>
+				<result column="eClassIntroduceCode"			property="eClassIntroduceCode"/>
+				<result column="eClassSectionTitleCode"			property="eClassSectionTitleCode"/>
+				<result column="eClassSectionCurriculumCode"	property="eClassSectionCurriculumCode"/>
+				<result column="eClassQuestionCode"				property="eClassQuestionCode"/>
+				<result column="eClassAnswerCode"				property="eClassAnswerCode"/>
+				<result column="eClassApprovedPrice"			property="eClassApprovedPrice"/>
+				<result column="eClassApprovedName"				property="eClassApprovedName"/>
+				<result column="eClassApprovedSetDate"			property="eClassApprovedSetDate"/>
+				<result column="eClassApprovedStratDate"		property="eClassApprovedStratDate"/>
+				<result column="eClassApprovedEndDate"			property="eClassApprovedEndDate"/>
+				<result column="eClassApprovedStudent"			property="eClassApprovedStudent"/>
+				<result column="eClassApprovedMaxStudent"		property="eClassApprovedMaxStudent"/>
+				<result column="eClassApprovedDate"				property="eClassApprovedDate"/>
+				<result column="eClassApprovedState"			property="eClassApprovedState"/>
+		
+			</association>
+			
+	</resultMap>
+	
 	<insert id="EClassPriceInsert" parameterType="EClassApproved">
 		/* 클래스 등록 처리 */
 		INSERT INTO eclassapproved(
@@ -549,7 +589,7 @@
 	</select>
 	
 	<select id="eClassApprovedByCode" parameterType="String" resultMap="eClassApprovedResultMap">
-		/* 신청한 운동클래스 또는 승인된 운동클래스 수정처리를 위한 조회 */
+		/* 신청한 운동클래스 또는 승인된 운동클래스 조회 */
 		SELECT
 			 ecs.eClassCategorySmallCode
 			,ecs.eClassCategorySmallName
@@ -575,6 +615,16 @@
 			,ea.eClassApprovedEndDate
 			,ea.eClassApprovedStudent
 			,ea.eClassApprovedMaxStudent
+			,er.memberEmail
+			,er.eClassReviewContent
+			,er.eClassReviewScore
+			,er.eClassReviewRegDate
+			,er.eClassReviewUpdateDate
+			,er.eClassReviewAnswer
+			,er.replyMemberEmail
+			,er.eClassReviewAnswerRegDate
+			,er.eClassReviewAnswerUpdateDate
+			,er.replyMemberUpdateEmail
 		FROM
 			eclassapproved AS ea
 		INNER JOIN
@@ -601,12 +651,16 @@
 			eclassanswer AS ean
 		ON
 			ea.eClassAnswerCode = ean.eClassAnswerCode
+		INNER join
+			eclassreview AS er
+		on
+			ea.eClassApprovedCode = er.eClassReviewCode
 		WHERE
 			ea.eClassApprovedCode = #{eClassApprovedCode};
 	</select>
 	
 	<select id="eClassOpenAppleyadminList" parameterType="String" resultMap="eClassApprovedResultMap">
-		/* 클래스 등록 신청한 전체 리스트 조회 */
+		/* 클래스 전체 리스트 조회 */
 		SELECT
 			 m.memberEmail
 			,ea.eClassApprovedCode
@@ -614,12 +668,17 @@
 			,ea.eClassApprovedName
 			,ea.eClassApprovedDate
 			,ea.eClassApprovedState
+			,er.eClassReviewScore
 		FROM
 			member AS m
 		INNER JOIN
 			eclassapproved AS ea
 		ON
-			m.memberEmail = ea.memberEmail;
+			m.memberEmail = ea.memberEmail
+		INNER JOIN
+			eclassreview AS er
+		ON
+			ea.eClassApprovedCode = er.eClassApprovedCode;
 	</select>
 	
 </mapper>
