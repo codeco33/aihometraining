@@ -16,7 +16,7 @@ public interface ChallengeGatherMapper {
 	
 	//모집 챌린지 세부내용 조회(모집챌린지와 모집챌린지계획 조회)
 	public List<ChallengeGatherPlan> getGatherDatail(String challengeGatherCode);
-
+	
 	//챌린지 카테고리 조회
 	public List<ChallengeCategory> getChallengeCate();
 	
