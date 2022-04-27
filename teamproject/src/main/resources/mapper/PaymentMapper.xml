@@ -233,6 +233,7 @@
 	
 	
 	<select id="getPaymentDetailByPaymentCode" parameterType="String" resultMap="paymentResultMap">
+		/* 거래 상세 내역*/
 		SELECT
 			p.*
 			,m.memberName
@@ -246,5 +247,36 @@
 			paymentCode = #{paymentCode};
 	</select>
 	
-	<select id="getPaymentList" parameterType="String" resultMap="paymentResultMap"></select>
+	<select id="getPaymentList" parameterType="String" resultMap="paymentResultMap">
+		/*거래내역 조회*/
+		SELECT 
+			*
+		FROM 
+			payment
+	    <trim prefix="JOIN" prefixOverrides="AND |OR ">
+			<if test="paymentGroupCode.substring(0,1).equals('c')">
+		    	challengeenter AS ce
+				ON 
+				p.paymentGroupCode = ce.paymentGroupCode
+				INNER JOIN 
+				challengegather AS cg
+				ON
+				ce.challengeGatherCode = cg.challengeGatherCode
+		    </if>
+			<if test="paymentGroupCode.substring(0,1).equals('e')">
+		    	eclasstake AS et
+				ON 
+				p.paymentGroupCode = et.paymentGroupCode
+				INNER JOIN 
+				eclassapproved AS ea
+				ON 
+				et.eClassApprovedCode = ea.eClassApprovedCode
+		    </if>
+		</trim>
+	    <trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="memberEmail != 'id001@email.com'">
+		    	memberEmail = #{memberEmail};
+		    </if>
+		</trim>
+	</select>
 </mapper>

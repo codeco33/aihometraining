@@ -3,6 +3,9 @@ package aihometraining.team.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -111,14 +114,21 @@ public class MypageController {
 		return "member/modifyMember";
 	}
 	
+	
 	/**
 	 *  회원별 결제 내역 조회 
 	 *  */
 	@GetMapping("/mypaymentList")
-	public String mypaymentList(Model model) {
+	public String mypaymentList(Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		String memberEmail = (String) session.getAttribute("SEMAIL");
+		
+		List<Payment> paymentList = paymentMapper.getPaymentList(memberEmail);
 		
 		model.addAttribute("title", "결제 내역");
 		model.addAttribute("leftMenuList", "거래내역");
+		model.addAttribute("paymentList", paymentList);
 		
 		return "payment/mypaymentList";
 	}
@@ -157,9 +167,9 @@ public class MypageController {
 								,@RequestParam(name="paymentCode") String paymentCode) {
 		
 		Payment payment = paymentMapper.getPaymentDetailByPaymentCode(paymentCode);		
-		log.info("결제정보 : {}", payment);
 		
 		Map<String,String> eClassTakeInfo = paymentMapper.getEClassTake(payment.getPaymentGroupCode());
+		log.info("결제정보 : {}", payment);
 		if(eClassTakeInfo != null ) {
 			
 			String eClassCode = eClassTakeInfo.get("eClassApprovedCode");
@@ -168,8 +178,8 @@ public class MypageController {
 		}
 		
 		Map<String, String> challengeEnterInfo = paymentMapper.getCallengeEnter(payment.getPaymentGroupCode());
-		log.info("챌린지 게더 코드 : {}", challengeEnterInfo.get("challengeGatherCode"));
 		if(challengeEnterInfo != null) {
+			log.info("챌린지 게더 코드 : {}", challengeEnterInfo.get("challengeGatherCode"));
 			
 			String challengeGatherCode = challengeEnterInfo.get("challengeGatherCode");
 			ChallengeGather  challenge= challengeGatherMapper.getChallengeGather(challengeGatherCode);
@@ -189,6 +199,9 @@ public class MypageController {
 		return "payment/paymentDetail";
 	}
 	
+	/** 
+	 * 환불 상세 내역 조회
+	 * */
 	@GetMapping("/myrefundList/refundDetail")
 	public String refundDetail(Model model) {
 		
@@ -199,7 +212,9 @@ public class MypageController {
 		
 		return "refund/refundDetail";
 	}
-	
+	/**
+	 * 회원별 클래스 목록 조회  
+	 */
 	@GetMapping("/myClassList")
 	public String myClassList(Model model) {
 		
@@ -209,6 +224,9 @@ public class MypageController {
 		return "eClass/myeClassList";
 	}
 	
+	/**
+	 * 회원별 수강신청내역 조회
+	 */
 	@GetMapping("/mySignUpForClassList")
 	public String mySignUpForClassList(Model model) {
 		

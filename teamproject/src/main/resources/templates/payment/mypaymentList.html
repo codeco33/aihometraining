@@ -156,7 +156,7 @@
 					<table id="paymentList" class="table table-striped table-bordered">
 						<thead>
 							<tr>
-								<th>결제일자<br>/결제코드</th>
+								<th>결제일자/결제코드</th>
 								<th>상품정보</th>
 								<th>결제금액</th>
 								<th>상태</th>
@@ -164,14 +164,14 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
+							<tr th:if="${not #lists.isEmpty(paymentList)}" th:each="l : ${paymentList}">
 								<td>
-									<p>2022-03-23</p>
-									<p><a th:href="@{/mypage/mypaymentList/paymentDetail(paymentCode='p20220426043618_id003')}">e20220323_00001</a></p>
+									<p>[[${l.paymentRegDate}]]</p>
+									<p><a th:href="@{/mypage/mypaymentList/paymentDetail(paymentCode=${l.paymentCode})}">[[${l.paymentCode}]]</a></p>
 								</td>
-								<td>운동클래스운동클래스운동클래스운동클래스운동클래스</td>
-								<td>137,500</td>
-								<td><span class="label label-success">결제완료</span></td>
+								<td></td>
+								<td>[[${l.paymentTotalPayPrice}]]</td>
+								<td>[[${l.paymentState}]]</td>
 								<td><input type="button" class="btn btn-outline btn-default refundBtn" value="신청"></td>
 							</tr>
 						</tbody>

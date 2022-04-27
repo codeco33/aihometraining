@@ -65,8 +65,6 @@ public class PaymentController {
 		HttpSession session = request.getSession();
 		String SEMAIL = (String) session.getAttribute("SEMAIL");
 		
-		System.out.println(sortStandard);
-		
 		List<WishList> wishList = paymentService.getWishList(SEMAIL, sortStandard);
 			
 		model.addAttribute("title", "위시리스트");
