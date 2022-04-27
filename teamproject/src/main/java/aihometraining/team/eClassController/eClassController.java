@@ -40,9 +40,12 @@ public class eClassController {
 	
 	@GetMapping("/eClassApprovedList")
 	public String eClassApprovedList(Model model
+									,EClassReview eClassReview
 									,EClassApproved eClassApproved) {
 		
-		List<EClassApproved> appList = eClassService.eClassOpenAppleyadminList(eClassApproved);
+		List<EClassReview> appList = eClassService.eClassApprovedList(eClassReview,eClassApproved);
+		
+		log.info("eClassController eClassApprovedList appList : {}", appList);
 		
 		model.addAttribute("title", "개설 승인된 리스트");
 		model.addAttribute("appList", appList);

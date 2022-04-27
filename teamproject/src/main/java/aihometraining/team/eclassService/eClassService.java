@@ -12,6 +12,7 @@ import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.EClassIntroduce;
 import aihometraining.team.dto.EClassQuestion;
+import aihometraining.team.dto.EClassReview;
 import aihometraining.team.dto.EClassSectionCurriculum;
 import aihometraining.team.dto.EClassSectionTitle;
 import aihometraining.team.mapper.CommonMapper;
@@ -270,11 +271,20 @@ public class eClassService {
 		return eClassApproved;
 	}
 	
+	//클래스 등록신청 리스트
 	public List<EClassApproved> eClassOpenAppleyadminList(EClassApproved eClassApproved) {
 		
 		List<EClassApproved> adminList = eClassMapper.eClassOpenAppleyadminList(eClassApproved);
 		
 		return adminList;
+	}
+	
+	//승인된 클래스 리스트
+	public List<EClassReview> eClassApprovedList (EClassReview eClassReview, EClassApproved eClassApproved) {
+		
+		List<EClassReview> appList = eClassMapper.eClassApprovedList(eClassReview,eClassApproved);
+		
+		return appList;
 	}
 	
 }

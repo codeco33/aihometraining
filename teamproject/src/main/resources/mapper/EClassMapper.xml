@@ -668,17 +668,30 @@
 			,ea.eClassApprovedName
 			,ea.eClassApprovedDate
 			,ea.eClassApprovedState
-			,er.eClassReviewScore
 		FROM
 			member AS m
 		INNER JOIN
 			eclassapproved AS ea
 		ON
-			m.memberEmail = ea.memberEmail
-		INNER JOIN
-			eclassreview AS er
-		ON
-			ea.eClassApprovedCode = er.eClassApprovedCode;
+			m.memberEmail = ea.memberEmail;
 	</select>
+	
+	<select id="eClassApprovedList" parameterType="String" resultMap="eClassReviewResultMap">
+		/* 승인된 클래스 리스트 조회 */
+		SELECT
+			 ea.eClassApprovedPrice
+			,ea.eClassApprovedName
+			,ea.eClassApprovedStratDate
+			,ea.eClassApprovedEndDate
+			,er.eClassReviewScore
+		FROM
+			eclassreview AS er
+		RIGHT JOIN
+			eclassapproved AS ea
+		ON
+			er.eClassApprovedCode = ea.eClassApprovedCode;
+	</select>
+	
+	
 	
 </mapper>

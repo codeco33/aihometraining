@@ -9,6 +9,7 @@ import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.EClassIntroduce;
 import aihometraining.team.dto.EClassQuestion;
+import aihometraining.team.dto.EClassReview;
 import aihometraining.team.dto.EClassSectionCurriculum;
 import aihometraining.team.dto.EClassSectionTitle;
 
@@ -75,4 +76,6 @@ public interface EClassMapper {
 
 	//클래스 신청 리스트 화면(관리자)
 	public List<EClassApproved> eClassOpenAppleyadminList (EClassApproved eClassApproved);
+	//승인된 클래스 리스트 화면
+	public List<EClassReview> eClassApprovedList (EClassReview eClassReview, EClassApproved eClassApproved);
 }

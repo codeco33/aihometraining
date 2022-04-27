@@ -19,6 +19,7 @@ public class EClassApproved {
 	private int eClassApprovedMaxStudent;
 	private String eClassApprovedDate;
 	private int eClassApprovedState;
+	
 	private EClassCategorySmall eClassCategorySmall;
 	private EClassIntroduce eClassIntroduce;
 	private EClassSectionTitle eClassSectionTitle;
@@ -26,6 +27,7 @@ public class EClassApproved {
 	private EClassQuestion eClassQuestion;
 	private EClassAnswer eClassAnswer;
 	private Member member;
+	
 	public String geteClassApprovedCode() {
 		return eClassApprovedCode;
 	}
@@ -170,6 +172,7 @@ public class EClassApproved {
 	public void setMember(Member member) {
 		this.member = member;
 	}
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
