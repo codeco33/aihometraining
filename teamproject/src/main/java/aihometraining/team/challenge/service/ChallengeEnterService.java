@@ -136,9 +136,10 @@ public class ChallengeEnterService {
 		//enterDetail.setChallengeGatherPlanDoList(ChallengeGatherPlanDoList);
 		log.info("참가챌린지 세부 정보 조회(service) enterDetail: {}", enterDetail);
 		
+		
 		return enterDetail;
+		
 	}
-	
 	//실행 코드별 챌린지 정보 조회
 	public List<ChallengeGatherPlanDo> getPlanDoProveByCode(String challengeGatherPlanDoCode) {
 		
@@ -198,7 +199,6 @@ public class ChallengeEnterService {
 		return result;
 		
 	}
-	
 	
 	//챌린지 참가 처리 프로세스
 	public void addChallegeEnter() {
