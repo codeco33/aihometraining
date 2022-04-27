@@ -58,7 +58,24 @@
 		<collection property="eClassApproved" resultMap="eClassApprovedResultMap"></collection>
 	</resultMap>
 	
+	<resultMap type="paymentMethod" id="paymentMethodResultMap">
+		<id 	column="paymentMethodCode" 		property="paymentMethodCode"/>
+		<result column="paymentMethodName" 		property="paymentMethodName"/>
+		<result column="paymentMethodRegDate" 	property="paymentMethodRegDate"/>
+		<collection property="member" 			resultMap="memberResultMap"></collection>
+	</resultMap>
 	
+	<resultMap type="payment" id="paymentResultMap">
+		<id 	column="paymentCode" 			property="paymentCode"/>
+		<result column="paymentGroupCode" 		property="paymentGroupCode"/>
+		<result column="paymentTotalOrderPrice" property="paymentTotalOrderPrice"/>
+		<result column="paymentUsePoint" 		property="paymentUsePoint"/>
+		<result column="paymentTotalPayPrice" 	property="paymentTotalPayPrice"/>
+		<result column="paymentState" 			property="paymentState"/>
+		<result column="paymentRegDate" 		property="paymentRegDate"/>
+		<collection property="member" 			resultMap="memberResultMap"></collection>
+		<collection property="paymentMethod"	resultMap="paymentMethodResultMap"></collection>
+	</resultMap>
 	
 	
 	<select id="getWishList" parameterType="String" resultMap="wishListResultMap" fetchSize="1000">
@@ -164,8 +181,15 @@
 	
 	<select id="getCallengeEnter" parameterType="String" resultType="Map">
 		SELECT
-			 challengeGatherCode
+			challengeEnterCode
+			,challengeCategoryCode
+			,challengeEnterContent
+			,challengeGatherCode
 			,memberEmail
+			,challengeEnterDeposit
+			,challengeEnterDate
+			,challengeServiceStartDate
+			,challengeServiceEndDate
 		FROM
 			challengeenter
 		WHERE 
@@ -176,7 +200,7 @@
 		SELECT
 			paymentMethodCode
 		FROM
-			paymentMethod
+			paymentmethod
 		WHERE 
 			paymentMethodName = #{paymentMethodName};
 	</select>
@@ -206,4 +230,21 @@
 			, '결제완료'
 			, NOW());
 	</insert>
+	
+	
+	<select id="getPaymentDetailByPaymentCode" parameterType="String" resultMap="paymentResultMap">
+		SELECT
+			p.*
+			,m.memberName
+		FROM
+			payment AS p
+			INNER JOIN
+			member AS m
+			ON
+			p.memberEmail = m.memberEmail
+		WHERE 
+			paymentCode = #{paymentCode};
+	</select>
+	
+	<select id="getPaymentList" parameterType="String" resultMap="paymentResultMap"></select>
 </mapper>

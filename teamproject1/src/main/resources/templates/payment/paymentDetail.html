@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{${layoutDeco}}">
+
+<!-- 사용자 정의 title -->
+<th:block layout:fragment="customTitle">
+	<title th:text="${title}"></title>
+</th:block>
+<!-- 사용자 정의 Css -->
+<th:block layout:fragment="customCss">
+	<link rel="stylesheet" type="text/css"
+		th:href="@{/asset/css/plugins/simple-line-icons.css}" />
+	<style type="text/css">
+		.title>h4 {
+			font-weight: bold;
+			margin-bottom: 10px;
+			border-bottom: 2px solid #58666e;
+			padding-bottom: 5px;
+		}
+		
+		#paymentDetailBtnDiv {
+			text-align: right;
+			margin-top: 50px;
+		}
+		
+		#paymentCancelBtn{
+			padding: 5px 10px;
+		}
+		
+		.orderGoodsTable th, .orderGoodsTable td {
+			text-align: center;
+			vertical-align: middle !important;
+		}
+		td[colspan="5"] {
+			text-align: right;
+		}
+</style>
+</th:block>
+<th:block th:with="level=${role}">
+	<div th:if="${role eq 'user' }"  layout:decorate="~{layout/mypagedefault}" th:replace="fragments/mypageleftmenu :: mypageleftmenuFragment"></div>
+	<div th:if="${role eq 'admin' }" layout:decorate="~{layout/default}" th:replace="fragments/leftmenu :: leftmenuFragment"></div>
+</th:block>
+<th:block layout:fragment="customContents">
+	<div class="col-md-12">
+		<div class="panel">
+			<!-- 패널 헤더 타이틀 -->
+
+			<div class="panel-body">
+				<div class="detailTable">
+					<div class="title">
+						<h4>
+							<span class="fa fa-angle-right"></span> 주문정보
+						</h4>
+					</div>
+					<table class="table">
+						<colgroup>
+							<col style="width: 150px">
+							<col style="width: auto">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th scope="row">결제코드</th>
+								<td>x00000000_00000</td>
+							</tr>
+							<tr>
+								<th scope="row">결제일자</th>
+								<td>2022-03-29 14:09:57</td>
+							</tr>
+							<tr>
+								<th scope="row">결제자</th>
+								<td><span>진수경</span></td>
+							</tr>
+							<tr>
+								<th scope="row">결제상태</th>
+								<td>결제완료 <input type="button" id="paymentCancelBtn" class="btn btn-outline btn-default" value="결제취소"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="detailTable">
+					<div class="title">
+						<h4>
+							<span class="fa fa-angle-right"></span> 결제정보
+						</h4>
+					</div>
+					<table class="table">
+						<colgroup>
+							<col style="width: 150px">
+							<col style="width: auto">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th scope="row">총 주문금액</th>
+								<td>50,000</td>
+							</tr>
+							<tr>
+								<th scope="row">포인트 사용 금액</th>
+								<td>6,000</td>
+							</tr>
+							<tr>
+								<th scope="row">총 결제금액</th>
+								<td>44,000</td>
+							</tr>
+							<tr>
+								<th scope="row">결제수단</th>
+								<td>카카오페이</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="detailTable responsive-table">
+					<div class="title">
+						<h4>
+							<span class="fa fa-angle-right"></span> 주문 상품 정보
+						</h4>
+					</div>
+					<table class="table orderGoodsTable">
+						<colgroup>
+							<col style="width: 150px">
+							<col style="width: 250px">
+							<col style="width: auto">
+							<col style="width: auto">
+							<col style="width: auto">
+						</colgroup>
+						<thead>
+							<tr>
+								<th colspan="2">상품정보</th>
+								<th>판매가</th>
+								<th>결제상태</th>
+								<th>다음 결제 일자</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>이미지</td>
+								<td>클래스/챌린지 제목<br>
+								클래스/챌린지 개설한 사람 이름</td>
+								<td>50,000</td>
+								<td>결제완료</td>
+								<td>-</td>
+							</tr>
+						</tbody>
+						<tfoot>
+						<tr>
+							<td colspan="5" >
+							상품구매금액 <strong>50,000</strong> - 포인트 사용금액 <strong>6,000</strong> = 합계 :  <strong>44,000</strong> 
+							</td>
+						</tr>
+						</tfoot>
+					</table>
+				</div>
+				
+				
+				<div id="paymentDetailBtnDiv">
+					<a th:if="${layoutDeco == 'layout/default'}" th:href="@{/admin/paymentList}"><input type="button" class="btn btn-outline btn-default" value="결제내역 목록"></a>
+					<a th:unless="${layoutDeco == 'layout/default'}" th:href="@{/mypage/mypaymentList}"><input type="button" class="btn btn-outline btn-default" value="결제내역 목록"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</th:block>
+
+<th:block layout:fragment="customBodyScript">
+
+	<!-- plugins -->
+	<script th:src="@{/asset/js/plugins/moment.min.js}"></script>
+	<script th:src="@{/asset/js/plugins/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/asset/js/plugins/dataTables.bootstrap.min.js}"></script>
+	<script th:src="@{/asset/js/plugins/jquery.nicescroll.js}"></script>
+
+	<!-- custom -->
+	<script th:src="@{/asset/js/main.js}"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+		});
+	</script>
+</th:block>
+</html>

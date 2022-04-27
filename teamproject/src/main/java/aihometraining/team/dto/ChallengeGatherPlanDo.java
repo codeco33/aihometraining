@@ -16,7 +16,8 @@ public class ChallengeGatherPlanDo {
 	 *  challengeGatherPlanDoState, 
 	 *  challengeGatherPlanDoAchieveRateAfterProve, 
 	 *  challengeGatherPlanDoAchieveRate, 
-	 *  challengeGatherPlanDoProveCheckDate*/
+	 *  challengeGatherPlanDoProveCheckDate
+	 *  challengeGatherPlanDoProveRound*/
 	
 	private String challengeGatherPlanDoCode;
 	private String challengeGatherPlanCode;
@@ -32,6 +33,7 @@ public class ChallengeGatherPlanDo {
 	private String challengeGatherPlanDoAchieveRateAfterProve;
 	private String challengeGatherPlanDoAchieveRate;
 	private String challengeGatherPlanDoProveCheckDate;
+	private int challengeGatherPlanDoProveRound;
 	
 	private ChallengeGatherPlan challengeGatherPlan;
 	private Member member;
@@ -130,6 +132,12 @@ public class ChallengeGatherPlanDo {
 	public void setChallengeGatherPlanDoProveCheckDate(String challengeGatherPlanDoProveCheckDate) {
 		this.challengeGatherPlanDoProveCheckDate = challengeGatherPlanDoProveCheckDate;
 	}
+	public int getChallengeGatherPlanDoProveRound() {
+		return challengeGatherPlanDoProveRound;
+	}
+	public void setChallengeGatherPlanDoProveRound(int challengeGatherPlanDoProveRound) {
+		this.challengeGatherPlanDoProveRound = challengeGatherPlanDoProveRound;
+	}
 	public ChallengeGatherPlan getChallengeGatherPlan() {
 		return challengeGatherPlan;
 	}
@@ -163,18 +171,51 @@ public class ChallengeGatherPlanDo {
 	
 	@Override
 	public String toString() {
-		return "ChallengeGatherPlanDo [challengeGatherPlanDoCode=" + challengeGatherPlanDoCode
-				+ ", challengeGatherPlanCode=" + challengeGatherPlanCode + ", memberEmail=" + memberEmail
-				+ ", challengeCategoryCode=" + challengeCategoryCode + ", challengeSettingCode=" + challengeSettingCode
-				+ ", challengeGatherCode=" + challengeGatherCode + ", memberEnterEmail=" + memberEnterEmail
-				+ ", challengeGatherPlanDoContent=" + challengeGatherPlanDoContent + ", fileIdx=" + fileIdx
-				+ ", challengeGatherPlanDoRegDate=" + challengeGatherPlanDoRegDate + ", challengeGatherPlanDoState="
-				+ challengeGatherPlanDoState + ", challengeGatherPlanDoAchieveRateAfterProve="
-				+ challengeGatherPlanDoAchieveRateAfterProve + ", challengeGatherPlanDoAchieveRate="
-				+ challengeGatherPlanDoAchieveRate + ", challengeGatherPlanDoProveCheckDate="
-				+ challengeGatherPlanDoProveCheckDate + ", challengeGatherPlan=" + challengeGatherPlan + ", member="
-				+ member + ", ChallengeCategory=" + ChallengeCategory + ", ChallengeSetting=" + ChallengeSetting
-				+ ", ChallengeGather=" + ChallengeGather + ", fileList=" + fileList + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("ChallengeGatherPlanDo [challengeGatherPlanDoCode=");
+		builder.append(challengeGatherPlanDoCode);
+		builder.append(", challengeGatherPlanCode=");
+		builder.append(challengeGatherPlanCode);
+		builder.append(", memberEmail=");
+		builder.append(memberEmail);
+		builder.append(", challengeCategoryCode=");
+		builder.append(challengeCategoryCode);
+		builder.append(", challengeSettingCode=");
+		builder.append(challengeSettingCode);
+		builder.append(", challengeGatherCode=");
+		builder.append(challengeGatherCode);
+		builder.append(", memberEnterEmail=");
+		builder.append(memberEnterEmail);
+		builder.append(", challengeGatherPlanDoContent=");
+		builder.append(challengeGatherPlanDoContent);
+		builder.append(", fileIdx=");
+		builder.append(fileIdx);
+		builder.append(", challengeGatherPlanDoRegDate=");
+		builder.append(challengeGatherPlanDoRegDate);
+		builder.append(", challengeGatherPlanDoState=");
+		builder.append(challengeGatherPlanDoState);
+		builder.append(", challengeGatherPlanDoAchieveRateAfterProve=");
+		builder.append(challengeGatherPlanDoAchieveRateAfterProve);
+		builder.append(", challengeGatherPlanDoAchieveRate=");
+		builder.append(challengeGatherPlanDoAchieveRate);
+		builder.append(", challengeGatherPlanDoProveCheckDate=");
+		builder.append(challengeGatherPlanDoProveCheckDate);
+		builder.append(", challengeGatherPlanDoProveRound=");
+		builder.append(challengeGatherPlanDoProveRound);
+		builder.append(", challengeGatherPlan=");
+		builder.append(challengeGatherPlan);
+		builder.append(", member=");
+		builder.append(member);
+		builder.append(", ChallengeCategory=");
+		builder.append(ChallengeCategory);
+		builder.append(", ChallengeSetting=");
+		builder.append(ChallengeSetting);
+		builder.append(", ChallengeGather=");
+		builder.append(ChallengeGather);
+		builder.append(", fileList=");
+		builder.append(fileList);
+		builder.append("]");
+		return builder.toString();
 	}
 	
 	

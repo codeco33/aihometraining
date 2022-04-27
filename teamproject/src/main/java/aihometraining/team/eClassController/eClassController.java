@@ -18,6 +18,7 @@ import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.EClassIntroduce;
 import aihometraining.team.dto.EClassQuestion;
+import aihometraining.team.dto.EClassReview;
 import aihometraining.team.dto.EClassSectionCurriculum;
 import aihometraining.team.dto.EClassSectionTitle;
 import aihometraining.team.eclassService.eClassService;
@@ -38,9 +39,13 @@ public class eClassController {
 	}
 	
 	@GetMapping("/eClassApprovedList")
-	public String eClassApprovedList(Model model) {
+	public String eClassApprovedList(Model model
+									,EClassApproved eClassApproved) {
+		
+		List<EClassApproved> appList = eClassService.eClassOpenAppleyadminList(eClassApproved);
 		
 		model.addAttribute("title", "개설 승인된 리스트");
+		model.addAttribute("appList", appList);
 		
 		return "eClass/eclassApprovedList";
 	}
@@ -119,34 +124,82 @@ public class eClassController {
 	}
 	
 	@GetMapping("/openAppleyUpdate")
-	public String EClassOpenAppleyFormUpdate( Model model
-											, EClassIntroduce eClassIntroduce
-											, EClassSectionTitle eClassSectionTitle
-											, EClassSectionCurriculum eClassSectionCurriculum
-											, EClassQuestion eClassQuestion
-											, EClassAnswer eClassAnswer
-											, EClassApproved eClassApproved
-											, HttpSession session) {
+	public String EClassOpenAppleyFormUpdate(Model model
+											,@RequestParam(value = "eClassApprovedCode",required = false)String eclassapprovedCode) {
 
-
-			String mamberEmail = (String) session.getAttribute("SEMAIL");
-			
+			EClassApproved eClassApproved = eClassService.eClassApprovedByCode(eclassapprovedCode);
+		
 			//운동 클래스 카테고리 조회
 			List<EClassCategorySmall> eClassCategoryLargeList = eClassService.eClassCategoryLargeList();
 			List<EClassCategorySmall> eClassCategoryMediumList = eClassService.eClassCategoryMediumList();
 			
-			log.info("eClassController.javaOpenAppleyForm 데이터: {}", eClassCategoryLargeList); //받은 내용이 여기{}에 담긴다.
-			log.info("eClassController.javaOpenAppleyForm 데이터: {}", eClassCategoryMediumList); //받은 내용이 여기{}에 담긴다.
-
+			log.info("eClassController.EClassOpenAppleyFormUpdate eClassCategoryLargeList 데이터: {}", eClassCategoryLargeList); //받은 내용이 여기{}에 담긴다.
+			log.info("eClassController.EClassOpenAppleyFormUpdate eClassCategoryMediumList 데이터: {}", eClassCategoryMediumList); //받은 내용이 여기{}에 담긴다.
+			log.info("eClassController.EClassOpenAppleyFormUpdate eClassApproved 데이터: {}", eClassApproved); //받은 내용이 여기{}에 담긴다.
 			
-			model.addAttribute("title", "운통클래스 신청폼");
+			model.addAttribute("title", "운통클래스 신청 폼 수정화면");
 			model.addAttribute("eClassCategoryLargeList", eClassCategoryLargeList);
 			model.addAttribute("eClassCategoryMediumList", eClassCategoryMediumList);
+			model.addAttribute("eClassApproved", eClassApproved);
 			
 			
-		return "";
+		return "eClass/eClassOpenAppleyFormUpdate";
 	}
 	
+	@GetMapping("/AppleyUpdate")
+	public String EClassAppleyFormUpdate( EClassCategorySmall eClassCategorySmall
+										, EClassIntroduce eClassIntroduce
+										, EClassSectionTitle eClassSectionTitle
+										, EClassSectionCurriculum eClassSectionCurriculum
+										, EClassQuestion eClassQuestion
+										, EClassAnswer eClassAnswer
+										, EClassApproved eClassApproved
+										, HttpSession session) {
+		log.info("운동클래스 신청 수정폼에서 입력 받은 데이터 : {}",eClassCategorySmall);
+		log.info("운동클래스 신청 수정폼에서 입력 받은 데이터 eClassIntroduce.geteClassIntroduceCode() : {}",eClassIntroduce.geteClassIntroduceCode());
+		log.info("운동클래스 신청 수정폼에서 입력 받은 데이터 eClassSectionTitle.geteClassSectionTitleCode() : {}",eClassSectionTitle.geteClassSectionTitleCode());
+		log.info("운동클래스 신청 수정폼에서 입력 받은 데이터 eClassSectionCurriculum.geteClassSectionCurriculumCode() : {}",eClassSectionCurriculum.geteClassSectionCurriculumCode());
+		log.info("운동클래스 신청 수정폼에서 입력 받은 데이터eClassQuestion.geteClassQuestionCode() : {}",eClassQuestion.geteClassQuestionCode());
+		log.info("운동클래스 신청 수정폼에서 입력 받은 데이터eClassAnswer.geteClassAnswerCode() : {}",eClassAnswer.geteClassAnswerCode());
+		log.info("운동클래스 신청 수정폼에서 입력 받은 데이터eClassApproved.geteClassApprovedCode() : {}",eClassApproved.geteClassApprovedCode());
+		
+		String mamberEmail = (String) session.getAttribute("SEMAIL");
+
+		eClassService.EClassIntroduceUpdate(eClassIntroduce, mamberEmail);
+		eClassService.EClassSectionTitleUpdate(eClassSectionTitle, mamberEmail);
+		eClassService.EClassSectionCurriculumUpdate(eClassSectionCurriculum, mamberEmail);
+		eClassService.EClassQuestionUpdate(eClassQuestion, mamberEmail);
+		eClassService.EClassAnswerUpdate(eClassAnswer, mamberEmail);
+		eClassService.EClassPriceUpdate(eClassApproved
+									  , eClassCategorySmall
+									  , mamberEmail 
+									  , eClassIntroduce 
+									  , eClassSectionTitle 
+									  , eClassSectionCurriculum 
+									  , eClassQuestion 
+									  , eClassAnswer);
+
+
+
+		return "redirect:/myEClassApplyList";
+	}
+	@GetMapping("/openAppleyDelete")
+	public String EClassAppleyFormDelete( EClassIntroduce eClassIntroduce
+										, EClassSectionTitle eClassSectionTitle
+										, EClassSectionCurriculum eClassSectionCurriculum
+										, EClassQuestion eClassQuestion
+										, EClassAnswer eClassAnswer
+										, EClassApproved eClassApproved) {
+		
+		eClassMapper.EClassIntroduceDelete(eClassIntroduce);
+		eClassMapper.EClassSectionTitleDelete(eClassSectionTitle);
+		eClassMapper.EClassSectionCurriculumDelete(eClassSectionCurriculum);
+		eClassMapper.EClassQuestionDelete(eClassQuestion);
+		eClassMapper.EClassAnswerDelete(eClassAnswer);
+		eClassMapper.EClassPriceDelete(eClassApproved);
+		
+		return "redirect:/myEClassApplyList";
+	}
 	
 	@GetMapping("/eClassOpenAppleyComplete") 
 	public String complete (Model model) {
@@ -158,27 +211,42 @@ public class eClassController {
 	}
 	 
 	@GetMapping("/eClassApproved")
-	public String eClassApproved(Model model) {
-	
+	public String eClassApproved(Model model
+								,@RequestParam(value = "eClassApprovedCode",required = false)String eclassapprovedCode) {
+		
+		EClassApproved appCode = eClassService.eClassApprovedByCode(eclassapprovedCode);
+		
+		log.info("eClassController eClassApproved eclassapprovedCode : {}",eclassapprovedCode);
+		
 		model.addAttribute("title", "개설 승인된 클래스");
+		model.addAttribute("appCode", appCode);
 		
 		return "eClass/eClassApproved";
 	}
 	
 	@GetMapping("/eClassOpenApplyadminList")
-	public String eClassOpenApplyadminList(Model model) {
+	public String eClassOpenApplyadminList(Model model
+										  ,EClassApproved eClassApproved) {
 		
-		model.addAttribute("title", "개설 신청 리스트");
+		List<EClassApproved> adminList = eClassService.eClassOpenAppleyadminList(eClassApproved);
+		
+		model.addAttribute("title", "개설 신청 관리자 리스트");
+		model.addAttribute("adminList", adminList);
 		
 		return "eClass/eClassOpenApplyadminList";
 	}
 	
 	@GetMapping("/eClassApplyadminList")
-	public String eClassApplyadminList(Model model) {
+	public String eClassApplyadminList(Model model
+									  ,EClassApproved eClassApproved
+									  ,EClassReview eClassReview) {
 		
-		model.addAttribute("title", "관리자 운동클래스목록");
+		List<EClassApproved> adminList =  eClassService.eClassOpenAppleyadminList(eClassApproved);
 		
-		return "eClass/eClassApplyadminList";
+		model.addAttribute("title", "승인된 운동클래스 목록(관리자)");
+		model.addAttribute("adminList", adminList);
+		
+		return "eClass/eClassApprovedadminList";
 	}
 	
 	@GetMapping("/myApplyList")
@@ -198,6 +266,17 @@ public class eClassController {
 		
 		
 		return "eClass/myEClassApplyList";
+	}
+	
+	/*
+	 * 승인처리
+	 */
+	@GetMapping("/stateApproval")
+	public String eClassApprovedState(EClassApproved eClassApproved) {
+		
+		eClassService.priceStateUpdate(eClassApproved);
+		
+		return "redirect:/eClassOpenApplyadminList";
 	}
 	
 	@GetMapping("/eclassadmin/studentList")

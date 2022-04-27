@@ -7,6 +7,8 @@ import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import aihometraining.team.challenge.mapper.ChallengeEnterMapper;
+import aihometraining.team.challenge.mapper.ChallengeGatherMapper;
+import aihometraining.team.challenge.service.ChallengeEnterService;
 import aihometraining.team.dto.ChallengeGather;
+import aihometraining.team.dto.ChallengeGatherPlan;
+import aihometraining.team.dto.ChallengeGatherPlanDo;
 import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.EClassTake;
 import aihometraining.team.dto.Member;
@@ -33,17 +39,22 @@ public class PaymentController {
 	private PaymentService paymentService;
 	private PaymentMapper paymentMapper;
 	private ChallengeEnterMapper challengeEnterMapper;
+	private ChallengeEnterService challengeEnterService;
 	private MemberMapper memberMapper;
+	private ChallengeGatherMapper challengeGatherMapper;
 	
 	public PaymentController(PaymentService paymentService, PaymentMapper paymentMapper
-							,ChallengeEnterMapper challengeEnterMapper
-							,MemberMapper memberMapper) {
+							,ChallengeEnterMapper challengeEnterMapper, ChallengeEnterService challengeEnterService
+							,MemberMapper memberMapper, ChallengeGatherMapper challengeGatherMapper) {
 		this.paymentService = paymentService;
 		this.paymentMapper = paymentMapper;
 		this.challengeEnterMapper = challengeEnterMapper;
+		this.challengeEnterService = challengeEnterService;
 		this.memberMapper = memberMapper;
+		this.challengeGatherMapper = challengeGatherMapper;
 	}
 	
+	private static final Logger log = LoggerFactory.getLogger(PaymentController.class);
 
 	
 	//위시리스트
@@ -112,13 +123,19 @@ public class PaymentController {
 	
 	//결제처리
 	@PostMapping("/payment")
-	public String payment(Model model, Payment payment, RedirectAttributes reAttr) {
+	public String payment(Model model, Payment payment, RedirectAttributes reAttr
+							,ChallengeGatherPlanDo challengeGatherPlanDo) {
 		
 		model.addAttribute("title", "결제");
+		String paymentGroupCode =payment.getPaymentGroupCode();
 		
-		paymentService.addPayment(payment);
+		log.info("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%챌린지 게더 플랜두 : {}", challengeGatherPlanDo);
+		int result = paymentService.addPayment(payment);
+		if(result == 1 && paymentGroupCode.startsWith("c") == true ) {
+			challengeEnterService.challengeGatherPlanDoInsert(challengeGatherPlanDo);
+		}
 		
-		reAttr.addAttribute("paymentCode", "1234");
+		reAttr.addAttribute("paymentCode", payment.getPaymentCode());
 		
 		return "redirect:/mypage/mypaymentList/paymentDetail";
 	}
@@ -147,9 +164,8 @@ public class PaymentController {
 				paymentGoodsName = eClass.geteClassApprovedName(); 
 				paymentGoodsPrice = eClass.geteClassApprovedPrice();
 				paymentGoodsSetDate = eClass.geteClassApprovedSetDate(); 
-				
 			}
-			 
+			
 		}else {
 			Map<String,String> challengeEnterInfo = paymentMapper.getCallengeEnter(paymentGroupCode);
 			String challengeCode = challengeEnterInfo.get("challengeGatherCode");
@@ -160,7 +176,14 @@ public class PaymentController {
 			if(Objects.nonNull(challenge)) { 
 				paymentGoodsName = challenge.getChallengeGatherName();
 				paymentGoodsPrice = challenge.getChallengeEnterDeposit();
+				model.addAttribute("challenge", challenge);
 			}
+			
+			List<ChallengeGatherPlan> challengeGatherPlan = challengeGatherMapper.getGatherDatail(challengeCode);
+			model.addAttribute("challengeGatherPlan",challengeGatherPlan.get(0));
+			
+			log.info("challenge : {}", challenge);
+			log.info("challengeGatherPlan: {}", challengeGatherPlan.get(0));
 		}
 		
 		Member member = memberMapper.getMemberInfoByEmail(memberEmail);

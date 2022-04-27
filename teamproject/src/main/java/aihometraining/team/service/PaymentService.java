@@ -10,11 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import aihometraining.team.dto.ChallengeEnter;
+import aihometraining.team.dto.ChallengeGatherPlanDo;
 import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.EClassTake;
 import aihometraining.team.dto.Member;
 import aihometraining.team.dto.Payment;
 import aihometraining.team.dto.WishList;
+import aihometraining.team.mapper.CommonMapper;
 import aihometraining.team.mapper.PaymentMapper;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
@@ -24,10 +27,12 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 public class PaymentService {
 	
 	private PaymentMapper paymentMapper; 
+	private CommonMapper commonMapper;
 	
 	@Autowired
-	public PaymentService(PaymentMapper paymentMapper) {
+	public PaymentService(PaymentMapper paymentMapper, CommonMapper commonMapper) {
 		this.paymentMapper = paymentMapper;
+		this.commonMapper = commonMapper;
 	}
 
 	//위시리스트 화면
@@ -90,13 +95,11 @@ public class PaymentService {
 	}
 	
 	//결제처리
-	public void addPayment(Payment payment) {
-		
-		//결제제코드 생성 및 셋팅
+	public int addPayment(Payment payment) {
 		
 		int len = payment.getMemberEmail().indexOf("@");
 		String memberId = payment.getMemberEmail().substring(0, len);
-		SimpleDateFormat date = new SimpleDateFormat("yyyyMMddhhmm");
+		SimpleDateFormat date = new SimpleDateFormat("yyyyMMddhhmmss");
 		
 		String paymentCode = "p"+date.format(new Date())+"_"+memberId;
 		
@@ -108,7 +111,7 @@ public class PaymentService {
 		
 		paymentMapper.addPayment(payment);
 		
-		
+		return 1;
 	}
 		
 	
@@ -138,6 +141,9 @@ public class PaymentService {
 		return numStr;
 		 
 	}
+	
+	
+	
 	
 	
 	

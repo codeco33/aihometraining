@@ -8,6 +8,13 @@ public class EClassTake {
 	private String eClassTakeRegDate;
 	private String eClassTakeState;
 	private String paymentGroupCode;
+	
+	
+	private EClassApproved eClassApproved;
+	private Member member;
+	
+	
+	
 	public String geteClassTakeCode() {
 		return eClassTakeCode;
 	}
@@ -50,6 +57,22 @@ public class EClassTake {
 	public void setPaymentGroupCode(String paymentGroupCode) {
 		this.paymentGroupCode = paymentGroupCode;
 	}
+	public EClassApproved geteClassApproved() {
+		return eClassApproved;
+	}
+	public void seteClassApproved(EClassApproved eClassApproved) {
+		this.eClassApproved = eClassApproved;
+	}
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
+	
+	
+	
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -67,9 +90,17 @@ public class EClassTake {
 		builder.append(eClassTakeState);
 		builder.append(", paymentGroupCode=");
 		builder.append(paymentGroupCode);
+		builder.append(", eClassApproved=");
+		builder.append(eClassApproved);
+		builder.append(", member=");
+		builder.append(member);
 		builder.append("]");
 		return builder.toString();
 	}
+	
+	
+	
+
 	
 	
 	

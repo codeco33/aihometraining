@@ -24,7 +24,15 @@ public class ChallengeEnter {
 	private String challengeEnterDate;
 	private String challengeServiceStartDate;
 	private String challengeServiceEndDate;
+	private String paymentGroupCode;
 	
+	public String getPaymentGroupCode() {
+		return paymentGroupCode;
+	}
+	public void setPaymentGroupCode(String paymentGroupCode) {
+		this.paymentGroupCode = paymentGroupCode;
+	}
+
 	private ChallengeCategory challengeCategory;
 	private ChallengeGather challengeGather;
 	private Member member;
@@ -110,13 +118,37 @@ public class ChallengeEnter {
 	
 	@Override
 	public String toString() {
-		return "ChallengeEnter [challengeEnterCode=" + challengeEnterCode + ", challengeCategoryCode="
-				+ challengeCategoryCode + ", challengeGatherCode=" + challengeGatherCode + ", memberEmail="
-				+ memberEmail + ", challengeEnterContent=" + challengeEnterContent + ", challengeEnterDeposit="
-				+ challengeEnterDeposit + ", challengeEnterDate=" + challengeEnterDate + ", challengeServiceStartDate="
-				+ challengeServiceStartDate + ", challengeServiceEndDate=" + challengeServiceEndDate
-				+ ", challengeCategory=" + challengeCategory + ", challengeGather=" + challengeGather + ", member="
-				+ member + ", challengeGatherPlan=" + challengeGatherPlan + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("ChallengeEnter [challengeEnterCode=");
+		builder.append(challengeEnterCode);
+		builder.append(", challengeCategoryCode=");
+		builder.append(challengeCategoryCode);
+		builder.append(", challengeGatherCode=");
+		builder.append(challengeGatherCode);
+		builder.append(", memberEmail=");
+		builder.append(memberEmail);
+		builder.append(", challengeEnterContent=");
+		builder.append(challengeEnterContent);
+		builder.append(", challengeEnterDeposit=");
+		builder.append(challengeEnterDeposit);
+		builder.append(", challengeEnterDate=");
+		builder.append(challengeEnterDate);
+		builder.append(", challengeServiceStartDate=");
+		builder.append(challengeServiceStartDate);
+		builder.append(", challengeServiceEndDate=");
+		builder.append(challengeServiceEndDate);
+		builder.append(", paymentGroupCode=");
+		builder.append(paymentGroupCode);
+		builder.append(", challengeCategory=");
+		builder.append(challengeCategory);
+		builder.append(", challengeGather=");
+		builder.append(challengeGather);
+		builder.append(", member=");
+		builder.append(member);
+		builder.append(", challengeGatherPlan=");
+		builder.append(challengeGatherPlan);
+		builder.append("]");
+		return builder.toString();
 	}
 	
 	

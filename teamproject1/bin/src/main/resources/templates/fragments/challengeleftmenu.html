@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+		<!-- start:ChallengeLeft Menu -->
+            <div id="left-menu" th:fragment="challengeleftmenuFragment">
+              <div class="sub-left-menu scroll">
+                <ul class="nav nav-list">
+                    <li class="time">
+                      <h1 class="animated fadeInLeft">21:00</h1>
+                      <p class="animated fadeInRight">Sat,October 1st 2029</p>
+                    </li>
+                    <li class="ripple">
+                    	<a th:href="@{/challenge/challengeGather/gatherAdmin}"><span class="fa-home fa"></span> 관리자 홈
+                      </a>
+                    </li>
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header"><span class="fa fa-trophy"></span> 모집 챌린지 관리
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                          <li><a th:href="@{#}">모집 챌린지 목록</a></li>                          
+                          <li><a th:href="@{#}">모집 챌린지 인증 목록</a></li>                          
+                      </ul>
+                    </li>
+                    <li class="ripple">
+                    <a class="tree-toggle nav-header">
+                    	<span class="fa fa-pencil-square"></span> 챌린지  
+                    	<span class="fa-angle-right fa right-arrow text-right"></span> 
+                    </a>
+                      <ul class="nav nav-list tree">
+                        <li><a th:href="@{/challenge/challengeConfig/configList}">챌린지 관리설정</a></li>
+                        <li><a href="weather.html">챌린지 카테고리 등록</a></li>
+                        <li><a href="typography.html">챌린지 세팅 등록</a></li>
+                        <li><a href="icons.html">모집 챌린지 목록</a></li>
+                        <li><a href="buttons.html">진행 챌린지 목록</a></li>
+                        <li><a href="media.html">챌린지 포인트 관리</a></li>
+                        <li><a href="panels.html">챌린지 신고 관리</a></li>
+                      </ul>
+                    </li>
+                    <li class="ripple">
+                    <a href="calendar.html">
+                   		<span class="fa fa-calendar-o"></span>Calendar
+                    </a>
+                    </li>                   
+                    <li><a href="credits.html">LogOut</a></li>
+                  </ul>
+                </div>
+            </div>
+          <!-- end: Left Menu -->
+</html>

@@ -11,8 +11,8 @@
 	<th:block layout:fragment="customContents">
 		사용자가 신청한 운동클래스 리스트 및 상태
 		<div class="container-fluid">
-			<th:block th:if="${not #lists.isEmpty(eClassOpenAppleyList)}" th:each="ecoal : ${eClassOpenAppleyList}">
-				<div class="row">
+			<div class="row">
+				<th:block th:if="${not #lists.isEmpty(eClassOpenAppleyList)}" th:each="ecoal : ${eClassOpenAppleyList}">
 					<div class="col-md-3" style="border: solid #aa00cc 1px;margin-left: 15px;margin-top: 15px;width: 250px;height: 500px;">
 						<div class="properties properties2">
 							<div class="properties__card">
@@ -34,29 +34,33 @@
 												        text-align: right;">
 										<span>원</span>
 									</div>
-									<div class="col-md-4" style="width: 100%; margin-top: 30px;">
+									<div class="col-md-4" style="width: 100%;">
 										<div class="col-md-12" 
 											 style="background-color: #FE2E2E; height: 30px;padding-top: 5px;"
 											 th:if="${ecoal.eClassApprovedState} == '2'">
-											<a href="#"><span style="color: #0abeac">반려됨(클릭시 상세사유)</span></a>
+											<a href="#"><span style="color: #0abeac;">반려됨(클릭시 상세사유)</span></a>
 										</div>
 										<div class="col-md-12" 
 											 style="background-color: #808080; height: 30px;padding-top: 5px;"
 											 th:if="${ecoal.eClassApprovedState} == '0'">
-											<span style="color: #fff">심사중</span>
+											<span style="color: #fff;">심사중</span>
 										</div>
 										<div class="col-md-12" 
 											 style="background-color: #2E2EFE; height: 30px;padding-top: 5px;"
 											 th:if="${ecoal.eClassApprovedState} == '1'">
-											<span style="color: #fff">승인</span>
+											<span style="color: #fff;">승인</span>
+										</div>
+										<div class="col-md-12" style="margin-top: 8px;">
+											<a th:href="@{/openAppleyDelete(eClassApprovedCode=${ecoal.eClassApprovedCode})}"><button class="cancel">취소하기</button></a>
+											<a th:href="@{/openAppleyUpdate(eClassApprovedCode=${ecoal.eClassApprovedCode})}"><button class="modify">수정하기</button></a>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</th:block>
+				</th:block>
+			</div>
 		</div>
 		<th:block th:unless="${not #lists.isEmpty(eClassOpenAppleyList)}" th:each="ecoal : ${eClassOpenAppleyList}">
 			신청한 운동클래스가 없습니다.
@@ -86,6 +90,17 @@
 			  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 			}
 		deleteCookie('menuLink');
+		$('.cancel').click(function(){
+			if (confirm("취소 하시겠습니까?") == true){  
+	
+				alery("취소 되었습니다");
+				
+			}else{  
+	
+				return;
+				
+			}
+		});
 	  });
 	</script>
 	

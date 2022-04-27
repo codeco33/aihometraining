@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.EClassCategoryLarge;
 import aihometraining.team.dto.EClassTake;
 import aihometraining.team.dto.FileDto;
@@ -67,9 +68,9 @@ public class WorkoutLogUserService {
 	}
 	
 	//일지 목록 조회
-	public List<WorkoutLog>	getworkoutLogList(){
+	public List<WorkoutLog>	getworkoutLogList(String sessionEmail){
 		
-		List<WorkoutLog> workoutLogList = workoutLogUserMapper.getworkoutLogList();
+		List<WorkoutLog> workoutLogList = workoutLogUserMapper.getworkoutLogList(sessionEmail);
 		
 		log.info("workoutLogList : {}", workoutLogList);
 		
@@ -131,24 +132,47 @@ public class WorkoutLogUserService {
 
 	
 	// 운동 목표 목록 조회
-	public List<WorkoutGoal> getworkoutGoalList(){
+	public List<WorkoutGoal> getworkoutGoalList(String sessionEmail){
 	
-		List<WorkoutGoal> workoutGoalList = workoutLogUserMapper.getworkoutGoalList();
+		List<WorkoutGoal> workoutGoalList = workoutLogUserMapper.getworkoutGoalList(sessionEmail);
 		
 		return workoutGoalList;
 		
 	}
 	
-	// 수강 중인 운동 클래스 목록 조회
-	/*
-	 * public List<EClassTake> geteClassTakeList(){
-	 * 
-	 * List<EClassTake> eClassTakeList = workoutLogUserMapper.geteClassTakeList();
-	 * 
-	 * return eClassTakeList;
-	 * 
-	 * }
-	 */
+	// 운동 목표 등록 처리
+	public int workoutGoalInsert(WorkoutGoal workoutGoal, String sessionEmail) {
+		
+		String code = commonMapper.getNewCode("workoutGoalCode", "workoutgoal");
+		workoutGoal.setWorkoutGoalCode(code);
+		workoutGoal.setMemberEmail(sessionEmail);	
+		
+		int result = workoutLogUserMapper.workoutGoalInsert(workoutGoal);
+		
+		
+		return result;
+		
+	}
+	
+	
+	//수강 중인  운동 클래스 목록 조회
+	public List<EClassTake> geteClassTakeList(String memberEmail){
+		
+		List<EClassTake> eClassTakeList = workoutLogUserMapper.geteClassTakeList(memberEmail);
+		
+		return eClassTakeList;
+		
+	}
+	
+	//개설 승인된 운동 클래스 목록 조회
+	public List<EClassApproved> geteClassApproved(){
+	 
+		 List<EClassApproved> eClassApprovedList = workoutLogUserMapper.geteClassApproved();
+	  
+		 return eClassApprovedList;
+	
+	 }
+	 
 	
 	// 일지 공개범위 목록 조회
 	public List<WorkoutLogPrivacybounds> getworkoutLogPrivacyboundsList(){

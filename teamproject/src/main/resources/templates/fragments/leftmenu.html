@@ -28,13 +28,10 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                      	<li><a th:href="@{/admin/eClassOpenApplyadminList}">#운동클래스 개설 신청 내역(재환)</a></li>
-						<li><a th:href="@{/admin/eClassApplyadminList}">#운동클래스 목록(재환)</a></li>
-                        <li><a th:href="@{/eClassOpenApplyadminList}">#운동클래스 개설 신청 내역(재환)</a></li>
+                        <li><a th:href="@{/eClassApplyadminList}">#승인된 운동 클래스 목록 (재환)</a></li>
+                      	<li><a th:href="@{/eClassOpenApplyadminList}">#운동클래스 개설 신청 내역(재환)</a></li>
                         <li><a th:href="@{/admin/eClassConfig/eClassCategoryList}">#운동 클래스 카테고리 관리(민식)</a></li>
-                        <li><a th:href="@{/eClassApplyadminList}">#운동클래스 목록(재환)</a></li>
-                        <li><a th:href="@{#}">#운동클래스(재환)</a></li>
-                        <li><a th:href="@{#}"></a></li>
+
                       </ul>
                     </li>
                     <li class="ripple">
@@ -69,9 +66,6 @@
                     </a>
                       <ul class="nav nav-list tree">
                         <li><a th:href="@{/admin/diet/dietBankListAdmin}">#식단 은행(영호)</a></li>
-                        <li><a th:href="@{#}">#개별 식단 관리(영호)</a></li>
-                        <li><a th:href="@{#}">#영양성분  API 관리(영호)</a></li>
-                        <li><a th:href="@{#}">#수강생 식단 관리(영호)</a></li>
                       </ul>
                     </li>
                     <li class="ripple">
@@ -80,9 +74,9 @@
                     	<span class="fa-angle-right fa right-arrow text-right"></span> 
                     </a>
                       <ul class="nav nav-list tree">
-                        <li><a th:href="@{#}">#결제 내역(수경)</a></li>
-                        <li><a th:href="@{#}">#환불 내역(수경)</a></li>
-                        <li><a th:href="@{#}">#환불 기준 관리(수경)</a></li>
+                        <li><a th:href="@{/admin/paymentList}">#결제 내역(수경)</a></li>
+                        <li><a th:href="@{/admin/refundList}">#환불 내역(수경)</a></li>
+                        <li><a th:href="@{/admin/refundStandard}">#환불 기준 관리(수경)</a></li>
                       </ul>
                     </li>
                     <li class="ripple">
@@ -91,9 +85,9 @@
                     	<span class="fa-angle-right fa right-arrow text-right"></span> 
                     </a>
                       <ul class="nav nav-list tree">
-                        <li><a th:href="@{#}">#포인트 지급(수경)</a></li>
-                        <li><a th:href="@{#}">#포인트 내역(수경)</a></li>
-                        <li><a th:href="@{#}">#포인트 지급 기준(수경)</a></li>
+                        <li><a th:href="@{/admin/givePoint}">#포인트 지급(수경)</a></li>
+                        <li><a th:href="@{/admin/pointList}">#포인트 내역(수경)</a></li>
+                        <li><a th:href="@{/admin/pointStandard}">#포인트 지급 기준(수경)</a></li>
                       </ul>
                     </li>
                     <li class="ripple">

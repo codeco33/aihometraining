@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="aihometraining.team.mapper.MemberMapper">
+
+	<resultMap type="LoginHistory" id="loginResultMap">
+		<result column="loginCode"				property="loginCode" />
+		<result column="loginMemberEmail"		property="loginMemberEmail" />
+		<result column="loginDate"				property="loginDate" />
+		<result column="loginFailNum"			property="loginFailNum" />
+		<result column="loginRecentTryDate"		property="loginRecentTryDate" />
+		<result column="login_id"				property="loginId" />
+		<result column="loginMACAddress"		property="loginMACAddress" />
+		<result column="loginOS"				property="loginOS" />
+		<result column="loginLogoutDate"		property="loginLogoutDate" />
+		<result column="loginOS"				property="loginOS" />
+		<result column="loginBrowser"			property="loginBrowser" />
+		<result column="loginIPAddress"			property="loginIPAddress" />
+		<association property="member" javaType="Member">
+			<id 	column="memberName" 		property="memberName"/>
+			<result column="memberLevelCode" 	property="memberLevelCode"/>
+			<result column="memberEmail" 		property="memberEmail"/>
+		</association>
+	</resultMap>
+
+	<resultMap type="Member" id="memberResultMap">
+		<id 	column="memberEmail" 			property="memberEmail"/>
+		<result column="memberPw" 				property="memberPw"/>
+		<result column="memberLevelCode" 		property="memberLevelCode"/>
+		<result column="memberNewsAgree" 		property="memberNewsAgree"/>
+		<result column="memberRegDate" 			property="memberRegDate"/>
+		<result column="memberName" 			property="memberName"/>
+		<result column="memberPhone"	 		property="memberPhone"/>
+		<result column="memberNickname" 		property="memberNickname"/>
+		<result column="memberBirthday" 		property="memberBirthday"/>
+		<result column="memberGender" 			property="memberGender"/>
+		<result column="memberRecommendEmail" 	property="memberRecommendEmail"/>
+		<result column="memberFinalPoint" 		property="memberFinalPoint"/>
+	</resultMap>
+	
+	<select id="getLoginHistory1" resultMap="loginResultMap" fetchSize="1000">
+	   SELECT	
+			 l.loginCode
+			,l.loginMemberEmail
+			,m.memberName
+			,m.memberLevelCode
+			,m.memberNickname
+			,l.loginDate
+			,l.loginFailNum
+			,l.loginRecentTryDate
+			,l.loginMACAddress
+			,l.loginOS
+			,l.loginBrowser
+			,l.loginIPAddress
+			,l.loginLogoutDate
+		FROM 	
+			member AS m
+			INNER JOIN 
+			login AS l
+			on
+			m.memberEmail = l.loginMemberEmail;
+	</select>
+	
+	<select id="getLoginHistory2" resultType="map" fetchSize="1000"> 
+		SELECT	
+			 l.loginCode
+			,l.loginMemberEmail
+			,m.memberName
+			,m.memberLevelCode
+			,m.memberNickname
+			,l.loginDate
+			,l.loginFailNum
+			,l.loginRecentTryDate
+			,l.loginMACAddress
+			,l.loginOS
+			,l.loginBrowser
+			,l.loginIPAddress
+			,l.loginLogoutDate
+		FROM 	
+			member AS m
+			INNER JOIN 
+			login AS l
+			on
+			m.memberEmail = l.loginMemberEmail;
+	</select>
+	
+	<delete id="removeMember" parameterType="String">
+		/* 회원 삭제 */
+		DELETE
+		FROM
+			member
+		WHERE
+			memberEmail = #{memberEmail};
+	</delete>
+	
+	
+	
+	<update id="modifyMember" parameterType="Member">
+		/* 회원정보 수정 */
+		UPDATE member 
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="memberPw != null and memberPw != ''">
+				memberPw = #{memberPw},
+			</if>
+			<if test="memberName != null and memberName != ''">
+				memberName = #{memberName},
+			</if>
+			<if test="memberNickname != null and memberNickname != ''">
+				memberNickname = #{memberNickname},
+			</if>
+			<if test="memberNewsAgree != null and memberNewsAgree != ''">
+				memberNewsAgree = #{memberNewsAgree}
+			</if>
+			<if test="memberPhone != null and memberPhone != ''">
+				memberPhone = #{memberPhone}
+			</if>
+			<if test="memberBirthday != null and memberBirthday != ''">
+				memberBirthday = #{memberBirthday}
+			</if>
+			<if test="memberGender != null and memberGender != ''">
+				memberGender = #{memberGender}
+			</if>
+		</trim>
+		WHERE
+			memberEmail = #{memberEmail}; 
+	
+	</update>
+
+	<select id="getMemberInfoByEmail" parameterType="String" resultMap="memberResultMap">
+		/* 회원별 회원정보 조회 */
+		SELECT
+		    m.memberEmail        
+		   ,m.memberPw        
+		   ,m.memberLevelCode        
+		   ,m.memberName        
+		   ,m.memberNickname      
+		   ,m.memberNewsAgree      
+		   ,m.memberPhone    
+		   ,m.memberBirthday      
+		   ,m.memberGender  
+		   ,m.memberRecommendEmail  
+		   ,m.memberFinalPoint  
+		FROM
+		   member AS m
+		WHERE
+		   m.memberEmail = #{memberEmail};
+		 
+	</select>
+
+	<select id="isEmailCheck" parameterType="String" resultType="boolean">
+		/* 회원 이메일 중복 체크 */
+		SELECT
+			IF(COUNT(1) = 1, 0, 1)
+		FROM 
+			member AS m
+		WHERE 
+			m.memberEmail = #{memberEmail};
+	</select>
+
+	<select id="getMemberLevelList" resultType="MemberLevel">
+	   /* 회원 등급 목록 조회 */
+	   SELECT 
+			 l.memberLevelCode
+			,l.memberLevelName
+			,l.memberLevelRegEmail
+			,l.memberLevelRegDate
+		FROM 
+			memberlevel AS l;
+	</select>
+
+	<insert id="addMember" parameterType="Member">
+		/* 회원 가입 */
+		INSERT INTO member
+		( 	 memberEmail
+			,memberPw
+			,memberLevelCode
+			,memberRegDate
+		)VALUES (
+			 #{memberEmail}
+			,#{memberPw}
+			,#{memberLevelCode}
+			,CURDATE()
+		);
+	</insert>
+	
+	<select id="getMemberList" parameterType="String" resultMap="memberResultMap" fetchSize="1000">
+		/* 회원 목록 조회 */
+		SELECT 
+			 m.memberEmail
+			,m.memberLevelCode 
+			,m.memberNewsAgree 
+			,m.memberRegDate 
+			,m.memberName 
+			,m.memberPhone
+			,m.memberNickname 
+			,m.memberBirthday 
+			,m.memberGender
+			,m.memberRecommendEmail 
+			,m.memberFinalPoint
+		FROM 
+			member AS m;
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="searchKey != null and searchKey != '' and searchValue != ''">
+				${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
+			</if>
+		</trim>;
+	</select>
+</mapper>

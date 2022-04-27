@@ -1,6 +1,7 @@
 package aihometraining.team.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,10 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import aihometraining.team.challenge.mapper.ChallengeGatherMapper;
+import aihometraining.team.dto.ChallengeGather;
+import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.Member;
 import aihometraining.team.dto.MemberLevel;
+import aihometraining.team.dto.Payment;
 import aihometraining.team.mapper.MemberMapper;
+import aihometraining.team.mapper.PaymentMapper;
 import aihometraining.team.service.MemberService;
+import aihometraining.team.service.PaymentService;
 
 @Controller
 @RequestMapping("/mypage")
@@ -27,10 +34,18 @@ public class MypageController {
 	//DI 의존성 주입 생성자 메소드 주입 방식
 	private MemberService memberService;
 	private MemberMapper memberMapper;
+	private PaymentMapper paymentMapper;
+	private PaymentService paymentService;
+	private ChallengeGatherMapper challengeGatherMapper; 
 	
-	public MypageController(MemberService memberService, MemberMapper memberMapper) {
+	public MypageController(MemberService memberService, MemberMapper memberMapper
+							,PaymentMapper paymentMapper, PaymentService paymentService
+							,ChallengeGatherMapper challengeGatherMapper) {
 		this.memberService = memberService;
 		this.memberMapper  = memberMapper;
+		this.paymentMapper = paymentMapper;
+		this.paymentService = paymentService;
+		this.challengeGatherMapper = challengeGatherMapper;
 	}
 	
 	/* 회원 탈퇴 처리 */
@@ -96,6 +111,9 @@ public class MypageController {
 		return "member/modifyMember";
 	}
 	
+	/**
+	 *  회원별 결제 내역 조회 
+	 *  */
 	@GetMapping("/mypaymentList")
 	public String mypaymentList(Model model) {
 		
@@ -105,6 +123,9 @@ public class MypageController {
 		return "payment/mypaymentList";
 	}
 	
+	/**
+	 * 회원별 환불 내역 조회
+	 * */
 	@GetMapping("/myrefundList")
 	public String myrefundList(Model model) {
 		
@@ -114,6 +135,9 @@ public class MypageController {
 		return "refund/myrefundList";
 	}
 	
+	/**
+	 *  회원별 포인트 내역 및 잔여 포인트 조회
+	 *  */
 	@GetMapping("/mypointList")
 	public String mypointList(Model model) {
 		
@@ -125,16 +149,42 @@ public class MypageController {
 		return "point/mypointList";
 	}
 	
-	//결제 상세 내역
+	/**
+	 * 결제 상세 내역 조회
+	 * */
 	@GetMapping("/mypaymentList/paymentDetail")
 	public String paymentDetail(Model model
 								,@RequestParam(name="paymentCode") String paymentCode) {
+		
+		Payment payment = paymentMapper.getPaymentDetailByPaymentCode(paymentCode);		
+		log.info("결제정보 : {}", payment);
+		
+		Map<String,String> eClassTakeInfo = paymentMapper.getEClassTake(payment.getPaymentGroupCode());
+		if(eClassTakeInfo != null ) {
+			
+			String eClassCode = eClassTakeInfo.get("eClassApprovedCode");
+			EClassApproved eClass = paymentService.getEClassApproved(eClassCode);
+			model.addAttribute("eClass", eClass);
+		}
+		
+		Map<String, String> challengeEnterInfo = paymentMapper.getCallengeEnter(payment.getPaymentGroupCode());
+		log.info("챌린지 게더 코드 : {}", challengeEnterInfo.get("challengeGatherCode"));
+		if(challengeEnterInfo != null) {
+			
+			String challengeGatherCode = challengeEnterInfo.get("challengeGatherCode");
+			ChallengeGather  challenge= challengeGatherMapper.getChallengeGather(challengeGatherCode);
+			model.addAttribute("challenge", challenge);
+		}
 		
 		model.addAttribute("title", "결제 내역");
 		model.addAttribute("leftMenuList", "거래내역");
 		model.addAttribute("subTitle", "결제 상세 내역");
 		model.addAttribute("layoutDeco", "layout/mypagedefault");
-		model.addAttribute("paymentCode", paymentCode);
+		
+		model.addAttribute("payment", payment);
+		
+		
+		
 		
 		return "payment/paymentDetail";
 	}

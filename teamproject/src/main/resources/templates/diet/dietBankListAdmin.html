@@ -16,27 +16,13 @@
                   
                   <div class="col-md-12 padding-0" style="padding-bottom:20px;">
                     <div class="col-lg-8">
-                         <div class="col-md-10">
-                            <div class="input-group">
-                              <input type="text" class="form-control" aria-label="..." placeholder ="검색할 게 없어서 검색기능 못씀">
-                              <div class="input-group-btn" >
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">검색<span class="caret"></span></button>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                  <li><a href="#">Action</a></li>
-                                  <li><a href="#">Another action</a></li>
-                                  <li><a href="#">Something else here</a></li>
-                                  <li role="separator" class="divider"></li>
-                                  <li><a href="#">Separated link</a></li>
-                                </ul>
-                              </div><!-- /btn-group -->
-                            </div><!-- /input-group -->
-                          </div>
+                         
                     </div>
                     
                     
                     <!-- Small modal -->
 
-                     <div class="col-lg-1 col-lg-offset-2">
+                     <div class="col-lg-2 col-lg-offset-2">
 	                         <button type=button class="btn btn-outline btn-default" id="insertDietBank" data-toggle="modal" data-target=".insertModal">
 	                         		식단 추가하기
 	                         		<i class="fa fa-plus"></i>
@@ -61,14 +47,6 @@
 				                        <td>생성자Email</td>
 				                        <td>
 				                        	<input type="text" name="insertEmail" readonly>
-				                        </td>
-				                      </tr>
-				                      <tr>
-				                        <td>연동 클래스</td>
-				                        <td>
-				                        	<select name="connectEClass">
-				                        		
-				                        	</select>
 				                        </td>
 				                      </tr>
 				                      <tr>
@@ -98,7 +76,6 @@
                     <thead>
                       <tr>
                         <th class="text-center">식단은행 번호</th>
-                        <th class="text-center">운동클래스</th>
                         <th class="text-center">작성자이메일</th>
                         <th class="text-center">작성일</th>
                         <th class="text-center">수정자이메일</th>
@@ -110,7 +87,6 @@
                     <tbody>
                       <tr th:each="d : ${dietBankList}">
                         <td th:text="${d.dietBankCode}" class="col-md-1 text-center"></td>
-                        <td th:text="${d.eClassApprovedCode}" class="col-md-4 text-center"></td>
                         <td th:text="${d.memberEmail}" class="text-center"></td>
                         <td th:text="${d.dietBankInsertDate}" class="text-center"></td>
                         <td th:text="${d.memberUpdateEmail}" class="text-center"></td>

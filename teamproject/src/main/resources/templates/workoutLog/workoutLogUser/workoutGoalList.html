@@ -11,31 +11,31 @@
 		<div class="services-area section-padding">
 	        <div class="container">
 	        	<div class="row justify-content-sm-center">
-	        	<th:block th:if="${not #lists.isEmpty(workoutGoalList)}" th:each="l : ${workoutGoalList}">
-	        		<div class="col-sm-4 mb-5 mb-lg-0">
-	            		<div class="properties__card">
-			                <div class="properties__caption">
-                                <h2>운동 목표 </h2>
-                                <p>[[${l.workoutGoalContent}]]</p>
-			                    <p>아이디 : [[${l.memberEmail}]]</p>
-			                    <h3>시작일 : [[${l.workoutGoalStartDate}]] </h3>
-			                    <h3>종료일 : [[${l.workoutGoalEndDate}]]</h3>
-			                    <h6>목표 달성률</h6>
-			                    <div class="percentage">
-									<div class="progress">
-										<div class="progress-bar color-7" role="progressbar" style="width: 30%"
-										aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+	        		<th:block th:if="${not #lists.isEmpty(workoutGoalList)}" th:each="l : ${workoutGoalList}">
+		        		<div class="col-sm-4 mb-5 mb-lg-0">
+		            		<div class="properties__card">
+				                <div class="properties__caption">
+	                                <h2>운동 목표 </h2>
+	                                <p>[[${l.workoutGoalContent}]]</p>
+				                    <p>수강 클래스 : [[${l.eClassApproved.eClassApprovedName}]]</p>
+				                    <h3>시작일 : [[${l.workoutGoalStartDate}]] </h3>
+				                    <h3>종료일 : [[${l.workoutGoalEndDate}]]</h3>
+				                    <h6>목표 달성률</h6>
+				                    <div class="percentage">
+										<div class="progress">
+											<div class="progress-bar color-7" role="progressbar" style="width: 30%"
+											aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
 									</div>
-								</div>
-			                    <form action="javascript:void(0)" method="post">
-				                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn mt-5" type="submit">
-				                    	운동 계획 GoGo
-				                    </button>
-				                </form>    
-			                </div>
-			
-			            </div>
-			        </div>
+				                    <form action="javascript:void(0)" method="post">
+					                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn mt-5" type="submit">
+					                    	운동 계획 GoGo
+					                    </button>
+					                </form>    
+				                </div>
+				
+				            </div>
+				        </div>
             		</th:block>
 	            	<th:block th:unless="${not #lists.isEmpty(workoutGoalList)}" th:each="l : ${workoutGoalList}">
 	            		<div class="col-lg-4 col-md-6 col-sm-8">

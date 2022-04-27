@@ -8,44 +8,60 @@
 	</th:block>
 	
 	<th:block layout:fragment="customContents">
-		<div class="col-md-12">
-			<div class="panel">
-		    	<div class="panel-heading-white panel-heading">
-		        	<h4>챌린지 결제 페이지</h4>
-		        </div>
-		        <div class="panel-body">
-			        <div class="col-md-6 col-md-offset-3">
-						<div class="col-md-12 top-20 padding-0">
-			            	<div class="col-md-12">
-			                	<div class="panel">
-			                    	<div class="panel-heading bg-deep-purple">
-			                    		<h6 class="text-white">챌린지 결제 페이지</h6>
-			                    	</div>
-							        <div class="panel-body">
-										<div class="col-md-12 panel-body" style="padding-bottom:30px;">
-											<div class="col-md-12">
-					  							<form class="cmxform" id="challengeCategoryForm" method="post" th:action="@{#}">
-					    							<div class="col-md-12">
-						       							결제
-					        						</div>
-													<div style="text-align: center;">
-														<input class="submit btn btn-outline btn-info btn-sm" type="submit" value="등록">
-													</div>
-												</form>
-											</div>
-										</div>
-							        </div>
-		        				</div>
-	                    	</div>
-	                   	</div>
-	                </div>
-                </div>
+		<div class="col-md-6 col-md-offset-3">
+         	<div class="panel">
+             	<div class="panel-heading bg-white border-none">
+	          		<h4><span class="icon-direction icons"></span> 챌린지 결제 페이지</h4>
+	        	</div>
+		     	<div class="panel-body">
+					<div class="col-md-12 panel-body" style="padding-bottom:30px;">
+						<div class="col-md-12">
+							<form class="cmxform" id="challengeCategoryForm" method="post" th:action="@{/challenge/challengeEnter/challengeEnterList}">
+								<div class="col-md-12">
+									
+									<div class="form-group form-animate-text" style="margin-top:40px !important;">
+			                	 		<input type="hidden" class="form-text" id="validate_challengeCategoryCode" name="challengeCategoryCode" th:value="${challengeGather.challengeCategoryCode}"  required>
+			                	 		<input type="hidden" class="form-text" id="validate_challengeGatherCode" name="challengeGatherCode" th:value="${challengeGather.challengeGatherCode}"  required>
+			                	 		<input type="hidden" class="form-text" id="validate_challengeServiceStartDate" name="challengeServiceStartDate" th:value="${challengeGather.challengeStartDate}"  required>
+			                	 		<input type="hidden" class="form-text" id="validate_challengeEndDate" name="challengeServiceEndDate" th:value="${challengeGather.challengeEndDate}"  required>
+			                	 		<input type="hidden" class="form-text" id="validate_challengeGatherPlanCode" name="challengeGatherPlan.challengeGatherPlanCode" th:value="${challengeGather.challengeGatherPlan.challengeGatherPlanCode}"  required>
+			                	 		<input type="hidden" class="form-text" id="validate_challengeGatherPlanProveNumber" name="challengeGatherPlan.challengeGatherPlanProveNumber" th:value="${challengeGather.challengeGatherPlan.challengeGatherPlanProveNumber}"  required>
+			                	 		<input type="hidden" class="form-text" id="validate_memberEmail" name="challengeGather.memberEmail" th:value="${challengeGather.memberEmail}"  required>
+			                	 		<input type="hidden" class="form-text" id="validate_challengeSettingCode" name="challengeGatherPlan.challengeSettingCode" th:value="${challengeGather.challengeGatherPlan.challengeSettingCode}"  required>
+			                	 		<input type="text" class="form-text" id="validate_gatherName" name="challengeGatherName" th:value="${challengeGather.challengeGatherName}"  required>
+			                 			<span class="bar"></span>
+			                	 		<label>챌린지 모집명</label>
+			                		</div>
+									<div class="form-group form-animate-text" style="margin-top:40px !important;">
+			                	 		<input type="text" class="form-text" id="validate_daposit" name="challengeEnterDeposit" th:value="${challengeGather.challengeEnterDeposit}"  required>
+			                 			<span class="bar"></span>
+			                	 		<label>챌린지 보증금</label>
+			                		</div>
+								</div>
+								<div style="text-align: center;">
+									<input class="submit btn btn-outline btn-info btn-sm" type="submit" value="결제">
+								</div>
+							</form>
+						</div>
+					</div>
+		     	</div>
 			</div>
-		</div>			
+    	</div>
 	</th:block>
 	
 	<!-- 사용자 정의 Css -->
 		<th:block layout:fragment="customCss">
+		<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/simple-line-icons.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/mediaelementplayer.css}" />
+		<style type="text/css">
+			
+			.panel-heading > h4 {
+				font-weight: bold;
+				margin-bottom: 0;
+				border-bottom: 2px solid #58666e;
+				padding-bottom: 5px;
+			}
+		</style>
 			<link rel="stylesheet" type="text/css" th:href="@{/asset/css/plugins/jquery.steps.css}"/>
 		
 		</th:block>

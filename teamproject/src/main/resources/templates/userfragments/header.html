@@ -21,9 +21,8 @@
                                             <li class="active" ><a th:href="@{/}">홈</a></li>
                                             <li><a href="#">#운동 클래스</a>
                                                 <ul class="submenu">
-                                                    <li><a th:href="@{/eClassApprovedList}">#신규 클래스(재환)</a></li>
-                                                    <li><a th:href="@{/OpenApplyForm}">#특가 클래스(재환)</a></li>
-                                                    <li><a href="#">#인기 클래스(재환)</a></li>
+                                                    <li><a th:href="@{/eClassApprovedList}">#클래스 살펴보기(재환)</a></li>
+                                                    <li><a th:href="@{/OpenApplyForm}">#클래스 신청하기(재환)</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="#">#챌린지</a>
@@ -35,8 +34,8 @@
                                             </li>
                                             <li><a href="#">#식단</a>
                                                 <ul class="submenu">
-                                                    <li><a th:href="@{/diet/mypage/dietBankList}">#식단은행(영호)</a></li>
-                                                    <li><a th:href="@{/diet/mypage/dietMyList}">#개인식단(영호)</a></li>
+                                                    <li th:if="${session.SEMAIL != null && session.SLEVEL == 'levelCode001'}"><a th:href="@{/admin/diet/dietBankListAdmin}">식단은행(영호)</a></li>
+                                                    <li><a th:href="@{/diet/mypage/dietMyList}">개인식단(영호)</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="#">#일지</a>
@@ -48,7 +47,7 @@
                                             </li>
                                             <!-- Button -->
                                             <li th:if="${session.SEMAIL == null}" class="button-header margin-left "><a class="btn btn3">#로그인(민식)</a>
-                                            	<ul class="submenu">
+                                            	<ul class="submenu" style="margin-left: 20px; margin-top: 20px;">
                                             		<li><a th:href="@{/login}">관리자</a></li>
                                             		<li><a th:href="@{/login2}">일반 회원</a></li>
                                             		<li><a th:href="@{/login3}">미인증 회원</a></li>
@@ -61,7 +60,7 @@
 												<ul class="submenu">
 													<li><a th:href="@{/mypage}"><span class="fa fa-user"></span>마이페이지</a></li>
 													<li role="separator" class="divider"></li>
-													<li><a th:href="@{#}"><span class="fa fa-calendar"></span>#위시리스트</a></li>
+													<li><a th:if="${session.SEMAIL != null && session.SLEVEL != 'levelCode001'}" th:href="@{/wishList}"><span class="fa fa-calendar"></span>#위시리스트</a></li>
 													<li><a th:href="@{/admin}"><span class="fa fa-cogs"></span>관리자 페이지</a></li>
 													<li><a th:href="@{/logout}" ><span class="fa fa-power-off"></span>로그아웃</a></li>
 												</ul>

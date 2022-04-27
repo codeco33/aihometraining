@@ -222,9 +222,19 @@
 			    	order : [ 0, 'desc' ],
 					lengthChange : false,
 					pageLength : 15,
-					filter: false,
-					 dom: '<"top"i>rt<"bottom"p><"clear">',
-			    });
+					filter : false,
+					dom : '<"top"i>rt<"bottom"p><"clear">',
+					
+					 "language": {
+					     "info": "전체 _TOTAL_건",
+				    	 "paginate": {
+				                "first":      "처음",
+				                "last":       "마지막",
+				                "next":       "다음",
+				                "previous":   "이전"
+				            }
+						 }
+				});
 			 	
 			    /* 레코드 수 포맷 */
 				var info = table.page.info();			

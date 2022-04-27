@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+
+<!--DietBankUpdate 내 요일별 식단 End-->	
+ 
+	<div class="panel-body" id="MealListContent" th:fragment="fragment-DailyMealList">
+		<div class="responsive-table">
+		    <table class="table table-condensed table-hover" width="100%" cellspacing="0">
+		    <thead>
+		      <tr>
+		        <th class=" text-center">식품명</th>
+		        <th class=" text-center">1회제공량</th>
+		        <th class=" text-center">에너지(㎉)</th>
+		        <th class=" text-center">탄수화물(g)</th>
+		        <th class=" text-center">단백질(g)</th>
+		        <th class=" text-center">지방(g)</th>
+		        <th class=" text-center">나트륨(㎎)</th>
+		        <th class=" text-center"></th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr th:each="s : ${selectOneMealConn}" class="todayTrLine" th:value="${s.dietOneMealConnectionGroupNum}">
+		        <td th:text="${s.nutrientsAPIName}"></td>
+		        <td th:text="${s.nutrientsAPIServe}"></td>
+		        <td th:text="${s.nutrientsAPIKcal}"></td>
+		        <td th:text="${s.nutrientsAPICarbo}"></td>
+		        <td th:text="${s.nutrientsAPIPro}"></td>
+		        <td th:text="${s.nutrientsAPIFat}"></td>
+		        <td th:text="${s.nutrientsAPINatr}"></td>
+		        <td class="text-center">
+		        	<button th:value ="${s.dietOneMealConnectionCode}" class="btn btn-round btn-default oneDayDelBtn">제거</button>
+		        </td>
+		      </tr>
+		    </tbody>
+		  </table>
+		</div>
+	</div>
+             
+	<th:block layout:fragment="customBodyScript">	
+		<script type="text/javascript">
+			$('.oneDayDelBtn').click(function(e){
+			  	
+			  	var dietOneMealConnectionCode = $(e.target).attr('value');
+			  	var dietBankCode = $('#DietUpdietBankCode').text()
+			  	var titleName = $('.modal-title').text();
+			  	 $.ajax({
+							 url: '/admin/diet/deleteDietOneMealConnection'
+							,type: 'POST'
+							,data: 
+							
+							{'dietOneMealConnectionCode' : dietOneMealConnectionCode,
+							 'dietBankCode' : dietBankCode }
+							 
+							,dataType: 'text'
+							,success: function(data){
+								$('#MealListContent').replaceWith(data);
+								
+								 $('.todayTrLine').each(function(index,item){
+							     	var groupName = $(this).attr('value');
+									if(groupName == titleName){
+											$(this).show();
+										} else{
+											$(this).hide();
+										}
+						     	});
+								
+							}
+						});
+			 	 });
+		</script>
+	</th:block>	
+	  
+	  
+</html>
+
+

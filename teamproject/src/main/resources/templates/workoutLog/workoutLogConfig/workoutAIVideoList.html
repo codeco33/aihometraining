@@ -28,7 +28,7 @@
 								<tbody>
 									<tr th:if="${not #lists.isEmpty(workoutAIVideoList)}" th:each="l : ${workoutAIVideoList}">
 										<td>
-											<button type=button class="btn btn-outline btn-default AIVideoImg"  th:data-code="${l.fileIdx}" data-toggle="modal" data-target=".AIVideoModal">
+											<button type=button class="btn btn-outline btn-default AIVideoImg"  th:data-code="${l.fileIdx}" data-toggle="modal" data-target=".AIVideoModal" th:data-whatever="${l.AIVideoTitle}" >
 					                         		[[${l.AIVideoTitle}]]
 					                        </button>
 										</td>
@@ -57,23 +57,21 @@
 		
 		
 		<div class="modal fade AIVideoModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-				  <div class="modal-dialog">
-				    <div class="modal-content">
-				      <div class="modal-header">
+			<div class="modal-dialog">
+			    <div class="modal-content">
+				    <div class="modal-header">
 					        <h4 class="modal-title" id="myModalLabel">사이드 런지</h4>
-					   </div>
-				      <div class="modal-body" id="imgModalBody">
+					</div>
+				    <div class="modal-body" id="imgModalBody">
 					        <!-- <img alt="사이드 런지" th:src="@{/assets/img/workoutLogImg1.jpg}"> -->
 					       <!-- <img  th:src="@{${ '/' + #strings.replace(${imgPath}, '\', '/')}}"  class="card-img rounded-0"  /> -->
-					        
-					        
-					  </div>
-				      	<div class="modal-footer">
-				        	<button type="button" id="cancel-insert" class="btn btn-default" data-dismiss="modal">취소</button>
-				      	</div>
-					    </div>
-					  </div>
 					</div>
+			      	<div class="modal-footer">
+			        	<button type="button" id="cancel-insert" class="btn btn-default" data-dismiss="modal">취소</button>
+			      	</div>
+				</div>
+			</div>
+		</div>
 		
 		
 		
@@ -118,7 +116,7 @@
 		
 		  $(document).ready(function(){
 			  
-			  /* 데이터 테이블 생성*/
+			    /* 데이터 테이블 생성 */
 				var table = $('#AIVideoList').DataTable({
 					order : [ 0, 'desc' ],
 					lengthChange : false,
@@ -139,6 +137,7 @@
 									'전체 ' + info.recordsTotal + ' 건');
 				});
 				
+				/* 모달에 AI운동영상 이미지 불러오기 */
 				$('.AIVideoImg').click(function(e){
 					
 					console.log($(e.target).data('code'));
@@ -161,6 +160,16 @@
 					
 				});
 				
+				//모달 title을 버튼 이름에 맞춰 바꿔주기
+				var AIVideoModal = $('.AIVideoModal');
+				AIVideoModal.on('show.bs.modal', function (event) {
+					 var button = $(event.relatedTarget);
+					 console.log(button);
+					 var recipient = button.data('whatever');
+					 console.log(recipient);
+					 var modal = $(this);
+					 modal.find('.modal-title').text(recipient);
+					})
 		  });
 			
 		</script>

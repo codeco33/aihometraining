@@ -6,6 +6,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Locale;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +23,8 @@ import aihometraining.team.mapper.CommonMapper;
 public class ChallengeGatherService {
 	
 	
+	private static final Logger log = LoggerFactory.getLogger(ChallengeGatherService.class);
+
 	
 	//DI 의존성 주입
 	private ChallengeGatherMapper challengeGatherMapper;
@@ -57,7 +61,7 @@ public class ChallengeGatherService {
 	}
 	
 	//챌린지 모집 등록 처리
-	public void challengeGatherInsert(ChallengeGather challengeGather, ChallengeGatherPlan challengeGatherPlan) {//,dto하나더 추가하고(controller)
+	public void challengeGatherInsert(ChallengeGather challengeGather, ChallengeGatherPlan challengeGatherPlan, String sEmail) {//,dto하나더 추가하고(controller)
 		//pk컬럼에 들어갈 코드를 자동으로 만들어주는 Mapper      //pk로 쓸 db의 컬럼명                     //코드가 들어갈 db의 테이블명
 		String newCode1 = commonMapper.getNewCode("challengeGatherCode", "challengegather");
 		challengeGather.setChallengeGatherCode(newCode1);
@@ -86,11 +90,11 @@ public class ChallengeGatherService {
 		long weekProve = ChronoUnit.WEEKS.between(startDate, endDate);
 		
 		
-		String week = Long.toString(proveFrequency * weekProve); //빈도수 * 챌린지기간(주로계산됨)
+		String proveNumber = Long.toString(proveFrequency * weekProve); //빈도수 * 챌린지기간(주로계산됨)
 		
-		System.out.println(week + "<-----------민희님이랑해냄");
+		log.info("빈도수 * 챌린지기간(주로계산됨) proveNumber : {}", proveNumber);
 		
-		challengeGather.setMemberEmail("id002@email.com");//임시처리
+		challengeGather.setMemberEmail(sEmail);
 		
 		//dto(커맨드객체2).set해당프로퍼티(?)(challengeGather.getChallengeCategoryCode());
 		//challengeGatherPlan에 challengeGather의 입력값을 다시 넣는 과정
@@ -99,7 +103,8 @@ public class ChallengeGatherService {
 		challengeGatherPlan.setChallengeCategoryCode(challengeGather.getChallengeCategoryCode());
 		challengeGatherPlan.setChallengeGatherChallengeStartDate(challengeGather.getChallengeStartDate());
 		challengeGatherPlan.setChallengeGatherChallengeLastDate(challengeGather.getChallengeEndDate());
-		challengeGatherPlan.setChallengeGatherPlanProveNumber(week);
+		challengeGatherPlan.setChallengeGatherPlanProveNumber(proveNumber);
+		challengeGatherPlan.setChallengeGatherPlanRound(proveNumber);
 		
 		//챌린지 모집 등록 처리
 		challengeGatherMapper.challengeGatherInsert(challengeGather);

@@ -13,6 +13,7 @@
 		<result column="challengeEnterDate" 				property="challengeEnterDate"/>
 		<result column="challengeServiceStartDate" 			property="challengeServiceStartDate"/>
 		<result column="challengeServiceEndDate" 			property="challengeServiceEndDate"/>
+		<result column="paymentGroupCode" 					property="paymentGroupCode"/>
 		
 		<association property="challengeCategory" javaType="ChallengeCategory">
 			<id 	column="challengeCategoryCode" 			property="challengeCategoryCode"/>
@@ -41,6 +42,7 @@
 			<result column="memberEnterEmail" 				property="memberEnterEmail"/>
 			<result column="challengeGatherStartDate" 		property="challengeGatherStartDate"/>
 			<result column="challengeGatherEndDate" 		property="challengeGatherEndDate"/>
+			<result column="challengeEnterDeposit" 			property="challengeEnterDeposit"/>
 		</association>
 		
 		<association property="member" javaType="Member">
@@ -93,6 +95,7 @@
 		<result column="memberEnterEmail" 				property="memberEnterEmail"/>
 		<result column="challengeGatherStartDate" 		property="challengeGatherStartDate"/>
 		<result column="challengeGatherEndDate" 		property="challengeGatherEndDate"/>
+		<result column="challengeEnterDeposit" 			property="challengeEnterDeposit"/>
 		
 		<association property="member" javaType="Member">
 			<id 	column="memberEmail" 				property="memberEmail"/>
@@ -162,6 +165,7 @@
 			<result column="challengeGatherPlanDoAchieveRateAfterProve" 	property="challengeGatherPlanDoAchieveRateAfterProve"/>
 			<result column="challengeGatherPlanDoAchieveRate" 				property="challengeGatherPlanDoAchieveRate"/>
 			<result column="challengeGatherPlanDoProveCheckDate" 			property="challengeGatherPlanDoProveCheckDate"/>
+			<result column="challengeGatherPlanDoProveRound" 				property="challengeGatherPlanDoProveRound"/>
 		</collection>
 	</resultMap>
 	
@@ -226,10 +230,11 @@
 		<result column="challengeGatherPlanDoContent" 					property="challengeGatherPlanDoContent"/>
 		<result column="fileIdx" 										property="fileIdx"/>
 		<result column="challengeGatherPlanDoRegDate" 					property="challengeGatherPlanDoRegDate"/>
-		<result column="challengeGatherPlanDoState" 					property="hallengeGatherPlanDoState"/>
+		<result column="challengeGatherPlanDoState" 					property="challengeGatherPlanDoState"/>
 		<result column="challengeGatherPlanDoAchieveRateAfterProve" 	property="challengeGatherPlanDoAchieveRateAfterProve"/>
 		<result column="challengeGatherPlanDoAchieveRate" 				property="challengeGatherPlanDoAchieveRate"/>
 		<result column="challengeGatherPlanDoProveCheckDate" 			property="challengeGatherPlanDoProveCheckDate"/>
+		<result column="challengeGatherPlanDoProveRound" 				property="challengeGatherPlanDoProveRound"/>
 		
 		<association property="challengeGatherPlan" javaType="ChallengeGatherPlan">
 			<id 	column="challengeGatherCode" 					property="challengeGatherCode"/>
@@ -334,6 +339,59 @@
 			ce.memberEmail = #{memberEmail}
 	</select>
 	
+	<insert id="challengeEnterInsert" parameterType="ChallengeEnter" >
+		/* 결제후 참가처리*/
+		INSERT INTO challengeenter
+		(	 challengeEnterCode
+			,challengeCategoryCode
+			,challengeGatherCode
+			,memberEmail
+			,challengeEnterDeposit
+			,challengeEnterDate
+			,challengeServiceStartDate
+			,challengeServiceEndDate
+			,paymentGroupCode
+		)VALUES (
+		 	 #{challengeEnterCode}
+			,#{challengeCategoryCode}
+			,#{challengeGatherCode}
+			,#{memberEmail}
+			,#{challengeEnterDeposit}
+			,CURDATE()
+			,#{challengeServiceStartDate}
+			,#{challengeServiceEndDate}
+			,#{paymentGroupCode}
+		);
+	</insert>
+	
+	<insert id="challengeGatherPlanDoInsert" parameterType="ChallengeGatherPlanDo">
+		/* 결제후 참가처리시 동시에 참가자 실행테이블에 등록처리 */
+		INSERT INTO challengegatherplando
+		(	 challengeGatherPlanDoCode
+			,challengeGatherPlanCode
+			,memberEmail
+			,challengeCategoryCode
+			,challengeSettingCode
+			,challengeGatherCode
+			,memberEnterEmail
+			,challengeGatherPlanDoRegDate
+			,challengeGatherPlanDoState
+			,challengeGatherPlanDoProveRound
+		)VALUES (
+			 #{challengeGatherPlanDoCode}
+			,#{challengeGatherPlanCode}
+			,#{memberEmail}
+			,#{challengeCategoryCode}
+			,#{challengeSettingCode}
+			,#{challengeGatherCode}
+			,#{memberEnterEmail}
+			,CURDATE()
+			,#{challengeGatherPlanDoState}
+			,#{challengeGatherPlanDoProveRound}
+		);
+		
+	</insert>
+	
 	<select id="getChallengeEnterByCode" resultMap="challengeGatherResultMap2">
 		SELECT
 			 cg.challengeGatherCode
@@ -345,6 +403,7 @@
 			,cg.challengeEndDate
 			,cg.challengeGatherAchieveRate
 			,cg.challengeEnterDeposit
+			,cg.challengeCategoryCode
 		FROM
 			challengegather AS cg
 			INNER JOIN 
@@ -389,60 +448,64 @@
 		GROUP BY cpd.memberEnterEmail;
 	</select>
 	
-	<select id="getChallengeEnterListByCode" parameterType="String" resultMap="challengeEnterResultMap">
-		/* 참가 챌린지 코드별 챌린지 정보 조회 */
+	<select id="getPlanDoProveByCode" parameterType="String" resultMap="ChallengeGatherPlanDoResultMap">
+		/* 실행 코드별 챌린지 정보 조회  */
 		SELECT
-			 ce.challengeEnterCode
-			,cg.memberEmail
-			,cp.challengeSettingCode
-			,cp.challengeGatherPlanCode
-			,ce.challengeCategoryCode
-			,cc.challengeCategoryName
-			,ce.challengeGatherCode
-			,cg.challengeGatherName
+			 cpd.challengeGatherPlanDoCode
+			,cpd.challengeGatherPlanDoProveRound
 		FROM
-			challengeenter AS ce
-			INNER JOIN
-			challengecategory AS cc
-			ON
-			cc.challengeCategoryCode = ce.challengeCategoryCode
-			INNER JOIN
-			challengegather AS cg
-			ON
-			cg.challengeGatherCode = ce.challengeGatherCode
-			INNER JOIN
-			challengegatherplan AS cp
-			on
-			cp.challengeGatherCode = ce.challengeGatherCode
-		WHERE
-			ce.challengeEnterCode = #{challengeEnterCode};
+			challengegatherplando AS cpd
+		where
+			cpd.challengeGatherPlanDoCode = #{challengeGatherPlanDoCode}
 	</select>
 	
-	<insert id="challengePlanDoInsert" parameterType="ChallengeGatherPlanDo">
-		/* 챌린지 인증 등록 처리*/
-		INSERT INTO challengegatherplando
-		( 	 challengeGatherPlanDoCode
-			,challengeGatherPlanCode
-			,memberEmail
-			,challengeCategoryCode
-			,challengeSettingCode
-			,challengeGatherCode
-			,memberEnterEmail
-			,challengeGatherPlanDoContent
-			,challengeGatherPlanDoRegDate
-		)
-		VALUES (
-			 #{challengeGatherPlanDoCode}
-			,#{challengeGatherPlanCode}
-			,#{memberEmail}
-			,#{challengeCategoryCode}
-			,#{challengeSettingCode}
-			,#{challengeGatherCode}
-			,#{memberEnterEmail}
-			,#{challengeGatherPlanDoContent}
-			,CURDATE()
-		)
-	</insert>
+	<select id="getPlanDoListByCodeAndEmail" parameterType="String" resultMap="ChallengeGatherPlanDoResultMap">
+		/* 참가 코드와 이메일별 인증 목록 조회  */
+		SELECT
+			 cpd.challengeGatherPlanDoCode
+			,cg.challengeGatherName
+			,cpd.challengeGatherPlanDoContent
+			,cpd.challengeGatherPlanDoState
+			,cpd.challengeGatherPlanDoProveCheckDate
+			,cpd.challengeGatherPlanDoProveRound
+		FROM
+			challengegatherplando AS cpd
+			INNER join
+			challengeenter AS ce
+			on
+			cpd.challengeGatherCode = ce.challengeGatherCode
+			INNER join
+			challengegather AS cg
+			on
+			cpd.challengeGatherCode = cg.challengeGatherCode
+		WHERE
+			cpd.memberEnterEmail = #{sEmail}
+		and
+			ce.challengeEnterCode = #{challengeEnterCode}
+		ORDER BY cpd.challengeGatherPlanDoProveRound;
+	</select>
+	
+	<update id="challengePlanDoInsert" parameterType="ChallengeGatherPlanDo">
+		/* 참가 챌린지 인증 등록처리(update처리) */
+		UPDATE challengegatherplando
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="challengeGatherPlanDoContent !=null and challengeGatherPlanDoContent !=''">
+				challengeGatherPlanDoContent = #{challengeGatherPlanDoContent},
+			</if>
+			<if test="challengeGatherPlanDoState !=null and challengeGatherPlanDoState !=''">
+				challengeGatherPlanDoState=#{challengeGatherPlanDoState},
+			</if>
+			<if test="challengeGatherPlanDoAchieveRateAfterProve !=null and challengeGatherPlanDoAchieveRateAfterProve !=''">
+				challengeGatherPlanDoAchieveRateAfterProve=#{challengeGatherPlanDoAchieveRateAfterProve},
+			</if>
+			<if test="challengeGatherPlanDoAchieveRate !=null and challengeGatherPlanDoAchieveRate !=''">
+				challengeGatherPlanDoAchieveRate=#{challengeGatherPlanDoAchieveRate},
+			</if>
+		</trim>
+			,challengeGatherPlanDoRegDate=CURDATE()
+		WHERE 
+			challengeGatherPlanDoCode= #{challengeGatherPlanDoCode};
+	</update>
 	
 	
 	<!-- 
