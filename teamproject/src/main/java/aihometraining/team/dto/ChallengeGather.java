@@ -20,6 +20,7 @@ public class ChallengeGather {
 	private String challengeGatherStartDate;
 	private String challengeGatherEndDate;
 	private int challengeEnterDeposit;
+	private String challengeEnterCode;
 	
 	private Member member;
 	private ChallengeCategory challengeCategory;
@@ -27,6 +28,13 @@ public class ChallengeGather {
 	private List<ChallengeEnter> challengeEnterList;
 	private List<ChallengeGatherPlanDo> challengeGatherPlanDoList;
 	
+	
+	public String getChallengeEnterCode() {
+		return challengeEnterCode;
+	}
+	public void setChallengeEnterCode(String challengeEnterCode) {
+		this.challengeEnterCode = challengeEnterCode;
+	}
 	public String getChallengeGatherCode() {
 		return challengeGatherCode;
 	}
@@ -196,6 +204,8 @@ public class ChallengeGather {
 		builder.append(challengeGatherEndDate);
 		builder.append(", challengeEnterDeposit=");
 		builder.append(challengeEnterDeposit);
+		builder.append(", challengeEnterCode=");
+		builder.append(challengeEnterCode);
 		builder.append(", member=");
 		builder.append(member);
 		builder.append(", challengeCategory=");

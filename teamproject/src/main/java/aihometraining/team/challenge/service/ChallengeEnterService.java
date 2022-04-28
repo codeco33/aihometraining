@@ -112,6 +112,7 @@ public class ChallengeEnterService {
 		ChallengeGatherPlan challengeGatherPlan = challengeGatherMapper.getChallengeGatherPlan(challengeGatherPlanCode);
 		
 		int planProveNumber =  Integer.parseInt(challengeGatherPlan.getChallengeGatherPlanProveNumber()); //필수 인증횟수 = 실행테이블에 insert처리될 갯수
+		challengeGatherPlanDo.setChallengeGatherPlanDoAchieveRate(challengeGatherPlan.getChallengeGatherPlanProveNumber()); //필수 인증횟수 = 실행후 달성률
 		for(int i=1; i<=planProveNumber; i++) {
 			String newPlanDoCode = commonMapper.getNewCode("challengeGatherPlanDoCode", "challengegatherplando");
 			log.info("새로 생성된 코드 newPlanDoCode : {}",newPlanDoCode);

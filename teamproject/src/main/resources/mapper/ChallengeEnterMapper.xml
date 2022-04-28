@@ -187,6 +187,7 @@
 		<result column="challengeGatherStartDate" 		property="challengeGatherStartDate"/>
 		<result column="challengeGatherEndDate" 		property="challengeGatherEndDate"/>
 		<result column="challengeEnterDeposit" 			property="challengeEnterDeposit"/>
+		<result column="challengeEnterCode" 			property="challengeEnterCode"/>
 		
 		<association property="challengeCategory" javaType="ChallengeCategory">
 			<id 	column="challengeCategoryCode" 			property="challengeCategoryCode"/>
