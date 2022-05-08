@@ -24,6 +24,9 @@ public interface ChallengeEnterMapper {
 	
 	//참가 챌린지의 세부 정보 조회
 	public List<ChallengeGatherPlanDo> getChallengeEnterDetail(String challengeGatherCode);
+
+	//참가 챌린지 세부내용 중 참가자별 진행률 조회
+	public List<String> getProgressByMember(String challengeGatherCode);
 	
 	//실행 코드별 챌린지 정보 조회
 	public List<ChallengeGatherPlanDo> getPlanDoProveByCode(String challengeGatherPlanDoCode);
